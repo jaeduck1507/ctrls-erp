@@ -92,7 +92,7 @@
 				contentType : false,
                 // 응답
                 success : function(result) {
-					$("#result").text("");
+					//$("#result").text("");
                 	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th></tr>");
                 	for(const emp of result) {
 					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+"</td></tr>"

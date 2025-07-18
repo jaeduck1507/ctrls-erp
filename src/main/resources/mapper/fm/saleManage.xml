@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.hrm.mapper.SaleManageMapper">
+	<resultMap id="saleManageMap" type="SaleManage">
+		<id property="smNo" column="sm_no" />
+		<result property="saleDate" column="sale_date"/>
+		<result property="quantity" column="quantity"/>
+		<result property="varAmount" column="var_amount"/>
+		<result property="totalAmount" column="total_amount"/>
+		<result property="productCode" column="product_code"/>
+	</resultMap>
+	
+	<select id="saleManage" parameterType="SaleManage" resultMap="saleManageMap">
+		SELECT * FROM sale_manage
+	</select>
+</mapper>
