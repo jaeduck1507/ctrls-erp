@@ -1,0 +1,14 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.hrm.mapper.JobPositionMapper">
+	<resultMap id="jobPositionMap" type="jobPosition">
+	    <id property="jobNo" column="job_no" />
+	    <result property="jobTitle" column="job_title" />
+	    <result property="jobLevel" column="job_level" />
+	    <result property="leaveCount" column="leave_count" />
+	    <result property="description" column="description" />
+	</resultMap>
+
+	<select id="showJob" parameterType="jobPosition" resultMap="jobPositionMap">
+		SELECT * FROM job_position
+	</select>
+</mapper>

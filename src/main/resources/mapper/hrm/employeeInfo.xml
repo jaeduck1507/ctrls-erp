@@ -1,0 +1,26 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.hrm.mapper.EmployeeInfoMapper">
+<resultMap type="EmpInfo" id="EmpInfoMap">
+	<result column="emp_name" property="empName"/>
+	<result column="job_title" property="jobTitle"/>
+	<result column="dept_name" property="deptName"/>
+</resultMap>
+	<select id="infoShow" parameterType="EmpInfo" resultMap="EmpInfoMap">
+		SELECT emp_name, dept_name, job_title 
+		FROM employee_info
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		<where>
+		<if test="empName != null" >
+			emp_name LIKE CONCAT('%', #{empName}, '%')
+		</if>
+		<if test='!jobTitle.equals("a")'>
+			AND job_title = #{jobTitle}
+		</if>
+		<if test='!deptName.equals("a")'>
+			AND dept_name = #{deptName}
+		</if>
+		</where>
+		
+	</select>
+</mapper>
