@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.erp.fm.mapper.SalaryMapper;
 
 @Service
-public class SalaryService {
+public class SalaryService implements SalaryMapper {
 
 	@Autowired
 	private SalaryMapper mapper;

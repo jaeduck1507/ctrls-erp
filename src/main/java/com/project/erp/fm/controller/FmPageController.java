@@ -13,4 +13,14 @@ public class FmPageController {
 		return "component/fm/saleManage";
 	}
 	
+	@GetMapping("/purchase")
+	public String purchase() {
+		return "component/fm/purchase";
+	}
+	
+	@GetMapping("/budget")
+	public String budget() {
+		return "component/fm/budget";
+	}
+	
 }

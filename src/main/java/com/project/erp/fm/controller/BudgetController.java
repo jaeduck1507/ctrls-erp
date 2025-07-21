@@ -7,19 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.fm.model.vo.SaleManage;
-import com.project.erp.fm.service.SaleManageService;
+import com.project.erp.fm.model.vo.Budget;
+import com.project.erp.fm.service.BudgetService;
 
 @Controller
-public class SaleManageController {
+public class BudgetController {
 
 	@Autowired
-	private SaleManageService service;
+	private BudgetService service;
 	
 	@ResponseBody
-	@GetMapping("/showSaleManage")
-	public List<SaleManage> showSaleManage() {
-		return service.showSaleManage();
+	@GetMapping("/showBudget")
+	public List<Budget> showBudget() {
+		return service.showBudget();
 	}
 	
 }

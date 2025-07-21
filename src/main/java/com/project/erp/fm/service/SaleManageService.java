@@ -18,4 +18,5 @@ public class SaleManageService implements SaleManageMapper {
 	public List<SaleManage> showSaleManage() {
 		return mapper.showSaleManage();
 	}
+	
 }
