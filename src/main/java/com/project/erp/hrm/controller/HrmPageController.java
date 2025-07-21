@@ -21,5 +21,9 @@ public class HrmPageController {
 		return "component/hrm/empInfo";
 	}
 	
+	@GetMapping("empAdd")
+	public String empAdd() {
+		return "component/hrm/empAdd";
+	}
 	
 }

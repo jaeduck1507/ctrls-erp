@@ -17,6 +17,7 @@
 <body>
     <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
     <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo</a>
+    <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a>
     
     <!-- 
     <script src = "../resources/js/layout.js"></script>
