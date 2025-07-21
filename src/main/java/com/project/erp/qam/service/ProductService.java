@@ -15,10 +15,9 @@ public class ProductService {
     private ProductMapper productMapper;
 
     
-    public List<Product> showProduct(Product p) { // 전체 제품 목록 조회
-    	List<Product> list = productMapper.showProduct(p);
-    	 System.out.println("제품: " + p);
-        return list;
+    public List<Product> showProduct() { // 전체 제품 목록 조회
+    	 System.out.println("작동한다!");
+        return productMapper.showProduct();
         
     }
 }

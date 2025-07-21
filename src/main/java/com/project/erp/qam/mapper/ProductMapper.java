@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
     // 전체 제품 목록 조회
-    List<Product> showProduct(Product p);
+    List<Product> showProduct();
 }
