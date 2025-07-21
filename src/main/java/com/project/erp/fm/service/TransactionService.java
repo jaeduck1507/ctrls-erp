@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.erp.fm.mapper.TransactionMapper;
 
 @Service
-public class TransactionService {
+public class TransactionService implements TransactionMapper {
 
 	@Autowired
 	private TransactionMapper mapper;
