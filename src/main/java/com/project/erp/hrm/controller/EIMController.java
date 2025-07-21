@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.vo.Department;
+import com.project.erp.hrm.model.vo.EmployeeInfo;
 import com.project.erp.hrm.model.vo.JobPosition;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
@@ -47,5 +49,11 @@ public class EIMController {
 	public List<JobPosition> showJob() {
 //		System.out.println(jobPositionService.showJob().get(0).getJobTitle());
 		return jobPositionService.showJob();
+	}
+	
+	@ResponseBody
+	@PostMapping("/empAdd")
+	public void empAdd(@RequestBody List<EmployeeInfo> eiList) {
+		System.out.println(eiList);
 	}
 }
