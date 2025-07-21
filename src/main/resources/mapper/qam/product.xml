@@ -7,7 +7,7 @@
         <result column="product_code" property="productCode"/>
     </resultMap>
     
-     <select id="findAll" parameterType="Product" resultMap="ProductMap">
+     <select id="showProduct" parameterType="Product" resultMap="ProductMap">
         SELECT * FROM product
      </select>
 
