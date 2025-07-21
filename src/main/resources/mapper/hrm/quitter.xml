@@ -1,0 +1,16 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.hrm.mapper.QuitterMapper">
+<resultMap type="Quitter" id="QuitterMap">
+    <result column="emp_name" property="empName"/>
+    <result column="quit_date" property="quitDate"/>
+    <result column="quit_pay" property="quitPay"/>
+    <result column="quit_pay_date" property="quitPayDate"/>
+</resultMap>
+<select id="quitShow" parameterType="Quitter" resultMap="QuitterMap">
+   SELECT emp_name, quit_date ,quit_pay, quit_pay_date 
+   FROM quitter
+        JOIN employee_info USING(emp_no)
+    
+</select>
+</mapper>

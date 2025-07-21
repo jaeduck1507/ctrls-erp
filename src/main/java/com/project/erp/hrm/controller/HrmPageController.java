@@ -26,4 +26,9 @@ public class HrmPageController {
 		return "component/hrm/empAdd";
 	}
 	
+	@GetMapping("/quitShow")
+	public String quitter() {
+		return "component/hrm/quitShow";
+	}
+	
 }
