@@ -20,7 +20,8 @@
     <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a>
     
 	<a href="/fm/saleManage">매출 조회 /fm/saleManage</a>
-	
+	<a href="/qam/product">상품(Product) 조회 /qam/product</a>
+	<a href="/qam/productName">제품(ProductName) 조회 /qam/productName</a>
     <!-- 
     <script src = "../resources/js/layout.js"></script>
     

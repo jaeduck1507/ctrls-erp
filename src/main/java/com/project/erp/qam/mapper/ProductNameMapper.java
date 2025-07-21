@@ -1,5 +1,12 @@
 package com.project.erp.qam.mapper;
 
-public interface ProductNameMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.project.erp.qam.model.vo.ProductName;
+
+@Mapper
+public interface ProductNameMapper {
+	List<ProductName> showProductName();
 }

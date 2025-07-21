@@ -11,9 +11,13 @@ public class QamPageController {
 	
 	@GetMapping("/product")
 	public String product() {
-//		System.out.println("작동하나?");
+		System.out.println("작동하나?");
 		return "component/qam/product";
 	}
 	
-	
+	@GetMapping("/productName")
+	public String productName() {
+		System.out.println("PageController productName");
+		return "component/qam/productName";
+	}
 }

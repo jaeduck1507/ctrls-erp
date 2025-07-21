@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.qam.model.vo.Product;
+import com.project.erp.qam.model.vo.ProductName;
+import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.ProductService;
 
 @Controller
@@ -18,10 +20,19 @@ public class PIMController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private ProductNameService productNameService;
+	
 	@ResponseBody
 	@GetMapping("/showProduct")
 	public List<Product> showProduct() {
 		return productService.showProduct();
+	}
+	
+	@ResponseBody
+	@GetMapping("/showProductName")
+	public List<ProductName> showProductName() {
+		return productNameService.showProductName();
 	}
 	
 	
