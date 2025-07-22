@@ -50,6 +50,9 @@ public class HrmPageController {
 	public String empEval(Model model) {
 		return "component/hrm/empEval";
 	}
-	
+	@GetMapping("/leaveRequest")
+	public String leaveRequest() {
+		return "component/hrm/leaveRequest";
+	}
 }
 

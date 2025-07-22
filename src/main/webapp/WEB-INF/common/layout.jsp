@@ -18,8 +18,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
     <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo</a>
     <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a>
-    <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow</a>
-    <a href="/hrm/leaveInfo">휴가조회 /hrm/leaveInfo</a>
+    <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow</a><br />
+	<a href="/hrm/leaveRequest">휴가신청 /hrm/leaveRequest</a><br />
+    <a href="/hrm/leaveInfo">휴가조회 /hrm/leaveInfo</a><br />
     <a href="/hrm/empEval">인사/성과평가 /hrm/empEval</a>
 
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a>
