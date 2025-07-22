@@ -35,9 +35,16 @@ public class PIMController {
 	public List<ProductName> showProductName() {
 		return productNameService.showProductName();
 	}
+	
+//	@GetMapping("/productForm")
+//	public String pForm(@RequestParam(required = false) Integer productNo, Model model) {
+//	
+//	}
+	
+	
 
 	@GetMapping("/productNameForm")
-	public String showForm(@RequestParam(required = false) Integer productCode, Model model) {
+	public String pnForm(@RequestParam(required = false) Integer productCode, Model model) {
 		if (productCode != null) {
 			ProductName productName = productNameService.findById(productCode);
 			model.addAttribute("productName", productName);

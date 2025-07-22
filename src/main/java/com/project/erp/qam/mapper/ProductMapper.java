@@ -9,4 +9,8 @@ import java.util.List;
 public interface ProductMapper {
     // 전체 제품 목록 조회
     List<Product> showProduct();
+    void insertProduct(Product p);
+    void updateProduct(Product p);
+    void deleteProduct(int productNo);
+
 }
