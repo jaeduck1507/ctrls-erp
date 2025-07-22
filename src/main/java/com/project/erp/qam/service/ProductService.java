@@ -9,15 +9,37 @@ import com.project.erp.qam.model.vo.Product;
 import java.util.List;
 
 @Service
-public class ProductService {
+public class ProductService implements ProductMapper {
 
 	@Autowired
     private ProductMapper productMapper;
 
     
     public List<Product> showProduct() { // 전체 제품 목록 조회
-    	 System.out.println("작동한다!");
-        return productMapper.showProduct();
-        
+        return productMapper.showProduct();      
     }
+
+
+	@Override
+	public void insertProduct(Product p) {
+		productMapper.insertProduct(p);
+		
+	}
+
+
+	@Override
+	public void updateProduct(Product p) {
+		productMapper.updateProduct(p);
+		
+	}
+
+
+	@Override
+	public void deleteProduct(int productNo) {
+		productMapper.deleteProduct(productNo);
+		
+	}
+    
+    
+    
 }

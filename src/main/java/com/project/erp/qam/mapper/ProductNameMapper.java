@@ -13,4 +13,6 @@ public interface ProductNameMapper {
     void updateProductName(ProductName pn);
     ProductName findById(int productCode);
    	void deleteProductName(int productCode);
+   	List<ProductName> searchProductName(String productName, String productCategory);
+
 }
