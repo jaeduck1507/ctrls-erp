@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.hrm.service.JobPositionService;
@@ -48,6 +49,7 @@ public class HrmPageController {
 	}
 	@GetMapping("/empEval")
 	public String empEval(Model model) {
+		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
 		return "component/hrm/empEval";
 	}
 	

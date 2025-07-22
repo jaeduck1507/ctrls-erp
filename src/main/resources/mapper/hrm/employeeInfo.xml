@@ -15,10 +15,10 @@
 		<if test="empName != null" >
 			emp_name LIKE CONCAT('%', #{empName}, '%')
 		</if>
-		<if test='!jobTitle.equals("a")'>
+		<if test='jobTitle != "a" and jobTitle != null'>
 			AND job_title = #{jobTitle}
 		</if>
-		<if test='!deptName.equals("a")'>
+		<if test='deptName != "a" and deptName != null'>
 			AND dept_name = #{deptName}
 		</if>
 		</where>
@@ -29,6 +29,7 @@
 		INSERT INTO employee_info (emp_id, emp_in, emp_pwd, emp_name, job_no, dept_no, hire_date, salary, addr, phone, email) VALUES
 		<foreach collection="eiList" item="emp" separator=",">
 		(#{emp.empId},#{emp.empIn},#{emp.empPwd},#{emp.empName},#{emp.jobNo},#{emp.deptNo},#{emp.hireDate},#{emp.salary},#{emp.addr},#{emp.phone},#{emp.email})
+		
 		</foreach>
 	</insert>
 </mapper>
