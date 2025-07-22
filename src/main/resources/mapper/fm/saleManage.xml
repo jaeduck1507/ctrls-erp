@@ -7,11 +7,19 @@
 		<result property="quantity" column="quantity"/>
 		<result property="varAmount" column="var_amount"/>
 		<result property="totalAmount" column="total_amount"/>
-		<result property="productCode" column="product_code"/>
+		<result property="productName" column="product_name"/>
+		<result property="productCategory" column="product_category"/>
 	</resultMap>
 	
-	<select id="showSaleManage" resultMap="SaleManageMap">
-		SELECT * FROM sale_manage
+	<select id="showSaleManage" parameterType="SaleManage" resultMap="SaleManageMap">
+		SELECT sm_no, sale_date, quantity, var_amount, total_amount, product_name, product_category 
+		FROM sale_manage
+		JOIN product_name USING(product_code)
+		<where>
+			<if test="productCategory == 'null' and productCategory == 'all'">
+				WHERE product_category = #{productCategory}
+			</if>
+		</where>		
 	</select>
 	
 	<!--

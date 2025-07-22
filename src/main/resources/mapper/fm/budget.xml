@@ -7,12 +7,18 @@
 		<result property="periodValue" column="period_value"/>
 		<result property="annualBudget" column="annual_budget"/>
 		<result property="plan" column="plan"/>
-		<result property="createdAt" column="created_at"/>
-		<result property="deptNo" column="dept_no"/>
+		<result property="deptName" column="dept_name"/>
 	</resultMap>
 	
-	<select id="showBudget" resultMap="BudgetMap">
-		SELECT * FROM budget
+	<select id="showBudget" parameterType="Budget" resultMap="BudgetMap">
+		SELECT period_type, period_value, annual_budget, plan, dept_name
+		FROM budget
+		JOIN department USING(dept_no)
+		<where>
+			<if test="deptName != 'null' and deptName != 'all'">
+				dept_name = #{deptName}
+			</if>
+		</where>
 	</select>
 	
 </mapper>

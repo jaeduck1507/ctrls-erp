@@ -15,7 +15,7 @@ public class BudgetService implements BudgetMapper {
 	private BudgetMapper mapper;
 
 	@Override
-	public List<Budget> showBudget() {
-		return mapper.showBudget();
+	public List<Budget> showBudget(Budget budget) {
+		return mapper.showBudget(budget);
 	}
 }

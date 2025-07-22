@@ -14,6 +14,8 @@ public class SaleManage {
 	private String quantity; // 수량
 	private int varAmount; // 부가세
 	private int totalAmount; // 총액
-	private int productCode; // 품목 번호(PK)
+	
+	private String productName; // 제품명
+	private String productCategory; // 카테고리
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.hrm.mapper.EmployeeInfoMapper;
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.vo.EmployeeInfo;
 
 @Service
 public class EmployeeInfoService implements EmployeeInfoMapper {
@@ -17,5 +18,9 @@ public class EmployeeInfoService implements EmployeeInfoMapper {
 	public List<EmpInfo> infoShow(EmpInfo ei) {
 //		if(ei.getEmpName().isBlank()) ei.setEmpName(null);
 		return employeeInfoMapper.infoShow(ei);
+	};
+	
+	public void empAdd(List<EmployeeInfo> eiList) {
+		employeeInfoMapper.empAdd(eiList);
 	};
 }

@@ -11,8 +11,8 @@ import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.fm.service.PurchaseService;
 
 @Controller
-public class PurchaseController {
-
+public class SVPController {
+	// Select View and Purchase
 	@Autowired
 	private PurchaseService service;
 	

@@ -11,13 +11,14 @@
 <body>
 	<h1>매출 조회</h1>
 	<div>
-		상품 검색: <input type="text" id="keyword">
-		<select id="category">
+		제품 검색: <input type="text" id="keyword">
+		<select id="productCategory">
 			<option value="" disabled selected>선택</option>
-			<option value="top">상의</option>
-			<option value="bottom">하의</option>
-			<option value="accessory">악세사리</option>
-			<option value="shoes">신발</option>
+			<option value="all">전체</option>
+			<option value="상의">상의</option>
+			<option value="하의">하의</option>
+			<option value="악세사리">악세사리</option>
+			<option value="신발">신발</option>
 		</select>
 		조회 기간: <input type="month" id="saleDate">
 		<button id="btn">조회</button>
@@ -32,14 +33,21 @@
 	<script>
 		
 		$("#btn").click(() => {
+			const formData = new FormData();
+			formData.append("productCategory", $("#productCategory").val());
 			$.ajax({
-				type: "get",
+				type: "post",
 				url: "/showSaleManage",
+				data: formData,
+				processData: false,
+				contentType : false,
 				success: function(result) {
-					$("#result").append("<tr><th>매출 번호</th><th>매출 발생일자</th><th>수량</th><th>부가세</th><th>총액</th><th>상품 번호</th></tr>");
+					$("#result").html("");
+					//console.log($("#category").val());
+					$("#result").append("<tr><th>매출 번호</th><th>매출 발생일자</th><th>수량</th><th>부가세</th><th>총액</th><th>제품명</th><th>카테고리</th></tr>");
 					for (const sm of result) {
-						var text = "<tr><td>" + sm.smNo + "</td><td>" + sm.saleDate + "</td><td>" + sm.quantity + "</td><td>"
-							 + sm.varAmount + "</td><td>" + sm.totalAmount + "</td><td>" + sm.productCode + "</td></tr>"
+						var text = "<tr><td>" + sm.smNo + "</td><td>" + sm.saleDate + "</td><td>" + sm.quantity + "</td><td>" + sm.varAmount 
+							+ "</td><td>" + sm.totalAmount + "</td><td>" + sm.productName + "</td><td>" + sm.productCategory + "</td></tr>"
 						$("#result").append(text);
 					}
 				},

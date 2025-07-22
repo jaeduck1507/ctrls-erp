@@ -15,8 +15,8 @@ public class SaleManageService implements SaleManageMapper {
 	private SaleManageMapper mapper;
 
 	@Override
-	public List<SaleManage> showSaleManage() {
-		return mapper.showSaleManage();
+	public List<SaleManage> showSaleManage(SaleManage sm) {
+		return mapper.showSaleManage(sm);
 	}
 	
 }
