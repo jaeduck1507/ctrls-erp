@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.hrm.model.vo.Quitter;
+import com.project.erp.hrm.model.dto.Quitter;
 import com.project.erp.hrm.service.QuitterService;
 
 @Controller
