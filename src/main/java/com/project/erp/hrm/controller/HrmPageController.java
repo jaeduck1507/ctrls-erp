@@ -31,4 +31,9 @@ public class HrmPageController {
 		return "component/hrm/quitShow";
 	}
 	
+	@GetMapping("/leaveInfo")
+	public String leaveInfo() {
+		return "component/hrm/leaveInfo";
+	}
+	
 }

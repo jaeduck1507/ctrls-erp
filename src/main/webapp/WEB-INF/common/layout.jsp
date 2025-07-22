@@ -19,6 +19,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo</a>
     <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a>
     <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow</a>
+	<a href="/hrm/leaveInfo">휴가조회 /hrm/leaveInfo</a>
 
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a>
 
