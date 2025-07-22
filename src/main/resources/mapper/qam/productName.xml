@@ -14,4 +14,28 @@
         SELECT * FROM product_name
      </select>
 
+	<insert id="insertProductName" parameterType="ProductName">
+    	INSERT INTO product_name(product_color, product_name, product_price, product_cost, product_category)
+    	VALUES(#{productColor}, #{productName}, #{productPrice}, #{productCost}, #{productCategory})
+	</insert>
+
+	<update id="updateProductName" parameterType="ProductName">
+    	UPDATE product_name
+    	SET product_color = #{productColor},
+        	product_name = #{productName},
+        	product_price = #{productPrice},
+        	product_cost = #{productCost},
+        	product_category = #{productCategory}
+    	WHERE product_code = #{productCode}
+	</update>
+
+	<select id="findById" parameterType="int" resultMap="ProductNameMap">
+    	SELECT * FROM product_name WHERE product_code = #{productCode}
+	</select>
+	
+	<delete id="deleteProductName" parameterType="int">
+    	DELETE FROM product_name
+    	WHERE product_code = #{productCode}
+	</delete>
+
 </mapper>
