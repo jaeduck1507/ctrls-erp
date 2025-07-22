@@ -1,12 +1,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.hrm.mapper.EmployeeInfoMapper">
 <resultMap type="EmpInfo" id="EmpInfoMap">
+	<result column="emp_no" property="empNo"/>
 	<result column="emp_name" property="empName"/>
 	<result column="job_title" property="jobTitle"/>
 	<result column="dept_name" property="deptName"/>
 </resultMap>
 	<select id="infoShow" parameterType="EmpInfo" resultMap="EmpInfoMap">
-		SELECT emp_name, dept_name, job_title 
+		SELECT emp_no,emp_name, dept_name, job_title 
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
@@ -23,4 +24,11 @@
 		</where>
 		
 	</select>
+	
+	<insert id="empAdd" parameterType="ArrayList">
+		INSERT INTO employee_info (emp_id, emp_in, emp_pwd, emp_name, job_no, dept_no, hire_date, salary, addr, phone, email) VALUES
+		<foreach collection="eiList" item="emp" separator=",">
+		(#{emp.empId},#{emp.empIn},#{emp.empPwd},#{emp.empName},#{emp.jobNo},#{emp.deptNo},#{emp.hireDate},#{emp.salary},#{emp.addr},#{emp.phone},#{emp.email})
+		</foreach>
+	</insert>
 </mapper>
