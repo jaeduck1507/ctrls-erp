@@ -54,6 +54,7 @@ public class EIMController {
 	@ResponseBody
 	@PostMapping("/empAdd")
 	public void empAdd(@RequestBody List<EmployeeInfo> eiList) {
-		System.out.println(eiList);
+//		System.out.println(eiList);
+		employeeInfoservice.empAdd(eiList);
 	}
 }
