@@ -17,6 +17,7 @@
 
 <script>
     $(document).ready(function () {
+		
         $.ajax({
 			type: "get",
             url: "/showProduct",
@@ -25,7 +26,11 @@
 				$("#result").append("<tr><th>제품 번호</th><th>생산일</th><th>제품 코드</th></tr>");
 
 				for(const p of result)	{
-					var text = "<tr><td>"+ p.productNo +"</td><td>"+p.productionDate+"</td><td>"+p.productCode+"</td></tr>"
+					var text = "<tr>";
+					text += "<td>" + p.productNo + "</td>";
+					text += "<td>" + p.productionDate +"</td>";
+					text += "<td>" + p.productCode + "</td>";
+					text += "</tr>";
 					$("#result").append(text);
 				}
 			},

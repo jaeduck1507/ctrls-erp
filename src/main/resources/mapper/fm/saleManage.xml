@@ -16,24 +16,19 @@
 		FROM sale_manage
 		JOIN product_name USING(product_code)
 		<where>
-			<if test="productCategory == 'null' and productCategory == 'all'">
-				WHERE product_category = #{productCategory}
-			</if>
-		</where>		
-	</select>
-	
-	<!--
-	<select id="selectSaleManage" resultMap="">
-		SELECT * FROM sale_manage
-		JOIN product_name USING(product_code)
-		<where>
-			<if test="">
-				product_name LIKE CONCAT ('%', #{productName}, '%')
-			</if>
-			<if test="">
-				category = #{category}
-			</if>
+			<choose>
+				<when test="productName != null and productCategory != 'null' and productCategory != 'all'">
+					product_category = #{productCategory}
+					AND product_name LIKE CONCAT ('%', #{productName}, '%')
+				</when>
+				<when test="productCategory != 'null' and productCategory != 'all'">
+					product_category = #{productCategory}
+				</when>
+				<when test="productName != null">
+					product_name LIKE CONCAT ('%', #{productName}, '%')
+				</when>
+			</choose>
 		</where>
 	</select>
-	-->
+	
 </mapper>

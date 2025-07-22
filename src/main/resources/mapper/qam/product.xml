@@ -11,4 +11,23 @@
         SELECT * FROM product
      </select>
 
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO product(production_date, product_code)
+		VALUES (#{productionDate}, #{productCode})
+	</insert>
+
+	<update id="updateProduct" parameterType="Product">
+		UPDATE product 
+		SET production_date = #{productionDate},
+			product_code = #{productCode}
+		WHERE product_no = #{productNo}
+	</update>
+
+	<delete id="deleteProduct" parameterType="Product">
+		DELETE FROM product
+		WHERE product_no = #{productNo}
+	</delete>
+	
+	
+
 </mapper>

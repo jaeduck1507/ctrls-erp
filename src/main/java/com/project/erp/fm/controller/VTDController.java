@@ -7,19 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.fm.model.vo.SaleManage;
-import com.project.erp.fm.service.SaleManageService;
+import com.project.erp.fm.model.vo.Transaction;
+import com.project.erp.fm.service.TransactionService;
 
 @Controller
-public class SVSController {
-	// Select and View Sales
+public class VTDController {
+	// View Transaction Details
 	@Autowired
-	private SaleManageService service;
+	private TransactionService service;
 	
 	@ResponseBody
-	@PostMapping("/showSaleManage")
-	public List<SaleManage> showSaleManage(SaleManage sm) {
-		return service.showSaleManage(sm);
+	@PostMapping("/showtrans")
+	public List<Transaction> showtrans(){
+		return service.showtrans();
 	}
 	
 }
