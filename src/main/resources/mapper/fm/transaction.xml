@@ -1,4 +1,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.TransactionMapper">
 	
+	<resultMap id="TransactionMap" type="Transaction">
+		<id property="transNo" column="trans_no"/>
+		<result property="transType" column="trans_type"/>
+		<result property="transAmount" column="trans_amount"/>
+		<result property="category" column="category"/>
+		<result property="transDesc" column="trans_desc"/>
+		<result property="transDate" column="trans_date"/>
+		<result property="deptName" column="dept_name"/>
+	</resultMap>
+	
+	<select id="showtrans" resultMap="TransactionMap">
+		SELECT trans_no, trans_type, category, trans_desc, trans_date, dept_name
+		FROM transaction
+		JOIN department USING(dept_no)
+	</select>
+	
 </mapper>
