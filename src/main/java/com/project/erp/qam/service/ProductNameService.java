@@ -9,14 +9,36 @@ import com.project.erp.qam.mapper.ProductNameMapper;
 import com.project.erp.qam.model.vo.ProductName;
 
 @Service
-public class ProductNameService {
+public class ProductNameService implements ProductNameMapper {
 
 	@Autowired
 	private ProductNameMapper productNameMapper;
 	
+	@Override
 	public List<ProductName> showProductName() {
-		System.out.println("이것도? productNameService");
 		return productNameMapper.showProductName();
+	}
+
+	@Override
+	public void insertProductName(ProductName pn) {
+		productNameMapper.insertProductName(pn);
+		
+	}
+
+	@Override
+	public void updateProductName(ProductName pn) {
+		productNameMapper.updateProductName(pn);
+		
+	}
+
+	@Override
+	public ProductName findById(int productCode) {
+		return productNameMapper.findById(productCode);
+	}
+	
+	@Override
+	public void deleteProductName(int productCode) {
+		productNameMapper.deleteProductName(productCode);
 	}
 	
 }
