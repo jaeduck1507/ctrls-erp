@@ -9,6 +9,6 @@ import com.project.erp.fm.model.vo.SaleManage;
 @Mapper
 public interface SaleManageMapper {
 
-	List<SaleManage> showSaleManage();
+	List<SaleManage> showSaleManage(SaleManage sm);
 	
 }

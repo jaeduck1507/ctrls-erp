@@ -15,6 +15,7 @@ public class Budget {
 	private int annualBudget; // 예산 금액
 	private String plan; // 계획 상세
 	private LocalDate createdAt; // 생성일시
-	private int deptNo; // 부서 번호(FK)
+	
+	private String deptName; // 부서명
 	
 }
