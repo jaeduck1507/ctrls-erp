@@ -65,6 +65,15 @@ public class PIMController {
 	public String delete(@RequestParam int productCode) {
 		productNameService.deleteProductName(productCode);
 		return "redirect:/qam/productName";
-	
 	}
+	
+	@GetMapping("/searchProductName")
+	@ResponseBody
+	public List<ProductName> searchProductName(
+	        @RequestParam(required = false) String productName,
+	        @RequestParam(required = false) String productCategory) {
+
+	    return productNameService.searchProductName(productName, productCategory);
+	}
+
 }

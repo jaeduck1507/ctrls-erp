@@ -41,5 +41,10 @@ public class ProductNameService implements ProductNameMapper {
 		productNameMapper.deleteProductName(productCode);
 	}
 	
+	@Override
+	public List<ProductName> searchProductName(String productName, String productCategory) {
+	    return productNameMapper.searchProductName(productName, productCategory);
+	}
+	
 }
 
