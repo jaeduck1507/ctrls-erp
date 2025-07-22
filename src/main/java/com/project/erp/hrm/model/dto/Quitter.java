@@ -1,4 +1,4 @@
-package com.project.erp.hrm.model.vo;
+package com.project.erp.hrm.model.dto;
 
 import java.time.LocalDate;
 

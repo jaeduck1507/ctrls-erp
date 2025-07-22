@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.project.erp.hrm.model.vo.Quitter;
+import com.project.erp.hrm.model.dto.Quitter;
 
 @Mapper
 public interface QuitterMapper {

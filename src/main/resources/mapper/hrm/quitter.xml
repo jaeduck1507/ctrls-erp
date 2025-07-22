@@ -11,6 +11,10 @@
    SELECT emp_name, quit_date ,quit_pay, quit_pay_date 
    FROM quitter
         JOIN employee_info USING(emp_no)
-    
+  <where>
+		<if test="empName != null" >
+			emp_name LIKE CONCAT('%', #{empName}, '%')
+		</if>
+  </where>  
 </select>
 </mapper>

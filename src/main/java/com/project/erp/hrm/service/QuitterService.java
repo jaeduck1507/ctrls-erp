@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.hrm.mapper.QuitterMapper;
-import com.project.erp.hrm.model.vo.Quitter;
+import com.project.erp.hrm.model.dto.Quitter;
 
 @Service
 public class QuitterService {
