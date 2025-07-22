@@ -26,6 +26,7 @@
 				type: "get",
 				url: "/showPurchase",
 				success: function(result) {
+					$("#result").html("");
 					$("#result").append("<tr><th>매입 번호</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th><th>상품 번호</th></tr>");
 					for (const p of result) {
 						var text = "<tr><td>"  + p.purchaseNo + "</td><td>" + p.unitPrice + "</td><td>" + p.quantity + "</td><td>" 

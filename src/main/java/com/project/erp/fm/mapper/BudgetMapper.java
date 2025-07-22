@@ -9,6 +9,6 @@ import com.project.erp.fm.model.vo.Budget;
 @Mapper
 public interface BudgetMapper {
 
-	List<Budget> showBudget();
+	List<Budget> showBudget(Budget budget);
 	
 }
