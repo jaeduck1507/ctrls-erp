@@ -14,12 +14,12 @@ import com.project.erp.fm.service.PurchaseService;
 public class SVPController {
 	// Select View and Purchase
 	@Autowired
-	private PurchaseService service;
+	private PurchaseService purchaseService;
 	
 	@ResponseBody
 	@GetMapping("/showPurchase")
-	public List<Purchase> showPurchase(){
-		return service.showPurchase();
+	public List<Purchase> showPurchase() {
+		return purchaseService.showPurchase();
 	}
 	
 }

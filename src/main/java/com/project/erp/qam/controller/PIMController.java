@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam; 
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.qam.model.vo.Product;
+import com.project.erp.qam.model.dto.ProductDetailDTO;
 import com.project.erp.qam.model.vo.ProductName;
 import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.ProductService;
@@ -19,68 +19,105 @@ import com.project.erp.qam.service.ProductService;
 public class PIMController {
 
 	@Autowired
-	private ProductService productService;
+	private ProductService productService; // 제품 관련 서비스 주입
 	
 	@Autowired
-	private ProductNameService productNameService;
-	
+	private ProductNameService productNameService; // 제품명 관련 서비스 주입
+
+	// ✅ 제품 전체 목록 조회 (DTO 기반)
+	// → AJAX로 호출되어 제품 목록을 JSON으로 반환
 	@ResponseBody
 	@GetMapping("/showProduct")
-	public List<Product> showProduct() {
-		return productService.showProduct();
+	public List<ProductDetailDTO> showProduct() {
+	    return productService.showProductDetail();
 	}
-	
+
+	// ✅ 제품명 전체 목록 조회
+	// → 제품 등록/수정 시 select option 동적 생성용
 	@ResponseBody
 	@GetMapping("/showProductName")
 	public List<ProductName> showProductName() {
 		return productNameService.showProductName();
 	}
-	
-//	@GetMapping("/productForm")
-//	public String pForm(@RequestParam(required = false) Integer productNo, Model model) {
-//	
-//	}
-	
-	
 
+	// ✅ 제품 수정 폼 페이지 호출
+	// → 수정할 productNo를 받아 해당 DTO를 model에 담아 JSP로 전달
+	@GetMapping("/productFormUpdate")
+	public String showUpdateForm(@RequestParam("productNo") int productNo, Model model) {
+	    ProductDetailDTO product = productService.findProductDetailById(productNo);
+	    model.addAttribute("product", product);
+	    return "component/qam/productDetailFormUpdate"; // JSP 경로 반환
+	}
+
+	// ✅ 제품 수정 처리
+	// → form에서 전달된 DTO를 이용하여 product + product_name 정보 동시 업데이트
+	@PostMapping("/updateProduct")
+	public String updateProduct(ProductDetailDTO product) {
+	    productService.updateProductDetail(product);
+	    return "redirect:/qam/product"; // 수정 후 제품 목록으로 리다이렉트
+	}
+
+	// ✅ 제품 삭제 처리
+	// → productNo를 기준으로 product 테이블에서 삭제
+	@GetMapping("/deleteProduct")
+	public String deleteProduct(@RequestParam("productNo") int productNo) {
+	    productService.deleteProduct(productNo);
+	    return "redirect:/qam/product"; // 삭제 후 목록으로 리다이렉트
+	}
+
+	// ✅ 제품 검색 (제품명, 카테고리 기반)
+	// → 조건 없이 호출 시 전체 반환, 조건 포함 시 LIKE/WHERE 절 처리
+	@GetMapping("/searchProduct")
+	@ResponseBody
+	public List<ProductDetailDTO> searchProduct(
+			@RequestParam(required = false) String productName,
+	        @RequestParam(required = false) String productCategory) {
+	    return productService.searchProductDetail(productName, productCategory);
+	}
+
+	// ✅ 제품명 등록/수정 폼 호출
+	// → productCode가 있으면 수정, 없으면 등록
 	@GetMapping("/productNameForm")
 	public String pnForm(@RequestParam(required = false) Integer productCode, Model model) {
 		if (productCode != null) {
 			ProductName productName = productNameService.findById(productCode);
-			model.addAttribute("productName", productName);
-			model.addAttribute("action", "/updateProductName");
+			model.addAttribute("productName", productName); // 수정용 데이터
+			model.addAttribute("action", "/updateProductName"); // 수정용 액션
 		} else {
-			model.addAttribute("productName", new ProductName());
-			model.addAttribute("action", "/registerProductName");
+			model.addAttribute("productName", new ProductName()); // 빈 객체 전달
+			model.addAttribute("action", "/registerProductName"); // 등록용 액션
 		}
-		return "component/qam/productNameForm"; 
+		return "component/qam/productNameForm"; // JSP 경로 반환
 	}
 
+	// ✅ 제품명 등록 처리
 	@PostMapping("/registerProductName")
 	public String register(ProductName productName) {
 		productNameService.insertProductName(productName);
-		return "redirect:/qam/productName";
+		return "redirect:/qam/productName"; // 등록 후 목록 페이지로 이동
 	}
 
+	// ✅ 제품명 수정 처리
 	@PostMapping("/updateProductName")
 	public String update(ProductName productName) {
 		productNameService.updateProductName(productName);
-		return "redirect:/qam/productName";
+		return "redirect:/qam/productName"; // 수정 후 목록 페이지로 이동
 	}
-	
+
+	// ✅ 제품명 삭제 처리
 	@GetMapping("/deleteProductName")
-	public String delete(@RequestParam int productCode) {
+	public String deleteProductName(@RequestParam int productCode) {
 		productNameService.deleteProductName(productCode);
-		return "redirect:/qam/productName";
+		return "redirect:/qam/productName"; // 삭제 후 목록 페이지로 이동
 	}
-	
+
+	// ✅ 제품명 검색 (제품명 or 카테고리)
+	// → 제품명 리스트에서 필터링할 때 사용
 	@GetMapping("/searchProductName")
 	@ResponseBody
 	public List<ProductName> searchProductName(
 	        @RequestParam(required = false) String productName,
 	        @RequestParam(required = false) String productCategory) {
-
 	    return productNameService.searchProductName(productName, productCategory);
 	}
-
 }

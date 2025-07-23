@@ -17,7 +17,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
 
-    <a href="/hrm/leaveRequest">휴가신청 /hrm/leaveRequest</a><br />
+    <a href="/hrm/leaveAdd">휴가신청 /hrm/leaveAdd</a><br />
     <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo</a><br />
     <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a><br />
     <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow</a><br />
@@ -29,6 +29,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="/fm/purchase">매입 내역 조회 /fm/purchase</a><br />
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a><br />
     <a href="/fm/purchaseRegister">매출 일괄 등록 /fm/purchaseRegister</a><br />
+    <a href="/fm/transaction">거래내역 조회 /fm/transaction</a><br />
+	<a href="/fm/salary">급여 조회 /fm/salary</a><br />
 
     <a href="/qam/product">상품(Product) 조회 /qam/product</a><br />
     <a href="/qam/productName"

@@ -17,4 +17,7 @@ public class LeaveInfoService {
 	public List<LeaveInfo> leaveInfo(LeaveInfo li) {
 		return leaveInfoMapper.leaveInfo(li);
 	}
+	public void leaveAdd(List<LeaveInfo> liList) {
+		leaveInfoMapper.leaveAdd(liList);
+	}
 }

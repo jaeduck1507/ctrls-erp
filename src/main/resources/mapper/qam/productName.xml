@@ -1,53 +1,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.qam.mapper.ProductNameMapper">
+    <!-- ✅ product_name 테이블 조회 결과를 ProductName 객체로 매핑 -->
+    <resultMap id="ProductNameMap" type="ProductName">
+        <id column="product_code" property="productCode"/>             <!-- PK -->
+        <result column="product_color" property="productColor"/>       <!-- 색상 -->
+        <result column="product_name" property="productName"/>         <!-- 이름 -->
+        <result column="product_price" property="productPrice"/>       <!-- 판매가 -->
+        <result column="product_cost" property="productCost"/>         <!-- 단가 -->
+        <result column="product_category" property="productCategory"/> <!-- 카테고리 -->
+    </resultMap>
 
-<resultMap id="ProductNameMap" type="ProductName">
-    <id column="product_code" property="productCode"/>
-    <result column="product_color" property="productColor"/>
-    <result column="product_name" property="productName"/>
-    <result column="product_price" property="productPrice"/>
-    <result column="product_cost" property="productCost"/>
-    <result column="product_category" property="productCategory"/>
-</resultMap>
-
-     <select id="showProductName" parameterType="ProductName" resultMap="ProductNameMap">
+    <!-- ✅ 전체 제품명 목록 조회 -->
+    <select id="showProductName" resultMap="ProductNameMap">
         SELECT * FROM product_name
-     </select>
+    </select>
 
-	<insert id="insertProductName" parameterType="ProductName">
-    	INSERT INTO product_name(product_color, product_name, product_price, product_cost, product_category)
-    	VALUES(#{productColor}, #{productName}, #{productPrice}, #{productCost}, #{productCategory})
-	</insert>
+    <!-- ✅ 제품명 등록 -->
+    <insert id="insertProductName" parameterType="ProductName">
+        INSERT INTO product_name(product_color, product_name, product_price, product_cost, product_category)
+        VALUES(#{productColor}, #{productName}, #{productPrice}, #{productCost}, #{productCategory})
+    </insert>
 
-	<update id="updateProductName" parameterType="ProductName">
-    	UPDATE product_name
-    	SET product_color = #{productColor},
-        	product_name = #{productName},
-        	product_price = #{productPrice},
-        	product_cost = #{productCost},
-        	product_category = #{productCategory}
-    	WHERE product_code = #{productCode}
-	</update>
+    <!-- ✅ 제품명 수정 -->
+    <update id="updateProductName" parameterType="ProductName">
+        UPDATE product_name
+        SET product_color = #{productColor},
+            product_name = #{productName},
+            product_price = #{productPrice},
+            product_cost = #{productCost},
+            product_category = #{productCategory}
+        WHERE product_code = #{productCode}
+    </update>
 
-	<select id="findById" parameterType="int" resultMap="ProductNameMap">
-    	SELECT * FROM product_name WHERE product_code = #{productCode}
-	</select>
-	
-	<delete id="deleteProductName" parameterType="int">
-    	DELETE FROM product_name
-    	WHERE product_code = #{productCode}
-	</delete>
+    <!-- ✅ 제품명 단건 조회 (수정폼 진입 시 사용) -->
+    <select id="findById" parameterType="int" resultMap="ProductNameMap">
+        SELECT * FROM product_name WHERE product_code = #{productCode}
+    </select>
 
-	<select id="searchProductName" resultMap="ProductNameMap">
-   		SELECT * FROM product_name
-    	WHERE 1=1
-    <if test="productName != null and productName != ''">
-        AND product_name LIKE CONCAT('%', #{productName}, '%')
-    </if>
-    <if test="productCategory != null and productCategory != ''">
-        AND product_category = #{productCategory}
-    </if>
-	</select>
+    <!-- ✅ 제품명 삭제 -->
+    <delete id="deleteProductName" parameterType="int">
+        DELETE FROM product_name
+        WHERE product_code = #{productCode}
+    </delete>
 
-
+    <!-- ✅ 제품명 검색 (이름 + 카테고리) -->
+    <select id="searchProductName" resultMap="ProductNameMap">
+        SELECT * FROM product_name
+        WHERE 1=1
+        <!-- 🔍 이름이 있을 경우 부분 일치 검색 -->
+        <if test="productName != null and productName != ''">
+            AND product_name LIKE CONCAT('%', #{productName}, '%')
+        </if>
+        <!-- 🔍 카테고리 정확 일치 검색 -->
+        <if test="productCategory != null and productCategory != ''">
+            AND product_category = #{productCategory}
+        </if>
+    </select>
 </mapper>

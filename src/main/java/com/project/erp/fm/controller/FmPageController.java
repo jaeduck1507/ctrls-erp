@@ -34,6 +34,14 @@ public class FmPageController {
 	public String purchaseRegister(Model model) {
 		model.addAttribute("productNameList", productNameService.showProductName());
 		return "component/fm/purchaseRegister";
+	@GetMapping("/transaction")
+	public String transaction() {
+		return "component/fm/transaction";
+	}
+	
+	@GetMapping("/salary")
+	public String salary() {
+		return "component/fm/salary";
 	}
 	
 }

@@ -15,7 +15,7 @@ public class TransactionService implements TransactionMapper {
 	private TransactionMapper mapper;
 
 	@Override
-	public List<Transaction> showtrans() {
-		return mapper.showtrans();
+	public List<Transaction> showtrans(Transaction trans) {
+		return mapper.showtrans(trans);
 	}
 }

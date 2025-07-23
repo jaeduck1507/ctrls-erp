@@ -11,7 +11,7 @@
 <body>
 	<h1>휴가 조회</h1>
 	<div id="search">
-		사번 <input type="text" id=empNo>
+		사번 <input type="text" id="empNo">
 		<button id="btn">검색</button>
 	</div>
 	<div>
@@ -32,7 +32,7 @@
 				// 응답
 				success : function(result) {
 					$("#result").empty();
-					$("#result").append("<tr><th>신청번호</th><th>신청날짜</th><th>유형<th><th>시작일</th><th>종료일</th><th>이유</th><th>상태</th></tr>");
+					$("#result").append("<tr><th>신청번호</th><th>신청날짜</th><th>유형</th><th>시작일</th><th>종료일</th><th>이유</th><th>상태</th></tr>");
 					for(const leaveInfo of result) {
 						var text = "<tr><td>" + leaveInfo.leaveId
 							       + "</td><td>" + leaveInfo.requestDate 
@@ -44,7 +44,7 @@
 					$("#result").append(text);
 					}
 				},
-				error:function(xhr, statusm, error){
+				error:function(xhr, status, error){
 					
 				}
 			})
@@ -52,5 +52,4 @@
 		
 	</script>
 </body>
-</head>
 </html>
