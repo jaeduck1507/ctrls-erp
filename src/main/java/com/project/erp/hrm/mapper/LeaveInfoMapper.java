@@ -10,5 +10,6 @@ import com.project.erp.hrm.model.dto.LeaveInfo;
 public interface LeaveInfoMapper {
 
 	List<LeaveInfo> leaveInfo(LeaveInfo li);
+	void leaveAdd(List<LeaveInfo> liList);
 
 }
