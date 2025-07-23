@@ -1,33 +1,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.qam.mapper.ProductMapper">
-
-<resultMap type="Product" id="ProductMap">
+    <!-- ✅ DTO 매핑 설정: SQL 결과 컬럼 → ProductDetailDTO 필드로 매핑 -->
+    <resultMap type="ProductDetailDTO" id="ProductDetailMap">
         <result column="product_no" property="productNo"/>
-        <result column="production_date" property="productionDate" />
+        <result column="production_date" property="productionDate"/>
         <result column="product_code" property="productCode"/>
+        
+        <result column="product_color" property="productColor"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_cost" property="productCost"/>
+        <result column="product_category" property="productCategory"/>
     </resultMap>
-    
-     <select id="showProduct" parameterType="Product" resultMap="ProductMap">
-        SELECT * FROM product
-     </select>
 
-	<insert id="insertProduct" parameterType="Product">
-		INSERT INTO product(production_date, product_code)
-		VALUES (#{productionDate}, #{productCode})
-	</insert>
+    <!-- ✅ 전체 제품 목록 조회 (조인) -->
+    <select id="showProductDetail" resultMap="ProductDetailMap">
+        SELECT p.product_no, p.production_date, p.product_code,
+               pn.product_color, pn.product_name, pn.product_price,
+               pn.product_cost, pn.product_category
+        FROM product p
+        JOIN product_name pn ON p.product_code = pn.product_code
+    </select>
 
-	<update id="updateProduct" parameterType="Product">
-		UPDATE product 
-		SET production_date = #{productionDate},
-			product_code = #{productCode}
-		WHERE product_no = #{productNo}
-	</update>
+    <!-- ✅ 단일 제품 상세 조회 (수정 폼 진입 시 사용) -->
+    <select id="findProductDetailById" parameterType="int" resultMap="ProductDetailMap">
+        SELECT p.product_no, p.production_date, p.product_code,
+               pn.product_color, pn.product_name, pn.product_price,
+               pn.product_cost, pn.product_category
+        FROM product p
+        JOIN product_name pn ON p.product_code = pn.product_code
+        WHERE p.product_no = #{productNo}
+    </select>
 
-	<delete id="deleteProduct" parameterType="Product">
-		DELETE FROM product
-		WHERE product_no = #{productNo}
-	</delete>
-	
-	
+    <!-- ✅ 제품명 정보 업데이트 (product_name 테이블 수정) -->
+    <update id="updateProductNameFromDetail" parameterType="ProductDetailDTO">
+        UPDATE product_name
+        SET product_color = #{productColor},
+            product_name = #{productName},
+            product_price = #{productPrice},
+            product_cost = #{productCost},
+            product_category = #{productCategory}
+        WHERE product_code = #{productCode}
+    </update>
+
+    <!-- ✅ 제품 정보 업데이트 (product 테이블 수정) -->
+    <update id="updateProductFromDetail" parameterType="ProductDetailDTO">
+        UPDATE product
+        SET production_date = #{productionDate}
+        WHERE product_no = #{productNo}
+    </update>
+
+    <!-- ✅ 제품 삭제 (product 테이블에서 삭제) -->
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM product WHERE product_no = #{productNo}
+    </delete>
+
+    <!-- ✅ 제품 검색 (동적 조건: 이름, 카테고리) -->
+    <select id="searchProductDetail" resultMap="ProductDetailMap">
+        SELECT p.product_no, p.production_date, p.product_code,
+               pn.product_color, pn.product_name, pn.product_price,
+               pn.product_cost, pn.product_category
+        FROM product p
+        JOIN product_name pn ON p.product_code = pn.product_code
+        WHERE 1=1
+        <!-- 🔍 제품명 LIKE 검색 -->
+        <if test="productName != null and productName != ''">
+            AND pn.product_name LIKE CONCAT('%', #{productName}, '%')
+        </if>
+        <!-- 🔍 카테고리 정확 일치 검색 -->
+        <if test="productCategory != null and productCategory != ''">
+            AND pn.product_category = #{productCategory}
+        </if>
+    </select>
 
 </mapper>
