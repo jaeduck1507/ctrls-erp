@@ -15,7 +15,7 @@
 		FROM budget
 		JOIN department USING(dept_no)
 		<where>
-			<if test="deptName != 'null' and deptName != 'all'">
+			<if test="deptName != 'dept'">
 				dept_name = #{deptName}
 			</if>
 		</where>
