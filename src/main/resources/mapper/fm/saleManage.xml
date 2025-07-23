@@ -17,11 +17,11 @@
 		JOIN product_name USING(product_code)
 		<where>
 			<choose>
-				<when test="productName != null and productCategory != 'null' and productCategory != 'all'">
+				<when test="productName != null and productCategory != 'all'">
 					product_category = #{productCategory}
 					AND product_name LIKE CONCAT ('%', #{productName}, '%')
 				</when>
-				<when test="productCategory != 'null' and productCategory != 'all'">
+				<when test="productCategory != 'all'">
 					product_category = #{productCategory}
 				</when>
 				<when test="productName != null">

@@ -9,6 +9,6 @@ import com.project.erp.fm.model.vo.Transaction;
 @Mapper
 public interface TransactionMapper {
 
-	List<Transaction> showtrans();
+	List<Transaction> showtrans(Transaction trans);
 	
 }

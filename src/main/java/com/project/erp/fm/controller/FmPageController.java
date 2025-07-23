@@ -23,4 +23,14 @@ public class FmPageController {
 		return "component/fm/budget";
 	}
 	
+	@GetMapping("/transaction")
+	public String transaction() {
+		return "component/fm/transaction";
+	}
+	
+	@GetMapping("/salary")
+	public String salary() {
+		return "component/fm/salary";
+	}
+	
 }
