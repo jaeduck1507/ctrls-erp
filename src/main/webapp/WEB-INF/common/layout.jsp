@@ -28,6 +28,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a><br />
     <a href="/fm/purchase">매입 내역 조회 /fm/purchase</a><br />
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a><br />
+    <a href="/fm/purchaseRegister">매출 일괄 등록 /fm/purchaseRegister</a><br />
 
     <a href="/qam/product">상품(Product) 조회 /qam/product</a><br />
     <a href="/qam/productName"

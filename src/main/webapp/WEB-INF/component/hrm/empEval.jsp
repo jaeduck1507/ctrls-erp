@@ -45,15 +45,35 @@
 	<script>
 	$("#btn").click(() => {
 		
-		const obj = {};
+		const pr = {};
 		
-		obj.empNo = 1;
-		obj.evaluatorEmpNo = $("#emp").val();
-		obj.attitudeScore = $('input[name="attitudeScore"]:checked').val();
-		obj.achieveScore = $('input[name="achieveScore"]:checked').val();
-		obj.comments = $("#comments").val;
-		console.log(obj);
+		pr.empNo = 1;
+		pr.evaluatorEmpNo = $("#emp").val();
+		pr.attitudeScore = $('input[name="attitudeScore"]:checked').val();
+		pr.achieveScore = $('input[name="achieveScore"]:checked').val();
+		pr.comments = $("#comments").val();
+		console.log(pr);
 		
+		$.ajax({
+            // 요청
+            type : "post",
+            url : "/empEval",
+            dataType : "json",
+            data : JSON.stringify(pr),
+			processData: false,
+			contentType : 'application/json; charset=UTF-8',
+            // 응답
+            success : function(result) {
+				//$("#result").text("");
+            	
+            	
+            	
+            },
+            
+			error:function(xhr,status,error) {
+				
+			}
+        });
 	});
 		
 		

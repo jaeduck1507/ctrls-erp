@@ -1,0 +1,7 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.hrm.mapper.PerformanceReviewMapper">
+	<insert id="empEval" parameterType="PerformanceReview">
+		INSERT INTO performance_review(emp_no,evaluator_emp_no,attitude_score,achieve_score,comments)
+		VALUES(#{empNo},#{evaluatorEmpNo},#{attitudeScore},#{achieveScore},#{comments})
+	</insert>
+</mapper>
