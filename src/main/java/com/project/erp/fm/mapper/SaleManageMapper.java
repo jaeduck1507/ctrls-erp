@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.project.erp.fm.model.vo.SaleManage;
+import com.project.erp.fm.model.dto.SaleProductDTO;
 
 @Mapper
 public interface SaleManageMapper {
 
-	List<SaleManage> showSaleManage(SaleManage sm);
+	List<SaleProductDTO> showSaleManage(SaleProductDTO sp);
 	
 }

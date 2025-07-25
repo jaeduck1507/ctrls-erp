@@ -16,8 +16,12 @@
 			<option value="수입">수입</option>
 			<option value="지출">지출</option>
 		</select>
+		
 		<select id="deptName">
 			<option value="dept">부서 선택</option>
+			<c:forEach items="${department}" var="dept">
+				<option value="${dept.deptName}">${dept.deptName}</option>
+			</c:forEach>
 		</select>
 		<button id="btn">조회</button>
 	</div>
@@ -29,22 +33,6 @@
 	</div>
 	
 	<script>
-		$(document).ready(() => {
-			$.ajax({
-				type : "get",
-				url : "/selectDept",
-				success : function(result) {
-					for(const i of result) {
-						var text = '<option value="'+ i.deptName +'">'+ i.deptName +'</option>';
-						$("#deptName").append(text);
-					}
-				},
-				error:function(xhr,status,error) {
-							
-				}
-			});
-		});
-		
 		$("#btn").click(() => {
 			const formData = new FormData();
 			formData.append("transType", $("#transType").val());

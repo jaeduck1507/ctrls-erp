@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.TransactionMapper">
 	
-	<resultMap id="TransactionMap" type="Transaction">
+	<resultMap id="TransMap" type="TransDTO">
 		<id property="transNo" column="trans_no"/>
 		<result property="transType" column="trans_type"/>
 		<result property="transAmount" column="trans_amount"/>
@@ -11,7 +11,7 @@
 		<result property="deptName" column="dept_name"/>
 	</resultMap>
 	
-	<select id="showtrans" parameterType="Transaction" resultMap="TransactionMap">
+	<select id="showtrans" parameterType="TransDTO" resultMap="TransMap">
 		SELECT trans_no, trans_type, trans_amount, category, trans_desc, trans_date, dept_name
 		FROM transaction
 		JOIN department USING(dept_no)

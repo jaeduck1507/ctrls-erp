@@ -15,6 +15,6 @@ public class Purchase {
 	private int varAmount; // 부가세 총액
 	private int totalAmount; // 총액 unit_price * quantity 
 	private LocalDate purchaseDate; // 매입일
-	private int productNo; // 상품 번호(FK)
+	private int productCode; // 상품 번호(FK)
 	
 }

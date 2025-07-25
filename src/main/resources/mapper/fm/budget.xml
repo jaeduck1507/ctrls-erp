@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.BudgetMapper">
 
-	<resultMap id="BudgetMap" type="Budget">
+	<resultMap id="BudgetDeptMap" type="BudgetDeptDTO">
 		<id property="budgetNo" column="budget_no"/>
 		<result property="periodType" column="period_type"/>
 		<result property="periodValue" column="period_value"/>
@@ -10,7 +10,7 @@
 		<result property="deptName" column="dept_name"/>
 	</resultMap>
 	
-	<select id="showBudget" parameterType="Budget" resultMap="BudgetMap">
+	<select id="showBudget" parameterType="BudgetDeptDTO" resultMap="BudgetDeptMap">
 		SELECT period_type, period_value, annual_budget, plan, dept_name
 		FROM budget
 		JOIN department USING(dept_no)

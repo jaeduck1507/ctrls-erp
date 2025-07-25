@@ -15,7 +15,6 @@ public class Transaction {
 	private String category; // 분류
 	private String transDesc; // 수입/지출 내역 상세
 	private LocalDate transDate; // 수입/지출 발생 일자
-	
-	private String deptName; // 부서 이름
+	private int deptNo; // 부서 번호(FK)
 	
 }

@@ -2,10 +2,9 @@ package com.project.erp.fm.model.dto;
 
 import java.time.LocalDate;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
+@Data
 public class SalEmpDTO {
 
 	private int salaryNo;
@@ -15,6 +14,7 @@ public class SalEmpDTO {
 	private int deduction;
 	private int tax;
 	private String empName;
+	private String deptName;
 	private int payment;
 	
 }

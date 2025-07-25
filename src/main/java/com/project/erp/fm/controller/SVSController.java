@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.fm.model.vo.SaleManage;
+import com.project.erp.fm.model.dto.SaleProductDTO;
 import com.project.erp.fm.service.SaleManageService;
 
 @Controller
@@ -18,8 +18,8 @@ public class SVSController {
 	
 	@ResponseBody
 	@PostMapping("/showSaleManage")
-	public List<SaleManage> showSaleManage(SaleManage sm) {
-		return saleManageService.showSaleManage(sm);
+	public List<SaleProductDTO> showSaleManage(SaleProductDTO sp) {
+		return saleManageService.showSaleManage(sp);
 	}
 	
 }

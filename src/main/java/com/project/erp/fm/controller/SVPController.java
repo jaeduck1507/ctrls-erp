@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.fm.model.vo.Purchase;
+import com.project.erp.fm.model.dto.PurDeptDTO;
 import com.project.erp.fm.service.PurchaseService;
 
 @Controller
@@ -17,9 +17,9 @@ public class SVPController {
 	private PurchaseService purchaseService;
 	
 	@ResponseBody
-	@GetMapping("/showPurchase")
-	public List<Purchase> showPurchase() {
-		return purchaseService.showPurchase();
+	@PostMapping("/showPurchase")
+	public List<PurDeptDTO> showPurchase(PurDeptDTO pd) {
+		return purchaseService.showPurchase(pd);
 	}
 	
 }
