@@ -2,6 +2,7 @@ package com.project.erp.qam.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.project.erp.qam.model.dto.ProductDetailDTO;
+import com.project.erp.qam.model.vo.Product;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface ProductMapper {
 
     // ✅ 제품 검색 (제품명, 카테고리 조건 기반 LIKE 필터 검색)
     List<ProductDetailDTO> searchProductDetail(String productName, String productCategory);
+    
+    void productBatchRegister(List<Product> productList);
 }

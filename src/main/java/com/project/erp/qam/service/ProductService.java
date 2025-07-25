@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.qam.mapper.ProductMapper;
 import com.project.erp.qam.model.dto.ProductDetailDTO;
+import com.project.erp.qam.model.vo.Product;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -52,9 +56,22 @@ public class ProductService {
         return productMapper.findProductDetailById(productNo) != null;
     }
 
+    public void productBatchRegister(List<Product> productList) {
+    	productMapper.productBatchRegister(productList);
+    }
     
-    
-    
-    
-    
+    // 제품 등록 수량에서 리스트로 변환
+    public void productBatchSetter(List<Purchase> prList) {
+    	List<Product> productList = new ArrayList<Product>();
+    	for(Purchase pr : prList) {
+    		for(int i = 0; i<pr.getQuantity(); i++) {
+    			
+    			Product product = new Product();
+    			product.setProductionDate(pr.getPurchaseDate());
+    			product.setProductCode(pr.getProductNo());
+    			productList.add(product);
+    		}
+    	}
+    	productBatchRegister(productList);
+    }
 }

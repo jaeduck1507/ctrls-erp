@@ -30,4 +30,11 @@
 		</where>
 	</select>
 	
+	<insert id="purchaseRegister" parameterType="ArrayList">
+		INSERT INTO purchase (unit_price, quantity, var_amount, total_amount, purchase_date, product_code) VALUES
+		<foreach collection="prList" item="purchase" separator=",">
+		(#{purchase.unitPrice},#{purchase.quantity},#{purchase.varAmount},#{purchase.totalAmount},#{purchase.purchaseDate},#{purchase.productNo})
+		
+		</foreach>
+	</insert>
 </mapper>

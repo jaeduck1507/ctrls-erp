@@ -10,5 +10,7 @@ import com.project.erp.fm.model.dto.PurDeptDTO;
 public interface PurchaseMapper {
 
 	List<PurDeptDTO> showPurchase(PurDeptDTO pd);
+	List<Purchase> showPurchase();
+	void purchaseRegister(List<Purchase> prList);
 	
 }
