@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.qam.service.ProductNameService;
 
 @RequestMapping("/fm")
@@ -14,6 +15,9 @@ public class FmPageController {
 
 	@Autowired
 	private ProductNameService productNameService;
+	
+	@Autowired
+	private DepartmentService departmentService;
 	
 	@GetMapping("/saleManage")
 	public String saleManage() {
@@ -26,7 +30,8 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/budget")
-	public String budget() {
+	public String budget(Model model) {
+		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/budget";
 	}
 	
@@ -37,12 +42,14 @@ public class FmPageController {
 	}	
 		
 	@GetMapping("/transaction")
-	public String transaction() {
+	public String transaction(Model model) {
+		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/transaction";
 	}
 	
 	@GetMapping("/salary")
-	public String salary() {
+	public String salary(Model model) {
+		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/salary";
 	}
 	

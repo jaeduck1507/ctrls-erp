@@ -1,5 +1,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.SalaryMapper">
+
 	<resultMap id="SalEmpMap" type="SalEmpDTO">
 		<id property="salaryNo" column="salary_no"/>
 		<result property="salaryDate" column="salary_date"/>
@@ -8,13 +9,27 @@
 		<result property="deduction" column="deduction"/>
 		<result property="tax" column="tax"/>
 		<result property="empName" column="emp_name"/>
+		<result property="deptName" column="dept_name"/>
 		<result property="payment" column="payment"/>
 	</resultMap>
 	
 	<select id="showSalary" parameterType="SalEmpDTO" resultMap="SalEmpMap">
-		SELECT emp_name, salary_date, base_salary, bonus, payment, deduction, tax 
+		SELECT dept_name, emp_name, salary_date, base_salary, bonus, deduction, tax
 		FROM salary 
 		JOIN employee_info USING(emp_no)
-		JOIN bonus_payment USING(bonus_payment_no)
+		JOIN department USING(dept_no)
+		<where>
+			<if test="deptName != 'dept' and empName != null">
+				dept_name = #{deptName}
+				AND emp_name LIKE CONCAT ('%', #{empName}, '%')
+			</if>
+			<if test="deptName != 'dept' and empName == null">
+				dept_name = #{deptName}
+			</if>
+			<if test="deptName == 'dept' and empName != null">
+				emp_name LIKE CONCAT ('%', #{empName}, '%')
+			</if>
+		</where>
 	</select>
+	
 </mapper>

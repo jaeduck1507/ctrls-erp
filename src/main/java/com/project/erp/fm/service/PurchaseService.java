@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.fm.mapper.PurchaseMapper;
-import com.project.erp.fm.model.vo.Purchase;
+import com.project.erp.fm.model.dto.PurDeptDTO;
 
 @Service
 public class PurchaseService implements PurchaseMapper {
@@ -15,8 +15,8 @@ public class PurchaseService implements PurchaseMapper {
 	private PurchaseMapper mapper;
 
 	@Override
-	public List<Purchase> showPurchase() {
-		return mapper.showPurchase();
+	public List<PurDeptDTO> showPurchase(PurDeptDTO pd) {
+		return mapper.showPurchase(pd);
 	}
 	
 }

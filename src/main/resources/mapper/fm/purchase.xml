@@ -1,17 +1,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.PurchaseMapper">
 	
-	<resultMap id="PurchaseMap" type="Purchase">
+	<resultMap id="PurDeptMap" type="PurDeptDTO">
 		<id property="purchaseNo" column="purchase_no"/>
 		<result property="unitPrice" column="unit_price"/>
 		<result property="quantity" column="quantity"/>
 		<result property="varAmount" column="var_amount"/>
 		<result property="totalAmount" column="total_amount"/>
 		<result property="purchaseDate" column="purchase_date"/>
-		<result property="productNo" column="product_code"/>
+		<result property="productName" column="product_name"/>
+		<result property="productCategory" column="product_category"/>
 	</resultMap>
 	
-	<select id="showPurchase" resultMap="PurchaseMap">
-		SELECT * FROM purchase
+	<select id="showPurchase" parameterType="PurDeptDTO" resultMap="PurDeptMap">
+		SELECT purchase_no, product_name, product_category,  unit_price, quantity, var_amount, total_amount, purchase_date
+		FROM purchase
+		JOIN product_name USING(product_code)
+		<where>
+			<if test="productName != null and productCategory != 'all'">
+				product_category = #{productCategory}
+				AND product_name LIKE CONCAT ('%', #{productName}, '%')
+			</if>
+			<if test="productName == null and productCategory != 'all'">
+				product_category = #{productCategory}
+			</if>
+			<if test="productName != null and productCategory == 'all'">
+				product_name LIKE CONCAT ('%', #{productName}, '%')
+			</if>
+		</where>
 	</select>
+	
 </mapper>

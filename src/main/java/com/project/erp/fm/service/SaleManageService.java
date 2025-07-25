@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.fm.mapper.SaleManageMapper;
-import com.project.erp.fm.model.vo.SaleManage;
+import com.project.erp.fm.model.dto.SaleProductDTO;
 
 @Service
 public class SaleManageService implements SaleManageMapper {
@@ -15,8 +15,8 @@ public class SaleManageService implements SaleManageMapper {
 	private SaleManageMapper mapper;
 
 	@Override
-	public List<SaleManage> showSaleManage(SaleManage sm) {
-		return mapper.showSaleManage(sm);
+	public List<SaleProductDTO> showSaleManage(SaleProductDTO sp) {
+		return mapper.showSaleManage(sp);
 	}
 	
 }

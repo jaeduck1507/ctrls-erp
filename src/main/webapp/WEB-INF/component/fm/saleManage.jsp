@@ -30,12 +30,11 @@
 	</div>
 	
 	<script>
-		
 		$("#btn").click(() => {
 			const formData = new FormData();
 			formData.append("productCategory", $("#productCategory").val());
 			formData.append("productName", $("#productName").val());
-			//formData.append("month", $("#month").val());
+			formData.append("month", $("#month").val());
 			$.ajax({
 				type: "post",
 				url: "/showSaleManage",
@@ -43,7 +42,9 @@
 				processData: false,
 				contentType : false,
 				success: function(result) {
-					//console.log($("#month").val());
+					//console.log($("#productCategory").val());
+					//console.log($("#productName").val());
+					console.log($("#month").val());
 					$("#result").html("");
 					$("#result").append("<tr><th>매출 번호</th><th>매출 발생일자</th><th>수량</th><th>부가세</th><th>총액</th><th>제품명</th><th>카테고리</th></tr>");
 					for (const sm of result) {

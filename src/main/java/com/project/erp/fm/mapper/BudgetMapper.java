@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.project.erp.fm.model.vo.Budget;
+import com.project.erp.fm.model.dto.BudgetDeptDTO;
 
 @Mapper
 public interface BudgetMapper {
 
-	List<Budget> showBudget(Budget budget);
+	List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd);
 	
 }

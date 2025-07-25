@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.fm.mapper.TransactionMapper;
-import com.project.erp.fm.model.vo.Transaction;
+import com.project.erp.fm.model.dto.TransDTO;
 
 @Service
 public class TransactionService implements TransactionMapper {
@@ -15,7 +15,7 @@ public class TransactionService implements TransactionMapper {
 	private TransactionMapper mapper;
 
 	@Override
-	public List<Transaction> showtrans(Transaction trans) {
+	public List<TransDTO> showtrans(TransDTO trans) {
 		return mapper.showtrans(trans);
 	}
 }
