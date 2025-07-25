@@ -72,5 +72,13 @@
             AND pn.product_category = #{productCategory}
         </if>
     </select>
+    
+    <insert id="productBatchRegister" parameterType="ArrayList">
+		INSERT INTO product (production_date, product_code) VALUES
+		<foreach collection="productList" item="product" separator=",">
+		(#{product.productionDate},#{product.productCode})
+		
+		</foreach>
+	</insert>
 
 </mapper>

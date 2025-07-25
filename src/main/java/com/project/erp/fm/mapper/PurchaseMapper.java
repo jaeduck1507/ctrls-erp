@@ -10,5 +10,6 @@ import com.project.erp.fm.model.vo.Purchase;
 public interface PurchaseMapper {
 
 	List<Purchase> showPurchase();
+	void purchaseRegister(List<Purchase> prList);
 	
 }

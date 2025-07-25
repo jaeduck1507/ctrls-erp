@@ -3,9 +3,13 @@ package com.project.erp.qam.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.qam.mapper.ProductMapper;
 import com.project.erp.qam.model.dto.ProductDetailDTO;
+import com.project.erp.qam.model.vo.Product;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -43,5 +47,24 @@ public class ProductService {
     // → 제품명 및 카테고리 기준 필터링 (LIKE + WHERE 조건 조합)
     public List<ProductDetailDTO> searchProductDetail(String productName, String productCategory) {
         return productMapper.searchProductDetail(productName, productCategory);
+    }
+    
+    public void productBatchRegister(List<Product> productList) {
+    	productMapper.productBatchRegister(productList);
+    }
+    
+    // 제품 등록 수량에서 리스트로 변환
+    public void productBatchSetter(List<Purchase> prList) {
+    	List<Product> productList = new ArrayList<Product>();
+    	for(Purchase pr : prList) {
+    		for(int i = 0; i<pr.getQuantity(); i++) {
+    			
+    			Product product = new Product();
+    			product.setProductionDate(pr.getPurchaseDate());
+    			product.setProductCode(pr.getProductNo());
+    			productList.add(product);
+    		}
+    	}
+    	productBatchRegister(productList);
     }
 }

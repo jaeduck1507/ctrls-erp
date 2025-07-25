@@ -18,5 +18,10 @@ public class PurchaseService implements PurchaseMapper {
 	public List<Purchase> showPurchase() {
 		return mapper.showPurchase();
 	}
+
+	@Override
+	public void purchaseRegister(List<Purchase> prList) {
+		mapper.purchaseRegister(prList);
+	}
 	
 }
