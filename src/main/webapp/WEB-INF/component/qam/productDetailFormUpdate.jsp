@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>제품 정보 수정</title> <!-- 페이지 제목 -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <h2>제품 정보 수정</h2> <!-- 제목 표시 -->

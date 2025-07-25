@@ -1,5 +1,10 @@
 package com.project.erp.qam.mapper;
 
-public interface DefectiveMapper {
+import com.project.erp.qam.model.vo.Defective;
 
+public interface DefectiveMapper {
+    // Insert a new defective record (used when QC fails)
+    void insertDefective(Defective defective);
+
+	void deleteByProductNo(int productNo);
 }

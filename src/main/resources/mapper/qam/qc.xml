@@ -1,5 +1,152 @@
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.project.erp.qam.mapper.QcMapper">
 
+    <!-- resultMap for QcResultDTO -->
+    <resultMap id="QcResultMap" type="QcResultDTO">
+        <!-- product -->
+        <result column="product_no" property="productNo"/>
+        <result column="production_date" property="productionDate"/>
+        <result column="product_code" property="productCode"/>
+	    <!-- product_name -->
+		<result column="product_color" property="productColor"/>
+		<result column="product_name" property="productName"/>
+		<result column="product_price" property="productPrice"/>
+		<result column="product_cost" property="productCost"/>
+		<result column="product_category" property="productCategory"/>
+		
+		<!-- qc -->
+		<result column="qc_code" property="qcCode"/>
+		<result column="check_material" property="checkMaterial"/>
+		<result column="check_color" property="checkColor"/>
+		<result column="check_damage" property="checkDamage"/>
+		<result column="qc_desc" property="qcDesc"/>
+		<result column="qc_date" property="qcDate"/>
+		<result column="emp_no" property="empNo"/>
+		
+		<!-- sale -->
+		<result column="sale_no" property="saleNo"/>
+		<result column="sale_date" property="saleDate"/>
+		
+		<!-- defective -->
+		<result column="defective_no" property="defectiveNo"/>
+		<result column="reason" property="reason"/>
+    </resultMap>
+
+    <!-- 품질검사 등록 -->
+    <insert id="insertQc" parameterType="Qc">
+        INSERT INTO qc (check_material, check_color, check_damage, qc_desc, qc_date, emp_no, product_no)
+        VALUES (#{checkMaterial}, #{checkColor}, #{checkDamage}, #{qcDesc}, #{qcDate}, #{empNo}, #{productNo})
+    </insert>
+
+    <!-- 제품번호로 QC 조회 -->
+    <select id="findQcResultByProductNo" parameterType="int" resultMap="QcResultMap">
+        SELECT 
+            p.product_no,
+            p.production_date,
+            p.product_code,
+            q.qc_code,
+            q.check_material,
+            q.check_color,
+            q.check_damage,
+            q.qc_desc,
+            q.qc_date,
+            q.emp_no,
+            s.sale_no,
+            s.sale_date,
+            d.defective_no,
+            d.reason
+        FROM qc q
+        JOIN product p ON q.product_no = p.product_no
+        JOIN product_name pn ON p.product_code = pn.product_code
+        LEFT JOIN sale s ON p.product_no = s.product_no
+        LEFT JOIN defective d ON p.product_no = d.product_no
+        WHERE p.product_no = #{productNo}
+    </select>
+
+    <!-- 검사자 사번(empNo)으로 조회 -->
+    <select id="findQcByEmpNo" parameterType="int" resultMap="QcResultMap">
+        SELECT 
+            p.product_no,
+            p.production_date,
+            p.product_code,
+            q.qc_code,
+            q.check_material,
+            q.check_color,
+            q.check_damage,
+            q.qc_desc,
+            q.qc_date,
+            q.emp_no,
+            s.sale_no,
+            s.sale_date,
+            d.defective_no,
+            d.reason
+        FROM qc q
+        JOIN product p ON q.product_no = p.product_no
+        JOIN product_name pn ON p.product_code = pn.product_code
+        LEFT JOIN sale s ON p.product_no = s.product_no
+        LEFT JOIN defective d ON p.product_no = d.product_no
+        WHERE q.emp_no = #{empNo}
+    </select>
+
+    <!-- 전체 QC + 판매 + 불량 조회 -->
+	<select id="findAllQcResults" resultMap="QcResultMap">
+	    SELECT
+	        p.product_no,
+	        p.production_date,
+	        pn.product_code,
+	        pn.product_color,
+	        pn.product_name,
+	        pn.product_price,
+	        pn.product_cost,
+	        pn.product_category,
+	        q.qc_code,
+	        q.check_material,
+	        q.check_color,
+	        q.check_damage,
+	        q.qc_desc,
+	        q.qc_date,
+	        q.emp_no
+	    FROM product p
+	    JOIN product_name pn ON p.product_code = pn.product_code
+	    LEFT JOIN qc q ON p.product_no = q.product_no
+	</select>
+
+	<!-- QC 안된제품들 조회 -->
+	<select id="findQcTargetProducts" resultMap="QcResultMap">
+	    SELECT
+	        p.product_no,
+	        p.production_date,
+	        pn.product_code,
+	        pn.product_color,
+	        pn.product_name,
+	        pn.product_price,
+	        pn.product_cost,
+	        pn.product_category,
+	        q.qc_code,
+	        q.check_material,
+	        q.check_color,
+	        q.check_damage,
+	        q.qc_desc,
+	        q.qc_date,
+	        q.emp_no
+	    FROM product p
+	    JOIN product_name pn ON p.product_code = pn.product_code
+	    LEFT JOIN qc q ON p.product_no = q.product_no
+	    WHERE q.qc_code IS NULL
+	</select>
+
+	<update id="updateQc" parameterType="Qc">
+	    UPDATE qc
+	    SET check_material = #{checkMaterial},
+	        check_color = #{checkColor},
+	        check_damage = #{checkDamage},
+	        qc_desc = #{qcDesc},
+	        emp_no = #{empNo}
+	    WHERE product_no = #{productNo}
+	</update>
+
+	
 
 </mapper>

@@ -7,7 +7,7 @@
     <title>제품 조회</title>
     <!-- CSS 적용은 주석처리된 상태 (추후 디자인 작업 시 해제 가능) -->
     <!-- <link rel="stylesheet" href="<c:url value='/resources/css/product.css' />"> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 로드 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery 로드 -->
 </head>
 
 <body>

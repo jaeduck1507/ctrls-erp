@@ -9,5 +9,6 @@ public class Defective { //불량품 테이블: 품질검사에서 불합격 처
 
  private int defectiveNo; // 불량품 고유 번호 (PK, AUTO_INCREMENT)
  private int productNo; // 불량품 제품 번호 (FK, product.product_no)
+ private String reason; // 불량 사유
 
 }

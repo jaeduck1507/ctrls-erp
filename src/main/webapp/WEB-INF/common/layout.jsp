@@ -33,9 +33,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<a href="/fm/salary">급여 조회 /fm/salary</a><br />
 
     <a href="/qam/product">상품(Product) 조회 /qam/product</a><br />
-    <a href="/qam/productName"
-      >제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a
-    ><br />
+    <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a><br />
+	<a href="/qam/qcList">제품 품질 검수 (조회 - 합격/불합격) + 판매 / 불량 테이블까지 JOIN /qam/qcList</a><br />
     <!-- 
     <script src = "../resources/js/layout.js"></script>
     
