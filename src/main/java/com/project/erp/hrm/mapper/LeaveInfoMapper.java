@@ -11,5 +11,6 @@ public interface LeaveInfoMapper {
 
 	List<LeaveInfo> leaveInfo(LeaveInfo li);
 	void leaveAdd(List<LeaveInfo> liList);
-
+	List<LeaveInfo> leaveStatus();
+	void leaveStatusUpdate(LeaveInfo leaveinfo);
 }

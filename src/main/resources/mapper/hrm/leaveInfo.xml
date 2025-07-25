@@ -2,30 +2,30 @@
 <mapper namespace="com.project.erp.hrm.mapper.LeaveInfoMapper">
 
 <resultMap type="LeaveInfo" id="LeaveInfoMap">
-   <result column="leave_id" property="leaveId"/>
+   <id column="leave_id" property="leaveId"/>
    <result column="leave_type" property="leaveType"/>
    <result column="request_date" property="requestDate"/>
    <result column="start_date" property="startDate"/>
    <result column="end_date" property="endDate"/>
+   <result column="emp_no" property="empNo"/>
    <result column="reason" property="reason"/>
    <result column="status" property="status" />
+   <result column="emp_name" property="empName"/>
+   <result column="dept_name" property="deptName"/>
+   <result column="job_title" property="jobTitle"/>
 </resultMap>
 
 <select id="leaveInfo" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
-SELECT
-leave_id,
-leave_type,
-request_date,
-start_date,
-end_date,
-reason,
-status
+SELECT leave_id, request_date, leave_type, start_date, end_date, reason, status, emp_name, dept_name, job_title
 FROM leave_request
+     JOIN employee_info USING(emp_no)
+     JOIN department USING(dept_no)
+     JOIN job_position USING(job_no)
 <where>
-		<if test="empNo != null" >
-			emp_no = #{empNo}
-		</if>
- </where>
+	<if test="empNo != null" >
+		emp_no = #{empNo}
+	</if>
+</where>
 ORDER BY request_date DESC
 </select>
 
@@ -36,6 +36,21 @@ VALUES
 		   (#{leave.empNo}, #{leave.requestDate},#{leave.leaveType},#{leave.startDate},#{leave.endDate},#{leave.reason})
 </foreach>
 </insert>
+
+<update id="leaveStatusUpdate" parameterType="LeaveInfo">
+UPDATE leave_request
+SET status = #{status}
+WHERE leave_id = #{leaveId}
+</update>
+<select id="leaveStatus" resultMap="LeaveInfoMap">
+SELECT leave_id, request_date, leave_type,emp_no, start_date, end_date, reason, status, emp_name, dept_name, job_title
+FROM leave_request
+     JOIN employee_info USING(emp_no)
+     JOIN department USING(dept_no)
+     JOIN job_position USING(job_no)
+WHERE status = '대기'
+ORDER BY leave_id ASC
+</select>
 
 
 </mapper>
