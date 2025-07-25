@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.fm.mapper.PurchaseMapper;
 import com.project.erp.fm.model.dto.PurDeptDTO;
+import com.project.erp.fm.model.vo.Purchase;
 
 @Service
 public class PurchaseService implements PurchaseMapper {
@@ -23,5 +24,7 @@ public class PurchaseService implements PurchaseMapper {
 	public void purchaseRegister(List<Purchase> prList) {
 		mapper.purchaseRegister(prList);
 	}
+
+	
 	
 }

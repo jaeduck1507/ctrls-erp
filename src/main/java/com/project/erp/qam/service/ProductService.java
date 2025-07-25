@@ -68,7 +68,7 @@ public class ProductService {
     			
     			Product product = new Product();
     			product.setProductionDate(pr.getPurchaseDate());
-    			product.setProductCode(pr.getProductNo());
+    			product.setProductCode(pr.getProductCode());
     			productList.add(product);
     		}
     	}

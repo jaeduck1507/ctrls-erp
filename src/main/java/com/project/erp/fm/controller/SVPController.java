@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.fm.model.dto.PurDeptDTO;
+import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.fm.service.PurchaseService;
 import com.project.erp.qam.service.ProductService;
 
