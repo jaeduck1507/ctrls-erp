@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,8 +30,15 @@ public class LMController {
 	@ResponseBody
 	@PostMapping("/leaveAdd")
 	public void leaveAdd(@RequestBody List<LeaveInfo> liList) {
-		System.out.println(liList.get(0).getEmpNo());
+//		System.out.println(liList.get(0).getEmpNo());
 		leaveInfoService.leaveAdd(liList);
+	}
+	
+	@ResponseBody
+	@PostMapping("/leaveStatusUpdate")
+	public void leaveStatusUpdate(LeaveInfo leaveinfo) {
+//		System.out.println(leaveinfo);
+		leaveInfoService.leaveStatusUpdate(leaveinfo);
 	}
 
 }

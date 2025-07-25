@@ -11,6 +11,7 @@ import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.hrm.service.JobPositionService;
+import com.project.erp.hrm.service.LeaveInfoService;
 
 @RequestMapping("/hrm")
 @Controller
@@ -24,6 +25,9 @@ public class HrmPageController {
 	
 	@Autowired
 	private JobPositionService jobPositionService;
+	
+	@Autowired
+	private LeaveInfoService leaveInfoService; 
 	
 	@GetMapping("/empInfo")
 	public String empInfo() {
@@ -52,9 +56,11 @@ public class HrmPageController {
 		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
 		return "component/hrm/empEval";
 	}
-	@GetMapping("/leaveAdd")
-	public String leaveAdd() {
-		return "component/hrm/leaveAdd";
+	
+	@GetMapping("/leaveStatus")
+	public String leaveStatus(Model model) {
+		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus() );
+		return "component/hrm/leaveStatus"; 
 	}
 }
 

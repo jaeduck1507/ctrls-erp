@@ -17,12 +17,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
 
-    <a href="/hrm/leaveAdd">휴가신청 /hrm/leaveAdd</a><br />
+    <a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a><br />
     <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo</a><br />
     <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a><br />
     <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow</a><br />
-    <a href="/hrm/leaveInfo">휴가조회 /hrm/leaveInfo</a><br />
+    <a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a><br />
     <a href="/hrm/empEval">인사/성과평가 /hrm/empEval</a><br />
+	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus</a><br />
 
     <a href="/fm/budget">예산 조회 /fm/budget</a><br />
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a><br />

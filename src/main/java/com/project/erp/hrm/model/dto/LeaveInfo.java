@@ -17,4 +17,7 @@ public class LeaveInfo {
  private LocalDate endDate; // end_date 휴가 종료일
  private String reason; // 이유
  private String status; // 휴가 상태(대기, 승인, 반려)
+ private String empName; // emp_name 직원이름
+ private String deptName;//dept_Name 부서
+ private String jobTitle;// job_title 직급
 }

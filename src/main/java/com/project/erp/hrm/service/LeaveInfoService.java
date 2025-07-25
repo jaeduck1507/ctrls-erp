@@ -20,4 +20,13 @@ public class LeaveInfoService {
 	public void leaveAdd(List<LeaveInfo> liList) {
 		leaveInfoMapper.leaveAdd(liList);
 	}
+	
+	public List<LeaveInfo> leaveStatus() {
+		return leaveInfoMapper.leaveStatus();
+	}
+	
+	public void leaveStatusUpdate(LeaveInfo leaveinfo) {
+		leaveInfoMapper.leaveStatusUpdate(leaveinfo);
+	}
+	
 }
