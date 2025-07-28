@@ -62,5 +62,15 @@ public class HrmPageController {
 		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus() );
 		return "component/hrm/leaveStatus"; 
 	}
+	
+	@GetMapping("/leaveAdd")
+	public String leaveAdd() {
+		return "component/hrm/leaveInfo";
+	}
+	
+	@GetMapping("/leaveDays")
+	public String leaveDays() {
+		return "component/hrm/leaveDays";
+	}
 }
 

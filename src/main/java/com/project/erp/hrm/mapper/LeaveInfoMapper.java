@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.hrm.model.dto.LeaveInfo;
+import com.project.erp.hrm.model.vo.LeaveDays;
 
 @Mapper
 public interface LeaveInfoMapper {
@@ -13,4 +14,5 @@ public interface LeaveInfoMapper {
 	void leaveAdd(List<LeaveInfo> liList);
 	List<LeaveInfo> leaveStatus();
 	void leaveStatusUpdate(LeaveInfo leaveinfo);
+	
 }
