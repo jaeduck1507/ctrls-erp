@@ -16,15 +16,14 @@
 		FROM sale_manage
 		JOIN product_name USING(product_code)
 		<where>
-			<if test="productName != null and productCategory != 'all'">
-				product_category = #{productCategory}
+			<if test="startDate != null and endDate != null">
+				sale_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="productCategory != 'all'">
+				AND product_category = #{productCategory}
+			</if>
+			<if test="productName != null">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
-			</if>
-			<if test="productName == null and productCategory != 'all'">
-				product_category = #{productCategory}
-			</if>
-			<if test="productName != null and productCategory == 'all'">
-				product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
 	</select>

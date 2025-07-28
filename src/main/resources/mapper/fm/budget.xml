@@ -1,6 +1,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.BudgetMapper">
-
+	
 	<resultMap id="BudgetDeptMap" type="BudgetDeptDTO">
 		<id property="budgetNo" column="budget_no"/>
 		<result property="periodType" column="period_type"/>
@@ -20,5 +20,12 @@
 			</if>
 		</where>
 	</select>
+	
+	<insert id="budgetRegister" parameterType="ArrayList">
+		INSERT INTO budget(period_type, period_value, annual_budget, plan, dept_no) VALUES
+		<foreach collection="bList" item="budget" separator=",">
+		(#{budget.periodType},#{budget.periodValue},#{budget.annualBudget},#{budget.plan},#{budget.deptNo})
+		</foreach>
+	</insert>
 	
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.fm.mapper.BudgetMapper;
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
+import com.project.erp.fm.model.vo.Budget;
 
 @Service
 public class BudgetService implements BudgetMapper {
@@ -18,4 +19,10 @@ public class BudgetService implements BudgetMapper {
 	public List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd) {
 		return mapper.showBudget(bd);
 	}
+
+	@Override
+	public void budgetRegister(List<Budget> bList) {
+		mapper.budgetRegister(bList);
+	}
+	
 }

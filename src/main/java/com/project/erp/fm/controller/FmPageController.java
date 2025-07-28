@@ -53,4 +53,10 @@ public class FmPageController {
 		return "component/fm/salary";
 	}
 	
+	@GetMapping("/budgetRegister")
+	public String budgetRegister(Model model) {
+		model.addAttribute("department", departmentService.showDept());
+		return "component/fm/budgetRegister";
+	}
+	
 }

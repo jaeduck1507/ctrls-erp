@@ -14,5 +14,7 @@ public class SaleProductDTO {
 	private int totalAmount;
 	private String productName;
 	private String productCategory;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	
 }

@@ -19,7 +19,8 @@
 			<option value="악세사리">악세사리</option>
 			<option value="신발">신발</option>
 		</select>
-		조회 기간: <input type="month" id="month">
+		조회 시작일: <input type="date" id="startDate">
+		조회 종료일: <input type="date" id="endDate">
 		<button id="btn">조회</button>
 	</div>
 	
@@ -34,7 +35,9 @@
 			const formData = new FormData();
 			formData.append("productCategory", $("#productCategory").val());
 			formData.append("productName", $("#productName").val());
-			formData.append("month", $("#month").val());
+			formData.append("startDate", $("#startDate").val());
+			formData.append("endDate", $("#endDate").val());
+			
 			$.ajax({
 				type: "post",
 				url: "/showSaleManage",
@@ -44,7 +47,8 @@
 				success: function(result) {
 					//console.log($("#productCategory").val());
 					//console.log($("#productName").val());
-					console.log($("#month").val());
+					//console.log($("#startDate").val());
+					//console.log($("#endDate").val());
 					$("#result").html("");
 					$("#result").append("<tr><th>매출 번호</th><th>매출 발생일자</th><th>수량</th><th>부가세</th><th>총액</th><th>제품명</th><th>카테고리</th></tr>");
 					for (const sm of result) {

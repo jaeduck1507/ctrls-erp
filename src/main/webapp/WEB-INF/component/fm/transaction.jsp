@@ -23,6 +23,8 @@
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>
 		</select>
+		조회 시작일: <input type="date" id="startDate">
+		조회 종료일: <input type="date" id="endDate">
 		<button id="btn">조회</button>
 	</div>
 	
@@ -37,6 +39,9 @@
 			const formData = new FormData();
 			formData.append("transType", $("#transType").val());
 			formData.append("deptName", $("#deptName").val());
+			formData.append("startDate", $("#startDate").val());
+			formData.append("endDate", $("#endDate").val());
+			
 			$.ajax({
 				type: "post",
 				url: "/showtrans",
@@ -46,6 +51,8 @@
 				success: function(result) {
 					//console.log($("#transType").val());
 					//console.log($("#deptName").val());
+					//console.log($("#startDate").val());
+					//console.log($("#endDate").val());
 					$("#result").html("");
 					$("#result").append("<tr><th>거래 번호</th><th>수입/지출</th><th>금액</th><th>분류</th><th>수입/지출 내역 상세</th><th>수입/지출 발생 일자</th><th>부서명</th></tr>");
 						for (const t of result) {
