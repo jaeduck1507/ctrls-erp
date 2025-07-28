@@ -17,7 +17,6 @@
 				<th>부서 선택</th>
 				<th>부서 번호</th>
 				<th>연/분기/월</th>
-				<th>적용 기간</th>
 				<th>예산 금액</th>
 				<th>계획 상세</th>
 				<th>삭제</th>
@@ -61,7 +60,7 @@
 		/*	
 		function addRow() { // 열 추가 함수
 			$("#result").append('<tr></tr>'); // 기본 열 추가
-			for(var i = 0; i < 6; i++) { // 열에 데이터 추가
+			for(var i = 0; i < 5; i++) { // 열에 데이터 추가
 				if(i == 0) $("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="deptName" placeholder="부서 선택" /><datalist id="List'+ count +'"><c:forEach items="${department}" var="dept"><option value="${dept.deptName}" data-dept_no ="${dept.deptNo}" ></option></c:forEach></datalist></td>');
 				else $("#result tr").eq(-1).append('<td></td>');
 			}
