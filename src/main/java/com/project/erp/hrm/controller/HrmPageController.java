@@ -62,5 +62,17 @@ public class HrmPageController {
 		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus() );
 		return "component/hrm/leaveStatus"; 
 	}
+	
+	@GetMapping("/attendanceRecord")
+	public String attendaceRecord(Model model) {
+		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
+		return "component/hrm/attendanceRecord";
+	}
+	
+	@GetMapping("/showAttendance")
+	public String showAttendance(Model model) {
+		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
+		return "component/hrm/showAttendance";
+	}
 }
 

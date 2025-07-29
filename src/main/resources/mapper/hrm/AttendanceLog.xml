@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.erp.hrm.mapper.AttendanceLogMapper">
+	<resultMap type="AttendanceLog" id="AttendanceLogMap">
+	   <id column="att_id" property="attId"/>
+	   <result column="emp_no" property="empNo"/>
+	   <result column="work_date" property="workDate"/>
+	   <result column="check_in" property="checkIn"/>
+	   <result column="check_out" property="checkOut"/>
+	   
+	</resultMap>
+
+	<insert id="startWork" parameterType="AttendanceLog">
+		INSERT INTO attendance_log(emp_no,work_date,check_in)
+		VALUES(#{empNo},#{workDate},#{checkIn})
+	</insert>
+	
+	<update id="finishWork" parameterType="AttendanceLog">
+		UPDATE attendance_log
+		SET check_out = #{checkOut}
+		WHERE emp_no = #{empNo}
+		AND work_date = #{workDate}
+	</update>
+	
+	<select id="showAttendance" parameterType="attendanceMonth" resultMap="AttendanceLogMap">
+		select * from attendance_log
+ 		WHERE work_date LIKE CONCAT(#{yearMonth},'%')
+ 		AND emp_no = #{empNo}
+ 		ORDER BY work_date ASC;
+	</select>
+</mapper>
