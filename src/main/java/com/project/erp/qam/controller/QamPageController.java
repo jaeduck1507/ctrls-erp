@@ -29,10 +29,15 @@ public class QamPageController {
 		return "component/qam/productName";
 	}
 	
-	@GetMapping("/qcList")
-	public String qcList(Model model) {
-		List<QcResultDTO> list = qcService.showAllQcResults(); // 모든 제품 + QC 결과 포함
-        model.addAttribute("qcList", list);
-        return "component/qam/qcList";
+	@GetMapping("/qc")
+	public String qc() {
+		return "component/qam/qc";
 	}
+	
+//	@GetMapping("/qcList")
+//	public String qcList(Model model) {
+//		List<QcResultDTO> list = qcService.showAllQcResults(); // 모든 제품 + QC 결과 포함
+//        model.addAttribute("qcList", list);
+//        return "component/qam/qcList";
+//	}
 }

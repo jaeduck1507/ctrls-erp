@@ -10,29 +10,29 @@
 <body>
     <h2>제품 등록</h2> <!-- 제목 표시 -->
 
-    <!-- ✅ 제품 등록 폼 시작 -->
+    <!-- 제품 등록 폼 시작 -->
     <!-- action은 Controller에서 동적으로 결정 (등록/수정 겸용 설계) -->
     <form action="${action}" method="post">
-        <!-- ✅ 생산일 입력 필드 -->
+        <!-- 생산일 입력 필드 -->
         <label>생산일:
             <input type="date" name="productionDate" required />
         </label><br/>
 
-        <!-- ✅ 제품명 선택 드롭다운 -->
+        <!-- 제품명 선택 드롭다운 -->
         <label>제품 코드:
             <select name="productCode" required id="productCodeSelect">
-                <!-- ✅ AJAX로 product_name 목록을 불러와서 동적으로 option 생성 -->
+                <!-- AJAX로 product_name 목록을 불러와서 동적으로 option 생성 -->
             </select>
         </label><br/><br/>
 
-        <!-- ✅ 등록 버튼 -->
+        <!-- 등록 버튼 -->
         <button type="submit">저장</button>
     </form>
 
-    <!-- ✅ 목록으로 돌아가기 -->
+    <!-- 목록으로 돌아가기 -->
     <a href="/qam/product">목록으로</a>
 
-    <!-- ✅ 제품명 목록 불러오기 (AJAX) -->
+    <!-- 제품명 목록 불러오기 (AJAX) -->
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -42,7 +42,7 @@
                     var select = $("#productCodeSelect"); // 드롭다운 select 요소
                     select.empty(); // 기존 옵션 초기화
 
-                    // ✅ 받은 데이터로 option 항목 생성
+                    // 받은 데이터로 option 항목 생성
                     for (var p of result) {
                         var label = "[" + p.productCode + "] " + p.productName + " - " + p.productColor;
                         var option = `<option value="${p.productCode}">${label}</option>`;

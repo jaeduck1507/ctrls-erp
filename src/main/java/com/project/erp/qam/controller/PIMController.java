@@ -42,8 +42,8 @@ public class PIMController {
 
 	// 제품 수정 폼 페이지 호출
 	// → 수정할 productNo를 받아 해당 DTO를 model에 담아 JSP로 전달
-	@GetMapping("/productFormUpdate")
-	public String showUpdateForm(@RequestParam("productNo") int productNo, Model model) {
+	@GetMapping("/productDetailFormUpdate")
+	public String showUpdateForm(int productNo, Model model) {
 	    ProductDetailDTO product = productService.findProductDetailById(productNo);
 	    model.addAttribute("product", product);
 	    return "component/qam/productDetailFormUpdate"; // JSP 경로 반환
@@ -60,7 +60,7 @@ public class PIMController {
 	// 제품 삭제 처리
 	// → productNo를 기준으로 product 테이블에서 삭제
 	@GetMapping("/deleteProduct")
-	public String deleteProduct(@RequestParam("productNo") int productNo) {
+	public String deleteProduct(int productNo) {
 	    productService.deleteProduct(productNo);
 	    return "redirect:/qam/product"; // 삭제 후 목록으로 리다이렉트
 	}
@@ -106,7 +106,7 @@ public class PIMController {
 
 	// 제품명 삭제 처리
 	@GetMapping("/deleteProductName")
-	public String deleteProductName(@RequestParam int productCode) {
+	public String deleteProductName(int productCode) {
 		productNameService.deleteProductName(productCode);
 		return "redirect:/qam/productName"; // 삭제 후 목록 페이지로 이동
 	}
