@@ -29,4 +29,12 @@ public class LeaveInfoService {
 		leaveInfoMapper.leaveStatusUpdate(leaveinfo);
 	}
 	
+	public List<LeaveInfo> leaveDays(LeaveInfo leaveInfo) {
+		return leaveInfoMapper.leaveDays(leaveInfo);
+		
+	}
+	
+	public void leaveUpdate(LeaveInfo leaveInfo) {
+		leaveInfoMapper.leaveUpdate(leaveInfo);
+	}
 }

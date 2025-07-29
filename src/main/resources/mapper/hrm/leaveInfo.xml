@@ -13,6 +13,8 @@
    <result column="emp_name" property="empName"/>
    <result column="dept_name" property="deptName"/>
    <result column="job_title" property="jobTitle"/>
+   <result column="total_days" property="totalDays"/>
+   <result column="remain_days" property="remainDays"/>
 </resultMap>
 
 <select id="leaveInfo" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
@@ -48,9 +50,24 @@ FROM leave_request
      JOIN employee_info USING(emp_no)
      JOIN department USING(dept_no)
      JOIN job_position USING(job_no)
-WHERE status = '대기'
 ORDER BY leave_id ASC
 </select>
 
+<select id="leaveDays" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
+SELECT emp_no, emp_name, dept_name, job_title, SUM(DATEDIFF(end_date, start_date) + 1) AS 'total_days', 12 - SUM(DATEDIFF(end_date, start_date) + 1) AS 'remain_days'
+FROM leave_request
+     JOIN employee_info using(emp_no)
+     JOIN department USING(dept_no)
+     JOIN job_position USING(job_no)
+WHERE emp_no= #{empNo} 
+AND status = '승인'
+AND YEAR(start_date) = YEAR(CURDATE())
+</select>
+<update id="leaveUpdate" parameterType="LeaveInfo">
+UPDATE leave_request
+SET leave_type=#{leaveType}, start_date=#{start_date}, end_date=#{end_date}, reason=#{reason}
+WHERE emp_no=#{empNo}
+AND status= '대기'
+</update>
 
 </mapper>

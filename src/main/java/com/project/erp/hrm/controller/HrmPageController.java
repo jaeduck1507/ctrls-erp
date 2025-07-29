@@ -17,6 +17,8 @@ import com.project.erp.hrm.service.LeaveInfoService;
 @Controller
 public class HrmPageController {
 
+    private final EOMController EOMController;
+
 	@Autowired
 	private EmployeeInfoService employeeInfoservice;
 	
@@ -27,7 +29,11 @@ public class HrmPageController {
 	private JobPositionService jobPositionService;
 	
 	@Autowired
-	private LeaveInfoService leaveInfoService; 
+	private LeaveInfoService leaveInfoService;
+
+    HrmPageController(EOMController EOMController) {
+        this.EOMController = EOMController;
+    } 
 	
 	@GetMapping("/empInfo")
 	public String empInfo() {
@@ -74,5 +80,20 @@ public class HrmPageController {
 		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
 		return "component/hrm/showAttendance";
 	}
+	@GetMapping("/leaveAdd")
+	public String leaveAdd() {
+		return "component/hrm/leaveAdd";
+	}
+	
+	@GetMapping("/leaveDays")
+	public String leaveDays() {
+		return "component/hrm/leaveDays";
+	}
+	
+	@GetMapping("/leaveUpdate")
+	public String leaveUpdate() {
+		return "component/hrm/leaveUpdate";
+	}
+
 }
 

@@ -20,4 +20,6 @@ public class LeaveInfo {
  private String empName; // emp_name 직원이름
  private String deptName;//dept_Name 부서
  private String jobTitle;// job_title 직급
+ private int totalDays; // SUM(DATEDIFF(end_date, start_date) + 1) AS ‘total_days’
+ private int remainDays; // 12 - SUM(DATEDIFF(end_date, start_date) + 1) AS 'remain_days' 
 }

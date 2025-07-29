@@ -40,5 +40,18 @@ public class LMController {
 //		System.out.println(leaveinfo);
 		leaveInfoService.leaveStatusUpdate(leaveinfo);
 	}
+	
+	@ResponseBody
+	@PostMapping("/leaveDays")
+	public List<LeaveInfo> leaveDays(LeaveInfo leaveInfo) {
+//		System.out.println(leaveInfo);
+		return leaveInfoService.leaveDays(leaveInfo);
+	}
+	
+	@ResponseBody
+	@PostMapping("leaveUpdate")
+	public void leaveUpdate(LeaveInfo leaveInfo) {
+//		leaveInfoService.leaveUpdate(leaveInfo);
+	}
 
 }
