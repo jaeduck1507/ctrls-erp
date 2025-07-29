@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.hrm.mapper.LeaveInfoMapper;
 import com.project.erp.hrm.model.dto.LeaveInfo;
-import com.project.erp.hrm.model.vo.LeaveDays;
 
 @Service
 public class LeaveInfoService {
@@ -30,5 +29,12 @@ public class LeaveInfoService {
 		leaveInfoMapper.leaveStatusUpdate(leaveinfo);
 	}
 	
-
+	public List<LeaveInfo> leaveDays(LeaveInfo leaveInfo) {
+		return leaveInfoMapper.leaveDays(leaveInfo);
+		
+	}
+	
+	public void leaveUpdate(LeaveInfo leaveInfo) {
+		leaveInfoMapper.leaveUpdate(leaveInfo);
+	}
 }

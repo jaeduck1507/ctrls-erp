@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.model.dto.Quitter;
 import com.project.erp.hrm.model.vo.EmployeeInfo;
-import com.project.erp.hrm.model.vo.LeaveDays;
 import com.project.erp.hrm.service.LeaveInfoService;
 import com.project.erp.hrm.service.QuitterService;
 
@@ -41,6 +40,18 @@ public class LMController {
 //		System.out.println(leaveinfo);
 		leaveInfoService.leaveStatusUpdate(leaveinfo);
 	}
-
+	
+	@ResponseBody
+	@PostMapping("/leaveDays")
+	public List<LeaveInfo> leaveDays(LeaveInfo leaveInfo) {
+//		System.out.println(leaveInfo);
+		return leaveInfoService.leaveDays(leaveInfo);
+	}
+	
+	@ResponseBody
+	@PostMapping("leaveUpdate")
+	public void leaveUpdate(LeaveInfo leaveInfo) {
+//		leaveInfoService.leaveUpdate(leaveInfo);
+	}
 
 }

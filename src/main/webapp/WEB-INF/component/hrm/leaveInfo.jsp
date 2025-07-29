@@ -12,7 +12,7 @@
 	<h1>휴가 조회</h1>
 	<div id="search">
 		사번 <input type="text" id="empNo">
-		<button id="btn">검색</button>
+		<button id="btn">조회</button>
 	</div>
 	<div>
 		<table border="1" id="result"></table>
