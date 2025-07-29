@@ -39,9 +39,9 @@
 				success: function(result) {
 					//console.log($("#deptName").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>연/분기/월</th><th>적용 기간</th><th>예산 금액</th><th>계획</th><th>부서명</th></tr>");
+					$("#result").append("<tr><th>예산 번호</th><th>연/분기/월</th><th>적용 기간</th><th>예산 금액</th><th>계획</th><th>부서명</th></tr>");
 					for (const b of result) {
-						var text = "<tr><td>" + b.periodType + "</td><td>" + b.periodValue + "</td><td>" 
+						var text = "<tr><td>" + b.budgetNo + "</td><td>" + b.periodType + "</td><td>" + b.periodValue + "</td><td>" 
 								+ b.annualBudget + "</td><td>" + b.plan + "</td><td>" + b.deptName + "</td></tr>"
 						$("#result").append(text);
 					}

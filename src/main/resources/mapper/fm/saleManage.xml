@@ -16,17 +16,23 @@
 		FROM sale_manage
 		JOIN product_name USING(product_code)
 		<where>
-			<if test="productName != null and productCategory != 'all'">
-				product_category = #{productCategory}
+			<if test="startDate != null and endDate != null">
+				sale_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="productCategory != 'all'">
+				AND product_category = #{productCategory}
+			</if>
+			<if test="productName != null">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
-			</if>
-			<if test="productName == null and productCategory != 'all'">
-				product_category = #{productCategory}
-			</if>
-			<if test="productName != null and productCategory == 'all'">
-				product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
 	</select>
+	
+	<insert id="saleRegister" parameterType="ArrayList">
+		INSERT INTO sale_manage(sale_date, quantity, var_amount, total_amount, product_code) VALUES
+		<foreach collection="smList" item="saleManage" separator=",">
+		(#{saleManage.saleDate}, #{saleManage.quantity}, #{saleManage.varAmount}, #{saleManage.totalAmount}, #{saleManage.product_code})
+		</foreach>
+	</insert>
 	
 </mapper>

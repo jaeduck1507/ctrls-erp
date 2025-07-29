@@ -1,17 +1,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.BudgetMapper">
-
+	
 	<resultMap id="BudgetDeptMap" type="BudgetDeptDTO">
 		<id property="budgetNo" column="budget_no"/>
 		<result property="periodType" column="period_type"/>
 		<result property="periodValue" column="period_value"/>
 		<result property="annualBudget" column="annual_budget"/>
 		<result property="plan" column="plan"/>
+		<result property="createdAt" column="created_at"/>
 		<result property="deptName" column="dept_name"/>
 	</resultMap>
 	
 	<select id="showBudget" parameterType="BudgetDeptDTO" resultMap="BudgetDeptMap">
-		SELECT period_type, period_value, annual_budget, plan, dept_name
+		SELECT budget_no, period_type, period_value, annual_budget, plan, dept_name
 		FROM budget
 		JOIN department USING(dept_no)
 		<where>
@@ -20,5 +21,16 @@
 			</if>
 		</where>
 	</select>
+	
+	<insert id="budgetRegister" parameterType="ArrayList">
+		INSERT INTO budget(period_type, annual_budget, plan, created_at, dept_no) VALUES
+		<foreach collection="bList" item="budget" separator=",">
+		(#{budget.periodType},#{budget.annualBudget},#{budget.plan},#{budget.createdAt},#{budget.deptNo})
+		</foreach>
+	</insert>
+	
+	<update id="updatePV" parameterType="Budget">
+		UPDATE budget SET period_value = CONCAT(YEAR(created_at), '-', period_type, budget_no)
+	</update>
 	
 </mapper>

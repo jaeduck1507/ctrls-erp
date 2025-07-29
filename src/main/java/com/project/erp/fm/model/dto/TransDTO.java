@@ -14,5 +14,7 @@ public class TransDTO {
 	private String transDesc;
 	private LocalDate transDate;
 	private String deptName;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	
 }
