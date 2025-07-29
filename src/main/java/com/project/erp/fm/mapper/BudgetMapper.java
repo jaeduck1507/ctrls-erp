@@ -12,5 +12,5 @@ public interface BudgetMapper {
 
 	List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd);
 	void budgetRegister(List<Budget> bList);
-	
+	void updatePV(Budget budget);
 }

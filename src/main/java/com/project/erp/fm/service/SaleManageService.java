@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.fm.mapper.SaleManageMapper;
 import com.project.erp.fm.model.dto.SaleProductDTO;
+import com.project.erp.fm.model.vo.SaleManage;
 
 @Service
 public class SaleManageService implements SaleManageMapper {
@@ -17,6 +18,11 @@ public class SaleManageService implements SaleManageMapper {
 	@Override
 	public List<SaleProductDTO> showSaleManage(SaleProductDTO sp) {
 		return mapper.showSaleManage(sp);
+	}
+
+	@Override
+	public void saleRegister(List<SaleManage> smList) {
+		mapper.saleRegister(smList);
 	}
 	
 }

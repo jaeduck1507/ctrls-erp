@@ -28,4 +28,11 @@
 		</where>
 	</select>
 	
+	<insert id="saleRegister" parameterType="ArrayList">
+		INSERT INTO sale_manage(sale_date, quantity, var_amount, total_amount, product_code) VALUES
+		<foreach collection="smList" item="saleManage" separator=",">
+		(#{saleManage.saleDate}, #{saleManage.quantity}, #{saleManage.varAmount}, #{saleManage.totalAmount}, #{saleManage.product_code})
+		</foreach>
+	</insert>
+	
 </mapper>

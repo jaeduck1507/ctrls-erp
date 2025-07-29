@@ -59,4 +59,9 @@ public class FmPageController {
 		return "component/fm/budgetRegister";
 	}
 	
+	@GetMapping("/saleRegister")
+	public String saleRegister() {
+		return "component/fm/saleRegister";
+	}
+	
 }

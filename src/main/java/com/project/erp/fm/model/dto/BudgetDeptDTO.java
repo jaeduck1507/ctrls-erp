@@ -1,6 +1,6 @@
 package com.project.erp.fm.model.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class BudgetDeptDTO {
 	private String periodValue;
 	private int annualBudget;
 	private String plan;
-	private LocalDateTime createdAt;
+	private LocalDate createdAt;
 	private String deptName;
 	
 }
