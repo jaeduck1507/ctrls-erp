@@ -12,13 +12,13 @@
 <h2>품질검사 등록</h2>
 
 <!-- QC 등록 폼 -->
-<form action="registerQc" method="post">
+<form action="/qam/registerQc" method="post">
 
     <!-- QC 대상: 검사되지 않은 제품만 표시 -->
     <label>제품 선택:
         <select name="productNo" required>
             <option value="">검사할 제품 선택</option>
-            <c:forEach var="p" items="${productList}">
+            <c:forEach var="p" items="${list}">
                 <option value="${p.productNo}">
                     [${p.productNo}] ${p.productName} - ${p.productColor}
                 </option>
@@ -65,7 +65,7 @@
 </form>
 
 <!-- 목록으로 이동 -->
-<a href="/qcList">검사 목록으로</a>
+<button><a href="/qam/qc">검사 목록으로</a></button>
 
 </body>
 </html>

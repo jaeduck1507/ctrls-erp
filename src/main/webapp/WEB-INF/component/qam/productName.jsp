@@ -12,12 +12,12 @@
 
 <h1>제품 정보 조회</h1> <!-- 타이틀 -->
 
-<!-- ✅ 제품명 신규 등록 버튼 -->
+<!-- 제품명 신규 등록 버튼 -->
 <a href="/productNameForm">
     <button>제품 신규 등록</button>
 </a>
 
-<!-- ✅ 검색창: 제품명 + 카테고리 -->
+<!-- 검색창: 제품명 + 카테고리 -->
 <form id="searchForm">
     제품명 : <input type="text" name="productName" id="productName" />
     <select name="productCategory" id="productCategory">
@@ -30,14 +30,14 @@
     <button type="submit">검색</button> <!-- 검색 버튼 -->
 </form>
 
-<!-- ✅ 검색 및 전체 조회 결과 출력 테이블 -->
+<!-- 검색 및 전체 조회 결과 출력 테이블 -->
 <table border="1" id="result">
 </table>
 
 <script>
     $(document).ready(function() {
 
-        // ✅ 검색 폼 제출 시 AJAX 요청
+        // 검색 폼 제출 시 AJAX 요청
         $("#searchForm").submit(function (e) {
             e.preventDefault(); // form 기본 제출 막기
 
@@ -64,7 +64,7 @@
             });
         });
 
-        // ✅ 페이지 로딩 시 전체 제품명 목록 조회
+        // 페이지 로딩 시 전체 제품명 목록 조회
         $.ajax({
             type: "get", 
             url: "/showProductName", // 전체 조회 URL

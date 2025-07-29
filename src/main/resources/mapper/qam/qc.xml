@@ -35,13 +35,13 @@
     </resultMap>
 
     <!-- 품질검사 등록 -->
-    <insert id="insertQc" parameterType="Qc">
+    <insert id="registerQc" parameterType="Qc">
         INSERT INTO qc (check_material, check_color, check_damage, qc_desc, qc_date, emp_no, product_no)
         VALUES (#{checkMaterial}, #{checkColor}, #{checkDamage}, #{qcDesc}, #{qcDate}, #{empNo}, #{productNo})
     </insert>
 
     <!-- 제품번호로 QC 조회 -->
-    <select id="findQcResultByProductNo" parameterType="int" resultMap="QcResultMap">
+    <select id="findByProductNo" parameterType="int" resultMap="QcResultMap">
         SELECT 
             p.product_no,
             p.production_date,
@@ -52,46 +52,40 @@
             q.check_damage,
             q.qc_desc,
             q.qc_date,
-            q.emp_no,
-            s.sale_no,
-            s.sale_date,
-            d.defective_no,
-            d.reason
+            q.emp_no
         FROM qc q
         JOIN product p ON q.product_no = p.product_no
         JOIN product_name pn ON p.product_code = pn.product_code
-        LEFT JOIN sale s ON p.product_no = s.product_no
-        LEFT JOIN defective d ON p.product_no = d.product_no
         WHERE p.product_no = #{productNo}
     </select>
 
-    <!-- 검사자 사번(empNo)으로 조회 -->
-    <select id="findQcByEmpNo" parameterType="int" resultMap="QcResultMap">
-        SELECT 
-            p.product_no,
-            p.production_date,
-            p.product_code,
-            q.qc_code,
-            q.check_material,
-            q.check_color,
-            q.check_damage,
-            q.qc_desc,
-            q.qc_date,
-            q.emp_no,
-            s.sale_no,
-            s.sale_date,
-            d.defective_no,
-            d.reason
-        FROM qc q
-        JOIN product p ON q.product_no = p.product_no
-        JOIN product_name pn ON p.product_code = pn.product_code
-        LEFT JOIN sale s ON p.product_no = s.product_no
-        LEFT JOIN defective d ON p.product_no = d.product_no
-        WHERE q.emp_no = #{empNo}
-    </select>
+<!--     검사자 사번(empNo)으로 조회 -->
+<!--    <select id="findQcByEmpNo" parameterType="int" resultMap="QcResultMap">-->
+<!--        SELECT -->
+<!--            p.product_no,-->
+<!--            p.production_date,-->
+<!--            p.product_code,-->
+<!--            q.qc_code,-->
+<!--            q.check_material,-->
+<!--            q.check_color,-->
+<!--            q.check_damage,-->
+<!--            q.qc_desc,-->
+<!--            q.qc_date,-->
+<!--            q.emp_no,-->
+<!--            s.sale_no,-->
+<!--            s.sale_date,-->
+<!--            d.defective_no,-->
+<!--            d.reason-->
+<!--        FROM qc q-->
+<!--        JOIN product p ON q.product_no = p.product_no-->
+<!--        JOIN product_name pn ON p.product_code = pn.product_code-->
+<!--        LEFT JOIN sale s ON p.product_no = s.product_no-->
+<!--        LEFT JOIN defective d ON p.product_no = d.product_no-->
+<!--        WHERE q.emp_no = #{empNo}-->
+<!--    </select>-->
 
     <!-- 전체 QC + 판매 + 불량 조회 -->
-	<select id="findAllQcResults" resultMap="QcResultMap">
+	<select id="showQc" resultMap="QcResultMap">
 	    SELECT
 	        p.product_no,
 	        p.production_date,
@@ -113,7 +107,7 @@
 	    LEFT JOIN qc q ON p.product_no = q.product_no
 	</select>
 
-	<!-- QC 안된제품들 조회 -->
+	<!-- QC 안된 제품들 조회 -->
 	<select id="findQcTargetProducts" resultMap="QcResultMap">
 	    SELECT
 	        p.product_no,
@@ -137,15 +131,28 @@
 	    WHERE q.qc_code IS NULL
 	</select>
 
-	<update id="updateQc" parameterType="Qc">
-	    UPDATE qc
-	    SET check_material = #{checkMaterial},
-	        check_color = #{checkColor},
-	        check_damage = #{checkDamage},
-	        qc_desc = #{qcDesc},
-	        emp_no = #{empNo}
-	    WHERE product_no = #{productNo}
-	</update>
+<!--qcFormUpdate에서 UPDATE 시도 전, 해당 제품이 QC 테이블에 없으면 INSERT 처리-->
+<insert id="updateQc" parameterType="Qc">
+    INSERT INTO qc (product_no, emp_no, check_material, check_color, check_damage, qc_desc)
+    VALUES (#{productNo}, #{empNo}, #{checkMaterial}, #{checkColor}, #{checkDamage}, #{qcDesc})
+    ON DUPLICATE KEY UPDATE
+        emp_no = VALUES(emp_no),
+        check_material = VALUES(check_material),
+        check_color = VALUES(check_color),
+        check_damage = VALUES(check_damage),
+        qc_desc = VALUES(qc_desc)
+</insert>
+
+<!--보류, qc 등록 전이라면 수정 자체가 불가능하기에 이를 해결하기 위해 위와 같이 처리-->
+<!--<update id="updateQc" parameterType="Qc">-->
+<!--    UPDATE qc-->
+<!--    SET emp_no = #{empNo},-->
+<!--        check_material = #{checkMaterial},-->
+<!--        check_color = #{checkColor},-->
+<!--        check_damage = #{checkDamage},-->
+<!--        qc_desc = #{qcDesc}-->
+<!--    WHERE product_no = #{productNo}-->
+<!--</update>-->
 
 	
 
