@@ -35,6 +35,8 @@ public class EmployeeInfoService {
 	
 	public List<EmpInfo> showEmployee() { // 윤의진 추가 qc 위함
 		return employeeInfoMapper.showEmployee();
+	}
+		
 	public int totalEmp(EmpInfo ei) {
 		return employeeInfoMapper.totalEmp(ei);
 	}
