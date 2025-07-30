@@ -11,4 +11,5 @@ import com.project.erp.hrm.model.vo.EmployeeInfo;
 public interface EmployeeInfoMapper {
 	List<EmpInfo> infoShow(EmpInfo ei);
 	void empAdd(List<EmployeeInfo> eiList);
+	List<EmpInfo> showEmployee(); // 윤의진 추가 qc 위함
 }

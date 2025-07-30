@@ -128,16 +128,6 @@ public class PIMController {
     return productService.existsByProductNo(productNo);
         }
     
-//    @GetMapping("/checkEmpNo")
-//    @ResponseBody
-//    public boolean checkEmpNo(@RequestParam int empNo) {
-//        return employeeService.existsByEmpNo(empNo);
-//    }
-
-    
-    
-    
-    
     
     }
 

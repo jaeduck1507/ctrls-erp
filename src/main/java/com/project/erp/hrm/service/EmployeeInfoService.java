@@ -23,4 +23,8 @@ public class EmployeeInfoService implements EmployeeInfoMapper {
 	public void empAdd(List<EmployeeInfo> eiList) {
 		employeeInfoMapper.empAdd(eiList);
 	};
+	
+	public List<EmpInfo> showEmployee() { // 윤의진 추가 qc 위함
+		return employeeInfoMapper.showEmployee();
+	}
 }

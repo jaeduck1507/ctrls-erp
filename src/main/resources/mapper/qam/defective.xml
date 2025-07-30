@@ -3,6 +3,12 @@
 
 <mapper namespace="com.project.erp.qam.mapper.DefectiveMapper">
 
+<resultMap id="defectiveMap" type="Defective">
+	<result column="defective_no" property="defectiveNo"/>
+	<result column="product_no" property="productNo"/>
+	<result column="reason" property="reason"/>
+</resultMap>
+
     <insert id="insertDefective" parameterType="Defective">
         INSERT INTO defective (product_no, reason)
         VALUES (#{productNo}, #{reason})
@@ -11,5 +17,13 @@
 	<delete id="deleteByProductNo" parameterType="int">
     DELETE FROM defective WHERE product_no = #{productNo}
 	</delete>
+
+	<select id="showDefective" resultMap="defectiveMap">
+	SELECT 
+		defective_no,
+		product_no,
+		reason
+	FROM defective
+	</select> 
 
 </mapper>

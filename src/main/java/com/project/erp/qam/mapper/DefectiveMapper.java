@@ -1,5 +1,7 @@
 package com.project.erp.qam.mapper;
 
+import java.util.List;
+
 import com.project.erp.qam.model.vo.Defective;
 
 public interface DefectiveMapper {
@@ -7,4 +9,6 @@ public interface DefectiveMapper {
     void insertDefective(Defective defective);
 
 	void deleteByProductNo(int productNo);
+
+	List<Defective> showDefective();
 }

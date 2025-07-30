@@ -3,6 +3,12 @@
 
 <mapper namespace="com.project.erp.qam.mapper.SaleMapper">
 
+<resultMap id="saleMap" type="Sale">
+	<result column="sale_no" property="saleNo"/>
+	<result column="sale_date" property="saleDate"/>
+	<result column="product_no" property="productNo"/>
+</resultMap>
+
     <insert id="insertSale" parameterType="Sale">
         INSERT INTO sale (sale_date, product_no)
         VALUES (#{saleDate}, #{productNo})
@@ -11,5 +17,13 @@
 	<delete id="deleteByProductNo" parameterType="int">
     DELETE FROM sale WHERE product_no = #{productNo}
 	</delete>
+
+	<select id="showSale" resultMap="saleMap">
+	SELECT 
+		sale_no, 
+		sale_date, 
+		product_no 
+	FROM sale
+	</select> 
 
 </mapper>
