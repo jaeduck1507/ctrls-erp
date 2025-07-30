@@ -50,10 +50,10 @@
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>매출 번호</th><th>매출 발생일자</th><th>수량</th><th>부가세</th><th>총액</th><th>제품명</th><th>카테고리</th></tr>");
+					$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
 					for (const sm of result) {
-						var text = "<tr><td>" + sm.smNo + "</td><td>" + sm.saleDate + "</td><td>" + sm.quantity + "</td><td>" + sm.varAmount 
-							+ "</td><td>" + sm.totalAmount + "</td><td>" + sm.productName + "</td><td>" + sm.productCategory + "</td></tr>"
+						var text = "<tr><td>" + sm.smNo + "</td><td>" + sm.productName + "</td><td>" + sm.productCategory + "</td><td>" + sm.productPrice 
+							+ "</td><td>" + sm.quantity + "</td><td>" + sm.varAmount + "</td><td>" + sm.totalAmount + "</td><td>" + sm.saleDate + "</td></tr>"
 						$("#result").append(text);
 					}
 				},

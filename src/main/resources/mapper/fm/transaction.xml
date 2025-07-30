@@ -28,4 +28,11 @@
 		</where>
 	</select>
 	
+	<insert id="transRegister" parameterType="ArrayList">
+		INSERT INTO transaction(trans_type, trans_amount, category, trans_desc, trans_date, dept_no) VALUES
+		<foreach collection="tList" item="trans" separator=",">
+		(#{trans.transType},#{trans.transAmount},#{trans.category},#{trans.transDesc},#{trans.transDate},#{trans.deptNo})
+		</foreach>
+	</insert>
+	
 </mapper>

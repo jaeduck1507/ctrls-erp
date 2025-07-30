@@ -11,7 +11,7 @@
 <body>
 	<h1>예산 등록</h1>
 	<div id="register">
-		<button id = "add-row">열 추가</button>
+		<button id="add-row">열 추가</button>
 		<table border="1" id="result">
 			<tr>
 				<th>부서 선택</th>
@@ -19,7 +19,7 @@
 				<th>연/분기/월</th>
 				<th>예산 금액</th>
 				<th>계획 상세</th>
-				<th>예산 집행 날짜</th>
+				<th>예산 집행일</th>
 				<th>삭제</th>
 			</tr>
 		</table>
@@ -64,7 +64,7 @@
 			$(e.target).parent().parent().find("td").eq(2).html('<select id="periodType"><option value="period" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
 			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" name="budget-amount">');
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan">');
-			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="purchase-date">');
+			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date">');
 		});
 		
 		$("#budget-register").click(() => {
@@ -77,7 +77,7 @@
 				obj.periodType=$("#result tr").eq(i).find("td").eq(2).find("select").val();
 				obj.annualBudget=$("#result tr").eq(i).find("td").eq(3).find("input").val();
 				obj.plan=$("#result tr").eq(i).find("td").eq(4).find("input").val();
-				obj.createdAt=$("#result tr").eq(i).find("td").eq(5).find("input").val();
+				obj.executionDate=$("#result tr").eq(i).find("td").eq(5).find("input").val();
 				
 				bList.push(obj);
 			}

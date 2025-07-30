@@ -8,11 +8,12 @@
 		<result property="varAmount" column="var_amount"/>
 		<result property="totalAmount" column="total_amount"/>
 		<result property="productName" column="product_name"/>
+		<result property="productPrice" column="product_price"/>
 		<result property="productCategory" column="product_category"/>
 	</resultMap>
 	
 	<select id="showSaleManage" parameterType="SaleProductDTO" resultMap="SaleProductMap">
-		SELECT sm_no, sale_date, quantity, var_amount, total_amount, product_name, product_category
+		SELECT sm_no, sale_date, quantity, var_amount, total_amount, product_name, product_price, product_category
 		FROM sale_manage
 		JOIN product_name USING(product_code)
 		<where>
@@ -31,7 +32,7 @@
 	<insert id="saleRegister" parameterType="ArrayList">
 		INSERT INTO sale_manage(sale_date, quantity, var_amount, total_amount, product_code) VALUES
 		<foreach collection="smList" item="saleManage" separator=",">
-		(#{saleManage.saleDate}, #{saleManage.quantity}, #{saleManage.varAmount}, #{saleManage.totalAmount}, #{saleManage.product_code})
+		(#{saleManage.saleDate},#{saleManage.quantity},#{saleManage.varAmount},#{saleManage.totalAmount},#{saleManage.productCode})
 		</foreach>
 	</insert>
 	

@@ -13,6 +13,7 @@ public class SaleProductDTO {
 	private int varAmount;
 	private int totalAmount;
 	private String productName;
+	private int productPrice;
 	private String productCategory;
 	private LocalDate startDate;
 	private LocalDate endDate;

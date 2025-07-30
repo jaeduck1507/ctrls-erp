@@ -60,8 +60,15 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/saleRegister")
-	public String saleRegister() {
+	public String saleRegister(Model model) {
+		model.addAttribute("productNameList", productNameService.showProductName());
 		return "component/fm/saleRegister";
+	}
+	
+	@GetMapping("/transRegister")
+	public String transRegister(Model model) {
+		model.addAttribute("department", departmentService.showDept());
+		return "component/fm/transRegister";
 	}
 	
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.fm.model.dto.TransDTO;
+import com.project.erp.fm.model.vo.Transaction;
 import com.project.erp.fm.service.TransactionService;
 
 @Controller
@@ -18,8 +20,14 @@ public class VTDController {
 	
 	@ResponseBody
 	@PostMapping("/showtrans")
-	public List<TransDTO> showtrans(TransDTO trans){
+	public List<TransDTO> showtrans(TransDTO trans) {
 		return transactionService.showtrans(trans);
+	}
+	
+	@ResponseBody
+	@PostMapping("/transRegister")
+	public void transRegister(@RequestBody List<Transaction> tList) {
+		transactionService.transRegister(tList);
 	}
 	
 }

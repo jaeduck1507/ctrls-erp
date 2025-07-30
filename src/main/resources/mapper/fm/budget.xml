@@ -7,7 +7,7 @@
 		<result property="periodValue" column="period_value"/>
 		<result property="annualBudget" column="annual_budget"/>
 		<result property="plan" column="plan"/>
-		<result property="createdAt" column="created_at"/>
+		<result property="executionDate" column="execution_date"/>
 		<result property="deptName" column="dept_name"/>
 	</resultMap>
 	
@@ -23,14 +23,14 @@
 	</select>
 	
 	<insert id="budgetRegister" parameterType="ArrayList">
-		INSERT INTO budget(period_type, annual_budget, plan, created_at, dept_no) VALUES
+		INSERT INTO budget(period_type, annual_budget, plan, execution_date, dept_no) VALUES
 		<foreach collection="bList" item="budget" separator=",">
-		(#{budget.periodType},#{budget.annualBudget},#{budget.plan},#{budget.createdAt},#{budget.deptNo})
+		(#{budget.periodType},#{budget.annualBudget},#{budget.plan},#{budget.executionDate},#{budget.deptNo})
 		</foreach>
 	</insert>
 	
 	<update id="updatePV" parameterType="Budget">
-		UPDATE budget SET period_value = CONCAT(YEAR(created_at), '-', period_type, budget_no)
+		UPDATE budget SET period_value = CONCAT(YEAR(execution_date), '-', period_type, budget_no)
 	</update>
 	
 </mapper>

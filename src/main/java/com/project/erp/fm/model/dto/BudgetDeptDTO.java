@@ -12,7 +12,7 @@ public class BudgetDeptDTO {
 	private String periodValue;
 	private int annualBudget;
 	private String plan;
-	private LocalDate createdAt;
+	private LocalDate executionDate;
 	private String deptName;
 	
 }
