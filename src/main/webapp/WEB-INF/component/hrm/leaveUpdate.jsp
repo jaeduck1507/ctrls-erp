@@ -19,6 +19,7 @@
 		</div>
 		
 		<script>
+			// 조회 버튼을 클릭하면 휴가 정보가 테이블 형태로 나오도록
 			$("#btn").click(()=>{
 				const formData = new FormData();
 				formData.append("empNo", $('#empNo').val());

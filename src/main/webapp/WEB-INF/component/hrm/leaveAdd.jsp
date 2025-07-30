@@ -28,14 +28,14 @@
 	 </div>
 	
 	<script>
-
+        
 		function addRow() { // 열 추가 함수
 		           $("#result").append('<tr></tr>'); // 기본 열 추가
-		           for(var i = 0; i < 6; i++) { // 열에 데이터 추가  0 : 사번, 2: 휴가 유형, 5 : 사유 나머지 : 날짜 데이터 
+		           for(var i = 0; i < 6; i++) { // 열에 데이터 추가  0 : 사번, 1: 신청날짜(현재날짜로 고정) 2: 휴가 유형, 5 : 사유 나머지 : 날짜 데이터 
 		               if(i == 0) $("#result tr").eq(-1).append('<td><input type="text"></td>');
-		               else if(i == 1) $("#result tr").eq(-1).append('<td><input type="date"></td>');
-					   else if(i == 2) $("#result tr").eq(-1).append('<td><select><option diabled selected>유형선택</option><option value="연차">연차</option><option value="병가">병가</option><option value="경조사">경조사</option><option value="기타">기타</option></select></td>');
-		               else if(i == 5) $("#result tr").eq(-1).append('<td><textarea style="resize:none"></textarea></td>');
+		               else if(i == 1) $("#result tr").eq(-1).append('<td><input type="date" id="currentDate"></td>');
+					   else if(i == 2) $("#result tr").eq(-1).append('<td><select><option disabled selected>유형선택</option><option value="연차">연차</option><option value="병가">병가</option><option value="경조사">경조사</option><option value="기타">기타</option></select></td>');
+		               else if(i == 5) $("#result tr").eq(-1).append('<td><input type="text"></td>');
 		               else $("#result tr").eq(-1).append('<td><input type="date"></td>');
 		           }
 		           $("#result tr").eq(-1).append('<td><button class="btn4">열 삭제</button></td>'); // 열 삭제 버튼 추가 (클래스 btn4)
@@ -46,6 +46,9 @@
 		       });
 
 		       addRow(); // 처음 열은 자동으로 추가
+			  
+			   // 현재 날짜로 고정 
+			   document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
 
 		       $("#btn2").click(() => { // 열 추가 버튼 클릭시 열 추가 함수 addRow 함수 실행
 		           
@@ -65,7 +68,7 @@
 			                   	if(j === 2)  obj.leaveType=$("#result tr").eq(i).find("td").eq(j).find("select").val();
 			                   	if(j === 3)  obj.startDate=$("#result tr").eq(i).find("td").eq(j).find("input").val();
 			                   	if(j === 4)  obj.endDate=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-			                   	if(j === 5)  obj.reason=$("#result tr").eq(i).find("td").eq(j).find("textarea").val();
+			                   	if(j === 5)  obj.reason=$("#result tr").eq(i).find("td").eq(j).find("input").val();
 			                   	if(j === 6)  obj.delete=$("#result tr").eq(i).find("td").eq(j).find("button").val();
 
 			                   }

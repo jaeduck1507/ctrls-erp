@@ -10,6 +10,7 @@
   </head>
   <body>
 	<h1>휴가 누적 사용일 조회</h1>
+	<p>승인된 휴가일만 누적</p>
 	<div>
 		사번 : <input type="text" id="empNo">
 		<button id="btn">조회</button>
