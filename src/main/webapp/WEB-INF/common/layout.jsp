@@ -17,16 +17,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
 
-    <a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a><br />
     <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo</a><br />
     <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a><br />
     <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow</a><br />
-    <a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a><br />
     <a href="/hrm/empEval">인사/성과평가 /hrm/empEval</a><br />
-	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus</a><br />
 	<a href="/hrm/attendanceRecord">출근/퇴근 기록 /hrm/attendanceRecord</a><br />
 	<a href="/hrm/showAttendance">출근/퇴근 조회 /hrm/attendanceRecord</a><br />
+	
+	<a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a><br />
+	<a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a><br />
 	<a href="/hrm/leaveDays">휴가 누적 사용일, 남은 휴가일 조회 /hrm/leaveDays</a></br>
+	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus</a><br />
 	<a href="/hrm/leaveUpdate">휴가 정보 수정 /hrm/leaveUpdate</a></br>
 
     <a href="/fm/budget">예산 조회 /fm/budget</a><br />

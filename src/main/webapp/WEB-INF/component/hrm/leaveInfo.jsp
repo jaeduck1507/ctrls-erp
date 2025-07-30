@@ -10,8 +10,18 @@
 </head>
 <body>
 	<h1>휴가 조회</h1>
+
 	<div id="search">
 		사번 <input type="text" id="empNo">
+		<select name="status" id="status">
+			<option value="s" disabled selected>상태 선택</option>
+			
+			<option value="all">전체</option>
+			<option value="wait">대기</option>
+			<option value="approve">승인</option>
+			<option value="back">반려</option>
+		   
+		</select>
 		<button id="btn">조회</button>
 	</div>
 	<div>
@@ -19,9 +29,11 @@
 	</div>
 	
 	<script>
+		
 		$("#btn").click(()=>{
 			const formData = new FormData();
 			formData.append("empNo", $('#empNo').val());
+			formData.append("status", $('#status').val());
 			$.ajax({
 				// 요청
 				type : "post",

@@ -17,6 +17,7 @@
    <result column="remain_days" property="remainDays"/>
 </resultMap>
 
+<!-- 사번을 조회하여 신청된 휴가 조회, 조회 시 신청된 시간 순서대로 정렬-->
 <select id="leaveInfo" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
 SELECT leave_id, request_date, leave_type, start_date, end_date, reason, status, emp_name, dept_name, job_title
 FROM leave_request
@@ -24,13 +25,22 @@ FROM leave_request
      JOIN department USING(dept_no)
      JOIN job_position USING(job_no)
 <where>
-	<if test="empNo != null" >
-		emp_no = #{empNo}
-	</if>
+  <if test="empNo != null">
+    emp_no = #{empNo}
+  </if>
+  <if test='status == "wait"'>
+    AND status = '대기'
+  </if>
+  <if test='status == "approve"'>
+    AND status = '승인'
+  </if>
+  <if test='status == "back"'>
+    AND status = '반려'
+  </if>
 </where>
-ORDER BY request_date DESC
+ORDER BY request_date ASC
 </select>
-
+<!-- 휴가 신청, 사번, 신청 날짜, 휴가 유형, 휴가 시작일,  종료일, 사유 작성-->
 <insert id="leaveAdd" parameterType="ArrayList">
 INSERT INTO leave_request(emp_no, request_date, leave_type, start_date, end_date, reason) 
 VALUES 
@@ -39,20 +49,25 @@ VALUES
 </foreach>
 </insert>
 
-<update id="leaveStatusUpdate" parameterType="LeaveInfo">
-UPDATE leave_request
-SET status = #{status}
-WHERE leave_id = #{leaveId}
-</update>
+<!-- 휴가 승인 상태 변경을 위한 신청 리스트 신청 순서대로 정렬-->
 <select id="leaveStatus" resultMap="LeaveInfoMap">
 SELECT leave_id, request_date, leave_type,emp_no, start_date, end_date, reason, status, emp_name, dept_name, job_title
 FROM leave_request
      JOIN employee_info USING(emp_no)
      JOIN department USING(dept_no)
      JOIN job_position USING(job_no)
+WHERE status = '대기'
 ORDER BY leave_id ASC
 </select>
 
+<!-- 신청된 휴가 내역 리스트 보고 대기->승인/반려 로 상태 변경-->
+<update id="leaveStatusUpdate" parameterType="LeaveInfo">
+UPDATE leave_request
+SET status = #{status}
+WHERE leave_id = #{leaveId}
+</update>
+
+<!-- 사번으로 검색하여 사용한 누적휴가일수와 남은 휴가일수 조회-->
 <select id="leaveDays" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
 SELECT emp_no, emp_name, dept_name, job_title, SUM(DATEDIFF(end_date, start_date) + 1) AS 'total_days', 12 - SUM(DATEDIFF(end_date, start_date) + 1) AS 'remain_days'
 FROM leave_request
@@ -63,6 +78,8 @@ WHERE emp_no= #{empNo}
 AND status = '승인'
 AND YEAR(start_date) = YEAR(CURDATE())
 </select>
+
+<!-- 신청된 휴가 중 대기중인 휴가 정보 수정 -->
 <update id="leaveUpdate" parameterType="LeaveInfo">
 UPDATE leave_request
 SET leave_type=#{leaveType}, start_date=#{start_date}, end_date=#{end_date}, reason=#{reason}
