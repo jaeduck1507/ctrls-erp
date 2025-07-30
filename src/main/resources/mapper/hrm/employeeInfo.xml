@@ -15,11 +15,11 @@
 		<if test="empName != null" >
 			emp_name LIKE CONCAT('%', #{empName}, '%')
 		</if>
-		<if test='jobTitle != "a" and jobTitle != null'>
-			AND job_title = #{jobTitle}
+		<if test='jobNo != -1'>
+			AND job_no = #{jobNo}
 		</if>
-		<if test='deptName != "a" and deptName != null'>
-			AND dept_name = #{deptName}
+		<if test='deptNo != -1'>
+			AND dept_no = #{deptNo}
 		</if>
 		</where>
 		
@@ -40,4 +40,42 @@
 		
 		</foreach>
 	</insert>
+	
+	<select id="totalEmp" parameterType="EmpInfo" resultType="int">
+		SELECT count(*) 
+		FROM employee_info
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		<where>
+		<if test="empName != null" >
+			emp_name LIKE CONCAT('%', #{empName}, '%')
+		</if>
+		<if test='jobNo != -1 and jobTitle != null'>
+			AND job_no = #{jobNo}
+		</if>
+		<if test='deptNo != -1 and deptNo != null'>
+			AND dept_no = #{deptNo}
+		</if>
+		</where>
+		
+	</select>
+	
+	<select id="infoShowPage" parameterType="EmpInfoPagingDTO" resultMap="EmpInfoMap">
+		SELECT emp_no,emp_name, dept_name, job_title 
+		FROM employee_info
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		<where>
+		<if test="empInfo.empName != null" >
+			emp_name LIKE CONCAT('%', #{empInfo.empName}, '%')
+		</if>
+		<if test='empInfo.jobNo != -1'>
+			AND job_no = #{empInfo.jobNo}
+		</if>
+		<if test='empInfo.deptNo != -1'>
+			AND dept_no = #{empInfo.deptNo}
+		</if>
+		</where>
+		LIMIT #{hrmPagingDTO.offset}, #{hrmPagingDTO.limit}
+	</select>
 </mapper>

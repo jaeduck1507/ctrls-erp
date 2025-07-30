@@ -7,6 +7,8 @@ import lombok.Setter;
 public class EmpInfo {
 	private int empNo;
 	private String empName;
+	private int deptNo;
+	private int jobNo;
 	private String jobTitle; // 직급명
 	private String deptName; // 부서이름
 }
