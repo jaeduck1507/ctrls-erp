@@ -16,15 +16,10 @@
 <br/><br/>
 
 <div id = "search">
-<!--	이름 : <input type="text" id="empName">-->
 		<select id = "productName">
 				<option value="a">제품 선택</option>
 		</select>
-		
-<!--		<select id = "jobTitle">-->
-<!--				<option value="a">카테고리 선택</option>-->
-<!--		</select>-->
-<!--		<button id = "btn">검색</button>-->
+		<button id = "btn">검색</button>
 	</div>
 
 <!-- 테이블 -->
@@ -51,7 +46,7 @@
 <script>
 function displayQc(data) {
 	// 테이블 헤더 초기화
-	let tableHead = "<tr><th>제품번호</th><th>생산일</th><th>제품코드</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>카테고리</th><th>부자재검사 여부</th><th>색상검사 여부</th><th>손상검사 여부</th><th>검사 설명</th><th>검사일</th><th>검사자</th><th>수정</th>"
+	let tableHead = "<tr><th>제품번호</th><th>생산일</th><th>제품코드</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>카테고리</th><th>부자재검사 여부</th><th>색상검사 여부</th><th>손상검사 여부</th><th>검사 설명</th><th>검사일</th><th>검사자</th><th>수정</th></tr>"
 	$("#qcResult").html(tableHead);
 	
 	// QC읭 각 행 기입 (전부 보여주는 페이지기에 product와 qc leftJoin으로 합침)
@@ -87,8 +82,6 @@ $(document).ready(function() {
 		}
 	});
 
-
-
 	$.ajax({
         // 요청
         type : "get",
@@ -98,67 +91,35 @@ $(document).ready(function() {
             for(const i of result) {
 				var text = '<option value="'+ i.productName +'">'+ i.productName +'</option>';
             	$("#productName").append(text);
-            	
             }
         },
-        
 		error:function(xhr,status,error) {
 			
 		}
     });
 	
-	
-	// 여기서부터 수정 필요
-	$.ajax({
-        // 요청
-        type : "get",
-        url : "/showJob",
-        // 응답
-        success : function(result) {
-        	for(const i of result) {
-				var text = '<option value="'+ i.jobTitle +'">'+ i.jobTitle +'</option>';
-				console.log(text);
-            	$("#jobTitle").append(text);
-            	
-            }
-        },
-        
-		error:function(xhr,status,error) {
-			
-		}
-    });
-	
-	$("#btn").click(() =>{
+	$("#btn").on("click", function (e) {
+	     e.preventDefault();
 
-		const formData = new FormData();
-		formData.append("empName", $('#empName').val());
-		formData.append("jobTitle",$('#jobTitle').val());
-		formData.append("deptName", $('#deptName').val());
-	    $.ajax({
-	        // 요청
-	        type : "post",
-	        url : "/infoShow",
-	        data : formData,
-			processData: false,
-			contentType : false,
-	        // 응답
-	        success : function(result) {
-				//$("#result").text("");
-	        	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th></tr>");
-	        	for(const emp of result) {
-				var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+"</td></tr>"
-				$("#result").append(text);
-	        	
-	        	}
-	        },
-	        
-			error:function(xhr,status,error) {
-				
-			}
-	    });
-	});
-});
-</script>
+	     const name = $("#productName").val();
+	     if (name === "a") {
+	       alert("제품을 선택하세요.");
+	       return;
+	     }
+	$.ajax({
+		 type: "get",
+		 url: "/qam/showQc",           // 서버에서 productName을 받아 필터링하도록 구현
+		 data: { productName: name },  // 작동 실패.. 뭐가 문제일까
+//		 dataType: "json",
+		 success: function (result) { 
+			displayQc(result); 
+		},
+		 error: function (xhr, status, err) {
+		         }
+		       });
+		     });
+		   });
+	</script>
 
 
 </body>

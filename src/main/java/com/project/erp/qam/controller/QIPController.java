@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.project.erp.qam.model.vo.ProductName;
 import com.project.erp.qam.model.vo.Qc;
+import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.qam.model.dto.QcResultDTO;
 import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.QcService;
@@ -19,6 +21,9 @@ public class QIPController {
 
     @Autowired
     private QcService qcService;
+    
+    @Autowired
+    private EmployeeInfoService employeeInfoService;
     
     @Autowired
     private ProductNameService productNameService;
@@ -34,7 +39,7 @@ public class QIPController {
     public List<QcResultDTO> showQc() {
     	return qcService.showQc();
     }
-
+    
     // QC 수정 폼 진입
     @GetMapping("/qcFormUpdate")
     public String showUpdateForm(int productNo, Model model) {
@@ -45,8 +50,11 @@ public class QIPController {
             qc = new QcResultDTO();
             qc.setProductNo(productNo);
         }
-
         model.addAttribute("qc", qc);
+        
+        List<EmpInfo> empList = employeeInfoService.showEmployee();
+        model.addAttribute("empList", empList);
+
         return "component/qam/qcFormUpdate";
     }
 
@@ -61,7 +69,9 @@ public class QIPController {
     @GetMapping("/qcForm")
     public String showQcForm(Model model) {
         List<QcResultDTO> list = qcService.findQcTargetProducts(); // QC 미등록 제품만
+        List<EmpInfo> empList = employeeInfoService.showEmployee();
         model.addAttribute("list", list);
+        model.addAttribute("empList", empList);
         return "component/qam/qcForm";
     }
     

@@ -27,14 +27,19 @@
     </label><br/>
 
     <!-- 검사자 사번 -->
-    <label>검사자 사번:
-        <input type="number" name="empNo" min="1" required />
-    </label><br/>
+	<label>검사자 사번:
+	    <select name="empNo" required>
+	        <option value="">사번 선택</option>
+	        <c:forEach var="e" items="${empList}">
+	            <option value="${e.empNo}">[${e.empNo}] ${e.empName}</option>
+	        </c:forEach>
+	    </select>
+	</label><br/>
 
     <!-- 검사 항목 -->
     <label>부자재 검사:
         <select name="checkMaterial" required>
-            <option value="">선택</option>
+<!--            <option value="" >선택</option>-->
             <option value="합격">합격</option>
             <option value="불합격">불합격</option>
         </select>
@@ -42,7 +47,7 @@
 
     <label>색상 검사:
         <select name="checkColor" required>
-            <option value="">선택</option>
+<!--            <option value="">선택</option>-->
             <option value="합격">합격</option>
             <option value="불합격">불합격</option>
         </select>
@@ -50,7 +55,7 @@
 
     <label>손상 검사:
         <select name="checkDamage" required>
-            <option value="">선택</option>
+<!--            <option value="">선택</option>-->
             <option value="합격">합격</option>
             <option value="불합격">불합격</option>
         </select>
