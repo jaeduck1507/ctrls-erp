@@ -39,6 +39,7 @@ public class QcService {
         defectiveMapper.deleteByProductNo(qc.getProductNo());
     	
         // 2. QC 업데이트
+        qc.setQcDate(LocalDate.now());
         qcMapper.updateQc(qc);
         
         // 3. 판정 로직

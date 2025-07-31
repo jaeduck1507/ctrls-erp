@@ -133,14 +133,15 @@
 
 <!--qcFormUpdate에서 UPDATE 시도 전, 해당 제품이 QC 테이블에 없으면 INSERT 처리-->
 <insert id="updateQc" parameterType="Qc">
-    INSERT INTO qc (product_no, emp_no, check_material, check_color, check_damage, qc_desc)
-    VALUES (#{productNo}, #{empNo}, #{checkMaterial}, #{checkColor}, #{checkDamage}, #{qcDesc})
+    INSERT INTO qc (product_no, emp_no, check_material, check_color, check_damage, qc_desc, qc_date)
+    VALUES (#{productNo}, #{empNo}, #{checkMaterial}, #{checkColor}, #{checkDamage}, #{qcDesc}, #{qcDate})
     ON DUPLICATE KEY UPDATE
         emp_no = VALUES(emp_no),
         check_material = VALUES(check_material),
         check_color = VALUES(check_color),
         check_damage = VALUES(check_damage),
-        qc_desc = VALUES(qc_desc)
+        qc_desc = VALUES(qc_desc),
+        qc_date = VALUES(qc_date)
 </insert>
 
 <!--보류, qc 등록 전이라면 수정 자체가 불가능하기에 이를 해결하기 위해 위와 같이 처리-->
