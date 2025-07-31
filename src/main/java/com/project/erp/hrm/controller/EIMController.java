@@ -58,4 +58,10 @@ public class EIMController {
 //		System.out.println(eiList);
 		employeeInfoservice.empAdd(eiList);
 	}
+	
+	@PostMapping("/empModify")
+	public String empModify(EmpInfo ei) {
+		employeeInfoservice.empModify(ei);
+		return "redirect:/hrm/empInfo";
+	}
 }

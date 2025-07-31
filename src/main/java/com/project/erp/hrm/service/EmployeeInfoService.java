@@ -50,4 +50,12 @@ public class EmployeeInfoService {
 		empInfoPagingDTO.setHrmPagingDTO(new HRMPagingDTO(hrmPagingDTO.getPage(),totalEmp(ei)));
 		return empInfoPagingDTO;
 	}
+	
+	public EmpInfo infoShowOne(EmpInfo ei) {
+		return employeeInfoMapper.infoShowOne(ei);
+	}
+	
+	public void empModify(EmpInfo ei) {
+		employeeInfoMapper.empModify(ei);
+	}
 }

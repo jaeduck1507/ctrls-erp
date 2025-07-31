@@ -102,9 +102,9 @@
                 success : function(result) {
 					//테이블 생성
 					$("#result").html("");
-                	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th></tr>");
+                	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th><th>수정</th></tr>");
                 	for(const emp of result.empInfoList) {
-					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+"</td></tr>"
+					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '">수정</a></td></tr>'
 					$("#result").append(text);
                 	
 					// 페이징 생성
@@ -145,9 +145,9 @@
                 success : function(result) {
 					//테이블 생성
 					$("#result").html("");
-                	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th></tr>");
+                	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th><th>수정</th></tr>");
                 	for(const emp of result.empInfoList) {
-					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+"</td></tr>"
+					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '">수정</a></td></tr>'
 					$("#result").append(text);
                 	
 					// 페이징 생성
