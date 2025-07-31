@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.hrm.mapper.AttendanceLogMapper;
+import com.project.erp.hrm.model.dto.AttendanceStatsDTO;
 import com.project.erp.hrm.model.dto.attendanceMonth;
 import com.project.erp.hrm.model.vo.AttendanceLog;
 
@@ -77,9 +78,38 @@ public class AttendanceLogService {
 			count++;
 			
 		}
-		for(AttendanceLog a : list) {
-			System.out.println(a);
-		}
+	
 		return list;
+	}
+	
+	public AttendanceStatsDTO attendanceStats(attendanceMonth am) {
+		List<AttendanceLog> list = showAttendance(am);
+		YearMonth ym = YearMonth.parse(am.getYearMonth());
+		
+		AttendanceStatsDTO asDto = new AttendanceStatsDTO();
+		asDto.setMonth(ym.getMonthValue());
+		asDto.setTotalCount(list.size());
+		for(AttendanceLog al : list) {
+			switch(al.getStatus()) {
+			case "출근":
+				asDto.setWorkCount(asDto.getWorkCount()+1);
+				break;
+			case "지각":
+				asDto.setLateCount(asDto.getLateCount()+1);
+				break;
+			case "조퇴":
+				asDto.setLeaveEarlyCount(asDto.getLeaveEarlyCount()+1);
+				break;
+			case "휴가":
+				asDto.setLeaveCount(asDto.getLeaveCount()+1);
+				break;
+			case "결근":
+				asDto.setAbsenceCount(asDto.getAbsenceCount()+1);
+				break;
+			default:
+				break;
+			}
+		}
+		return asDto;
 	}
 }

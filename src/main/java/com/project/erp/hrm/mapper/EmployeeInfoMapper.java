@@ -15,4 +15,6 @@ public interface EmployeeInfoMapper {
 	void empAdd(List<EmployeeInfo> eiList);
 	List<EmpInfo> showEmployee(); // 윤의진 추가 qc 위함
 	int totalEmp(EmpInfo ei);
+	EmpInfo infoShowOne(EmpInfo ei);
+	void empModify(EmpInfo ei);
 }

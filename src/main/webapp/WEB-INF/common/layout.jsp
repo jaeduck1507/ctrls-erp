@@ -23,6 +23,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="/hrm/empEval">인사/성과평가 /hrm/empEval</a><br />
 	<a href="/hrm/attendanceRecord">출근/퇴근 기록 /hrm/attendanceRecord</a><br />
 	<a href="/hrm/showAttendance">출근/퇴근 조회 /hrm/attendanceRecord</a><br />
+	<a href="/hrm/attendanceStats">출근/퇴근 통계 /hrm/attendanceStats</a><br />
 	
 	<a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a><br />
 	<a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a><br />

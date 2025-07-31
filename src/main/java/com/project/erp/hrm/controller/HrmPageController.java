@@ -94,6 +94,18 @@ public class HrmPageController {
 	public String leaveUpdate() {
 		return "component/hrm/leaveUpdate";
 	}
+	
+	@GetMapping("/empModify")
+	public String empModify(Model model,EmpInfo ei) {
+		model.addAttribute("empInfo", employeeInfoservice.infoShowOne(ei));
+		return "component/hrm/empModify";
+	}
+	
+	@GetMapping("/attendanceStats")
+	public String attendanceStats(Model model) {
+		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
+		return "component/hrm/attendanceStats";
+	}
 
 }
 

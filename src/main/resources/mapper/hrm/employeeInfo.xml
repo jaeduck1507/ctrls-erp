@@ -1,13 +1,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.hrm.mapper.EmployeeInfoMapper">
-<resultMap type="EmpInfo" id="EmpInfoMap">
-	<result column="emp_no" property="empNo"/>
-	<result column="emp_name" property="empName"/>
-	<result column="job_title" property="jobTitle"/>
-	<result column="dept_name" property="deptName"/>
+<resultMap id="EmpInfoMap" type="EmpInfo">
+    <id property="empNo" column="emp_no" />
+    <result property="empName" column="emp_name" />
+    <result property="empId" column="emp_id" />
+    <result property="empIn" column="emp_in" />
+    <result property="deptNo" column="dept_no" />
+    <result property="jobNo" column="job_no" />
+    <result property="jobTitle" column="job_title" />
+    <result property="deptName" column="dept_name" />
+    <result property="hireDate" column="hire_date" />
+    <result property="quitDate" column="quit_date" />
+    <result property="salary" column="salary" />
+    <result property="addr" column="addr" />
+    <result property="phone" column="phone" />
+    <result property="email" column="email" />
 </resultMap>
 	<select id="infoShow" parameterType="EmpInfo" resultMap="EmpInfoMap">
-		SELECT emp_no,emp_name, dept_name, job_title 
+		SELECT emp_no,emp_name, dept_name, job_title, emp_id, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
@@ -61,7 +71,7 @@
 	</select>
 	
 	<select id="infoShowPage" parameterType="EmpInfoPagingDTO" resultMap="EmpInfoMap">
-		SELECT emp_no,emp_name, dept_name, job_title 
+		SELECT emp_no,emp_name, dept_name, job_title, emp_id, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email 
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
@@ -78,4 +88,29 @@
 		</where>
 		LIMIT #{hrmPagingDTO.offset}, #{hrmPagingDTO.limit}
 	</select>
+	
+	<select id="infoShowOne" parameterType="EmpInfo" resultMap="EmpInfoMap">
+		SELECT emp_no,emp_name, dept_name, job_title, emp_id, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email
+		FROM employee_info
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		<where>
+			emp_no = #{empNo}
+		</where>
+		
+	</select>
+	
+	<update id="empModify" parameterType="EmpInfo">
+		UPDATE employee_info
+		<set>
+			emp_name = #{empName},
+			emp_id = #{empId},
+			addr = #{addr},
+			phone = #{phone},
+			email = #{email},
+		</set>
+		<where>
+			emp_no = #{empNo}
+		</where>
+	</update>
 </mapper>

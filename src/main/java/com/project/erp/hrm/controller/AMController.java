@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.hrm.model.dto.AttendanceStatsDTO;
 import com.project.erp.hrm.model.dto.attendanceMonth;
 import com.project.erp.hrm.model.vo.AttendanceLog;
 import com.project.erp.hrm.service.AttendanceLogService;
@@ -38,6 +39,13 @@ public class AMController {
 	@PostMapping("/showAttendance")
 	public List<AttendanceLog> showAttendance(@RequestBody attendanceMonth am) {
 		return attendanceLogService.showAttendance(am);
+	}
+	
+	@ResponseBody
+	@PostMapping("/attendanceStats")
+	public AttendanceStatsDTO attendanceStats(@RequestBody attendanceMonth am) {
+		
+		return attendanceLogService.attendanceStats(am);
 	}
 	
 }
