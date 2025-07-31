@@ -49,9 +49,11 @@ public class LMController {
 	}
 	
 	@ResponseBody
-	@PostMapping("leaveUpdate")
-	public void leaveUpdate(LeaveInfo leaveInfo) {
-//		leaveInfoService.leaveUpdate(leaveInfo);
+	@PostMapping("/leaveUpdate")
+	public String leaveUpdate(LeaveInfo li) {
+		System.out.println(li);
+		leaveInfoService.leaveUpdate(li);
+		return "component/hrm/leaveView?leaveId="+ li.getLeaveId();
 	}
 
 }

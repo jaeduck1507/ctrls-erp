@@ -79,12 +79,20 @@ AND status = '승인'
 AND YEAR(start_date) = YEAR(CURDATE())
 </select>
 
+<select id="leaveInfoView" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
+SELECT leave_id, request_date, leave_type, start_date, end_date, reason, status, emp_no, emp_name, dept_name, job_title
+FROM leave_request
+     JOIN employee_info USING(emp_no)
+     JOIN department USING(dept_no)
+     JOIN job_position USING(job_no)
+WHERE leave_id = #{leaveId}
+</select>    
+    
 <!-- 신청된 휴가 중 대기중인 휴가 정보 수정 -->
 <update id="leaveUpdate" parameterType="LeaveInfo">
 UPDATE leave_request
-SET leave_type=#{leaveType}, start_date=#{start_date}, end_date=#{end_date}, reason=#{reason}
-WHERE emp_no=#{empNo}
-AND status= '대기'
+SET start_date=#{startDate}, end_date=#{endDate}, reason=#{reason}
+WHERE leave_id=#{leaveId}
 </update>
 
 </mapper>
