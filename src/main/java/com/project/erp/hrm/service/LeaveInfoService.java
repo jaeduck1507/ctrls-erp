@@ -34,7 +34,10 @@ public class LeaveInfoService {
 		
 	}
 	
-	public void leaveUpdate(LeaveInfo leaveInfo) {
-		leaveInfoMapper.leaveUpdate(leaveInfo);
+	public List<LeaveInfo> leaveInfoView(LeaveInfo li){
+		return leaveInfoMapper.leaveInfoView(li);
+	};
+	public void leaveUpdate(LeaveInfo li) {
+		leaveInfoMapper.leaveUpdate(li);
 	}
 }

@@ -1,5 +1,7 @@
 package com.project.erp.hrm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.hrm.service.JobPositionService;
@@ -90,9 +93,11 @@ public class HrmPageController {
 		return "component/hrm/leaveDays";
 	}
 	
-	@GetMapping("/leaveUpdate")
-	public String leaveUpdate() {
-		return "component/hrm/leaveUpdate";
+	@GetMapping("/leaveView")
+	public String leaveView(Model model, LeaveInfo li) {
+//		System.out.println(li);
+		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));		
+		return "component/hrm/leaveView";
 	}
 
 }

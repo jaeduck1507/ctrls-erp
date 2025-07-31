@@ -19,6 +19,9 @@ public interface LeaveInfoMapper {
 	void leaveStatusUpdate(LeaveInfo leaveinfo);
 	// 누적 휴가 일수 조회
 	List<LeaveInfo> leaveDays(LeaveInfo leaveInfo);
+	// 휴가 수정을 위한 조회
+		List<LeaveInfo> leaveInfoView(LeaveInfo li);
 	// 휴가 수정
-	void leaveUpdate(LeaveInfo leaveInfo);
+	void leaveUpdate(LeaveInfo li);
+	
 }

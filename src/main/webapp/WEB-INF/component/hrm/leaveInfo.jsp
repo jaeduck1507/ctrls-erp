@@ -13,8 +13,8 @@
 
 	<div id="search">
 		사번 <input type="text" id="empNo">
+		상태
 		<select name="status" id="status">
-			<option value="s" disabled selected>상태 선택</option>
 			
 			<option value="all">전체</option>
 			<option value="wait">대기</option>
@@ -44,7 +44,7 @@
 				// 응답
 				success : function(result) {
 					$("#result").empty();
-					$("#result").append("<tr><th>신청번호</th><th>신청날짜</th><th>유형</th><th>시작일</th><th>종료일</th><th>이유</th><th>상태</th><th>사원명</th><th>부서</th><th>직급</th></tr>");
+					$("#result").append("<tr><th>신청번호</th><th>신청날짜</th><th>유형</th><th>시작일</th><th>종료일</th><th>이유</th><th>상태</th><th>사원명</th><th>부서</th><th>직급</th><th>수정/삭제</th></tr>");
 					for(const leaveInfo of result) {
 						var text = "<tr><td>" + leaveInfo.leaveId
 							       + "</td><td>" + leaveInfo.requestDate 
@@ -56,7 +56,7 @@
 								   + "</td><td>" + leaveInfo.empName 
 								   + "</td><td>" + leaveInfo.deptName
 								   + "</td><td>" + leaveInfo.jobTitle 
-									+ "</td></tr>"
+									+ "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "'>수정</a><a id='btn2' href='/hrm/leaveDelete'>삭제</a></td></tr>"
 					$("#result").append(text);
 					}
 				},
