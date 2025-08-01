@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
+import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.qam.service.ProductNameService;
 
 @RequestMapping("/fm")
@@ -18,6 +20,12 @@ public class FmPageController {
 	
 	@Autowired
 	private DepartmentService departmentService;
+	
+	@Autowired
+	private EmployeeInfoService employeeInfoService;
+	
+	@Autowired
+	private BonusMapper bonusMapper;
 	
 	@GetMapping("/saleManage")
 	public String saleManage() {
@@ -69,6 +77,13 @@ public class FmPageController {
 	public String transRegister(Model model) {
 		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/transRegister";
+	}
+	
+	@GetMapping("/addBonusPayment")
+	public String addBonusPayment(Model model) {
+		model.addAttribute("empInfo", employeeInfoService.showEmployee());
+		model.addAttribute("bonus", bonusMapper.showBonusAll());
+		return "component/fm/addBonusPayment";
 	}
 	
 }
