@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.erp.fm.model.dto.BudgetDeptDTO;
+import com.project.erp.fm.service.BudgetService;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.qam.service.ProductNameService;
 
@@ -18,6 +20,9 @@ public class FmPageController {
 	
 	@Autowired
 	private DepartmentService departmentService;
+	
+	@Autowired
+	private BudgetService budgetServive;
 	
 	@GetMapping("/saleManage")
 	public String saleManage() {
@@ -69,6 +74,12 @@ public class FmPageController {
 	public String transRegister(Model model) {
 		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/transRegister";
+	}
+	
+	@GetMapping("/budgetUpdate")
+	public String budgetUpdate(Model model, BudgetDeptDTO bd) {
+		model.addAttribute("budgetInfo", budgetServive.searchBudget(bd));
+		return "component/fm/budgetUpdate";
 	}
 	
 }

@@ -21,13 +21,23 @@ public class BudgetService implements BudgetMapper {
 	}
 
 	@Override
-	public void budgetRegister(List<Budget> bList) {
-		mapper.budgetRegister(bList);
+	public void registerBudget(List<Budget> bList) {
+		mapper.registerBudget(bList);
 	}
 
 	@Override
 	public void updatePV(Budget budget) {
 		mapper.updatePV(budget);		
+	}
+
+	@Override
+	public BudgetDeptDTO searchBudget(BudgetDeptDTO bd) {
+		return mapper.searchBudget(bd);
+	}
+	
+	@Override
+	public void updateBudget(Budget budget) {
+		mapper.updateBudget(budget);		
 	}
 	
 }

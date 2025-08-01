@@ -39,11 +39,12 @@
 				success: function(result) {
 					//console.log($("#deptName").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>예산 번호</th><th>연/분기/월</th><th>적용 기간</th><th>예산 금액</th><th>계획</th><th>부서명</th></tr>");
+					$("#result").append("<tr><th>예산 코드</th><th>부서명</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th></tr>");
 					for (const b of result) {
-						var text = "<tr><td>" + b.budgetNo + "</td><td>" + b.periodType + "</td><td>" + b.periodValue + "</td><td>" 
-								+ b.annualBudget + "</td><td>" + b.plan + "</td><td>" + b.deptName + "</td></tr>"
+						var text = "<tr><td>" + b.periodValue + "</td><td>" + b.deptName + "</td><td>" 
+							+ b.annualBudget + "</td><td>" + b.plan + "</td><td>" + b.executionDate + "</td></tr>"
 						$("#result").append(text);
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + b.budgetNo + '">수정</a></td>')
 					}
 				},
 				error: function(xhr, status, error) {
@@ -51,6 +52,7 @@
 				}
 			});
 		});
+		
 	</script>
 </body>
 </html>
