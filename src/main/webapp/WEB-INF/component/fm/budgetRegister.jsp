@@ -85,7 +85,7 @@
 			
 			$.ajax({
 				type : "post",
-				url: "/budgetRegister",
+				url: "/registerBudget",
 				dataType : "json",
 				data : JSON.stringify(bList),
 				processData: false,

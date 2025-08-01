@@ -11,6 +11,9 @@ import com.project.erp.fm.model.vo.Budget;
 public interface BudgetMapper {
 
 	List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd);
-	void budgetRegister(List<Budget> bList);
+	void registerBudget(List<Budget> bList);
 	void updatePV(Budget budget);
+	BudgetDeptDTO searchBudget(BudgetDeptDTO bd);
+	void updateBudget(Budget budget);
+	
 }

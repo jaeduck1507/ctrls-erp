@@ -12,8 +12,7 @@
 	</resultMap>
 	
 	<select id="showBudget" parameterType="BudgetDeptDTO" resultMap="BudgetDeptMap">
-		SELECT budget_no, period_type, period_value, annual_budget, plan, dept_name
-		FROM budget
+		SELECT * FROM budget
 		JOIN department USING(dept_no)
 		<where>
 			<if test="deptName != 'dept'">
@@ -22,7 +21,7 @@
 		</where>
 	</select>
 	
-	<insert id="budgetRegister" parameterType="ArrayList">
+	<insert id="registerBudget" parameterType="ArrayList">
 		INSERT INTO budget(period_type, annual_budget, plan, execution_date, dept_no) VALUES
 		<foreach collection="bList" item="budget" separator=",">
 		(#{budget.periodType},#{budget.annualBudget},#{budget.plan},#{budget.executionDate},#{budget.deptNo})
@@ -31,6 +30,23 @@
 	
 	<update id="updatePV" parameterType="Budget">
 		UPDATE budget SET period_value = CONCAT(YEAR(execution_date), '-', period_type, budget_no)
+	</update>
+	
+	<select id="searchBudget" parameterType="BudgetDeptDTO" resultMap="BudgetDeptMap">
+		SELECT * FROM budget
+		JOIN department USING(dept_no)
+		WHERE budget_no = #{budgetNo}
+	</select>
+	
+	<update id="updateBudget" parameterType="Budget">
+		UPDATE budget
+		<set>
+			period_type = #{periodType},
+			annual_budget = #{annualBudget},
+			plan = #{plan},
+			execution_date = #{executionDate}
+		</set>
+		WHERE budget_no = #{budgetNo}
 	</update>
 	
 </mapper>

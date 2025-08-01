@@ -22,13 +22,20 @@ public class SVBController {
 	@PostMapping("/showBudget")
 	public List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd, Budget budget) {
 		budgetService.updatePV(budget);
+		//System.out.println(budgetService.showBudget(bd));
 		return budgetService.showBudget(bd);
 	}
 	
 	@ResponseBody
-	@PostMapping("/budgetRegister")
-	public void budgetRegister(@RequestBody List<Budget> bList) {
-		budgetService.budgetRegister(bList);
+	@PostMapping("/registerBudget")
+	public void registerBudget(@RequestBody List<Budget> bList) {
+		budgetService.registerBudget(bList);
+	}
+	
+	@PostMapping("/updateBudget")
+	public String updateBudget(Budget budget) {
+		budgetService.updateBudget(budget);
+		return "redirect:/fm/budget";
 	}
 	
 }
