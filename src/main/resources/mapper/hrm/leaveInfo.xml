@@ -40,12 +40,13 @@ FROM leave_request
 </where>
 ORDER BY request_date ASC
 </select>
+
 <!-- 휴가 신청, 사번, 신청 날짜, 휴가 유형, 휴가 시작일,  종료일, 사유 작성-->
 <insert id="leaveAdd" parameterType="ArrayList">
 INSERT INTO leave_request(emp_no, request_date, leave_type, start_date, end_date, reason) 
 VALUES 
 <foreach collection="liList" item="leave" separator=",">
-		   (#{leave.empNo}, #{leave.requestDate},#{leave.leaveType},#{leave.startDate},#{leave.endDate},#{leave.reason})
+		   (#{leave.empNo}, #{leave.requestDate}, #{leave.leaveType}, #{leave.startDate}, #{leave.endDate}, #{leave.reason})
 </foreach>
 </insert>
 
@@ -69,14 +70,28 @@ WHERE leave_id = #{leaveId}
 
 <!-- 사번으로 검색하여 사용한 누적휴가일수와 남은 휴가일수 조회-->
 <select id="leaveDays" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
-SELECT emp_no, emp_name, dept_name, job_title, SUM(DATEDIFF(end_date, start_date) + 1) AS 'total_days', 12 - SUM(DATEDIFF(end_date, start_date) + 1) AS 'remain_days'
+<!--SELECT emp_no, emp_name, dept_name, job_title, 
+IFNULL(SUM(DATEDIFF(end_date, start_date) + 1), 0) AS 'total_days', 
+12 - IFNULL(SUM(DATEDIFF(end_date, start_date) + 1), 0) AS 'remain_days'
 FROM leave_request
      JOIN employee_info using(emp_no)
      JOIN department USING(dept_no)
      JOIN job_position USING(job_no)
 WHERE emp_no= #{empNo} 
 AND status = '승인'
-AND YEAR(start_date) = YEAR(CURDATE())
+AND YEAR(start_date) = YEAR(CURDATE())-->
+SELECT emp_no, emp_name, dept_name, job_title
+FROM employee_info
+     JOIN department USING(dept_no)
+     JOIN job_position USING(job_no)
+WHERE emp_no= #{empNo}
+</select>
+
+<select id="leaveTotalDays" parameterType="int" resultMap="LeaveInfoMap">
+SELECT 
+SUM(DATEDIFF(end_date, start_date) + 1) AS 'total_days'
+FROM leave_request
+WHERE emp_no = #{empNo}
 </select>
 
 <select id="leaveInfoView" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
@@ -88,11 +103,16 @@ FROM leave_request
 WHERE leave_id = #{leaveId}
 </select>    
     
-<!-- 신청된 휴가 중 대기중인 휴가 정보 수정 -->
+<!-- 휴가 정보 수정 -->
 <update id="leaveUpdate" parameterType="LeaveInfo">
 UPDATE leave_request
 SET start_date=#{startDate}, end_date=#{endDate}, reason=#{reason}
 WHERE leave_id=#{leaveId}
 </update>
+
+<!-- 휴가 삭제 -->
+<delete id="leaveDelete" parameterType="int">
+DELETE FROM leave_request WHERE leave_id = #{leaveId}
+</delete>
 
 </mapper>

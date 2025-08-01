@@ -34,10 +34,20 @@ public class LeaveInfoService {
 		
 	}
 	
+	public List<LeaveInfo> leaveTotalDays(int empNo) {
+		return leaveInfoMapper.leaveTotalDays(empNo);
+		
+	}
+	
 	public List<LeaveInfo> leaveInfoView(LeaveInfo li){
 		return leaveInfoMapper.leaveInfoView(li);
 	};
+	
 	public void leaveUpdate(LeaveInfo li) {
 		leaveInfoMapper.leaveUpdate(li);
 	}
+	
+	public void leaveDelete(int leaveId) {
+		leaveInfoMapper.leaveDelete(leaveId);
+	};
 }

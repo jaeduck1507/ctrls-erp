@@ -29,9 +29,10 @@ public class LMController {
 	
 	@ResponseBody
 	@PostMapping("/leaveAdd")
-	public void leaveAdd(@RequestBody List<LeaveInfo> liList) {
+	public String leaveAdd(@RequestBody List<LeaveInfo> liList) {
 //		System.out.println(liList.get(0).getEmpNo());
 		leaveInfoService.leaveAdd(liList);
+		return "redirect:/component/hrm/leaveAdd";
 	}
 	
 	@ResponseBody
@@ -49,11 +50,19 @@ public class LMController {
 	}
 	
 	@ResponseBody
+	@PostMapping("/leaveTotalDays")
+	public List<LeaveInfo> leaveTotalDays(int empNo) {
+//		System.out.println(leaveInfo);
+		return leaveInfoService.leaveTotalDays(empNo);
+	}
+	
+	@ResponseBody
 	@PostMapping("/leaveUpdate")
 	public String leaveUpdate(LeaveInfo li) {
 		System.out.println(li);
 		leaveInfoService.leaveUpdate(li);
 		return "component/hrm/leaveView?leaveId="+ li.getLeaveId();
 	}
+	
 
 }
