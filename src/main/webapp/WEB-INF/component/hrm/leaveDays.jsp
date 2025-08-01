@@ -33,15 +33,16 @@
 				// 응답
 				success : function(result) {
 					$("#result").empty();
-					$("#result").append("<tr><th>사번</th><th>사원명</th><th>부서</th><th>직급</th><th>올해 받은 휴가 일수</th><th>휴가 누적 사용 일수</th><th>남은 휴가 일수</th></tr>");
 					for(const leaveDays of result) {
-						var text = "<tr><td>" + leaveDays.empNo
-							       + "</td><td>" + leaveDays.empName
-							       + "</td><td>" + leaveDays.deptName 
-								   + "</td><td>" + leaveDays.jobTitle 
-									+ "</td><td>12일</td><td>" + leaveDays.totalDays 
-								   + "일</td><td>" + leaveDays.remainDays
-								   + "일</td></tr>"
+						var text = "사번 : " + leaveDays.empNo
+							       + "</br>사원명 : " + leaveDays.empName
+							       + "</br>부서 :" + leaveDays.deptName 
+								   + "</br>직급 : " + leaveDays.jobTitle 
+								   
+					               + "</br>올해 받은 휴가일수 : " + "12일"
+								   + "</br>휴가 누적 사용일수 : " + leaveDays.totalDays + "일"
+								   + "</br>남은 휴가일수 : " + (12-leaveDays.totalDays)
+		
 					$("#result").append(text);
 					}
 				},

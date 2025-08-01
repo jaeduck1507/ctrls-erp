@@ -111,6 +111,12 @@ public class HrmPageController {
 		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
 		return "component/hrm/attendanceStats";
 	}
+	
+	@GetMapping("/leaveDelete")
+	public String leaveDelete(int leaveId) {
+		leaveInfoService.leaveDelete(leaveId);
+		return "component/hrm/leaveInfo";
+	}
 
 }
 
