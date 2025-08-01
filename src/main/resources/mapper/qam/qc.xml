@@ -59,31 +59,6 @@
         WHERE p.product_no = #{productNo}
     </select>
 
-<!--     검사자 사번(empNo)으로 조회 -->
-<!--    <select id="findQcByEmpNo" parameterType="int" resultMap="QcResultMap">-->
-<!--        SELECT -->
-<!--            p.product_no,-->
-<!--            p.production_date,-->
-<!--            p.product_code,-->
-<!--            q.qc_code,-->
-<!--            q.check_material,-->
-<!--            q.check_color,-->
-<!--            q.check_damage,-->
-<!--            q.qc_desc,-->
-<!--            q.qc_date,-->
-<!--            q.emp_no,-->
-<!--            s.sale_no,-->
-<!--            s.sale_date,-->
-<!--            d.defective_no,-->
-<!--            d.reason-->
-<!--        FROM qc q-->
-<!--        JOIN product p ON q.product_no = p.product_no-->
-<!--        JOIN product_name pn ON p.product_code = pn.product_code-->
-<!--        LEFT JOIN sale s ON p.product_no = s.product_no-->
-<!--        LEFT JOIN defective d ON p.product_no = d.product_no-->
-<!--        WHERE q.emp_no = #{empNo}-->
-<!--    </select>-->
-
     <!-- 전체 QC + 판매 + 불량 조회 -->
 	<select id="showQc" resultMap="QcResultMap">
 	    SELECT
@@ -105,6 +80,7 @@
 	    FROM product p
 	    JOIN product_name pn ON p.product_code = pn.product_code
 	    LEFT JOIN qc q ON p.product_no = q.product_no
+	    ORDER BY p.production_date DESC
 	</select>
 
 	<!-- QC 안된 제품들 조회 -->
@@ -143,18 +119,5 @@
         qc_desc = VALUES(qc_desc),
         qc_date = VALUES(qc_date)
 </insert>
-
-<!--보류, qc 등록 전이라면 수정 자체가 불가능하기에 이를 해결하기 위해 위와 같이 처리-->
-<!--<update id="updateQc" parameterType="Qc">-->
-<!--    UPDATE qc-->
-<!--    SET emp_no = #{empNo},-->
-<!--        check_material = #{checkMaterial},-->
-<!--        check_color = #{checkColor},-->
-<!--        check_damage = #{checkDamage},-->
-<!--        qc_desc = #{qcDesc}-->
-<!--    WHERE product_no = #{productNo}-->
-<!--</update>-->
-
-	
 
 </mapper>

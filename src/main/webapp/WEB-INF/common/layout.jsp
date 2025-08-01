@@ -43,7 +43,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="/qam/product">상품(Product) 조회 /qam/product</a><br />
     <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a><br />
     <a href="/qam/qc">제품 품질 검수 전체조회 /qam/qc</a><br />
-	<a href="/qam/sale">판매대기/판매 제품 조회 /qam/sale</a><br />
+	<a href="/qam/saleReady">판매 전 제품 조회 /qam/saleReady</a><br />
+	<a href="/qam/saleDone">판매 완료 제품 조회 /qam/saleDone</a><br />
 	<a href="/qam/defective">불량 제품 조회 /qam/defective</a><br />
 	<!-- 
     <script src = "../resources/js/layout.js"></script>

@@ -24,9 +24,14 @@ public class QamPageController {
 		return "component/qam/qc";
 	}
 	
-	@GetMapping("/sale")
-	public String sale() {
-		return "component/qam/sale";
+	@GetMapping("/saleReady")
+	public String saleReady() {
+		return "component/qam/saleReady";
+	}
+	
+	@GetMapping("/saleDone")
+	public String saleDone() {
+		return "component/qam/saleDone";
 	}
 	
 	@GetMapping("/defective")

@@ -20,6 +20,7 @@
                pn.product_cost, pn.product_category
         FROM product p
         JOIN product_name pn ON p.product_code = pn.product_code
+        ORDER BY p.production_date DESC
     </select>
 
     <!-- 단일 제품 상세 조회 (수정 폼 진입 시 사용) -->
@@ -72,6 +73,7 @@
             AND pn.product_category = #{productCategory}
         </if>
     </where>
+    ORDER BY p.production_date DESC
 </select>
 
     

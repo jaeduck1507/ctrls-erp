@@ -3,10 +3,13 @@
 
 <mapper namespace="com.project.erp.qam.mapper.SaleMapper">
 
-<resultMap id="saleMap" type="Sale">
+<resultMap id="saleMap" type="SaleReadyDTO">
 	<result column="sale_no" property="saleNo"/>
 	<result column="sale_date" property="saleDate"/>
 	<result column="product_no" property="productNo"/>
+
+	<result column="product_code" property="productCode"/>
+	<result column="product_price" property="productPrice"/>
 </resultMap>
 
     <insert id="insertSale" parameterType="Sale">
@@ -18,12 +21,51 @@
     DELETE FROM sale WHERE product_no = #{productNo}
 	</delete>
 
-	<select id="showSale" resultMap="saleMap">
-	SELECT 
-		sale_no, 
-		sale_date, 
-		product_no 
-	FROM sale
+	<select id="showSaleDone" resultMap="saleMap">
+	  SELECT
+	  	p.product_no,
+	  	pn.product_code,
+	  	pn.product_price,
+	    s.sale_no,
+	    s.sale_date
+	  FROM sale s
+	  JOIN product p ON s.product_no = p.product_no
+	  JOIN product_name pn ON p.product_code = pn.product_code
+  	  WHERE s.sale_date IS NOT NULL
+  	  ORDER BY s.sale_date DESC
 	</select> 
+	
+	<select id="showSaleNull" resultMap="saleMap">
+	  SELECT
+	  	p.product_no,
+	  	pn.product_code,
+	  	pn.product_price,
+	    s.sale_no,
+	    s.sale_date
+	  FROM sale s
+	  JOIN product p ON s.product_no = p.product_no
+	  JOIN product_name pn ON p.product_code = pn.product_code
+  	  WHERE s.sale_date IS NULL
+  	  ORDER BY s.sale_no ASC
+	</select>
+
+	<select id="findBySaleNo" parameterType="int" resultMap="saleMap">
+		SELECT
+			p.product_no,
+	  		pn.product_code,
+	  		pn.product_price,
+	    	s.sale_no,
+	    	s.sale_date  
+	    FROM sale s
+	    JOIN product p ON s.product_no = p.product_no
+	    JOIN product_name pn ON p.product_code = pn.product_code
+		WHERE s.sale_no = #{saleNo}
+	</select>
+
+	<update id="registerSaleDate" parameterType="SaleReadyDTO">
+		UPDATE sale
+		SET sale_date = #{saleDate}
+		WHERE sale_no = #{saleNo}
+	</update>
 
 </mapper>
