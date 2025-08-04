@@ -51,15 +51,15 @@ public class LMController {
 	
 	@ResponseBody
 	@PostMapping("/leaveTotalDays")
-	public List<LeaveInfo> leaveTotalDays(int empNo) {
+	public List<LeaveInfo> leaveTotalDays(LeaveInfo leaveInfo) {
 //		System.out.println(leaveInfo);
-		return leaveInfoService.leaveTotalDays(empNo);
+		return leaveInfoService.leaveTotalDays(leaveInfo);
 	}
 	
 	@ResponseBody
 	@PostMapping("/leaveUpdate")
 	public String leaveUpdate(LeaveInfo li) {
-		System.out.println(li);
+//		System.out.println(li);
 		leaveInfoService.leaveUpdate(li);
 		return "component/hrm/leaveView?leaveId="+ li.getLeaveId();
 	}
