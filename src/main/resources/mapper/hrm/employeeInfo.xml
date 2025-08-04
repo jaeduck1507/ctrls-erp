@@ -28,9 +28,6 @@
 		<if test='jobNo != -1'>
 			AND job_no = #{jobNo}
 		</if>
-		<if test='deptNo != -1'>
-			AND dept_no = #{deptNo}
-		</if>
 		</where>
 		
 	</select>
