@@ -1,6 +1,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.fm.mapper.BonusPaymentMapper">
 	
+	<resultMap id="BonusPaymentDTOMap" type="BonusPaymentDTO">
+	    <id property="empNo" column="emp_no" />
+	    <result property="bonusPaymentNo" column="bonus_payment_no" />
+	    <result property="payment" column="payment" />
+	    <result property="payDate" column="pay_date" />
+	    <result property="bonusNo" column="bonus_no" />
+	    <result property="empNo" column="emp_no" />
+	    <result property="empName" column="emp_name" />
+	    <result property="deptName" column="dept_name" />
+	    <result property="jobTitle" column="job_title" />
+	    <result property="bonusName" column="bonus_name" />
+	</resultMap>
+	
+	
+	
 	<update id="addBonusPayment" parameterType="ArrayList">
 	
 	INSERT INTO bonus_payment (emp_no, bonus_no, payment, pay_date) VALUES
@@ -10,5 +25,29 @@
 		</foreach>
 	</update>
 	
+	<select id="showBonusPayment" parameterType="EmpInfo" resultMap="BonusPaymentDTOMap">
+		SELECT bonus_payment_no, payment, pay_date, bonus_no, emp_no, dept_name, job_title, bonus_name,emp_name
+		FROM bonus_payment
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		JOIN bonus USING(bonus_no)
+		
+		<where>
+		<if test="empName != null" >
+			emp_name LIKE CONCAT('%', #{empName}, '%')
+		</if>
+		<if test='jobNo != -1'>
+			AND job_no = #{jobNo}
+		</if>
+		<if test='deptNo != -1'>
+			AND dept_no = #{deptNo}
+		</if>
+		<if test='date != null'>
+			pay_date LIKE CONCAT('%', #{date}, '%')
+		</if>
+		</where>
+		
+	</select>
 	
 </mapper>

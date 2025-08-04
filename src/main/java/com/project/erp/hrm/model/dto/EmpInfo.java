@@ -4,8 +4,9 @@ import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter
+@Getter @Setter @ToString
 public class EmpInfo {
 	private int empNo;
 	private String empName;
@@ -21,4 +22,5 @@ public class EmpInfo {
 	private String addr; // 주소
 	private String phone; // 연락처
 	private String email; // 이메일
+	private String date; // 다른 날짜 정보(월,분기,일 등 임시 저장소)
 }

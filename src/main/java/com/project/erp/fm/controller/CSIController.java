@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.fm.model.dto.BonusPaymentDTO;
 import com.project.erp.fm.model.dto.SalEmpDTO;
 import com.project.erp.fm.model.vo.BonusPayment;
 import com.project.erp.fm.service.BonusPaymentService;
 import com.project.erp.fm.service.SalaryService;
+import com.project.erp.hrm.model.dto.EmpInfo;
 
 @Controller
 public class CSIController {
@@ -33,6 +35,12 @@ public class CSIController {
 	public void addBonusPayment(@RequestBody List<BonusPayment> bList) {
 		System.out.println(bList);
 		bonusPaymentService.addBonusPayment(bList);
+	}
+	
+	@ResponseBody
+	@PostMapping("/showBonusPayment")
+	public List<BonusPaymentDTO> showBonusPayment(@RequestBody EmpInfo empInfo) {
+		return bonusPaymentService.showBonusPayment(empInfo);
 	}
 	
 }

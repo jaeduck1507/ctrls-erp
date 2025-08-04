@@ -11,6 +11,7 @@ import com.project.erp.fm.service.BudgetService;
 import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
+import com.project.erp.hrm.service.JobPositionService;
 import com.project.erp.qam.service.ProductNameService;
 
 @RequestMapping("/fm")
@@ -31,6 +32,9 @@ public class FmPageController {
 	
 	@Autowired
 	private BonusMapper bonusMapper;
+	
+	@Autowired
+	private JobPositionService jobPositionService;
 	
 	@GetMapping("/saleManage")
 	public String saleManage() {
@@ -94,6 +98,13 @@ public class FmPageController {
 		model.addAttribute("empInfo", employeeInfoService.showEmployee());
 		model.addAttribute("bonus", bonusMapper.showBonusAll());
 		return "component/fm/addBonusPayment";
+	}
+	
+	@GetMapping("/showBonusPayment")
+	public String showBonusPayment(Model model) {
+		model.addAttribute("department", departmentService.showDept());
+		model.addAttribute("jobPosition", jobPositionService.showJob());
+		return "component/fm/showBonusPayment";
 	}
 	
 }
