@@ -26,4 +26,7 @@ public interface SaleMapper {
 //	void registerSaleDate(SaleReadyDTO dto);
 
 	void registerSaleDate(int saleNo, LocalDate saleDate);
+	
+	List<SaleReadyDTO> countSale(SaleReadyDTO dto);
+	
 }

@@ -40,4 +40,9 @@ public class SaleService {
 	public void registerSaleDate(int saleNo, LocalDate saleDate) {
 		saleMapper.registerSaleDate(saleNo, saleDate);
 	}
+	
+	public List<SaleReadyDTO> countSale(SaleReadyDTO dto) {
+		return saleMapper.countSale(dto);
+	}
+	
 }

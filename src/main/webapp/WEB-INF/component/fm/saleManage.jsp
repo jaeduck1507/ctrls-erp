@@ -43,7 +43,7 @@
 				url: "/showSaleManage",
 				data: formData,
 				processData: false,
-				contentType : false,
+				contentType: false,
 				success: function(result) {
 					//console.log($("#productCategory").val());
 					//console.log($("#productName").val());

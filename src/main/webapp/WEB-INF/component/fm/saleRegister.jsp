@@ -11,73 +11,37 @@
 <body>
 	<h1>매출 등록</h1>
 	<div id="register">
-		<button id="add-row">열 추가</button>
-		<table border="1" id="result">
-			<tr>
-				<th>상품명</th>
-				<th>상품 코드</th>
-				<th>가격</th>
-				<th>수량</th>
-				<th>부가세</th>
-				<th>총액</th>
-				<th>매출 발생일자</th>
-				<th>삭제</th>
-			</tr>
-		</table>
+		날짜 : <input type="date" id="saleDate"/>
+		<button id="search">조회</button>
 		<button id="sale-register">매출 등록</button>
+		
+		<table border="1" id="result">
+			
+		</table>
 	</div>
 	
 	<script>
-		var count = 0;
-		
-		function addRow() {
-			$("#result").append("<tr></tr>");
-			for (var i = 0; i < 7; i++) {
-				if (i == 0) $("#result tr").eq(-1).append('<td><input list="productList'+ (++count) +'" class="productName" placeholder="검색 또는 선택" /><datalist id="productList'+ count +'"><c:forEach items="${productNameList}" var="product"><option value="${product.productName}" data-product_code ="${product.productCode}" data-product_price="${product.productPrice}" ></option></c:forEach></datalist></td>');
-				else $("#result tr").eq(-1).append('<td></td>');
-			}
-			$("#result tr").eq(-1).append('<td><button class="remove-row">열 삭제</button></td>');
-		}
-		
-		addRow();
-		
-		$("#add-row").click(() => {
-			addRow();
-		});
-		
-		$(document).on("click", ".remove-row", function() {
-			if($("#result tr").length > 2) $(this).parent().parent().remove();
-		});
-		
-		$(document).on("change", ".productName", (e) => {
-			const productInfo = {};
-			const val = $(e.target).val();
-			console.log(val);
-			const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
+		$("#search").click(() => {
+			const formData = new FormData();
+			formData.append("saleDate", $("#saleDate").val());
+			console.log($("#saleDate").val());
 			
-			if (!opt.length) {
-				alert("존재하지 않는 상품입니다");
-				return;
-			}
-			
-			productInfo.productCode = opt.data("product_code");
-			productInfo.productPrice = opt.data("product_price");
-			$(e.target).parent().parent().find("td").eq(1).text(productInfo.productCode);
-			$(e.target).parent().parent().find("td").eq(2).text(productInfo.productPrice);
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" name="quantity" class="quantity"/>');
-			$(e.target).parent().parent().find("td").eq(4).text("");
-			$(e.target).parent().parent().find("td").eq(5).text("");
-			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="sale-date"/>');
-		});
-		
-		$(document).on("change", ".quantity", (e) => {
-			const quantity = $(e.target).val();
-			const amount = $(e.target).parent().parent().find("td").eq(2).text();
-			const total = quantity * amount;
-			const vat = Math.floor(total - (total / 1.1));
-			
-			$(e.target).parent().parent().find("td").eq(4).text(vat);
-			$(e.target).parent().parent().find("td").eq(5).text(total);
+			$.ajax({
+				type: "post",
+				url: "/countSale",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(result) {
+					$("#result").html("");
+					$("#result").append("<tr><th>상품명</th><th>상품 코드</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
+					for (const sale of result) {
+						const totalAmount = sale.productPrice * sale.quantity;
+						const varAmount = Math.floor(totalAmount - (totalAmount / 1.1));
+						$("#result").append("<tr><td>" + sale.productName + "</td><td>" +sale.productCode + "</td><td>" + sale.productPrice + "</td><td>" + sale.quantity + "</td><td>" + varAmount + "</td><td>" + totalAmount + "</td><td>" + $("#saleDate").val() + "</td></tr>");
+					}
+				}
+			});
 		});
 		
 		$("#sale-register").click(() => {
@@ -87,10 +51,10 @@
 			for (var i = 1; i < table.length; i++) {
 				const obj ={};
 				obj.productCode=$("#result tr").eq(i).find("td").eq(1).text();
-				obj.quantity=$("#result tr").eq(i).find("td").eq(3).find("input").val();
+				obj.quantity=$("#result tr").eq(i).find("td").eq(3).text();
 				obj.varAmount=$("#result tr").eq(i).find("td").eq(4).text();
 				obj.totalAmount=$("#result tr").eq(i).find("td").eq(5).text();
-				obj.saleDate=$("#result tr").eq(i).find("td").eq(6).find("input").val();
+				obj.saleDate=$("#result tr").eq(i).find("td").eq(6).text();
 				
 				smList.push(obj);
 			}

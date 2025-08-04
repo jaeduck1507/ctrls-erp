@@ -11,7 +11,9 @@ import com.project.erp.fm.service.BudgetService;
 import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
+import com.project.erp.qam.model.dto.SaleReadyDTO;
 import com.project.erp.qam.service.ProductNameService;
+import com.project.erp.qam.service.SaleService;
 
 @RequestMapping("/fm")
 @Controller
@@ -28,6 +30,9 @@ public class FmPageController {
 
 	@Autowired
 	private EmployeeInfoService employeeInfoService;
+	
+	@Autowired
+	private SaleService saleService;
 	
 	@Autowired
 	private BonusMapper bonusMapper;
@@ -73,8 +78,10 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/saleRegister")
-	public String saleRegister(Model model) {
+	public String saleRegister(Model model, SaleReadyDTO dto) {
 		model.addAttribute("productNameList", productNameService.showProductName());
+		model.addAttribute("countSale", saleService.countSale(dto));
+		//System.out.println(saleService.countSale(dto));
 		return "component/fm/saleRegister";
 	}
 	
