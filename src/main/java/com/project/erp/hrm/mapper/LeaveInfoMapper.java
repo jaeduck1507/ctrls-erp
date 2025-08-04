@@ -17,10 +17,10 @@ public interface LeaveInfoMapper {
 	List<LeaveInfo> leaveStatus();
 	// 휴가 상태 변경(대기-> 승인 or 반려)
 	void leaveStatusUpdate(LeaveInfo leaveinfo);
-	// 누적 휴가 일수 조회
+	// 누적 휴가 일수 중 사원 정보 조회
 	List<LeaveInfo> leaveDays(LeaveInfo leaveInfo);
-	
-	List<LeaveInfo> leaveTotalDays(int empNo);
+	// 누적 휴가 일수
+	List<LeaveInfo> leaveTotalDays(LeaveInfo leaveInfo);
 	// 휴가 수정을 위한 조회
 	List<LeaveInfo> leaveInfoView(LeaveInfo li);
 	// 휴가 수정

@@ -34,8 +34,8 @@ public class LeaveInfoService {
 		
 	}
 	
-	public List<LeaveInfo> leaveTotalDays(int empNo) {
-		return leaveInfoMapper.leaveTotalDays(empNo);
+	public List<LeaveInfo> leaveTotalDays(LeaveInfo leaveInfo) {
+		return leaveInfoMapper.leaveTotalDays(leaveInfo);
 		
 	}
 	
