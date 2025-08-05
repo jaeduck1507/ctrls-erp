@@ -21,8 +21,8 @@ public class BudgetService implements BudgetMapper {
 	}
 
 	@Override
-	public void registerBudget(List<Budget> bList) {
-		mapper.registerBudget(bList);
+	public void budgetRegister(List<Budget> bList) {
+		mapper.budgetRegister(bList);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class BudgetService implements BudgetMapper {
 	}
 	
 	@Override
-	public void updateBudget(Budget budget) {
-		mapper.updateBudget(budget);		
+	public void budgetUpdate(Budget budget) {
+		mapper.budgetUpdate(budget);		
 	}
 	
 }

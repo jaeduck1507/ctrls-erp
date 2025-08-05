@@ -37,9 +37,9 @@ public class SVSController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/countSale")
-	public List<SaleReadyDTO> countSale(SaleReadyDTO dto) {
-		return saleService.countSale(dto);
+	@PostMapping("/dailySale")
+	public List<SaleReadyDTO> dailySale(SaleReadyDTO dto) {
+		return saleService.dailySale(dto);
 	}
 		
 }

@@ -41,8 +41,8 @@ public class SaleService {
 		saleMapper.registerSaleDate(saleNo, saleDate);
 	}
 	
-	public List<SaleReadyDTO> countSale(SaleReadyDTO dto) {
-		return saleMapper.countSale(dto);
+	public List<SaleReadyDTO> dailySale(SaleReadyDTO dto) {
+		return saleMapper.dailySale(dto);
 	}
 	
 }

@@ -28,7 +28,7 @@
 			
 			$.ajax({
 				type: "post",
-				url: "/countSale",
+				url: "/dailySale",
 				data: formData,
 				processData: false,
 				contentType: false,

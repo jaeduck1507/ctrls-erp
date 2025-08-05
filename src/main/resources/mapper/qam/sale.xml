@@ -71,12 +71,12 @@
 		WHERE sale_no = #{saleNo}
 	</update>
 
-	<select id="countSale" parameterType="SaleReadyDTO" resultMap="saleMap">
+	<select id="dailySale" parameterType="SaleReadyDTO" resultMap="saleMap">
 		SELECT product_name, product_code, product_price, sale_date, count(*) AS quantity FROM sale
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
 		WHERE sale_date = #{saleDate}
-		GROUP BY product_name, product_name, product_code, product_price, sale_date
+		GROUP BY product_name, product_code, product_price, sale_date
 	</select>
 	
 </mapper>

@@ -61,7 +61,7 @@
 			
 			deptInfo.deptNo = opt.data('dept_no');
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
-			$(e.target).parent().parent().find("td").eq(2).html('<select id="periodType"><option value="period" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
+			$(e.target).parent().parent().find("td").eq(2).html('<select id="periodType"><option value="" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
 			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" name="budget-amount">');
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date">');
@@ -85,7 +85,7 @@
 			
 			$.ajax({
 				type : "post",
-				url: "/registerBudget",
+				url: "/budgetRegister",
 				dataType : "json",
 				data : JSON.stringify(bList),
 				processData: false,
