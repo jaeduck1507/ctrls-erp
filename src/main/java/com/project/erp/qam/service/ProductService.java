@@ -2,6 +2,7 @@ package com.project.erp.qam.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.qam.mapper.ProductMapper;
@@ -25,8 +26,10 @@ public class ProductService {
 
     // 단일 제품 상세 조회
     // → 수정 페이지 진입 시 해당 제품 정보 불러오기
-    public ProductDetailDTO findProductDetailById(int productNo) {
-        return productMapper.findProductDetailById(productNo);
+    public String findProductDetailById(int productNo, Model model) {
+    	ProductDetailDTO product = productMapper.findProductDetailById(productNo);
+	    model.addAttribute("product", product);
+    	return "component/qam/productDetailFormUpdate"; // JSP 경로 반환
     }
 
     // 제품 정보 수정

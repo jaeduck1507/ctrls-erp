@@ -15,12 +15,30 @@
 <a href="/qam/qcForm"><button>신규 검사 등록</button></a>
 <br/><br/>
 
-<div id = "search">
-		<select id = "productName">
-				<option value="a">제품 선택</option>
+<form id = "searchForm">
+		제품 조회: <select id ="productName">
+				<option value="">제품 선택</option>
 		</select>
-		<button id = "btn">검색</button>
-	</div>
+		카테고리 조회: <select id="productCategory">
+		    <option value="">카테고리 선택</option>
+		    <option value="상의">상의</option>
+		    <option value="하의">하의</option>
+		    <option value="악세사리">악세사리</option>
+		    <option value="신발">신발</option>
+		</select>
+		검사자 사번: <select id="empNo">
+		        <option value="">사번 선택</option>
+		        <c:forEach var="e" items="${empList}">
+		            <option value="${e.empNo}">
+		                [${e.empNo}] ${e.empName}
+		            </option>
+		        </c:forEach>
+		    </select>
+		<br>
+		생산일 조회 (시작일): <input type="date" id="startDate">
+		(종료일): <input type="date" id="endDate">
+		<button type="submit">검색</button> <!-- button type 지정 안할 시 default => submit -->
+</form>
 
 <!-- 테이블 -->
 <table border="1" id="qcResult">
@@ -100,27 +118,28 @@ $(document).ready(function() {
 		}
     });
 	
-	$("#btn").on("click", function (e) {
+	$("#searchForm").submit(function (e) {
 	     e.preventDefault();
+		 console.log("작동 확인용");
 
-	     const name = $("#productName").val();
-	     if (name === "a") {
-	       alert("제품을 선택하세요.");
-	       return;
-	     }
-	$.ajax({
+		$.ajax({
 		 type: "get",
-		 url: "/qam/showQc",           // 서버에서 productName을 받아 필터링하도록 구현
-		 data: { productName: name },  // 작동 실패.. 뭐가 문제일까
-//		 dataType: "json",
+		 url: "/qam/searchQc", // 서버에서 /qam/searchQc JSON을 받아 필터링하도록 구현
+		 data: { 
+			productName: $("#productName").val(),
+			productCategory: $("#productCategory").val(),
+			empNo: $("#empNo").val(),
+			startDate: $("#startDate").val(),
+			endDate: $("#endDate").val()
+		},  
 		 success: function (result) { 
 			displayQc(result); 
 		},
 		 error: function (xhr, status, err) {
 		         }
-		       });
-		     });
-		   });
+		    });
+		});
+	});
 	</script>
 
 

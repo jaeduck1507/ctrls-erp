@@ -13,25 +13,25 @@
 
 <table border="1" id="saleResult">
     <tr>
+		<th>판매코드</th>
         <th>제품번호</th>
         <th>제품코드</th>
         <th>가격</th>
-		<th>판매코드</th>
 		<th>판매날짜</th>
 	</tr>
 </table>
 		
 <script>
 	function displaySale(data) {
-		let tableHead = "<tr><th>제품번호</th><th>제품코드</th><th>가격</th><th>판매코드</th><th>판매날짜</th></tr>"
+		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>가격</th><th>판매날짜</th></tr>"
 		$("#saleResult").html(tableHead);
 		
 		for (let s of data) {
 				let row = "<tr>";
+				row += "<td>" + s.saleNo + "</td>";
 				row += "<td>" + s.productNo + "</td>";
 				row += "<td>" + s.productCode + "</td>";
 				row += "<td>" + s.productPrice + "</td>";
-				row += "<td>" + s.saleNo + "</td>";
 				row += "<td>" + s.saleDate + "</td>";
 
 				row += "</tr>"

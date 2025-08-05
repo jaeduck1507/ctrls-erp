@@ -44,9 +44,11 @@ public class PIMController {
 	// → 수정할 productNo를 받아 해당 DTO를 model에 담아 JSP로 전달
 	@GetMapping("/productDetailFormUpdate")
 	public String showUpdateForm(int productNo, Model model) {
-	    ProductDetailDTO product = productService.findProductDetailById(productNo);
-	    model.addAttribute("product", product);
-	    return "component/qam/productDetailFormUpdate"; // JSP 경로 반환
+//	    ProductDetailDTO product = productService.findProductDetailById(productNo);
+//	    model.addAttribute("product", product); // Service로 비즈니스 로직 옮김
+	    return productService.findProductDetailById(productNo, model);
+	    // productService.findProductDetailById(productNo, model);
+	    // return "/qam/product etc." 같이 해도 되는지 알아보기 
 	}
 
 	// 제품 수정 처리

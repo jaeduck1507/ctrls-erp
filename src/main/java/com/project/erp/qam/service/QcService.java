@@ -31,6 +31,12 @@ public class QcService {
 	public List<QcResultDTO> showQc() {
 		return qcMapper.showQc();
 	}
+	
+    // 제품명/카테고리 조회 
+	public List<QcResultDTO> searchQc(QcResultDTO dto) {
+		return qcMapper.searchQc(dto);
+	}
+	
     
     // 품질검사 수정
     public void updateQc(Qc qc) {

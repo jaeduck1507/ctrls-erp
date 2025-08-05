@@ -18,12 +18,17 @@ public interface QcMapper {
 
     // 제품번호로 QC 결과 조회 (join 포함)
     QcResultDTO findByProductNo(int productNo);
+    
+    // 제품명으로 결과 조회
+    List<QcResultDTO> searchQc(QcResultDTO dto);
 
     // QC 안된 제품만 조회
     List<QcResultDTO> findQcTargetProducts(); 
     
     // 품질검사 등록
     void registerQc(Qc qc);
+    
+    
 
 }
 

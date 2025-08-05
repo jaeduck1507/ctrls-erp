@@ -4,19 +4,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>판매 전 제품 조회</title>
+    <title>판매대기 제품 리스트</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
-<h2>판매 전 제품 조회</h2>
+<h2>판매대기 제품 리스트</h2>
 
 <table border="1" id="saleReady">
     <tr>
-        <th>제품번호</th>
-        <th>제품코드</th>
-        <th>가격</th>
 		<th>판매코드</th>
+		<th>제품번호</th>
+		<th>제품코드</th>
+        <th>가격</th>
 		<th>판매날짜</th>
 		<th>날짜입력</th>
 	</tr>
@@ -25,15 +25,15 @@
 		
 <script>
 	function displaySale(data) {
-		let tableHead = "<tr><th>제품번호</th><th>제품코드</th><th>가격</th><th>판매코드</th><th>판매날짜</th><th>날짜입력</th></tr>"
+		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>가격</th><th>판매날짜</th><th>날짜입력</th></tr>"
 		$("#saleReady").html(tableHead);
 		
 		for (let s of data) {
 				let row = "<tr>";
+				row += "<td>" + s.saleNo + "</td>";
 				row += "<td>" + s.productNo + "</td>";
 				row += "<td>" + s.productCode + "</td>";
 				row += "<td>" + s.productPrice + "</td>";
-				row += "<td>" + s.saleNo + "</td>";
 				row += "<td>" + s.saleDate + "</td>";
 				row += "<td><input type='date' class='sellDate'></td>";
 				row += "</tr>"
@@ -58,13 +58,13 @@
 			for (let i = 1; i < table.length; i++) {
 				let row = table.eq(i);
 
-				let saleNo = row.find("td").eq(3).text();
-				let saleDate = row.find("td").eq(5).find("input").val(); // 
+				let saleNos = row.find("td").eq(0).text();
+				let saleDates = row.find("td").eq(5).find("input").val(); 
 
-				if (saleDate) {
+				if (saleDates) {
 					sellList.push({
-						saleNo: saleNo,
-						saleDate: saleDate
+						saleNo: saleNos,
+						saleDate: saleDates // sellList [] 안에 saleNo, saleDate 삽입, s를 끝에 붙임으로 어느게 어느건지 가시화
 					});
 				}
 			}

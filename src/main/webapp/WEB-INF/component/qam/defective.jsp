@@ -11,29 +11,52 @@
 <body>
 <h2>불량품 조회</h2>
 
+<form id="searchForm">
+	<!-- 추후 검색 조건 추가 가능 -->
+</form>
+
 <table border="1" id="defectiveResult">
     <tr>
-        <th>불량번호</th>
+        <th>불량코드</th>
         <th>제품번호</th>
-        <th>불량사유</th>
-		<th>수정</th>
+        <th>제품코드</th>
+		<th>제품명</th>
+		<th>제품가격</th>
+		<th>불량사유</th>
 	</tr>
 </table>
-		
+	
+
+<div id="priceSum">
+	<!-- 총 가격 출력 영역 -->
+</div>
+
 <script>
 	function displayDefective(data) {
-		let tableHead = "<tr><th>불량번호</th><th>제품번호</th><th>불량사유</th><th>수정</th></tr>"
+		let tableHead = "<tr><th>불량코드</th><th>제품번호</th><th>제품코드</th><th>제품명</th><th>제품가격</th><th>불량사유</th></tr>"
 		$("#defectiveResult").html(tableHead);
 		
-		for (let d of data) {
+		// 가격 총합 변수 (int)
+		var total = 0;
+
+		for (var i = 0; i < data.length; i++) {
+					var d = data[i];
+					total += d.productPrice;
+
 				let row = "<tr>";
 				row += "<td>" + d.defectiveNo + "</td>";
 				row += "<td>" + d.productNo + "</td>";
+				row += "<td>" + d.productCode + "</td>";
+				row += "<td>" + d.productName + "</td>";
+				row += "<td>" + d.productPrice + "</td>";
 				row += "<td>" + d.reason + "</td>";
-				row += "<td><a href='/qam/defectiveUpdate?defectiveNo=" + d.defectiveNo + "'>수정</a></td>";
+//				row += "<td><a href='/qam/defectiveUpdate?defectiveNo=" + d.defectiveNo + "'>수정</a></td>";
 				row += "</tr>"
 				$("#defectiveResult").append(row);
 				}
+				
+				document.getElementById("priceSum").innerText = "손실액 총합: " + total + "원";
+				
 			}
 	$(document).ready(function() {
 		$.ajax({
@@ -43,6 +66,9 @@
 					displayDefective(result);
 				}
 			});
+			
+		
+			
 		});
 	
 </script>

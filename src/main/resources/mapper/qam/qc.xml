@@ -59,6 +59,45 @@
         WHERE p.product_no = #{productNo}
     </select>
 
+	<select id="searchQc" resultMap="QcResultMap">
+	    SELECT
+	        p.product_no,
+	        p.production_date,
+	        pn.product_code,
+	        pn.product_color,
+	        pn.product_name,
+	        pn.product_price,
+	        pn.product_cost,
+	        pn.product_category,
+	        q.qc_code,
+	        q.check_material,
+	        q.check_color,
+	        q.check_damage,
+	        q.qc_desc,
+	        q.qc_date,
+	        q.emp_no
+	    FROM product p
+	    JOIN product_name pn ON p.product_code = pn.product_code
+	    LEFT JOIN qc q ON p.product_no = q.product_no
+	    <where>
+        	<!-- 제품명 일치 검색 -->	
+        	<if test="productName != null and productName != ''">
+        		pn.product_name = #{productName}
+        	</if>
+			<!-- 카테고리 일치 검색 -->
+        	<if test="productCategory != null and productCategory != ''">
+        		AND pn.product_category = #{productCategory}
+        	</if>
+        	<if test="empNo != null and empNo != ''">
+        		AND q.emp_no = #{empNo}
+        	</if>
+        	<if test="startDate != null and endDate != null">
+				AND p.production_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+        </where>
+	    ORDER BY p.production_date DESC
+	</select>
+
     <!-- 전체 QC + 판매 + 불량 조회 -->
 	<select id="showQc" resultMap="QcResultMap">
 	    SELECT

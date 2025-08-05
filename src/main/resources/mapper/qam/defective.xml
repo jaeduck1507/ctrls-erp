@@ -3,10 +3,22 @@
 
 <mapper namespace="com.project.erp.qam.mapper.DefectiveMapper">
 
-<resultMap id="defectiveMap" type="Defective">
+<!--<resultMap id="defectiveMap" type="Defective">-->
+<!--	<result column="defective_no" property="defectiveNo"/>-->
+<!--	<result column="product_no" property="productNo"/>-->
+<!--	<result column="reason" property="reason"/>-->
+<!--</resultMap>-->
+
+<resultMap id="defectiveMap" type="DefectiveDTO">
 	<result column="defective_no" property="defectiveNo"/>
 	<result column="product_no" property="productNo"/>
 	<result column="reason" property="reason"/>
+	
+	<result column="product_code" property="productCode"/>
+	<result column="product_price" property="productPrice"/>
+	
+	<result column="product_name" property="productName"/>
+	<result column="quantity" property="quantity"/>
 </resultMap>
 
     <insert id="insertDefective" parameterType="Defective">
@@ -20,10 +32,15 @@
 
 	<select id="showDefective" resultMap="defectiveMap">
 	SELECT 
-		defective_no,
-		product_no,
-		reason
-	FROM defective
+		d.defective_no,
+		p.product_no,
+		pn.product_code,
+		pn.product_name,
+		pn.product_price,
+		d.reason
+	FROM defective d
+	JOIN product p ON d.product_no = p.product_no
+	JOIN product_name pn ON p.product_code = pn.product_code
 	</select> 
 
 </mapper>

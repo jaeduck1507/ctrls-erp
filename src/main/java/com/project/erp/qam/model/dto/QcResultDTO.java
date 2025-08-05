@@ -28,6 +28,9 @@ public class QcResultDTO {
     private Date qcDate;
     private int empNo;
     
+	private LocalDate startDate;
+	private LocalDate endDate;
+    
     // defective
    private int defectiveNo;
    private String reason;

@@ -40,6 +40,13 @@ public class QIPController {
     	return qcService.showQc();
     }
     
+    @ResponseBody
+    @GetMapping("/searchQc")
+    public List<QcResultDTO> searchQc(
+    		QcResultDTO dto) {
+    	return qcService.searchQc(dto);
+    }
+    
     // QC 수정 폼 진입
     @GetMapping("/qcFormUpdate")
     public String showUpdateForm(int productNo, Model model) {

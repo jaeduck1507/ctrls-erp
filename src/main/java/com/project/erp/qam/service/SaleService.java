@@ -28,17 +28,14 @@ public class SaleService {
 		return saleMapper.showSaleDone();
 	}
 	
-//	public void registerSaleDate(List<SaleReadyDTO> sellList) {
-//		for (SaleReadyDTO dto : sellList)
-//			saleMapper.registerSaleDate(dto);
-//	}
-	
 	public SaleReadyDTO findBySaleNo(int saleNo) {
 		return saleMapper.findBySaleNo(saleNo);
 	}
 
-	public void registerSaleDate(int saleNo, LocalDate saleDate) {
-		saleMapper.registerSaleDate(saleNo, saleDate);
+	public void registerSaleDate(List<SaleReadyDTO> sellList) {
+		for (SaleReadyDTO dto : sellList) {
+    		saleMapper.registerSaleDate(dto.getSaleNo(), dto.getSaleDate());
+    	}
 	}
 	
 	public List<SaleReadyDTO> countSale(SaleReadyDTO dto) {

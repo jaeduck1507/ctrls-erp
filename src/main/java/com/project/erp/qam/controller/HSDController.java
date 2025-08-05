@@ -1,8 +1,6 @@
 // 불량품 처리 및 사후 조치(HD)
-
 package com.project.erp.qam.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.qam.model.dto.SaleReadyDTO;
@@ -44,9 +41,7 @@ public class HSDController {
     
     @PostMapping("/registerSaleDate")
     public String registerSaleDate(@RequestBody List<SaleReadyDTO> sellList) {
-    	for (SaleReadyDTO dto : sellList) {
-    		saleService.registerSaleDate(dto.getSaleNo(), dto.getSaleDate());
-    	}
+    	saleService.registerSaleDate(sellList);
 		return "redirect:/qam/saleReady";
     }
     
