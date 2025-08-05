@@ -29,15 +29,15 @@
 				<c:forEach items="${leaveInfoList}" var="item">
 				<tr>
 				    <td>${item.leaveId}<input type="hidden" name="leaveId" value="${item.leaveId}"></td>
-					<td>${item.requestDate}<input type="hidden" name="leaveId" value="${item.requestDate}"></td>
-					<td>${item.leaveType}</td>
+					<td>${item.requestDate}<input type="hidden" name="requestDate" value="${item.requestDate}"></td>
+					<!--휴가 신청 시 유형이 고정되도록, 하지만 다시 선택할 수 있도록 ${item.leaveType eq '연차' ? 'selected' : ''} 추가-->
+					<td><select name="leaveType"><option disabled selected>유형선택</option><option value="연차" ${item.leaveType eq '연차' ? 'selected' : ''}>연차</option><option value="병가" ${item.leaveType eq '병가' ? 'selected' : ''}>병가</option><option value="경조사" ${item.leaveType eq '경조사' ? 'selected' : ''}>경조사</option><option value="기타" ${item.leaveType eq '기타' ? 'selected' : ''}>기타</option></select></td>
 					<td><input type="date" name="startDate" value="${item.startDate}"></td>
 					<td><input type="date" name="endDate" value="${item.endDate}"></td>
 					<td><input type="title" name="reason" value="${item.reason}"></td>
 					<td>${item.empNo}<input type="hidden" name="leaveId" value="${item.empNo}"></td>
 					<td>${item.empName}<input type="hidden" name="leaveId" value="${item.empName}"></td>
 					<td>${item.status}<input type="hidden" name="leaveId" value="${item.status}"></td>
-					
 				</tr>
 				</c:forEach>
 		</table>
