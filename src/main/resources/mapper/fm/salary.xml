@@ -13,6 +13,21 @@
 		<result property="payment" column="payment"/>
 	</resultMap>
 	
+	<resultMap id="SalaryDTOtMap" type="SalaryDTO">
+		<id property="salaryNo" column="salary_no"/>
+		<result property="salaryDate" column="salary_date"/>
+		<result property="baseSalary" column="base_salary"/>
+		<result property="bonus" column="bonus"/>
+		<result property="deduction" column="deduction"/>
+		<result property="tax" column="tax"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="bonusPaymentNo" column="bonus_payment_no"/>
+		<result property="empName" column="emp_name"/>
+		<result property="deptName" column="dept_name"/>
+		<result property="jobTitle" column="job_title"/>
+		<result property="payment" column="payment"/>
+	</resultMap>
+	
 	<select id="showSalary" parameterType="SalEmpDTO" resultMap="SalEmpMap">
 		SELECT dept_name, emp_name, salary_date, base_salary, bonus, deduction, tax
 		FROM salary 
@@ -30,6 +45,36 @@
 				emp_name LIKE CONCAT ('%', #{empName}, '%')
 			</if>
 		</where>
+	</select>
+	
+	<select id="salaryPayment" parameterType="String" resultMap="SalaryDTOtMap">
+	SELECT emp_no, emp_name,dept_name,job_title,salary as 'base_salary',IFNULL(sum(payment),0) as 'bonus'
+	FROM salary
+	RIGHT JOIN employee_info using(emp_no)
+	LEFT JOIN bonus_payment USING(emp_no)
+	JOIN department USING(dept_no)
+	JOIN job_position USING(job_no)
+	where pay_date like CONCAT('%', #{yearMonth}, '%')
+	AND salary_no IS NULL
+	AND quit_date IS NULL
+	GROUP BY emp_no
+	</select>
+	
+	<select id="salaryPaymentNoBonus" parameterType="arrayList" resultMap="SalaryDTOtMap">
+		SELECT emp_no, emp_name,dept_name,job_title,salary as 'base_salary'FROM salary
+		RIGHT JOIN employee_info using(emp_no)
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		<where>
+			salary_no IS NULL
+			AND quit_date IS NULL
+			<if test="existList.size != 0">
+				<foreach collection="existList" item = "emp">
+					AND emp_no != #{emp.empNo}
+				</foreach>
+			</if>
+		</where>
+	
 	</select>
 	
 </mapper>
