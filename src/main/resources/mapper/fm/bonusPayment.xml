@@ -44,7 +44,7 @@
 			AND dept_no = #{deptNo}
 		</if>
 		<if test='date != null'>
-			pay_date LIKE CONCAT('%', #{date}, '%')
+			AND pay_date LIKE CONCAT('%', #{date}, '%')
 		</if>
 		</where>
 		

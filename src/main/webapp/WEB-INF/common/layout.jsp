@@ -36,6 +36,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="/fm/purchaseRegister">매입 일괄 등록 /fm/purchaseRegister</a><br />
     <a href="/fm/transaction">거래내역 조회 /fm/transaction</a><br />
 	<a href="/fm/salary">급여 조회 /fm/salary</a><br />
+	<a href="/fm/salaryPayment">급여 등록 /fm/salaryPayment</a><br />
 	<a href="/fm/budgetRegister">예산 등록 /fm/budgetRegister</a><br />
 	<a href="/fm/saleRegister">매출 등록 /fm/saleRegister</a><br />
 	<a href="/fm/transRegister">거래내역 입력 /fm/transRegister</a><br />

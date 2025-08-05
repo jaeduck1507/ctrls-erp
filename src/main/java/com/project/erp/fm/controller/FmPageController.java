@@ -114,4 +114,11 @@ public class FmPageController {
 		return "component/fm/showBonusPayment";
 	}
 	
+	@GetMapping("/salaryPayment")
+	public String salaryPayment(Model model) {
+		model.addAttribute("department", departmentService.showDept());
+		model.addAttribute("jobPosition", jobPositionService.showJob());
+		return "component/fm/salaryPayment";
+	}
+	
 }
