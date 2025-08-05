@@ -56,12 +56,12 @@ public class LMController {
 		return leaveInfoService.leaveTotalDays(leaveInfo);
 	}
 	
-	@ResponseBody
 	@PostMapping("/leaveUpdate")
 	public String leaveUpdate(LeaveInfo li) {
 //		System.out.println(li);
+		// "component/hrm/leaveView?leaveId="+ li.getLeaveId()
 		leaveInfoService.leaveUpdate(li);
-		return "component/hrm/leaveView?leaveId="+ li.getLeaveId();
+		return "component/hrm/leaveInfo";
 	}
 	
 

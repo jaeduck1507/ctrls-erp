@@ -34,6 +34,7 @@
 			const formData = new FormData();
 			formData.append("empNo", $('#empNo').val());
 			formData.append("status", $('#status').val());
+			
 			$.ajax({
 				// 요청
 				type : "post",
@@ -56,7 +57,7 @@
 								   + "</td><td>" + leaveInfo.empName 
 								   + "</td><td>" + leaveInfo.deptName
 								   + "</td><td>" + leaveInfo.jobTitle 
-									+ "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "'>수정</a><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"'>삭제</a></td></tr>"
+								   + "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "'>수정</a><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"'>삭제</a></td></tr>"
 					$("#result").append(text);
 					}
 				},

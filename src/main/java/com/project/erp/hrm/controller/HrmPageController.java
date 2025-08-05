@@ -117,6 +117,12 @@ public class HrmPageController {
 		leaveInfoService.leaveDelete(leaveId);
 		return "component/hrm/leaveInfo";
 	}
+	
+	@GetMapping("/leaveUpdate")
+	public String leaveUpdate(LeaveInfo li) {
+		leaveInfoService.leaveUpdate(li);
+		return "component/hrm/leaveView?leaveId="+ li.getLeaveId();
+	}
 
 }
 
