@@ -84,7 +84,7 @@ public class FmPageController {
 	@GetMapping("/saleRegister")
 	public String saleRegister(Model model, SaleReadyDTO dto) {
 		model.addAttribute("productNameList", productNameService.showProductName());
-		model.addAttribute("countSale", saleService.countSale(dto));
+		model.addAttribute("countSale", saleService.dailySale(dto));
 		//System.out.println(saleService.countSale(dto));
 		return "component/fm/saleRegister";
 	}

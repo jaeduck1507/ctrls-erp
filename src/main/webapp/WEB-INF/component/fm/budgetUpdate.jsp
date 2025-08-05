@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>예산 수정</h1>
-	<form action="/updateBudget" method="post">
+	<form action="/budgetUpdate" method="post">
 		예산 번호 : <input type="text" name="budgetNo" value="${budgetInfo.budgetNo}" readonly="readonly"><br>
 		부서명 : <input type="text" name="deptName" value="${budgetInfo.deptName}" readonly="readonly"/><br>
 		연/분기/월 : <input type="text" name="periodType" value="${budgetInfo.periodType}"/><br>

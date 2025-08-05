@@ -27,14 +27,14 @@ public class SVBController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/registerBudget")
-	public void registerBudget(@RequestBody List<Budget> bList) {
-		budgetService.registerBudget(bList);
+	@PostMapping("/budgetRegister")
+	public void budgetRegister(@RequestBody List<Budget> bList) {
+		budgetService.budgetRegister(bList);
 	}
 	
-	@PostMapping("/updateBudget")
-	public String updateBudget(Budget budget) {
-		budgetService.updateBudget(budget);
+	@PostMapping("/budgetUpdate")
+	public String budgetUpdate(Budget budget) {
+		budgetService.budgetUpdate(budget);
 		return "redirect:/fm/budget";
 	}
 	

@@ -38,8 +38,8 @@ public class SaleService {
     	}
 	}
 	
-	public List<SaleReadyDTO> countSale(SaleReadyDTO dto) {
-		return saleMapper.countSale(dto);
+	public List<SaleReadyDTO> dailySale(SaleReadyDTO dto) {
+		return saleMapper.dailySale(dto);
 	}
 	
 }

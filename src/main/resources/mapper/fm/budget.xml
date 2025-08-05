@@ -21,7 +21,7 @@
 		</where>
 	</select>
 	
-	<insert id="registerBudget" parameterType="ArrayList">
+	<insert id="budgetRegister" parameterType="ArrayList">
 		INSERT INTO budget(period_type, annual_budget, plan, execution_date, dept_no) VALUES
 		<foreach collection="bList" item="budget" separator=",">
 		(#{budget.periodType},#{budget.annualBudget},#{budget.plan},#{budget.executionDate},#{budget.deptNo})
@@ -38,7 +38,7 @@
 		WHERE budget_no = #{budgetNo}
 	</select>
 	
-	<update id="updateBudget" parameterType="Budget">
+	<update id="budgetUpdate" parameterType="Budget">
 		UPDATE budget
 		<set>
 			period_type = #{periodType},
