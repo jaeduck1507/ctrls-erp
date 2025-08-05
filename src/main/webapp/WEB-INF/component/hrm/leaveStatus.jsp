@@ -58,6 +58,7 @@
 					const formData = new FormData();
 					formData.append("status", "승인");
 					formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
+					location.reload(); // 승인 버튼 누르면 자동 새로고침
 					$.ajax({
 						// 요청
 						type : "post",
@@ -79,6 +80,7 @@
 									const formData = new FormData();
 									formData.append("status", "반려");
 									formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
+									location.reload(); // 반려 버튼 누르면 자동 새로고침
 									$.ajax({
 										// 요청
 										type : "post",
