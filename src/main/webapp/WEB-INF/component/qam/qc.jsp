@@ -128,7 +128,7 @@ $(document).ready(function() {
 		 data: { 
 			productName: $("#productName").val(),
 			productCategory: $("#productCategory").val(),
-			empNo: $("#empNo").val(),
+//			empNo: $("#empNo").val(),
 			startDate: $("#startDate").val(),
 			endDate: $("#endDate").val()
 		},  
