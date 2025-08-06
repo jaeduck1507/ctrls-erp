@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.fm.model.dto.SalEmpDTO;
+import com.project.erp.fm.model.dto.SalaryAlreadyAddDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
 import com.project.erp.fm.model.vo.Salary;
 
@@ -12,8 +13,10 @@ import com.project.erp.fm.model.vo.Salary;
 public interface SalaryMapper {
 
 	List<SalEmpDTO> showSalary(SalEmpDTO se);
-	List<SalaryDTO> salaryPayment(String yearMonth);
+	List<SalaryDTO> salaryPayment(SalaryAlreadyAddDTO saaDto);
 	List<SalaryDTO> salaryPaymentNoBonus(List<SalaryDTO> existList);
 	void addSalaryPayment(List<Salary> spList);
+	List<SalaryDTO> showSalaryAlreadyAdd(SalaryAlreadyAddDTO saaDto);
+	
 	
 }

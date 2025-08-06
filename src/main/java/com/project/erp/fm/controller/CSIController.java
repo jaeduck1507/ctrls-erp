@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.fm.model.dto.BonusPaymentDTO;
 import com.project.erp.fm.model.dto.SalEmpDTO;
+import com.project.erp.fm.model.dto.SalaryAlreadyAddDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
 import com.project.erp.fm.model.vo.BonusPayment;
 import com.project.erp.fm.model.vo.Salary;
@@ -47,9 +48,9 @@ public class CSIController {
 	
 	@ResponseBody
 	@PostMapping("/salaryPayment")
-	public List<SalaryDTO> salaryPayment(String yearMonth) {
-		System.out.println(salaryService.salaryPayment(yearMonth));
-		return salaryService.salaryPayment(yearMonth);
+	public List<SalaryDTO> salaryPayment(SalaryAlreadyAddDTO saaDto) {
+		
+		return salaryService.salaryPayment(saaDto);
 	}
 	
 	@ResponseBody
