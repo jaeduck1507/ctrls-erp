@@ -90,7 +90,7 @@
 		GROUP BY product_name, product_code, product_price, sale_date
 	</select>
 
-	<select id="searchSaleDone" resultType="SaleReadyDTO"> 
+	<select id="searchSaleDone" resultMap="saleMap"> 
 		SELECT 
 		s.sale_no,
 		p.product_no,
@@ -105,7 +105,11 @@
 		WHERE s.sale_date IS NOT NULL 
 		<if test="productCategory != null and productCategory != ''">
 			AND pn.product_category = #{productCategory}
+		</if> 
+		<if test="startDate != null and endDate != null">
+			AND s.sale_date BETWEEN #{startDate} AND #{endDate}
 		</if>
+		ORDER BY s.sale_date DESC
 	</select>
 
 

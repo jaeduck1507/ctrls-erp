@@ -24,6 +24,10 @@
 	    <option value="악세사리">악세사리</option>
 	    <option value="신발">신발</option>
 	</select>
+	<br>
+	판매일 조회 (시작일): <input type="date" id="startDate">
+	(종료일): <input type="date" id="endDate"> 
+	
 	<button type="button" id="searchBtn">조회</button>
 	<button type="button" id="resetBtn">전체보기</button>
 </form>
@@ -43,10 +47,9 @@
 <script>
 	function displaySale(data) {
 		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>"
-		$("#saleResult").html(tableHead);
+		$("#saleResult").html(tableHead); // tableHead (첫 헤더 줄) 작성용
 		
-		// 가격 총합 변수 (int)
-		var total = 0;
+		var total = 0; // 가격 총합 변수 (int)
 
 		for (var i = 0; i < data.length; i++) {
 					var s = data[i];
@@ -65,6 +68,7 @@
 				}
 				document.getElementById("salePriceSum").innerText = "매출 총합: " + total.toLocaleString() + "원";
 			}
+			
 	$(document).ready(function() {
 		
 		$.ajax({
@@ -83,6 +87,8 @@
 				url: "/qam/searchSaleDone", 
 				data: {
 					productCategory: $("#productCategory").val(),
+					startDate: $("#startDate").val(),
+					endDate: $("#endDate").val()
 				},
 				success: function (result) {
 					displaySale(result);
@@ -93,6 +99,8 @@
 		// 전체보기 버튼 이벤트
 		$("#resetBtn").click(function () {
 			$("#productCategory").val("");
+			$("#startDate").val("");
+			$("#endDate").val("");
 
 			$.ajax({
 				type: "get",

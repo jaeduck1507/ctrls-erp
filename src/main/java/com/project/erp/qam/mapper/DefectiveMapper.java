@@ -2,6 +2,7 @@ package com.project.erp.qam.mapper;
 
 import java.util.List;
 
+import com.project.erp.qam.model.dto.DefectiveDTO;
 import com.project.erp.qam.model.vo.Defective;
 
 public interface DefectiveMapper {
@@ -10,5 +11,7 @@ public interface DefectiveMapper {
 
 	void deleteByProductNo(int productNo);
 
-	List<Defective> showDefective();
+	List<DefectiveDTO> showDefective();
+
+	List<DefectiveDTO> searchDefective(DefectiveDTO dto);
 }

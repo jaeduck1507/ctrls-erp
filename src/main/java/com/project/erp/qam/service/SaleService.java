@@ -42,8 +42,8 @@ public class SaleService {
 		return saleMapper.dailySale(dto);
 	}
 	
-	public List<SaleReadyDTO> searchSaleDone(String productCategory) {
-	    return saleMapper.searchSaleDone(productCategory);
+	public List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto) {
+	    return saleMapper.searchSaleDone(dto);
 	}
 	
 }

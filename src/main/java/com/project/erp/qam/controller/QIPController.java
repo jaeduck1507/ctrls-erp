@@ -49,8 +49,7 @@ public class QIPController {
     
     @ResponseBody
     @GetMapping("/searchQc")
-    public List<QcResultDTO> searchQc(
-    		QcResultDTO dto) {
+    public List<QcResultDTO> searchQc(QcResultDTO dto) {
     	return qcService.searchQc(dto);
     }
     

@@ -29,6 +29,6 @@ public interface SaleMapper {
 	
 	List<SaleReadyDTO> dailySale(SaleReadyDTO dto);
 	
-	List<SaleReadyDTO> searchSaleDone(String productCategory);
+	List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto);
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.qam.model.dto.DefectiveDTO;
 import com.project.erp.qam.model.dto.SaleReadyDTO;
 import com.project.erp.qam.model.vo.Defective;
 import com.project.erp.qam.model.vo.Sale;
@@ -41,7 +42,7 @@ public class HSDController {
     }
     
     @PostMapping("/registerSaleDate")
-    public String registerSaleDate(@RequestBody List<SaleReadyDTO> sellList) {
+    public String registerSaleDate(@RequestBody List<SaleReadyDTO> sellList) { // @RequestBody는 HTTP 요청(/qam/saleReady)의 Body에 담겨 있는 JSON 데이터를 Java 객체로 자동 변환해주는 역할
     	saleService.registerSaleDate(sellList);
 		return "redirect:/qam/saleReady";
     }
@@ -54,13 +55,19 @@ public class HSDController {
 	
 	@ResponseBody
     @GetMapping("/showDefective")
-    public List<Defective> showDefective() {
+    public List<DefectiveDTO> showDefective() {
     	return defectiveService.showDefective();
+    }
+	
+	@ResponseBody
+    @GetMapping("/searchDefective")
+    public List<DefectiveDTO> searchDefective(DefectiveDTO dto) {
+    	return defectiveService.searchDefective(dto);
     }
 	
 	@GetMapping("/searchSaleDone")
 	@ResponseBody
-	public List<SaleReadyDTO> searchSaleDone(@RequestParam(required = false) String productCategory) {
-	    return saleService.searchSaleDone(productCategory);
+	public List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto) {
+	    return saleService.searchSaleDone(dto);
 	}
 }
