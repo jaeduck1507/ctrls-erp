@@ -56,29 +56,28 @@
 				$(e.target).parent().parent().find("td").eq(8).text(total);
 			});
 		
-		$("#purchase-register").click(() => { // 제출 버튼
+		$("#submit").click(() => { // 제출 버튼
 	        const table = $("#result tr"); // 테이블 정보 획득
-	        const prList = []; // 객체를 담을 배열
+	        const spList = []; // 객체를 담을 배열
 	    	
 	        for(var i = 1; i < table.length; i++){ // i가 1부터 시작하는 이유는 첫번째 열은 th(열의 설명)부분이라 데이터가 아님
 	            const obj ={}; // 직원 하나당 하나의 객체로 생성
-	            obj.productNo=$("#result tr").eq(i).find("td").eq(1).text(); 
-	            obj.unitPrice=$("#result tr").eq(i).find("td").eq(4).text(); 
-	            obj.quantity=$("#result tr").eq(i).find("td").eq(6).find("input").val(); 
-	            obj.varAmount=$("#result tr").eq(i).find("td").eq(7).text(); 
-	            obj.totalAmount=$("#result tr").eq(i).find("td").eq(8).text(); 
-	            obj.purchaseDate=$("#result tr").eq(i).find("td").eq(9).find("input").val();  
-	            prList.push(obj); // 정보 저장한 객체를 배열에 삽입
+	            obj.empNo=$("#result tr").eq(i).find("td").eq(0).text(); 
+	            obj.salaryDate=$("#result tr").eq(i).find("td").eq(4).text(); 
+	            obj.baseSalary=$("#result tr").eq(i).find("td").eq(5).text(); 
+	            obj.bonus=$("#result tr").eq(i).find("td").eq(6).text(); 
+	            obj.deduction=$("#result tr").eq(i).find("td").eq(7).find("input").val(); 
+	            spList.push(obj); // 정보 저장한 객체를 배열에 삽입
 	        }
-	        console.log(JSON.stringify(prList));
+	        console.log(JSON.stringify(spList));
 	        
-	        /*
+	        
 	        $.ajax({
 	            // 요청
 	            type : "post",
-	            url : "/purchaseRegister",
+	            url : "/addSalaryPayment",
 	            dataType : "json", // dataType 지정해줘야 자바에서 인식하는 듯?
-	            data : JSON.stringify(prList), // json문자열로 변환해서 전송
+	            data : JSON.stringify(spList), // json문자열로 변환해서 전송
 				processData: false,
 				contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	            // 응답
@@ -89,7 +88,7 @@
 				error:function(xhr,status,error) {
 					
 				} 
-	        });*/
+	        });
 	    });
 	</script>
 </body>

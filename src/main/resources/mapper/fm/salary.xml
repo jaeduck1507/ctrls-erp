@@ -77,4 +77,12 @@
 	
 	</select>
 	
+	<insert id="addSalaryPayment" parameterType="arrayList">
+		INSERT INTO salary(salary_date, base_salary, bonus, deduction,emp_no)
+		VALUES
+		<foreach collection="spList" item="emp" separator=",">
+		(#{emp.salaryDate},#{emp.baseSalary},#{emp.bonus},#{emp.deduction},#{emp.empNo})
+		
+		</foreach>
+	</insert>	
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.erp.fm.mapper.SalaryMapper;
 import com.project.erp.fm.model.dto.SalEmpDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
+import com.project.erp.fm.model.vo.Salary;
 
 @Service
 public class SalaryService implements SalaryMapper {
@@ -34,5 +35,11 @@ public class SalaryService implements SalaryMapper {
 	@Override
 	public List<SalaryDTO> salaryPaymentNoBonus(List<SalaryDTO> existList) {
 		return mapper.salaryPaymentNoBonus(existList);
+	}
+
+	@Override
+	public void addSalaryPayment(List<Salary> spList) {
+		mapper.addSalaryPayment(spList);
+		
 	}
 }

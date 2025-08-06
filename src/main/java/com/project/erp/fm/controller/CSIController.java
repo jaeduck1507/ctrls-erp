@@ -12,6 +12,7 @@ import com.project.erp.fm.model.dto.BonusPaymentDTO;
 import com.project.erp.fm.model.dto.SalEmpDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
 import com.project.erp.fm.model.vo.BonusPayment;
+import com.project.erp.fm.model.vo.Salary;
 import com.project.erp.fm.service.BonusPaymentService;
 import com.project.erp.fm.service.SalaryService;
 import com.project.erp.hrm.model.dto.EmpInfo;
@@ -49,6 +50,12 @@ public class CSIController {
 	public List<SalaryDTO> salaryPayment(String yearMonth) {
 		System.out.println(salaryService.salaryPayment(yearMonth));
 		return salaryService.salaryPayment(yearMonth);
+	}
+	
+	@ResponseBody
+	@PostMapping("/addSalaryPayment")
+	public void addSalaryPayment(@RequestBody List<Salary> spList) {
+		salaryService.addSalaryPayment(spList);
 	}
 	
 }

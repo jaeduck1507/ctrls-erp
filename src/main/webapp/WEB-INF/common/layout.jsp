@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,6 +50,19 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<a href="/qam/saleReady">판매 전 제품 조회 /qam/saleReady</a><br />
 	<a href="/qam/saleDone">판매 완료 제품 조회 /qam/saleDone</a><br />
 	<a href="/qam/defective">불량 제품 조회 /qam/defective</a><br />
+	
+	<!-- 로그인 및 로그아웃 버튼 위에다가 기능 작성해주세요 -->
+	<br><br><br><br>
+	<sec:authorize access="isAnonymous()">
+	<a href="/login">로그인</a><br>
+	<a href="/register">회원가입</a><br>
+	</sec:authorize>
+	
+	<sec:authorize access="isAuthenticated()">
+	<a href="/logout">로그아웃</a><br>
+	<a href="/mypage">마이페이지</a><br>
+	</sec:authorize>
+	
 	<!-- 
     <script src = "../resources/js/layout.js"></script>
     
