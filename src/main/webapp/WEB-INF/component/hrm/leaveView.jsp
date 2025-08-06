@@ -33,7 +33,7 @@
 					<!--휴가 신청 시 유형이 고정되도록, 하지만 다시 선택할 수 있도록 ${item.leaveType eq '연차' ? 'selected' : ''} 추가-->
 					<td><select name="leaveType"><option disabled selected>유형선택</option><option value="연차" ${item.leaveType eq '연차' ? 'selected' : ''}>연차</option><option value="병가" ${item.leaveType eq '병가' ? 'selected' : ''}>병가</option><option value="경조사" ${item.leaveType eq '경조사' ? 'selected' : ''}>경조사</option><option value="기타" ${item.leaveType eq '기타' ? 'selected' : ''}>기타</option></select></td>
 					<td><input type="date" name="startDate" value="${item.startDate}" class="leaveDate"></td>
-					<td><input type="date" name="endDate" value="${item.endDate}" class="leaveDate"></td>
+					<td><input type="date" name="endDate" value="${item.endDate}" class="leaveDate" id="endDate"></td>
 					<td><input type="title" name="reason" value="${item.reason}"></td>
 					<td>${item.empNo}<input type="hidden" name="leaveId" value="${item.empNo}"></td>
 					<td>${item.empName}<input type="hidden" name="leaveId" value="${item.empName}"></td>
@@ -64,6 +64,7 @@
 		   ];
 
 		   const leaveDateInputs = document.querySelectorAll('.leaveDate');
+		   const endDateInput = document.querySelector('#endDate');
 
 		   leaveDateInputs.forEach(function(input){
 		     input.setAttribute('min', tomorrowStr); // 과거 날짜 선택 제한
@@ -79,6 +80,8 @@
 		         this.value = tomorrowStr; // 날짜 초기화
 		         return;
 		       }
+			   // 휴가 종료일은 휴가 시작일부터 가능하도록 제어
+			   endDateInput.setAttribute('min', this.value);
 		     });
 		   });
 		</script>

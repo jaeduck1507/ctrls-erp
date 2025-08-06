@@ -32,7 +32,7 @@
 		function addRow() { // 열 추가 함수
 		           $("#result").append('<tr></tr>'); // 기본 열 추가
 		           for(var i = 0; i < 6; i++) { // 열에 데이터 추가  0 : 사번, 1: 신청날짜(현재날짜로 고정) 2: 휴가 유형, 5 : 사유 나머지 : 날짜 데이터 
-		               if(i == 0) $("#result tr").eq(-1).append('<td><input type="text"></td>');
+		               if(i == 0) $("#result tr").eq(-1).append('<td><input type="text" class="empNo"></td>');
 		               else if(i == 1) $("#result tr").eq(-1).append('<td><input type="date" class="currentDate" disabled></td>');
 					   else if(i == 2) $("#result tr").eq(-1).append('<td><select><option disabled selected>유형선택</option><option value="연차">연차</option><option value="병가">병가</option><option value="경조사">경조사</option><option value="기타">기타</option></select></td>');
 					   else if(i == 3) $("#result tr").eq(-1).append('<td><input type="date" id="startDate" class="leaveDate"></td>');
@@ -43,6 +43,9 @@
 		           $("#result tr").eq(-1).append('<td><button class="btn4">열 삭제</button></td>'); 
 				   // 현재 날짜로 고정 
 				   $("#result tr").eq(-1).find(".currentDate").val(new Date().toISOString().substring(0, 10));
+				   // 입력한 사번으로 고정
+				   const empNoInput = document.querySelector('.empNo');
+				   $("#result tr").eq(-1).find(".empNo").val(empNoInput.value);
 				   // 휴가시작일, 종료일 신청날짜 다음날로 고정(다음날부터 신청가능하도록)
 				   const tomorrow = new Date();
 				   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -50,7 +53,8 @@
 				   $("#result tr").eq(-1).find(".leaveDate").val(tomorrowStr);
 				   
 				   // 과거시간, 주말, 공휴일 선택 제한
-				   const holidays = [// 막을 공휴일 목록
+				   // Q. 더 간단한 방법, 그리고 앞으로의 공휴일을 계속 제한할 방법은?
+				   const holidays = [// 제한할 공휴일 목록
 				     "2025-08-15", // 광복절
 				     "2025-10-03", // 개천절
 					 "2025-10-06", // 추석
@@ -62,22 +66,31 @@
 				   ];
 
 				   const leaveDateInputs = document.querySelectorAll('.leaveDate');
-
+				   const startDateInput = document.querySelector('#startDate');
+				   const endDateInput = document.querySelector('#endDate');
 				   leaveDateInputs.forEach(function(input){
 				     input.setAttribute('min', tomorrowStr); // 과거 날짜 선택 제한
-
+					 
 				     input.addEventListener('input', function(){
 				       const selectedDate = new Date(this.value); // 사용자가 선택한 날짜
 				       const day = selectedDate.getDay(); // 사용자가 선택한 날짜 요일로 변환
-				       const isWeekend = (day === 0 || day === 6); // 0: 일, 6: 토 주말
-				       const isHoliday = holidays.includes(this.value); // 공휴일
+				       const weekend = (day === 0 || day === 6); // 0: 일, 6: 토 주말
+				       const holiday = holidays.includes(this.value); // 공휴일
 
-				       if(isWeekend || isHoliday){
+				       if(weekend || holiday){
 				         alert("주말 및 공휴일 선택불가");
-				         this.value = tomorrowStr; // 날짜 초기화
+				         this.value = tomorrowStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
+						 endDateInput.value = startDateInput.value
 				         return;
 				       }
-				     });
+					   //console.log("휴가 시작일 : " + startDateInput.value);
+					   //console.log("휴가 종료일 : " + endDateInput.value);
+					 
+					   // 휴가 종료일은 사용자가 선택한 휴가 시작일부터 가능하도록 제어
+					   endDateInput.setAttribute('min', startDateInput.value);
+					   // 사용자가 휴가 시작일 변경하면 휴가 종료일 가능일로 자동변경
+					   $("#result tr").eq(-1).find("#endDate").val(this.value);
+				     });			 
 				   });
 		       };
 
@@ -112,6 +125,7 @@
 
 			                   }
 			                   liList.push(obj); // 정보 저장한 객체를 배열에 삽입
+							   
 			               }
 						   alert("신청완료"); // 휴가 등록 버튼을 누르면
 						   location.reload(); // 새로고침
