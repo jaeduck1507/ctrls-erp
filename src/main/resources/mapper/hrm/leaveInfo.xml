@@ -24,21 +24,20 @@ FROM leave_request
      JOIN employee_info USING(emp_no)
      JOIN department USING(dept_no)
      JOIN job_position USING(job_no)
-<where>
-  <if test="empNo != null">
-    emp_no = #{empNo}
-  </if>
-  <if test='status == "wait"'>
-    AND status = '대기'
-  </if>
-  <if test='status == "approve"'>
-    AND status = '승인'
-  </if>
-  <if test='status == "back"'>
-    AND status = '반려'
-  </if>
-</where>
-ORDER BY request_date ASC
+<if test="empNo != null">
+	<where>
+	    emp_no = #{empNo}
+	  <if test='status == "wait"'>
+	    AND status = '대기'
+	  </if>
+	  <if test='status == "approve"'>
+	    AND status = '승인'
+	  </if>
+	  <if test='status == "back"'>
+	    AND status = '반려'
+	  </if>
+	</where>
+</if>
 </select>
 
 <!-- 휴가 신청, 사번, 신청 날짜, 휴가 유형, 휴가 시작일,  종료일, 사유 작성-->
