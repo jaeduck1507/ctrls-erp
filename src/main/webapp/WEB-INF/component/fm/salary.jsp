@@ -18,6 +18,7 @@
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>
 		</select>
+		<input type="month" id = "yearMonth">
 		<button id="btn">조회</button>
 	</div>
 		

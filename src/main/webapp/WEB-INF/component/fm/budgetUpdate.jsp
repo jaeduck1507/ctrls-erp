@@ -13,7 +13,8 @@
 	<form action="/budgetUpdate" method="post">
 		예산 번호 : <input type="text" name="budgetNo" value="${budgetInfo.budgetNo}" readonly="readonly"><br>
 		부서명 : <input type="text" name="deptName" value="${budgetInfo.deptName}" readonly="readonly"/><br>
-		연/분기/월 : <input type="text" name="periodType" value="${budgetInfo.periodType}"/><br>
+		<!--연/분기/월 : <input type="text" name="periodType" value="${budgetInfo.periodType}"/><br>-->
+		연/분기/월 : <select name="periodType"><option value="${budgetInfo.periodType}">${budgetInfo.periodType}</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select><br>
 		예산 금액 : <input type="number" name="annualBudget" value="${budgetInfo.annualBudget}"/><br>
 		계획 : <input type="text" name="plan" value="${budgetInfo.plan}"/><br>
 		예산 집행일 : <input type="date" name="executionDate" value="${budgetInfo.executionDate}"/><br>
