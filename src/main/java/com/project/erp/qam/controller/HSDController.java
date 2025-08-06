@@ -35,11 +35,12 @@ public class HSDController {
 		return saleService.showSale();
     }
 	
+	/*
 	@ResponseBody
     @GetMapping("/showSaleNull")
     public List<SaleReadyDTO> showSaleNull() {
     	return saleService.showSaleNull();
-    }
+    }*/
     
     @PostMapping("/registerSaleDate")
     public String registerSaleDate(@RequestBody List<SaleReadyDTO> sellList) { // @RequestBody는 HTTP 요청(/qam/saleReady)의 Body에 담겨 있는 JSON 데이터를 Java 객체로 자동 변환해주는 역할
