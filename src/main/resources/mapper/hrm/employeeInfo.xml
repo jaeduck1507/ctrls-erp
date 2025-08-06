@@ -17,7 +17,7 @@
     <result property="email" column="email" />
 </resultMap>
 	<select id="infoShow" parameterType="EmpInfo" resultMap="EmpInfoMap">
-		SELECT emp_no,emp_name, dept_name, job_title, emp_id, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email
+		SELECT emp_no,emp_name, dept_name, job_title, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
@@ -41,9 +41,9 @@
 	</select>
 	
 	<insert id="empAdd" parameterType="ArrayList">
-		INSERT INTO employee_info (emp_id, emp_in, emp_pwd, emp_name, job_no, dept_no, hire_date, salary, addr, phone, email) VALUES
+		INSERT INTO employee_info ( emp_in, emp_name, job_no, dept_no, hire_date, salary, addr, phone, email) VALUES
 		<foreach collection="eiList" item="emp" separator=",">
-		(#{emp.empId},#{emp.empIn},#{emp.empPwd},#{emp.empName},#{emp.jobNo},#{emp.deptNo},#{emp.hireDate},#{emp.salary},#{emp.addr},#{emp.phone},#{emp.email})
+		(#{emp.empIn},#{emp.empName},#{emp.jobNo},#{emp.deptNo},#{emp.hireDate},#{emp.salary},#{emp.addr},#{emp.phone},#{emp.email})
 		
 		</foreach>
 	</insert>
@@ -68,7 +68,7 @@
 	</select>
 	
 	<select id="infoShowPage" parameterType="EmpInfoPagingDTO" resultMap="EmpInfoMap">
-		SELECT emp_no,emp_name, dept_name, job_title, emp_id, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email 
+		SELECT emp_no,emp_name, dept_name, job_title, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email 
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
@@ -87,7 +87,7 @@
 	</select>
 	
 	<select id="infoShowOne" parameterType="EmpInfo" resultMap="EmpInfoMap">
-		SELECT emp_no,emp_name, dept_name, job_title, emp_id, emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email
+		SELECT emp_no,emp_name, dept_name, job_title,emp_in, dept_no, job_no, hire_date, quit_date, salary, addr, phone, email
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
@@ -101,7 +101,6 @@
 		UPDATE employee_info
 		<set>
 			emp_name = #{empName},
-			emp_id = #{empId},
 			addr = #{addr},
 			phone = #{phone},
 			email = #{email},

@@ -47,26 +47,33 @@
 		</where>
 	</select>
 	
-	<select id="salaryPayment" parameterType="String" resultMap="SalaryDTOtMap">
+	<select id="salaryPayment" parameterType="SalaryAlreadyAddDTO" resultMap="SalaryDTOtMap">
 	SELECT emp_no, emp_name,dept_name,job_title,salary as 'base_salary',IFNULL(sum(payment),0) as 'bonus'
 	FROM salary
 	RIGHT JOIN employee_info using(emp_no)
 	LEFT JOIN bonus_payment USING(emp_no)
 	JOIN department USING(dept_no)
 	JOIN job_position USING(job_no)
-	where pay_date like CONCAT('%', #{yearMonth}, '%')
-	AND salary_no IS NULL
+	<where>
+	pay_date like CONCAT('%', #{yearMonth}, '%')
 	AND quit_date IS NULL
+	<if test="list.size != 0">
+				<foreach collection="list" item = "emp">
+					AND emp_no != #{emp.empNo}
+				</foreach>
+			</if>
+	</where>
 	GROUP BY emp_no
 	</select>
 	
 	<select id="salaryPaymentNoBonus" parameterType="arrayList" resultMap="SalaryDTOtMap">
-		SELECT emp_no, emp_name,dept_name,job_title,salary as 'base_salary'FROM salary
+		SELECT DISTINCT emp_no, emp_name,dept_name,job_title,salary as 'base_salary'
+		FROM salary
 		RIGHT JOIN employee_info using(emp_no)
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
 		<where>
-			salary_no IS NULL
+		
 			AND quit_date IS NULL
 			<if test="existList.size != 0">
 				<foreach collection="existList" item = "emp">
@@ -77,4 +84,18 @@
 	
 	</select>
 	
+	<insert id="addSalaryPayment" parameterType="arrayList">
+		INSERT INTO salary(salary_date, base_salary, bonus, deduction,emp_no)
+		VALUES
+		<foreach collection="spList" item="emp" separator=",">
+		(#{emp.salaryDate},#{emp.baseSalary},#{emp.bonus},#{emp.deduction},#{emp.empNo})
+		
+		</foreach>
+	</insert>	
+	
+	<select id="showSalaryAlreadyAdd" parameterType="SalaryAlreadyAddDTO" resultMap="SalaryDTOtMap">
+	select emp_no from salary
+	JOIN employee_info USING(emp_no)
+	WHERE salary_date LIKE CONCAT('%', #{yearMonth}, '%')
+	</select>
 </mapper>
