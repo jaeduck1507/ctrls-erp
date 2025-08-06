@@ -27,6 +27,7 @@
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
+		ORDER BY sale_date
 	</select>
 	
 	<insert id="saleRegister" parameterType="ArrayList">

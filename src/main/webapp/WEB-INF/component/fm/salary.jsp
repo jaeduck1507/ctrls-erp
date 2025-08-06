@@ -18,7 +18,7 @@
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>
 		</select>
-		<input type="month" id = "yearMonth">
+		<input type="month" id="yearMonth">
 		<button id="btn">조회</button>
 	</div>
 		
@@ -28,11 +28,17 @@
 		</table>
 	</div>
 	
+	<div>
+		
+	</div>
+	
 	<script>
 		$("#btn").click(() => {
 			const formData = new FormData();
 			formData.append("deptName", $("#deptName").val());
 			formData.append("empName", $("#empName").val());
+			formData.append("yearMonth", $("#yearMonth").val());
+			console.log($("#yearMonth").val());
 			$.ajax({
 				type: "post",
 				url: "/showSalary",
@@ -43,11 +49,11 @@
 					//console.log($("#deptName").val());
 					//console.log($("#empName").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>세금</th><th>급여 총액</th></tr>");
+					$("#result").append("<tr><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
 					for (const s of result) {
+						const total = s.baseSalary + s.bonus - s.deduction;
 						var text = "<tr><td>" + s.deptName + "</td><td>" + s.empName + "</td><td>" + s.salaryDate + "</td><td>" 
-							+ s.baseSalary + "</td><td>" + s.bonus + "</td><td>" + s.deduction + "</td><td>" + s.tax + "</td><td>" 
-							+ (s.baseSalary + s.bonus - s.deduction - s.tax) + "</td></tr>"
+							+ s.baseSalary + "</td><td>" + s.bonus + "</td><td>" + s.deduction + "</td><td>" + total + "</td></tr>"
 						$("#result").append(text);
 					}
 				},

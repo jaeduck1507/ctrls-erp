@@ -17,6 +17,6 @@ public interface SalaryMapper {
 	List<SalaryDTO> salaryPaymentNoBonus(List<SalaryDTO> existList);
 	void addSalaryPayment(List<Salary> spList);
 	List<SalaryDTO> showSalaryAlreadyAdd(SalaryAlreadyAddDTO saaDto);
-	
+	List<SalEmpDTO> totalSalary(SalEmpDTO se);
 	
 }

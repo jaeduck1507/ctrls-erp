@@ -13,6 +13,7 @@ public class TransDTO {
 	private String category;
 	private String transDesc;
 	private LocalDate transDate;
+	private int deptNo;
 	private String deptName;
 	private LocalDate startDate;
 	private LocalDate endDate;

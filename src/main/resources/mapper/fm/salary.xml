@@ -9,6 +9,7 @@
 		<result property="deduction" column="deduction"/>
 		<result property="tax" column="tax"/>
 		<result property="empName" column="emp_name"/>
+		<result property="deptNo" column="dept_no"/>
 		<result property="deptName" column="dept_name"/>
 		<result property="payment" column="payment"/>
 	</resultMap>
@@ -34,15 +35,14 @@
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
 		<where>
-			<if test="deptName != 'dept' and empName != null">
-				dept_name = #{deptName}
+			<if test="yearMonth != null">
+				salary_date LIKE CONCAT ('%', #{yearMonth}, '%')
+			</if>
+			<if test="deptName != 'dept'">
+				AND dept_name = #{deptName}
+			</if>
+			<if test="empName != null">
 				AND emp_name LIKE CONCAT ('%', #{empName}, '%')
-			</if>
-			<if test="deptName != 'dept' and empName == null">
-				dept_name = #{deptName}
-			</if>
-			<if test="deptName == 'dept' and empName != null">
-				emp_name LIKE CONCAT ('%', #{empName}, '%')
 			</if>
 		</where>
 	</select>
@@ -97,5 +97,15 @@
 	select emp_no from salary
 	JOIN employee_info USING(emp_no)
 	WHERE salary_date LIKE CONCAT('%', #{yearMonth}, '%')
+	</select>
+	
+	<select id="totalSalary" parameterType="SalEmpDTO" resultMap="SalEmpMap">
+		SELECT dept_no, dept_name, salary_date, SUM(base_salary+bonus-deduction) AS totalSal
+		FROM salary
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		WHERE salary_date LIKE CONCAT('%', #{yearMonth}, '%')
+		GROUP BY dept_no, dept_name, salary_date
+		ORDER BY dept_no
 	</select>
 </mapper>

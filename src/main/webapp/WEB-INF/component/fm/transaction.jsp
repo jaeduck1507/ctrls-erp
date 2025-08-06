@@ -54,7 +54,7 @@
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>거래 번호</th><th>부서명</th><th>수입/지출</th><th>금액</th><th>분류</th><th>수입/지출 내역 상세</th><th>수입/지출 발생 일자</th></tr>");
+					$("#result").append("<tr><th>거래 번호</th><th>부서명</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
 						for (const t of result) {
 							var text = "<tr><td>" + t.transNo + "</td><td>" + t.deptName + "</td><td>" + t.transType + "</td><td>" + t.transAmount 
 								+ "</td><td>" + t.category + "</td><td>" + t.transDesc + "</td><td>" + t.transDate + "</td></tr>"
