@@ -21,6 +21,11 @@
 	</div>
 	
 	<script>
+		$(document).ready(() => {
+			$("#saleDate").val(new Date().toISOString().substring(0, 10));
+			//console.log($("#saleDate").val());
+		});
+		
 		$("#search").click(() => {
 			const formData = new FormData();
 			formData.append("saleDate", $("#saleDate").val());
@@ -71,9 +76,11 @@
 					
 				},
 				error: function(xhr, status, error) {
-				
+					
 				}
 			});
+			alert("등록되었습니다");
+			location.reload();
 		});
 		
 	</script>
