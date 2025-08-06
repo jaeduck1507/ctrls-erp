@@ -17,8 +17,13 @@
 	<result column="product_code" property="productCode"/>
 	<result column="product_price" property="productPrice"/>
 	
+	<result column="product_category" property="productCategory"/>
 	<result column="product_name" property="productName"/>
 	<result column="quantity" property="quantity"/>
+	
+	<result column="check_material" property="checkMaterial"/>
+	<result column="check_color" property="checkColor"/>
+	<result column="check_damage" property="checkDamage"/>
 </resultMap>
 
     <insert id="insertDefective" parameterType="Defective">
@@ -36,11 +41,16 @@
 		p.product_no,
 		pn.product_code,
 		pn.product_name,
+		pn.product_category,
+		q.check_material,
+        q.check_color,
+        q.check_damage,
 		pn.product_price,
 		d.reason
 	FROM defective d
 	JOIN product p ON d.product_no = p.product_no
 	JOIN product_name pn ON p.product_code = pn.product_code
+	JOIN qc q ON p.product_no = q.product_no
 	</select> 
 
 </mapper>

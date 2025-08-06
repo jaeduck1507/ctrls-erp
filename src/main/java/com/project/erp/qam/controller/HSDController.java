@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.qam.model.dto.SaleReadyDTO;
@@ -56,4 +57,10 @@ public class HSDController {
     public List<Defective> showDefective() {
     	return defectiveService.showDefective();
     }
+	
+	@GetMapping("/searchSaleDone")
+	@ResponseBody
+	public List<SaleReadyDTO> searchSaleDone(@RequestParam(required = false) String productCategory) {
+	    return saleService.searchSaleDone(productCategory);
+	}
 }

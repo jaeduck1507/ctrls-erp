@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,67 +10,129 @@
 
 <body>
 <h2>불량품 조회</h2>
+<h3 id="defectivePriceSum"></h3>
 
-<form id="searchForm">
-	<!-- 추후 검색 조건 추가 가능 -->
+<form id="defectiveSearchForm">
+	<!-- 불량 유형 필터 체크박스 -->
+	불량 유형:
+	<label><input type="checkbox" class="defectiveFilter" value="material"> 부자재 불량</label>
+	<label><input type="checkbox" class="defectiveFilter" value="color"> 색상 불량</label>
+	<label><input type="checkbox" class="defectiveFilter" value="damage"> 손상 불량</label>
+<!--	<br>-->
+<!--	카테고리 조회: <select id="productCategory">-->
+<!--	    <option value="">카테고리 선택</option>-->
+<!--	    <option value="상의">상의</option>-->
+<!--	    <option value="하의">하의</option>-->
+<!--	    <option value="악세사리">악세사리</option>-->
+<!--	    <option value="신발">신발</option>-->
+<!--	</select>-->
+<!--검사일 조회 (시작일): <input type="date" id="startDate">
+	(종료일): <input type="date" id="endDate">-->
+	<!-- 필터 적용 버튼 -->
+	<button type="submit">검색</button>
+	<button type="button" id="resetBtn">전체보기</button>
 </form>
 
 <table border="1" id="defectiveResult">
-    <tr>
-        <th>불량코드</th>
-        <th>제품번호</th>
-        <th>제품코드</th>
-		<th>제품명</th>
-		<th>제품가격</th>
-		<th>불량사유</th>
-	</tr>
+    <thead>
+        <tr>
+            <th>불량코드</th>
+            <th>제품번호</th>
+            <th>제품코드</th>
+            <th>부자재검사 여부</th>
+            <th>색상검사 여부</th>
+            <th>손상검사 여부</th>
+			<th>카테고리</th>
+            <th>제품명</th>
+            <th>가격</th>
+            <th>불량사유</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
 </table>
-	
-
-<div id="priceSum">
-	<!-- 총 가격 출력 영역 -->
-</div>
 
 <script>
-	function displayDefective(data) {
-		let tableHead = "<tr><th>불량코드</th><th>제품번호</th><th>제품코드</th><th>제품명</th><th>제품가격</th><th>불량사유</th></tr>"
-		$("#defectiveResult").html(tableHead);
-		
-		// 가격 총합 변수 (int)
-		var total = 0;
-
-		for (var i = 0; i < data.length; i++) {
-					var d = data[i];
-					total += d.productPrice;
-
-				let row = "<tr>";
-				row += "<td>" + d.defectiveNo + "</td>";
-				row += "<td>" + d.productNo + "</td>";
-				row += "<td>" + d.productCode + "</td>";
-				row += "<td>" + d.productName + "</td>";
-				row += "<td>" + d.productPrice + "</td>";
-				row += "<td>" + d.reason + "</td>";
-//				row += "<td><a href='/qam/defectiveUpdate?defectiveNo=" + d.defectiveNo + "'>수정</a></td>";
-				row += "</tr>"
-				$("#defectiveResult").append(row);
-				}
-				
-				document.getElementById("priceSum").innerText = "손실액 총합: " + total + "원";
-				
-			}
-	$(document).ready(function() {
-		$.ajax({
-				type: "get",
-				url: "/qam/showDefective",
-				success: function (result) {
-					displayDefective(result);
-				}
-			});
-			
-		
-			
-		});
+function displayDefective(data) {
 	
+	let selectedFilter = [];
+	
+	$(".defectiveFilter:checked").each(function () {
+	    selectedFilter.push($(this).val());
+	});
+	
+	console.log(selectedFilter);
+	
+    let tableHead = "<tr><th>불량코드</th><th>제품번호</th><th>제품코드</th><th>부자재검사 여부</th><th>색상검사 여부</th><th>손상검사 여부</th><th>카테고리</th><th>제품명</th><th>가격</th><th>불량사유</th></tr>";
+    $("#defectiveResult thead").html(tableHead);
+    $("#defectiveResult tbody").empty();
+
+    var total = 0;
+
+	for (let d of data) {
+	    let include = true;
+
+	    for (let filter of selectedFilter) {
+	        if (filter === "material" && d.checkMaterial == "합격") include = false;
+	        if (filter === "color" && d.checkColor == "합격") include = false;
+	        if (filter === "damage" && d.checkDamage == "합격") include = false;
+	    }
+	    if (!include) continue;
+		
+		total += d.productPrice;
+
+        let row = "<tr>";
+        row += "<td>" + d.defectiveNo + "</td>";
+        row += "<td>" + d.productNo + "</td>";
+        row += "<td>" + d.productCode + "</td>";
+        row += "<td>" + d.checkMaterial + "</td>";
+        row += "<td>" + d.checkColor + "</td>";
+        row += "<td>" + d.checkDamage + "</td>";
+		row += "<td>" + d.productCategory + "</td>";
+        row += "<td>" + d.productName + "</td>";
+        row += "<td>" + d.productPrice + "</td>";
+        row += "<td>" + (d.reason == null || d.reason == '' ? "미작성" : d.reason) + "</td>";
+        row += "</tr>";
+
+        $("#defectiveResult tbody").append(row);
+    }
+    $("#defectivePriceSum").text("손실액 총합: " + total.toLocaleString() + "원");
+}
+
+$(document).ready(function() {
+    $.ajax({
+        type: "get",
+        url: "/qam/showDefective",
+        success: function (result) {
+            displayDefective(result);
+        }
+    });
+	
+	// 필터 적용 버튼 누를 때만 필터링 실행
+	$("#defectiveSearchForm").submit(function (e) {
+	    e.preventDefault(); // 기본 폼 제출 막기
+
+	    $.ajax({
+	        type: "get",
+	        url: "/qam/showDefective",
+	        success: function (result) {
+	            displayDefective(result); // 필터 적용
+	        }
+	    });
+	});
+	
+	$('#resetBtn').click(function() {
+		
+		$(".defectiveFilter").prop("checked", false);
+
+		  $.ajax({
+		       type: "get",
+		       url: "/qam/showDefective",
+		       success: function (result) {
+		           displayDefective(result);
+		       }
+		  });
+	});	
+});
 </script>
 
 </body>

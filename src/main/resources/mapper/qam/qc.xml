@@ -118,7 +118,7 @@
 	        q.emp_no
 	    FROM product p
 	    JOIN product_name pn ON p.product_code = pn.product_code
-	    LEFT JOIN qc q ON p.product_no = q.product_no
+	    RIGHT JOIN qc q ON p.product_no = q.product_no
 	    ORDER BY p.production_date DESC
 	</select>
 

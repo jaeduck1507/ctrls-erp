@@ -15,7 +15,7 @@ public interface SaleMapper {
 
 	void deleteByProductNo(int productNo);
 	
-	List<Sale> showSale();
+	List<Sale> showSale(); // QAM내에서는 활용 X, 필요하신 분들 위해 만들어둠
 	
 	List<SaleReadyDTO> showSaleNull();
 	
@@ -28,5 +28,7 @@ public interface SaleMapper {
 	void registerSaleDate(int saleNo, LocalDate saleDate);
 	
 	List<SaleReadyDTO> dailySale(SaleReadyDTO dto);
+	
+	List<SaleReadyDTO> searchSaleDone(String productCategory);
 	
 }

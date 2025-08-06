@@ -16,7 +16,7 @@ public class SaleService {
 	@Autowired
 	private SaleMapper saleMapper;
 	
-	public List<Sale> showSale() {
+	public List<Sale> showSale() { // QAM내에서는 활용 X, 필요하신 분들 위해 만들어둠
 		return saleMapper.showSale();
 	}
 	
@@ -40,6 +40,10 @@ public class SaleService {
 	
 	public List<SaleReadyDTO> dailySale(SaleReadyDTO dto) {
 		return saleMapper.dailySale(dto);
+	}
+	
+	public List<SaleReadyDTO> searchSaleDone(String productCategory) {
+	    return saleMapper.searchSaleDone(productCategory);
 	}
 	
 }

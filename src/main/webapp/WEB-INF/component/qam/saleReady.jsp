@@ -11,21 +11,24 @@
 <body>
 <h2>판매대기 제품 리스트</h2>
 
+<button id = "sellRegister">판매 등록</button>
+
 <table border="1" id="saleReady">
     <tr>
 		<th>판매코드</th>
 		<th>제품번호</th>
 		<th>제품코드</th>
+		<th>카테고리</th>
+		<th>제품명</th>
         <th>가격</th>
-		<th>판매날짜</th>
+		<th>판매날짜(확인용)</th>
 		<th>날짜입력</th>
 	</tr>
 </table>
-<button id = "sellRegister">판매 등록</button>
-		
+	
 <script>
 	function displaySale(data) {
-		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>가격</th><th>판매날짜</th><th>날짜입력</th></tr>"
+		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜(확인용)</th><th>날짜입력</th></tr>"
 		$("#saleReady").html(tableHead);
 		
 		for (let s of data) {
@@ -33,12 +36,15 @@
 				row += "<td>" + s.saleNo + "</td>";
 				row += "<td>" + s.productNo + "</td>";
 				row += "<td>" + s.productCode + "</td>";
+				row += "<td>" + s.productCategory + "</td>";
+				row += "<td>" + s.productName + "</td>";
 				row += "<td>" + s.productPrice + "</td>";
 				row += "<td>" + s.saleDate + "</td>";
 				row += "<td><input type='date' class='sellDate'></td>";
 				row += "</tr>"
 				$("#saleReady").append(row);
 				}
+				$("#saleReady tr").find(".sellDate").val(new Date().toISOString().substring(0, 10));
 			}
 			
 	$(document).ready(function() {
@@ -59,7 +65,7 @@
 				let row = table.eq(i);
 
 				let saleNos = row.find("td").eq(0).text();
-				let saleDates = row.find("td").eq(5).find("input").val(); 
+				let saleDates = row.find("td").eq(7).find("input").val(); 
 
 				if (saleDates) {
 					sellList.push({

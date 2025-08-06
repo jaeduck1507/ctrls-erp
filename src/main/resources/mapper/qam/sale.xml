@@ -1,67 +1,73 @@
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.qam.mapper.SaleMapper">
 
-<resultMap id="saleMap" type="SaleReadyDTO">
-	<result column="sale_no" property="saleNo"/>
-	<result column="sale_date" property="saleDate"/>
-	<result column="product_no" property="productNo"/>
+	<resultMap id="saleMap" type="SaleReadyDTO">
+		<result column="sale_no" property="saleNo" />
+		<result column="sale_date" property="saleDate" />
+		<result column="product_no" property="productNo" />
 
-	<result column="product_code" property="productCode"/>
-	<result column="product_price" property="productPrice"/>
-	
-	<result column="product_name" property="productName"/>
-	<result column="quantity" property="quantity"/>
-</resultMap>
+		<result column="product_code" property="productCode" />
+		<result column="product_price" property="productPrice" />
 
-    <insert id="insertSale" parameterType="Sale">
-        INSERT INTO sale (sale_date, product_no)
-        VALUES (#{saleDate}, #{productNo})
-    </insert>
+		<result column="product_category" property="productCategory" />
+		<result column="product_name" property="productName" />
+		<result column="quantity" property="quantity" />
+	</resultMap>
+
+	<insert id="insertSale" parameterType="Sale">
+		INSERT INTO sale (sale_date, product_no)
+		VALUES (#{saleDate}, #{productNo})
+	</insert>
 
 	<delete id="deleteByProductNo" parameterType="int">
-    DELETE FROM sale WHERE product_no = #{productNo}
+		DELETE FROM sale WHERE product_no = #{productNo}
 	</delete>
 
 	<select id="showSaleDone" resultMap="saleMap">
-	  SELECT
-	  	p.product_no,
-	  	pn.product_code,
-	  	pn.product_price,
-	    s.sale_no,
-	    s.sale_date
-	  FROM sale s
-	  JOIN product p ON s.product_no = p.product_no
-	  JOIN product_name pn ON p.product_code = pn.product_code
-  	  WHERE s.sale_date IS NOT NULL
-  	  ORDER BY s.sale_date DESC
-	</select> 
-	
+		SELECT
+		p.product_no,
+		pn.product_code,
+		pn.product_name,
+		pn.product_category,
+		pn.product_price,
+		s.sale_no,
+		s.sale_date
+		FROM sale s
+		JOIN product p ON s.product_no = p.product_no
+		JOIN product_name pn ON p.product_code = pn.product_code
+		WHERE s.sale_date IS NOT NULL
+		ORDER BY s.sale_date DESC
+	</select>
+
 	<select id="showSaleNull" resultMap="saleMap">
-	  SELECT
-	  	p.product_no,
-	  	pn.product_code,
-	  	pn.product_price,
-	    s.sale_no,
-	    s.sale_date
-	  FROM sale s
-	  JOIN product p ON s.product_no = p.product_no
-	  JOIN product_name pn ON p.product_code = pn.product_code
-  	  WHERE s.sale_date IS NULL
-  	  ORDER BY s.sale_no ASC
+		SELECT
+		p.product_no,
+		pn.product_code,
+		pn.product_price,
+		pn.product_name,
+		pn.product_category,
+		s.sale_no,
+		s.sale_date
+		FROM sale s
+		JOIN product p ON s.product_no = p.product_no
+		JOIN product_name pn ON p.product_code = pn.product_code
+		WHERE s.sale_date IS NULL
+		ORDER BY s.sale_no ASC
 	</select>
 
 	<select id="findBySaleNo" parameterType="int" resultMap="saleMap">
 		SELECT
-			p.product_no,
-	  		pn.product_code,
-	  		pn.product_price,
-	    	s.sale_no,
-	    	s.sale_date  
-	    FROM sale s
-	    JOIN product p ON s.product_no = p.product_no
-	    JOIN product_name pn ON p.product_code = pn.product_code
+		s.sale_no,
+		p.product_no,
+		pn.product_code,
+		pn.product_name,
+		pn.product_price,
+		pn.product_category,
+		s.sale_date
+		FROM sale s
+		JOIN product p ON s.product_no = p.product_no
+		JOIN product_name pn ON p.product_code = pn.product_code
 		WHERE s.sale_no = #{saleNo}
 	</select>
 
@@ -72,11 +78,35 @@
 	</update>
 
 	<select id="dailySale" parameterType="SaleReadyDTO" resultMap="saleMap">
-		SELECT product_name, product_code, product_price, sale_date, count(*) AS quantity FROM sale
+		SELECT
+		product_name,
+		product_code,
+		product_price,
+		sale_date,
+		count(*) AS quantity FROM sale
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
 		WHERE sale_date = #{saleDate}
 		GROUP BY product_name, product_code, product_price, sale_date
 	</select>
-	
+
+	<select id="searchSaleDone" resultType="SaleReadyDTO"> 
+		SELECT 
+		s.sale_no,
+		p.product_no,
+		pn.product_code, 
+		pn.product_name, 
+		pn.product_price,
+		pn.product_category, 
+		s.sale_date 
+		FROM sale s 
+		JOIN product p ON s.product_no = p.product_no 
+		JOIN product_name pn ON p.product_code = pn.product_code 
+		WHERE s.sale_date IS NOT NULL 
+		<if test="productCategory != null and productCategory != ''">
+			AND pn.product_category = #{productCategory}
+		</if>
+	</select>
+
+
 </mapper>

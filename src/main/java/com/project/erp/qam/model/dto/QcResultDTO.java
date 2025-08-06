@@ -26,7 +26,7 @@ public class QcResultDTO {
     private String checkDamage;
     private String qcDesc;
     private Date qcDate;
-    private int empNo;
+    private Integer empNo;
     
 	private LocalDate startDate;
 	private LocalDate endDate;

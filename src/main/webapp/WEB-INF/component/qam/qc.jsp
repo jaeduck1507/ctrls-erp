@@ -10,6 +10,7 @@
 <body>
 
 <h2>품질검사 결과 목록</h2>
+<h3>(QC 1차 완료된 제품들만 조회, 미완료 제품들은 신규 검사 등록에서 select후 QC)</h3>
 
 <!-- QC 등록 버튼 -->
 <a href="/qam/qcForm"><button>신규 검사 등록</button></a>
@@ -38,6 +39,7 @@
 		생산일 조회 (시작일): <input type="date" id="startDate">
 		(종료일): <input type="date" id="endDate">
 		<button type="submit">검색</button> <!-- button type 지정 안할 시 default => submit -->
+		<button type="button" id="resetBtn">전체보기</button>
 </form>
 
 <!-- 테이블 -->
@@ -128,7 +130,7 @@ $(document).ready(function() {
 		 data: { 
 			productName: $("#productName").val(),
 			productCategory: $("#productCategory").val(),
-//			empNo: $("#empNo").val(),
+			empNo: $("#empNo").val(),
 			startDate: $("#startDate").val(),
 			endDate: $("#endDate").val()
 		},  
@@ -139,7 +141,24 @@ $(document).ready(function() {
 		         }
 		    });
 		});
-	});
+		
+	$('#resetBtn').click(function() {
+		$("#productName").val("");
+		$("#productCategory").val("");
+		$("#empNo").val("");
+		$("#startDate").val("");
+		$("#endDate").val("");
+
+		   $.ajax({
+		       type: "get",
+		       url: "/qam/showQc",
+		       success: function (result) {
+		           displayQc(result);
+		       }
+		   });
+	})
+	
+});
 	</script>
 
 
