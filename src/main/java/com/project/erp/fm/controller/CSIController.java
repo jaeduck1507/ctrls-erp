@@ -55,8 +55,9 @@ public class CSIController {
 	
 	@ResponseBody
 	@PostMapping("/addSalaryPayment")
-	public void addSalaryPayment(@RequestBody List<Salary> spList) {
+	public boolean addSalaryPayment(@RequestBody List<Salary> spList) {
 		salaryService.addSalaryPayment(spList);
+		return true;
 	}
 	
 	@ResponseBody

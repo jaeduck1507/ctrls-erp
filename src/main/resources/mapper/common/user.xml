@@ -5,6 +5,11 @@
 	   <result column="password" property="password"/>
 	   <result column="role" property="role"/>
 	   <result column="emp_no" property="empNo"/>
+	   <result column="emp_name" property="empName"/>
+	   <result column="dept_no" property="deptNo"/>
+	   <result column="job_no" property="jobNo"/>
+	   <result column="job_title" property="jobTitle"/>
+	   <result column="dept_name" property="deptName"/>
 	   
 	</resultMap>
 
@@ -14,7 +19,11 @@
 	</insert>
 	
 	<select id="login" parameterType="String" resultMap="UserMap">
-		SELECT * FROM user
+		SELECT job_no, dept_no, emp_no, username, password, role,  emp_name, dept_name, job_title 
+		FROM user
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
 		WHERE username = #{username}
 		
 	</select>

@@ -36,7 +36,16 @@ public class AttendanceLogService {
 		LocalTime checkOutStd = LocalTime.parse("18:00");
 		int lastDate =ym.lengthOfMonth();
 		int count = 0; // 리스트 번호대로
+		LocalDate today = LocalDate.now();
+		if(alList.size() ==0) {
+			AttendanceLog dummyLog= new AttendanceLog();
+			dummyLog.setEmpNo(am.getEmpNo());
+			alList.add(dummyLog);
+		}
 		for(int i =1; i<=lastDate; i++) {
+			if(ym.getYear() > today.getYear()) break;
+			if( ym.getYear() == today.getYear()&& ym.getMonthValue() > today.getMonthValue()) break;
+			if(ym.getYear() == today.getYear()&& ym.getMonthValue() == today.getMonthValue() && today.getDayOfMonth() == i) break;
 			LocalDate date = ym.atDay(i);
 			AttendanceLog al = alList.get(count);
 			if(al.getStatus() != null && al.getStatus().equals("휴가")) { // 휴가 일때

@@ -69,7 +69,6 @@
 	            obj.deduction=$("#result tr").eq(i).find("td").eq(7).find("input").val(); 
 	            spList.push(obj); // 정보 저장한 객체를 배열에 삽입
 	        }
-	        console.log(JSON.stringify(spList));
 	        
 	        
 	        $.ajax({
@@ -82,7 +81,27 @@
 				contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	            // 응답
 	            success : function(result) {
-					
+	            	const yearMonth = $("#yearMonth").val();
+	    			$.ajax({
+	    				type: "post",
+	    				url: "/salaryPayment",
+	    				data: {yearMonth : yearMonth},
+	    				
+	    				success: function(result) {
+	    					
+	    					$("#result").html("");
+	    					$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
+	    					for (const s of result) {
+	    						var text = "<tr><td>" + s.empNo + "</td><td>" + s.empName + "</td><td>" + s.deptName + "</td><td>" 
+	    							+ s.jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + s.baseSalary + "</td><td>" + s.bonus + "</td><td>" 
+	    							+ '<input type="number" class= "deduction" value="'+ ((s.baseSalary+s.bonus)*0.1) +'">' +"</td><td>" + ((s.baseSalary+s.bonus)*0.9) + "</td></tr>";
+	    						$("#result").append(text);
+	    					}
+	    				},
+	    				error: function(xhr, status, error) {
+	    							
+	    				}
+	    			});
 	            },
 	            
 				error:function(xhr,status,error) {
