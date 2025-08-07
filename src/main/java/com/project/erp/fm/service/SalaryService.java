@@ -56,6 +56,10 @@ public class SalaryService implements SalaryMapper {
 		return mapper.showSalaryAlreadyAdd(saaDto);
 	}
 
+	@Override
+	public List<SalEmpDTO> totalSalary(SalEmpDTO se) {
+		System.out.println(mapper.totalSalary(se));
+		return mapper.totalSalary(se);
+	}
 	
-
 }

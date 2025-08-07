@@ -85,7 +85,7 @@ public class FmPageController {
 	public String saleRegister(Model model, SaleReadyDTO dto) {
 		model.addAttribute("productNameList", productNameService.showProductName());
 		model.addAttribute("countSale", saleService.dailySale(dto));
-		//System.out.println(saleService.countSale(dto));
+		//System.out.println(saleService.dailySale(dto));
 		return "component/fm/saleRegister";
 	}
 	
@@ -119,6 +119,11 @@ public class FmPageController {
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
 		return "component/fm/salaryPayment";
+	}
+	
+	@GetMapping("/totalSalary")
+	public String totalSalary() {
+		return "component/fm/totalSalary";
 	}
 	
 }

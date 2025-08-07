@@ -59,4 +59,10 @@ public class CSIController {
 		salaryService.addSalaryPayment(spList);
 	}
 	
+	@ResponseBody
+	@PostMapping("/totalSalary")
+	public List<SalEmpDTO> totalSalary(SalEmpDTO se) {
+		return salaryService.totalSalary(se);
+	}
+	
 }

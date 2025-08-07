@@ -10,6 +10,8 @@
 </head>
 <body>
 	<h1>거래내역 입력</h1>
+	<a href="/fm/totalSalary">부서별 월 급여 입력 /fm/totalSalary</a><br />
+	<!--
 	<div id="register">
 		<button id="add-row">열 추가</button>
 		<table border="1" id="result">
@@ -26,8 +28,9 @@
 		</table>
 		<button id="trans-register">등록</button>
 	</div>
-	
+	-->
 	<script>
+		/*
 		var count = 0;
 		
 		function addRow() {
@@ -116,7 +119,7 @@
 					
 				}
 			});
-		});
+		});*/
 	</script>
 </body>
 </html>
