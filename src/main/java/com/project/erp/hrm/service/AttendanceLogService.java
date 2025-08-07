@@ -45,7 +45,7 @@ public class AttendanceLogService {
 		for(int i =1; i<=lastDate; i++) {
 			if(ym.getYear() > today.getYear()) break;
 			if( ym.getYear() == today.getYear()&& ym.getMonthValue() > today.getMonthValue()) break;
-			if(ym.getYear() == today.getYear()&& ym.getMonthValue() == today.getMonthValue() && today.getDayOfMonth() == i) break;
+			if(ym.getYear() == today.getYear()&& ym.getMonthValue() == today.getMonthValue() && today.getDayOfMonth() < i) break;
 			LocalDate date = ym.atDay(i);
 			AttendanceLog al = alList.get(count);
 			if(al.getStatus() != null && al.getStatus().equals("휴가")) { // 휴가 일때
@@ -120,5 +120,10 @@ public class AttendanceLogService {
 			}
 		}
 		return asDto;
+	}
+	
+	public AttendanceLog showAttendanceOneAtToday(AttendanceLog al) {
+		return attendanceLogMapper.showAttendanceOneAtToday(al);
+		
 	}
 }
