@@ -45,6 +45,7 @@
 				AND emp_name LIKE CONCAT ('%', #{empName}, '%')
 			</if>
 		</where>
+		ORDER BY salary_date desc
 	</select>
 	
 	<select id="salaryPayment" parameterType="SalaryAlreadyAddDTO" resultMap="SalaryDTOtMap">
