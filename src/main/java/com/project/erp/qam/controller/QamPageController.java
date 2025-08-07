@@ -26,12 +26,7 @@ public class QamPageController {
 	public String productName() {
 		return "component/qam/productName";
 	}
-	
-//	@GetMapping("/qc")
-//	public String qc() {
-//		return "component/qam/qc";
-//	} // QIPController에서 중복 다루기에 여기는 주석처리 (Model 사용 위해 옮김)
-	
+
 	@GetMapping("/saleReady")
 	public String saleReady(Model model, Paging paging) {
 		model.addAttribute("saleList", saleService.showSaleNull(paging));
@@ -40,7 +35,9 @@ public class QamPageController {
 	}
 	
 	@GetMapping("/saleDone")
-	public String saleDone() {
+	public String saleDone(Model model, Paging paging) {
+		model.addAttribute("saleList", saleService.showSaleDone(paging));
+		model.addAttribute("paging", paging);
 		return "component/qam/saleDone";
 	}
 	

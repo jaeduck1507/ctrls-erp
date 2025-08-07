@@ -37,13 +37,44 @@
 		<th>판매코드</th>
         <th>제품번호</th>
         <th>제품코드</th>
+		<th>부서코드</th>
+		<th>부서명</th>
 		<th>카테고리</th>
 		<th>제품명</th>
         <th>가격</th>
 		<th>판매날짜</th>
 	</tr>
+	
+	<c:forEach items="${saleList}" var="sale">
+		<tr>
+			<td>${sale.saleNo}</td>
+			<td>${sale.productNo}</td>
+			<td>${sale.deptNo}</td>
+			<td>${sale.deptName}</td>
+			<td>${sale.productCode}</td>
+			<td>${sale.productCategory}</td>
+			<td>${sale.</td>
+			<td>${sale.</td>
+			<td>${sale.</td>
+		</tr>
+	</c:forEach>
+	
 </table>
 		
+
+
+<nav>
+	<ul class="pagination">
+		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/saleReady?page=${paging.startPage - 1}">Previous</a></li>
+							
+		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+			<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/saleReady?page=${page}">${page}</a></li>
+		</c:forEach>
+		
+		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/saleReady?page=${paging.endPage + 1}">Next</a></li>
+	</ul>
+</nav>
+
 <script>
 	function displaySale(data) {
 		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>"

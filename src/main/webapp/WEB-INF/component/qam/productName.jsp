@@ -51,11 +51,11 @@
                 success: function (result) {
                     // 결과 테이블 초기화 후 헤더 생성
                     $("#result").html("");
-                    $("#result").append("<tr><th>제품 코드</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>카테고리</th><th>수정</th><th>삭제</th></tr>");
+                    $("#result").append("<tr><th>제품 코드</th><th>브랜드코드</th><th>브랜드</th><th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>수정</th><th>삭제</th></tr>");
 
                     // 데이터 순회하며 행 생성
                     for (const pn of result) {
-                        let row = "<tr><td>" + pn.productCode + "</td><td>" + pn.productColor + "</td><td>" + pn.productName + "</td><td>" + pn.productPrice + "</td><td>" + pn.productCost + "</td><td>" + pn.productCategory + "</td>";
+                        let row = "<tr><td>" + pn.productCode + "</td><td>" + pn.brandCode + "</td><td>" + pn.brandName + "</td><td>" + pn.productCategory + "</td><td>" + pn.productColor + "</td><td>" + pn.productName + "</td><td>" + pn.productPrice + "</td><td>" + pn.productCost + "</td>";
                         row += "<td><a href='/productNameForm?productCode=" + pn.productCode + "'>수정</a></td>";
                         row += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a></td></tr>";
                         $("#result").append(row);
@@ -71,17 +71,19 @@
             success: function(result) {
                 // 테이블 초기화 + 헤더 생성
                 $("#result").html(""); 
-                $("#result").append("<tr><th>제품 코드</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>카테고리</th><th>수정</th><th>삭제</th></tr>");
+                $("#result").append("<tr><th>제품 코드</th><th>브랜드 코드</th><th>브랜드</th><th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>수정</th><th>삭제</th></tr>");
 
                 // 각 제품명 객체를 테이블에 추가
                 for (const pn of result) {
                     var text = "<tr>";
                     text += "<td>" + pn.productCode + "</td>";
+					text += "<td>" + pn.brandCode + "</td>";
+					text += "<td>" + pn.brandName + "</td>";
+					text += "<td>" + pn.productCategory + "</td>";
                     text += "<td>" + pn.productColor + "</td>";
                     text += "<td>" + pn.productName + "</td>";
                     text += "<td>" + pn.productPrice + "</td>";
                     text += "<td>" + pn.productCost + "</td>";
-                    text += "<td>" + pn.productCategory + "</td>";
                     text += "<td><a href='/productNameForm?productCode=" + pn.productCode + "'>수정</a></td>";
                     text += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a></td>";
                     text += "</tr>";

@@ -1,0 +1,37 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.qam.mapper.BrandMapper">
+
+<resultMap id="brandMap" type="Brand">
+	<result column="brand_code" property="brandCode"/>
+	<result column="brand_name" property="brandName"/>
+	<result column="brand_phone" property="brandPhone"/>
+	<result column="brand_account" property="brandAccount"/>
+	<result column="brand_bank" property="brandBank"/>
+	<result column="product_code" property="productCode"/>
+</resultMap>
+
+
+  <insert id="registerBrand" parameterType="Brand">
+    INSERT INTO brand (brand_name, brand_phone, brand_account, brand_bank, product_code)
+	VALUES (#{brandName}, #{brandPhone}, #{brandAccount}, #{brandBank}, #{productCode});
+  </insert>
+    
+  <select id="showBrand" resultMap="brandMap">
+  	 SELECT b.brand_name, b.brand_phone, b.brand_account, b.brand_bank, b.product_code
+     FROM brand b
+     JOIN product_name pn ON pn.product_code = b.product_code
+	 ORDER BY b.brand_code
+  </select>
+
+  <select id="findById" resultMap="brandMap" parameterType="int">
+  	 SELECT b.brand_name, b.brand_phone, b.brand_account, b.brand_bank, b.product_code
+     FROM brand b
+     JOIN product_name pn ON pn.product_code = b.product_code
+     WHERE b.brand_code = #{brandCode}
+	 ORDER BY b.brand_code
+  </select>
+
+
+</mapper>

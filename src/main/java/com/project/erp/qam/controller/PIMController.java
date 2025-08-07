@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.qam.model.dto.ProductDetailDTO;
+import com.project.erp.qam.model.dto.ProductNameDTO;
+import com.project.erp.qam.model.vo.Brand;
 import com.project.erp.qam.model.vo.ProductName;
+import com.project.erp.qam.service.BrandService;
 import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.ProductService;
 
@@ -23,6 +26,9 @@ public class PIMController {
 	
 	@Autowired
 	private ProductNameService productNameService; // 제품명 관련 서비스 주입
+	
+	@Autowired
+	private BrandService brandService; // 브랜드 관련 서비스 주입
 
 	// 제품 전체 목록 조회 (DTO 기반)
 	// → AJAX로 호출되어 제품 목록을 JSON으로 반환
@@ -36,7 +42,7 @@ public class PIMController {
 	// → 제품 등록/수정 시 select option 동적 생성용
 	@ResponseBody
 	@GetMapping("/showProductName")
-	public List<ProductName> showProductName() {
+	public List<ProductNameDTO> showProductName() {
 		return productNameService.showProductName();
 	}
 
@@ -80,14 +86,21 @@ public class PIMController {
 	// 제품명 등록/수정 폼 호출
 	// → productCode가 있으면 수정, 없으면 등록
 	@GetMapping("/productNameForm")
-	public String pnForm(@RequestParam(required = false) Integer productCode, Model model) {
+	public String pnForm(@RequestParam(required = false) Integer productCode, Integer brandCode, Model model) {
 		if (productCode != null) {
-			ProductName productName = productNameService.findById(productCode);
+			ProductNameDTO productName = productNameService.findById(productCode);
+			Brand brand = brandService.findById(brandCode);
+			model.addAttribute("brand", brand);
 			model.addAttribute("productName", productName); // 수정용 데이터
 			model.addAttribute("action", "/updateProductName"); // 수정용 액션
+			//model.addAttribute("action", "/updateBrand"); // 수정용 액션
 		} else {
-			model.addAttribute("productName", new ProductName()); // 빈 객체 전달
+			Brand brand = brandService.findById(brandCode);
+			model.addAttribute("brand", brand);
+			model.addAttribute("productName", new ProductNameDTO()); // 빈 객체 전달
 			model.addAttribute("action", "/registerProductName"); // 등록용 액션
+			//model.addAttribute("brand", new Brand());
+			//model.addAttribute("action", "/registerBrand"); // 등록용 액션
 		}
 		return "component/qam/productNameForm"; // JSP 경로 반환
 	}
@@ -117,7 +130,7 @@ public class PIMController {
 	// → 제품명 리스트에서 필터링할 때 사용
 	@GetMapping("/searchProductName")
 	@ResponseBody
-	public List<ProductName> searchProductName(
+	public List<ProductNameDTO> searchProductName(
 	        @RequestParam(required = false) String productName,
 	        @RequestParam(required = false) String productCategory) {
 	    return productNameService.searchProductName(productName, productCategory);

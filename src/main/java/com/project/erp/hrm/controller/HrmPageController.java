@@ -1,5 +1,6 @@
 package com.project.erp.hrm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.LeaveInfo;
+import com.project.erp.hrm.model.vo.Department;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.hrm.service.JobPositionService;
@@ -46,6 +48,12 @@ public class HrmPageController {
 	
 	@GetMapping("/empAdd")
 	public String empAdd(Model model) {
+//		List<Department> saleDept = new ArrayList<>();
+//		List<Department> deptList = departmentService.showDept();
+//		for(Department d : deptList) {
+//			if(d.getDeptName().contains("지점")) saleDept.add(d);
+//		}
+//		System.out.println(saleDept);
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
 		return "component/hrm/empAdd";

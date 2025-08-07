@@ -28,13 +28,7 @@ public class HSDController {
 	
 	@Autowired
 	private DefectiveService defectiveService;
-	
-	@ResponseBody
-	@GetMapping("/showSale")
-	public List<Sale> showSale() {
-		return saleService.showSale();
-    }
-	
+
 	/*
 	@ResponseBody
     @GetMapping("/showSaleNull")
@@ -48,11 +42,12 @@ public class HSDController {
 		return "redirect:/qam/saleReady";
     }
     
+    /*
 	@ResponseBody
     @GetMapping("/showSaleDone")
     public List<SaleReadyDTO> showSaleDone() {
     	return saleService.showSaleDone();
-    }
+    }*/
 	
 	@ResponseBody
     @GetMapping("/showDefective")

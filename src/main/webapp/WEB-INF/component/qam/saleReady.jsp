@@ -23,9 +23,12 @@
 		<th>카테고리</th>
 		<th>제품명</th>
         <th>가격</th>
-		<th>판매날짜(확인용)</th>
+		<th>부서코드</th>
+		<th>부서명</th>
+<!--		<th>판매날짜(확인용)</th>-->
 		<th>날짜입력</th>
 	</tr>
+	
 	<c:forEach items="${saleList}" var="sale">
 		<tr>
 			<td>${sale.saleNo}</td>
@@ -34,7 +37,9 @@
 			<td>${sale.productCategory}</td>
 			<td>${sale.productName}</td>
 			<td>${sale.productPrice}</td>
-			<td>${sale.saleDate}</td>
+			<td>${sale.deptNo}</td>
+			<td>${sale.deptName}</td>
+<!--			<td>${sale.saleDate}</td>-->
 			<td><input type="date" class="sellDate" data-no="${sale.saleNo}"></td>
 		</tr>
 	</c:forEach>

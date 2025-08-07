@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Paging {
 	private int offset = 0; // 시작 위치
-	private int limit = 10; // 개수
+	private int limit = 20; // 개수
 	
 	private int page = 1; // 현재 페이지
 	private int pageSize = 10; // 한 페이지 당 페이지 개수

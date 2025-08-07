@@ -1,5 +1,6 @@
 package com.project.erp.qam.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import com.project.erp.qam.model.vo.ProductName;
 import com.project.erp.qam.model.vo.Qc;
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.vo.Department;
 import com.project.erp.hrm.service.EmployeeInfoService;
+import com.project.erp.qam.model.dto.ProductNameDTO;
 import com.project.erp.qam.model.dto.QcResultDTO;
 import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.QcService;
@@ -30,7 +33,7 @@ public class QIPController {
 
 	@ResponseBody
 	@GetMapping("/showProductName")
-	public List<ProductName> showProductName() {
+	public List<ProductNameDTO> showProductName() {
 		return productNameService.showProductName();
 	}
     
@@ -98,7 +101,12 @@ public class QIPController {
     // 삭제 필요 X? 자동 매입 연결이기에 수정, 등록 항목만 고려
 }
 
-
+//List<Department> saleDept = new ArrayList<>();
+//List<Department> deptList = departmentService.showDept();
+//for(Department d : deptList) {
+//	if(d.getDeptName().contains("지점")) saleDept.add(d);
+//}
+//System.out.println(saleDept);
 
 
 

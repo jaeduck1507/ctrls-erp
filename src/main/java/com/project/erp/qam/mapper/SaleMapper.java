@@ -20,9 +20,11 @@ public interface SaleMapper {
 	
 	List<SaleReadyDTO> showSaleNull(Paging paging);
 	
-	int totalSale();
+	int totalSaleReady(); // saleReady.jsp의 total
 	
-	List<SaleReadyDTO> showSaleDone();	
+	List<SaleReadyDTO> showSaleDone(Paging paging);	
+	
+	int totalSaleDone(); // saleDone.jsp의 total
 	
 	SaleReadyDTO findBySaleNo(int saleNo);
 	

@@ -22,6 +22,9 @@ public class SaleReadyDTO {
     private String productCategory;
     private String productName;
     private int quantity;
+    
+    private int deptNo;
+    private String deptName;
 	
 }
 

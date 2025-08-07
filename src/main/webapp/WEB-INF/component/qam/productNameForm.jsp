@@ -45,7 +45,15 @@
             <option value="악세사리" ${productName.productCategory == '악세사리' ? 'selected' : ''}>악세사리</option>
             <option value="신발" ${productName.productCategory == '신발' ? 'selected' : ''}>신발</option>
         </select>
-    </label><br/><br/>
+    </label><br/>
+	
+	<label>브랜드:
+	    <select name="brandCode">
+	        <option value="1" ${brand.brandCode == 1 ? 'selected' : ''}>샤넬</option>
+	        <option value="2" ${brand.brandCode == 2 ? 'selected' : ''}>유니클로</option>
+	        <option value="3" ${brand.brandCode == 3 ? 'selected' : ''}>자라</option>
+	    </select>
+	</label><br/><br/>
 
     <!-- 저장 버튼 -->
     <button type="submit">저장</button>

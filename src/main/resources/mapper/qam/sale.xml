@@ -13,6 +13,9 @@
 		<result column="product_category" property="productCategory" />
 		<result column="product_name" property="productName" />
 		<result column="quantity" property="quantity" />
+		
+		<result column="dept_no" property="deptNo" />
+		<result column="dept_name" property="deptName" />
 	</resultMap>
 
 	<insert id="insertSale" parameterType="Sale">
@@ -32,10 +35,25 @@
 		pn.product_category,
 		pn.product_price,
 		s.sale_no,
-		s.sale_date
+		s.sale_date,
+		s.dept_no,
+		d.dept_name
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN department d ON s.dept_no = d.dept_no
+		WHERE s.sale_date IS NOT NULL
+		ORDER BY s.sale_date DESC
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+		<select id="totalSaleDone" resultMap="saleMap">
+		SELECT
+			count(*)
+		FROM sale s
+		JOIN product p ON s.product_no = p.product_no
+		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN department d ON s.dept_no = d.dept_no
 		WHERE s.sale_date IS NOT NULL
 		ORDER BY s.sale_date DESC
 	</select>
@@ -48,21 +66,25 @@
 		pn.product_name,
 		pn.product_category,
 		s.sale_no,
-		s.sale_date
+		s.sale_date,
+		s.dept_no,
+		d.dept_name
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN department d ON s.dept_no = d.dept_no
 		WHERE s.sale_date IS NULL
 		ORDER BY s.sale_no ASC
 		LIMIT #{offset}, #{limit}
 	</select>
 	
-	<select id="totalSale" resultType="int">
+	<select id="totalSaleReady" resultType="int">
 		SELECT
 			count(*)
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN department d ON s.dept_no = d.dept_no
 		WHERE s.sale_date IS NULL
 		ORDER BY s.sale_no ASC
 	</select>
@@ -75,10 +97,13 @@
 		pn.product_name,
 		pn.product_price,
 		pn.product_category,
-		s.sale_date
+		s.sale_date,
+		s.dept_no,
+		d.dept_name
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN department d ON s.dept_no = d.dept_no
 		WHERE s.sale_no = #{saleNo}
 	</select>
 
@@ -109,10 +134,13 @@
 		pn.product_name, 
 		pn.product_price,
 		pn.product_category, 
-		s.sale_date 
+		s.sale_date,
+		s.dept_no,
+		d.dept_name
 		FROM sale s 
 		JOIN product p ON s.product_no = p.product_no 
-		JOIN product_name pn ON p.product_code = pn.product_code 
+		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN department d ON s.dept_no = d.dept_no 
 		WHERE s.sale_date IS NOT NULL 
 		<if test="productCategory != null and productCategory != ''">
 			AND pn.product_category = #{productCategory}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.qam.mapper.ProductNameMapper;
+import com.project.erp.qam.model.dto.ProductNameDTO;
 import com.project.erp.qam.model.vo.ProductName;
 
 @Service
@@ -16,25 +17,25 @@ public class ProductNameService {
 
 	// 전체 제품명 조회
 	// → SELECT * FROM product_name
-	public List<ProductName> showProductName() {
+	public List<ProductNameDTO> showProductName() {
 		return productNameMapper.showProductName();
 	}
 
 	// 제품명 등록
 	// → INSERT INTO product_name (...) VALUES (...)
-	public void insertProductName(ProductName pn) {
-		productNameMapper.insertProductName(pn);
+	public void insertProductName(ProductName productName) {
+		productNameMapper.insertProductName(productName);
 	}
 
 	// 제품명 수정
 	// → UPDATE product_name SET ... WHERE product_code = ?
-	public void updateProductName(ProductName pn) {
-		productNameMapper.updateProductName(pn);
+	public void updateProductName(ProductName productName) {
+		productNameMapper.updateProductName(productName);
 	}
 
 	// 특정 제품명 단건 조회
 	// → 수정폼 진입 시 기존 정보 조회용
-	public ProductName findById(int productCode) {
+	public ProductNameDTO findById(int productCode) {
 		return productNameMapper.findById(productCode);
 	}
 
@@ -46,7 +47,7 @@ public class ProductNameService {
 
 	// 제품명 검색
 	// → product_name LIKE '%keyword%' AND category 조건 조회
-	public List<ProductName> searchProductName(String productName, String productCategory) {
+	public List<ProductNameDTO> searchProductName(String productName, String productCategory) {
 	    return productNameMapper.searchProductName(productName, productCategory);
 	}
 }

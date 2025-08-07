@@ -23,12 +23,14 @@ public class SaleService {
 	
 	public List<SaleReadyDTO> showSaleNull(Paging paging) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
-		paging.setTotal(saleMapper.totalSale());
+		paging.setTotal(saleMapper.totalSaleReady());
 		return saleMapper.showSaleNull(paging);
 	}
 	
-	public List<SaleReadyDTO> showSaleDone() {
-		return saleMapper.showSaleDone();
+	public List<SaleReadyDTO> showSaleDone(Paging paging) {
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		paging.setTotal(saleMapper.totalSaleDone());
+		return saleMapper.showSaleDone(paging);
 	}
 	
 	public SaleReadyDTO findBySaleNo(int saleNo) {

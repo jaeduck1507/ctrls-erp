@@ -22,4 +22,6 @@ public class ProductDetailDTO {
     private int productPrice;       // 판매가
     private int productCost;        // 단가
     private String productCategory; // 카테고리 (상의/하의/악세사리/신발)
+    private int brandCode;
+    private String brandName;
 }
