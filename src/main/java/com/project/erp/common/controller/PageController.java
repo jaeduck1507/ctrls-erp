@@ -1,5 +1,7 @@
 package com.project.erp.common.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.project.erp.common.model.vo.User;
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.vo.AttendanceLog;
 import com.project.erp.hrm.service.EmployeeInfoService;
 
 import jakarta.servlet.http.HttpSession;
@@ -39,8 +42,9 @@ public class PageController {
 	public String mypage(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
-		
-		model.addAttribute("user",user);
+		EmpInfo empInfo = new EmpInfo();
+		empInfo.setEmpNo(user.getEmpNo());
+		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		return "common/mypage";
 		
 	}

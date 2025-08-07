@@ -1,14 +1,19 @@
 package com.project.erp.hrm.controller;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.User;
 import com.project.erp.hrm.model.dto.AttendanceStatsDTO;
 import com.project.erp.hrm.model.dto.attendanceMonth;
 import com.project.erp.hrm.model.vo.AttendanceLog;
@@ -46,6 +51,29 @@ public class AMController {
 	public AttendanceStatsDTO attendanceStats(@RequestBody attendanceMonth am) {
 		
 		return attendanceLogService.attendanceStats(am);
+	}
+	
+	@ResponseBody
+	@PostMapping("/startWorking")
+	public boolean startWorking(@RequestBody AttendanceLog al) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		al.setEmpNo(user.getEmpNo());
+		al.setWorkDate(LocalDate.now());
+		attendanceLogService.startWork(al);
+		return true;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/finishWorking")
+	public boolean finishWorking(@RequestBody AttendanceLog al) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		al.setEmpNo(user.getEmpNo());
+		al.setWorkDate(LocalDate.now());
+		attendanceLogService.finishWork(al);
+		return true;
 	}
 	
 }

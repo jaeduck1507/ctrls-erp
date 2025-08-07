@@ -27,4 +27,11 @@
  		AND emp_no = #{empNo}
  		ORDER BY work_date ASC;
 	</select>
+	
+	<select id="showAttendanceOneAtToday" parameterType="AttendanceLog" resultMap="AttendanceLogMap">
+		select * from attendance_log
+		WHERE work_date = #{workDate}
+ 		AND emp_no = #{empNo}
+	</select>
+	
 </mapper>
