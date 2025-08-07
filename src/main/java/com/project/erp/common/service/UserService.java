@@ -80,5 +80,10 @@ public class UserService implements UserDetailsService{
 		return userMapper.noCheck(empNo);
 	}
 	
+	public String findId(int empNo) {
+		System.out.println("service");
+		return userMapper.findId(empNo);
+	};
+	
 
 }

@@ -33,4 +33,8 @@
 		WHERE emp_no = #{empNo}
 		
 	</select>
+	
+	<select id="findId" parameterType="int" resultType="String">
+	    SELECT username FROM user WHERE emp_no = #{empNo};
+	</select>
 </mapper>

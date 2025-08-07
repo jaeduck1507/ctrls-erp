@@ -44,4 +44,9 @@ public class PageController {
 		return "common/mypage";
 		
 	}
+	
+	@GetMapping("/findId")
+	public String findId() {
+		return "common/findId";
+	};
 }
