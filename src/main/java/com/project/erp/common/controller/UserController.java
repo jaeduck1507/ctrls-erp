@@ -26,4 +26,11 @@ public class UserController {
 		userService.register(vo);
 		return"redirect:/register";
 	}
+	
+	@ResponseBody
+	@PostMapping("/findId")
+	public String findId(int empNo) {
+		return userService.findId(empNo);
+	}
+
 }

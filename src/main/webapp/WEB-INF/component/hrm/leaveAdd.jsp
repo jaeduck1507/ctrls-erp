@@ -34,10 +34,10 @@
 		           for(var i = 0; i < 6; i++) { // 열에 데이터 추가  0 : 사번, 1: 신청날짜(현재날짜로 고정) 2: 휴가 유형, 5 : 사유 나머지 : 날짜 데이터 
 		               if(i == 0) $("#result tr").eq(-1).append('<td><input type="text" class="empNo"></td>');
 		               else if(i == 1) $("#result tr").eq(-1).append('<td><input type="date" class="currentDate" disabled></td>');
-					   else if(i == 2) $("#result tr").eq(-1).append('<td><select><option disabled selected>유형선택</option><option value="연차">연차</option><option value="병가">병가</option><option value="경조사">경조사</option><option value="기타">기타</option></select></td>');
+					   else if(i == 2) $("#result tr").eq(-1).append('<td><select><option disabled selected>유형선택</option><option value="연차" selected>연차</option><option value="병가">병가</option><option value="경조사">경조사</option><option value="기타">기타</option></select></td>');
 					   else if(i == 3) $("#result tr").eq(-1).append('<td><input type="date" id="startDate" class="leaveDate"></td>');
 					   else if(i == 4) $("#result tr").eq(-1).append('<td><input type="date" id="endDate" class="leaveDate"></td>');
-					   else if(i == 5) $("#result tr").eq(-1).append('<td><input type="text"></td>');
+					   else if(i == 5) $("#result tr").eq(-1).append('<td><input type="text" value="휴가"></td>');
 		           }
 				   // 열 삭제 버튼 추가 (클래스 btn4)
 		           $("#result tr").eq(-1).append('<td><button class="btn4">열 삭제</button></td>'); 
@@ -127,8 +127,7 @@
 			                   liList.push(obj); // 정보 저장한 객체를 배열에 삽입
 							   
 			               }
-						   alert("신청완료"); // 휴가 등록 버튼을 누르면
-						   location.reload(); // 새로고침
+						   
 					
 			               console.log(JSON.stringify(liList));
 			               $.ajax({
@@ -141,11 +140,12 @@
 			   				contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 			                   // 응답
 			                   success : function(result) {
-			   					
+								alert("신청완료"); // 휴가 등록 버튼을 누르면
+								location.reload(); // 새로고침
 			                   },
 			                   
 			   				error:function(xhr,status,error) {
-			   					
+									alert("사번을 입력하세요");
 			   				}
 			               });
 			           });

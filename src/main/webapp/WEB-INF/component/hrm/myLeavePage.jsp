@@ -36,7 +36,7 @@
 		  신청 날짜 <input type="date" id="currentDate" >
 		  휴가 유형 <select id="select">
 				       <option disabled selected>유형선택</option>
-					   <option value="연차">연차</option>
+					   <option value="연차" selected>연차</option>
 					   <option value="병가">병가</option>
 					   <option value="경조사">경조사</option>
 					   <option value="기타">기타</option>
@@ -194,38 +194,41 @@
 			 
 	   });
 		
-	  // 수정 
-	$("#btn2").click((e) => { // 제출 버튼
-        const liList = []; // 객체를 담을 배열
-        const formData = new FormData();
-        const obj ={}; 
-  
-	   	  obj.empNo=$(".empNo").val();
-	   	  obj.requestDate=.$("#currentDate").val();
-	   	  obj.leaveType=find("#select").val();
-	      obj.startDate=$("#startDate").val();
-	   	  obj.endDate=$("#endDate").val();
-	   	  obj.reason=$("#reason").val();
-           
-		   console.log(obj);
-           liList.push(obj); // 정보 저장한 객체를 배열에 삽입
+	  
+	$("#btn2").click(() => { // 제출 버튼
+  	   	  const empNo = $(".empNo").val();
+		  const currentDate = $("#currentDate").val();
+		  const select = $("#select").val();
+		  const startDate = $("#startDate").val();
+		  const endDate = $("#endDate").val();
+		  const reason = $("#reason").val();
 
-	   //alert("신청완료"); // 휴가 등록 버튼을 누르면
-	   //location.reload(); // 새로고침
-	   //console.log(JSON.stringify(liList));
-	   console.log(liList);
+		  //console.log(empNo);
+		  //console.log(currentDate);
+		  //console.log(select);
+		  //console.log(startDate);
+		  //console.log(endDate);
+		  //console.log(reason);
+
 	   $.ajax({
-		   // 요청
-	       type : "post",
-	       url : "/leaveAdd",
-	       dataType : "json", // dataType 지정해줘야 자바에서 인식
-	       data : JSON.stringify(liList), // json문자열로 변환해서 전송
-		   processData: false,
+			// 요청
+			type : "post",
+			url : "/leaveAdd",
+			data : JSON.stringify([{
+				"empNo" : empNo,
+				"requestDate" : currentDate, 
+				"leaveType" : select,
+				"startDate" : startDate,
+				"endDate" : endDate,
+				"reason" : reason,
+		   }]),
+		   contentType: false,
 		   contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	       // 응답
-	       success : function(result) {
-			
-	       },
+		   success : function(response) {
+				alert("신청완료"); // 휴가 등록 버튼을 누르면
+				location.reload(); // 새로고침
+	      },
 	       error:function(xhr,status,error) {
 		   }
        });
