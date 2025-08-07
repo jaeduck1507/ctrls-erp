@@ -30,9 +30,20 @@ public class LMController {
 	@ResponseBody
 	@PostMapping("/leaveAdd")
 	public String leaveAdd(@RequestBody List<LeaveInfo> liList) {
+		System.out.println("Controller");
+		System.out.println(liList);
+		System.out.println("-----------");
 //		System.out.println(liList.get(0).getEmpNo());
 		leaveInfoService.leaveAdd(liList);
 		return "redirect:/component/hrm/leaveAdd";
+	}
+	
+	@ResponseBody
+	@PostMapping("/myLeavePage")
+	public String myLeavePage(@RequestBody List<LeaveInfo> liList) {
+//		System.out.println(liList.get(0).getEmpNo());
+		leaveInfoService.leaveAdd(liList);
+		return "redirect:/component/hrm/myLeavePage";
 	}
 	
 	@ResponseBody

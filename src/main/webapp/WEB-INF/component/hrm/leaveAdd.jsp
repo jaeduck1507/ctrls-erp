@@ -129,6 +129,7 @@
 			               }
 						   alert("신청완료"); // 휴가 등록 버튼을 누르면
 						   location.reload(); // 새로고침
+					
 			               console.log(JSON.stringify(liList));
 			               $.ajax({
 			                   // 요청

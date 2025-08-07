@@ -18,6 +18,9 @@ public class LeaveInfoService {
 		return leaveInfoMapper.leaveInfo(li);
 	}
 	public void leaveAdd(List<LeaveInfo> liList) {
+		System.out.println("service!");
+		System.out.println(liList);
+		System.out.println("-------------");
 		leaveInfoMapper.leaveAdd(liList);
 	}
 	
