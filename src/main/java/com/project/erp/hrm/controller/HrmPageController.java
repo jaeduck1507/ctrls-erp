@@ -88,6 +88,14 @@ public class HrmPageController {
 		return "component/hrm/leaveAdd";
 	}
 	
+	@GetMapping("/myLeavePage")
+	public String myLeaveAdd(Model model, LeaveInfo li) {
+		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
+		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
+		
+		return "component/hrm/myLeavePage";
+	}
+	
 	@GetMapping("/leaveDays")
 	public String leaveDays() {
 		return "component/hrm/leaveDays";
