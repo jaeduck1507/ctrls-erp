@@ -81,6 +81,10 @@
 				contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	            // 응답
 	            success : function(result) {
+					if(result) {
+						alert("정상적으로 처리되었습니다!");
+					}
+					/*
 	            	const yearMonth = $("#yearMonth").val();
 	    			$.ajax({
 	    				type: "post",
@@ -101,7 +105,7 @@
 	    				error: function(xhr, status, error) {
 	    							
 	    				}
-	    			});
+	    			});*/
 	            },
 	            
 				error:function(xhr,status,error) {

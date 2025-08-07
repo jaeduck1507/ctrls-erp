@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+	<!-- 급여 등록 시 자동으로 거래내역에 입력되게 로직 바꿈! -> 필요 없는 페이지-->
 	<h1>부서별 월 급여</h1>
 	<div id="total">
 		<input type="month" id="yearMonth"/>
@@ -63,7 +64,7 @@
 				obj.transAmount=$("#result tr").eq(i).find("td").eq(3).text();
 				obj.transType="지출";
 				obj.category="인건비";
-				obj.transDesc=$("#result tr").eq(i).find("td").eq(0).text() + " " + obj.transDate.substring(6, 7) + "월 급여";
+				obj.transDesc=$("#result tr").eq(i).find("td").eq(0).text() + " " + obj.transDate.substring(5, 7) + "월 급여";
 				
 				salList.push(obj);
 			}

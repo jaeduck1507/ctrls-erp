@@ -10,6 +10,7 @@
 		<result property="productName" column="product_name"/>
 		<result property="productPrice" column="product_price"/>
 		<result property="productCategory" column="product_category"/>
+		<result property="dailySales" column="daily_sales"/>
 	</resultMap>
 	
 	<select id="showSaleManage" parameterType="SaleProductDTO" resultMap="SaleProductMap">
@@ -37,4 +38,9 @@
 		</foreach>
 	</insert>
 	
+	<select id="totalSales" parameterType="SaleProductDTO" resultMap="SaleProductMap">
+		SELECT sale_date, SUM(total_amount) AS daily_sales
+		FROM sale_manage
+		WHERE sale_date = #{saleDate}
+	</select>
 </mapper>

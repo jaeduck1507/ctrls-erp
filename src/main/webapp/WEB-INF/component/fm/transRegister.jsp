@@ -9,9 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>거래내역 입력</h1>
-	<a href="/fm/totalSalary">부서별 월 급여 입력 /fm/totalSalary</a><br />
-	<!--
+	<h1>기타 지출 내역 입력</h1>
 	<div id="register">
 		<button id="add-row">열 추가</button>
 		<table border="1" id="result">
@@ -28,9 +26,8 @@
 		</table>
 		<button id="trans-register">등록</button>
 	</div>
-	-->
+	
 	<script>
-		/*
 		var count = 0;
 		
 		function addRow() {
@@ -66,20 +63,8 @@
 			
 			deptInfo.deptNo = opt.data('dept_no');
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
-			$(e.target).parent().parent().find("td").eq(2).html('<select id="transType"><option value="" disabled selected>선택</option><option value="수입">수입</option><option value="지출">지출</option></select>');
-		});
-		
-		$(document).on("change", "#transType", (e) => {
-			const typeInfo = {};
-			const val = $(e.target).val();
-			console.log(val);
-			
-			if (val == "수입") {
-				$(e.target).parent().parent().find("td").eq(3).text("판매 수입");
-			} else if (val == "지출") {
-				$(e.target).parent().parent().find("td").eq(3).html('<select id="category"><option value="" disabled selected>선택</option><option value="급여">급여</option><option value="매입 비용">매입 비용</option><option value="기타 비용">기타 비용</option></select>');
-			}
-			
+			$(e.target).parent().parent().find("td").eq(2).text("지출");
+			$(e.target).parent().parent().find("td").eq(3).html('<input type="text" name="category">');
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" name="trans-amount">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc">');
 			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date">');
@@ -92,15 +77,12 @@
 			for (var i = 1; i < table.length; i++) {
 				const obj ={};
 				obj.deptNo=$("#result tr").eq(i).find("td").eq(1).text();
-				obj.transType=$("#result tr").eq(i).find("td").eq(2).find("select").val();
+				obj.transType=$("#result tr").eq(i).find("td").eq(2).text();
+				obj.category=$("#result tr").eq(i).find("td").eq(3).find("input").val();
 				obj.transAmount=$("#result tr").eq(i).find("td").eq(4).find("input").val();
 				obj.transDesc=$("#result tr").eq(i).find("td").eq(5).find("input").val();
 				obj.transDate=$("#result tr").eq(i).find("td").eq(6).find("input").val();
 				
-				obj.category=$("#result tr").eq(i).find("td").eq(3).find("#category").val();
-				if (obj.category == null) {
-					obj.category=$("#result tr").eq(i).find("td").eq(3).text();
-				}
 				tList.push(obj);
 			}
 			console.log(JSON.stringify(tList));
@@ -119,7 +101,7 @@
 					
 				}
 			});
-		});*/
+		});
 	</script>
 </body>
 </html>

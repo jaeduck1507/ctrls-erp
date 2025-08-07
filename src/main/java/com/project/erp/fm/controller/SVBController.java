@@ -28,8 +28,9 @@ public class SVBController {
 	
 	@ResponseBody
 	@PostMapping("/budgetRegister")
-	public void budgetRegister(@RequestBody List<Budget> bList) {
+	public boolean budgetRegister(@RequestBody List<Budget> bList) {
 		budgetService.budgetRegister(bList);
+		return true;
 	}
 	
 	@PostMapping("/budgetUpdate")

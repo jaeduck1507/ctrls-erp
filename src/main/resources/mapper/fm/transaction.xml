@@ -27,6 +27,7 @@
 				AND dept_name = #{deptName}
 			</if>
 		</where>
+		ORDER BY trans_date
 	</select>
 	
 	<insert id="transRegister" parameterType="ArrayList">
