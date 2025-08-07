@@ -17,18 +17,15 @@ public class User implements UserDetails {
 	private String password;
 	private String role;
 	private int empNo;
+	private String empName;
+	private int deptNo;
+	private int jobNo;
+	private String jobTitle; // 직급명
+	private String deptName;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(this.role));
 	}
 	
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
 	
-	@Override
-	public String getUsername() {
-		return this.username;
-	}
 }

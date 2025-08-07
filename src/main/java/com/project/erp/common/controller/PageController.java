@@ -39,9 +39,8 @@ public class PageController {
 	public String mypage(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
-		EmpInfo empInfo = new EmpInfo();
-		empInfo.setEmpNo(user.getEmpNo());
-		model.addAttribute("user", employeeInfoService.infoShowOne(empInfo));
+		
+		model.addAttribute("user",user);
 		return "common/mypage";
 		
 	}
