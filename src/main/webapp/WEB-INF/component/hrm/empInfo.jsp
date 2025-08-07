@@ -110,11 +110,11 @@
 					// 페이징 생성
                 	}
                 	$(".pagination").html('');
-                	$(".pagination").append('<li class="page-item ' + (result.hrmPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.hrmPagingDTO.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.hrmPagingDTO.startPage; i<=result.hrmPagingDTO.endPage; i++) {
-                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.hrmPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for(var i =result.startPage; i<=result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
                 	}
-                	$(".pagination").append('<li class="page-item ' + (result.hrmPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.hrmPagingDTO.endPage + 1) + '">Next</a></li>');
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
                 },
                 
 				error:function(xhr,status,error) {
@@ -153,11 +153,11 @@
 					// 페이징 생성
                 	}
                 	$(".pagination").html('');
-                	$(".pagination").append('<li class="page-item ' + (result.hrmPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.hrmPagingDTO.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.hrmPagingDTO.startPage; i<=result.hrmPagingDTO.endPage; i++) {
-                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.hrmPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for(var i =result.startPage; i<=result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
                 	}
-                	$(".pagination").append('<li class="page-item ' + (result.hrmPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.hrmPagingDTO.endPage + 1) + '">Next</a></li>');
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
                 },
                 
 				error:function(xhr,status,error) {

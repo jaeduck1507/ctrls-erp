@@ -40,7 +40,7 @@
 		ORDER BY s.sale_date DESC
 	</select>
 
-	<select id="showSaleNull" resultMap="saleMap">
+	<select id="showSaleNull" parameterType="Paging" resultMap="saleMap">
 		SELECT
 		p.product_no,
 		pn.product_code,
@@ -49,6 +49,17 @@
 		pn.product_category,
 		s.sale_no,
 		s.sale_date
+		FROM sale s
+		JOIN product p ON s.product_no = p.product_no
+		JOIN product_name pn ON p.product_code = pn.product_code
+		WHERE s.sale_date IS NULL
+		ORDER BY s.sale_no ASC
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalSale" resultType="int">
+		SELECT
+			count(*)
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
@@ -90,7 +101,7 @@
 		GROUP BY product_name, product_code, product_price, sale_date
 	</select>
 
-	<select id="searchSaleDone" resultType="SaleReadyDTO"> 
+	<select id="searchSaleDone" resultMap="saleMap"> 
 		SELECT 
 		s.sale_no,
 		p.product_no,
@@ -105,7 +116,11 @@
 		WHERE s.sale_date IS NOT NULL 
 		<if test="productCategory != null and productCategory != ''">
 			AND pn.product_category = #{productCategory}
+		</if> 
+		<if test="startDate != null and endDate != null">
+			AND s.sale_date BETWEEN #{startDate} AND #{endDate}
 		</if>
+		ORDER BY s.sale_date DESC
 	</select>
 
 

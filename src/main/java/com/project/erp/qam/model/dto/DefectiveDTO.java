@@ -19,7 +19,13 @@ public class DefectiveDTO { //불량품 테이블: 품질검사에서 불합격 
 	 private String productName;
 	 private int productPrice;
 	 private String reason; // 불량 사유
+	 private LocalDate qcDate;
 	 
 	 private LocalDate startDate;
 	 private LocalDate endDate;
+	 
+	 // defectiveFilter 위해
+	 private boolean filterMaterial;
+	 private boolean filterColor;
+	 private boolean filterDamage;
 }

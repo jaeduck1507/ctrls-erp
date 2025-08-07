@@ -83,7 +83,7 @@
 			AND dept_no = #{empInfo.deptNo}
 		</if>
 		</where>
-		LIMIT #{hrmPagingDTO.offset}, #{hrmPagingDTO.limit}
+		LIMIT #{offset}, #{limit}
 	</select>
 	
 	<select id="infoShowOne" parameterType="EmpInfo" resultMap="EmpInfoMap">

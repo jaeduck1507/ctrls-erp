@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
-import com.project.erp.hrm.model.dto.HRMPagingDTO;
 import com.project.erp.hrm.model.vo.Department;
 import com.project.erp.hrm.model.vo.EmployeeInfo;
 import com.project.erp.hrm.model.vo.JobPosition;
@@ -35,7 +35,7 @@ public class EIMController {
 	
 	@ResponseBody
 	@PostMapping("/infoShow")
-	public EmpInfoPagingDTO infoShow(EmpInfo ei,HRMPagingDTO hrmPagingDTO) {
+	public EmpInfoPagingDTO infoShow(EmpInfo ei, Paging hrmPagingDTO) {
 		return employeeInfoservice.pagingInfoShow(ei,hrmPagingDTO);
 	}
 	

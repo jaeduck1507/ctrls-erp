@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.mapper.EmployeeInfoMapper;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
-import com.project.erp.hrm.model.dto.HRMPagingDTO;
 import com.project.erp.hrm.model.vo.EmployeeInfo;
 
 @Service
@@ -41,13 +41,13 @@ public class EmployeeInfoService {
 		return employeeInfoMapper.totalEmp(ei);
 	}
 	
-	public EmpInfoPagingDTO pagingInfoShow(EmpInfo ei,HRMPagingDTO hrmPagingDTO) {
+	public EmpInfoPagingDTO pagingInfoShow(EmpInfo ei, Paging paging) {
 		EmpInfoPagingDTO empInfoPagingDTO = new EmpInfoPagingDTO();
 		empInfoPagingDTO.setEmpInfo(ei);
-		hrmPagingDTO.setOffset(hrmPagingDTO.getLimit() * (hrmPagingDTO.getPage()-1));
-		empInfoPagingDTO.setHrmPagingDTO(hrmPagingDTO);
+		empInfoPagingDTO.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		empInfoPagingDTO.setEmpInfoList(infoShowPage(empInfoPagingDTO));
-		empInfoPagingDTO.setHrmPagingDTO(new HRMPagingDTO(hrmPagingDTO.getPage(),totalEmp(ei)));
+		empInfoPagingDTO.setPage(paging.getPage());
+		empInfoPagingDTO.setTotal(totalEmp(ei));
 		return empInfoPagingDTO;
 	}
 	

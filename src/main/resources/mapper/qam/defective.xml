@@ -24,6 +24,7 @@
 	<result column="check_material" property="checkMaterial"/>
 	<result column="check_color" property="checkColor"/>
 	<result column="check_damage" property="checkDamage"/>
+	<result column="qc_date" property="qcDate"/>
 </resultMap>
 
     <insert id="insertDefective" parameterType="Defective">
@@ -46,11 +47,41 @@
         q.check_color,
         q.check_damage,
 		pn.product_price,
-		d.reason
+		d.reason,
+		q.qc_date
 	FROM defective d
 	JOIN product p ON d.product_no = p.product_no
 	JOIN product_name pn ON p.product_code = pn.product_code
 	JOIN qc q ON p.product_no = q.product_no
+	ORDER BY q.qc_date DESC
+	</select> 
+	
+	<select id="searchDefective" resultMap="defectiveMap">
+		SELECT 
+			d.defective_no,
+			p.product_no,
+			pn.product_code,
+			pn.product_name,
+			pn.product_category,
+			q.check_material,
+	        q.check_color,
+	        q.check_damage,
+			pn.product_price,
+			d.reason,
+			q.qc_date
+		FROM defective d
+		JOIN product p ON d.product_no = p.product_no
+		JOIN product_name pn ON p.product_code = pn.product_code
+		JOIN qc q ON p.product_no = q.product_no
+		<where>
+			<if test="productCategory != null and productCategory != ''">
+				AND pn.product_category = #{productCategory}
+			</if>
+			<if test="startDate != null and endDate != null">
+				AND q.qc_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+		</where>
+		ORDER BY q.qc_date DESC
 	</select> 
 
 </mapper>

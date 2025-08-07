@@ -1,10 +1,9 @@
-package com.project.erp.hrm.model.dto;
+package com.project.erp.common.model.vo;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor
-public class HRMPagingDTO {
+@Data
+public class Paging {
 	private int offset = 0; // 시작 위치
 	private int limit = 10; // 개수
 	
@@ -21,8 +20,12 @@ public class HRMPagingDTO {
 	private boolean prev;
 	private boolean next;
 	
-	public HRMPagingDTO(int page, int total) {
-		this.page = page;
+	private int total;
+	
+	public void setTotal(int total) {
+		this.total = total;
+		this.offset = (page - 1) * limit;
+
 		this.endPage = (int)(Math.ceil((double)page / this.pageSize)) * this.pageSize;
 		this.startPage = this.endPage - this.pageSize + 1;
 		
