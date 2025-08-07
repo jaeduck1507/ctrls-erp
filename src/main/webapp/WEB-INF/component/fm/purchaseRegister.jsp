@@ -109,7 +109,7 @@
     	
         for(var i = 1; i < table.length; i++){ // i가 1부터 시작하는 이유는 첫번째 열은 th(열의 설명)부분이라 데이터가 아님
             const obj ={}; // 직원 하나당 하나의 객체로 생성
-            obj.productNo=$("#result tr").eq(i).find("td").eq(1).text(); 
+            obj.productCode=$("#result tr").eq(i).find("td").eq(1).text(); 
             obj.unitPrice=$("#result tr").eq(i).find("td").eq(4).text(); 
             obj.quantity=$("#result tr").eq(i).find("td").eq(6).find("input").val(); 
             obj.varAmount=$("#result tr").eq(i).find("td").eq(7).text(); 
@@ -118,7 +118,7 @@
             prList.push(obj); // 정보 저장한 객체를 배열에 삽입
         }
         console.log(JSON.stringify(prList));
-        
+        /*
         $.ajax({
             // 요청
             type : "post",
@@ -135,7 +135,7 @@
 			error:function(xhr,status,error) {
 				
 			}
-        });
+        });*/
     });
 
 </script>

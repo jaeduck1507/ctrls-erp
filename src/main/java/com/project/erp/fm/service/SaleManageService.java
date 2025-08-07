@@ -13,16 +13,21 @@ import com.project.erp.fm.model.vo.SaleManage;
 public class SaleManageService implements SaleManageMapper {
 
 	@Autowired
-	private SaleManageMapper mapper;
+	private SaleManageMapper saleManageMapper;
 
 	@Override
 	public List<SaleProductDTO> showSaleManage(SaleProductDTO sp) {
-		return mapper.showSaleManage(sp);
+		return saleManageMapper.showSaleManage(sp);
 	}
 
 	@Override
 	public void saleRegister(List<SaleManage> smList) {
-		mapper.saleRegister(smList);
+		saleManageMapper.saleRegister(smList);
+	}
+
+	@Override
+	public List<SaleProductDTO> totalSales(SaleProductDTO sp) {
+		return saleManageMapper.totalSales(sp);
 	}
 	
 }

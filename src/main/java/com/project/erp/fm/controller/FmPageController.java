@@ -11,10 +11,8 @@ import com.project.erp.fm.service.BudgetService;
 import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
-import com.project.erp.qam.model.dto.SaleReadyDTO;
 import com.project.erp.hrm.service.JobPositionService;
 import com.project.erp.qam.service.ProductNameService;
-import com.project.erp.qam.service.SaleService;
 
 @RequestMapping("/fm")
 @Controller
@@ -31,9 +29,6 @@ public class FmPageController {
 
 	@Autowired
 	private EmployeeInfoService employeeInfoService;
-	
-	@Autowired
-	private SaleService saleService;
 	
 	@Autowired
 	private BonusMapper bonusMapper;
@@ -82,10 +77,7 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/saleRegister")
-	public String saleRegister(Model model, SaleReadyDTO dto) {
-		model.addAttribute("productNameList", productNameService.showProductName());
-		model.addAttribute("countSale", saleService.dailySale(dto));
-		//System.out.println(saleService.dailySale(dto));
+	public String saleRegister() {
 		return "component/fm/saleRegister";
 	}
 	
@@ -100,6 +92,7 @@ public class FmPageController {
 		model.addAttribute("budgetInfo", budgetServive.searchBudget(bd));
 		return "component/fm/budgetUpdate";
 	}
+	
 	@GetMapping("/addBonusPayment")
 	public String addBonusPayment(Model model) {
 		model.addAttribute("empInfo", employeeInfoService.showEmployee());
@@ -119,11 +112,6 @@ public class FmPageController {
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
 		return "component/fm/salaryPayment";
-	}
-	
-	@GetMapping("/totalSalary")
-	public String totalSalary() {
-		return "component/fm/totalSalary";
 	}
 	
 }

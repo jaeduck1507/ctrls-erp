@@ -1,5 +1,8 @@
 package com.project.erp.fm.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,10 @@ import com.project.erp.fm.model.dto.SalaryAlreadyAddDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
 import com.project.erp.fm.model.vo.BonusPayment;
 import com.project.erp.fm.model.vo.Salary;
+import com.project.erp.fm.model.vo.Transaction;
 import com.project.erp.fm.service.BonusPaymentService;
 import com.project.erp.fm.service.SalaryService;
+import com.project.erp.fm.service.TransactionService;
 import com.project.erp.hrm.model.dto.EmpInfo;
 
 @Controller
@@ -23,6 +28,9 @@ public class CSIController {
 	// Check Salary Information
 	@Autowired
 	private SalaryService salaryService;
+	
+	@Autowired
+	private TransactionService transactionService;
 	
 	@Autowired
 	private BonusPaymentService bonusPaymentService; 
@@ -56,14 +64,34 @@ public class CSIController {
 	@ResponseBody
 	@PostMapping("/addSalaryPayment")
 	public boolean addSalaryPayment(@RequestBody List<Salary> spList) {
+		System.out.println(spList);
 		salaryService.addSalaryPayment(spList);
+		
+		// 날짜
+		LocalDate salaryDate = spList.get(0).getSalaryDate();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+	    String yearMonth = salaryDate.format(formatter);
+	    String month = yearMonth.substring(5, 7);
+	    
+	    SalEmpDTO dto = new SalEmpDTO();
+	    dto.setYearMonth(yearMonth);
+	    
+		List<SalEmpDTO> salaryList = salaryService.totalSalary(dto);
+		
+		List<Transaction> transactionList = new ArrayList<>();
+		
+		for (SalEmpDTO salEmp : salaryList) {
+			Transaction transaction = new Transaction();
+			transaction.setTransType("지출");
+			transaction.setTransAmount(salEmp.getTotalSal());
+			transaction.setCategory("인건비");
+			transaction.setTransDesc(salEmp.getDeptName() + " " + month + "월 급여");
+			transaction.setTransDate(salaryDate);
+			transaction.setDeptNo(salEmp.getDeptNo());
+			transactionList.add(transaction);
+		}
+		transactionService.transRegister(transactionList);
 		return true;
-	}
-	
-	@ResponseBody
-	@PostMapping("/totalSalary")
-	public List<SalEmpDTO> totalSalary(SalEmpDTO se) {
-		return salaryService.totalSalary(se);
 	}
 	
 }

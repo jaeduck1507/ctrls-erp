@@ -12,4 +12,6 @@ public interface SaleManageMapper {
 
 	List<SaleProductDTO> showSaleManage(SaleProductDTO sp);
 	void saleRegister(List<SaleManage> smList);
+	List<SaleProductDTO> totalSales(SaleProductDTO sp);
+	
 }

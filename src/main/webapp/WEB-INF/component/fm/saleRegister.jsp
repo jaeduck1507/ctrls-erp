@@ -73,14 +73,18 @@
 				processData: false,
 				contentType: 'application/json; charset=UTF-8',
 				success: function(response) {
-					
+					if (response) {
+						alert("등록되었습니다!");
+						location.reload();
+					} else {
+						alert("이미 등록한 정보입니다!");
+						location.reload();
+					}
 				},
 				error: function(xhr, status, error) {
 					
 				}
-			});
-			alert("등록되었습니다");
-			location.reload();
+			});			
 		});
 		
 	</script>
