@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.project.erp.common.model.vo.User;
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.model.vo.AttendanceLog;
 import com.project.erp.hrm.service.EmployeeInfoService;
+import com.project.erp.hrm.service.LeaveInfoService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +23,9 @@ public class PageController {
 	
 	@Autowired
 	private EmployeeInfoService employeeInfoService;
+	
+	@Autowired
+	private LeaveInfoService leaveInfoService;
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
@@ -45,6 +50,7 @@ public class PageController {
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
+		
 		return "common/mypage";
 		
 	}
@@ -53,4 +59,35 @@ public class PageController {
 	public String findId() {
 		return "common/findId";
 	};
+	
+	@GetMapping("/myLeavePage")
+	public String myLeaveAdd(Model model, LeaveInfo li) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		EmpInfo empInfo = new EmpInfo();
+		empInfo.setEmpNo(user.getEmpNo());
+		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
+		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
+		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
+		
+		return "common/myLeavePage";
+	}
+	
+	@GetMapping("/myLeaveView")
+	public String myLeaveView(Model model, LeaveInfo li) {
+//		System.out.println(li);
+		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));		
+		return "common/myLeaveView";
+	}
+	@GetMapping("/myLeaveUpdate")
+	public String myLeaveUpdate(LeaveInfo li) {
+		leaveInfoService.leaveUpdate(li);
+		return "common/myLeavePage";
+	}
+	
+	@GetMapping("/myLeaveDelete")
+	public String myLeaveDelete(int leaveId) {
+		leaveInfoService.leaveDelete(leaveId);
+		return "redirect:/myLeavePage";
+	}
 }

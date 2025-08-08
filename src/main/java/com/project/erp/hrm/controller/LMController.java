@@ -37,14 +37,14 @@ public class LMController {
 		leaveInfoService.leaveAdd(liList);
 		return "redirect:/component/hrm/leaveAdd";
 	}
-	
-	@ResponseBody
-	@PostMapping("/myLeavePage")
-	public String myLeavePage(@RequestBody List<LeaveInfo> liList) {
+//	common UserController로 이동
+//	@ResponseBody
+//	@PostMapping("/myLeavePage")
+//	public String myLeavePage(@RequestBody List<LeaveInfo> liList) {
 //		System.out.println(liList.get(0).getEmpNo());
-		leaveInfoService.leaveAdd(liList);
-		return "redirect:/component/hrm/myLeavePage";
-	}
+//		leaveInfoService.leaveAdd(liList);
+//		return "redirect:/component/hrm/myLeavePage";
+//	}
 	
 	@ResponseBody
 	@PostMapping("/leaveStatusUpdate")
