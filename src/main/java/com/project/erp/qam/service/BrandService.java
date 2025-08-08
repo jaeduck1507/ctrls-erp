@@ -26,7 +26,9 @@ public class BrandService {
 		return brandMapper.findById(brandCode);
 	}
 	
-	
+	public List<Brand> findBrand() {
+	    return brandMapper.findBrand(); // assumes brandMapper exists and works
+	}
 	
 	
 }

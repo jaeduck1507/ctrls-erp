@@ -13,9 +13,7 @@
 		<result column="product_category" property="productCategory" />
 		<result column="product_name" property="productName" />
 		<result column="quantity" property="quantity" />
-		
-		<result column="dept_no" property="deptNo" />
-		<result column="dept_name" property="deptName" />
+	
 	</resultMap>
 
 	<insert id="insertSale" parameterType="Sale">
@@ -35,76 +33,65 @@
 		pn.product_category,
 		pn.product_price,
 		s.sale_no,
-		s.sale_date,
-		s.dept_no,
-		d.dept_name
+		s.sale_date
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN department d ON s.dept_no = d.dept_no
 		WHERE s.sale_date IS NOT NULL
 		ORDER BY s.sale_date DESC
-		LIMIT #{offset}, #{limit}
+<!--		LIMIT #{offset}, #{limit}-->
 	</select>
 	
-		<select id="totalSaleDone" resultMap="saleMap">
+	<select id="totalSaleDone" resultType="int">
 		SELECT
 			count(*)
 		FROM sale s
 		JOIN product p ON s.product_no = p.product_no
 		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN department d ON s.dept_no = d.dept_no
 		WHERE s.sale_date IS NOT NULL
 		ORDER BY s.sale_date DESC
 	</select>
 
 	<select id="showSaleNull" parameterType="Paging" resultMap="saleMap">
 		SELECT
-		p.product_no,
-		pn.product_code,
-		pn.product_price,
-		pn.product_name,
-		pn.product_category,
-		s.sale_no,
-		s.sale_date,
-		s.dept_no,
-		d.dept_name
-		FROM sale s
-		JOIN product p ON s.product_no = p.product_no
-		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN department d ON s.dept_no = d.dept_no
-		WHERE s.sale_date IS NULL
-		ORDER BY s.sale_no ASC
+			product_no,
+			product_code,
+			product_price,
+			product_name,
+			product_category,
+			sale_no,
+			sale_date
+		FROM sale
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		WHERE sale_date IS NULL
+		ORDER BY sale_no ASC
 		LIMIT #{offset}, #{limit}
 	</select>
 	
 	<select id="totalSaleReady" resultType="int">
 		SELECT
 			count(*)
-		FROM sale s
-		JOIN product p ON s.product_no = p.product_no
-		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN department d ON s.dept_no = d.dept_no
-		WHERE s.sale_date IS NULL
-		ORDER BY s.sale_no ASC
+		FROM sale
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		WHERE sale_date IS NULL
+		ORDER BY sale_no ASC
 	</select>
 
 	<select id="findBySaleNo" parameterType="int" resultMap="saleMap">
 		SELECT
-		s.sale_no,
-		p.product_no,
-		pn.product_code,
-		pn.product_name,
-		pn.product_price,
-		pn.product_category,
-		s.sale_date,
-		s.dept_no,
-		d.dept_name
-		FROM sale s
-		JOIN product p ON s.product_no = p.product_no
-		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN department d ON s.dept_no = d.dept_no
-		WHERE s.sale_no = #{saleNo}
+			sale_no,
+			product_no,
+			product_code,
+			product_name,
+			product_price,
+			product_category,
+			sale_date
+		FROM sale 
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		WHERE sale_no = #{saleNo}
 	</select>
 
 	<update id="registerSaleDate" parameterType="SaleReadyDTO">
@@ -115,11 +102,11 @@
 
 	<select id="dailySale" parameterType="SaleReadyDTO" resultMap="saleMap">
 		SELECT
-		product_name,
-		product_code,
-		product_price,
-		sale_date,
-		count(*) AS quantity 
+			product_name,
+			product_code,
+			product_price,
+			sale_date,
+			count(*) AS quantity 
 		FROM sale
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
@@ -129,27 +116,25 @@
 
 	<select id="searchSaleDone" resultMap="saleMap"> 
 		SELECT 
-		s.sale_no,
-		p.product_no,
-		pn.product_code, 
-		pn.product_name, 
-		pn.product_price,
-		pn.product_category, 
-		s.sale_date,
-		s.dept_no,
-		d.dept_name
-		FROM sale s 
-		JOIN product p ON s.product_no = p.product_no 
-		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN department d ON s.dept_no = d.dept_no 
-		WHERE s.sale_date IS NOT NULL 
+			sale_no,
+			product_no,
+			product_code, 
+			product_name, 
+			product_price,
+			product_category, 
+			sale_date
+		FROM sale  
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		WHERE sale_date IS NOT NULL 
 		<if test="productCategory != null and productCategory != ''">
-			AND pn.product_category = #{productCategory}
+			AND product_category = #{productCategory}
 		</if> 
 		<if test="startDate != null and endDate != null">
-			AND s.sale_date BETWEEN #{startDate} AND #{endDate}
+			AND sale_date BETWEEN #{startDate} AND #{endDate}
 		</if>
-		ORDER BY s.sale_date DESC
+		ORDER BY sale_date DESC
+<!--		LIMIT #{offset}, #{limit}-->
 	</select>
 
 

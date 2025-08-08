@@ -11,6 +11,4 @@ public class Brand {
 	private int brandAccount; // 계좌번호
 	private String brandBank; // 어떤은행인지
 	
-	private int productCode; // 제품명 외래키
-	
 }

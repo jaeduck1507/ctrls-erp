@@ -1,5 +1,6 @@
 package com.project.erp.qam.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,24 +86,48 @@ public class PIMController {
 
 	// 제품명 등록/수정 폼 호출
 	// → productCode가 있으면 수정, 없으면 등록
+//	@GetMapping("/productNameForm")
+//	public String pnForm(@RequestParam(required = false) Integer productCode, Integer brandCode, Model model) {
+//		if (productCode != null) {
+//			ProductNameDTO productName = productNameService.findById(productCode);
+//			Brand brand = brandService.findById(brandCode);
+//			model.addAttribute("brand", brand);
+//			model.addAttribute("productName", productName); // 수정용 데이터
+//			model.addAttribute("action", "/updateProductName"); // 수정용 액션
+//		} else {
+//			Brand brand = brandService.findById(brandCode);
+//			model.addAttribute("brand", brand);
+//			model.addAttribute("productName", new ProductNameDTO()); // 빈 객체 전달
+//			model.addAttribute("action", "/registerProductName"); // 등록용 액션
+//		}
+//		return "component/qam/productNameForm"; // JSP 경로 반환
+//	}
 	@GetMapping("/productNameForm")
 	public String pnForm(@RequestParam(required = false) Integer productCode, Integer brandCode, Model model) {
-		if (productCode != null) {
-			ProductNameDTO productName = productNameService.findById(productCode);
-			Brand brand = brandService.findById(brandCode);
-			model.addAttribute("brand", brand);
-			model.addAttribute("productName", productName); // 수정용 데이터
-			model.addAttribute("action", "/updateProductName"); // 수정용 액션
-			//model.addAttribute("action", "/updateBrand"); // 수정용 액션
-		} else {
-			Brand brand = brandService.findById(brandCode);
-			model.addAttribute("brand", brand);
-			model.addAttribute("productName", new ProductNameDTO()); // 빈 객체 전달
-			model.addAttribute("action", "/registerProductName"); // 등록용 액션
-			//model.addAttribute("brand", new Brand());
-			//model.addAttribute("action", "/registerBrand"); // 등록용 액션
-		}
-		return "component/qam/productNameForm"; // JSP 경로 반환
+
+	    // 카테고리 목록 추가 (DB단에서 하는게 나으려나)
+		List<String> categoryList = new ArrayList<>();
+		categoryList.add("상의");
+		categoryList.add("하의");
+		categoryList.add("악세사리");
+		categoryList.add("신발");
+	    model.addAttribute("categoryList", categoryList);
+
+	    // 브랜드 목록 추가 (DB에서 모든 브랜드 가져오기)
+	    List<Brand> brandList = brandService.findBrand(); // 이 메서드 필요
+	    model.addAttribute("brandList", brandList);
+	    System.out.println("findBrand() working");
+
+	    if (productCode != null) {
+	        ProductNameDTO productName = productNameService.findById(productCode);
+	        model.addAttribute("productName", productName); // 수정용 데이터
+	        model.addAttribute("action", "/updateProductName"); // 수정용 액션
+	    } else {
+	        model.addAttribute("productName", new ProductNameDTO()); // 빈 객체 전달
+	        model.addAttribute("action", "/registerProductName"); // 등록용 액션
+	    }
+	    System.out.println("/productNameForm working");
+	    return "component/qam/productNameForm";
 	}
 
 	// 제품명 등록 처리

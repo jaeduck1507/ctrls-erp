@@ -38,7 +38,7 @@
 		<br>
 		생산일 조회 (시작일): <input type="date" id="startDate">
 		(종료일): <input type="date" id="endDate">
-		<button type="submit">검색</button> <!-- button type 지정 안할 시 default => submit -->
+		<button type="submit">조회</button> <!-- button type 지정 안할 시 default => submit -->
 		<button type="button" id="resetBtn">전체보기</button>
 </form>
 

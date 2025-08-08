@@ -71,7 +71,7 @@
             success: function(result) {
                 // 테이블 초기화 + 헤더 생성
                 $("#result").html(""); 
-                $("#result").append("<tr><th>제품 코드</th><th>브랜드 코드</th><th>브랜드</th><th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>수정</th><th>삭제</th></tr>");
+                $("#result").append("<tr><th>제품 코드</th><th>브랜드코드</th><th>브랜드</th><th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>수정</th><th>삭제</th></tr>");
 
                 // 각 제품명 객체를 테이블에 추가
                 for (const pn of result) {

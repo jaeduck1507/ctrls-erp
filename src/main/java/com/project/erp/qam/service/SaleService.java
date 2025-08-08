@@ -24,6 +24,7 @@ public class SaleService {
 	public List<SaleReadyDTO> showSaleNull(Paging paging) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		paging.setTotal(saleMapper.totalSaleReady());
+		System.out.println("showSaleNull 넘어감");
 		return saleMapper.showSaleNull(paging);
 	}
 	
@@ -50,5 +51,9 @@ public class SaleService {
 	public List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto) {
 	    return saleMapper.searchSaleDone(dto);
 	}
+
+//	public Integer totalSaleDone() { // ajax saleDone paging용
+//		return saleMapper.totalSaleDone();
+//	}
 	
 }

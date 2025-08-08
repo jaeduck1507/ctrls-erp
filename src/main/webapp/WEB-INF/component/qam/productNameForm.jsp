@@ -36,25 +36,43 @@
     <label>단가:
         <input type="number" name="productCost" value="${productName.productCost}" required />
     </label><br/>
-
-    <!-- 카테고리 선택 -->
-    <label>카테고리:
-        <select name="productCategory">
-            <option value="상의" ${productName.productCategory == '상의' ? 'selected' : ''}>상의</option>
-            <option value="하의" ${productName.productCategory == '하의' ? 'selected' : ''}>하의</option>
-            <option value="악세사리" ${productName.productCategory == '악세사리' ? 'selected' : ''}>악세사리</option>
-            <option value="신발" ${productName.productCategory == '신발' ? 'selected' : ''}>신발</option>
-        </select>
-    </label><br/>
 	
+	<!-- 카테고리 선택 -->
+	<label>카테고리:
+	    <select name="productCategory">
+	        <c:forEach var="category" items="${categoryList}">
+	            <option value="${category}" ${productName.productCategory == category ? 'selected' : ''}>${category}</option>
+	        </c:forEach>
+	    </select>
+	</label><br/>
+	
+	<!-- 브랜드 선택 -->
 	<label>브랜드:
 	    <select name="brandCode">
-	        <option value="1" ${brand.brandCode == 1 ? 'selected' : ''}>샤넬</option>
-	        <option value="2" ${brand.brandCode == 2 ? 'selected' : ''}>유니클로</option>
-	        <option value="3" ${brand.brandCode == 3 ? 'selected' : ''}>자라</option>
+	        <c:forEach var="brand" items="${brandList}">
+	            <option value="${brand.brandCode}" ${productName.brandCode == brand.brandCode ? 'selected' : ''}>${brand.brandName}</option>
+	        </c:forEach>
 	    </select>
 	</label><br/><br/>
 
+	    <!-- 카테고리 선택 -->
+	<!--    <label>카테고리:-->
+	<!--        <select name="productCategory">-->
+	<!--            <option value="상의" ${productName.productCategory == '상의' ? 'selected' : ''}>상의</option>-->
+	<!--            <option value="하의" ${productName.productCategory == '하의' ? 'selected' : ''}>하의</option>-->
+	<!--            <option value="악세사리" ${productName.productCategory == '악세사리' ? 'selected' : ''}>악세사리</option>-->
+	<!--            <option value="신발" ${productName.productCategory == '신발' ? 'selected' : ''}>신발</option>-->
+	<!--        </select>-->
+	<!--    </label><br/>-->
+		
+	<!--	<label>브랜드:-->
+	<!--	    <select name="brandCode">-->
+	<!--	        <option value="1" ${productName.brandCode == 1 ? 'selected' : ''}>샤넬</option>-->
+	<!--	        <option value="2" ${productName.brandCode == 2 ? 'selected' : ''}>유니클로</option>-->
+	<!--	        <option value="3" ${productName.brandCode == 3 ? 'selected' : ''}>자라</option>-->
+	<!--	    </select>-->
+	<!--	</label><br/><br/>-->
+	
     <!-- 저장 버튼 -->
     <button type="submit">저장</button>
 </form>

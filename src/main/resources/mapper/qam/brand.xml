@@ -9,29 +9,33 @@
 	<result column="brand_phone" property="brandPhone"/>
 	<result column="brand_account" property="brandAccount"/>
 	<result column="brand_bank" property="brandBank"/>
-	<result column="product_code" property="productCode"/>
 </resultMap>
 
 
   <insert id="registerBrand" parameterType="Brand">
-    INSERT INTO brand (brand_name, brand_phone, brand_account, brand_bank, product_code)
-	VALUES (#{brandName}, #{brandPhone}, #{brandAccount}, #{brandBank}, #{productCode});
+    INSERT INTO brand (brand_name, brand_phone, brand_account, brand_bank)
+	VALUES (#{brandName}, #{brandPhone}, #{brandAccount}, #{brandBank});
   </insert>
     
   <select id="showBrand" resultMap="brandMap">
-  	 SELECT b.brand_name, b.brand_phone, b.brand_account, b.brand_bank, b.product_code
-     FROM brand b
-     JOIN product_name pn ON pn.product_code = b.product_code
-	 ORDER BY b.brand_code
+  	 SELECT brand_name, brand_phone, brand_account, brand_bank
+     FROM brand
+     JOIN product_name USING(brand_code)
+	 ORDER BY brand_code
   </select>
 
   <select id="findById" resultMap="brandMap" parameterType="int">
-  	 SELECT b.brand_name, b.brand_phone, b.brand_account, b.brand_bank, b.product_code
-     FROM brand b
-     JOIN product_name pn ON pn.product_code = b.product_code
-     WHERE b.brand_code = #{brandCode}
-	 ORDER BY b.brand_code
+  	 SELECT brand_name, brand_phone, brand_account, brand_bank
+     FROM brand
+     JOIN product_name USING(brand_code)
+     WHERE brand_code = #{brandCode}
+	 ORDER BY brand_code
   </select>
 
+  <select id="findBrand" resultMap="brandMap">
+	  SELECT brand_code, brand_name
+	  FROM brand
+	  ORDER BY brand_code
+  </select>
 
 </mapper>

@@ -23,8 +23,6 @@
 		<th>카테고리</th>
 		<th>제품명</th>
         <th>가격</th>
-		<th>부서코드</th>
-		<th>부서명</th>
 <!--		<th>판매날짜(확인용)</th>-->
 		<th>날짜입력</th>
 	</tr>
@@ -37,8 +35,6 @@
 			<td>${sale.productCategory}</td>
 			<td>${sale.productName}</td>
 			<td>${sale.productPrice}</td>
-			<td>${sale.deptNo}</td>
-			<td>${sale.deptName}</td>
 <!--			<td>${sale.saleDate}</td>-->
 			<td><input type="date" class="sellDate" data-no="${sale.saleNo}"></td>
 		</tr>
@@ -58,7 +54,9 @@
 </nav>
 	
 <script>
-	$('.sellDate').val(new Date().toISOString().substring(0, 10));
+	$(document).ready(function() {
+		$('.sellDate').val(new Date().toISOString().substring(0, 10)).trigger('change');
+	});
 	/*
 	function displaySale(data) {
 		let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜(확인용)</th><th>날짜입력</th></tr>"
@@ -127,15 +125,17 @@
 		//		});
 		//	}
 		//}
-
+		console.log("Submitting:", JSON.parse(sessionStorage.getItem("sellList")));
 		$.ajax({
 			type: "post", // .jsp에서 받아진 값을 DB로 보내기에 POST
 			url: "/qam/registerSaleDate", // HSDController의 registerSaleDate(@RequestBody List<SaleReadyDTO> sellList)를 POST 호출, @PostMapping("/registerSaleDate")
 			contentType: "application/json", // Ajax 요청을 보낼 때, 요청 본문(RequestBody)에 담긴 데이터가 JSON 형식임을 서버에 알리는 역할
 			data: JSON.stringify(sellList), // sellList를 JSON'화'해두기 (HSDController의 registerSaleDate에서 @RequestBody로 JSON 데이터 Java 객체로 변환 예정)
 			success: function (result) {
+				console.log(sellList)
 				sessionStorage.removeItem("sellList");
 				location.reload(); // 성공적으로 요청이 처리되면 페이지를 새로고침, saleDate가 등록된 제품(=판매 완료된 제품)은 리스트에서 사라지고, saleDate가 여전히 null인 제품만 화면에 남음
+				
 			},
 			error: function (xhr, status, error) {
 			}

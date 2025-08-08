@@ -28,13 +28,13 @@
     </select>
 
     <!-- 제품명 등록 -->
-    <insert id="insertProductName" parameterType="ProductName">
+    <insert id="insertProductName" parameterType="ProductNameDTO">
         INSERT INTO product_name(product_color, product_name, product_price, product_cost, product_category, brand_code)
         VALUES(#{productColor}, #{productName}, #{productPrice}, #{productCost}, #{productCategory}, #{brandCode})
     </insert>
 
     <!-- 제품명 수정 -->
-	<update id="updateProductName" parameterType="ProductName">
+	<update id="updateProductName" parameterType="ProductNameDTO">
 	    UPDATE product_name
 	    SET product_color = #{productColor},
 	        product_name = #{productName},
@@ -91,4 +91,7 @@
 	        </if>
         </where>
     </select>
+    
+    
+    
 </mapper>

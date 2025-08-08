@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.model.dto.DefectiveDTO;
 import com.project.erp.qam.model.dto.SaleReadyDTO;
 import com.project.erp.qam.model.vo.Defective;
@@ -39,15 +40,23 @@ public class HSDController {
     @PostMapping("/registerSaleDate")
     public String registerSaleDate(@RequestBody List<SaleReadyDTO> sellList) { // @RequestBody는 HTTP 요청(/qam/saleReady)의 Body에 담겨 있는 JSON 데이터를 Java 객체로 자동 변환해주는 역할
     	saleService.registerSaleDate(sellList);
+    	System.out.println("registerSaleDate 넘어감");
+    	System.out.println(sellList);
 		return "redirect:/qam/saleReady";
     }
     
-    /*
+    
 	@ResponseBody
     @GetMapping("/showSaleDone")
-    public List<SaleReadyDTO> showSaleDone() {
-    	return saleService.showSaleDone();
-    }*/
+    public List<SaleReadyDTO> showSaleDone(Paging paging) {
+//	    Paging pagingAjax = new Paging(); // ajax showSaleDone용
+//	    paging.setPage(paging.getPage());
+//	    paging.setPageSize(20); // or whatever your page size is
+//	    paging.setOffset((paging.getPage() - 1) * pagingAjax.getPageSize());
+
+//	    paging.setTotal(saleService.totalSaleDone()); // total count setter
+    	return saleService.showSaleDone(paging);
+    }
 	
 	@ResponseBody
     @GetMapping("/showDefective")
