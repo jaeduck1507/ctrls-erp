@@ -16,5 +16,6 @@ public class Purchase {
 	private int totalAmount; // 총액 unit_price * quantity 
 	private LocalDate purchaseDate; // 매입일
 	private int productCode; // 상품 번호(FK)
+	private int brandCode;
 	
 }

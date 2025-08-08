@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.qam.model.dto.ProductNameDTO;
+import com.project.erp.qam.model.vo.Brand;
 import com.project.erp.qam.model.vo.ProductName;
 
 @Mapper // MyBatis 매퍼로 인식시켜 Spring에서 자동 주입 가능하게 함
@@ -32,4 +33,6 @@ public interface ProductNameMapper {
     // 제품명 검색
     // → 이름 or 카테고리 조건으로 필터링 (LIKE, WHERE)
     List<ProductNameDTO> searchProductName(String productName, String productCategory);
+    
+    List<ProductNameDTO> showProductNameByBrandFilter(Brand brand);
 }

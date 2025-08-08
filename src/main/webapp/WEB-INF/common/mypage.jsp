@@ -137,6 +137,10 @@
 		  const now = new Date(); // 현재 시각
 		  
 
+		  
+		  
+		  
+		  
 		  // 초기 화면 표시
 		  // 초기 화면 : 현재 시간 및 남은 시간
 		  ymd.textContent = now.getFullYear() + "년 " + (now.getMonth() + 1) + "월 " + now.getDate() + "일 (" + day[now.getDay()] + ")";

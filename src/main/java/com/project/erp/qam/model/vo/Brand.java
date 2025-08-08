@@ -1,8 +1,10 @@
 package com.project.erp.qam.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Brand {
 
 	private int brandCode; // 명시용 코드
@@ -11,6 +13,5 @@ public class Brand {
 	private int brandAccount; // 계좌번호
 	private String brandBank; // 어떤은행인지
 	
-	private int productCode; // 제품명 외래키
 	
 }

@@ -19,10 +19,10 @@
   </insert>
     
   <select id="showBrand" resultMap="brandMap">
-  	 SELECT b.brand_name, b.brand_phone, b.brand_account, b.brand_bank, b.product_code
-     FROM brand b
-     JOIN product_name pn ON pn.product_code = b.product_code
-	 ORDER BY b.brand_code
+  	 SELECT *
+     FROM brand 
+     
+	 ORDER BY brand_code
   </select>
 
   <select id="findById" resultMap="brandMap" parameterType="int">
