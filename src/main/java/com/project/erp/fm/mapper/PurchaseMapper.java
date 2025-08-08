@@ -12,5 +12,6 @@ public interface PurchaseMapper {
 
 	List<PurDeptDTO> showPurchase(PurDeptDTO pd);
 	void purchaseRegister(List<Purchase> prList);
+	List<PurDeptDTO> totalPurchase(PurDeptDTO pd);
 	
 }

@@ -13,16 +13,21 @@ import com.project.erp.fm.model.vo.Purchase;
 public class PurchaseService implements PurchaseMapper {
 
 	@Autowired
-	private PurchaseMapper mapper;
+	private PurchaseMapper purchaseMapper;
 
 	@Override
 	public List<PurDeptDTO> showPurchase(PurDeptDTO pd) {
-		return mapper.showPurchase(pd);
+		return purchaseMapper.showPurchase(pd);
 	}
 
 	@Override
 	public void purchaseRegister(List<Purchase> prList) {
-		mapper.purchaseRegister(prList);
+		purchaseMapper.purchaseRegister(prList);
+	}
+
+	@Override
+	public List<PurDeptDTO> totalPurchase(PurDeptDTO pd) {
+		return purchaseMapper.totalPurchase(pd);
 	}
 
 	

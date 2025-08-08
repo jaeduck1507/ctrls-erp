@@ -176,6 +176,11 @@ public class PIMController {
     	return productNameService.showProductNameByBrandFilter(brand);
     }
     
+    @PostMapping("/selectCategory")
+    public List<String> selectCategory() {
+    	return productNameService.selectCategory();
     }
+
+}
 
 

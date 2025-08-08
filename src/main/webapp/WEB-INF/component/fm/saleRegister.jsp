@@ -22,8 +22,18 @@
 	
 	<script>
 		$(document).ready(() => {
-			$("#saleDate").val(new Date().toISOString().substring(0, 10));
-			//console.log($("#saleDate").val());
+			const now = new Date();
+			//console.log(now);
+			//const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+			//console.log(date);
+			
+			const today = now.getFullYear() + '-' 
+			                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
+			                    + String(now.getDate()).padStart(2, '0');
+			//console.log(today);
+			
+			$("#saleDate").val(today);
+			console.log($("#saleDate").val());
 		});
 		
 		$("#search").click(() => {
@@ -75,9 +85,6 @@
 				success: function(response) {
 					if (response) {
 						alert("등록되었습니다!");
-						location.reload();
-					} else {
-						alert("이미 등록한 정보입니다!");
 						location.reload();
 					}
 				},

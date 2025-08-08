@@ -109,4 +109,9 @@
         WHERE brand_code = #{brandCode}
         
     </select>
+    
+    <select id="selectCategory" resultType="String">
+		SELECT DISTINCT product_category
+		FROM product_name
+	</select>
 </mapper>

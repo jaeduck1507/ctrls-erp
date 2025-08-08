@@ -35,4 +35,6 @@ public interface ProductNameMapper {
     List<ProductNameDTO> searchProductName(String productName, String productCategory);
     
     List<ProductNameDTO> showProductNameByBrandFilter(Brand brand);
+    
+    List<String> selectCategory();
 }

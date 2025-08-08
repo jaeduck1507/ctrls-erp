@@ -57,4 +57,8 @@ public class ProductNameService {
 		
 		return productNameMapper.showProductNameByBrandFilter(brand);
 	}
+	
+	public List<String> selectCategory () {
+		return productNameMapper.selectCategory();
+	}
 }

@@ -11,14 +11,20 @@
 <body>
 	<h1>매입 내역 조회</h1>
 	<div>
-		제품명 검색: <input type="text" id="productName">
-		<select id="productCategory">
-			<option value="all">전체</option>
-			<option value="상의">상의</option>
-			<option value="하의">하의</option>
-			<option value="악세사리">악세사리</option>
-			<option value="신발">신발</option>
+		<select id="brandName">
+			<option value="all">브랜드</option>
+			<option value="상의">샤넬</option>
+			<option value="하의">자라</option>
+			<option value="악세사리">유니클로</option>
 		</select>
+		<select id="productCategory">
+			<option value="all">카테고리</option>
+			<c:forEach items="${categoryList}" var="category">
+				<option value="${category}">${category}</option>
+			</c:forEach>
+		</select>
+		제품명 검색: <input type="text" id="productName">
+		
 		조회 시작일: <input type="date" id="startDate">
 		조회 종료일: <input type="date" id="endDate">
 		<button id="btn">조회</button>
@@ -50,10 +56,10 @@
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>매입 번호</th><th>제품명</th><th>카테고리</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th></tr>");
+					$("#result").append("<tr><th>매입 번호</th><th>브랜드</th><th>제품명</th><th>카테고리</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th></tr>");
 					for (const p of result) {
-						var text = "<tr><td>"  + p.purchaseNo + "</td><td>"  + p.productName + "</td><td>" + p.productCategory + "</td><td>" + p.unitPrice 
-							+ "</td><td>" + p.quantity + "</td><td>" + p.varAmount + "</td><td>" + p.totalAmount + "</td><td>" + p.purchaseDate + "</td></tr>"
+						var text = "<tr><td>"  + p.purchaseNo + "</td><td>"  + p.brandName + "</td><td>"  + p.productName + "</td><td>" + p.productCategory + "</td><td>"	
+							+ p.unitPrice + "</td><td>" + p.quantity + "</td><td>" + p.varAmount + "</td><td>" + p.totalAmount + "</td><td>" + p.purchaseDate + "</td></tr>"
 						$("#result").append(text);
 					}
 				},

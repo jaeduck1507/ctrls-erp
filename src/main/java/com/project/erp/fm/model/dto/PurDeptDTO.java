@@ -15,7 +15,10 @@ public class PurDeptDTO {
 	private LocalDate purchaseDate;
 	private String productName;
 	private String productCategory;
+	private int brandCode;
+	private String brandName;
 	private LocalDate startDate;
 	private LocalDate endDate;
+	private int totalPurchase;
 	
 }

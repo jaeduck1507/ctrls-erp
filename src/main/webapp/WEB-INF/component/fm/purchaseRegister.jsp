@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SaleManage</title>
+<title>PurchaseRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	
 	<div id="brandList">
 		<select id="brand">
-			<option value="0"> 선택</option>
+			<option value="0" disabled selected> 선택</option>
 			<c:forEach items="${brandList}" var="brand">
 				<option value="${brand.brandCode}">${brand.brandName}</option>
 			</c:forEach>
@@ -28,12 +28,17 @@
 	var count = 0;
 	var totalOptionText ='';
 	$("#brand").change((e) =>{
-		console.log("Gdgdgd");
+		console.log($("#brand").val());
 	});
 	
 	$("#selectBrand").click((e) => {
 		const brand = $("#brand").val();
 		console.log(brand);
+		
+		if (brand == null) {
+			alert("거래처를 선택해주세요!");
+			return;
+		}
 		
 		$.ajax({
             // 요청
@@ -83,7 +88,7 @@
         for(var i = 0; i < 10; i++) { // 열에 데이터 추가  4 : 직무, 5: 부서, 6 : 고용일 나머지 : 텍스트 데이터 
 			if(i == 0) {
 				
-				console.log(totalOptionText);
+				//console.log(totalOptionText);
         		$("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="productName" placeholder="검색 또는 선택" />'+
 					'<datalist id="List'+ count +'">'+
 					totalOptionText+
@@ -132,7 +137,7 @@
 		$(e.target).parent().parent().find("td").eq(6).html('<input type="number" name="quantity" class="price">');
 		$(e.target).parent().parent().find("td").eq(7).text("");
 		$(e.target).parent().parent().find("td").eq(8).text("");
-		$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date">');
+		$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date" value="${today}">');
 		});
 	
 		$(document).on('input', '.price', (e) => {
@@ -174,7 +179,10 @@
 				contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	            // 응답
 	            success : function(result) {
-					
+					if (result) {
+						alert("등록되었습니다!");
+						location.reload();
+					}
 	            },
 	            
 				error:function(xhr,status,error) {

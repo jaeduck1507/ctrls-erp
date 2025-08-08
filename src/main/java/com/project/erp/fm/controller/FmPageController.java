@@ -1,5 +1,7 @@
 package com.project.erp.fm.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,12 +44,15 @@ public class FmPageController {
 	private BrandService brandService;
 	
 	@GetMapping("/saleManage")
-	public String saleManage() {
+	public String saleManage(Model model) {
+		model.addAttribute("categoryList", productNameService.selectCategory());
 		return "component/fm/saleManage";
 	}
 	
 	@GetMapping("/purchase")
-	public String purchase() {
+	public String purchase(Model model) {
+		model.addAttribute("categoryList", productNameService.selectCategory());
+		//System.out.println(productNameService.selectCategory());
 		return "component/fm/purchase";
 	}
 	
@@ -60,14 +65,16 @@ public class FmPageController {
 	@GetMapping("/purchaseRegister")
 	public String purchaseRegister(Model model) {
 		model.addAttribute("productNameList", productNameService.showProductName());
-		model.addAttribute("brandList", brandService.showBrand());
+		model.addAttribute("brandList", brandService.findBrand());
+		//System.out.println(brandService.findBrand());
+		model.addAttribute("today", LocalDate.now().toString());
+		//System.out.println(LocalDate.now().toString());
 		return "component/fm/purchaseRegister";
 	}	
 		
 	@GetMapping("/transaction")
 	public String transaction(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
-		//model.addAttribute("paging", paging);
 		return "component/fm/transaction";
 	}
 	
