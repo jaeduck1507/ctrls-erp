@@ -12,6 +12,7 @@
 		<result property="deptNo" column="dept_no"/>
 		<result property="deptName" column="dept_name"/>
 		<result property="payment" column="payment"/>
+		<result property="totalSal" column="total_sal"/>
 	</resultMap>
 	
 	<resultMap id="SalaryDTOtMap" type="SalaryDTO">
@@ -101,7 +102,7 @@
 	</select>
 	
 	<select id="totalSalary" parameterType="SalEmpDTO" resultMap="SalEmpMap">
-		SELECT dept_no, dept_name, salary_date, SUM(base_salary+bonus-deduction) AS totalSal
+		SELECT dept_no, dept_name, salary_date, SUM(base_salary+bonus-deduction) AS total_sal
 		FROM salary
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)

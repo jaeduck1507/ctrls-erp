@@ -14,10 +14,9 @@
 		제품명 검색: <input type="text" id="productName">
 		<select id="productCategory">
 			<option value="all">전체</option>
-			<option value="상의">상의</option>
-			<option value="하의">하의</option>
-			<option value="악세사리">악세사리</option>
-			<option value="신발">신발</option>
+			<c:forEach items="${categoryList}" var="category">
+				<option value="${category}">${category}</option>
+			</c:forEach>
 		</select>
 		조회 시작일: <input type="date" id="startDate">
 		조회 종료일: <input type="date" id="endDate">

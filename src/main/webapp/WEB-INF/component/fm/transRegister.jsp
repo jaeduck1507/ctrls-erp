@@ -64,7 +64,7 @@
 			deptInfo.deptNo = opt.data('dept_no');
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 			$(e.target).parent().parent().find("td").eq(2).text("지출");
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="text" name="category">');
+			$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" name="trans-amount">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc">');
 			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date">');
@@ -78,7 +78,7 @@
 				const obj ={};
 				obj.deptNo=$("#result tr").eq(i).find("td").eq(1).text();
 				obj.transType=$("#result tr").eq(i).find("td").eq(2).text();
-				obj.category=$("#result tr").eq(i).find("td").eq(3).find("input").val();
+				obj.category=$("#result tr").eq(i).find("td").eq(3).text();
 				obj.transAmount=$("#result tr").eq(i).find("td").eq(4).find("input").val();
 				obj.transDesc=$("#result tr").eq(i).find("td").eq(5).find("input").val();
 				obj.transDate=$("#result tr").eq(i).find("td").eq(6).find("input").val();

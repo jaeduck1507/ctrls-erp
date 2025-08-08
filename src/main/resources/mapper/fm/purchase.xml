@@ -10,11 +10,15 @@
 		<result property="purchaseDate" column="purchase_date"/>
 		<result property="productName" column="product_name"/>
 		<result property="productCategory" column="product_category"/>
+		<result property="brandCode" column="brand_code"/>
+		<result property="brandName" column="brand_name"/>
+		<result property="totalPurchase" column="total_purchase"/>
 	</resultMap>
 	
 	<select id="showPurchase" parameterType="PurDeptDTO" resultMap="PurDeptMap">
-		SELECT purchase_no, product_name, product_category,  unit_price, quantity, var_amount, total_amount, purchase_date
+		SELECT purchase_no, product_name, product_category,  unit_price, quantity, var_amount, total_amount, purchase_date, brand_name
 		FROM purchase
+		JOIN brand USING(brand_code)
 		JOIN product_name USING(product_code)
 		<where>
 			<if test="startDate != null and endDate != null">
@@ -36,4 +40,12 @@
 		
 		</foreach>
 	</insert>
+	
+	<select id="totalPurchase" parameterType="PurDeptDTO" resultMap="PurDeptMap">
+		SELECT brand_code, brand_name, purchase_date, SUM(total_amount) AS total_purchase FROM purchase
+		JOIN brand USING(brand_code)
+		WHERE brand_code = #{brandCode}
+		AND purchase_date = #{purchaseDate}
+		GROUP BY brand_code, brand_name, purchase_date
+	</select>
 </mapper>

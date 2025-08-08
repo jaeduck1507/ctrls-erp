@@ -207,6 +207,11 @@ public class PIMController {
 		return "redirect:/qam/brand";
 	}
 
+    @PostMapping("/selectCategory")
+    public List<String> selectCategory() {
+    	return productNameService.selectCategory();
     }
+
+}
 
 
