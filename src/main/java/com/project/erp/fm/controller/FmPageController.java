@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
 import com.project.erp.fm.service.BudgetService;
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
@@ -59,8 +60,9 @@ public class FmPageController {
 	}	
 		
 	@GetMapping("/transaction")
-	public String transaction(Model model) {
+	public String transaction(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
+		//model.addAttribute("paging", paging);
 		return "component/fm/transaction";
 	}
 	
