@@ -57,7 +57,7 @@ FROM leave_request
      JOIN department USING(dept_no)
      JOIN job_position USING(job_no)
 WHERE status = '대기'
-ORDER BY leave_id ASC
+ORDER BY leave_id DESC
 </select>
 
 <!-- 신청된 휴가 내역 리스트 보고 대기->승인/반려 로 상태 변경-->

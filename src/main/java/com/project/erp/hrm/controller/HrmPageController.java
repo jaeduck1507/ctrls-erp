@@ -76,6 +76,7 @@ public class HrmPageController {
 	
 	@GetMapping("/leaveStatus")
 	public String leaveStatus(Model model) {
+		System.out.println("test    " + leaveInfoService.leaveStatus());
 		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus() );
 		return "component/hrm/leaveStatus"; 
 	}
@@ -95,14 +96,14 @@ public class HrmPageController {
 	public String leaveAdd() {
 		return "component/hrm/leaveAdd";
 	}
-	
-	@GetMapping("/myLeavePage")
-	public String myLeaveAdd(Model model, LeaveInfo li) {
-		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
-		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
-		
-		return "component/hrm/myLeavePage";
-	}
+//	common PageController로 이동
+//	@GetMapping("/myLeavePage")
+//	public String myLeaveAdd(Model model, LeaveInfo li) {
+//		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
+//		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
+//		
+//		return "component/hrm/myLeavePage";
+//	}
 	
 	@GetMapping("/leaveDays")
 	public String leaveDays() {
