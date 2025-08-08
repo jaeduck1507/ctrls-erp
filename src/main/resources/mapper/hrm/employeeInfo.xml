@@ -109,4 +109,20 @@
 			emp_no = #{empNo}
 		</where>
 	</update>
+	
+	<select id="showNotEvalEmp" parameterType="PerformanceReviewDTO" resultMap = "EmpInfoMap">
+		select * from employee_info
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+			<where>
+				dept_no = #{deptNo}
+				<if test="empList.size() != 0">
+					<foreach collection="empList" item="emp">
+						AND emp_no != #{emp.empNo}
+					</foreach>
+				</if>
+			</where>
+			
+	</select>
+	
 </mapper>

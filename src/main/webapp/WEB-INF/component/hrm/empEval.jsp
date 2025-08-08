@@ -11,12 +11,17 @@
 <body>
 	<h1>인사 평가</h1>
 	<div>
+	
+	<input type="hidden" value="${user.empNo}" id="empNo">
+	
+	
 	<select id="emp">
 		<option value="-1" id="evaluated">평가할 사원 선택</option>
 		<c:forEach items="${empInfo}" var="emp">
 		<option value="${emp.empNo}">${emp.empName} / ${emp.jobTitle} / ${emp.deptName}</option>
 		</c:forEach>
 	</select>
+	
 
 	 <fieldset>
 	    <legend>태도 평가 점수</legend>
@@ -47,7 +52,7 @@
 		
 		const pr = {};
 		
-		pr.empNo = 1;
+		pr.empNo = $("#empNo").val();
 		pr.evaluatorEmpNo = $("#emp").val();
 		pr.attitudeScore = $('input[name="attitudeScore"]:checked').val();
 		pr.achieveScore = $('input[name="achieveScore"]:checked').val();
@@ -74,6 +79,8 @@
 				
 			}
         });
+		
+		location.reload();
 	});
 		
 		

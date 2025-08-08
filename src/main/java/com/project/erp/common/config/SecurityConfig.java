@@ -15,12 +15,50 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		int a = 1;
+		if(a != 1) { // 평가할때 기간 정해서
+			return http
+					.csrf(csrf -> csrf.disable()) // 웹 보안 토큰 설정 (비활성화)
+					
+					.authorizeHttpRequests(authorize -> 
+							
+							authorize
+							.requestMatchers("/mypage").authenticated()
+							.requestMatchers("/hrm/my*").authenticated()
+							.requestMatchers("/hrm/empEval").denyAll()
+							.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
+							.requestMatchers("/hrm/empAdd").hasRole("ADMIN") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
+							.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM") // ** 을 통해 모두 접근가능한가
+							.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM")
+							.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM")
+							.anyRequest().permitAll()
+					)
+					.formLogin(form -> 
+					form.loginPage("/login")
+						.defaultSuccessUrl("/")
+						.failureUrl("/login")
+						
+						
+						
+						
+					)
+					.logout(logout -> 
+						logout.logoutUrl("/logout")
+							.logoutSuccessUrl("/")
+					)
+					.build();
+		}
+		
+		
 		return http
 				.csrf(csrf -> csrf.disable()) // 웹 보안 토큰 설정 (비활성화)
 				
-				.authorizeHttpRequests(authorize -> authorize
+				.authorizeHttpRequests(authorize -> 
+						
+						authorize
 						.requestMatchers("/mypage").authenticated()
 						.requestMatchers("/hrm/my*").authenticated()
+						.requestMatchers("/hrm/empEval").authenticated()
 						.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
 						.requestMatchers("/hrm/empAdd").hasRole("ADMIN") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
 						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM") // ** 을 통해 모두 접근가능한가
