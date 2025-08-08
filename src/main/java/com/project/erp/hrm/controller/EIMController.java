@@ -36,6 +36,7 @@ public class EIMController {
 	@ResponseBody
 	@PostMapping("/infoShow")
 	public EmpInfoPagingDTO infoShow(EmpInfo ei, Paging hrmPagingDTO) {
+		System.out.println(hrmPagingDTO);
 		return employeeInfoservice.pagingInfoShow(ei,hrmPagingDTO);
 	}
 	

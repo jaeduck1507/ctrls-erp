@@ -44,6 +44,7 @@ public class EmployeeInfoService {
 	
 	public EmpInfoPagingDTO pagingInfoShow(EmpInfo ei, Paging paging) {
 		EmpInfoPagingDTO empInfoPagingDTO = new EmpInfoPagingDTO();
+		
 		empInfoPagingDTO.setEmpInfo(ei);
 		empInfoPagingDTO.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		empInfoPagingDTO.setEmpInfoList(infoShowPage(empInfoPagingDTO));
