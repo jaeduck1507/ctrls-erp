@@ -57,7 +57,7 @@
 		<if test="empName != null" >
 			emp_name LIKE CONCAT('%', #{empName}, '%')
 		</if>
-		<if test='jobNo != -1 and jobTitle != null'>
+		<if test='jobNo != -1 and jobNo != null'>
 			AND job_no = #{jobNo}
 		</if>
 		<if test='deptNo != -1 and deptNo != null'>
