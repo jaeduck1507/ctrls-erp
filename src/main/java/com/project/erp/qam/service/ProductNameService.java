@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project.erp.qam.mapper.ProductNameMapper;
 import com.project.erp.qam.model.dto.ProductNameDTO;
+import com.project.erp.qam.model.vo.Brand;
 import com.project.erp.qam.model.vo.ProductName;
 
 @Service
@@ -49,5 +51,10 @@ public class ProductNameService {
 	// → product_name LIKE '%keyword%' AND category 조건 조회
 	public List<ProductNameDTO> searchProductName(String productName, String productCategory) {
 	    return productNameMapper.searchProductName(productName, productCategory);
+	}
+	
+	public List<ProductNameDTO> showProductNameByBrandFilter(Brand brand) {
+		
+		return productNameMapper.showProductNameByBrandFilter(brand);
 	}
 }

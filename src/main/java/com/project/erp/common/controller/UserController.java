@@ -50,6 +50,7 @@ public class UserController {
 		return userService.findId(empNo);
 	}
 
+	@ResponseBody
 	@PostMapping("/showAttendanceOneAtToday")
 	public AttendanceLog showAttendanceOneAtToday() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

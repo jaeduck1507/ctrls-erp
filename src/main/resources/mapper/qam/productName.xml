@@ -94,4 +94,19 @@
     
     
     
+    <select id="showProductNameByBrandFilter" parameterType="Brand" resultMap="ProductNameMap">
+        SELECT 
+        	product_code,
+	        product_color, 
+	        product_name, 
+	        product_price, 
+	        product_category, 
+	        product_cost, 
+	        brand_code,
+	        brand_name
+        FROM product_name
+        JOIN brand USING(brand_code)
+        WHERE brand_code = #{brandCode}
+        
+    </select>
 </mapper>

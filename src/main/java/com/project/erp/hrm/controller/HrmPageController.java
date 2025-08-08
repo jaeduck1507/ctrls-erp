@@ -105,6 +105,8 @@ public class HrmPageController {
 //		return "component/hrm/myLeavePage";
 //	}
 	
+	
+	
 	@GetMapping("/leaveDays")
 	public String leaveDays() {
 		return "component/hrm/leaveDays";
