@@ -30,7 +30,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a><br />
 	<a href="/hrm/leaveDays">휴가 누적 사용일, 남은 휴가일 조회 /hrm/leaveDays</a></br>
 	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus</a><br />
-	<a href="/myLeavePage">(개인) 휴가 페이지 /common/myLeavePage</a><br />
+
 
     <a href="/fm/budget">예산 조회 /fm/budget</a><br />
     <a href="/fm/saleManage">매출 조회 /fm/saleManage</a><br />
