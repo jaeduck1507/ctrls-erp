@@ -30,6 +30,43 @@
 		ORDER BY trans_date
 	</select>
 	
+	<select id="showtransPage" parameterType="TransPagingDTO" resultMap="TransMap">
+		SELECT trans_no, trans_type, trans_amount, category, trans_desc, trans_date, dept_name
+		FROM transaction
+		JOIN department USING(dept_no)
+		<where>
+			<if test="transDTO.startDate != null and transDTO.endDate != null">
+				trans_date BETWEEN #{transDTO.startDate} AND #{transDTO.endDate}
+			</if>
+			<if test="transDTO.transType != 'all'">
+				AND trans_type = #{transDTO.transType}
+			</if>
+			<if test="transDTO.deptName != 'dept'">
+				AND dept_name = #{transDTO.deptName}
+			</if>
+		</where>
+		ORDER BY trans_date
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalTrans" parameterType="TransDTO" resultType="int">
+		SELECT count(*)
+		FROM transaction
+		JOIN department USING(dept_no)
+		<where>
+			<if test="startDate != null and endDate != null">
+				trans_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="transType != 'all'">
+				AND trans_type = #{transType}
+			</if>
+			<if test="deptName != 'dept'">
+				AND dept_name = #{deptName}
+			</if>
+		</where>
+		ORDER BY trans_date
+	</select>
+	
 	<insert id="transRegister" parameterType="ArrayList">
 		INSERT INTO transaction(trans_type, trans_amount, category, trans_desc, trans_date, dept_no) VALUES
 		<foreach collection="tList" item="trans" separator=",">

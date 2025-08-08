@@ -16,6 +16,7 @@ import com.project.erp.fm.model.vo.SaleManage;
 import com.project.erp.fm.model.vo.Transaction;
 import com.project.erp.fm.service.SaleManageService;
 import com.project.erp.fm.service.TransactionService;
+import com.project.erp.hrm.model.vo.Department;
 import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.qam.model.dto.SaleReadyDTO;
 import com.project.erp.qam.service.SaleService;
@@ -48,7 +49,16 @@ public class SVSController {
 		saleManageService.saleRegister(smList);
 		
 		//System.out.println(departmentService.showDept().getLast().getDeptNo());
-		int salesDept = departmentService.showDept().getLast().getDeptNo(); // department의 마지막 dept_no
+		//int salesDept = departmentService.showDept().getLast().getDeptNo(); // department의 마지막 dept_no
+		
+		List<Department> deptList = departmentService.showDept();
+		int salesDept = 0;
+		for (Department dept : deptList) {
+			// 부서 이름에 '지점'이 들어가는 부서 번호 조회
+			if (dept.getDeptName().contains("지점")) {
+				salesDept = dept.getDeptNo();
+			}
+		}
 		
 		LocalDate checkDate = smList.get(0).getSaleDate();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 M월 d일");
