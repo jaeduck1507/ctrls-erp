@@ -45,6 +45,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<a href="/fm/addBonusPayment">사원 보너스 입력 /fm/addBonusPayment</a><br />
 	<a href="/fm/showBonusPayment">사원 보너스 조회 /fm/showBonusPayment</a><br />
 
+	<a href="/qam/brand">브랜드 조회 /qam/brand</a><br />
     <a href="/qam/product">상품(Product) 조회 /qam/product</a><br />
     <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a><br />
     <a href="/qam/qc">제품 품질 검수 전체조회 /qam/qc</a><br />

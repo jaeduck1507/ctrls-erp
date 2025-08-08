@@ -29,6 +29,14 @@ public class BrandService {
 	public List<Brand> findBrand() {
 	    return brandMapper.findBrand(); // assumes brandMapper exists and works
 	}
+
+	public void updateBrand(Brand brand) {
+		brandMapper.updateBrand(brand);
+	}
+	
+	public void deleteBrand(Integer brandCode) {
+		brandMapper.deleteBrand(brandCode);
+	}
 	
 	
 }

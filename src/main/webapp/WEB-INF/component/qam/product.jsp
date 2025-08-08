@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>제품 조회</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,7 +35,33 @@
         <th>색상</th><th>제품명</th><th>판매가</th>
         <th>단가</th><th>카테고리</th><th>수정</th><th>삭제</th>
     </tr>
+	
+	<c:forEach items="${productList}" var="p">
+	    <tr>
+	        <td>${p.productNo}</td>
+	        <td>${p.productionDate}</td>
+	        <td>${p.productCode}</td>
+	        <td>${p.productColor}</td>
+	        <td>${p.productName}</td>
+	        <td>${p.productPrice}</td>
+	        <td>${p.productCost}</td>
+	        <td>${p.productCategory}</td>
+	        <td><a href='/productDetailFormUpdate?productNo=${p.productNo}'>수정</a></td>
+	        <td><a href='/deleteProduct?productNo=${p.productNo}'>삭제</a></td>
+	    </tr>
+	</c:forEach>
 </table>
+
+<nav>
+    <ul class="pagination">
+        <li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/product?page=${paging.startPage - 1}">Previous</a></li>
+        <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+           <li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/product?page=${page}">${page}</a></li>
+<!--			<li class="page-item ${paging.page == page ? 'active' : ''}"><a class="page-link" href="${searchUrl}&page=${page}">${page}</a></li>-->
+		</c:forEach>
+        <li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/product?page=${paging.endPage + 1}">Next</a></li>
+    </ul>
+</nav>
 
 <script>
 function displayProducts(data) {
@@ -61,13 +89,13 @@ function displayProducts(data) {
 
 $(document).ready(function () {
     // 전체 제품 불러오기 (초기 로딩)
-    $.ajax({
+/*    $.ajax({
         type: "get",
         url: "/showProduct",
         success: function (result) {
             displayProducts(result);
-        }
-    });
+        } 
+    }); */
 
     // 검색 버튼 처리
     $("#searchForm").submit(function (e) {

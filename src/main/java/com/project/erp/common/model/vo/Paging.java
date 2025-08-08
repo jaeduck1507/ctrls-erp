@@ -39,4 +39,7 @@ public class Paging {
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < lastPage;
 	}
+
+	private String productName;
+	private String productCategory;
 }

@@ -23,6 +23,20 @@
      JOIN product_name USING(brand_code)
 	 ORDER BY brand_code
   </select>
+  
+  <update id="updateBrand" parameterType="Brand"> 
+<!--  parameterType = resultMap의 type / vo & dto 이름, or int/paging/Arraylist etc. -->
+  	UPDATE brand
+  	SET brand_name = #{brandName},
+  		brand_phone = #{brandPhone},
+  		brand_account = #{brandAccount},
+  		brand_bank = #{brandBank}
+  	WHERE brand_code = #{brandCode}
+  </update> 
+
+  <delete id="deleteBrand" parameterType="int">
+	DELETE FROM brand WHERE brand_code = #{brandCode}
+  </delete>
 
   <select id="findById" resultMap="brandMap" parameterType="int">
   	 SELECT brand_name, brand_phone, brand_account, brand_bank
@@ -33,7 +47,7 @@
   </select>
 
   <select id="findBrand" resultMap="brandMap">
-	  SELECT brand_code, brand_name
+	  SELECT brand_code, brand_name, brand_phone, brand_account, brand_bank
 	  FROM brand
 	  ORDER BY brand_code
   </select>

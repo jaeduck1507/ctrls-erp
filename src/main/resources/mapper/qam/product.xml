@@ -14,13 +14,14 @@
     </resultMap>
 
     <!-- 전체 제품 목록 조회 (조인) -->
-    <select id="showProductDetail" resultMap="ProductDetailMap">
+    <select id="showProductDetail" parameterType="Paging" resultMap="ProductDetailMap">
         SELECT p.product_no, p.production_date, p.product_code,
                pn.product_color, pn.product_name, pn.product_price,
                pn.product_cost, pn.product_category
         FROM product p
         JOIN product_name pn ON p.product_code = pn.product_code
         ORDER BY p.production_date DESC
+        LIMIT #{offset}, #{limit}
     </select>
 
     <!-- 단일 제품 상세 조회 (수정 폼 진입 시 사용) -->
@@ -57,7 +58,7 @@
     </delete>
 
 <!-- 제품 검색 (동적 조건: 이름, 카테고리) -->
-<select id="searchProductDetail" resultMap="ProductDetailMap">
+<select id="searchProductDetail" parameterType="Paging" resultMap="ProductDetailMap">
     SELECT p.product_no, p.production_date, p.product_code,
            pn.product_color, pn.product_name, pn.product_price,
            pn.product_cost, pn.product_category
@@ -74,6 +75,7 @@
         </if>
     </where>
     ORDER BY p.production_date DESC
+    LIMIT #{paging.offset}, #{paging.limit}
 </select>
 
     
@@ -84,5 +86,30 @@
 		
 		</foreach>
 	</insert>
+	
+	<select id="totalProduct" resultType="int">
+		SELECT 
+			count(*)
+		FROM product
+	</select>
+	
+	<select id="totalSearchProduct" resultType="int">
+    SELECT 
+    	count(*)
+    FROM product p
+    JOIN product_name pn ON p.product_code = pn.product_code
+    <where>
+        <!-- 제품명 LIKE 검색 -->
+        <if test="productName != null and productName != ''">
+            pn.product_name LIKE CONCAT('%', #{productName}, '%')
+        </if>
+        <!-- 카테고리 정확 일치 검색 -->
+        <if test="productCategory != null and productCategory != ''">
+            AND pn.product_category = #{productCategory}
+        </if>
+    </where>
+    ORDER BY p.production_date DESC
+	</select>
+	
 
 </mapper>

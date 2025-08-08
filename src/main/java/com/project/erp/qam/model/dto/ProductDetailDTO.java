@@ -2,12 +2,14 @@ package com.project.erp.qam.model.dto;
 
 import java.sql.Date;
 
+import com.project.erp.common.model.vo.Paging;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor @AllArgsConstructor @Data
-public class ProductDetailDTO {
+public class ProductDetailDTO extends Paging {
 
     // 제품 테이블 (product) 관련 필드
 

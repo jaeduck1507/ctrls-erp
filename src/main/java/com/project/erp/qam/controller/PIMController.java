@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam; 
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.model.dto.ProductDetailDTO;
 import com.project.erp.qam.model.dto.ProductNameDTO;
 import com.project.erp.qam.model.vo.Brand;
@@ -36,8 +37,8 @@ public class PIMController {
 	// → AJAX로 호출되어 제품 목록을 JSON으로 반환
 	@ResponseBody
 	@GetMapping("/showProduct")
-	public List<ProductDetailDTO> showProduct() {
-	    return productService.showProductDetail();
+	public List<ProductDetailDTO> showProduct(Paging paging) {
+	    return productService.showProductDetail(paging);
 	}
 
 	// 제품명 전체 목록 조회
@@ -79,10 +80,10 @@ public class PIMController {
 	// → 조건 없이 호출 시 전체 반환, 조건 포함 시 LIKE/WHERE 절 처리
 	@GetMapping("/searchProduct")
 	@ResponseBody
-	public List<ProductDetailDTO> searchProduct(
+	public List<ProductDetailDTO> searchProduct(Paging paging,
 			@RequestParam(required = false) String productName,
 	        @RequestParam(required = false) String productCategory) {
-	    return productService.searchProductDetail(productName, productCategory);
+	    return productService.searchProductDetail(paging, productName, productCategory);
 	}
 
 	// 제품명 등록/수정 폼 호출
@@ -103,6 +104,7 @@ public class PIMController {
 //		}
 //		return "component/qam/productNameForm"; // JSP 경로 반환
 //	}
+	
 	@GetMapping("/productNameForm")
 	public String pnForm(@RequestParam(required = false) Integer productCode, Integer brandCode, Model model) {
 
@@ -176,6 +178,35 @@ public class PIMController {
     	return productNameService.showProductNameByBrandFilter(brand);
     }
     
+    @GetMapping("/showBrand")
+    @ResponseBody
+    public List<Brand> showBrand() {
+    	return brandService.showBrand();
+    }
+    
+    @GetMapping("/brandForm")
+    public String brandForm() {
+    	return "component/qam/brandForm";
+    }
+    
+    @PostMapping("/registerBrand")
+    public String registerBrand(Brand brand) {
+    	brandService.registerBrand(brand);
+    	return "component/qam/brand";
+    }
+    
+    @PostMapping("/updateBrand")
+    public String updateBrand(Brand brand) {
+    	brandService.updateBrand(brand);
+    	return "component/qam/brand";
+    }
+    
+	@GetMapping("/deleteBrand")
+	public String deleteBrand(int brandCode) {
+		brandService.deleteBrand(brandCode);
+		return "redirect:/qam/brand";
+	}
+
     }
 
 

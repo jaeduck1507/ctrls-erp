@@ -52,7 +52,6 @@
                     // 결과 테이블 초기화 후 헤더 생성
                     $("#result").html("");
                     $("#result").append("<tr><th>제품 코드</th><th>브랜드코드</th><th>브랜드</th><th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>수정</th><th>삭제</th></tr>");
-
                     // 데이터 순회하며 행 생성
                     for (const pn of result) {
                         let row = "<tr><td>" + pn.productCode + "</td><td>" + pn.brandCode + "</td><td>" + pn.brandName + "</td><td>" + pn.productCategory + "</td><td>" + pn.productColor + "</td><td>" + pn.productName + "</td><td>" + pn.productPrice + "</td><td>" + pn.productCost + "</td>";

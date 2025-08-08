@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.qam.mapper.ProductMapper;
 import com.project.erp.qam.model.dto.ProductDetailDTO;
@@ -20,8 +21,11 @@ public class ProductService {
 
     // 전체 제품 리스트 조회
     // → product + product_name 조인 결과 (DTO) 반환
-    public List<ProductDetailDTO> showProductDetail() {
-        return productMapper.showProductDetail();
+    public List<ProductDetailDTO> showProductDetail(Paging paging) {
+    	paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+    	paging.setTotal(productMapper.totalProduct());
+    	System.out.println("showProductDetail 서비스 넘어감");
+        return productMapper.showProductDetail(paging);
     }
 
     // 단일 제품 상세 조회
@@ -47,8 +51,10 @@ public class ProductService {
 
     // 제품 검색
     // → 제품명 및 카테고리 기준 필터링 (LIKE + WHERE 조건 조합)
-    public List<ProductDetailDTO> searchProductDetail(String productName, String productCategory) {
-        return productMapper.searchProductDetail(productName, productCategory);
+    public List<ProductDetailDTO> searchProductDetail(Paging paging, String productName, String productCategory) {
+    	paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+    	paging.setTotal(productMapper.totalSearchProduct(productName, productCategory));
+    return productMapper.searchProductDetail(paging, productName, productCategory);
     }
     
     public boolean existsByProductNo(int productNo) {
@@ -73,4 +79,10 @@ public class ProductService {
     	}
     	productBatchRegister(productList);
     }
+    
+    public Integer totalSearchProduct(Paging paging) {
+    	return productMapper.totalSearchProduct(paging.getProductName(), paging.getProductCategory());
+    }
+    
+    
 }
