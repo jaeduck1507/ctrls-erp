@@ -1,7 +1,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.erp.hrm.mapper.PerformanceReviewMapper">
+
+	<resultMap id="EmpInfoMap" type="EmpInfo">
+	    <id property="empNo" column="emp_no" />
+	    <result property="empName" column="emp_name" />
+	    <result property="empId" column="emp_id" />
+	    <result property="empIn" column="emp_in" />
+	    <result property="deptNo" column="dept_no" />
+	    <result property="jobNo" column="job_no" />
+	    <result property="jobTitle" column="job_title" />
+	    <result property="deptName" column="dept_name" />
+	    <result property="hireDate" column="hire_date" />
+	    <result property="quitDate" column="quit_date" />
+	    <result property="salary" column="salary" />
+	    <result property="addr" column="addr" />
+	    <result property="phone" column="phone" />
+	    <result property="email" column="email" />
+	</resultMap>
+	
 	<insert id="empEval" parameterType="PerformanceReview">
 		INSERT INTO performance_review(emp_no,evaluator_emp_no,attitude_score,achieve_score,comments)
 		VALUES(#{empNo},#{evaluatorEmpNo},#{attitudeScore},#{achieveScore},#{comments})
 	</insert>
+	
+	<select id="showEvalEmp" parameterType="EmpInfo" resultMap="EmpInfoMap">
+		select evaluator_emp_no as 'emp_no'
+		from performance_review 
+		WHERE emp_no = #{empNo}
+	</select>
 </mapper>

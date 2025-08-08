@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.User;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.model.vo.Department;
@@ -17,6 +20,7 @@ import com.project.erp.hrm.service.DepartmentService;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.hrm.service.JobPositionService;
 import com.project.erp.hrm.service.LeaveInfoService;
+import com.project.erp.hrm.service.PerformanceReviewService;
 
 @RequestMapping("/hrm")
 @Controller
@@ -35,6 +39,9 @@ public class HrmPageController {
 	
 	@Autowired
 	private LeaveInfoService leaveInfoService;
+	
+	@Autowired
+	private PerformanceReviewService performanceReviewService;
 
     HrmPageController(EOMController EOMController) {
         this.EOMController = EOMController;
@@ -70,7 +77,14 @@ public class HrmPageController {
 	}
 	@GetMapping("/empEval")
 	public String empEval(Model model) {
-		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		EmpInfo empinfo = new EmpInfo();
+		empinfo.setEmpNo(user.getEmpNo());
+		empinfo.setDeptNo(user.getDeptNo());
+		performanceReviewService.showEvalEmp(empinfo);
+		model.addAttribute("empInfo", performanceReviewService.showEvalEmp(empinfo));
+		model.addAttribute("user", user);
 		return "component/hrm/empEval";
 	}
 	

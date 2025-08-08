@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
+import com.project.erp.hrm.model.dto.PerformanceReviewDTO;
 import com.project.erp.hrm.model.vo.EmployeeInfo;
 
 @Mapper
@@ -17,4 +18,5 @@ public interface EmployeeInfoMapper {
 	int totalEmp(EmpInfo ei);
 	EmpInfo infoShowOne(EmpInfo ei);
 	void empModify(EmpInfo ei);
+	List<EmpInfo> showNotEvalEmp(PerformanceReviewDTO prDto);
 }

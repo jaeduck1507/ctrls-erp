@@ -9,6 +9,7 @@ import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.mapper.EmployeeInfoMapper;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
+import com.project.erp.hrm.model.dto.PerformanceReviewDTO;
 import com.project.erp.hrm.model.vo.EmployeeInfo;
 
 @Service
@@ -57,5 +58,9 @@ public class EmployeeInfoService {
 	
 	public void empModify(EmpInfo ei) {
 		employeeInfoMapper.empModify(ei);
+	}
+	
+	public List<EmpInfo> showNotEvalEmp(PerformanceReviewDTO prDto) {
+		return employeeInfoMapper.showNotEvalEmp(prDto);
 	}
 }
