@@ -76,4 +76,13 @@ public class AMController {
 		return true;
 	}
 	
+	@ResponseBody
+	@PostMapping("/showMyAttendance")
+	public List<AttendanceLog> showMyAttendance(@RequestBody attendanceMonth am) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		am.setEmpNo(user.getEmpNo());
+		return attendanceLogService.showAttendance(am);
+	}
+	
 }

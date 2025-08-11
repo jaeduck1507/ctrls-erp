@@ -126,6 +126,7 @@
 		//	}
 		//}
 		console.log("Submitting:", JSON.parse(sessionStorage.getItem("sellList")));
+		/*
 		$.ajax({
 			type: "post", // .jsp에서 받아진 값을 DB로 보내기에 POST
 			url: "/qam/registerSaleDate", // HSDController의 registerSaleDate(@RequestBody List<SaleReadyDTO> sellList)를 POST 호출, @PostMapping("/registerSaleDate")
@@ -139,7 +140,7 @@
 			},
 			error: function (xhr, status, error) {
 			}
-		});
+		});*/
 	});
 </script>
 

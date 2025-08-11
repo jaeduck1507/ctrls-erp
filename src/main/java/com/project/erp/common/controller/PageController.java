@@ -98,5 +98,21 @@ public class PageController {
 	public String layout2() {
 		
 		return "common/layout2";
+	@GetMapping("/modifyMyInfo")
+	public String modifyMyInfo(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		EmpInfo empInfo = new EmpInfo();
+		empInfo.setEmpNo(user.getEmpNo());
+		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
+		return "common/modifyMyInfo";
+	}
+	
+	@GetMapping("/myAttendance")
+	public String myAttendance(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		model.addAttribute("user",user);
+		return "common/myAttendance";
 	}
 }

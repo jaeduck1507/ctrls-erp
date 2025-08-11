@@ -15,7 +15,6 @@
     <label>
     직원 번호 : <input type="text" name="empNo" value="${empInfo.empNo}" readonly="readonly"></label><br>
     <label>성명 : <input type="text" name="empName" value="${empInfo.empName}"></label><br>
-    <label>아이디 : <input type="text" name="empId" value="${empInfo.empId}"></label><br>
     <label>주민등록번호 : <input type="text" name="empIn" value="${empInfo.empIn}" readonly="readonly"></label><br>
     <label>직급 : <input type="text" name="jobTitle" value="${empInfo.jobTitle}" readonly="readonly"></label><br>
     <label>부서 : <input type="text" name="deptName" value="${empInfo.deptName}" readonly="readonly"></label><br>
