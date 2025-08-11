@@ -1,0 +1,98 @@
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+}
+* {
+  font-family: "Pretendard", sans-serif;
+}
+
+/* 메뉴 */
+.side .menu {
+  position: fixed;
+  background-color: var(--color);
+  border-radius: 10px;
+  height: 90%;
+  width: var(--side-width);
+  margin-top: calc(var(--header-height) + 10px); /* 헤더높이 70px + 여백 10px */
+  color: white;
+  overflow-y: auto;
+}
+
+/* 로고 */
+.side .logo {
+  position: fixed;
+  background-color: #f8f8f8;
+  text-align: center;
+  height: var(--header-height); /* 우측 헤더 높이와 동일 */
+  width: var(--side-width); /* 사이드 메뉴 가로 길이와 동일 */
+  border-radius: 10px;
+  border: #cec7c7 solid 1px;
+  box-shadow: #33333362 0 1px 1px; /* 그림자 효과 */
+}
+
+/* 사이드 메뉴 중 주메뉴 */
+.side h1 {
+  font-size: 22px;
+  margin: 20px 16px;
+}
+/* 사이드 메뉴 중 서브 메뉴 */
+.side h1 a {
+  color: var(--color);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+}
+/* 사이드 메뉴 글씨 색 */
+.side h1 a:hover {
+  color: #ccc;
+}
+
+/* 사이드메뉴 중 주메뉴 스타일*/
+.menu-title {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 15px 20px;
+}
+/* 사이드메뉴 중 주메뉴에 커서 올렸을 경우 */
+.menu-title:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 서브 메뉴 숨김/펼침 */
+.submenu {
+  display: none;
+  padding-left: 20px;
+  padding-top: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.submenu.show {
+  display: block;
+}
+
+/* 서브 메뉴 스타일 */
+.submenu a {
+  display: block;
+  padding: 6px 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+/* 서브 메뉴 커서 올렸을 경우 */
+.submenu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* 선택된 메뉴 강조 */
+.submenu a.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: bold;
+}
+.main {
+  padding-left: var(--side-width); /* 메인을 메뉴 가로 길이 만큼 밀기 */
+}

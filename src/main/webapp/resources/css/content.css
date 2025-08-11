@@ -1,0 +1,178 @@
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+  --input-color: #ccc;
+  --table-th-color:#cecece;
+  --table-td-color:#e4e4e7;
+}
+* {
+  font-family: "Pretendard", sans-serif;
+}
+/* 본문 스타일 */
+/* 메인 섹션 */
+.main .section {
+  margin: 10px;
+  overflow-y: auto; /* 스크롤 가능 */
+  padding: 20px;
+  padding-top: calc(var(--header-height) + 15px);
+  height: 100%;
+  font-family: "Pretendard", sans-serif; 
+}
+
+/* 메뉴 제목 */
+.section-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 8px;
+}
+
+/* 검색 필터 영역(select, input) */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.filter-bar input[type="text"],
+.filter-bar input[type="password"],
+.filter-bar input[type="month"],
+.filter-bar input[type="date"],
+.filter-bar input[type="time"],
+.filter-bar input[type="checkbox"],
+.filter-bar fieldset,
+.filter-bar select {
+  padding: 6px 8px;
+  border: 1px solid var(--input-color);
+  border-radius: 4px;
+}
+
+.filter-bar input[type="radio"],
+.filter-bar input[type="checkbox"] {
+  accent-color: var(--color); /* 체크박스 색상 */
+}
+/* submit, a, button 스타일 */
+.filter-bar input[type="submit"],
+.filter-bar a,
+.filter-bar button {
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #516b38;
+  border: var(--color) solid 1px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+/* a 태그 상세 크기 조정*/
+.filter-bar a{
+  padding: 8.5px 12px;
+  font-size: 14px;
+}
+/* 각종 버튼들 커서 올렸을 경우 색상 변경 */
+.filter-bar input[type="submit"]:hover,
+.filter-bar a:hover,
+.filter-bar button:hover {
+  background-color: var(--color);
+  color: #ffffff;
+}
+.btn-logout a{
+  text-decoration: none;
+  color: white;
+  background-color: #90c67c;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+  box-shadow: #33333362 0px 1px 1px;
+  width: 80px;
+}
+
+/* 테이블 */
+table.data-table {
+  width: 100%;
+  font-size: 14px;
+  border: none;
+}
+
+.data-table th,
+.data-table td {
+  padding:5px 10px;
+  border-radius: 10px;
+  text-align: center;
+  height: fit-content;
+  max-height: 1px;
+}
+
+/* 테이블 컬럼명 */
+.data-table th {
+  background-color: var(--table-th-color);
+  font-weight: bold;
+}
+
+/* 테이블 데이터 */
+.data-table td {
+  background-color: var(--table-td-color);
+}
+.data-table td input[type="text"],
+.data-table td input[type="date"],
+.data-table td select
+{
+	border-style: none;
+	background-color: var(--table-td-color);
+}
+
+/* 테이블 내 버튼*/
+.innerbtn {
+  background-color: var(--table-td-color);
+  border: none;
+  color: #333;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* 테이블 내 버튼 커서 올렸을 경우 */
+.innerbtn:hover {
+  color: var(--color);
+}
+
+/* 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 10px;
+}
+
+.pagination li a {
+  display: block;
+  padding: 5px 14px;
+  border: 1px solid var(--input-color);
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.pagination li a:hover {
+  background-color: #eee;
+}
+
+.pagination .active a {
+  background-color: #328e6e;
+  color: white;
+  font-weight: bold;
+  border-color: #328e6e;
+}
+
+.pagination .disabled a {
+  pointer-events: none;
+  opacity: 0.4;
+}

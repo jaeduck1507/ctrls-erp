@@ -29,7 +29,10 @@ public class PageController {
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
-		
+		Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println(auth.toString().equals("anonymousUser"));
+		if(auth.toString().equals("anonymousUser")) return "redirect:/login";
+		//User user = (User) auth.getPrincipal();
 		return "common/layout";
 	}
 	
@@ -89,5 +92,11 @@ public class PageController {
 	public String myLeaveDelete(int leaveId) {
 		leaveInfoService.leaveDelete(leaveId);
 		return "redirect:/myLeavePage";
+	}
+	
+	@GetMapping("/layout2")
+	public String layout2() {
+		
+		return "common/layout2";
 	}
 }
