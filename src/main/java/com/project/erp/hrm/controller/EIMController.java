@@ -65,4 +65,10 @@ public class EIMController {
 		employeeInfoservice.empModify(ei);
 		return "redirect:/hrm/empInfo";
 	}
+	
+	@PostMapping("/modifyMyInfo")
+	public String modifyMyInfo(EmpInfo ei) {
+		employeeInfoservice.empModify(ei);
+		return "redirect:/mypage";
+	}
 }

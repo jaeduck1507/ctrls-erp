@@ -32,9 +32,9 @@
 	    <p>이메일 : ${user.email}</p>
 	</div>
 	<div>
-	<button>개인정보 수정(미완)</button>
+	<button onclick="location.href='/modifyMyInfo'">개인정보 수정(완)</button>
 	<button onclick="location.href='/myLeavePage'">휴가신청(완)</button>
-	<button>출근 현황 보기(미완)</button>
+	<button onclick="location.href='/myAttendance'">출근 현황 보기(완)</button>
 	</div>
 		
 	<a href="/logout">로그아웃</a>

@@ -47,9 +47,21 @@ public class AttendanceLogService {
 			if( ym.getYear() == today.getYear()&& ym.getMonthValue() > today.getMonthValue()) break;
 			if(ym.getYear() == today.getYear()&& ym.getMonthValue() == today.getMonthValue() && today.getDayOfMonth() < i) break;
 			LocalDate date = ym.atDay(i);
-			AttendanceLog al = alList.get(count);
+			AttendanceLog al = new AttendanceLog();
+			
+			
+			try { // 카운트가 리스트 크기 넘을때 더미데이터 생성으로 오류 차단
+				al = alList.get(count);
+			} catch(IndexOutOfBoundsException e) {
+				AttendanceLog dummyLog= new AttendanceLog();
+				dummyLog.setEmpNo(am.getEmpNo());
+				alList.add(dummyLog);
+				al = alList.get(count);
+			} 
+			
 			if(al.getStatus() != null && al.getStatus().equals("휴가")) { // 휴가 일때
 				list.add(al);
+				System.out.println("휴휴휴휴흏휴휴휴휴가가가각가가가가");
 				count++;
 				continue;
 			}
