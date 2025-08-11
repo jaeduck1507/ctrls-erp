@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.model.dto.BonusPaymentDTO;
+import com.project.erp.fm.model.dto.BonusPaymentPagingDTO;
 import com.project.erp.fm.model.dto.SalEmpDTO;
 import com.project.erp.fm.model.dto.SalaryAlreadyAddDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
+import com.project.erp.fm.model.dto.SalaryPagingDTO;
 import com.project.erp.fm.model.vo.BonusPayment;
 import com.project.erp.fm.model.vo.Salary;
 import com.project.erp.fm.model.vo.Transaction;
@@ -37,8 +40,8 @@ public class CSIController {
 	
 	@ResponseBody
 	@PostMapping("/showSalary")
-	public List<SalEmpDTO> showSalary(SalEmpDTO se) {
-		return salaryService.showSalary(se);
+	public SalaryPagingDTO showSalary(SalEmpDTO se, Paging paging) {
+		return salaryService.showSalaryPaging(se, paging);
 	}
 	
 	@ResponseBody
@@ -50,14 +53,13 @@ public class CSIController {
 	
 	@ResponseBody
 	@PostMapping("/showBonusPayment")
-	public List<BonusPaymentDTO> showBonusPayment(@RequestBody EmpInfo empInfo) {
-		return bonusPaymentService.showBonusPayment(empInfo);
+	public BonusPaymentPagingDTO showBonusPayment(EmpInfo empInfo, Paging paging) {
+		return bonusPaymentService.showBonusPaymentPaging(empInfo, paging);
 	}
 	
 	@ResponseBody
 	@PostMapping("/salaryPayment")
 	public List<SalaryDTO> salaryPayment(SalaryAlreadyAddDTO saaDto) {
-		
 		return salaryService.salaryPayment(saaDto);
 	}
 	

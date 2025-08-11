@@ -32,18 +32,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus 페이징 처리 필요</a><br />
 
 
-    <a href="/fm/budget">예산 조회 /fm/budget 페이징 처리 필요</a><br />
-    <a href="/fm/saleManage">매출 조회 /fm/saleManage 페이징 처리 필요</a><br />
-    <a href="/fm/purchase">매입 내역 조회 /fm/purchase 페이징 처리 필요</a><br />
+    <a href="/fm/budget">예산 조회 /fm/budget 페이징 처리 완료</a><br />
+    <a href="/fm/saleManage">매출 조회 /fm/saleManage 페이징 처리 완료</a><br />
+    <a href="/fm/purchase">매입 내역 조회 /fm/purchase 페이징 처리 완료</a><br />
     <a href="/fm/purchaseRegister">매입 일괄 등록 /fm/purchaseRegister</a><br />
     <a href="/fm/transaction">거래내역 조회 /fm/transaction 페이징 처리 완료</a><br />
-	<a href="/fm/salary">급여 조회 /fm/salary 페이징 처리 필요</a><br />
+	<a href="/fm/salary">급여 조회 /fm/salary 페이징 처리 완료</a><br />
 	<a href="/fm/salaryPayment">급여 등록 /fm/salaryPayment</a><br />
 	<a href="/fm/budgetRegister">예산 등록 /fm/budgetRegister</a><br />
 	<a href="/fm/saleRegister">매출 등록 /fm/saleRegister</a><br />
 	<a href="/fm/transRegister">거래내역 입력 /fm/transRegister</a><br />
 	<a href="/fm/addBonusPayment">사원 보너스 입력 /fm/addBonusPayment</a><br />
-	<a href="/fm/showBonusPayment">사원 보너스 조회 /fm/showBonusPayment 페이징 처리 필요</a><br />
+	<a href="/fm/showBonusPayment">사원 보너스 조회 /fm/showBonusPayment 페이징 처리 완료</a><br />
 
 	<a href="/qam/brand">브랜드 조회 /qam/brand 페이징 처리 필요</a><br />
     <a href="/qam/product">상품(Product) 조회 /qam/product 페이징 처리 필요</a><br />

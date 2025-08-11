@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.model.dto.PurDeptDTO;
+import com.project.erp.fm.model.dto.PurchasePagingDTO;
 import com.project.erp.fm.model.vo.Purchase;
 import com.project.erp.fm.model.vo.Transaction;
 import com.project.erp.fm.service.PurchaseService;
@@ -36,8 +38,8 @@ public class SVPController {
 	
 	@ResponseBody
 	@PostMapping("/showPurchase")
-	public List<PurDeptDTO> showPurchase(PurDeptDTO pd) {
-		return purchaseService.showPurchase(pd);
+	public PurchasePagingDTO showPurchase(PurDeptDTO pd, Paging paging) {
+		return purchaseService.showPurchasePaging(pd, paging);
 	}
 	
 	@ResponseBody
@@ -48,10 +50,10 @@ public class SVPController {
 		System.out.println(prList);
 		
 		List<Department> deptList = departmentService.showDept();
-		int salesDept = 0;
+		int purchaseDept = 0;
 		for (Department dept : deptList) {
 			if (dept.getDeptName().contains("지점")) {
-				salesDept = dept.getDeptNo();
+				purchaseDept = dept.getDeptNo();
 			}
 		}
 		
@@ -73,7 +75,7 @@ public class SVPController {
 			transaction.setCategory("매입 비용");
 			transaction.setTransDesc(purDept.getBrandName() + " 제품 매입");
 			transaction.setTransDate(purDept.getPurchaseDate());
-			transaction.setDeptNo(salesDept);
+			transaction.setDeptNo(purchaseDept);
 			transactionList.add(transaction);
 		}
 		transactionService.transRegister(transactionList);

@@ -6,29 +6,47 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.SalaryMapper;
 import com.project.erp.fm.model.dto.SalEmpDTO;
 import com.project.erp.fm.model.dto.SalaryAlreadyAddDTO;
 import com.project.erp.fm.model.dto.SalaryDTO;
+import com.project.erp.fm.model.dto.SalaryPagingDTO;
 import com.project.erp.fm.model.vo.Salary;
 
 @Service
-public class SalaryService implements SalaryMapper {
+public class SalaryService {
 
 	@Autowired
-	private SalaryMapper mapper;
-
-	@Override
+	private SalaryMapper salaryMapper;
+	
 	public List<SalEmpDTO> showSalary(SalEmpDTO se) {
-		return mapper.showSalary(se);
+		return salaryMapper.showSalary(se);
 	}
-
-	@Override
+	
+	public List<SalEmpDTO> showSalaryPage(SalaryPagingDTO salaryPaging) {
+		return salaryMapper.showSalaryPage(salaryPaging);
+	}
+	
+	public int totalSalaryPage(SalEmpDTO se) {
+		return salaryMapper.totalSalaryPage(se);
+	}
+	
+	public SalaryPagingDTO showSalaryPaging(SalEmpDTO se, Paging paging) {
+		SalaryPagingDTO salaryPagingDTO = new SalaryPagingDTO();
+		salaryPagingDTO.setSalEmpDTO(se);
+		salaryPagingDTO.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		salaryPagingDTO.setSalaryList(showSalaryPage(salaryPagingDTO));
+		salaryPagingDTO.setPage(paging.getPage());
+		salaryPagingDTO.setTotal(totalSalaryPage(se));
+		return salaryPagingDTO;
+	}
+	
 	public List<SalaryDTO> salaryPayment(SalaryAlreadyAddDTO saaDto) {
 		List<SalaryDTO> allList = new ArrayList<SalaryDTO>();
 		saaDto.setList(showSalaryAlreadyAdd(saaDto)); // 이미 급여 등록이된 사람 조회한 리스트
 		
-		List<SalaryDTO> existList = mapper.salaryPayment(saaDto); // 이미 급여 등록이 된 사람을 제외하고 보너스가 존재하는 사람 보너스 종합
+		List<SalaryDTO> existList = salaryMapper.salaryPayment(saaDto); // 이미 급여 등록이 된 사람을 제외하고 보너스가 존재하는 사람 보너스 종합
 		saaDto.getList().addAll(existList); // 급여등록 및 보너스 존재하는 사람 리스트
 		List<SalaryDTO> noList = salaryPaymentNoBonus(saaDto.getList()); // 위의 리스트에 담긴 사람을 제외한 정보 들고오기
 		
@@ -37,29 +55,25 @@ public class SalaryService implements SalaryMapper {
 		allList.addAll(noList);
 		return allList;
 	}
-
-	@Override
+	
 	public List<SalaryDTO> salaryPaymentNoBonus(List<SalaryDTO> existList) {
-		System.out.println(mapper.salaryPaymentNoBonus(existList));
-		return mapper.salaryPaymentNoBonus(existList);
+		System.out.println(salaryMapper.salaryPaymentNoBonus(existList));
+		return salaryMapper.salaryPaymentNoBonus(existList);
 	}
-
-	@Override
+	
 	public void addSalaryPayment(List<Salary> spList) {
-		mapper.addSalaryPayment(spList);
+		salaryMapper.addSalaryPayment(spList);
 		
 	}
-
-	@Override
+	
 	public List<SalaryDTO> showSalaryAlreadyAdd(SalaryAlreadyAddDTO saaDto) {
-		System.out.println(mapper.showSalaryAlreadyAdd(saaDto));
-		return mapper.showSalaryAlreadyAdd(saaDto);
+		System.out.println(salaryMapper.showSalaryAlreadyAdd(saaDto));
+		return salaryMapper.showSalaryAlreadyAdd(saaDto);
 	}
-
-	@Override
+	
 	public List<SalEmpDTO> totalSalary(SalEmpDTO se) {
-		System.out.println(mapper.totalSalary(se));
-		return mapper.totalSalary(se);
+		System.out.println(salaryMapper.totalSalary(se));
+		return salaryMapper.totalSalary(se);
 	}
 	
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
+import com.project.erp.fm.model.dto.BudgetPagingDTO;
 import com.project.erp.fm.model.vo.Budget;
 import com.project.erp.fm.service.BudgetService;
 
@@ -20,10 +22,9 @@ public class SVBController {
 	
 	@ResponseBody
 	@PostMapping("/showBudget")
-	public List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd, Budget budget) {
+	public BudgetPagingDTO showBudget(BudgetDeptDTO bd, Budget budget, Paging paging) {
 		budgetService.updatePV(budget);
-		//System.out.println(budgetService.showBudget(bd));
-		return budgetService.showBudget(bd);
+		return budgetService.showBudgetPaging(bd, paging);
 	}
 	
 	@ResponseBody

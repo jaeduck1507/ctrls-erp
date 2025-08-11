@@ -21,6 +21,27 @@
 		</where>
 	</select>
 	
+	<select id="showBudgetPage" parameterType="BudgetPagingDTO" resultMap="BudgetDeptMap">
+		SELECT * FROM budget
+		JOIN department USING(dept_no)
+		<where>
+			<if test="budgetDeptDTO.deptName != 'dept'">
+				dept_name = #{budgetDeptDTO.deptName}
+			</if>
+		</where>
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalBudgetPage" parameterType="BudgetDeptDTO" resultType="int">
+		SELECT count(*) FROM budget
+		JOIN department USING(dept_no)
+		<where>
+			<if test="deptName != 'dept'">
+				dept_name = #{deptName}
+			</if>
+		</where>
+	</select>
+	
 	<insert id="budgetRegister" parameterType="ArrayList">
 		INSERT INTO budget(period_type, annual_budget, plan, execution_date, dept_no) VALUES
 		<foreach collection="bList" item="budget" separator=",">

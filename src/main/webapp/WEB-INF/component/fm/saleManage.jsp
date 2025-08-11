@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>SaleManage</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1>매출 조회</h1>
@@ -29,6 +31,14 @@
 		</table>
 	</div>
 	
+	<div>
+		<nav>
+			<ul class="pagination">
+				
+			</ul>
+		</nav>
+	</div>
+	
 	<script>
 		$("#btn").click(() => {
 			const formData = new FormData();
@@ -49,17 +59,61 @@
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
-					for (const sm of result) {
-						var text = "<tr><td>" + sm.productName + "</td><td>" + sm.productCategory + "</td><td>" + sm.productPrice + "</td><td>" 
-							+ sm.quantity + "</td><td>" + sm.varAmount + "</td><td>" + sm.totalAmount + "</td><td>" + sm.saleDate + "</td></tr>"
+					$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
+					for (const sales of result.salesList) {
+						var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice + "</td><td>" 
+							+ sales.quantity + "</td><td>" + sales.varAmount + "</td><td>" + sales.totalAmount + "</td><td>" + sales.saleDate + "</td></tr>"
 						$("#result").append(text);
 					}
+					
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for (var i = result.startPage; i <= result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
 				},
 				error: function(xhr, status, error) {
 					
 				}
-				
+			});
+		});
+		
+		$(document).on('click', 'a.page-link', function(e) {
+			e.preventDefault();
+			
+			const formData = new FormData();
+			formData.append("productCategory", $("#productCategory").val());
+			formData.append("productName", $("#productName").val());
+			formData.append("startDate", $("#startDate").val());
+			formData.append("endDate", $("#endDate").val());
+			formData.append("page", $(this).attr('href'));
+			
+			$.ajax({
+				type: "post",
+				url: "/showSaleManage",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(result) {
+					$("#result").html("");
+					$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
+					for (const sales of result.salesList) {
+						var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice + "</td><td>" 
+							+ sales.quantity + "</td><td>" + sales.varAmount + "</td><td>" + sales.totalAmount + "</td><td>" + sales.saleDate + "</td></tr>"
+						$("#result").append(text);
+					}
+					
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for (var i = result.startPage; i <= result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+				},
+				error: function(xhr, status, error) {
+					
+				}
 			});
 		});
 	</script>

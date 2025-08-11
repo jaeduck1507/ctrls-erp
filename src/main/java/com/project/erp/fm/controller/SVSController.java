@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
+import com.project.erp.fm.model.dto.SaleManagePagingDTO;
 import com.project.erp.fm.model.dto.SaleProductDTO;
 import com.project.erp.fm.model.vo.SaleManage;
 import com.project.erp.fm.model.vo.Transaction;
@@ -38,8 +40,8 @@ public class SVSController {
 	
 	@ResponseBody
 	@PostMapping("/showSaleManage")
-	public List<SaleProductDTO> showSaleManage(SaleProductDTO sp) {
-		return saleManageService.showSaleManage(sp);
+	public SaleManagePagingDTO showSaleManage(SaleProductDTO sp, Paging paging) {
+		return saleManageService.showSalesPaging(sp, paging);
 	}
 	
 	@ResponseBody

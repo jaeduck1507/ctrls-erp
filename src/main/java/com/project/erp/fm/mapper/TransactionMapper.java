@@ -13,6 +13,6 @@ public interface TransactionMapper {
 
 	List<TransDTO> showtrans(TransDTO trans);
 	List<TransDTO> showtransPage(TransPagingDTO transPaging);
-	int totalTrans(TransDTO trans);
+	int totalTransPage(TransDTO trans);
 	void transRegister(List<Transaction> tList);
 }

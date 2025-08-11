@@ -7,15 +7,17 @@
 <meta charset="UTF-8">
 <title>Purchase</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1>매입 내역 조회</h1>
 	<div>
 		<select id="brandName">
 			<option value="all">브랜드</option>
-			<option value="상의">샤넬</option>
-			<option value="하의">자라</option>
-			<option value="악세사리">유니클로</option>
+			<c:forEach items="${brandList}" var="brand">
+				<option value="${brand.brandName}">${brand.brandName}</option>
+			</c:forEach>
 		</select>
 		<select id="productCategory">
 			<option value="all">카테고리</option>
@@ -36,11 +38,20 @@
 		</table>
 	</div>
 	
+	<div>
+		<nav>
+			<ul class="pagination">
+				
+			</ul>
+		</nav>
+	</div>
+	
 	<script>
 		$("#btn").click(() => {
 			const formData = new FormData();
-			formData.append("productName", $("#productName").val());
+			formData.append("brandName", $("#brandName").val());
 			formData.append("productCategory", $("#productCategory").val());
+			formData.append("productName", $("#productName").val());
 			formData.append("startDate", $("#startDate").val());
 			formData.append("endDate", $("#endDate").val());
 			
@@ -51,23 +62,70 @@
 				processData: false,
 				contentType : false,
 				success: function(result) {
-					//console.log($("#productName").val());
+					//console.log($("#brandName").val());
 					//console.log($("#productCategory").val());
+					//console.log($("#productName").val());
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
 					$("#result").html("");
 					$("#result").append("<tr><th>매입 번호</th><th>브랜드</th><th>제품명</th><th>카테고리</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th></tr>");
-					for (const p of result) {
-						var text = "<tr><td>"  + p.purchaseNo + "</td><td>"  + p.brandName + "</td><td>"  + p.productName + "</td><td>" + p.productCategory + "</td><td>"	
-							+ p.unitPrice + "</td><td>" + p.quantity + "</td><td>" + p.varAmount + "</td><td>" + p.totalAmount + "</td><td>" + p.purchaseDate + "</td></tr>"
+					for (const purchase of result.purchaseList) {
+						var text = "<tr><td>"  + purchase.purchaseNo + "</td><td>"  + purchase.brandName + "</td><td>"  + purchase.productName + "</td><td>" + purchase.productCategory + "</td><td>"	
+							+ purchase.unitPrice + "</td><td>" + purchase.quantity + "</td><td>" + purchase.varAmount + "</td><td>" + purchase.totalAmount + "</td><td>" + purchase.purchaseDate + "</td></tr>"
 						$("#result").append(text);
 					}
+					
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for (var i = result.startPage; i <= result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
 				},
 				error: function(xhr, status, error) {
 					
 				}
 			});
-		});	
+		});
+		
+		$(document).on('click', 'a.page-link', function(e) {
+			e.preventDefault();
+			
+			const formData = new FormData();
+			formData.append("brandName", $("#brandName").val());
+			formData.append("productCategory", $("#productCategory").val());
+			formData.append("productName", $("#productName").val());
+			formData.append("startDate", $("#startDate").val());
+			formData.append("endDate", $("#endDate").val());
+			formData.append("page", $(this).attr('href'));
+			
+			$.ajax({
+				type: "post",
+				url: "/showPurchase",
+				data: formData,
+				processData: false,
+				contentType : false,
+				success: function(result) {
+					$("#result").html("");
+					$("#result").append("<tr><th>매입 번호</th><th>브랜드</th><th>제품명</th><th>카테고리</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th></tr>");
+					for (const purchase of result.purchaseList) {
+						var text = "<tr><td>"  + purchase.purchaseNo + "</td><td>"  + purchase.brandName + "</td><td>"  + purchase.productName + "</td><td>" + purchase.productCategory + "</td><td>"	
+							+ purchase.unitPrice + "</td><td>" + purchase.quantity + "</td><td>" + purchase.varAmount + "</td><td>" + purchase.totalAmount + "</td><td>" + purchase.purchaseDate + "</td></tr>"
+						$("#result").append(text);
+					}
+					
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for (var i = result.startPage; i <= result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+				},
+				error: function(xhr, status, error) {
+					
+				}
+			});
+		});
 	</script>
 </body>
 </html>
