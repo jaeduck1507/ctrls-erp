@@ -17,4 +17,5 @@ public class SalaryDTO {
 	private String empName;
 	private String jobTitle; // 직급명
 	private String deptName;
+	
 }
