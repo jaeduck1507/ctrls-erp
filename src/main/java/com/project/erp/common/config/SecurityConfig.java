@@ -23,6 +23,7 @@ public class SecurityConfig {
 					.authorizeHttpRequests(authorize -> 
 							
 							authorize
+							.requestMatchers("/resources/**","/css/**","/js/**","/images/**").permitAll()
 							.requestMatchers("/mypage").authenticated()
 							.requestMatchers("/hrm/my*").authenticated()
 							.requestMatchers("/hrm/empEval").denyAll()
@@ -56,6 +57,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(authorize -> 
 						
 						authorize
+						.requestMatchers("/resources/**","/css/**","/js/**","/images/**").permitAll()
 						.requestMatchers("/mypage").authenticated()
 						.requestMatchers("/hrm/my*").authenticated()
 						.requestMatchers("/hrm/empEval").authenticated()

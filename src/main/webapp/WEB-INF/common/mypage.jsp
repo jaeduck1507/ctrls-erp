@@ -6,13 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>마이 페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+	
 	<!-- get, /mypage: 인증된 사람만 즉! 로그인된 사람만 -->
 	<h1>마이페이지</h1>
-	<div>
+	<div class="filter-bar">
 		<p class="date" id="ymd"></p>
 	    <p id="timer"></p>
 		출퇴근 등록 시간: <input type="time" id = "checkTime">
@@ -31,13 +33,14 @@
 	    <p>연락처 : ${user.phone}</p>
 	    <p>이메일 : ${user.email}</p>
 	</div>
-	<div>
+	<div class="filter-bar">
 	<button>개인정보 수정(미완)</button>
 	<button onclick="location.href='/myLeavePage'">휴가신청(완)</button>
 	<button>출근 현황 보기(미완)</button>
 	</div>
-		
+	<div class="btn-logout">
 	<a href="/logout">로그아웃</a>
+	</div>
 	<script>
 	
 	function checkAtt() { // 출퇴근 현황 ajax로 보기

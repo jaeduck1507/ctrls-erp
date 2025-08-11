@@ -149,7 +149,12 @@
 	            
 	
 		// 신청날짜 현재 날짜로 고정 
-		$("#currentDate").val(new Date().toISOString().substring(0, 10));
+		 const today = new Date();
+	     const year = today.getFullYear();
+	     const month = String(today.getMonth() + 1).padStart(2, "0");
+	     const day = String(today.getDate()).padStart(2, "0");
+		 const todayStr = year+"-"+month+"-"+day;
+		$("#currentDate").val(todayStr);
 		
 		// 휴가시작일, 종료일 신청날짜 다음날로 고정(다음날부터 신청가능하도록)
 	   const tomorrow = new Date();

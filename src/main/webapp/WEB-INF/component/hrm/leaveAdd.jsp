@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>휴가 신청</title>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
-<body>
-	<h1>휴가 신청</h1>
+<section>
+	<h5>[근태 관리] > [휴가 신청]</h5>
+	
 	<div id = "test">
+		<h3>휴가 신청</h3>
+		<div class="filter-bar">
 	        <button id = "btn2">열 추가</button>
 	        <!-- <button id = "btn3">removeRowTest</button> -->
-	        <table border="1" id = "result">
+	        <table border="1" id = "result" class="data-table">
 	            <tr>
 	                <th>사번</th>
 	                <th>신청날짜</th>
@@ -24,15 +20,18 @@
 					<th>삭제</th>
 	            </tr>
 			</table>
+
 			<button id="btn">휴가 등록</button>
+			
+		</div>
 	 </div>
-	
+ </section>	
 	<script>
         
 		function addRow() { // 열 추가 함수
 		           $("#result").append('<tr></tr>'); // 기본 열 추가
 		           for(var i = 0; i < 6; i++) { // 열에 데이터 추가  0 : 사번, 1: 신청날짜(현재날짜로 고정) 2: 휴가 유형, 5 : 사유 나머지 : 날짜 데이터 
-		               if(i == 0) $("#result tr").eq(-1).append('<td><input type="text" class="empNo"></td>');
+		               if(i == 0) $("#result tr").eq(-1).append('<td><input type="text" class="empNo" placeholder="사번 입력"></td>');
 		               else if(i == 1) $("#result tr").eq(-1).append('<td><input type="date" class="currentDate" disabled></td>');
 					   else if(i == 2) $("#result tr").eq(-1).append('<td><select><option disabled selected>유형선택</option><option value="연차" selected>연차</option><option value="병가">병가</option><option value="경조사">경조사</option><option value="기타">기타</option></select></td>');
 					   else if(i == 3) $("#result tr").eq(-1).append('<td><input type="date" id="startDate" class="leaveDate"></td>');
@@ -42,15 +41,15 @@
 				   // 열 삭제 버튼 추가 (클래스 btn4)
 		           $("#result tr").eq(-1).append('<td><button class="btn4">열 삭제</button></td>'); 
 				   // 현재 날짜로 고정 
-				    // const today = new Date();
-				   //  const year = today.getFullYear();
-				   //  const month = today.getMonth() + 1;
-				    // const day = today.getDate();
-					// const todayStr = "year +'-'+month+'-'+day";
-					// console.log(todayStr);
-					// $("#result tr").eq(-1).find(".currentDate").val(todayStr);
+				     const today = new Date();
+				     const year = today.getFullYear();
+				     const month = String(today.getMonth() + 1).padStart(2, "0");
+				     const day = String(today.getDate()).padStart(2, "0");
+					 const todayStr = year+"-"+month+"-"+day;
+					 console.log(todayStr);
+					 $("#result tr").eq(-1).find(".currentDate").val(todayStr);
 
-				   $("#result tr").eq(-1).find(".currentDate").val(new Date().toISOString().substring(0, 10));
+				   //$("#result tr").eq(-1).find(".currentDate").val(new Date().toISOString().substring(0, 10));
 				   // 입력한 사번으로 고정
 				   const empNoInput = document.querySelector('.empNo');
 				   $("#result tr").eq(-1).find(".empNo").val(empNoInput.value);
@@ -159,5 +158,3 @@
 			           });
 
 	</script>
-</body>
-</html>
