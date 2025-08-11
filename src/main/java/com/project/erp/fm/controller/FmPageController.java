@@ -52,7 +52,7 @@ public class FmPageController {
 	@GetMapping("/purchase")
 	public String purchase(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
-		model.addAttribute("brandList", brandService.findBrand());
+		model.addAttribute("brandList", brandService.findBrand(paging));
 		//System.out.println(productNameService.selectCategory());
 		return "component/fm/purchase";
 	}

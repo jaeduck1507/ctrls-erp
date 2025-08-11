@@ -98,6 +98,7 @@ public class PageController {
 	public String layout2() {
 		
 		return "common/layout2";
+	}
 	@GetMapping("/modifyMyInfo")
 	public String modifyMyInfo(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
