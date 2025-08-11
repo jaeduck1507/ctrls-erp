@@ -11,8 +11,11 @@
 <body>
 	<div class="container">
 		<form action="/leaveUpdate" method="post">
-			<h1>휴가 수정</h1>
-		<table border="1">
+			
+			<h5>[근태 관리] > [휴가 조회] > [휴가 수정]</h5>
+				<h3>휴가 수정</h3>
+				<div class="filter-bar">
+		<table border="1" class="data-table">
 				<tr>
 					
 				<th>신청번호</th>
@@ -41,7 +44,9 @@
 				</tr>
 				</c:forEach>
 		</table>
+		
 		<button type="submit" id="update">수정</button>
+		</div>
 		</form>
 
 		<script>

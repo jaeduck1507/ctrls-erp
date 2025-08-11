@@ -9,23 +9,22 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>휴가 조회</h1>
+	<h3>휴가 조회</h3>
 
-	<div id="search">
-		사번 <input type="text" id="empNo">
-		상태
+	<div id="search" class="filter-bar">
+		
+		휴가 처리 상태
 		<select name="status" id="status">
-			
 			<option value="all">전체</option>
 			<option value="wait">대기</option>
 			<option value="approve">승인</option>
 			<option value="back">반려</option>
-		   
 		</select>
+		<input type="text" id="empNo" placeholder="사번을 입력하세요.">
 		<button id="btn">조회</button>
 	</div>
 	<div>
-		<table border="1" id="result"></table>
+		<table border="1" id="result" class="data-table"></table>
 	</div>
 	
 	<script>
