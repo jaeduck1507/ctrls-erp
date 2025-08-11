@@ -16,13 +16,16 @@
 	</resultMap>
 	
 	<select id="showPurchase" parameterType="PurDeptDTO" resultMap="PurDeptMap">
-		SELECT purchase_no, product_name, product_category,  unit_price, quantity, var_amount, total_amount, purchase_date, brand_name
+		SELECT purchase_no, product_name, product_category, unit_price, quantity, var_amount, total_amount, purchase_date, brand_name
 		FROM purchase
 		JOIN brand USING(brand_code)
 		JOIN product_name USING(product_code)
 		<where>
 			<if test="startDate != null and endDate != null">
 				purchase_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="brandName != 'all'">
+				AND brand_name = #{brandName}
 			</if>
 			<if test="productCategory != 'all'">
 				AND product_category = #{productCategory}
@@ -31,6 +34,52 @@
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
+		ORDER BY purchase_date
+	</select>
+	
+	<select id="showPurchasePage" parameterType="PurchasePagingDTO" resultMap="PurDeptMap">
+		SELECT purchase_no, product_name, product_category, unit_price, quantity, var_amount, total_amount, purchase_date, brand_name
+		FROM purchase
+		JOIN brand USING(brand_code)
+		JOIN product_name USING(product_code)
+		<where>
+			<if test="purDeptDTO.startDate != null and purDeptDTO.endDate != null">
+				purchase_date BETWEEN #{purDeptDTO.startDate} AND #{purDeptDTO.endDate}
+			</if>
+			<if test="purDeptDTO.brandName != 'all'">
+				AND brand_name = #{purDeptDTO.brandName}
+			</if>
+			<if test="purDeptDTO.productCategory != 'all'">
+				AND product_category = #{purDeptDTO.productCategory}
+			</if>
+			<if test="purDeptDTO.productName != null">
+				AND product_name LIKE CONCAT ('%', #{purDeptDTO.productName}, '%')
+			</if>
+		</where>
+		ORDER BY purchase_date
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalPurchasePage" parameterType="PurDeptDTO" resultType="int">
+		SELECT count(*)
+		FROM purchase
+		JOIN brand USING(brand_code)
+		JOIN product_name USING(product_code)
+		<where>
+			<if test="startDate != null and endDate != null">
+				purchase_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="brandName != 'all'">
+				AND brand_name = #{brandName}
+			</if>
+			<if test="productCategory != 'all'">
+				AND product_category = #{productCategory}
+			</if>
+			<if test="productName != null">
+				AND product_name LIKE CONCAT ('%', #{productName}, '%')
+			</if>
+		</where>
+		ORDER BY purchase_date
 	</select>
 	
 	<insert id="purchaseRegister" parameterType="ArrayList">

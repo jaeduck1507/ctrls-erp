@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>budget</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1>예산 조회</h1>
@@ -26,10 +28,19 @@
 		</table>
 	</div>
 	
+	<div>
+		<nav>
+			<ul class="pagination">
+				
+			</ul>
+		</nav>
+	</div>
+	
 	<script>
 		$("#btn").click(() => {
 			const formData = new FormData();
 			formData.append("deptName", $("#deptName").val());
+			
 			$.ajax({
 				type: "post",
 				url: "/showBudget",
@@ -40,12 +51,19 @@
 					//console.log($("#deptName").val());
 					$("#result").html("");
 					$("#result").append("<tr><th>예산 코드</th><th>부서명</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th></tr>");
-					for (const b of result) {
-						var text = "<tr><td>" + b.periodValue + "</td><td>" + b.deptName + "</td><td>" 
-							+ b.annualBudget + "</td><td>" + b.plan + "</td><td>" + b.executionDate + "</td></tr>"
+					for (const budget of result.budgetList) {
+						var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
+							+ budget.annualBudget + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
 						$("#result").append(text);
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + b.budgetNo + '">수정</a></td>')
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>')
 					}
+					
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for (var i = result.startPage; i <= result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
 				},
 				error: function(xhr, status, error) {
 					
@@ -53,6 +71,41 @@
 			});
 		});
 		
+		$(document).on('click', 'a.page-link', function(e) {
+			e.preventDefault();
+			
+			const formData = new FormData();
+			formData.append("deptName", $("#deptName").val());
+			formData.append("page", $(this).attr('href'));
+			
+			$.ajax({
+				type: "post",
+				url: "/showBudget",
+				data: formData,
+				processData: false,
+				contentType : false,
+				success: function(result) {
+					$("#result").html("");
+					$("#result").append("<tr><th>예산 코드</th><th>부서명</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th></tr>");
+					for (const budget of result.budgetList) {
+						var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
+							+ budget.annualBudget + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
+						$("#result").append(text);
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>')
+					}
+					
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for (var i = result.startPage; i <= result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+				},
+				error: function(xhr, status, error) {
+					
+				}
+			});
+		});
 	</script>
 </body>
 </html>

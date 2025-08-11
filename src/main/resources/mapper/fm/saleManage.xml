@@ -31,6 +31,43 @@
 		ORDER BY sale_date
 	</select>
 	
+	<select id="showSaleManagePage" parameterType="SaleManagePagingDTO" resultMap="SaleProductMap">
+		SELECT sm_no, sale_date, quantity, var_amount, total_amount, product_name, product_price, product_category
+		FROM sale_manage
+		JOIN product_name USING(product_code)
+		<where>
+			<if test="saleProductDTO.startDate != null and saleProductDTO.endDate != null">
+				sale_date BETWEEN #{saleProductDTO.startDate} AND #{saleProductDTO.endDate}
+			</if>
+			<if test="saleProductDTO.productCategory != 'all'">
+				AND product_category = #{saleProductDTO.productCategory}
+			</if>
+			<if test="saleProductDTO.productName != null">
+				AND product_name LIKE CONCAT ('%', #{saleProductDTO.productName}, '%')
+			</if>
+		</where>
+		ORDER BY sale_date
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalSaleManagePage" parameterType="SaleProductDTO" resultType="int">
+		SELECT count(*)
+		FROM sale_manage
+		JOIN product_name USING(product_code)
+		<where>
+			<if test="startDate != null and endDate != null">
+				sale_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+			<if test="productCategory != 'all'">
+				AND product_category = #{productCategory}
+			</if>
+			<if test="productName != null">
+				AND product_name LIKE CONCAT ('%', #{productName}, '%')
+			</if>
+		</where>
+		ORDER BY sale_date
+	</select>
+	
 	<insert id="saleRegister" parameterType="ArrayList">
 		INSERT INTO sale_manage(sale_date, quantity, var_amount, total_amount, product_code) VALUES
 		<foreach collection="smList" item="saleManage" separator=",">

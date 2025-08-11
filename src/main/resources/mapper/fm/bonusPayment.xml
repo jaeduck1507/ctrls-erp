@@ -47,7 +47,55 @@
 			AND pay_date LIKE CONCAT('%', #{date}, '%')
 		</if>
 		</where>
+	</select>
+	
+	<select id="showBonusPaymentPage" parameterType="BonusPaymentPagingDTO" resultMap="BonusPaymentDTOMap">
+		SELECT bonus_payment_no, payment, pay_date, bonus_no, emp_no, dept_name, job_title, bonus_name,emp_name
+		FROM bonus_payment
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		JOIN bonus USING(bonus_no)
 		
+		<where>
+		<if test="empInfo.empName != null" >
+			emp_name LIKE CONCAT('%', #{empInfo.empName}, '%')
+		</if>
+		<if test='empInfo.jobNo != -1'>
+			AND job_no = #{empInfo.jobNo}
+		</if>
+		<if test='empInfo.deptNo != -1'>
+			AND dept_no = #{empInfo.deptNo}
+		</if>
+		<if test='empInfo.date != null'>
+			AND pay_date LIKE CONCAT('%', #{empInfo.date}, '%')
+		</if>
+		</where>
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalBonusPaymentPage" parameterType="EmpInfo" resultType="int">
+		SELECT count(*)
+		FROM bonus_payment
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		JOIN job_position USING(job_no)
+		JOIN bonus USING(bonus_no)
+		
+		<where>
+		<if test="empName != null" >
+			emp_name LIKE CONCAT('%', #{empName}, '%')
+		</if>
+		<if test='jobNo != -1'>
+			AND job_no = #{jobNo}
+		</if>
+		<if test='deptNo != -1'>
+			AND dept_no = #{deptNo}
+		</if>
+		<if test='date != null'>
+			AND pay_date LIKE CONCAT('%', #{date}, '%')
+		</if>
+		</where>
 	</select>
 	
 </mapper>

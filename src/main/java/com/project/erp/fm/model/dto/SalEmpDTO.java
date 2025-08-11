@@ -13,10 +13,10 @@ public class SalEmpDTO {
 	private int bonus;
 	private int deduction;
 	private int tax;
+	private int empNo;
 	private String empName;
 	private int deptNo;
 	private String deptName;
-	private int payment;
 	private String yearMonth;
 	private int totalSal;
 	

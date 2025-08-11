@@ -91,7 +91,7 @@
 				error: function(xhr, status, error) {
 					
 				}
-			});			
+			});
 		});
 		
 	</script>

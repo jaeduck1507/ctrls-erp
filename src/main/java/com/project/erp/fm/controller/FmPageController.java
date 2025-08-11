@@ -44,20 +44,21 @@ public class FmPageController {
 	private BrandService brandService;
 	
 	@GetMapping("/saleManage")
-	public String saleManage(Model model) {
+	public String saleManage(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		return "component/fm/saleManage";
 	}
 	
 	@GetMapping("/purchase")
-	public String purchase(Model model) {
+	public String purchase(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
+		model.addAttribute("brandList", brandService.findBrand());
 		//System.out.println(productNameService.selectCategory());
 		return "component/fm/purchase";
 	}
 	
 	@GetMapping("/budget")
-	public String budget(Model model) {
+	public String budget(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/budget";
 	}
@@ -79,7 +80,7 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/salary")
-	public String salary(Model model) {
+	public String salary(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
 		return "component/fm/salary";
 	}
@@ -115,7 +116,7 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/showBonusPayment")
-	public String showBonusPayment(Model model) {
+	public String showBonusPayment(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
 		return "component/fm/showBonusPayment";

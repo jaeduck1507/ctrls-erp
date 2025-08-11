@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>salary</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1>급여 조회</h1>
@@ -29,7 +31,11 @@
 	</div>
 	
 	<div>
-		
+		<nav>
+			<ul class="pagination">
+				
+			</ul>
+		</nav>
 	</div>
 	
 	<script>
@@ -38,7 +44,7 @@
 			formData.append("deptName", $("#deptName").val());
 			formData.append("empName", $("#empName").val());
 			formData.append("yearMonth", $("#yearMonth").val());
-			console.log($("#yearMonth").val());
+			
 			$.ajax({
 				type: "post",
 				url: "/showSalary",
@@ -48,21 +54,22 @@
 				success: function(result) {
 					//console.log($("#deptName").val());
 					//console.log($("#empName").val());
+					//console.log($("#yearMonth").val());
 					$("#result").html("");
-					$("#result").append("<tr><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
-					for (const s of result) {
-						const total = s.baseSalary + s.bonus - s.deduction;
-						var text = "<tr><td>" + s.deptName + "</td><td>" + s.empName + "</td><td>" + s.salaryDate + "</td><td>" 
-							+ s.baseSalary + "</td><td>" + s.bonus + "</td><td>" + s.deduction + "</td><td>" + total + "</td></tr>"
+					$("#result").append("<tr><th>직원 번호</th><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
+					for (const salary of result.salaryList) {
+						const total = salary.baseSalary + salary.bonus - salary.deduction;
+						var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate + "</td><td>" 
+							+ salary.baseSalary + "</td><td>" + salary.bonus + "</td><td>" + salary.deduction + "</td><td>" + total + "</td></tr>"
 						$("#result").append(text);
 					}
-					/*
+					
 					$(".pagination").html('');
                 	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.startPage; i<=result.endPage; i++) {
+                	for (var i = result.startPage; i <= result.endPage; i++) {
                 		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
                 	}
-                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>'); */
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>'); 
 				},
 				error: function(xhr, status, error) {
 							
@@ -70,21 +77,21 @@
 			});
 		});	
 		
-		/*
 		$(document).on('click', 'a.page-link', function(e) {
-            e.preventDefault();        
-            // a 태그 기본 동작(페이지 이동) 차단
+            e.preventDefault(); // a 태그 기본 동작(페이지 이동) 차단
+			
+			const formData = new FormData();
             formData.append("deptName", $("#deptName").val());
 			formData.append("empName", $("#empName").val());
 			formData.append("yearMonth", $("#yearMonth").val());
-        	formData.append("page",$(this).attr('href'));
+        	formData.append("page", $(this).attr('href'));
                 
         	// 링크 URL 읽기
 			
         	$.ajax({
                 // 요청
                 type : "post",
-                url : "/infoShow",
+                url : "/showSalary",
                 data : formData,
 				processData: false,
 				contentType : false,
@@ -92,30 +99,27 @@
                 success : function(result) {
 					//테이블 생성
 					$("#result").html("");
-					$("#result").append("<tr><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
-					for (const s of result) {
-						const total = s.baseSalary + s.bonus - s.deduction;
-						var text = "<tr><td>" + s.deptName + "</td><td>" + s.empName + "</td><td>" + s.salaryDate + "</td><td>" 
-							+ s.baseSalary + "</td><td>" + s.bonus + "</td><td>" + s.deduction + "</td><td>" + total + "</td></tr>"
+					$("#result").append("<tr><th>직원 번호</th><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
+					for (const salary of result.salaryList) {
+						const total = salary.baseSalary + salary.bonus - salary.deduction;
+						var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate + "</td><td>" 
+							+ salary.baseSalary + "</td><td>" + salary.bonus + "</td><td>" + salary.deduction + "</td><td>" + total + "</td></tr>"
 						$("#result").append(text);
 					}
-                	
+					
 					// 페이징 생성
-                	}
-                	$(".pagination").html('');
+					$(".pagination").html('');
                 	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.startPage; i<=result.endPage; i++) {
+                	for (var i = result.startPage; i <= result.endPage; i++) {
                 		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
                 	}
-                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>'); 
                 },
-                
 				error:function(xhr,status,error) {
 					
 				}
             });
-          }); 
-		*/
+		}); 
 	</script>
 </body>
 </html>

@@ -49,7 +49,7 @@
 		LIMIT #{offset}, #{limit}
 	</select>
 	
-	<select id="totalTrans" parameterType="TransDTO" resultType="int">
+	<select id="totalTransPage" parameterType="TransDTO" resultType="int">
 		SELECT count(*)
 		FROM transaction
 		JOIN department USING(dept_no)

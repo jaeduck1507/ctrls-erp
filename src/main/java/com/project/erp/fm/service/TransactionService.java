@@ -22,12 +22,11 @@ public class TransactionService {
 	}
 
 	public List<TransDTO> showtransPage(TransPagingDTO transPaging) {
-		//paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		return transactionMapper.showtransPage(transPaging);
 	}
 	
-	public int totalTrans(TransDTO trans) {
-		return transactionMapper.totalTrans(trans);
+	public int totalTransPage(TransDTO trans) {
+		return transactionMapper.totalTransPage(trans);
 	}
 	
 	public TransPagingDTO showTransPaging(TransDTO trans, Paging paging) {
@@ -36,7 +35,7 @@ public class TransactionService {
 		transPagingDTO.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		transPagingDTO.setTransList(showtransPage(transPagingDTO));
 		transPagingDTO.setPage(paging.getPage());
-		transPagingDTO.setTotal(totalTrans(trans));
+		transPagingDTO.setTotal(totalTransPage(trans));
 		return transPagingDTO;
 	}
 	

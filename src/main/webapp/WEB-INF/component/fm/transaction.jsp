@@ -73,7 +73,7 @@
 					
 					$(".pagination").html('');
                 	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.startPage; i<=result.endPage; i++) {
+                	for (var i = result.startPage; i <= result.endPage; i++) {
                 		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
                 	}
                 	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
@@ -81,7 +81,7 @@
 				},
 				error: function(xhr, status, error) {
 													
-				} 
+				}
 			});
 		});
 		
@@ -93,7 +93,7 @@
 			formData.append("deptName", $("#deptName").val());
 			formData.append("startDate", $("#startDate").val());
 			formData.append("endDate", $("#endDate").val());
-			formData.append("page",$(this).attr('href'));
+			formData.append("page", $(this).attr('href'));
 			
 			$.ajax({
 				type: "post",
@@ -109,10 +109,10 @@
 								+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"
 						$("#result").append(text);
 					}
-					
+										
 					$(".pagination").html('');
                 	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.startPage; i<=result.endPage; i++) {
+                	for (var i = result.startPage; i <= result.endPage; i++) {
                 		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
                 	}
                 	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');

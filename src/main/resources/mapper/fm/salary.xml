@@ -8,10 +8,10 @@
 		<result property="bonus" column="bonus"/>
 		<result property="deduction" column="deduction"/>
 		<result property="tax" column="tax"/>
+		<result property="empNo" column="emp_no"/>
 		<result property="empName" column="emp_name"/>
 		<result property="deptNo" column="dept_no"/>
 		<result property="deptName" column="dept_name"/>
-		<result property="payment" column="payment"/>
 		<result property="totalSal" column="total_sal"/>
 	</resultMap>
 	
@@ -31,7 +31,46 @@
 	</resultMap>
 	
 	<select id="showSalary" parameterType="SalEmpDTO" resultMap="SalEmpMap">
-		SELECT dept_name, emp_name, salary_date, base_salary, bonus, deduction, tax
+		SELECT emp_no, dept_name, emp_name, salary_date, base_salary, bonus, deduction, tax
+		FROM salary 
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		<where>
+			<if test="yearMonth != null">
+				salary_date LIKE CONCAT ('%', #{yearMonth}, '%')
+			</if>
+			<if test="deptName != 'dept'">
+				AND dept_name = #{deptName}
+			</if>
+			<if test="empName != null">
+				AND emp_name LIKE CONCAT ('%', #{empName}, '%')
+			</if>
+		</where>
+		ORDER BY salary_date desc
+	</select>
+	
+	<select id="showSalaryPage" parameterType="SalaryPagingDTO" resultMap="SalEmpMap">
+		SELECT emp_no, dept_name, emp_name, salary_date, base_salary, bonus, deduction, tax
+		FROM salary 
+		JOIN employee_info USING(emp_no)
+		JOIN department USING(dept_no)
+		<where>
+			<if test="salEmpDTO.yearMonth != null">
+				salary_date LIKE CONCAT ('%', #{salEmpDTO.yearMonth}, '%')
+			</if>
+			<if test="salEmpDTO.deptName != 'dept'">
+				AND dept_name = #{salEmpDTO.deptName}
+			</if>
+			<if test="salEmpDTO.empName != null">
+				AND emp_name LIKE CONCAT ('%', #{salEmpDTO.empName}, '%')
+			</if>
+		</where>
+		ORDER BY salary_date desc
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="totalSalaryPage" parameterType="SalEmpDTO" resultType="int">
+		SELECT count(*)
 		FROM salary 
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
