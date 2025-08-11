@@ -6,14 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
+<link rel="stylesheet" href="../resources/css/login.css" />
 </head>
 <body>
-	<h1>로그인</h1>
-	<form action="login" method="post">
-	아이디 <input type="text" name="username"> <br>
-	비밀번호 <input type="password" name="password"> <br>
-	<button type="submit">로그인</button>
-	<button type="button" onclick="location.href='/findId'">아이디 찾기</button>
-	</form>
-</body>
-</html>
+	    <form action="login" method="post">
+	      <div class="filter-bar" id="login-card">
+	        <h1>로그인</h1>
+	        <input type="text" name="username" placeholder="아이디" />
+	        <input type="password" name="password" placeholder="비밀번호" />
+	        <button type="submit">로그인</button>
+	        <button type="button" onclick="location.href='/findId'">
+	          아이디 찾기
+	        </button>
+	      </div>
+	    </form>
+	  </body>
+	</html>
