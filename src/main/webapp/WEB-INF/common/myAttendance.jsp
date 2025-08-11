@@ -9,11 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<div>
+	<div class="filter-bar">
 	월별 조회 : <input type="month" id="yearMonth">
 	<button id="showBtn">조회</button>
 	</div>
-	<table border="1" id = "result" ></table>
+	<table border="1" id = "result" class="data-table" ></table>
 	<script>
 		$("#showBtn").click(() =>{
 			const yearMonth = $("#yearMonth").val();

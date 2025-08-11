@@ -33,6 +33,12 @@ public class PageController {
 		System.out.println(auth.toString().equals("anonymousUser"));
 		if(auth.toString().equals("anonymousUser")) return "redirect:/login";
 		//User user = (User) auth.getPrincipal();
+		User user = (User) auth;
+		EmpInfo empInfo = new EmpInfo();
+		empInfo.setEmpNo(user.getEmpNo());
+		System.out.println(employeeInfoService.infoShowOne(empInfo));
+		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
+		model.addAttribute("component","../common/mypage.jsp");
 		return "common/layout";
 	}
 	
@@ -52,9 +58,11 @@ public class PageController {
 		User user = (User) auth.getPrincipal();
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
+		System.out.println(employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("component","../common/mypage.jsp");
 		return "common/layout";
+		
 	}
 	
 	@GetMapping("/findId")
@@ -71,8 +79,8 @@ public class PageController {
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
 		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
-		
-		return "common/myLeavePage";
+		model.addAttribute("component","../common/myLeavePage.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/myLeaveView")
@@ -105,7 +113,8 @@ public class PageController {
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
-		return "common/modifyMyInfo";
+		model.addAttribute("component","../common/modifyMyInfo.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/myAttendance")
@@ -113,6 +122,7 @@ public class PageController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) auth.getPrincipal();
 		model.addAttribute("user",user);
-		return "common/myAttendance";
+		model.addAttribute("component","../common/myAttendance.jsp");
+		return "common/layout";
 	}
 }

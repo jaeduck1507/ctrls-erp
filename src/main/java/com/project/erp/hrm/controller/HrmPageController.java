@@ -48,9 +48,9 @@ public class HrmPageController {
     } 
 	
 	@GetMapping("/empInfo")
-	public String empInfo() {
-		
-		return "component/hrm/empInfo";
+	public String empInfo(Model model) {
+		model.addAttribute("component","../component/hrm/empInfo.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/empAdd")
@@ -63,17 +63,20 @@ public class HrmPageController {
 //		System.out.println(saleDept);
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
-		return "component/hrm/empAdd";
+		model.addAttribute("component","../component/hrm/empAdd.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/quitShow")
-	public String quitter() {
-		return "component/hrm/quitShow";
+	public String quitter(Model model) {
+		model.addAttribute("component","../component/hrm/quitShow.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/leaveInfo")
-	public String leaveInfo() {
-		return "component/hrm/leaveInfo";
+	public String leaveInfo(Model model) {
+		model.addAttribute("component","../component/hrm/leaveInfo.jsp");
+		return "common/layout";
 	}
 	@GetMapping("/empEval")
 	public String empEval(Model model) {
@@ -85,30 +88,35 @@ public class HrmPageController {
 		performanceReviewService.showEvalEmp(empinfo);
 		model.addAttribute("empInfo", performanceReviewService.showEvalEmp(empinfo));
 		model.addAttribute("user", user);
-		return "component/hrm/empEval";
+		model.addAttribute("component","../component/hrm/empEval.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/leaveStatus")
 	public String leaveStatus(Model model) {
 		System.out.println("test    " + leaveInfoService.leaveStatus());
 		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus() );
-		return "component/hrm/leaveStatus"; 
+		model.addAttribute("component","../component/hrm/leaveStatus.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/attendanceRecord")
 	public String attendaceRecord(Model model) {
 		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
-		return "component/hrm/attendanceRecord";
+		model.addAttribute("component","../component/hrm/attendanceRecord.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/showAttendance")
 	public String showAttendance(Model model) {
 		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
-		return "component/hrm/showAttendance";
+		model.addAttribute("component","../component/hrm/showAttendance.jsp");
+		return "common/layout";
 	}
 	@GetMapping("/leaveAdd")
-	public String leaveAdd() {
-		return "component/hrm/leaveAdd";
+	public String leaveAdd(Model model) {
+		model.addAttribute("component","../component/hrm/leaveAdd.jsp");
+		return "common/layout";
 	}
 //	common PageController로 이동
 //	@GetMapping("/myLeavePage")
@@ -122,39 +130,45 @@ public class HrmPageController {
 	
 	
 	@GetMapping("/leaveDays")
-	public String leaveDays() {
-		return "component/hrm/leaveDays";
+	public String leaveDays(Model model) {
+		model.addAttribute("component","../component/hrm/leaveDays.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/leaveView")
 	public String leaveView(Model model, LeaveInfo li) {
 //		System.out.println(li);
-		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));		
-		return "component/hrm/leaveView";
+		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));
+		model.addAttribute("component","../component/hrm/leaveView.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/empModify")
 	public String empModify(Model model,EmpInfo ei) {
 		model.addAttribute("empInfo", employeeInfoservice.infoShowOne(ei));
-		return "component/hrm/empModify";
+		model.addAttribute("component","../component/hrm/empModify.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/attendanceStats")
 	public String attendanceStats(Model model) {
 		model.addAttribute("empInfo", employeeInfoservice.infoShow(new EmpInfo()));
-		return "component/hrm/attendanceStats";
+		model.addAttribute("component","../component/hrm/attendanceStats.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/leaveDelete")
-	public String leaveDelete(int leaveId) {
+	public String leaveDelete(int leaveId,Model model) {
 		leaveInfoService.leaveDelete(leaveId);
-		return "component/hrm/leaveInfo";
+		model.addAttribute("component","../component/hrm/leaveInfo.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/leaveUpdate")
-	public String leaveUpdate(LeaveInfo li) {
+	public String leaveUpdate(LeaveInfo li,Model model) {
 		leaveInfoService.leaveUpdate(li);
-		return "component/hrm/leaveView?leaveId="+ li.getLeaveId();
+		model.addAttribute("component","../component/hrm/leaveView.jsp");
+		return "common/layout";
 	}
 
 }

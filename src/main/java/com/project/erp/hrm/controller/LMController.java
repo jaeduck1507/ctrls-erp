@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,13 +30,13 @@ public class LMController {
 	
 	@ResponseBody
 	@PostMapping("/leaveAdd")
-	public String leaveAdd(@RequestBody List<LeaveInfo> liList) {
+	public boolean leaveAdd(@RequestBody List<LeaveInfo> liList) {
 		System.out.println("Controller");
 		System.out.println(liList);
 		System.out.println("-----------");
 //		System.out.println(liList.get(0).getEmpNo());
 		leaveInfoService.leaveAdd(liList);
-		return "redirect:/component/hrm/leaveAdd";
+		return true;
 	}
 //	common UserController로 이동
 //	@ResponseBody
@@ -68,11 +69,12 @@ public class LMController {
 	}
 	
 	@PostMapping("/leaveUpdate")
-	public String leaveUpdate(LeaveInfo li) {
+	public String leaveUpdate(LeaveInfo li, Model model) {
 //		System.out.println(li);
 		// "component/hrm/leaveView?leaveId="+ li.getLeaveId()
 		leaveInfoService.leaveUpdate(li);
-		return "component/hrm/leaveInfo";
+		model.addAttribute("component","../component/hrm/leaveInfo.jsp");
+		return "common/layout";
 	}
 	
 
