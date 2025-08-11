@@ -42,6 +42,14 @@
 				   // 열 삭제 버튼 추가 (클래스 btn4)
 		           $("#result tr").eq(-1).append('<td><button class="btn4">열 삭제</button></td>'); 
 				   // 현재 날짜로 고정 
+				    // const today = new Date();
+				   //  const year = today.getFullYear();
+				   //  const month = today.getMonth() + 1;
+				    // const day = today.getDate();
+					// const todayStr = "year +'-'+month+'-'+day";
+					// console.log(todayStr);
+					// $("#result tr").eq(-1).find(".currentDate").val(todayStr);
+
 				   $("#result tr").eq(-1).find(".currentDate").val(new Date().toISOString().substring(0, 10));
 				   // 입력한 사번으로 고정
 				   const empNoInput = document.querySelector('.empNo');
