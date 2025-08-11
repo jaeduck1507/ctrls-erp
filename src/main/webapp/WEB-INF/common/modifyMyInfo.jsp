@@ -9,9 +9,9 @@
 </head>
 <body>
 
-	<h1>사원 정보 수정</h1>
+	<h1>개인 정보 수정</h1>
 
-<form action="modifyMyInfo" method="post">
+<form action="modifyMyInfo" method="post" class="filter-bar">
     <label>
     직원 번호 : <input type="text" name="empNo" value="${user.empNo}" readonly="readonly"></label><br>
     <label>성명 : <input type="text" name="empName" value="${user.empName}"></label><br>

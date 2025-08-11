@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="side">
       <div class="logo">
-        <h1><a href="#">ctrl S</a></h1>
+        <h1><a href="/">ctrl S</a></h1>
       </div>
 	  <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
       <div class="menu">

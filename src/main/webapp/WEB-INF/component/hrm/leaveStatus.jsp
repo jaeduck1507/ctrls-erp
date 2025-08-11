@@ -11,8 +11,8 @@
 <body>
 	<h1>휴가 상태 처리</h1>
 	
-	<div>
-		<table border="1" id="result">
+	<div class="data-table  ">
+		<table border="1" id="result" >
 				<tr>
 					
 				<th>신청번호</th>
@@ -44,8 +44,8 @@
 					<td>${item.status}</td>
 					
 					<td>
-						<button class="btnO">승인</button>
-						<button class="btnX">반려</button>
+						<button class="btnO innerbtn">승인</button>
+						<button class="btnX innerbtn">반려</button>
 					</td>
 				</tr>
 				</c:forEach>
