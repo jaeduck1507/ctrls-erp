@@ -23,7 +23,7 @@
 	</div>
 	
 	<div>	
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 				
 		</table>
 	</div>
@@ -55,7 +55,7 @@
 						var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
 							+ budget.annualBudget + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
 						$("#result").append(text);
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>')
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></button></td>')
 					}
 					
 					$(".pagination").html('');
