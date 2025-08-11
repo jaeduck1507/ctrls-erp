@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>budgetRegister</title>
+<title>bonusRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
@@ -58,7 +58,7 @@
 			}
 			
 			deptInfo.deptNo = opt.data('emp_no');
-			$(e.target).parent().parent().find("td").eq(1).html('<select id="bonusNo"><option value="period" disabled selected><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
+			$(e.target).parent().parent().find("td").eq(1).html('<select id="bonusNo"><option value="period" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
 			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" name="payment">');
 			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" name="payDate">');
 		});

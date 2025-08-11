@@ -23,10 +23,6 @@
 	<script>
 		$(document).ready(() => {
 			const now = new Date();
-			//console.log(now);
-			//const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-			//console.log(date);
-			
 			const today = now.getFullYear() + '-' 
 			                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
 			                    + String(now.getDate()).padStart(2, '0');
@@ -74,7 +70,7 @@
 				smList.push(obj);
 			}
 			console.log(JSON.stringify(smList));
-			
+			/*
 			$.ajax({
 				type : "post",
 				url: "/saleRegister",
@@ -91,9 +87,8 @@
 				error: function(xhr, status, error) {
 					
 				}
-			});
+			});*/
 		});
-		
 	</script>
 </body>
 </html>

@@ -53,9 +53,8 @@ public class PageController {
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
-		
-		return "common/mypage";
-		
+		model.addAttribute("component","../common/mypage.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/findId")

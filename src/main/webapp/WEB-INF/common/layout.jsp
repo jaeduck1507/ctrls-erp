@@ -30,7 +30,7 @@ uri="http://www.springframework.org/security/tags" %>
     <div class="main">
       <jsp:include page="header.jsp" />
       <div class="section">
-        <jsp:include page="../common/mypage.jsp" />
+		<jsp:include page="${component}" />
       </div>
     </div>
     <script src="../resources/js/side.js"></script>

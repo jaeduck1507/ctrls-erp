@@ -46,7 +46,8 @@ public class FmPageController {
 	@GetMapping("/saleManage")
 	public String saleManage(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
-		return "component/fm/saleManage";
+		model.addAttribute("component","../component/fm/saleManage.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/purchase")
@@ -54,13 +55,15 @@ public class FmPageController {
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("brandList", brandService.findBrand(paging));
 		//System.out.println(productNameService.selectCategory());
-		return "component/fm/purchase";
+		model.addAttribute("component","../component/fm/purchase.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/budget")
 	public String budget(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
-		return "component/fm/budget";
+		model.addAttribute("component","../component/fm/budget.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/purchaseRegister")
@@ -70,63 +73,73 @@ public class FmPageController {
 		//System.out.println(brandService.findBrand());
 		model.addAttribute("today", LocalDate.now().toString());
 		//System.out.println(LocalDate.now().toString());
-		return "component/fm/purchaseRegister";
+		model.addAttribute("component","../component/fm/purchaseRegister.jsp");
+		return "common/layout";
 	}	
 		
 	@GetMapping("/transaction")
 	public String transaction(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
-		return "component/fm/transaction";
+		model.addAttribute("component","../component/fm/transaction.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/salary")
 	public String salary(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
-		return "component/fm/salary";
+		model.addAttribute("component","../component/fm/salary.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/budgetRegister")
 	public String budgetRegister(Model model) {
 		model.addAttribute("department", departmentService.showDept());
-		return "component/fm/budgetRegister";
+		model.addAttribute("component","../component/fm/budgetRegister.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/saleRegister")
-	public String saleRegister() {
-		return "component/fm/saleRegister";
+	public String saleRegister(Model model) {
+		model.addAttribute("component","../component/fm/saleRegister.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/transRegister")
 	public String transRegister(Model model) {
 		model.addAttribute("department", departmentService.showDept());
-		return "component/fm/transRegister";
+		model.addAttribute("component","../component/fm/transRegister.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/budgetUpdate")
 	public String budgetUpdate(Model model, BudgetDeptDTO bd) {
 		model.addAttribute("budgetInfo", budgetServive.searchBudget(bd));
-		return "component/fm/budgetUpdate";
+		model.addAttribute("component","../component/fm/budgetUpdate.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/addBonusPayment")
 	public String addBonusPayment(Model model) {
 		model.addAttribute("empInfo", employeeInfoService.showEmployee());
 		model.addAttribute("bonus", bonusMapper.showBonusAll());
-		return "component/fm/addBonusPayment";
+		model.addAttribute("component","../component/fm/addBonusPayment.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/showBonusPayment")
 	public String showBonusPayment(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
-		return "component/fm/showBonusPayment";
+		model.addAttribute("component","../component/fm/showBonusPayment.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/salaryPayment")
 	public String salaryPayment(Model model) {
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
-		return "component/fm/salaryPayment";
+		model.addAttribute("component","../component/fm/salaryPayment.jsp");
+		return "common/layout";
 	}
 	
 }
