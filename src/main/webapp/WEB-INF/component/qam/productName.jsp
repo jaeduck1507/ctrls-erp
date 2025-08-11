@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>제품 정보 조회</title> <!-- 페이지 제목 -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery 로드 -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -32,7 +34,48 @@
 
 <!-- 검색 및 전체 조회 결과 출력 테이블 -->
 <table border="1" id="result">
+	<tr>
+		<th>제품 코드</th>
+		<th>브랜드코드</th>
+		<th>브랜드</th>
+		<th>카테고리</th>
+		<th>색상</th>
+		<th>제품명</th>
+		<th>판매가</th>
+		<th>단가</th>
+		<th>수정</th>
+		<th>삭제</th>
+	</tr>
+	
+	<c:forEach items="${productNameList}" var="pn">
+	    <tr>
+	        <td>${pn.productCode}</td>
+	        <td>${pn.brandCode}</td>
+	        <td>${pn.brandName}</td>
+	        <td>${pn.productCategory}</td>
+	        <td>${pn.productColor}</td>
+	        <td>${pn.productName}</td>
+	        <td>${pn.productPrice}</td>
+	        <td>${pn.productCost}</td>
+	        <td><a href='/productNameForm?productCode=${pn.productCode}'>수정</a></td>
+	        <td>
+	            <a href='/deleteProductName?productCode=${pn.productCode}'
+	               onclick='return confirm("정말 삭제하시겠습니까?")'>삭제</a>
+	        </td>
+	    </tr>
+	</c:forEach>
+	
 </table>
+
+<nav>
+    <ul class="pagination">
+		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/productName?page=${paging.startPage - 1}">Previous</a></li>			
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+					<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/productName?page=${page}">${page}</a></li>
+				</c:forEach>
+		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/productName?page=${paging.endPage + 1}">Next</a></li>
+    </ul>
+</nav>
 
 <script>
     $(document).ready(function() {
@@ -59,6 +102,14 @@
                         row += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a></td></tr>";
                         $("#result").append(row);
                     }
+					
+					// 페이징 생성
+					$(".pagination").html('');
+					$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+					for(var i =result.startPage; i<=result.endPage; i++) {
+						$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+					}
+					$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
                 }
             });
         });
@@ -74,19 +125,19 @@
 
                 // 각 제품명 객체를 테이블에 추가
                 for (const pn of result) {
-                    var text = "<tr>";
-                    text += "<td>" + pn.productCode + "</td>";
-					text += "<td>" + pn.brandCode + "</td>";
-					text += "<td>" + pn.brandName + "</td>";
-					text += "<td>" + pn.productCategory + "</td>";
-                    text += "<td>" + pn.productColor + "</td>";
-                    text += "<td>" + pn.productName + "</td>";
-                    text += "<td>" + pn.productPrice + "</td>";
-                    text += "<td>" + pn.productCost + "</td>";
-                    text += "<td><a href='/productNameForm?productCode=" + pn.productCode + "'>수정</a></td>";
-                    text += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a></td>";
-                    text += "</tr>";
-                    $("#result").append(text);
+                    let row = "<tr>";
+                    row += "<td>" + pn.productCode + "</td>";
+					row += "<td>" + pn.brandCode + "</td>";
+					row += "<td>" + pn.brandName + "</td>";
+					row += "<td>" + pn.productCategory + "</td>";
+                    row += "<td>" + pn.productColor + "</td>";
+                    row += "<td>" + pn.productName + "</td>";
+                    row += "<td>" + pn.productPrice + "</td>";
+                    row += "<td>" + pn.productCost + "</td>";
+                    row += "<td><a href='/productNameForm?productCode=" + pn.productCode + "'>수정</a></td>";
+                    row += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a></td>";
+                    row += "</tr>";
+                    $("#result").append(row);
                 }
             },
             error: function(xhr, status, error) {

@@ -13,7 +13,9 @@
 		<result column="product_category" property="productCategory" />
 		<result column="product_name" property="productName" />
 		<result column="quantity" property="quantity" />
-	
+	        
+        <result column="brand_code" property="brandCode"/>
+        <result column="brand_name" property="brandName"/>
 	</resultMap>
 
 	<insert id="insertSale" parameterType="Sale">
@@ -27,29 +29,32 @@
 
 	<select id="showSaleDone" resultMap="saleMap">
 		SELECT
-		p.product_no,
-		pn.product_code,
-		pn.product_name,
-		pn.product_category,
-		pn.product_price,
-		s.sale_no,
-		s.sale_date
-		FROM sale s
-		JOIN product p ON s.product_no = p.product_no
-		JOIN product_name pn ON p.product_code = pn.product_code
-		WHERE s.sale_date IS NOT NULL
-		ORDER BY s.sale_date DESC
+			product_no,
+			product_code,
+			product_name,
+			product_category,
+			product_price,
+			sale_no,
+			sale_date,
+			brand_code,
+			brand_name
+		FROM sale
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN brand USING(brand_code)
+		WHERE sale_date IS NOT NULL
+		ORDER BY sale_date DESC
 <!--		LIMIT #{offset}, #{limit}-->
 	</select>
 	
 	<select id="totalSaleDone" resultType="int">
 		SELECT
 			count(*)
-		FROM sale s
-		JOIN product p ON s.product_no = p.product_no
-		JOIN product_name pn ON p.product_code = pn.product_code
-		WHERE s.sale_date IS NOT NULL
-		ORDER BY s.sale_date DESC
+		FROM sale
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		WHERE sale_date IS NOT NULL
+		ORDER BY sale_date DESC
 	</select>
 
 	<select id="showSaleNull" parameterType="Paging" resultMap="saleMap">
@@ -60,10 +65,13 @@
 			product_name,
 			product_category,
 			sale_no,
-			sale_date
+			sale_date,
+			brand_code,
+			brand_name
 		FROM sale
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
+		JOIN brand USING(brand_code)
 		WHERE sale_date IS NULL
 		ORDER BY sale_no ASC
 		LIMIT #{offset}, #{limit}
@@ -87,10 +95,13 @@
 			product_name,
 			product_price,
 			product_category,
-			sale_date
+			sale_date,
+			brand_code,
+			brand_name
 		FROM sale 
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
+		JOIN brand USING(brand_code)
 		WHERE sale_no = #{saleNo}
 	</select>
 
@@ -122,10 +133,13 @@
 			product_name, 
 			product_price,
 			product_category, 
-			sale_date
+			sale_date,
+			brand_code,
+			brand_name
 		FROM sale  
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
+		JOIN brand USING(brand_code)
 		WHERE sale_date IS NOT NULL 
 		<if test="productCategory != null and productCategory != ''">
 			AND product_category = #{productCategory}

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.service.BrandService;
+import com.project.erp.qam.service.DefectiveService;
+import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.ProductService;
 import com.project.erp.qam.service.SaleService;
 
@@ -26,6 +28,12 @@ public class QamPageController {
 	@Autowired
 	private BrandService brandService;
 	
+	@Autowired
+	private ProductNameService productNameService;
+	
+	@Autowired
+	private DefectiveService defectiveService;
+	
 //	@GetMapping("/product")
 //	public String product(Model model, Paging paging) {
 //		model.addAttribute("productList", productService.showProductDetail(paging));
@@ -34,8 +42,9 @@ public class QamPageController {
 //	}
 
 	@GetMapping("/brand")
-	public String brand(Model model) {
-		model.addAttribute("brandList", brandService.findBrand());
+	public String brand(Model model, Paging paging) {
+		model.addAttribute("paging", paging);
+		model.addAttribute("brandList", brandService.findBrand(paging));
 		return "component/qam/brand";
 	}
 	
@@ -45,16 +54,6 @@ public class QamPageController {
 		Paging paging,
 		@RequestParam(required = false) String productName,
 		@RequestParam(required = false) String productCategory) {
-
-		// 검색 조건을 paging에 담음
-		paging.setProductName(productName);
-		paging.setProductCategory(productCategory);
-
-		// 전체 데이터 수 조회 (검색 조건 반영)
-		int total = productService.totalSearchProduct(paging); // 반드시 이 메서드 사용
-		paging.setTotal(total);
-
-		// 현재 페이지의 데이터 조회
 		model.addAttribute("productList", productService.searchProductDetail(paging, productName, productCategory));
 		model.addAttribute("paging", paging);
 		
@@ -62,7 +61,9 @@ public class QamPageController {
 	}
 	
 	@GetMapping("/productName")
-	public String productName() {
+	public String productName(Model model, Paging paging) {
+		model.addAttribute("productNameList", productNameService.showProductName(paging));
+		model.addAttribute(paging);
 		return "component/qam/productName";
 	}
 
@@ -81,7 +82,9 @@ public class QamPageController {
 	}
 	
 	@GetMapping("/defective")
-	public String defective() {
+	public String defective(Model model, Paging paging) {
+		model.addAttribute("defectiveList", defectiveService.showDefective(paging));
+		model.addAttribute("paging", paging);
 		return "component/qam/defective";
 	}
 	

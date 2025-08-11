@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.project.erp.qam.model.vo.ProductName;
 import com.project.erp.qam.model.vo.Qc;
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.vo.Department;
 import com.project.erp.hrm.service.EmployeeInfoService;
@@ -33,8 +34,8 @@ public class QIPController {
 
 	@ResponseBody
 	@GetMapping("/showProductName")
-	public List<ProductNameDTO> showProductName() {
-		return productNameService.showProductName();
+	public List<ProductNameDTO> showProductName(Paging paging) {
+		return productNameService.showProductName(paging);
 	}
     
     @ResponseBody

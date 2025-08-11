@@ -25,6 +25,9 @@
 	<result column="check_color" property="checkColor"/>
 	<result column="check_damage" property="checkDamage"/>
 	<result column="qc_date" property="qcDate"/>
+	        
+    <result column="brand_code" property="brandCode"/>
+    <result column="brand_name" property="brandName"/>
 </resultMap>
 
     <insert id="insertDefective" parameterType="Defective">
@@ -36,52 +39,91 @@
     DELETE FROM defective WHERE product_no = #{productNo}
 	</delete>
 
-	<select id="showDefective" resultMap="defectiveMap">
+	<select id="showDefective" parameterType="Paging" resultMap="defectiveMap">
 	SELECT 
-		d.defective_no,
-		p.product_no,
-		pn.product_code,
-		pn.product_name,
-		pn.product_category,
-		q.check_material,
-        q.check_color,
-        q.check_damage,
-		pn.product_price,
-		d.reason,
-		q.qc_date
-	FROM defective d
-	JOIN product p ON d.product_no = p.product_no
-	JOIN product_name pn ON p.product_code = pn.product_code
-	JOIN qc q ON p.product_no = q.product_no
-	ORDER BY q.qc_date DESC
+		defective_no,
+		product_no,
+		product_code,
+		product_name,
+		product_category,
+		check_material,
+        check_color,
+        check_damage,
+		product_price,
+		reason,
+		qc_date,
+		brand_code,
+		brand_name
+	FROM defective
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN qc USING(product_no)
+		JOIN brand USING(brand_code)
+	ORDER BY qc_date DESC
+	LIMIT #{offset}, #{limit}
 	</select> 
 	
-	<select id="searchDefective" resultMap="defectiveMap">
+	<select id="totalDefective" parameterType="int">
+	SELECT 
+		COUNT(*)
+	FROM defective
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN qc USING(product_no)
+		JOIN brand USING(brand_code)
+	ORDER BY qc_date DESC
+	</select> 
+	
+	<select id="searchDefective" parameterType="Paging" resultMap="defectiveMap">
 		SELECT 
-			d.defective_no,
-			p.product_no,
-			pn.product_code,
-			pn.product_name,
-			pn.product_category,
-			q.check_material,
-	        q.check_color,
-	        q.check_damage,
-			pn.product_price,
-			d.reason,
-			q.qc_date
-		FROM defective d
-		JOIN product p ON d.product_no = p.product_no
-		JOIN product_name pn ON p.product_code = pn.product_code
-		JOIN qc q ON p.product_no = q.product_no
+			defective_no,
+			product_no,
+			product_code,
+			product_name,
+			product_category,
+			check_material,
+	        check_color,
+	        check_damage,
+			product_price,
+			reason,
+			qc_date,
+			brand_code,
+			brand_name
+		FROM defective 
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN qc USING(product_no)
+		JOIN brand USING(brand_code)
 		<where>
 			<if test="productCategory != null and productCategory != ''">
-				AND pn.product_category = #{productCategory}
+				AND product_category = #{productCategory}
 			</if>
 			<if test="startDate != null and endDate != null">
-				AND q.qc_date BETWEEN #{startDate} AND #{endDate}
+				AND qc_date BETWEEN #{startDate} AND #{endDate}
 			</if>
 		</where>
-		ORDER BY q.qc_date DESC
+		ORDER BY qc_date DESC
+		LIMIT #{paging.offset}, #{paging.limit}
+	</select> 
+<!--	문제있으면 paging.offset / limit-->
+	
+	<select id="totalSearchDefective" parameterType="int">
+		SELECT 
+			COUNT(*)
+		FROM defective
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN qc USING(product_no)
+		JOIN brand USING(brand_code)
+		<where>
+			<if test="productCategory != null and productCategory != ''">
+				AND product_category = #{productCategory}
+			</if>
+			<if test="startDate != null and endDate != null">
+				AND qc_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+		</where>
+		ORDER BY qc_date DESC
 	</select> 
 
 </mapper>

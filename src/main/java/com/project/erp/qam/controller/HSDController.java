@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,14 +61,15 @@ public class HSDController {
 	
 	@ResponseBody
     @GetMapping("/showDefective")
-    public List<DefectiveDTO> showDefective() {
-    	return defectiveService.showDefective();
+    public List<DefectiveDTO> showDefective(Paging paging) {
+    	return defectiveService.showDefective(paging);
     }
 	
 	@ResponseBody
     @GetMapping("/searchDefective")
-    public List<DefectiveDTO> searchDefective(DefectiveDTO dto) {
-    	return defectiveService.searchDefective(dto);
+    public List<DefectiveDTO> searchDefective(Model model, Paging paging, DefectiveDTO dto) {
+		model.addAttribute("searchDefectiveList", defectiveService.searchDefective(paging, dto));
+    	return defectiveService.searchDefective(paging, dto);
     }
 	
 	@GetMapping("/searchSaleDone")

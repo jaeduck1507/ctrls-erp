@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.BrandMapper;
 import com.project.erp.qam.model.vo.Brand;
 
@@ -26,8 +27,11 @@ public class BrandService {
 		return brandMapper.findById(brandCode);
 	}
 	
-	public List<Brand> findBrand() {
-	    return brandMapper.findBrand(); // assumes brandMapper exists and works
+	public List<Brand> findBrand(Paging paging) {
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		paging.setTotal(brandMapper.totalBrand());
+		System.out.println("findBrand 넘어감");
+	    return brandMapper.findBrand(paging); // assumes brandMapper exists and works
 	}
 
 	public void updateBrand(Brand brand) {

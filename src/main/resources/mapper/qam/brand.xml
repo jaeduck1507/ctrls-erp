@@ -18,7 +18,7 @@
   </insert>
     
   <select id="showBrand" resultMap="brandMap">
-  	 SELECT brand_name, brand_phone, brand_account, brand_bank
+  	 SELECT brand_code, brand_name, brand_phone, brand_account, brand_bank
      FROM brand
      JOIN product_name USING(brand_code)
 	 ORDER BY brand_code
@@ -39,9 +39,9 @@
   </delete>
 
   <select id="findById" resultMap="brandMap" parameterType="int">
-  	 SELECT brand_name, brand_phone, brand_account, brand_bank
+  	 SELECT brand_code, brand_name, brand_phone, brand_account, brand_bank
      FROM brand
-     JOIN product_name USING(brand_code)
+<!--     JOIN product_name USING(brand_code)-->
      WHERE brand_code = #{brandCode}
 	 ORDER BY brand_code
   </select>
@@ -50,6 +50,13 @@
 	  SELECT brand_code, brand_name, brand_phone, brand_account, brand_bank
 	  FROM brand
 	  ORDER BY brand_code
+	  LIMIT #{offset}, #{limit}
+  </select>
+  
+    <select id="totalBrand" resultType="int">
+	  SELECT 
+		COUNT(*)
+	  FROM brand
   </select>
 
 </mapper>

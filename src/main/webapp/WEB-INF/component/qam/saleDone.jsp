@@ -39,6 +39,7 @@
 		<th>판매코드</th>
         <th>제품번호</th>
         <th>제품코드</th>
+		<th>브랜드명</th>
 		<th>카테고리</th>
 		<th>제품명</th>
         <th>가격</th>
@@ -76,7 +77,7 @@
 
 <script>
 function displaySale(data) {
-	let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>";
+	let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>";
 	$("#saleResult").html(tableHead); // 테이블 헤더 설정
 
 	let total = 0;
@@ -89,6 +90,7 @@ function displaySale(data) {
 		row += "<td>" + s.saleNo + "</td>";
 		row += "<td>" + s.productNo + "</td>";
 		row += "<td>" + s.productCode + "</td>";
+		row += "<td>" + s.brandName + "</td>";
 		row += "<td>" + s.productCategory + "</td>";
 		row += "<td>" + s.productName + "</td>";
 		row += "<td>" + s.productPrice + "</td>";

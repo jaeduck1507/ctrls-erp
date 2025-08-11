@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.ProductNameMapper;
 import com.project.erp.qam.model.dto.ProductNameDTO;
 import com.project.erp.qam.model.vo.Brand;
@@ -19,8 +20,11 @@ public class ProductNameService {
 
 	// 전체 제품명 조회
 	// → SELECT * FROM product_name
-	public List<ProductNameDTO> showProductName() {
-		return productNameMapper.showProductName();
+	public List<ProductNameDTO> showProductName(Paging paging) {
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		paging.setTotal(productNameMapper.totalProductName());
+		System.out.println("showProductName 넘어감");
+		return productNameMapper.showProductName(paging);
 	}
 
 	// 제품명 등록
@@ -49,8 +53,11 @@ public class ProductNameService {
 
 	// 제품명 검색
 	// → product_name LIKE '%keyword%' AND category 조건 조회
-	public List<ProductNameDTO> searchProductName(String productName, String productCategory) {
-	    return productNameMapper.searchProductName(productName, productCategory);
+	public List<ProductNameDTO> searchProductName(Paging paging, String productName, String productCategory) {
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		paging.setTotal(productNameMapper.totalSearchProductName());
+		System.out.println("searchProductName 넘어감");
+		return productNameMapper.searchProductName(paging, productName, productCategory);
 	}
 	
 	public List<ProductNameDTO> showProductNameByBrandFilter(Brand brand) {

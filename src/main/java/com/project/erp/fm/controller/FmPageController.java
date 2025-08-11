@@ -63,9 +63,9 @@ public class FmPageController {
 	}
 	
 	@GetMapping("/purchaseRegister")
-	public String purchaseRegister(Model model) {
-		model.addAttribute("productNameList", productNameService.showProductName());
-		model.addAttribute("brandList", brandService.findBrand());
+	public String purchaseRegister(Model model, Paging paging) {
+		model.addAttribute("productNameList", productNameService.showProductName(paging));
+		model.addAttribute("brandList", brandService.findBrand(paging));
 		//System.out.println(brandService.findBrand());
 		model.addAttribute("today", LocalDate.now().toString());
 		//System.out.println(LocalDate.now().toString());

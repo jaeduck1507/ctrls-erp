@@ -11,27 +11,48 @@
         <result column="product_price" property="productPrice"/>
         <result column="product_cost" property="productCost"/>
         <result column="product_category" property="productCategory"/>
+        
+        <result column="brand_code" property="brandCode"/>
+        <result column="brand_name" property="brandName"/>
     </resultMap>
 
     <!-- 전체 제품 목록 조회 (조인) -->
     <select id="showProductDetail" parameterType="Paging" resultMap="ProductDetailMap">
-        SELECT p.product_no, p.production_date, p.product_code,
-               pn.product_color, pn.product_name, pn.product_price,
-               pn.product_cost, pn.product_category
-        FROM product p
-        JOIN product_name pn ON p.product_code = pn.product_code
-        ORDER BY p.production_date DESC
+        SELECT 
+        	product_no, 
+        	production_date, 
+        	product_code,   
+            product_color,
+            product_name,
+            product_price,
+            product_cost, 
+            product_category,
+            brand_code,
+            brand_name
+        FROM product
+        JOIN product_name USING(product_code)
+        JOIN brand USING(brand_code)
+        ORDER BY production_date DESC
         LIMIT #{offset}, #{limit}
     </select>
 
     <!-- 단일 제품 상세 조회 (수정 폼 진입 시 사용) -->
     <select id="findProductDetailById" parameterType="int" resultMap="ProductDetailMap">
-        SELECT p.product_no, p.production_date, p.product_code,
-               pn.product_color, pn.product_name, pn.product_price,
-               pn.product_cost, pn.product_category
-        FROM product p
-        JOIN product_name pn ON p.product_code = pn.product_code
-        WHERE p.product_no = #{productNo}
+        SELECT 
+        	product_no, 
+        	production_date, 
+        	product_code,   
+            product_color,
+            product_name,
+            product_price,
+            product_cost, 
+            product_category,
+            brand_code,
+            brand_name
+        FROM product
+        JOIN product_name USING(product_code)
+        JOIN brand USING(brand_code)
+        WHERE product_no = #{productNo}
     </select>
 
     <!-- 제품명 정보 업데이트 (product_name 테이블 수정) -->
@@ -59,22 +80,31 @@
 
 <!-- 제품 검색 (동적 조건: 이름, 카테고리) -->
 <select id="searchProductDetail" parameterType="Paging" resultMap="ProductDetailMap">
-    SELECT p.product_no, p.production_date, p.product_code,
-           pn.product_color, pn.product_name, pn.product_price,
-           pn.product_cost, pn.product_category
-    FROM product p
-    JOIN product_name pn ON p.product_code = pn.product_code
+        SELECT 
+        	product_no, 
+        	production_date, 
+        	product_code,   
+            product_color,
+            product_name,
+            product_price,
+            product_cost, 
+            product_category,
+            brand_code,
+            brand_name
+        FROM product
+        JOIN product_name USING(product_code)
+        JOIN brand USING(brand_code)
     <where>
         <!-- 제품명 LIKE 검색 -->
         <if test="productName != null and productName != ''">
-            pn.product_name LIKE CONCAT('%', #{productName}, '%')
+            product_name LIKE CONCAT('%', #{productName}, '%')
         </if>
         <!-- 카테고리 정확 일치 검색 -->
         <if test="productCategory != null and productCategory != ''">
-            AND pn.product_category = #{productCategory}
+            AND product_category = #{productCategory}
         </if>
     </where>
-    ORDER BY p.production_date DESC
+    ORDER BY production_date DESC
     LIMIT #{paging.offset}, #{paging.limit}
 </select>
 
@@ -94,21 +124,22 @@
 	</select>
 	
 	<select id="totalSearchProduct" resultType="int">
-    SELECT 
-    	count(*)
-    FROM product p
-    JOIN product_name pn ON p.product_code = pn.product_code
+        SELECT 
+			COUNT(*)
+        FROM product
+        JOIN product_name USING(product_code)
+        JOIN brand USING(brand_code)
     <where>
         <!-- 제품명 LIKE 검색 -->
         <if test="productName != null and productName != ''">
-            pn.product_name LIKE CONCAT('%', #{productName}, '%')
+            product_name LIKE CONCAT('%', #{productName}, '%')
         </if>
         <!-- 카테고리 정확 일치 검색 -->
         <if test="productCategory != null and productCategory != ''">
-            AND pn.product_category = #{productCategory}
+            AND product_category = #{productCategory}
         </if>
     </where>
-    ORDER BY p.production_date DESC
+    ORDER BY production_date DESC
 	</select>
 	
 

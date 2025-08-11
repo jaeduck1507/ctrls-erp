@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.model.dto.DefectiveDTO;
 import com.project.erp.qam.model.vo.Defective;
 
@@ -14,7 +15,12 @@ public interface DefectiveMapper {
 
 	void deleteByProductNo(int productNo);
 
-	List<DefectiveDTO> showDefective();
+	List<DefectiveDTO> showDefective(Paging paging);
 
-	List<DefectiveDTO> searchDefective(DefectiveDTO dto);
+	List<DefectiveDTO> searchDefective(Paging paging, DefectiveDTO dto);
+	
+	Integer totalDefective();
+	
+	Integer totalSearchDefective();
+	
 }

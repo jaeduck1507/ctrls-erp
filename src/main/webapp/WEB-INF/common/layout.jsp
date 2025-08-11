@@ -45,13 +45,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	<a href="/fm/addBonusPayment">사원 보너스 입력 /fm/addBonusPayment</a><br />
 	<a href="/fm/showBonusPayment">사원 보너스 조회 /fm/showBonusPayment 페이징 처리 필요</a><br />
 
-	<a href="/qam/brand">브랜드 조회 /qam/brand 페이징 처리 필요</a><br />
-    <a href="/qam/product">상품(Product) 조회 /qam/product 페이징 처리 필요</a><br />
-    <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a><br />
+	<a href="/qam/brand">브랜드 조회 /qam/brand 페이징 완료</a><br />
+    <a href="/qam/product">상품(Product) 조회 /qam/product 페이징 처리 완료(Search/Reset 개수 오류, 강사님필요)</a><br />
+    <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName 페이징 처리 완료(Search/Reset 개수 오류, 강사님필요)</a><br />
     <a href="/qam/qc">제품 품질 검수 전체조회 /qam/qc 페이징 처리 필요</a><br />
-	<a href="/qam/saleReady">판매 전 제품 조회 /qam/saleReady 페이징 처리 필요</a><br />
+	<a href="/qam/saleReady">판매 전 제품 조회 /qam/saleReady 페이징 처리 완료</a><br />
 	<a href="/qam/saleDone">판매 완료 제품 조회 /qam/saleDone 페이징 처리 필요</a><br />
-	<a href="/qam/defective">불량 제품 조회 /qam/defective 페이징 처리 필요</a><br />
+	<a href="/qam/defective">불량 제품 조회 /qam/defective 페이징 처리 완료(Search/Reset 개수 오류, 강사님필요)</a><br />
 	
 	<!-- 로그인 및 로그아웃 버튼 위에다가 기능 작성해주세요 -->
 	<br><br><br><br>

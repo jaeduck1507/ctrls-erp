@@ -45,8 +45,8 @@ public class PIMController {
 	// → 제품 등록/수정 시 select option 동적 생성용
 	@ResponseBody
 	@GetMapping("/showProductName")
-	public List<ProductNameDTO> showProductName() {
-		return productNameService.showProductName();
+	public List<ProductNameDTO> showProductName(Paging paging) {
+		return productNameService.showProductName(paging);
 	}
 
 	// 제품 수정 폼 페이지 호출
@@ -80,9 +80,12 @@ public class PIMController {
 	// → 조건 없이 호출 시 전체 반환, 조건 포함 시 LIKE/WHERE 절 처리
 	@GetMapping("/searchProduct")
 	@ResponseBody
-	public List<ProductDetailDTO> searchProduct(Paging paging,
+	public List<ProductDetailDTO> searchProduct(
+//			Model model, 
+			Paging paging,
 			@RequestParam(required = false) String productName,
 	        @RequestParam(required = false) String productCategory) {
+//		model.addAttribute("productList", productService.searchProductDetail(paging, productName, productCategory));
 	    return productService.searchProductDetail(paging, productName, productCategory);
 	}
 
@@ -106,7 +109,7 @@ public class PIMController {
 //	}
 	
 	@GetMapping("/productNameForm")
-	public String pnForm(@RequestParam(required = false) Integer productCode, Integer brandCode, Model model) {
+	public String pnForm(@RequestParam(required = false) Integer productCode, Integer brandCode, Model model, Paging paging) {
 
 	    // 카테고리 목록 추가 (DB단에서 하는게 나으려나)
 		List<String> categoryList = new ArrayList<>();
@@ -117,7 +120,7 @@ public class PIMController {
 	    model.addAttribute("categoryList", categoryList);
 
 	    // 브랜드 목록 추가 (DB에서 모든 브랜드 가져오기)
-	    List<Brand> brandList = brandService.findBrand(); // 이 메서드 필요
+	    List<Brand> brandList = brandService.findBrand(paging); // 이 메서드 필요
 	    model.addAttribute("brandList", brandList);
 	    System.out.println("findBrand() working");
 
@@ -158,10 +161,10 @@ public class PIMController {
 	// → 제품명 리스트에서 필터링할 때 사용
 	@GetMapping("/searchProductName")
 	@ResponseBody
-	public List<ProductNameDTO> searchProductName(
+	public List<ProductNameDTO> searchProductName(Paging paging,
 	        @RequestParam(required = false) String productName,
 	        @RequestParam(required = false) String productCategory) {
-	    return productNameService.searchProductName(productName, productCategory);
+	    return productNameService.searchProductName(paging, productName, productCategory);
 	}
 	
     // 컨트롤러에 productNo 존재 여부 확인 API 만들기
@@ -192,13 +195,20 @@ public class PIMController {
     @PostMapping("/registerBrand")
     public String registerBrand(Brand brand) {
     	brandService.registerBrand(brand);
-    	return "component/qam/brand";
+    	return "redirect:/qam/brand";
+    }
+    
+    @GetMapping("/brandFormUpdate")
+    public String brandFormUpdate(Model model, int brandCode) {
+    	Brand brand = brandService.findById(brandCode);
+    	model.addAttribute("brand", brand);
+    	return "component/qam/brandFormUpdate";
     }
     
     @PostMapping("/updateBrand")
     public String updateBrand(Brand brand) {
     	brandService.updateBrand(brand);
-    	return "component/qam/brand";
+    	return "redirect:/qam/brand";
     }
     
 	@GetMapping("/deleteBrand")

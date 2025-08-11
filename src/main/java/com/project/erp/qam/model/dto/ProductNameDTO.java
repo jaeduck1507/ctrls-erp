@@ -1,11 +1,13 @@
 package com.project.erp.qam.model.dto;
 
+import com.project.erp.common.model.vo.Paging;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor @AllArgsConstructor @Data
-public class ProductNameDTO {
+public class ProductNameDTO extends Paging {
 	
     private int productCode;         // 제품 코드 (PK, AUTO_INCREMENT)
     private String productColor;     // 제품 색상

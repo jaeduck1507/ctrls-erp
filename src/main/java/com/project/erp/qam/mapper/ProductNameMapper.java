@@ -3,6 +3,7 @@ package com.project.erp.qam.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.model.dto.ProductNameDTO;
 import com.project.erp.qam.model.vo.Brand;
 import com.project.erp.qam.model.vo.ProductName;
@@ -12,7 +13,7 @@ public interface ProductNameMapper {
 
     // 전체 제품명 목록 조회
     // → 제품 등록/수정 시 드롭다운용 select list 데이터
-	List<ProductNameDTO> showProductName();
+	List<ProductNameDTO> showProductName(Paging paging);
 
     // 제품명 등록
     // → 새 제품 카테고리, 이름, 가격 등 DB에 추가
@@ -32,9 +33,14 @@ public interface ProductNameMapper {
 
     // 제품명 검색
     // → 이름 or 카테고리 조건으로 필터링 (LIKE, WHERE)
-    List<ProductNameDTO> searchProductName(String productName, String productCategory);
+    List<ProductNameDTO> searchProductName(Paging paging, String productName, String productCategory);
     
     List<ProductNameDTO> showProductNameByBrandFilter(Brand brand);
     
     List<String> selectCategory();
+
+	Integer totalProductName();
+	
+	Integer totalSearchProductName();
+
 }
