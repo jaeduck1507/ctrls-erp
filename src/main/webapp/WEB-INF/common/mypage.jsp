@@ -49,12 +49,12 @@
 	        url: '/showAttendanceOneAtToday',
 	        method: 'post',
 	        success: function(response) {
-	            // console.log(response.checkIn);
-	            // console.log(response.checkOut);
+	            console.log(response.checkIn);
+	            console.log(response.checkOut);
 	            // console.log('데이터 성공적으로 받아옴:', response);
 	            if(!response) {
 					// 출근 X 퇴근 X
-					// console.log("출근 X 퇴근 X");
+					console.log("출근 X 퇴근 X");
 					$("#start_work").prop('disabled', false);
 					$("#finish_work").prop('disabled', true);
 	            } else {
@@ -65,14 +65,14 @@
 						
 					}
 					else if(response.checkOut != null) {
-		            	// console.log("출근 O 퇴근 O");
+		            	console.log("출근 O 퇴근 O");
 						$("#start_work").prop('disabled', true);
 						$("#finish_work").prop('disabled', true);
 						$("#checkIn").text(response.checkIn);
 						$("#checkOut").text(response.checkOut);
 		            }
 		            else if(response.checkIn != null) {
-		            	// console.log("출근 O 퇴근 X");
+		            	console.log("출근 O 퇴근 X");
 						$("#start_work").prop('disabled', true);
 						$("#finish_work").prop('disabled', false);
 						$("#checkIn").text(response.checkIn);
