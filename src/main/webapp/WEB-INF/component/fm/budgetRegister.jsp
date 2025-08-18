@@ -9,10 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>예산 등록</h1>
-	<div id="register">
+	<h5>[재무 관리] > [예산 등록]</h5>
+	<h3>예산 등록</h3>
+	<div id="register" class="filter-bar">
 		<button id="add-row">열 추가</button>
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 			<tr>
 				<th>부서 선택</th>
 				<th>부서 번호</th>
@@ -26,7 +27,7 @@
 		<button id="budget-register">예산 등록</button>
 	</div>
 	
-	<script>
+	<script>		
 		var count = 0;
 		
 		function addRow() { // 열 추가 함수
@@ -62,9 +63,22 @@
 			deptInfo.deptNo = opt.data('dept_no');
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 			$(e.target).parent().parent().find("td").eq(2).html('<select id="periodType"><option value="" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" name="budget-amount">');
+			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" min="0" name="budget-amount" id="budgetAmount">');
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date">');
+		});
+		
+		const exp = /^\d+$/;
+		const budgetAmount = document.querySelector("#budgetAmount");
+		$(document).on("input", "#budgetAmount", (e) => {
+			console.log(e.target.value);
+			console.log(exp.test(e.target.value));
+			
+			if (!exp.test(e.target.value)) {
+				alert("숫자만 입력!");
+			} else {
+				console.log("OK");
+			}
 		});
 		
 		$("#budget-register").click(() => {

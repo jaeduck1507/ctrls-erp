@@ -12,8 +12,9 @@
 </head>
 <body>
 	<div class="container">
-		<h1>수당 조회</h1>
-		<div id = "search">
+		<h5>[재무 관리] > [수당 조회]</h5>
+		<h3>수당 조회</h3>
+		<div id = "search" class="filter-bar">
 		이름 : <input type="text" id="empName">
 			<select id="deptName">
 				<option value="-1">부서 선택</option>
@@ -32,7 +33,7 @@
 		</div>
 		
 		<div>
-			<table border="1" id = "result" >
+			<table border="1" id = "result" class="data-table">
 			</table>
 		</div>
 	
@@ -62,6 +63,11 @@
 				
 	            // 응답
 	            success : function(result) {
+					if (!result.bonusPaymentList || result.bonusPaymentList.length === 0) {
+						alert("조회된 결과가 없습니다");
+						location.reload();
+					}
+					
 					$("#result").html("");
 	            	$("#result").append("<tr><th>이름</th><th>부서</th><th>직급</th><th>수당 금액</th><th>수당 종류</th><th>지급 날짜</th></tr>");
                 	for(const bonus of result.bonusPaymentList) {

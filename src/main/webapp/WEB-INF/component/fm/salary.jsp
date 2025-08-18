@@ -11,8 +11,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>급여 조회</h1>
-	<div id="search">
+	<h5>[재무 관리] > [급여 조회]</h5>
+	<h3>급여 조회</h3>
+	<div id="search" class="filter-bar">
 		사원 검색 : <input type="text" id="empName">
 		<select id="deptName">
 			<option value="dept">부서 선택</option>
@@ -25,7 +26,7 @@
 	</div>
 		
 	<div>	
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 				
 		</table>
 	</div>
@@ -55,12 +56,19 @@
 					//console.log($("#deptName").val());
 					//console.log($("#empName").val());
 					//console.log($("#yearMonth").val());
+					
+					if (!result.salaryList || result.salaryList.length === 0) {
+						alert("조회된 결과가 없습니다");
+						location.reload();
+					}
+					
 					$("#result").html("");
 					$("#result").append("<tr><th>직원 번호</th><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
 					for (const salary of result.salaryList) {
 						const total = salary.baseSalary + salary.bonus - salary.deduction;
-						var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate + "</td><td>" 
-							+ salary.baseSalary + "</td><td>" + salary.bonus + "</td><td>" + salary.deduction + "</td><td>" + total + "</td></tr>"
+						var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate 
+							+ "</td><td>" + salary.baseSalary.toLocaleString() + "</td><td>" + salary.bonus.toLocaleString() + "</td><td>" + salary.deduction.toLocaleString() 
+							+ "</td><td>" + total.toLocaleString() + "</td></tr>"
 						$("#result").append(text);
 					}
 					
@@ -102,8 +110,9 @@
 					$("#result").append("<tr><th>직원 번호</th><th>부서 이름</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
 					for (const salary of result.salaryList) {
 						const total = salary.baseSalary + salary.bonus - salary.deduction;
-						var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate + "</td><td>" 
-							+ salary.baseSalary + "</td><td>" + salary.bonus + "</td><td>" + salary.deduction + "</td><td>" + total + "</td></tr>"
+						var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate 
+							+ "</td><td>" + salary.baseSalary.toLocaleString() + "</td><td>" + salary.bonus.toLocaleString() + "</td><td>" + salary.deduction.toLocaleString() 
+							+ "</td><td>" + total.toLocaleString() + "</td></tr>"
 						$("#result").append(text);
 					}
 					

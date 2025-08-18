@@ -9,8 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	
-	<div id="brandList">
+	<h5>[재무 관리] > [매입 일괄 등록]</h5>
+	<h3>매입 일괄 등록</h3>
+	<div id="brandList" class="filter-bar">
 		<select id="brand">
 			<option value="0" disabled selected> 선택</option>
 			<c:forEach items="${brandList}" var="brand">
@@ -19,10 +20,12 @@
 		</select>
 		<button id="selectBrand">거래처 선택</button>
 	</div>
-	<div id = "test">
-        
-        
-    </div>
+	
+	<div class="filter-bar">
+		<div id = "test" class="data-table">
+			
+		</div>
+	</div>
 	
 	<script>
 	var count = 0;
@@ -52,11 +55,11 @@
             success : function(result) {
             	$("#test").html('');
         		$("#test").append(
-        		'<button id = "add-row">열 추가</button>' +
-        		'<table border="1" id = "result">' +
+        		'<button id = "add-row" class="filter-bar">열 추가</button>' +
+        		'<table border="1" id = "result" class="filter-bar">' +
         		'<tr><th>상품 이름</th><th>상품 코드</th><th>상품 색깔</th><th>상품 가격</th><th>상품 단가</th><th>상품 카테고리</th><th>수량</th><th>부가세</th><th>총액</th><th>매입일</th><th>삭제</th></tr>' +
         		'</table>' +
-        		'<button id = "purchase-register">매입 등록</button>'
+        		'<button id = "purchase-register" class="filter-bar">매입 등록</button>'
         		);
         		totalOptionText ='';
 				for(r of result) {
@@ -116,12 +119,10 @@
 		const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
 		
 		if (!opt.length) {
-		  console.warn('없는 값:', val);
-		 
-		  return;
+			console.warn('없는 값:', val);
+			alert("존재하지 않는 상품입니다!");
+			return;
 		}
-		
-		
 		
 		productInfo.productCode = opt.data('product_code');
 		productInfo.productColor = opt.data('product_color');
@@ -134,10 +135,10 @@
 		$(e.target).parent().parent().find("td").eq(3).text(productInfo.productPrice);
 		$(e.target).parent().parent().find("td").eq(4).text(productInfo.productCost);
 		$(e.target).parent().parent().find("td").eq(5).text(productInfo.productCategory);
-		$(e.target).parent().parent().find("td").eq(6).html('<input type="number" name="quantity" class="price">');
+		$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="0" name="quantity" class="price">');
 		$(e.target).parent().parent().find("td").eq(7).text("");
 		$(e.target).parent().parent().find("td").eq(8).text("");
-		$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date" value="${today}">');
+		$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date" value="${today}"  readonly="readonly">');
 		});
 	
 		$(document).on('input', '.price', (e) => {

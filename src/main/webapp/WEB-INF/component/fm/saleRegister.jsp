@@ -9,13 +9,14 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>매출 등록</h1>
-	<div id="register">
+	<h5>[재무 관리] > [매출 등록]</h5>
+	<h3>매출 등록</h3>
+	<div id="register" class="filter-bar">
 		날짜 : <input type="date" id="saleDate"/>
 		<button id="search">조회</button>
-		<button id="sale-register">매출 등록</button>
+		<button id="sale-register" disabled>매출 등록</button>
 		
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 			
 		</table>
 	</div>
@@ -44,6 +45,13 @@
 				processData: false,
 				contentType: false,
 				success: function(result) {
+					const registerBtn = document.getElementById("sale-register");
+					if (!result || result.length === 0) {
+						registerBtn.disabled = true; // 조회 결과 없으면 버튼 비활성화
+					} else {
+						registerBtn.disabled = false; // 조회 결과 있으면 버튼 활성화
+					}
+					
 					$("#result").html("");
 					$("#result").append("<tr><th>상품명</th><th>상품 코드</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
 					for (const sale of result) {
@@ -70,7 +78,7 @@
 				smList.push(obj);
 			}
 			console.log(JSON.stringify(smList));
-			/*
+			
 			$.ajax({
 				type : "post",
 				url: "/saleRegister",
@@ -87,7 +95,7 @@
 				error: function(xhr, status, error) {
 					
 				}
-			});*/
+			});
 		});
 	</script>
 </body>

@@ -44,6 +44,7 @@
 .filter-bar input[type="month"],
 .filter-bar input[type="date"],
 .filter-bar input[type="time"],
+.filter-bar input[type="number"],
 .filter-bar input[type="checkbox"],
 .filter-bar fieldset,
 .filter-bar select {
@@ -93,6 +94,18 @@
   width: 80px;
 }
 
+/* 버튼 disabled 일 때 */
+.filter-bar button:disabled {
+  text-decoration: none;
+  background-color: #ffffff;
+  color: darkgray;
+  border: lightgray solid 1px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: default;
+  font-weight: bold;
+}
+
 /* 테이블 */
 table.data-table {
   width: 100%;
@@ -102,7 +115,7 @@ table.data-table {
 
 .data-table th,
 .data-table td {
-  padding:5px 10px;
+  padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
   height: fit-content;
@@ -121,6 +134,7 @@ table.data-table {
 }
 .data-table td input[type="text"],
 .data-table td input[type="date"],
+.data-table td input[type="number"],
 .data-table td select
 {
 	border-style: none;

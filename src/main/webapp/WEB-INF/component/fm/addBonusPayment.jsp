@@ -9,10 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>보너스 수당 등록</h1>
-	<div id="register">
+	<h5>[재무 관리] > [보너스 수당 등록]</h5>
+	<h3>보너스 수당 등록</h3>
+	<div id="register" class="filter-bar">
 		<button id="add-row">열 추가</button>
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 			<tr>
 				<th>사원 선택</th>
 				<th>수당 유형</th>
@@ -59,7 +60,7 @@
 			
 			deptInfo.deptNo = opt.data('emp_no');
 			$(e.target).parent().parent().find("td").eq(1).html('<select id="bonusNo"><option value="period" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
-			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" name="payment">');
+			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" name="payment">');
 			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" name="payDate">');
 		});
 		

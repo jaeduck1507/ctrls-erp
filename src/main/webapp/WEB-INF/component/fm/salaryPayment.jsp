@@ -11,24 +11,26 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>급여 등록</h1>
-	<div id="search">
-		<input type="month" id = "yearMonth"  >
+	<h5>[재무 관리] > [급여 등록]</h5>
+	<h3>급여 등록</h3>
+	<div id="search" class="filter-bar">
+		<input type="month" id = "yearMonth">
 		<button id="btn">조회</button>
 	</div>
 		
 	<div>	
-		<div>
-			<table border="1" id="result">
+		<div class="filter-bar">
+			<table border="1" id="result" class="data-table">
 					
 			</table>
+			<button id="submit">등록하기</button>
 		</div>
 		
 		<nav>
 			<ul class="pagination">
 			</ul>
 		</nav>
-		<button id="submit" >등록하기</button>
+		
 	</div>
 	
 	<script>
@@ -90,7 +92,7 @@
 						
 						var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
 							+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
-							+ '<input type="number" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
+							+ '<input type="number" min="0" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
 						$("#result").append(text);
 					}
 					
@@ -148,7 +150,7 @@
 					
 					var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
 						+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
-						+ '<input type="number" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
+						+ '<input type="number" min="0" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
 					$("#result").append(text);
 					console.log(i + " : " + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1));
 				}

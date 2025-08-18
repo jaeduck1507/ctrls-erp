@@ -9,10 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>기타 지출 내역 입력</h1>
-	<div id="register">
+	<h5>[재무 관리] > [기타 지출 내역 입력]</h5>
+	<h3>기타 지출 내역 입력</h3>
+	<div id="register" class="filter-bar">
 		<button id="add-row">열 추가</button>
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 			<tr>
 				<th>부서 선택</th>
 				<th>부서 코드</th>
@@ -65,7 +66,7 @@
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 			$(e.target).parent().parent().find("td").eq(2).text("지출");
 			$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
-			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" name="trans-amount">');
+			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc">');
 			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date">');
 		});

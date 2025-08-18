@@ -11,11 +11,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>매출 조회</h1>
-	<div id="search">
+	<h5>[재무 관리] > [매출 조회]</h5>
+	<h3>매출 조회</h3>
+	<div id="search" class="filter-bar">
 		제품명 검색: <input type="text" id="productName">
 		<select id="productCategory">
-			<option value="all">전체</option>
+			<option value="all">카테고리</option>
 			<c:forEach items="${categoryList}" var="category">
 				<option value="${category}">${category}</option>
 			</c:forEach>
@@ -26,7 +27,7 @@
 	</div>
 	
 	<div>	
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 			
 		</table>
 	</div>
@@ -44,8 +45,22 @@
 			const formData = new FormData();
 			formData.append("productCategory", $("#productCategory").val());
 			formData.append("productName", $("#productName").val());
-			formData.append("startDate", $("#startDate").val());
-			formData.append("endDate", $("#endDate").val());
+			
+			const startDate = $("#startDate").val();
+			const endDate = $("#endDate").val();
+			formData.append("startDate", startDate);
+			formData.append("endDate", endDate);
+			
+			if (startDate && !endDate) {
+				alert("조회 종료일을 선택해주세요!");
+				return;
+			} else if (!startDate && endDate) {
+				alert("조회 시작일을 선택해주세요!");
+				return;
+			} else if (startDate > endDate) {
+				alert("조회 기간을 다시 선택해주세요!");
+				return;
+			}
 			
 			$.ajax({
 				type: "post",
@@ -58,11 +73,17 @@
 					//console.log($("#productName").val());
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
+					
+					if (!result.salesList || result.salesList.length === 0) {
+						alert("조회된 결과가 없습니다");
+						location.reload();
+					}
+					
 					$("#result").html("");
 					$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
 					for (const sales of result.salesList) {
-						var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice + "</td><td>" 
-							+ sales.quantity + "</td><td>" + sales.varAmount + "</td><td>" + sales.totalAmount + "</td><td>" + sales.saleDate + "</td></tr>"
+						var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice.toLocaleString() + "</td><td>" 
+							+ sales.quantity + "</td><td>" + sales.varAmount.toLocaleString() + "</td><td>" + sales.totalAmount.toLocaleString() + "</td><td>" + sales.saleDate + "</td></tr>"
 						$("#result").append(text);
 					}
 					
@@ -99,8 +120,8 @@
 					$("#result").html("");
 					$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
 					for (const sales of result.salesList) {
-						var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice + "</td><td>" 
-							+ sales.quantity + "</td><td>" + sales.varAmount + "</td><td>" + sales.totalAmount + "</td><td>" + sales.saleDate + "</td></tr>"
+						var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice.toLocaleString() + "</td><td>" 
+							+ sales.quantity + "</td><td>" + sales.varAmount.toLocaleString() + "</td><td>" + sales.totalAmount.toLocaleString() + "</td><td>" + sales.saleDate + "</td></tr>"
 						$("#result").append(text);
 					}
 					

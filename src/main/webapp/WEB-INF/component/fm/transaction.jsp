@@ -11,8 +11,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>거래내역 조회</h1>
-	<div id="search">
+	<h5>[재무 관리] > [거래내역 조회]</h5>
+	<h3>거래내역 조회</h3>
+	<div id="search" class="filter-bar">
 		<select id="transType">
 			<option value="all">전체</option>
 			<option value="수입">수입</option>
@@ -31,7 +32,7 @@
 	</div>
 	
 	<div>	
-		<table border="1" id="result">
+		<table border="1" id="result" class="data-table">
 			
 		</table>
 	</div>
@@ -49,8 +50,22 @@
 			const formData = new FormData();
 			formData.append("transType", $("#transType").val());
 			formData.append("deptName", $("#deptName").val());
-			formData.append("startDate", $("#startDate").val());
-			formData.append("endDate", $("#endDate").val());
+			
+			const startDate = $("#startDate").val();
+			const endDate = $("#endDate").val();
+			formData.append("startDate", startDate);
+			formData.append("endDate", endDate);
+			
+			if (startDate && !endDate) {
+				alert("조회 종료일을 선택해주세요!");
+				return;
+			} else if (!startDate && endDate) {
+				alert("조회 시작일을 선택해주세요!");
+				return;
+			} else if (startDate > endDate) {
+				alert("조회 기간을 다시 선택해주세요!");
+				return;
+			}
 			
 			$.ajax({
 				type: "post",
@@ -63,10 +78,16 @@
 					//console.log($("#deptName").val());
 					//console.log($("#startDate").val());
 					//console.log($("#endDate").val());
+					
+					if (!result.transList || result.transList.length === 0) {
+						alert("조회된 결과가 없습니다");
+						location.reload();
+					}
+					
 					$("#result").html("");
 					$("#result").append("<tr><th>거래 번호</th><th>부서명</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
 						for (const trans of result.transList) {
-							var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount 
+							var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount .toLocaleString()
 								+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"
 						$("#result").append(text);
 					}
@@ -105,11 +126,11 @@
 					$("#result").html("");
 					$("#result").append("<tr><th>거래 번호</th><th>부서명</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
 						for (const trans of result.transList) {
-							var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount 
+							var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount.toLocaleString()
 								+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"
 						$("#result").append(text);
 					}
-										
+								
 					$(".pagination").html('');
                 	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
                 	for (var i = result.startPage; i <= result.endPage; i++) {
