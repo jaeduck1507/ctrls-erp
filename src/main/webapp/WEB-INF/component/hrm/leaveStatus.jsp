@@ -9,7 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>휴가 상태 처리</h1>
+	<h5>[근태 관리] > [휴가 상태 처리]</h5>
+	<h3>휴가 상태 처리</h3>
 	
 	<div class="data-table  ">
 		<table border="1" id="result" >

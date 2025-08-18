@@ -1,4 +1,63 @@
-.filter-bar p {
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+} 
+h4, p, span {
+	color: #424242;
+	
+}
+h4 {
+	margin-bottom: 20px;
+	font-weight: bolder;
+}
+
+#date-timer {
+	display: flex;
+	flex-direction: row;
 	font-size: large;
+
+}
+
+#date-timer #ymd,
+#date-timer #timer {
 	font-weight: bold;
+}
+
+.filter-bar {
+	display: flex;
+	flex-direction: row;
+
+}
+
+.filter-bar p, 
+.filter-bar span{
+	font-size: large;
+	margin-bottom: 0;
+}
+.box {
+	display: flex;
+	flex-direction: row;
+	font-size: medium;
+	gap: 5px;
+	
+	
+}
+.box1{
+	background-color: #E4E4E7;
+	padding: 30px 30px 10px 30px;
+	width: calc(100vp - var(--side-width));
+	border-radius: 10px;
+	gap: 5px;
+	margin-bottom: 10px;
+	margin-right: 0;
+	
+}
+
+.box2, .box3  {
+	background-color: #F5F5F5;
+	padding: 30px 30px 10px 30px;
+	width: calc(100% - var(--side-width));
+	border-radius: 10px;
+	margin-bottom: 10px;
 }

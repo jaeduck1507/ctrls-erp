@@ -9,8 +9,9 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
-	<h1>휴가 누적 사용일, 남은 휴가일 조회</h1>
-	<div>
+	<h5>[근태 관리] > [휴가 누적 사용일, 남은 휴가일 조회]</h5>
+	<h3>휴가 누적 사용일, 남은 휴가일 조회</h3>
+	<div class="filter-bar">
 		사번 : <input type="text" id="empNo">
 		<button id="btn">조회</button>
 	</div>

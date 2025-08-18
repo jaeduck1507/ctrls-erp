@@ -15,32 +15,50 @@
 	
 	<!-- get, /mypage: 인증된 사람만 즉! 로그인된 사람만 -->
 	<h1>마이페이지</h1>
-	<div class="filter-bar">
-		<p class="date" id="ymd"></p>
-	    <p id="timer"></p>
-		출퇴근 등록 시간: <input type="time" id = "checkTime">
-		<button id="start_work">출근</button>
-		<button id="finish_work">퇴근</button>
-	</div>
-		<p id="status">출퇴근 시간 : <span id = "checkIn">00:00:00</span> ~ <span id="checkOut">00:00:00</span></p>
-	<div>
-	    <p>직원 번호 : ${user.empNo}</p>
-	    <p>성명 : ${user.empName}</p>
-	    <p>주민등록번호 : ${user.empIn}</p>
-	    <p>직급 : ${user.jobTitle}</p>
-	    <p>부서 : ${user.deptName}</p>
-	    <p>입사일 : ${user.hireDate}</p>
-	    <p>주소 : ${user.addr}</p>
-	    <p>연락처 : ${user.phone}</p>
-	    <p>이메일 : ${user.email}</p>
+	<div class="mypage">
+		<div class="box1">
+			<h4>출퇴근 등록</h4>
+			<div id="date-timer" class="filter-bar">
+				<p class="date" id="ymd"></p>
+			    <p id="timer"></p>
+
+				출퇴근 등록 시간: <input type="time" id = "checkTime">
+				<button id="start_work">출근</button>
+				<button id="finish_work">퇴근</button>
+
+				<p id="status"><span id = "checkIn">00:00:00</span> ~ <span id="checkOut">00:00:00</span></p>
+
+			</div>
+			
+		</div>	
+		<div class="box">
+		<div class="box2">
+			<h4>사원 정보</h4>
+		    <p>직원 번호 : <b> ${user.empNo}</b></p>
+		    <p>성명 : <b>${user.empName}</b></p>
+		    <p>직급 : <b>${user.jobTitle}</b></p>
+		    <p>부서 : <b>${user.deptName}</b></p>
+		    <p>입사일 : <b>${user.hireDate}</b></p>
+		</div>
+		
+		<div class="box3">
+			<h4>개인 정보</h4>
+			<p><b>주민등록번호 : </b>${user.empIn}</p>
+		    <p><b>주소 : </b>${user.addr}</p>
+		    <p><b>연락처 : </b>${user.phone}</p>
+		    <p><b>이메일 : </b>${user.email}</p>
+		</div>
+		
 	</div>
 	<div class="filter-bar">
 	<button onclick="location.href='/modifyMyInfo'">개인정보 수정(완)</button>
 	<button onclick="location.href='/myLeavePage'">휴가신청(완)</button>
 	<button onclick="location.href='/myAttendance'">출근 현황 보기(완)</button>
 	</div>
+	
 	<div class="btn-logout">
 	<a href="/logout">로그아웃</a>
+	</div>
 	</div>
 	<script>
 	

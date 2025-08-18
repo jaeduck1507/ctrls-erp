@@ -1,0 +1,32 @@
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+}
+form{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+form .box {
+	background-color: #F5F5F5;
+	padding: 30px;
+	border-radius: 10px;
+	width: calc(100% - var(--side-width));
+	flex-direction: column;
+	font-size: large;
+} 
+
+.box div {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 10px;
+	gap: 10px;
+	margin: 20px;
+}
+
+.box label {
+	color: #938E8E;
+}
