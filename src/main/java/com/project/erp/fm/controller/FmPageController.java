@@ -118,6 +118,13 @@ public class FmPageController {
 		return "common/layout";
 	}
 	
+	@GetMapping("/budgetDelete")
+	public String leaveDelete(int budgetNo, Model model) {
+		budgetServive.budgetDelete(budgetNo);
+		model.addAttribute("component","../component/fm/budget.jsp");
+		return "common/layout";
+	}
+	
 	@GetMapping("/addBonusPayment")
 	public String addBonusPayment(Model model) {
 		model.addAttribute("empInfo", employeeInfoService.showEmployee());

@@ -46,9 +46,10 @@ public class CSIController {
 	
 	@ResponseBody
 	@PostMapping("/addBonusPayment")
-	public void addBonusPayment(@RequestBody List<BonusPayment> bList) {
+	public boolean addBonusPayment(@RequestBody List<BonusPayment> bList) {
 		System.out.println(bList);
 		bonusPaymentService.addBonusPayment(bList);
+		return true;
 	}
 	
 	@ResponseBody

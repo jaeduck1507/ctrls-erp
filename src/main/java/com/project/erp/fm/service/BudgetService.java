@@ -55,4 +55,8 @@ public class BudgetService {
 		budgetMapper.budgetUpdate(budget);		
 	}
 	
+	public void budgetDelete(int budgetNo) {
+		budgetMapper.budgetDelete(budgetNo);
+	}
+	
 }

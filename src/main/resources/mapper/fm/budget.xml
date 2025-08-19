@@ -15,8 +15,11 @@
 		SELECT * FROM budget
 		JOIN department USING(dept_no)
 		<where>
+			<if test="yearMonth != null">
+				execution_date LIKE CONCAT('%', #{yearMonth}, '%')
+			</if>
 			<if test="deptName != 'dept'">
-				dept_name = #{deptName}
+				AND dept_name = #{deptName}
 			</if>
 		</where>
 	</select>
@@ -25,8 +28,11 @@
 		SELECT * FROM budget
 		JOIN department USING(dept_no)
 		<where>
+			<if test="budgetDeptDTO.yearMonth != null">
+				execution_date LIKE CONCAT('%', #{budgetDeptDTO.yearMonth}, '%')
+			</if>
 			<if test="budgetDeptDTO.deptName != 'dept'">
-				dept_name = #{budgetDeptDTO.deptName}
+				AND dept_name = #{budgetDeptDTO.deptName}
 			</if>
 		</where>
 		LIMIT #{offset}, #{limit}
@@ -36,8 +42,11 @@
 		SELECT count(*) FROM budget
 		JOIN department USING(dept_no)
 		<where>
+			<if test="yearMonth != null">
+				execution_date LIKE CONCAT('%', #{yearMonth}, '%')
+			</if>
 			<if test="deptName != 'dept'">
-				dept_name = #{deptName}
+				AND dept_name = #{deptName}
 			</if>
 		</where>
 	</select>
@@ -70,4 +79,8 @@
 		WHERE budget_no = #{budgetNo}
 	</update>
 	
+	<delete id="budgetDelete" parameterType="int">
+		DELETE FROM budget 
+		WHERE budget_no = #{budgetNo}
+	</delete>
 </mapper>

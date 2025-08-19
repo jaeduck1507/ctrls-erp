@@ -7,6 +7,21 @@
 <meta charset="UTF-8">
 <title>budgetRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+	td {
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	.red {
+		border-color: red;
+		border-width: 2px;
+	}
+
+	table {
+	  border-collapse: separate;  
+	}
+</style>
 </head>
 <body>
 	<h5>[재무 관리] > [예산 등록]</h5>
@@ -24,16 +39,91 @@
 				<th>삭제</th>
 			</tr>
 		</table>
-		<button id="budget-register">예산 등록</button>
+		<button id="budget-register" disabled>예산 등록</button>
 	</div>
 	
-	<script>		
+	<script>
+		/*
+		const periodTypeCheckValue = {
+			reg : /^[A-Z]$/
+		};
+		const budgetAmountCheckValue = {
+			reg : /^[1-9]\d*$/
+		};
+		const executionDateCheckValue = {
+			reg : /.+/
+		};
+		
+		function checkReg(target, checkValue) {
+			console.log(target.value);
+    		console.log(checkValue.reg.test(target.value));
+		}
+		*/
+		
+		var periodTypeCheckValue = false;
+		var budgetAmountCheckValue = false;
+		var executionDateCheckValue = false;
+		
+		const periodTypeCheck = /^[A-Z]$/;
+		$(document).on("click", "#periodType", (e) => {
+			console.log(e.target.value);
+			console.log(periodTypeCheck.test(e.target.value));
+			
+			if (!periodTypeCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				periodTypeCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				periodTypeCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		const budgetAmountCheck = /^[1-9]\d*$/;
+		$(document).on("input", "#budgetAmount", (e) => {
+			console.log(e.target.value);
+			console.log(budgetAmountCheck.test(e.target.value));
+			
+			if (!budgetAmountCheck.test(e.target.value)) {
+				//alert("숫자만 입력!");
+				e.target.parentElement.classList.add("red");
+				budgetAmountCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				budgetAmountCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		const executionDateCheck = /.+/;
+		$(document).on("input", "#executionDate", (e) => {
+			console.log(e.target.value);
+			console.log(executionDateCheck.test(e.target.value));
+			
+			if (!executionDateCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				executionDateCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				executionDateCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		function checkAll() {
+		    if (periodTypeCheckValue && budgetAmountCheckValue && executionDateCheckValue) {
+		        $("#budget-register").prop("disabled", false);
+		    } else {
+		        $("#budget-register").prop("disabled", true);
+		    }
+		}
+		
 		var count = 0;
 		
 		function addRow() { // 열 추가 함수
 			$("#result").append('<tr></tr>'); // 기본 열 추가
 			for(var i = 0; i < 6; i++) { // 열에 데이터 추가
-				if(i == 0) $("#result tr").eq(-1).append('<td><input list="deptList'+ (++count) +'" class="deptName" placeholder="부서 선택" /><datalist id="deptList'+ count + '"><c:forEach items="${department}" var="dept"><option value="${dept.deptName}" data-dept_no ="${dept.deptNo}" ></option></c:forEach></datalist></td>');
+				if(i == 0) $("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="deptName" placeholder="부서 선택" /><datalist id="List'+ count + '"><c:forEach items="${department}" var="dept"><option value="${dept.deptName}" data-dept_no ="${dept.deptNo}" ></option></c:forEach></datalist></td>');
 				else $("#result tr").eq(-1).append('<td></td>');
 			}
 			$("#result tr").eq(-1).append('<td><button class="remove-row">열 삭제</button></td>'); // 열 삭제 버튼 추가
@@ -65,21 +155,9 @@
 			$(e.target).parent().parent().find("td").eq(2).html('<select id="periodType"><option value="" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
 			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" min="0" name="budget-amount" id="budgetAmount">');
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan">');
-			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date">');
+			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date" id="executionDate">');
 		});
 		
-		const exp = /^\d+$/;
-		const budgetAmount = document.querySelector("#budgetAmount");
-		$(document).on("input", "#budgetAmount", (e) => {
-			console.log(e.target.value);
-			console.log(exp.test(e.target.value));
-			
-			if (!exp.test(e.target.value)) {
-				alert("숫자만 입력!");
-			} else {
-				console.log("OK");
-			}
-		});
 		
 		$("#budget-register").click(() => {
 			const table = $("#result tr");

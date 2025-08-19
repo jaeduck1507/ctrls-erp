@@ -18,5 +18,6 @@ public interface BudgetMapper {
 	void updatePV(Budget budget);
 	BudgetDeptDTO searchBudget(BudgetDeptDTO bd);
 	void budgetUpdate(Budget budget);
+	void budgetDelete(int budgetNo);
 	
 }

@@ -7,6 +7,21 @@
 <meta charset="UTF-8">
 <title>bonusRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+	td {
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	.red {
+		border-color: red;
+		border-width: 2px;
+	}
+
+	table {
+	  border-collapse: separate;  
+	}
+</style>
 </head>
 <body>
 	<h5>[재무 관리] > [보너스 수당 등록]</h5>
@@ -22,16 +37,73 @@
 				<th>삭제</th>
 			</tr>
 		</table>
-		<button id="bonus-register">보너스 등록</button>
+		<button id="bonus-register" disabled>보너스 등록</button>
 	</div>
 	
 	<script>
+		var bonusNoCheckValue = false;
+		var paymentCheckValue = false;
+		var payDateCheckValue = false;
+		
+		const bonusNoCheck = /^[1-9]$/;
+		$(document).on("click", "#bonusNo", (e) => {
+			console.log(e.target.value);
+			console.log(bonusNoCheck.test(e.target.value));
+			
+			if (!bonusNoCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				bonusNoCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				bonusNoCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		const paymentCheck = /^[1-9]\d*$/;
+		$(document).on("input", "#payment", (e) => {
+			console.log(e.target.value);
+			console.log(paymentCheck.test(e.target.value));
+			
+			if (!paymentCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				paymentCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				paymentCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		const payDateCheck = /.+/;
+		$(document).on("input", "#payDate", (e) => {
+			console.log(e.target.value);
+			console.log(payDateCheck.test(e.target.value));
+			
+			if (!payDateCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				payDateCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				payDateCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		function checkAll() {
+		    if (bonusNoCheckValue && paymentCheckValue && payDateCheckValue) {
+		        $("#bonus-register").prop("disabled", false);
+		    } else {
+		        $("#bonus-register").prop("disabled", true);
+		    }
+		}
+		
 		var count = 0;
 		
 		function addRow() { // 열 추가 함수
 			$("#result").append('<tr></tr>'); // 기본 열 추가
 			for(var i = 0; i < 4; i++) { // 열에 데이터 추가
-				if(i == 0) $("#result tr").eq(-1).append('<td><input list="empList'+ (++count) +'" class="empName" placeholder="사원 선택" /><datalist id="empList'+ count + '"><c:forEach items="${empInfo}" var="emp"><option value="${emp.empName}/${emp.deptName}/${emp.jobTitle}" data-emp_no ="${emp.empNo}" ></option></c:forEach></datalist></td>');
+				if(i == 0) $("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="empName" placeholder="사원 선택" /><datalist id="List'+ count + '"><c:forEach items="${empInfo}" var="emp"><option value="${emp.empName}/${emp.deptName}/${emp.jobTitle}" data-emp_no ="${emp.empNo}" ></option></c:forEach></datalist></td>');
 				else $("#result tr").eq(-1).append('<td></td>');
 			}
 			$("#result tr").eq(-1).append('<td><button class="remove-row">열 삭제</button></td>'); // 열 삭제 버튼 추가
@@ -59,9 +131,9 @@
 			}
 			
 			deptInfo.deptNo = opt.data('emp_no');
-			$(e.target).parent().parent().find("td").eq(1).html('<select id="bonusNo"><option value="period" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
-			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" name="payment">');
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" name="payDate">');
+			$(e.target).parent().parent().find("td").eq(1).html('<select id="bonusNo"><option value="" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
+			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" id="payment" name="payment">');
+			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" id="payDate" name="payDate">');
 		});
 		
 		$("#bonus-register").click(() => {
@@ -91,14 +163,15 @@
 				processData: false,
 				contentType: 'application/json; charset=UTF-8',
 				success: function(response) {
-					
+					if (response) {
+						alert("등록되었습니다!");
+						location.reload();
+					}
 				},
 				error: function(xhr, status, error) {
 					
 				}
 			});
-			
-			
 		});
 	</script>
 </body>

@@ -45,11 +45,10 @@
 				processData: false,
 				contentType: false,
 				success: function(result) {
-					const registerBtn = document.getElementById("sale-register");
 					if (!result || result.length === 0) {
-						registerBtn.disabled = true; // 조회 결과 없으면 버튼 비활성화
+						$("#sale-register").prop("disabled", true);
 					} else {
-						registerBtn.disabled = false; // 조회 결과 있으면 버튼 활성화
+						$("#sale-register").prop("disabled", false);
 					}
 					
 					$("#result").html("");

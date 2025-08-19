@@ -14,5 +14,6 @@ public class BudgetDeptDTO {
 	private String plan;
 	private LocalDate executionDate;
 	private String deptName;
+	private String yearMonth;
 	
 }

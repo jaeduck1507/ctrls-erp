@@ -7,6 +7,21 @@
 <meta charset="UTF-8">
 <title>transRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+	td {
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	.red {
+		border-color: red;
+		border-width: 2px;
+	}
+
+	table {
+	  border-collapse: separate;  
+	}
+</style>
 </head>
 <body>
 	<h5>[재무 관리] > [기타 지출 내역 입력]</h5>
@@ -25,16 +40,58 @@
 				<th>삭제</th>
 			</tr>
 		</table>
-		<button id="trans-register">등록</button>
+		<button id="trans-register" disabled>등록</button>
 	</div>
 	
 	<script>
+		var transAmountCheckValue = false;
+		var transDateCheckValue = false;
+		
+		const transAmountCheck = /^[1-9]\d*$/;
+		$(document).on("input", "#transAmount", (e) => {
+			console.log(e.target.value);
+			console.log(transAmountCheck.test(e.target.value));
+			
+			if (!transAmountCheck.test(e.target.value)) {
+				//alert("숫자만 입력!");
+				e.target.parentElement.classList.add("red");
+				transAmountCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				transAmountCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		const transDateCheck = /.+/;
+		$(document).on("input", "#transDate", (e) => {
+			console.log(e.target.value);
+			console.log(transDateCheck.test(e.target.value));
+			
+			if (!transDateCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				transDateCheckValue = false;
+			} else {
+				e.target.parentElement.classList.remove("red");
+				transDateCheckValue = true;
+			}
+			checkAll();
+		});
+		
+		function checkAll() {
+		    if (transAmountCheckValue && transDateCheckValue) {
+		        $("#trans-register").prop("disabled", false);
+		    } else {
+		        $("#trans-register").prop("disabled", true);
+		    }
+		}
+		
 		var count = 0;
 		
 		function addRow() {
 			$("#result").append("<tr></tr>");
 			for (var i = 0; i < 7; i++) {
-				if (i == 0) $("#result tr").eq(-1).append('<td><input list="deptList'+ (++count) +'" class="deptName" placeholder="부서 선택" /><datalist id="deptList'+ count + '"><c:forEach items="${department}" var="dept"><option value="${dept.deptName}" data-dept_no ="${dept.deptNo}" ></option></c:forEach></datalist></td>');
+				if (i == 0) $("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="deptName" placeholder="부서 선택" /><datalist id="List'+ count + '"><c:forEach items="${department}" var="dept"><option value="${dept.deptName}" data-dept_no ="${dept.deptNo}" ></option></c:forEach></datalist></td>');
 				else $("#result tr").eq(-1).append('<td></td>');
 			}
 			$("#result tr").eq(-1).append('<td><button class="remove-row">열 삭제</button></td>')
@@ -66,9 +123,9 @@
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 			$(e.target).parent().parent().find("td").eq(2).text("지출");
 			$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
-			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount">');
+			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" id="transAmount">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc">');
-			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date">');
+			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date" id="transDate">');
 		});
 		
 		$("#trans-register").click(() => {
