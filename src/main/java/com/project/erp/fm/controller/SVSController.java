@@ -78,7 +78,7 @@ public class SVSController {
 			transaction.setTransType("수입");
 			transaction.setTransAmount(saleProduct.getDailySales());
 			transaction.setCategory("판매 수익");
-			transaction.setTransDesc(formattedDate + " 매출");
+			transaction.setTransDesc(formattedDate + " 매출액");
 			transaction.setTransDate(saleProduct.getSaleDate());
 			transaction.setDeptNo(salesDept);
 			transactionList.add(transaction);
@@ -92,5 +92,5 @@ public class SVSController {
 	public List<SaleReadyDTO> dailySale(SaleReadyDTO dto) {
 		return saleService.dailySale(dto);
 	}
-		
+	
 }

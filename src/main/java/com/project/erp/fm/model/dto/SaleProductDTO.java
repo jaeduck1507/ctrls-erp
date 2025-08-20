@@ -18,5 +18,6 @@ public class SaleProductDTO {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private int dailySales;
+	private int saleAmount;
 	
 }

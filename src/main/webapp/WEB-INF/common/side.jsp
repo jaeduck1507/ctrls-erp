@@ -34,6 +34,7 @@
           <div class="menu-group">
             <div class="menu-title">재무 관리</div>
             <div class="submenu">
+				<a href="/modalTest">**모달 테스트 /modalTest</a> <!-- 테스트용 -->
 				<a href="/fm/budget">예산 조회 /fm/budget 페이징 처리 완료</a>
 			    <a href="/fm/saleManage">매출 조회 /fm/saleManage 페이징 처리 완료</a>
 			    <a href="/fm/purchase">매입 내역 조회 /fm/purchase 페이징 처리 완료</a>

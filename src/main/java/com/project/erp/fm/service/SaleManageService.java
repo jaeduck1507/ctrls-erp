@@ -48,4 +48,8 @@ public class SaleManageService {
 		return saleManageMapper.totalSales(sp);
 	}
 	
+	public List<SaleProductDTO> salesChart() {
+		return saleManageMapper.salesChart();
+	}
+	
 }

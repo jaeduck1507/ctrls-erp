@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.project.erp.common.model.vo.User;
+import com.project.erp.fm.service.SaleManageService;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.model.vo.AttendanceLog;
@@ -26,6 +27,9 @@ public class PageController {
 	
 	@Autowired
 	private LeaveInfoService leaveInfoService;
+	
+	@Autowired
+	private SaleManageService saleManageService;
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
@@ -125,4 +129,14 @@ public class PageController {
 		model.addAttribute("component","../common/myAttendance.jsp");
 		return "common/layout";
 	}
+	
+	// 모달창 테스트용
+	@GetMapping("/modalTest")
+	public String modalTest(Model model) {
+		model.addAttribute("salesChart", saleManageService.salesChart());
+		System.out.println(saleManageService.salesChart());
+		model.addAttribute("component","../common/modalTest.jsp");
+		return "common/layout";
+	}
+	
 }

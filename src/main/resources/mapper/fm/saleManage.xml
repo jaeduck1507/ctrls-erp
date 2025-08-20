@@ -11,6 +11,7 @@
 		<result property="productPrice" column="product_price"/>
 		<result property="productCategory" column="product_category"/>
 		<result property="dailySales" column="daily_sales"/>
+		<result property="saleAmount" column="sale_amount"/>
 	</resultMap>
 	
 	<select id="showSaleManage" parameterType="SaleProductDTO" resultMap="SaleProductMap">
@@ -79,5 +80,13 @@
 		SELECT sale_date, SUM(total_amount) AS daily_sales
 		FROM sale_manage
 		WHERE sale_date = #{saleDate}
+	</select>
+	
+	<select id="salesChart" resultMap="SaleProductMap">
+		SELECT sale_date, SUM(total_amount) AS sale_amount
+		FROM sale_manage
+		WHERE sale_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+		GROUP BY sale_date
+		ORDER BY sale_date
 	</select>
 </mapper>

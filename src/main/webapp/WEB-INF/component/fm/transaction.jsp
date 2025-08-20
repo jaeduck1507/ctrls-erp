@@ -85,7 +85,7 @@
 					}
 					
 					$("#result").html("");
-					$("#result").append("<tr><th>거래 번호</th><th>부서명</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
+					$("#result").append("<tr><th>거래 번호</th><th>부서</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
 						for (const trans of result.transList) {
 							var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount .toLocaleString()
 								+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"
@@ -124,7 +124,7 @@
 				contentType : false,
 				success: function(result) {
 					$("#result").html("");
-					$("#result").append("<tr><th>거래 번호</th><th>부서명</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
+					$("#result").append("<tr><th>거래 번호</th><th>부서</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
 						for (const trans of result.transList) {
 							var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount.toLocaleString()
 								+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"

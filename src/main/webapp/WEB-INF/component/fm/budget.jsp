@@ -52,7 +52,7 @@
 				contentType : false,
 				success: function(result) {
 					//console.log($("#deptName").val());
-					console.log($("#yearMonth").val());
+					//console.log($("#yearMonth").val());
 					
 					if (!result.budgetList || result.budgetList.length === 0) {
 						alert("조회된 결과가 없습니다");
@@ -60,13 +60,13 @@
 					}
 					
 					$("#result").html("");
-					$("#result").append("<tr><th>예산 코드</th><th>부서명</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th><th>삭제</th></tr>");
+					$("#result").append("<tr><th>예산 코드</th><th>부서</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th><th>삭제</th></tr>");
 					for (const budget of result.budgetList) {
 						var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
 							+ budget.annualBudget.toLocaleString() + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
 						$("#result").append(text);
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>')
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '">삭제</a></td>')
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>');
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '">삭제</a></td>');
 					}
 					
 					$(".pagination").html('');
@@ -97,12 +97,13 @@
 				contentType : false,
 				success: function(result) {
 					$("#result").html("");
-					$("#result").append("<tr><th>예산 코드</th><th>부서명</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th></tr>");
+					$("#result").append("<tr><th>예산 코드</th><th>부서</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th></tr>");
 					for (const budget of result.budgetList) {
 						var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
 							+ budget.annualBudget.toLocaleString() + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
 						$("#result").append(text);
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>')
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>');
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '">삭제</a></td>');
 					}
 					
 					$(".pagination").html('');
