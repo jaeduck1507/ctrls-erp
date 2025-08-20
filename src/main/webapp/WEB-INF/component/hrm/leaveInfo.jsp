@@ -20,7 +20,7 @@
 			<option value="approve">승인</option>
 			<option value="back">반려</option>
 		</select>
-		<input type="text" id="empNo" placeholder="사번을 입력하세요.">
+		<input type="text" id="empNo" placeholder="사번 입력">
 		<button id="btn">조회</button>
 	</div>
 	<div>

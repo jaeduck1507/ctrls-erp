@@ -48,12 +48,14 @@ public class QIPController {
     public String QcPage(Model model) {
         List<EmpInfo> empList = employeeInfoService.showEmployee();
         model.addAttribute("empList", empList);
-        return "component/qam/qc"; // qc.jsp 경로
+        model.addAttribute("component","../component/qam/qc.jsp");
+		return "common/layout"; // qc.jsp 경로
     }
     
     @ResponseBody
     @GetMapping("/searchQc")
     public List<QcResultDTO> searchQc(QcResultDTO dto) {
+    	
     	return qcService.searchQc(dto);
     }
     

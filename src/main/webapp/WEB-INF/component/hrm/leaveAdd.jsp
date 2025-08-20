@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<section>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원정보조회</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
 	<h5>[근태 관리] > [휴가 신청]</h5>
-	
-	<div id = "test">
-		<h3>휴가 신청</h3>
-		<div class="filter-bar">
+	<h3>휴가 신청</h3>
+	<div id = "test" class="filter-bar">
 	        <button id = "btn2">열 추가</button>
 	        <!-- <button id = "btn3">removeRowTest</button> -->
 	        <table border="1" id = "result" class="data-table">
@@ -22,10 +27,7 @@
 			</table>
 
 			<button id="btn">휴가 등록</button>
-			
-		</div>
 	 </div>
- </section>	
 	<script>
         
 		function addRow() { // 열 추가 함수
@@ -158,3 +160,5 @@
 			           });
 
 	</script>
+	</body>
+	</html>

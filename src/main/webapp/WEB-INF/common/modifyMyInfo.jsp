@@ -10,32 +10,46 @@
 </head>
 <body>
 
-	<h1>개인 정보 수정</h1>
+	<h5>[마이페이지] > [개인정보수정]</h5>
+		<h3>개인정보수정</h3>
 
 <form action="modifyMyInfo" method="post" class="filter-bar">
 	<div class="box">
-		<div class="a">
-		    <label>사번</label><input type="text" name="empNo" value="${user.empNo}" readonly="readonly"><br>
-		    <label>성명</label><input type="text" id="empName" value="${user.empName}"><br>
-			<p id="resultName">한글 2자 이상</p>
-		    <label>주민등록번호</label><input type="text" name="empIn" value="${user.empIn}" readonly="readonly"><br>
-		</div>
-		<div class="b">
-		    <label>직급</label><input type="text" name="jobTitle" value="${user.jobTitle}" readonly="readonly"><br>
-		    <label>부서</label><input type="text" name="deptName" value="${user.deptName}" readonly="readonly"><br>
-		</div>
-		<div class="c">
-		    <label>입사일</label><input type="date" name="hireDate" value="${user.hireDate}" readonly="readonly"><br>
-		    <label>퇴사일</label><input type="date" name="quitDate" value="${user.quitDate}" readonly="readonly"><br>
-		</div>
-		<div class="d">
-		    <label>주소</label><input type="text" name="addr" value="${user.addr}"><br>
-			<p id="resultName">한글 2자 이상</p>
-		    <label>연락처</label><input type="text" id="phone" value="${user.phone}"><br>
-			<p id="resultTel">010-0000-0000 형식이어야 합니다.</p>
-		    <label>이메일</label><input type="text" id="email" value="${user.email}"><br>
-			<p id="resultEmail">@가 포함되어야 합니다.</p>
-		</div>
+		<table>
+			<tr>
+		    <th>사번</th><td><input type="text" name="empNo" value="${user.empNo}" readonly="readonly"></td>
+			</tr>
+			<tr>
+		    <th>성명</th><td><input type="text" name="empName" id="empName" value="${user.empName}"></td>
+			<td><p id="resultName">한글 두 글자 이상</p></td>
+			</tr>
+			<tr>
+		    <th>주민등록번호</th><td><input type="text" name="empIn" value="${user.empIn}" readonly="readonly"></td>
+			</tr>
+			<tr>
+		    <th>직급</th><td><input type="text" name="jobTitle" value="${user.jobTitle}" readonly="readonly"></td>
+			</tr>
+			<tr>
+		    <th>부서</th><td><input type="text" name="deptName" value="${user.deptName}" readonly="readonly"></td>
+			</tr>
+			<tr>
+		    <th>입사일</th><td><input type="date" name="hireDate" value="${user.hireDate}" readonly="readonly"></td>
+			</tr>
+			<tr>
+		    <th>퇴사일</th><td><input type="date" name="quitDate" value="${user.quitDate}" readonly="readonly"></td>
+			</tr>
+			<tr>
+		    <th>주소</th><td><input type="text" name="addr" value="${user.addr}"></td>
+			</tr>
+			<tr>
+		    <th>연락처</th><td><input type="text" name="phone" id="phone" value="${user.phone}"></td>
+			<td><p id="resultTel">010-0000-0000 형식</p></td>
+			</tr>
+			<tr>
+		    <th>이메일</th><td><input type="text" name="email" id="email" value="${user.email}"></td>
+			<td><p id="resultEmail">이메일 형식(@포함)</p></td>
+			</tr>
+			</table>
    </div>
     <button type="submit">수정</button>
 </form>
@@ -58,13 +72,13 @@
 	const tel = document.querySelector("#phone");
 	const resultTel = document.querySelector("#resultTel");
 	tel.addEventListener("input", (e) => {
-	  const telExp = /^010-\d{4}-\d{4}$/;
+	  const telExp = /^\d{3}-\d{3,4}-\d{4}$/;
 	  const tEt = telExp.test(e.target.value);
 	  if (tEt) {
 	    resultTel.innerHTML = "OK!";
 	    resultTel.style.color = "blue";
 	  } else {
-		resultName.innerHTML = "010-0000-0000 형식이어야 합니다.";
+		resultTel.innerHTML = "010-0000-0000 형식";
 	    resultTel.style.color = "red";
 	  }
 	});
@@ -79,7 +93,7 @@
 	    resultEmail.innerHTML = "OK!";
 	    resultEmail.style.color = "blue";
 	  } else {
-		resultName.innerHTML = "@가 포함되어야 합니다.";
+		resultEmail.innerHTML = "이메일 형식(@포함)";
 	    resultEmail.style.color = "red";
 	  }
 	});

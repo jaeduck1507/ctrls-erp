@@ -29,9 +29,9 @@ uri="http://www.springframework.org/security/tags" %>
     <jsp:include page="side.jsp" />
     <div class="main">
       <jsp:include page="header.jsp" />
-      <div class="section">
+      <section>
 		<jsp:include page="${component}" />
-      </div>
+      </section>
     </div>
     <script src="../resources/js/side.js"></script>
   </body>

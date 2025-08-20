@@ -11,11 +11,9 @@
 <body>
 	<h5>[근태 관리] > [휴가 상태 처리]</h5>
 	<h3>휴가 상태 처리</h3>
-	
-	<div class="data-table  ">
+	<div class="data-table">
 		<table border="1" id="result" >
 				<tr>
-					
 				<th>신청번호</th>
 				<th>신청날짜</th>
 				<th>유형</th>

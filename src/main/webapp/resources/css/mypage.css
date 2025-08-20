@@ -44,7 +44,7 @@ h4 {
 	
 }
 .box1{
-	background-color: #E4E4E7;
+	background-color: #E4E4E7; /*E1EEBC*/
 	padding: 30px 30px 10px 30px;
 	width: calc(100vp - var(--side-width));
 	border-radius: 10px;
@@ -60,4 +60,17 @@ h4 {
 	width: calc(100% - var(--side-width));
 	border-radius: 10px;
 	margin-bottom: 10px;
+}
+
+.logout .btn-logout {
+  color: white;
+  background-color: #90c67c;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+  box-shadow: #33333362 0px 1px 1px;
+}
+.logout .btn-logout:hover{
+  background-color: #328e6e;
 }

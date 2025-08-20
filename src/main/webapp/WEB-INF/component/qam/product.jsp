@@ -11,8 +11,9 @@
 </head>
 
 <body>
-<h2>상품 조회</h2>
-
+<h5>[품질 관리] > [상품 조회]</h5>
+	<h3>상품 조회</h3>
+<div class="filter-bar">
 <!-- 검색창 -->
 <form id="searchForm">
     제품명: <input type="text" id="productName" />
@@ -26,10 +27,11 @@
     <button type="submit">검색</button>
     <button type="button" id="resetBtn">전체보기</button>
 </form>
+</div>
 <br/>
 
 <!-- 제품 목록 테이블 -->
-<table border="1" id="result">
+<table border="1" id="result" class="data-table">
     <tr>
         <th>제품 번호</th><th>생산일</th><th>제품 코드</th>
         <th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th>
@@ -46,8 +48,8 @@
 	        <td>${p.productName}</td>
 	        <td>${p.productPrice}</td>
 	        <td>${p.productCost}</td>
-	        <td><a href='/productDetailFormUpdate?productNo=${p.productNo}'>수정</a></td>
-	        <td><a href='/deleteProduct?productNo=${p.productNo}'>삭제</a></td>
+	        <td><a href='/productDetailFormUpdate?productNo=${p.productNo}' class="btnO">수정</a></td>
+	        <td><a href='/deleteProduct?productNo=${p.productNo}' class="btnX">삭제</a></td>
 	    </tr>
 	</c:forEach>
 </table>
@@ -80,8 +82,8 @@ function displayProducts(data) {
         row += "<td>" + p.productName + "</td>";
         row += "<td>" + p.productPrice + "</td>";
         row += "<td>" + p.productCost + "</td>";
-        row += "<td><a href='/productDetailFormUpdate?productNo=" + p.productNo + "'>수정</a></td>";
-        row += "<td><a href='/deleteProduct?productNo=" + p.productNo + "'>삭제</a></td>";
+        row += "<td><a href='/productDetailFormUpdate?productNo=" + p.productNo + "' class="btnO">수정</a></td>";
+        row += "<td><a href='/deleteProduct?productNo=" + p.productNo + "' class="btnX">삭제</a></td>";
         row += "</tr>";
         $("#result").append(row);
     }

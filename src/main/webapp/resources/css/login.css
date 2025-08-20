@@ -36,10 +36,12 @@ body {
   flex-direction: column;
 }
 .filter-bar input[type="text"],
-.filter-bar input[type="password"] {
+.filter-bar input[type="password"],
+.filter-bar input[type="number"] {
   padding: 6px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #90c67c;
   border-radius: 4px;
+  width: 100%;
 }
 /* submit, a, button 스타일 */
 .filter-bar button[type="submit"] {
@@ -48,29 +50,37 @@ body {
   color: white;
   background-color: #90c67c;
   padding: 4px 12px;
-  border-radius: 4px;
+  border-radius: 10px;
   text-decoration: none;
   transition: background 0.2s;
-  width: 180px;
+  width: 100%;
 }
-.filter-bar button[type="button"] {
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #516b38;
-  border: #67ae6e solid 1px;
-  padding: 4px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  width: 180px;
-}
+
 /* a 태그 상세 크기 조정*/
 .filter-bar a {
   padding: 5px 12px;
   font-size: 14px;
 }
-/* 각종 버튼들 커서 올렸을 경우 색상 변경 */
+.filter-bar .btn{
+	display: flex;
+		flex-direction: row;
+		gap: 10px;
+		justify-content: center;
+		width: 100%; 
+}
+.filter-bar .btn button[type="button"] {
+	flex: 1;
+	text-decoration: none;
+	  background-color: #ffffff;
+	  color: #516b38;
+	  border: #67ae6e solid 1px;
+	  padding: 4px 9px;
+	  border-radius: 10px;
+	  cursor: pointer;
+	  font-weight: bold;
+}
 
+/* 각종 버튼들 커서 올렸을 경우 색상 변경 */
 .filter-bar a:hover,
 .filter-bar button[type="button"]:hover {
   background-color: #67ae6e;

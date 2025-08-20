@@ -11,16 +11,17 @@
 </head>
 
 <body>
-<h2>브랜드 조회</h2>
-
+<h5>[품질 관리] > [브랜드 조회]</h5>
+	<h3>브랜드 조회</h3>
+<div class="filter-bar">
 <a href="/brandForm">
-    <button>브랜드 신규 등록</button>
+    브랜드 신규 등록
 </a>
-
+</div>
 <form id="searchBrand">
 </form>
 
-<table border="1" id="result">
+<table border="1" id="result" class="data-table">
 	<tr>
 		<th>브랜드코드</th>
 		<th>브랜드명</th>
@@ -38,8 +39,8 @@
 		    <td>${b.brandPhone}</td>
 		    <td>${b.brandAccount}</td>
 		    <td>${b.brandBank}</td>
-		    <td><a href='/brandFormUpdate?brandCode=${b.brandCode}'>수정</a></td>
-		    <td><a href='/deleteBrand?brandCode=${b.brandCode}'>삭제</a></td>
+		    <td><a href='/brandFormUpdate?brandCode=${b.brandCode}' class="btnO">수정</a></td>
+		    <td><a href='/deleteBrand?brandCode=${b.brandCode}' class="btnX">삭제</a></td>
 		</tr>
 	</c:forEach>
 </table>
