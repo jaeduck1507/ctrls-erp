@@ -39,7 +39,7 @@
 		function inint_Paing() {
 		salayPagingDTO = { 
 				offset: 0,
-		        limit: 5,
+		        limit: 10,
 		        page: 1,
 		        pageSize: 10,
 		        endPage: this.pageSize,
@@ -69,44 +69,51 @@
 		
 		$("#btn").click(() => {
 			const yearMonth = $("#yearMonth").val();
-			$.ajax({
-				type: "post",
-				url: "/salaryPayment",
-				data: {yearMonth : yearMonth},
-				
-				success: function(result) {
-					inint_Paing();
-					salayPagingDTO.result = result;
-					salayPagingDTO.setTotal(result.length);
+			if(yearMonth) {
+				$.ajax({
+					type: "post",
+					url: "/salaryPayment",
+					data: {yearMonth : yearMonth},
 					
-					$("#result").html("");
-					$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
-					for (var i = salayPagingDTO.offset;   i < salayPagingDTO.offset + salayPagingDTO.limit; i++) {
-						var deduction =0;
-						if(salayPagingDTO.result[i].deduction == 0) {
-							deduction = (Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1;
-							salayPagingDTO.result[i].deduction = deduction;
-						} else {
-							deduction = salayPagingDTO.result[i].deduction;
+					success: function(result) {
+						inint_Paing();
+						salayPagingDTO.result = result;
+						salayPagingDTO.setTotal(result.length);
+						
+						
+						$("#result").html("");
+						$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
+						for (var i = salayPagingDTO.offset;   i < ((salayPagingDTO.offset + salayPagingDTO.limit) > salayPagingDTO.result.length ? salayPagingDTO.result.length: (salayPagingDTO.offset + salayPagingDTO.limit) ); i++) {
+							var deduction =0;
+							if(salayPagingDTO.result[i].deduction == 0) {
+								deduction = (Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1;
+								salayPagingDTO.result[i].deduction = deduction;
+							} else {
+								deduction = salayPagingDTO.result[i].deduction;
+							}
+							
+							var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
+								+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
+								+ '<input type="number" min="0" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
+							$("#result").append(text);
 						}
 						
-						var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
-							+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
-							+ '<input type="number" min="0" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
-						$("#result").append(text);
+						$(".pagination").html('');
+	                	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.startPage - 1) + '">Previous</a></li>');
+	                	for(var i =salayPagingDTO.startPage; i<=salayPagingDTO.endPage; i++) {
+	                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (salayPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+	                	}
+	                	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.endPage + 1) + '">Next</a></li>');
+					},
+					error: function(xhr, status, error) {
+								
 					}
-					
-					$(".pagination").html('');
-                	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.startPage - 1) + '">Previous</a></li>');
-                	for(var i =salayPagingDTO.startPage; i<=salayPagingDTO.endPage; i++) {
-                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (salayPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-                	}
-                	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.endPage + 1) + '">Next</a></li>');
-				},
-				error: function(xhr, status, error) {
-							
-				}
-			});
+				});
+				
+			}else {
+				alert("월을 입력해주세요");
+				location.reload();
+			}
 		});	
 		$(document).on('input', '.deduction', (e) => {
 				const indexNum = $(e.target).parent().parent().attr("id").split("_")[1];
@@ -127,21 +134,23 @@
 		
 		$(document).on('click', 'a.page-link', function(e) {
             e.preventDefault();        
-            console.log(salayPagingDTO.result[1].bonus);
+           
             // a 태그 기본 동작(페이지 이동) 차단
+            
             const yearMonth = $("#yearMonth").val();
         	const page = $(this).attr('href');
         	salayPagingDTO.offset = (page - 1) * salayPagingDTO.limit;
         	salayPagingDTO.page = page;
+        	salayPagingDTO.setTotal(salayPagingDTO.result.length);
                 
         	// 링크 URL 읽기
 			
         	
         		$("#result").html("");
 				$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
-				for (var i = salayPagingDTO.offset;   i < salayPagingDTO.offset + salayPagingDTO.limit; i++) {
+				for (var i = salayPagingDTO.offset;   i < ((salayPagingDTO.offset + salayPagingDTO.limit) > salayPagingDTO.result.length ? salayPagingDTO.result.length: (salayPagingDTO.offset + salayPagingDTO.limit) ); i++) {
 					var deduction =0;
-					if(salayPagingDTO.result[i].deduction == 0) {
+					if(salayPagingDTO.result[i].deduction ==0) {
 						deduction = (Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1;
 						salayPagingDTO.result[i].deduction = deduction;
 					} else {
@@ -213,6 +222,7 @@
 	            success : function(result) {
 					if(result) {
 						alert("정상적으로 처리되었습니다!");
+						location.reload();
 					}
 	            },
 	            

@@ -11,4 +11,5 @@ import com.project.erp.hrm.model.dto.Quitter;
 public interface QuitterMapper {
 
 	List<Quitter> quitShow(Quitter q);
+	void empQuit(Quitter q);
 }

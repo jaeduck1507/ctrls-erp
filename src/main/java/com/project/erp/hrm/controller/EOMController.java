@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,5 +24,12 @@ public class EOMController {
 //		System.out.println(q.getEmpName());
 //		System.out.println(quitterService.quitShow(q).get(0).getEmpName());
 		return quitterService.quitShow(q);
+	}
+	
+	@PostMapping("/empQuit")
+	public String empQuit(Quitter q, Model model) {
+		System.out.println(q);
+		quitterService.empQuit(q);
+		return "redirect:/hrm/empInfoDetails?empNo=" + q.getEmpNo();
 	}
 }
