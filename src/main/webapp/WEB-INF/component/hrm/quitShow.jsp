@@ -9,13 +9,14 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>퇴사자정보조회</h1>
-	<div id="search">
-		이름 : <input type="text" id="quitName">
+	<h5>[인적자원관리] > [퇴사자정보조회]</h5>
+					<h3>퇴사자 정보 조회</h3>
+	<div id="search" class="filter-bar">
+		<input type="text" id="quitName" placeholder="이름 입력">
 		<button id="btn">검색</button>
 	</div>
 	<div>
-		<table border="1" id="result"></table>
+		<table border="1" id="result" class="data-table"></table>
 	</div>
 	
 	<script>

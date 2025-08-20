@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<section>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원정보조회</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
 	<h5>[인적자원관리] > [사원정보조회]</h5>
 	<h3>사원정보조회</h3>
-	<div class="container">
-	
 	<div id = "search" class="filter-bar">
 	이름 : <input type="text" id="empName">
 		<select id = "deptName">
@@ -20,7 +25,6 @@
 		<button id = "btn">검색</button>
 	</div>
 	<div>
-	
 	<table border="1" id = "result" class="data-table">
 	</table>
 	</div>
@@ -29,8 +33,6 @@
 		<ul class="pagination">
 		</ul>
 	</nav>
-	</div>
-	<section>
 		
 	<script>
 		$(document).ready(() => { // 페이지 로드 되자마자 실행되는 함수
@@ -93,7 +95,7 @@
 					$("#result").html("");
                 	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th><th>수정</th></tr>");
                 	for(const emp of result.empInfoList) {
-					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '">수정</a></td></tr>'
+					var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '" class="btnO">수정</a></td></tr>'
 					$("#result").append(text);
                 	
 					// 페이징 생성
@@ -155,3 +157,5 @@
             });
           });
     </script>
+	</body>
+	</html>

@@ -8,12 +8,14 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-
+	<h5>[품질 관리] > [품질검사 결과 목록]</h5>
+	<h3>품질검사 결과 목록</h3>
+	<div class="filter-bar">
 <h2>품질검사 결과 목록</h2>
 <h3>(QC 1차 완료된 제품들만 조회, 미완료 제품들은 신규 검사 등록에서 select후 QC)</h3>
 
 <!-- QC 등록 버튼 -->
-<a href="/qam/qcForm"><button>신규 검사 등록</button></a>
+<a href="/qam/qcForm">신규 검사 등록</a>
 <br/><br/>
 
 <form id = "searchForm">
@@ -41,9 +43,9 @@
 		<button type="submit">조회</button> <!-- button type 지정 안할 시 default => submit -->
 		<button type="button" id="resetBtn">전체보기</button>
 </form>
-
+</div>
 <!-- 테이블 -->
-<table border="1" id="qcResult">
+<table border="1" id="qcResult" class="data-table">
     <tr>
         <th>제품번호</th>
 		<th>qc코드</th>
@@ -90,7 +92,7 @@ function displayQc(data) {
 		row += "<td>" + q.qcDesc + "</td>";
 		row += "<td>" + q.qcDate + "</td>";
 		row += "<td>" + q.empNo + "</td>";
-		row += "<td><a href='/qam/qcFormUpdate?productNo=" + q.productNo + "'>수정</a></td>";
+		row += "<td><a href='/qam/qcFormUpdate?productNo=" + q.productNo + "' class='btnO'>수정</a></td>";
 		row += "</tr>"
 		$("#qcResult").append(row);
 	}

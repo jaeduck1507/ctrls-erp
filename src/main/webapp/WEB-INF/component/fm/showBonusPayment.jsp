@@ -11,8 +11,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
+	<h5>[재무 관리] > [수당 조회]</h5>
 	<div class="container">
-		<h5>[재무 관리] > [수당 조회]</h5>
+		
 		<h3>수당 조회</h3>
 		<div id = "search" class="filter-bar">
 		이름 : <input type="text" id="empName">

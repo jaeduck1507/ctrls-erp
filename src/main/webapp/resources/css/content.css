@@ -6,18 +6,20 @@
   --table-th-color:#cecece;
   --table-td-color:#e4e4e7;
 }
-* {
-  font-family: "Pretendard", sans-serif;
-}
+
 /* 본문 스타일 */
 /* 메인 섹션 */
-.main .section {
-  margin: 10px;
+
+section {
+  margin: 15px;
   overflow-y: auto; /* 스크롤 가능 */
   padding: 20px;
   padding-top: calc(var(--header-height) + 15px);
   height: 100%;
   font-family: "Pretendard", sans-serif; 
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 /* 메뉴 제목 */
@@ -33,31 +35,56 @@
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 16px;
   flex-wrap: wrap;
   font-size: 14px;
 }
+/*empEval용*/
+#filter-bar{
+	  display: flex;
+	  align-items: flex-start;
+	  gap: 10px;
+	  margin-bottom: 16px;
+	  flex-wrap: wrap;
+	  font-size: 14px;
+	  flex-direction: column;
+	}
+	#filter-bar #test button,
+	#filter-bar #test table
+.filter-bar #test button,
+.filter-bar #test table
+{
+	margin-bottom: 10px;
+}
 
 .filter-bar input[type="text"],
+#filter-bar input[type="text"],
 .filter-bar input[type="password"],
 .filter-bar input[type="month"],
 .filter-bar input[type="date"],
 .filter-bar input[type="time"],
 .filter-bar input[type="number"],
 .filter-bar input[type="checkbox"],
+#filter-bar fieldset,
+#filter-bar select,
 .filter-bar fieldset,
-.filter-bar select {
+.filter-bar select
+ {
   padding: 6px 8px;
   border: 1px solid var(--input-color);
   border-radius: 4px;
 }
-
+#filter-bar input[type="radio"],
+#filter-bar input[type="checkbox"], 
 .filter-bar input[type="radio"],
 .filter-bar input[type="checkbox"] {
   accent-color: var(--color); /* 체크박스 색상 */
 }
 /* submit, a, button 스타일 */
+#filter-bar input[type="submit"],
+#filter-bar a,
+#filter-bar button,
 .filter-bar input[type="submit"],
 .filter-bar a,
 .filter-bar button {
@@ -119,9 +146,6 @@ table.data-table {
   border-radius: 10px;
   text-align: center;
   height: fit-content;
-  max-height: 1px;
-
-  margin: 5px;
 }
 
 /* 테이블 컬럼명 */
@@ -137,26 +161,52 @@ table.data-table {
 .data-table td input[type="text"],
 .data-table td input[type="date"],
 .data-table td input[type="number"],
-.data-table td select
+.data-table td select,
+.data-table td input[list="List1"]
 {
 	border-style: none;
 	background-color: var(--table-td-color);
 }
 
 /* 테이블 내 버튼*/
-.innerbtn {
+/*.innerbtn{
+  text-decoration: none;
   background-color: var(--table-td-color);
   border: none;
-  color: #333;
+  color:var(--color);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}*/
+.btnO{
+	text-decoration: none;
+  background-color: var(--table-td-color);
+  border: none;
+  color:var(--color);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btnX{
+	text-decoration: none;
+  background-color: var(--table-td-color);
+  border: none;
+  color: indianred;
   padding: 6px 10px;
   cursor: pointer;
   font-weight: bold;
 }
 
 /* 테이블 내 버튼 커서 올렸을 경우 */
-.innerbtn:hover {
-  color: var(--color);
+.innerbtn:hover,
+.btnO:hover {
+  color: green;
 }
+.btnX:hover {
+  color:orangered;
+}
+
+
 
 /* 페이징 */
 .pagination {
@@ -192,3 +242,4 @@ table.data-table {
   pointer-events: none;
   opacity: 0.4;
 }
+

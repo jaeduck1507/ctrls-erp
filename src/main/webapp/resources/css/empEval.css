@@ -1,0 +1,6 @@
+#filter-bar div {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+

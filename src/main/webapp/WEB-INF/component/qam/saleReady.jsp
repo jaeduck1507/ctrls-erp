@@ -11,11 +11,14 @@
 </head>
 
 <body>
-<h2>판매대기 제품 리스트</h2>
+	<h5>[품질 관리] > [판매대기 제품 리스트]</h5>
+	<h3>판매대기 제품 리스트</h3>
+	<div class="filter-bar">
+
 
 <button id = "sellRegister">판매 등록</button> <!-- 누를 시 입력된 날짜대로 판매날짜가 등록되는 버튼 -->
-
-<table border="1" id="saleReady"> <!-- saleReady 테이블 -->
+</div>
+<table border="1" id="saleReady" class="data-table"> <!-- saleReady 테이블 -->
     <tr>
 		<th>판매코드</th>
 		<th>제품번호</th>

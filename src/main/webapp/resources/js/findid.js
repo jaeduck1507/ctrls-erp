@@ -13,6 +13,7 @@ $("#btn").click(() => {
         $("#result").append("아이디가 존재하지 않습니다.");
       } else {
         $("#result").append("아이디는 " + result + "입니다.");
+		
       }
     },
     error: function (xhr, status, error) {},

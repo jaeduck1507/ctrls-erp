@@ -6,6 +6,9 @@
 * {
   font-family: "Pretendard", sans-serif;
 }
+.side{
+	margin-left: 5px;
+}
 
 /* 메뉴 */
 .side .menu {

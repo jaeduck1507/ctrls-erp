@@ -2,31 +2,47 @@
   --side-width: 250px; /* 사이드 메뉴 가로 길이*/
   --header-height: 70px; /* 헤더 높이*/
   --color: #67ae6e;
-}
+}  
 form{
 	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-}
+	  flex-direction: column;   /* 세로 방향 정렬 */
+
+  }
+   
 
 form .box {
 	background-color: #F5F5F5;
 	padding: 30px;
 	border-radius: 10px;
-	width: calc(100% - var(--side-width));
-	flex-direction: column;
+	width: calc(95vw - var(--side-width));
 	font-size: large;
-} 
-
-.box div {
-	display: flex;
-	flex-direction: row;
 	justify-content: flex-start;
-	padding: 10px;
-	gap: 10px;
-	margin: 20px;
+} 
+form button{
+	justify-content: flex-start;
+}
+.box table{
+	border-radius: 10px;
+	
+}
+.box td{
+	color: #938E8E;
+	border-radius: 10px;
+	width: 300px;
+	height: 60px;
+	
+}
+.box th {
+	color: #938E8E;
+	border-radius: 10px;
+	width: 250px;
+}
+.box input[type="text"],
+.box input[type="date"] {
+	border-style: none;
+}
+.box input[readonly="readonly"]{
+	border-style: none;
+	background-color:#F5F5F5;
 }
 
-.box label {
-	color: #938E8E;
-}

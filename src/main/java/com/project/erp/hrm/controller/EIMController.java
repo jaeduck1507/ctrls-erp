@@ -68,7 +68,9 @@ public class EIMController {
 	
 	@PostMapping("/modifyMyInfo")
 	public String modifyMyInfo(EmpInfo ei) {
+		System.out.println(ei);
 		employeeInfoservice.empModify(ei);
+		
 		return "redirect:/mypage";
 	}
 }

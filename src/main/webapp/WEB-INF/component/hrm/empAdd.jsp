@@ -56,10 +56,10 @@ table {
 </head>
 <body>
     <h1>테이블 열 추가/삭제 (사원 등록) 관리자</h1>
-    <div id = "test" class="data-table">
+    <div id = "test" class="filter-bar">
         <button id = "btn2">열 추가</button>
         <!-- <button id = "btn3">removeRowTest</button> -->
-        <table border="1" id = "result" >
+        <table border="1" id = "result" class="data-table">
             <tr>
                 <th>이름</th>
                 <th>주민등록번호</th>

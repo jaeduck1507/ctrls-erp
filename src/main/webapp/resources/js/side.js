@@ -21,3 +21,4 @@ document.querySelector(".side nav").addEventListener("click", (e) => {
     }
   }
 });
+

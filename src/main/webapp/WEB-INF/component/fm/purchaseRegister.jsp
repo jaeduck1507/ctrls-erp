@@ -22,7 +22,7 @@
 	</div>
 	
 	<div class="filter-bar">
-		<div id = "test" class="data-table">
+		<div id = "test">
 			
 		</div>
 	</div>
@@ -55,11 +55,11 @@
             success : function(result) {
             	$("#test").html('');
         		$("#test").append(
-        		'<button id = "add-row" class="filter-bar">열 추가</button>' +
-        		'<table border="1" id = "result" class="filter-bar">' +
+        		'<button id = "add-row">열 추가</button>' +
+        		'<table border="1" id = "result" class="data-table">' +
         		'<tr><th>상품 이름</th><th>상품 코드</th><th>상품 색깔</th><th>상품 가격</th><th>상품 단가</th><th>상품 카테고리</th><th>수량</th><th>부가세</th><th>총액</th><th>매입일</th><th>삭제</th></tr>' +
         		'</table>' +
-        		'<button id = "purchase-register" class="filter-bar">매입 등록</button>'
+        		'<button id = "purchase-register">매입 등록</button>'
         		);
         		totalOptionText ='';
 				for(r of result) {

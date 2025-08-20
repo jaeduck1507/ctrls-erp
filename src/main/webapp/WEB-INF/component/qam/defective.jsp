@@ -11,9 +11,10 @@
 </head>
 
 <body>
-<h2>불량품 조회</h2>
-<h3 id="defectivePriceSum"></h3>
-
+	<h5>[품질 관리] > [불량품 조회]</h5>
+		<h3>불량품 조회</h3>
+<h4 id="defectivePriceSum"></h4>
+<div class="filter-bar">
 <form id="defectiveSearchForm">
 	<!-- 불량 유형 필터 체크박스 -->
 	불량 유형:
@@ -37,8 +38,8 @@
 	<button type="button" id="searchBtn">검색</button>
 	<button type="button" id="resetBtn">전체보기</button>
 </form>
-
-<table border="1" id="defectiveResult">
+</div>
+<table border="1" id="defectiveResult" class="data-table">
     <thead>
         <tr>
             <th>불량코드</th>

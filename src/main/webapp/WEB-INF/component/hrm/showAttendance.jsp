@@ -9,7 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<div>
+	<h5>[근태 관리] > [출근/퇴근 조회]</h5>
+	<h3>출근/퇴근 조회</h3>
+	<div class="filter-bar">
 	<select id = "empNo">
 	<!-- 일단 로그인 정보가 없으므로 select로 대체 -->
 		<option value="-1">사원 선택</option>

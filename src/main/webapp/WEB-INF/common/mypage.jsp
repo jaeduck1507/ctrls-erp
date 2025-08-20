@@ -56,8 +56,8 @@
 	<button onclick="location.href='/myAttendance'">출근 현황 보기(완)</button>
 	</div>
 	
-	<div class="btn-logout">
-	<a href="/logout">로그아웃</a>
+	<div class="logout">
+	<a href="/logout" class="btn-logout">로그아웃</a>
 	</div>
 	</div>
 	<script>

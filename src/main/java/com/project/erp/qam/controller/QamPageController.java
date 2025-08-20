@@ -45,7 +45,8 @@ public class QamPageController {
 	public String brand(Model model, Paging paging) {
 		model.addAttribute("paging", paging);
 		model.addAttribute("brandList", brandService.findBrand(paging));
-		return "component/qam/brand";
+		model.addAttribute("component","../component/qam/brand.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/product")
@@ -56,36 +57,40 @@ public class QamPageController {
 		@RequestParam(required = false) String productCategory) {
 		model.addAttribute("productList", productService.searchProductDetail(paging, productName, productCategory));
 		model.addAttribute("paging", paging);
-		
-		return "component/qam/product";
+		model.addAttribute("component","../component/qam/product.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/productName")
 	public String productName(Model model, Paging paging) {
 		model.addAttribute("productNameList", productNameService.showProductName(paging));
 		model.addAttribute(paging);
-		return "component/qam/productName";
+		model.addAttribute("component","../component/qam/productName.jsp");
+		return "common/layout";
 	}
 
 	@GetMapping("/saleReady")
 	public String saleReady(Model model, Paging paging) {
 		model.addAttribute("saleList", saleService.showSaleNull(paging));
 		model.addAttribute("paging", paging);
-		return "component/qam/saleReady";
+		model.addAttribute("component","../component/qam/saleReady.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/saleDone")
 	public String saleDone(Model model, Paging paging) {
 		model.addAttribute("saleList", saleService.showSaleDone(paging));
 		model.addAttribute("paging", paging);
-		return "component/qam/saleDone";
+		model.addAttribute("component","../component/qam/saleDone.jsp");
+		return "common/layout";
 	}
 	
 	@GetMapping("/defective")
 	public String defective(Model model, Paging paging) {
 		model.addAttribute("defectiveList", defectiveService.showDefective(paging));
 		model.addAttribute("paging", paging);
-		return "component/qam/defective";
+		model.addAttribute("component","../component/qam/defective.jsp");
+		return "common/layout";
 	}
 	
 }

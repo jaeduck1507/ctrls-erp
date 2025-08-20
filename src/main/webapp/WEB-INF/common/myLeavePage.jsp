@@ -7,49 +7,57 @@
 <meta charset="UTF-8">
 <title>휴가 조회 및 신청</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="../resources/css/myLeavePage.css"/>
 </head>
 <body>
-	<h1>휴가 조회 및 신청</h1>
-	
-	<div>
-		<b>사원명 : </b>${user.empName}  
-		<b>부서 : </b>${user.deptName}  
-		<b>직급 : </b>${user.jobTitle}  </br>
-		<b>올해 받은 휴가일수 : </b>12일   
-		<a id="result1"></a></br></br>
-	  <b>휴가 조회</b>
-	  휴가 처리 상태 <select name="status" id="status">
-	   			<option value="all">전체</option>
-	   			<option value="wait">대기</option>
-	   			<option value="approve">승인</option>
-	   			<option value="back">반려</option>
-	   		</select>
-	 	<input type="hidden" id="empNoSearch" value="${user.empNo}">
-		<button id="btn1">조회</button></br>
- 		<table border="1" id="result2"></table>
+	<h5>[마이페이지] > [휴가 조회 및 신청]</h5>
+	<h3>휴가 조회 및 신청</h3>
+	<div class="box">
+		<!-- &nbsp; : span에서 띄어쓰기 적용-->
+		<span>올해 받은 휴가일수&nbsp;&nbsp;<b>12일</b>&nbsp;&nbsp;</span>
+		<span id="result1"></span>
 	</div>
 	
-	<div>
-	   <h2>휴가 신청</h2>
+		<div class="box2">
+		<h4>휴가 신청</h4>
+
+	   <div class="filter-bar">
 	      <input type="hidden" class="empNo" value="${user.empNo}">
-		  신청 날짜 <input type="date" id="currentDate" disabled>
+		  휴가 신청일 <input type="date" id="currentDate" disabled>
 		  휴가 유형 <select id="select">
 				       <option disabled>유형선택</option>
 					   <option value="연차" selected>연차</option>
 					   <option value="병가">병가</option>
 					   <option value="경조사">경조사</option>
 					   <option value="기타">기타</option>
-			      </select>
+			      </select>	  
 		  휴가 시작일 <input type="date" id="startDate" class="leaveDate">
 		  휴가 종료일 <input type="date" id="endDate" class="leaveDate">
-		  사유 <input type="text" id="reason" value="휴가">
+		  사유 <input type="text" id="reason" value="휴가" placeholder="사유 입력"/>
 		  <button id="btn2">휴가 등록</button>
-	 </div>
-	 
+		  </div>
+
+		  </div>
+		  <div class="box2">
+		  		<h4>휴가 처리 현황</h4>
+		     <div class="filter-bar">
+		  	
+		  	  휴가 처리 상태 <select name="status" id="status">
+		  	   			<option value="all">전체</option>
+		  	   			<option value="wait">대기</option>
+		  	   			<option value="approve">승인</option>
+		  	   			<option value="back">반려</option>
+		  	   		</select>
+		  	 	<input type="hidden" id="empNoSearch" value="${user.empNo}">
+		  		<button id="btn1">조회</button></br>
+		  		</div>
+		  		<div>
+		   		<table border="1" id="result2" class="data-table"></table>
+		  		</div>
+		  		</div>
 	 
 
 	<script>
-		
 		// 조회 버튼 클릭 시 정보 출력
    		$(document).ready(()=>{
    			const formData = new FormData();
@@ -67,11 +75,11 @@
 					
 					  for(const leaveTotalDays of result) {
 						if(leaveTotalDays && leaveTotalDays.empNo !== null) {
-						  var text = "    <b>휴가 누적 사용일수</b> : " + leaveTotalDays.totalDays + "일"
-					             + "    <b>남은 휴가일수</b> : " + (12-leaveTotalDays.totalDays)  + "일";
+						  var text = "휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+					             + "남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
 				       } else {
-							var text = "    <b>휴가 누적 사용일수</b> : 0일"
-						             + "    <b>남은 휴가일수</b> : 12일";
+							var text = "휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+						             + "남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
 						   
 					} 
 					$("#result1").append(text);
@@ -96,7 +104,7 @@
 								   + "</td><td>" + leaveInfo.endDate 
 								   + "</td><td>" + leaveInfo.reason
 								   + "</td><td>" + leaveInfo.status 
-								   + "</td><td><a id='btn1' href='/myLeaveView?leaveId=" + leaveInfo.leaveId + "'>수정</a></td><td><a id='btn2' href='/myLeaveDelete?leaveId="+ leaveInfo.leaveId +"'>삭제</a></td></tr>";
+								   + "</td><td><a id='btn1' href='/myLeaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/myLeaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
 					$("#result2").append(text);
 					}
 				// 휴가 처리 상태로 조회
@@ -125,7 +133,7 @@
 											   + "</td><td>" + leaveInfo.endDate 
 											   + "</td><td>" + leaveInfo.reason
 											   + "</td><td>" + leaveInfo.status 
-											   + "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "'>수정</a></td><td><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"'>삭제</a></td></tr>";
+											   + "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
 								$("#result2").append(text);
 								
 								}

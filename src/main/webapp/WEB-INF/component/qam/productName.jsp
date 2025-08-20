@@ -11,12 +11,12 @@
 </head>
 
 <body>
-
-<h1>제품 정보 조회</h1> <!-- 타이틀 -->
-
+<h5>[품질 관리] > [제품 정보 조회]</h5>
+<h3>제품 정보 조회</h3>
+<div class="filter-bar">
 <!-- 제품명 신규 등록 버튼 -->
 <a href="/productNameForm">
-    <button>제품 신규 등록</button>
+제품 신규 등록
 </a>
 
 <!-- 검색창: 제품명 + 카테고리 -->
@@ -31,9 +31,9 @@
     </select>
     <button type="submit">검색</button> <!-- 검색 버튼 -->
 </form>
-
+</div>
 <!-- 검색 및 전체 조회 결과 출력 테이블 -->
-<table border="1" id="result">
+<table border="1" id="result" class="data-table">
 	<tr>
 		<th>제품 코드</th>
 		<th>브랜드코드</th>
@@ -57,10 +57,10 @@
 	        <td>${pn.productName}</td>
 	        <td>${pn.productPrice}</td>
 	        <td>${pn.productCost}</td>
-	        <td><a href='/productNameForm?productCode=${pn.productCode}'>수정</a></td>
+	        <td><a href='/productNameForm?productCode=${pn.productCode}' class="btnO">수정</a></td>
 	        <td>
 	            <a href='/deleteProductName?productCode=${pn.productCode}'
-	               onclick='return confirm("정말 삭제하시겠습니까?")'>삭제</a>
+	               onclick='return confirm("정말 삭제하시겠습니까?")' class="btnX">삭제</a>
 	        </td>
 	    </tr>
 	</c:forEach>
@@ -98,8 +98,8 @@
                     // 데이터 순회하며 행 생성
                     for (const pn of result) {
                         let row = "<tr><td>" + pn.productCode + "</td><td>" + pn.brandCode + "</td><td>" + pn.brandName + "</td><td>" + pn.productCategory + "</td><td>" + pn.productColor + "</td><td>" + pn.productName + "</td><td>" + pn.productPrice + "</td><td>" + pn.productCost + "</td>";
-                        row += "<td><a href='/productNameForm?productCode=" + pn.productCode + "'>수정</a></td>";
-                        row += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")'>삭제</a></td></tr>";
+                        row += "<td><a href='/productNameForm?productCode=" + pn.productCode + "' class="btnO">수정</a></td>";
+                        row += "<td><a href='/deleteProductName?productCode=" + pn.productCode + "' onclick='return confirm(\"정말 삭제하시겠습니까?\")' class="btnX">삭제</a></td></tr>";
                         $("#result").append(row);
                     }
 					
