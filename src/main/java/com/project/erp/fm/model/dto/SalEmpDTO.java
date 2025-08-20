@@ -19,5 +19,6 @@ public class SalEmpDTO {
 	private String deptName;
 	private String yearMonth;
 	private int totalSal;
+	private int quitPay;
 	
 }

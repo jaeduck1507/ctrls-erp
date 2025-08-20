@@ -21,7 +21,7 @@
 	월별 조회 : <input type="month" id="yearMonth">
 	<button id="showBtn">조회</button>
 	</div>
-	<table border="1" id = "result" ></table>
+	<table border="1" id = "result" class="data-table"></table>
 	<script>
 		$("#showBtn").click(() =>{
 			const empNo = $("#empNo").val();

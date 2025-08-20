@@ -125,4 +125,10 @@
 			
 	</select>
 	
+	<update id="updateEmpQuit" parameterType="Quitter">
+		UPDATE employee_info
+		SET quit_date = #{quitDate}
+		WHERE emp_no = #{empNo}
+	</update>
+	
 </mapper>

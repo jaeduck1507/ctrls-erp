@@ -149,6 +149,12 @@ public class HrmPageController {
 		model.addAttribute("component","../component/hrm/empModify.jsp");
 		return "common/layout";
 	}
+	@GetMapping("/empInfoDetails")
+	public String empInfoDetails(Model model,EmpInfo ei) {
+		model.addAttribute("empInfo", employeeInfoservice.infoShowOne(ei));
+		model.addAttribute("component","../component/hrm/empInfoDetails.jsp");
+		return "common/layout";
+	}
 	
 	@GetMapping("/attendanceStats")
 	public String attendanceStats(Model model) {

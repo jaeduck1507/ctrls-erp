@@ -18,6 +18,9 @@
 	        <button type="button" onclick="location.href='/findId'">
 	          아이디 찾기
 	        </button>
+	        <button type="button" onclick="location.href='/register'">
+	          회원가입
+	        </button>
 	      </div>
 	    </form>
 	  </body>

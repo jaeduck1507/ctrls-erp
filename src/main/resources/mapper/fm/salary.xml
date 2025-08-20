@@ -89,15 +89,21 @@
 	</select>
 	
 	<select id="salaryPayment" parameterType="SalaryAlreadyAddDTO" resultMap="SalaryDTOtMap">
-	SELECT emp_no, emp_name,dept_name,job_title,salary as 'base_salary',IFNULL(sum(payment),0) as 'bonus'
+	SELECT emp_no, emp_name,dept_name,job_title,(salary+IFNULL(sum(quit_pay),0)) as 'base_salary',IFNULL(sum(payment),0) as 'bonus',IFNULL(sum(quit_pay),0) as quit_pay
 	FROM salary
 	RIGHT JOIN employee_info using(emp_no)
 	LEFT JOIN bonus_payment USING(emp_no)
 	JOIN department USING(dept_no)
 	JOIN job_position USING(job_no)
+	LEFT JOIN(
+	select emp_no, quit_pay
+	from quitter
+	where quit_pay_date like CONCAT('%', #{yearMonth}, '%')
+	) as q USING(emp_no)
+	
 	<where>
 	pay_date like CONCAT('%', #{yearMonth}, '%')
-	AND quit_date IS NULL
+	and IFNULL(quit_date,'2050-01-01') <![CDATA[>=]]> CONCAT(#{lastMonth},'-1')
 	<if test="list.size != 0">
 				<foreach collection="list" item = "emp">
 					AND emp_no != #{emp.empNo}
@@ -107,22 +113,27 @@
 	GROUP BY emp_no
 	</select>
 	
-	<select id="salaryPaymentNoBonus" parameterType="arrayList" resultMap="SalaryDTOtMap">
-		SELECT DISTINCT emp_no, emp_name,dept_name,job_title,salary as 'base_salary'
+	<select id="salaryPaymentNoBonus" parameterType="SalaryAlreadyAddDTO" resultMap="SalaryDTOtMap">
+		SELECT DISTINCT emp_no, emp_name,dept_name,job_title,(salary+IFNULL(quit_pay,0)) as 'base_salary'
 		FROM salary
 		RIGHT JOIN employee_info using(emp_no)
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
+		LEFT JOIN(
+	select emp_no, quit_pay
+	from quitter
+	where quit_pay_date like CONCAT('%', #{yearMonth}, '%')
+	) AS q USING(emp_no)
 		<where>
-		
-			AND quit_date IS NULL
-			<if test="existList.size != 0">
-				<foreach collection="existList" item = "emp">
+			IFNULL(quit_date,'2050-01-01') <![CDATA[>=]]> CONCAT(#{lastMonth},'-1')
+			
+			<if test="list.size != 0">
+				<foreach collection="list" item = "emp">
 					AND emp_no != #{emp.empNo}
 				</foreach>
 			</if>
 		</where>
-	
+	order by emp_no
 	</select>
 	
 	<insert id="addSalaryPayment" parameterType="arrayList">

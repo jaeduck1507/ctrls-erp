@@ -17,4 +17,9 @@
 		</if>
   </where>  
 </select>
+
+<insert id="empQuit" parameterType="Quitter">
+	INSERT INTO quitter(quit_pay, quit_pay_date, emp_no)
+	VALUES(#{quitPay},#{quitPayDate},#{empNo})
+</insert>
 </mapper>
