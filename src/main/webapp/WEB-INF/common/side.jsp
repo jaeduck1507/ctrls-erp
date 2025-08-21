@@ -53,12 +53,12 @@
           <div class="menu-group">
             <div class="menu-title">품질 관리</div>
             <div class="submenu">
-				<a href="/qam/brand">브랜드 조회 /qam/brand 페이징 처리 필요</a>
-			    <a href="/qam/product">상품(Product) 조회 /qam/product 페이징 처리 필요</a>
+				<a href="/qam/brand">브랜드 조회 /qam/brand 페이징 처리 완료</a>
+			    <a href="/qam/product">상품(Product) 조회 /qam/product 페이징 처리 완료</a>
 			    <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a>
 			    <a href="/qam/qc">제품 품질 검수 전체조회 /qam/qc 페이징 처리 필요</a>
 				<a href="/qam/saleReady">판매 전 제품 조회 /qam/saleReady 페이징 처리 필요</a>
-				<a href="/qam/saleDone">판매 완료 제품 조회 /qam/saleDone 페이징 처리 필요</a>
+				<a href="/qam/saleDone">판매 완료 제품 조회 /qam/saleDone 페이징 처리 완료</a>
 				<a href="/qam/defective">불량 제품 조회 /qam/defective 페이징 처리 필요</a>
             </div>
           </div>

@@ -19,6 +19,22 @@
         
         <result column="sale_registerd" property="saleRegisterd"/>
 	</resultMap>
+	
+	<resultMap id="SaleReadyForListDTOMap" type="SaleReadyForListDTO">
+		<result column="sale_no" property="saleNo" />
+		<result column="sale_date" property="saleDate" />
+		<result column="product_no" property="productNo" />
+
+		<result column="product_code" property="productCode" />
+		<result column="product_price" property="productPrice" />
+
+		<result column="product_category" property="productCategory" />
+		<result column="product_name" property="productName" />
+		<result column="quantity" property="quantity" />
+	        
+        <result column="brand_code" property="brandCode"/>
+        <result column="brand_name" property="brandName"/>
+	</resultMap>
 
 	<insert id="insertSale" parameterType="Sale">
 		INSERT INTO sale (sale_date, product_no)
@@ -59,7 +75,7 @@
 		ORDER BY sale_date DESC
 	</select>
 
-	<select id="showSaleNull" parameterType="Paging" resultMap="saleMap">
+	<select id="showSaleNull"  resultMap="saleMap">
 		SELECT
 			product_no,
 			product_code,
@@ -76,7 +92,7 @@
 		JOIN brand USING(brand_code)
 		WHERE sale_date IS NULL
 		ORDER BY sale_no ASC
-		LIMIT #{offset}, #{limit}
+		
 	</select>
 	
 	<select id="totalSaleReady" resultType="int">
@@ -134,7 +150,7 @@
     	WHERE sale_date = #{saleDate}
 	</update>
 
-	<select id="searchSaleDone" resultMap="saleMap"> 
+	<select id="searchSaleDone" parameterType="SaleReadyDTO" resultMap="SaleReadyForListDTOMap"> 
 		SELECT 
 			sale_no,
 			product_no,
@@ -149,13 +165,41 @@
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
 		JOIN brand USING(brand_code)
-		WHERE sale_date IS NOT NULL 
+		<where>
+		sale_date IS NOT NULL 
 		<if test="productCategory != null and productCategory != ''">
 			AND product_category = #{productCategory}
 		</if> 
-		<if test="startDate != null and endDate != null">
-			AND sale_date BETWEEN #{startDate} AND #{endDate}
+		<if test="startDate != null ">
+			AND sale_date <![CDATA[>=]]> #{startDate}
 		</if>
+		<if test="endDate != null ">
+			AND sale_date <![CDATA[<=]]> #{endDate}
+		</if>
+		</where>
+		ORDER BY sale_date DESC
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="serachSaleDoneTotal" parameterType="SaleReadyDTO" resultType="int"> 
+		SELECT 
+			count(*)
+		FROM sale  
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN brand USING(brand_code)
+		<where>
+		sale_date IS NOT NULL 
+		<if test="productCategory != null and productCategory != ''">
+			AND product_category = #{productCategory}
+		</if> 
+		<if test="startDate != null ">
+			AND sale_date <![CDATA[>=]]> #{startDate}
+		</if>
+		<if test="endDate != null ">
+			AND sale_date <![CDATA[<=]]> #{endDate}
+		</if>
+		</where>
 		ORDER BY sale_date DESC
 <!--		LIMIT #{offset}, #{limit}-->
 	</select>

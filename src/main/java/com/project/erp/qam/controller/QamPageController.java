@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.erp.common.model.vo.Paging;
+import com.project.erp.qam.model.vo.ProductName;
 import com.project.erp.qam.service.BrandService;
 import com.project.erp.qam.service.DefectiveService;
 import com.project.erp.qam.service.ProductNameService;
@@ -52,26 +53,32 @@ public class QamPageController {
 	@GetMapping("/product")
 	public String product(
 		Model model,
-		Paging paging,
-		@RequestParam(required = false) String productName,
-		@RequestParam(required = false) String productCategory) {
-		model.addAttribute("productList", productService.searchProductDetail(paging, productName, productCategory));
+		Paging paging,ProductName productname
+		) {
+		System.out.println(productname);
+		model.addAttribute("productList", productService.searchProductDetail(paging, productname.getProductName(), productname.getProductCategory()));
 		model.addAttribute("paging", paging);
+		System.out.println(paging);
+		model.addAttribute("productName", productname.getProductName());
+		model.addAttribute("productCategory", productname.getProductCategory());
 		model.addAttribute("component","../component/qam/product.jsp");
 		return "common/layout";
 	}
 	
 	@GetMapping("/productName")
-	public String productName(Model model, Paging paging) {
-		model.addAttribute("productNameList", productNameService.showProductName(paging));
-		model.addAttribute(paging);
+	public String productName(Model model, Paging paging, ProductName productName) {
+		System.out.println(productName);
+		model.addAttribute("productNameList", productNameService.searchProductName(paging, productName.getProductName(), productName.getProductCategory()));
+		model.addAttribute("paging",paging);
+		model.addAttribute("productName", productName.getProductName());
+		model.addAttribute("productCategory", productName.getProductCategory());
 		model.addAttribute("component","../component/qam/productName.jsp");
 		return "common/layout";
 	}
 
 	@GetMapping("/saleReady")
 	public String saleReady(Model model, Paging paging) {
-		model.addAttribute("saleList", saleService.showSaleNull(paging));
+		model.addAttribute("saleList", saleService.showSaleNull());
 		model.addAttribute("paging", paging);
 		model.addAttribute("component","../component/qam/saleReady.jsp");
 		return "common/layout";

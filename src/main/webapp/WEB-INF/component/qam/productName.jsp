@@ -20,7 +20,7 @@
 </a>
 
 <!-- 검색창: 제품명 + 카테고리 -->
-<form id="searchForm">
+<form action="productName">
     제품명 : <input type="text" name="productName" id="productName" />
     <select name="productCategory" id="productCategory">
         <option value="">카테고리 선택</option>
@@ -69,15 +69,16 @@
 
 <nav>
     <ul class="pagination">
-		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/productName?page=${paging.startPage - 1}">Previous</a></li>			
+		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/productName?page=${paging.startPage - 1}&productName=${productName}&productCategory=${productCategory}">Previous</a></li>			
 				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
-					<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/productName?page=${page}">${page}</a></li>
+					<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/productName?page=${page}&productName=${productName}&productCategory=${productCategory}">${page}</a></li>
 				</c:forEach>
-		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/productName?page=${paging.endPage + 1}">Next</a></li>
+		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/productName?page=${paging.endPage + 1}&productName=${productName}&productCategory=${productCategory}">Next</a></li>
     </ul>
 </nav>
 
 <script>
+/*
     $(document).ready(function() {
 
         // 검색 폼 제출 시 AJAX 요청
@@ -145,6 +146,7 @@
             }
         });
     });
+    */
 </script>
 
 </body>

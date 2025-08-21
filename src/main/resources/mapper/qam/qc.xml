@@ -154,7 +154,7 @@
 	    FROM product
 	    JOIN product_name USING(product_code)
 	    JOIN brand USING(brand_code)
-	    LEFT JOIN qc USING(product_no)
+	    LEFT JOIN qc as q USING(product_no)
 	    WHERE q.qc_code IS NULL
 	</select>
 

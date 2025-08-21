@@ -80,9 +80,9 @@ public class ProductService {
     	productBatchRegister(productList);
     }
     
-    public Integer totalSearchProduct(Paging paging) {
-    	return productMapper.totalSearchProduct(paging.getProductName(), paging.getProductCategory());
-    }
+//    public Integer totalSearchProduct(Paging paging) {
+//    	return productMapper.totalSearchProduct(paging.getProductName(), paging.getProductCategory());
+//    }
     
     
 }
