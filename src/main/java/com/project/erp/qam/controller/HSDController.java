@@ -68,13 +68,21 @@ public class HSDController {
 	@ResponseBody
     @GetMapping("/searchDefective")
     public List<DefectiveDTO> searchDefective(Model model, Paging paging, DefectiveDTO dto) {
+		System.out.println(dto);
 		model.addAttribute("searchDefectiveList", defectiveService.searchDefective(paging, dto));
     	return defectiveService.searchDefective(paging, dto);
     }
 	
 	@GetMapping("/searchSaleDone")
 	@ResponseBody
-	public List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto) {
-	    return saleService.searchSaleDone(dto);
+	public SaleReadyDTO searchSaleDone(SaleReadyDTO dto,Paging paging) {
+	    return saleService.searchSaleDone(dto,paging);
+	}
+	
+	@ResponseBody
+	@PostMapping("/saleReady")
+	public List<SaleReadyDTO> saleReady() {
+		
+		return saleService.showSaleNull();
 	}
 }

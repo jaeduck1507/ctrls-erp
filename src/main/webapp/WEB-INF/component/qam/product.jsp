@@ -15,9 +15,9 @@
 	<h3>상품 조회</h3>
 <div class="filter-bar">
 <!-- 검색창 -->
-<form id="searchForm">
-    제품명: <input type="text" id="productName" />
-    <select id="productCategory">
+<form action="product" method="get">
+    제품명: <input type="text" name="productName"  value="${productName}"/>
+    <select name="productCategory" >
         <option value="">카테고리 선택</option>
         <option value="상의">상의</option>
         <option value="하의">하의</option>
@@ -56,15 +56,16 @@
 
 <nav>
     <ul class="pagination">
-		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/product?page=${paging.startPage - 1}">Previous</a></li>			
+		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/product?page=${paging.startPage - 1}&productName=${productName}&productCategory=${productCategory}">Previous</a></li>			
 				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
-					<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/product?page=${page}">${page}</a></li>
+					<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/product?page=${page}&productName=${productName}&productCategory=${productCategory}">${page}</a></li>
 				</c:forEach>
-		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/product?page=${paging.endPage + 1}">Next</a></li>
+		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/product?page=${paging.endPage + 1}&productName=${productName}&productCategory=${productCategory}">Next</a></li>
     </ul>
 </nav>
 
 <script>
+/*
 function displayProducts(data) {
     // 테이블 헤더 초기화
     let tableHead = "<tr><th>제품 번호</th><th>생산일</th><th>제품 코드</th><th>브랜드명</th><th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>수정</th><th>삭제</th></tr>";
@@ -143,7 +144,7 @@ $(document).ready(function () {
             }
         });
     });
-});
+});*/
 </script>
 
 </body>

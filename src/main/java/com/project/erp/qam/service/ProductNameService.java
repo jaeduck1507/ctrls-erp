@@ -55,7 +55,7 @@ public class ProductNameService {
 	// → product_name LIKE '%keyword%' AND category 조건 조회
 	public List<ProductNameDTO> searchProductName(Paging paging, String productName, String productCategory) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
-		paging.setTotal(productNameMapper.totalSearchProductName());
+		paging.setTotal(productNameMapper.totalSearchProductName(productName,productCategory));
 		System.out.println("searchProductName 넘어감");
 		return productNameMapper.searchProductName(paging, productName, productCategory);
 	}

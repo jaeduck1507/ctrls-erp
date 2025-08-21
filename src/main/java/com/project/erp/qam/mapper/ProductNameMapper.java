@@ -41,6 +41,6 @@ public interface ProductNameMapper {
 
 	Integer totalProductName();
 	
-	Integer totalSearchProductName();
+	Integer totalSearchProductName(String productName, String productCategory);
 
 }

@@ -40,7 +40,7 @@ public class Paging {
 		this.next = this.endPage < lastPage;
 	}
 
-	private String productName;
-	private String productCategory;
+//	private String productName;
+//	private String productCategory;
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.SaleMapper;
 import com.project.erp.qam.model.dto.SaleReadyDTO;
+import com.project.erp.qam.model.dto.SaleReadyForListDTO;
 import com.project.erp.qam.model.vo.Sale;
 
 @Service
@@ -21,11 +22,11 @@ public class SaleService {
 		return saleMapper.showSale();
 	}
 	
-	public List<SaleReadyDTO> showSaleNull(Paging paging) {
-		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
-		paging.setTotal(saleMapper.totalSaleReady());
+	public List<SaleReadyDTO> showSaleNull() {
+//		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+//		paging.setTotal(saleMapper.totalSaleReady());
 		System.out.println("showSaleNull 넘어감");
-		return saleMapper.showSaleNull(paging);
+		return saleMapper.showSaleNull();
 	}
 	
 	public List<SaleReadyDTO> showSaleDone(Paging paging) {
@@ -48,8 +49,16 @@ public class SaleService {
 		return saleMapper.dailySale(dto);
 	}
 	
-	public List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto) {
-	    return saleMapper.searchSaleDone(dto);
+	public SaleReadyDTO searchSaleDone(SaleReadyDTO dto, Paging paging) {
+		dto.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		dto.setList(saleMapper.searchSaleDone(dto));
+		dto.setPage(paging.getPage());
+		dto.setTotal(serachSaleDoneTotal(dto));
+	    return dto;
+	}
+	
+	public int serachSaleDoneTotal(SaleReadyDTO dto) {
+		return saleMapper.serachSaleDoneTotal(dto);
 	}
 
 //	public Integer totalSaleDone() { // ajax saleDone paging용

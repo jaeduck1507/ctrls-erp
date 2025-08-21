@@ -1,18 +1,11 @@
 package com.project.erp.qam.model.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.project.erp.common.model.vo.Paging;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor @AllArgsConstructor
 @Data
-public class SaleReadyDTO extends Paging {
-	
+public class SaleReadyForListDTO {
 	private int productNo; // 판매된 제품 번호 (FK, product.product_no)
 	private int productCode;
 	private int productPrice;
@@ -29,11 +22,4 @@ public class SaleReadyDTO extends Paging {
     // brand
     private int brandCode;
     private String brandName;
-    
-    private boolean checking;
-    
-    
-    private List<SaleReadyForListDTO> list;
 }
-
-
