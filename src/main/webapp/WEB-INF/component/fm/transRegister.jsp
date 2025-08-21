@@ -124,7 +124,7 @@
 			$(e.target).parent().parent().find("td").eq(2).text("지출");
 			$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" id="transAmount">');
-			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc">');
+			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc" value="기타 비용 지출">');
 			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date" id="transDate">');
 		});
 		

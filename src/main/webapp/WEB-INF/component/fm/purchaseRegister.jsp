@@ -165,7 +165,7 @@
 			$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="0" id="quantity" name="quantity" class="price">');
 			$(e.target).parent().parent().find("td").eq(7).text("");
 			$(e.target).parent().parent().find("td").eq(8).text("");
-			$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date" value="${today}"  readonly="readonly">');
+			$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date" value="${today}" readonly="readonly">');
 		});
 		
 		$(document).on('input', '.price', (e) => {

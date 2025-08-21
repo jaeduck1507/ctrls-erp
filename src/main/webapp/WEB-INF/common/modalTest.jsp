@@ -24,7 +24,7 @@
 		<button type="button" data-bs-toggle="modal" data-bs-target="#barModal">월별 매출 현황</button>
 		<button type="button" data-bs-toggle="modal" data-bs-target="#doughnutModal">제품별 판매 현황</button>
 		<button type="button" data-bs-toggle="modal" data-bs-target="#lineModal">주간 매출 변화</button>
-		<!--<button type="button" data-bs-toggle="modal" data-bs-target="#scatterModal">scatter</button>-->
+		<button type="button" data-bs-toggle="modal" data-bs-target="#scatterModal">scatter</button>
 		
 		<!-- bar -->
 		<div class="modal fade" id="barModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
@@ -119,10 +119,10 @@
         const month = now.getMonth() + 1;
 		document.querySelector("#currentMonth").innerHTML = month + "월";
 		
-		const barChart = document.getElementById('barChart');
-		const doughnutChart = document.getElementById('doughnutChart');
-		const lineChart = document.getElementById('lineChart');
-		const scatterChart = document.getElementById('scatterChart');
+		const barChart = document.querySelector("#barChart");
+		const doughnutChart = document.querySelector("#doughnutChart");
+		const lineChart = document.querySelector("#lineChart");
+		const scatterChart = document.querySelector("#scatterChart");
 		  
 		// 주간 매출
 		const weekLabels = [
@@ -163,116 +163,116 @@
 		    </c:forEach>
 		];
 		  
-		  new Chart(barChart, {
-		    type: 'bar',
-		    data: {
-		      labels: monthLabels,
-		      datasets: [{
-		        label: '월별 매출액',
-		        data: monthDataValues,
-				backgroundColor: [
-				     'rgba(255, 99, 132, 0.2)',
-				     'rgba(255, 159, 64, 0.2)',
-				     'rgba(255, 205, 86, 0.2)',
-				     'rgba(75, 192, 192, 0.2)',
-				     'rgba(54, 162, 235, 0.2)',
-				     'rgba(153, 102, 255, 0.2)',
-				     'rgba(255, 182, 193, 0.2)'
-				   ],
-			    borderColor: [
-				     'rgb(255, 99, 132)',
-				     'rgb(255, 159, 64)',
-				     'rgb(255, 205, 86)',
-				     'rgb(75, 192, 192)',
-				     'rgb(54, 162, 235)',
-				     'rgb(153, 102, 255)',
-				     'rgb(255, 182, 193)'
-			    ],
-		        borderWidth: 1
-		      }]
-		    },
-		    options: {
-		      scales: {
-		        y: {
-		          beginAtZero: true
-		        }
-		      }
-		    }
-		  });
-		 
-		  new Chart(doughnutChart, {
-  		    type: 'doughnut',
-  		    data: {
-			  labels: productLabels,
-			  datasets: [{
-			    label: '제품별 판매 수량',
-			    data: quantityValues,
-			    backgroundColor: [
-					 'rgba(255, 99, 132, 0.5)',
-				     'rgba(255, 159, 64, 0.5)',
-				     'rgba(255, 205, 86, 0.5)',
-				     'rgba(75, 192, 192, 0.5)',
-				     'rgba(54, 162, 235, 0.5)',
-				     'rgba(153, 102, 255, 0.5)',
-				     'rgba(255, 182, 193, 0.5)'
-			    ],
-			    hoverOffset: 4
-			  }]
+		new Chart(barChart, {
+			type: 'bar',
+			data: {
+				labels: monthLabels,
+				datasets: [{
+					label: '월별 매출액',
+					data: monthDataValues,
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(255, 205, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 182, 193, 0.2)'
+					],
+					borderColor: [
+					'rgb(255, 99, 132)',
+					'rgb(255, 159, 64)',
+					'rgb(255, 205, 86)',
+					'rgb(75, 192, 192)',
+					'rgb(54, 162, 235)',
+					'rgb(153, 102, 255)',
+					'rgb(255, 182, 193)'
+					],
+					borderWidth: 1
+				}]
 			},
-  		    options: {
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+		 
+		new Chart(doughnutChart, {
+			type: 'doughnut',
+			data: {
+				labels: productLabels,
+				datasets: [{
+					label: '제품별 판매 수량',
+					data: quantityValues,
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.5)',
+					'rgba(255, 159, 64, 0.5)',
+					'rgba(255, 205, 86, 0.5)',
+					'rgba(75, 192, 192, 0.5)',
+					'rgba(54, 162, 235, 0.5)',
+					'rgba(153, 102, 255, 0.5)',
+					'rgba(255, 182, 193, 0.5)'
+					],
+					hoverOffset: 4
+				}]
+			},
+			options: {
 				responsive: true, // 창 크기에 맞게 자동 조절
 				maintainAspectRatio: false, // 비율 고정 여부
 				cutout: "50%", // 도넛 가운데 구멍 크기 (퍼센트나 픽셀 가능)
-  		    }
-  		  });
-		  
-		  new Chart(lineChart, {
-		    type: 'line',
-		    data: {
-			  labels: weekLabels,
-			  datasets: [{
-			    label: '주간 매출액',
-			    data: weekDataValues,
-			    fill: false,
-			    borderColor: 'rgb(255, 205, 86)'
-			  }]
+			}
+		});
+		
+		new Chart(lineChart, {
+			type: 'line',
+			data: {
+				labels: weekLabels,
+				datasets: [{
+					label: '주간 매출액',
+					data: weekDataValues,
+					fill: false,
+					borderColor: 'rgb(31, 216, 108)'
+				}]
 			},
-		    options: {
-		      scales: {
-		        y: {
-		          beginAtZero: true
-		        }
-		      }
-		    }
-		  });
-		  
-		  new Chart(scatterChart, {
-  		    type: 'scatter',
-  		    data: {
-  			  labels: ['January', 'February', 'March', 'April'],
-			  datasets: [{
-			      type: 'bar',
-			      label: 'Bar Dataset',
-			      data: [10, 20, 30, 40],
-				  borderWidth: 1,
-			      borderColor: 'rgb(255, 99, 132)',
-			      backgroundColor: 'rgba(255, 99, 132, 0.2)'
-			    }, {
-		      type: 'line',
-		      label: 'Line Dataset',
-		      data: [15, 30, 25, 43],
-		      fill: false,
-		      borderColor: 'rgb(255, 99, 132)'
-		  	  }]
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+
+		new Chart(scatterChart, {
+			type: 'scatter',
+			data: {
+				labels: ['January', 'February', 'March', 'April'],
+				datasets: [{
+					type: 'bar',
+					label: 'Bar Dataset',
+					data: [10, 20, 30, 40],
+					borderWidth: 1,
+					borderColor: 'rgb(255, 99, 132)',
+					backgroundColor: 'rgba(255, 99, 132, 0.2)'
+				}, {
+					type: 'line',
+					label: 'Line Dataset',
+					data: [15, 30, 25, 43],
+					fill: false,
+					borderColor: 'rgb(255, 99, 132)'
+				}]
 			},
-  		    options: {
-  		      scales: {
-  		        y: {
-  		          beginAtZero: true
-  		        }
-  		      }
-  		    }
-  		  });
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
 	</script>
 </body>
 </html>

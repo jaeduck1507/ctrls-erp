@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
 import com.project.erp.fm.service.BudgetService;
+import com.project.erp.fm.service.SaleManageService;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
@@ -43,9 +44,14 @@ public class FmPageController {
 	@Autowired
 	private BrandService brandService;
 	
+	@Autowired
+	private SaleManageService saleManageService;
+	
 	@GetMapping("/saleManage")
 	public String saleManage(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
+		model.addAttribute("weekSalesChart", saleManageService.weekSalesChart());
+		model.addAttribute("monthSalesChart", saleManageService.monthSalesChart());
 		model.addAttribute("component","../component/fm/saleManage.jsp");
 		return "common/layout";
 	}

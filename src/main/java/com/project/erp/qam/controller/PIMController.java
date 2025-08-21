@@ -133,7 +133,8 @@ public class PIMController {
 	        model.addAttribute("action", "/registerProductName"); // 등록용 액션
 	    }
 	    System.out.println("/productNameForm working");
-	    return "component/qam/productNameForm";
+	    model.addAttribute("component","../component/qam/productNameForm.jsp");
+	    return "common/layout";
 	}
 
 	// 제품명 등록 처리
@@ -188,8 +189,9 @@ public class PIMController {
     }
     
     @GetMapping("/brandForm")
-    public String brandForm() {
-    	return "component/qam/brandForm";
+    public String brandForm(Model model) {
+    	model.addAttribute("component","../component/qam/brandForm.jsp");
+    	return "common/layout";
     }
     
     @PostMapping("/registerBrand")
@@ -202,7 +204,8 @@ public class PIMController {
     public String brandFormUpdate(Model model, int brandCode) {
     	Brand brand = brandService.findById(brandCode);
     	model.addAttribute("brand", brand);
-    	return "component/qam/brandFormUpdate";
+    	model.addAttribute("component","../component/qam/brandFormUpdate.jsp");
+    	return "common/layout";
     }
     
     @PostMapping("/updateBrand")
