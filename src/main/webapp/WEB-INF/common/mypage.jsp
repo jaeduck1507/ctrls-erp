@@ -34,19 +34,41 @@
 		<div class="box">
 		<div class="box2">
 			<h4>사원 정보</h4>
-		    <p>직원 번호 : <b> ${user.empNo}</b></p>
-		    <p>성명 : <b>${user.empName}</b></p>
-		    <p>직급 : <b>${user.jobTitle}</b></p>
-		    <p>부서 : <b>${user.deptName}</b></p>
-		    <p>입사일 : <b>${user.hireDate}</b></p>
+			<table>
+				<tr>
+		    <th>직원 번호</th><td><b> ${user.empNo}</b></td>
+			</tr>
+			<tr>
+		    <th>성명</th><td><b>${user.empName}</b></td>
+			</tr>
+			<tr>
+		    <th>직급</th><td><b>${user.jobTitle}</b></td>
+			</tr>
+			<tr>
+		    <th>부서</th><td><b>${user.deptName}</b></td>
+			</tr>
+			<tr>
+		    <th>입사일</th><td><b>${user.hireDate}</b></td>
+			</tr>
+			</table>
 		</div>
 		
-		<div class="box3">
+		<div class="box2">
 			<h4>개인 정보</h4>
-			<p><b>주민등록번호 : </b>${user.empIn}</p>
-		    <p><b>주소 : </b>${user.addr}</p>
-		    <p><b>연락처 : </b>${user.phone}</p>
-		    <p><b>이메일 : </b>${user.email}</p>
+		<table>
+			<tr>
+			<th>주민등록번호</th><td><b>${user.empIn}</b></td>
+			</tr>
+						<tr>
+		    <th>주소</th><td><b>${user.addr}</b></td>
+			</tr>
+						<tr>
+		    <th>연락처</th><td><b>${user.phone}</b></td>
+			</tr>
+						<tr>
+		    <th>이메일</th><td><b>${user.email}</b></td>
+			</tr>
+		</table>
 		</div>
 		
 	</div>

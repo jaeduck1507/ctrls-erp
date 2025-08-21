@@ -100,7 +100,7 @@
 					$("#result").html("");
                 	$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th><th>조회</th><th>수정</th></tr>");
                 	for(const emp of result.empInfoList) {
-						var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empInfoDetails?empNo=' + emp.empNo + '">조회</a></td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '" class="btnO">수정</a></td></tr>'
+						var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empInfoDetails?empNo=' + emp.empNo + '" class="btnO">조회</a></td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '" class="btnO">수정</a></td></tr>'
 						$("#result").append(text);
                 	
 					// 페이징 생성
@@ -143,7 +143,7 @@
 					$("#result").html("");
 					$("#result").append("<tr><th>이름</th><th>직급</th><th>부서</th><th>조회</th><th>수정</th></tr>");
                 	for(const emp of result.empInfoList) {
-                		var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empInfoDetails?empNo=' + emp.empNo + '">조회</a></td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '">수정</a></td></tr>'
+                		var text = "<tr><td>"+ emp.empName +"</td><td>"+emp.jobTitle+"</td><td>"+emp.deptName+'</td><td><a href="/hrm/empInfoDetails?empNo=' + emp.empNo + '" class="btnO">조회</a></td><td><a href="/hrm/empModify?empNo=' + emp.empNo + '" class="btnO">수정</a></td></tr>'
 						$("#result").append(text);
                 	
 					// 페이징 생성

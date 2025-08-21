@@ -38,6 +38,7 @@ FROM leave_request
 	  </if>
 	</where>
 </if>
+
 </select>
 
 <!-- 휴가 신청, 사번, 신청 날짜, 휴가 유형, 휴가 시작일,  종료일, 사유 작성-->
@@ -50,7 +51,7 @@ VALUES
 </insert>
 
 <!-- 휴가 승인 상태 변경을 위한 신청 리스트 신청 순서대로 정렬-->
-<select id="leaveStatus" resultMap="LeaveInfoMap">
+<select id="leaveStatus" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
 SELECT leave_id, request_date, leave_type,emp_no, start_date, end_date, reason, status, emp_name, dept_name, job_title
 FROM leave_request
      JOIN employee_info USING(emp_no)
@@ -58,6 +59,11 @@ FROM leave_request
      JOIN job_position USING(job_no)
 WHERE status = '대기'
 ORDER BY leave_id DESC
+LIMIT #{offset}, #{limit}
+</select>
+
+<select id="totalLeaveInfo" resultType="int">
+SELECT count(leave_id) FROM leave_request WHERE status = '대기'
 </select>
 
 <!-- 신청된 휴가 내역 리스트 보고 대기->승인/반려 로 상태 변경-->

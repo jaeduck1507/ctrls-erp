@@ -8,8 +8,9 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+	<h5>[인적자원관리] > [사원정보조회] > [상세정보]</h5>
+	<h3>사원 상세 정보</h3>
 
-	<h1>사원 정보 조회</h1>
 	<div class="container">
 		<div class="box">
 			<div class="box2">

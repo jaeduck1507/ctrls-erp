@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <header class="top-header">
-  <div class="breadcrumb">상단바</div>
+  <div class="breadcrumb"></div>
   <div class="right-area">
     <span>id</span>
     <span>이름</span>

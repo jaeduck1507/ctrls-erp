@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>휴가 상태 처리</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
 	<h5>[근태 관리] > [휴가 상태 처리]</h5>
 	<h3>휴가 상태 처리</h3>
-	<div class="data-table">
-		<table border="1" id="result" >
+		<table border="1" id="result" class="data-table">
 				<tr>
 				<th>신청번호</th>
 				<th>신청날짜</th>
@@ -25,7 +26,8 @@
 				<th>부서</th>
 				<th>직급</th>
 				<th>상태</th>
-				<th>승인/반려</th>
+				<th>승인</th>
+				<th>반려</th>
 				</tr>
 					
 				<c:forEach items="${leaveInfoList}" var="item">
@@ -43,14 +45,31 @@
 					<td>${item.status}</td>
 					
 					<td>
-						<button class="btnO innerbtn">승인</button>
-						<button class="btnX innerbtn">반려</button>
+						<button class="btnO">승인</button>
+					</td>
+					<td>
+						<button class="btnX">반려</button>
 					</td>
 				</tr>
 				</c:forEach>
 		</table>
-		
-	</div>
+
+		<nav>
+		<ul class="pagination">
+				<li class="page-item ${paging.prev ? '' : 'disabled'}">
+					<a class="page-link" href="/hrm/leaveStatus?page=${paging.startPage - 1}">Previous</a>
+				</li>
+										
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+				<li class="page-item">
+					<a class="page-link ${paging.page == page ? 'active' : ''}" href="/hrm/leaveStatus?page=${page}">${page}</a>
+				</li>
+			</c:forEach>
+				<li class="page-item ${paging.next ? '' : 'disabled'}">
+					<a class="page-link" href="/hrm/leaveStatus?page=${paging.endPage + 1}">Next</a>
+				</li>
+		</ul>
+		</nav>
 	
 	<script>
 		$(".btnO").click((e)=>{
@@ -67,17 +86,13 @@
 					    contentType : false,
 						// 응답
 						success : function(result) {
-							
+							location.reload();
 							
 						},
 						error:function(xhr, status, error){
 							
 						}
 					});
-					//console.log("gdg");
-					setTimeout(() => {
-					    location.reload();
-					},2);
 					
 				});
 				$(".btnX").click((e)=>{
@@ -94,17 +109,16 @@
 									    contentType : false,
 										// 응답
 										success : function(result) {
-											
+											location.reload();
 											
 										},
 										error:function(xhr, status, error){
 											
 										}
 									});
-									setTimeout(() => {
-										location.reload();
-									},2);
+									
 								});
+		
 	</script>
 </body>
 </html>

@@ -9,6 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+	<h5>[마이페이지] > [출근 현황]</h5>
+	<h3>출근 현황</h3>
 	<div class="filter-bar">
 	월별 조회 : <input type="month" id="yearMonth">
 	<button id="showBtn">조회</button>

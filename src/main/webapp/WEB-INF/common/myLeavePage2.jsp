@@ -243,7 +243,6 @@
 	   const leaveDateInputs = document.querySelectorAll('.leaveDate');
  	   const startDateInput = document.getElementById('startDate');
  	   const endDateInput = document.getElementById('endDate');
-	   const endDateInput2 = document.querySelector('#endDate');
 	   
 	   leaveDateInputs.forEach(function(input){
 			 input.setAttribute('min', tomorrowStr); // 과거 날짜 선택 제한
@@ -310,7 +309,7 @@
        });
 	});
 
-	
+		
 	</script>
 </body>
 </html>

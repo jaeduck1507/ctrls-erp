@@ -90,8 +90,9 @@ public class PageController {
 	@GetMapping("/myLeaveView")
 	public String myLeaveView(Model model, LeaveInfo li) {
 //		System.out.println(li);
-		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));		
-		return "common/myLeaveView";
+		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));	
+		model.addAttribute("component","../common/myLeaveView.jsp");
+		return "common/layout";
 	}
 	@GetMapping("/myLeaveUpdate")
 	public String myLeaveUpdate(LeaveInfo li) {
@@ -105,11 +106,11 @@ public class PageController {
 		return "redirect:/myLeavePage";
 	}
 	
-	@GetMapping("/layout2")
-	public String layout2() {
-		
-		return "common/layout2";
-	}
+//	@GetMapping("/layout2")
+//	public String layout2() {
+//		
+//		return "common/layout2";
+//	}
 	@GetMapping("/modifyMyInfo")
 	public String modifyMyInfo(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

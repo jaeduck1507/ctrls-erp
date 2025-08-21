@@ -31,9 +31,9 @@ public class LMController {
 	@ResponseBody
 	@PostMapping("/leaveAdd")
 	public boolean leaveAdd(@RequestBody List<LeaveInfo> liList) {
-		System.out.println("Controller");
-		System.out.println(liList);
-		System.out.println("-----------");
+//		System.out.println("Controller");
+//		System.out.println(liList);
+//		System.out.println("-----------");
 //		System.out.println(liList.get(0).getEmpNo());
 		leaveInfoService.leaveAdd(liList);
 		return true;
