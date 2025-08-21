@@ -16,6 +16,8 @@ public interface SaleManageMapper {
 	int totalSaleManagePage(SaleProductDTO sp);
 	void saleRegister(List<SaleManage> smList);
 	List<SaleProductDTO> totalSales(SaleProductDTO sp);
-	List<SaleProductDTO> salesChart();
+	List<SaleProductDTO> weekSalesChart();
+	List<SaleProductDTO> monthSalesChart();
+	List<SaleProductDTO> monthQuantityChart();
 	
 }

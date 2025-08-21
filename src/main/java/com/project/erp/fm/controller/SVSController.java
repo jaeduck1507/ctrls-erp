@@ -50,6 +50,10 @@ public class SVSController {
 		//System.out.println(smList);
 		saleManageService.saleRegister(smList);
 		
+		// sale_registered 컬럼 값 'Y'로 업데이트
+		LocalDate saleDate = smList.get(0).getSaleDate();
+		saleService.updateSaleRegistered(saleDate);
+		
 		//System.out.println(departmentService.showDept().getLast().getDeptNo());
 		//int salesDept = departmentService.showDept().getLast().getDeptNo(); // department의 마지막 dept_no
 		

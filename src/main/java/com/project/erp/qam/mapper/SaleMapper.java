@@ -34,6 +34,8 @@ public interface SaleMapper {
 	
 	List<SaleReadyDTO> dailySale(SaleReadyDTO dto);
 	
+	void updateSaleRegistered(LocalDate saleDate);
+	
 	List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto);
 	
 }

@@ -133,8 +133,12 @@ public class PageController {
 	// 모달창 테스트용
 	@GetMapping("/modalTest")
 	public String modalTest(Model model) {
-		model.addAttribute("salesChart", saleManageService.salesChart());
-		System.out.println(saleManageService.salesChart());
+		model.addAttribute("weekSalesChart", saleManageService.weekSalesChart());
+		model.addAttribute("monthSalesChart", saleManageService.monthSalesChart());
+		model.addAttribute("monthQuantityChart", saleManageService.monthQuantityChart());
+		//System.out.println("week : " + saleManageService.weekSalesChart());
+		//System.out.println("month : " + saleManageService.monthSalesChart());
+		//System.out.println("quantity : " + saleManageService.monthQuantityChart());
 		model.addAttribute("component","../common/modalTest.jsp");
 		return "common/layout";
 	}

@@ -48,8 +48,16 @@ public class SaleManageService {
 		return saleManageMapper.totalSales(sp);
 	}
 	
-	public List<SaleProductDTO> salesChart() {
-		return saleManageMapper.salesChart();
+	public List<SaleProductDTO> weekSalesChart() {
+		return saleManageMapper.weekSalesChart();
 	}
 	
+	public List<SaleProductDTO> monthSalesChart() {
+		return saleManageMapper.monthSalesChart();
+	}
+	
+	public List<SaleProductDTO> monthQuantityChart() {
+		return saleManageMapper.monthQuantityChart();
+	}
+ 	
 }

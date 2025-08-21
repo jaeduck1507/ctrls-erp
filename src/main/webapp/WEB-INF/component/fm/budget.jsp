@@ -65,8 +65,8 @@
 						var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
 							+ budget.annualBudget.toLocaleString() + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
 						$("#result").append(text);
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>');
-						$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '">삭제</a></td>');
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '" class="btnO">수정</a></td>');
+						$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '" class="btnX">삭제</a></td>');
 					}
 					
 					$(".pagination").html('');

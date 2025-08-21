@@ -12,6 +12,9 @@
 		<result property="productCategory" column="product_category"/>
 		<result property="dailySales" column="daily_sales"/>
 		<result property="saleAmount" column="sale_amount"/>
+		<result property="monthAmount" column="month_amount"/>
+		<result property="saleMonth" column="sale_month"/>
+		<result property="monthQuantity" column="month_quantity"/>
 	</resultMap>
 	
 	<select id="showSaleManage" parameterType="SaleProductDTO" resultMap="SaleProductMap">
@@ -82,11 +85,32 @@
 		WHERE sale_date = #{saleDate}
 	</select>
 	
-	<select id="salesChart" resultMap="SaleProductMap">
+	<select id="weekSalesChart" resultMap="SaleProductMap">
 		SELECT sale_date, SUM(total_amount) AS sale_amount
 		FROM sale_manage
-		WHERE sale_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+		WHERE sale_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND CURDATE()
 		GROUP BY sale_date
 		ORDER BY sale_date
+	</select>
+	
+	<select id="monthSalesChart" resultMap="SaleProductMap">
+		SELECT DATE_FORMAT(sale_date, '%Y-%m') AS sale_month, SUM(total_amount) AS month_amount
+		FROM sale_manage
+		WHERE DATE_FORMAT(sale_date, '%Y-%m')
+			BETWEEN DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 6 MONTH), '%Y-%m')
+			AND DATE_FORMAT(CURDATE(), '%Y-%m')
+		GROUP BY DATE_FORMAT(sale_date, '%Y-%m')
+		ORDER BY sale_month
+	</select>
+	
+	<select id="monthQuantityChart" resultMap="SaleProductMap">
+		SELECT product_name, SUM(quantity) AS month_quantity
+		FROM sale_manage
+		JOIN product_name USING(product_code)
+		WHERE DATE_FORMAT(sale_date, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
+		<if test="productCategory != null and productCategory != ''">
+	        AND product_category = #{productCategory}
+	    </if>
+		GROUP BY product_name
 	</select>
 </mapper>

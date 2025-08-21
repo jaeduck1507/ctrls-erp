@@ -28,6 +28,8 @@ public class SaleReadyDTO extends Paging {
     // brand
     private int brandCode;
     private String brandName;
+    
+    private String saleRegisterd;
 }
 
 

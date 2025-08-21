@@ -11,32 +11,30 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <style>
 	.modal-dialog {
-	  max-width: 800px;
+		max-width: 800px;
 	}
-
 	.modal-body {
-	  height: 450px;
+		min-height: 450px;
 	}
 </style>
 </head>
 <body>
 	<div class="filter-bar">
 		
-		<button type="button" data-bs-toggle="modal" data-bs-target="#barModal">bar</button>
-		<button type="button" data-bs-toggle="modal" data-bs-target="#doughnutModal">doughnut</button>
-		<button type="button" data-bs-toggle="modal" data-bs-target="#lineModal">line</button>
-		<button type="button" data-bs-toggle="modal" data-bs-target="#scatterModal">scatter</button>
+		<button type="button" data-bs-toggle="modal" data-bs-target="#barModal">월별 매출 현황</button>
+		<button type="button" data-bs-toggle="modal" data-bs-target="#doughnutModal">제품별 판매 현황</button>
+		<button type="button" data-bs-toggle="modal" data-bs-target="#lineModal">주간 매출 변화</button>
+		<!--<button type="button" data-bs-toggle="modal" data-bs-target="#scatterModal">scatter</button>-->
 		
 		<!-- bar -->
 		<div class="modal fade" id="barModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModal">그래프</h1>
+		        <h1 class="modal-title fs-5" id="exampleModal">월별 매출 현황</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      	<div class="modal-body">
-					<p>bar</p>
 					<div>
 					  <canvas id="barChart"></canvas>
 					</div>
@@ -53,11 +51,15 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModal">그래프</h1>
+		        <h1 class="modal-title fs-5" id="exampleModal"><span id="currentMonth"></span> 제품별 판매 현황</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      	<div class="modal-body">
-					<p>doughnut</p>
+					<button>전체</button>
+					<button>상의</button>
+					<button>하의</button>
+					<button>악세사리</button>
+					<button>신발</button>
 					<div>
 					  <canvas id="doughnutChart"></canvas>
 					</div>
@@ -74,11 +76,10 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModal">그래프</h1>
+		        <h1 class="modal-title fs-5" id="exampleModal">주간 매출 변화</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      	<div class="modal-body">
-					<p>line</p>
 					<div>
 					  <canvas id="lineChart"></canvas>
 					</div>
@@ -95,11 +96,10 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModal">그래프</h1>
+		        <h1 class="modal-title fs-5" id="exampleModal">scatter</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      	<div class="modal-body">
-					<p>scatter</p>
 					<div>
 					  <canvas id="scatterChart"></canvas>
 					</div>
@@ -114,31 +114,62 @@
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script>		
-		  const barChart = document.getElementById('barChart');
-		  const doughnutChart = document.getElementById('doughnutChart');
-		  const lineChart = document.getElementById('lineChart');
-		  const scatterChart = document.getElementById('scatterChart');
+	<script>
+		const now = new Date();
+        const month = now.getMonth() + 1;
+		document.querySelector("#currentMonth").innerHTML = month + "월";
+		
+		const barChart = document.getElementById('barChart');
+		const doughnutChart = document.getElementById('doughnutChart');
+		const lineChart = document.getElementById('lineChart');
+		const scatterChart = document.getElementById('scatterChart');
 		  
-		  const labels = [
-		      <c:forEach var="sales" items="${salesChart}" varStatus="loop">
-		        "${sales.saleDate}"<c:if test="${!loop.last}">,</c:if>
-		      </c:forEach>
-		    ];
+		// 주간 매출
+		const weekLabels = [
+		    <c:forEach var="week" items="${weekSalesChart}" varStatus="loop">
+		    	"${week.saleDate}"<c:if test="${!loop.last}">,</c:if>
+		    </c:forEach>
+		];
 			
-			const dataValues = [
-			   <c:forEach var="sales" items="${salesChart}" varStatus="loop">
-			     ${sales.saleAmount}<c:if test="${!loop.last}">,</c:if>
-			   </c:forEach>
-			 ];
+		const weekDataValues = [
+			<c:forEach var="week" items="${weekSalesChart}" varStatus="loop">
+				${week.saleAmount}<c:if test="${!loop.last}">,</c:if>
+			</c:forEach>
+		];
+			 
+		// 월간 매출
+		const monthLabels = [
+			<c:forEach var="month" items="${monthSalesChart}" varStatus="loop">
+		    	"${month.saleMonth}"<c:if test="${!loop.last}">,</c:if>
+		    </c:forEach>
+		];
+		
+		const monthDataValues = [
+			<c:forEach var="month" items="${monthSalesChart}" varStatus="loop">
+		    	"${month.monthAmount}"<c:if test="${!loop.last}">,</c:if>
+		    </c:forEach>
+		];
+		
+		// 제품별 판매 수량(월별)
+		const productLabels = [
+			<c:forEach var="quantity" items="${monthQuantityChart}" varStatus="loop">
+		    	"${quantity.productName}"<c:if test="${!loop.last}">,</c:if>
+		    </c:forEach>
+		];
+		
+		const quantityValues = [
+			<c:forEach var="quantity" items="${monthQuantityChart}" varStatus="loop">
+		    	"${quantity.monthQuantity}"<c:if test="${!loop.last}">,</c:if>
+		    </c:forEach>
+		];
 		  
 		  new Chart(barChart, {
 		    type: 'bar',
 		    data: {
-		      labels: labels,
+		      labels: monthLabels,
 		      datasets: [{
-		        label: '주간 매출액',
-		        data: dataValues,
+		        label: '월별 매출액',
+		        data: monthDataValues,
 				backgroundColor: [
 				     'rgba(255, 99, 132, 0.2)',
 				     'rgba(255, 159, 64, 0.2)',
@@ -172,16 +203,18 @@
 		  new Chart(doughnutChart, {
   		    type: 'doughnut',
   		    data: {
-			  labels: labels,
+			  labels: productLabels,
 			  datasets: [{
-			    label: '주간 매출액',
-			    data: dataValues,
+			    label: '제품별 판매 수량',
+			    data: quantityValues,
 			    backgroundColor: [
-			      'rgb(255, 99, 132)',
-			      'rgb(54, 162, 235)',
-			      'rgb(255, 205, 86)',
-				  'rgb(50, 205, 50)',
-				  'rgb(153, 102, 255)'
+					 'rgba(255, 99, 132, 0.5)',
+				     'rgba(255, 159, 64, 0.5)',
+				     'rgba(255, 205, 86, 0.5)',
+				     'rgba(75, 192, 192, 0.5)',
+				     'rgba(54, 162, 235, 0.5)',
+				     'rgba(153, 102, 255, 0.5)',
+				     'rgba(255, 182, 193, 0.5)'
 			    ],
 			    hoverOffset: 4
 			  }]
@@ -196,12 +229,12 @@
 		  new Chart(lineChart, {
 		    type: 'line',
 		    data: {
-			  labels: labels,
+			  labels: weekLabels,
 			  datasets: [{
 			    label: '주간 매출액',
-			    data: dataValues,
+			    data: weekDataValues,
 			    fill: false,
-			    borderColor: 'rgb(75, 192, 192)'
+			    borderColor: 'rgb(255, 205, 86)'
 			  }]
 			},
 		    options: {

@@ -16,6 +16,8 @@
 	        
         <result column="brand_code" property="brandCode"/>
         <result column="brand_name" property="brandName"/>
+        
+        <result column="sale_registerd" property="saleRegisterd"/>
 	</resultMap>
 
 	<insert id="insertSale" parameterType="Sale">
@@ -122,8 +124,15 @@
 		JOIN product USING(product_no)
 		JOIN product_name USING(product_code)
 		WHERE sale_date = #{saleDate}
+			AND sale_registered = 'N'
 		GROUP BY product_name, product_code, product_price, sale_date
 	</select>
+	
+	<update id="updateSaleRegistered" parameterType="SaleManage">
+		UPDATE sale
+    	SET sale_registered = 'Y'
+    	WHERE sale_date = #{saleDate}
+	</update>
 
 	<select id="searchSaleDone" resultMap="saleMap"> 
 		SELECT 

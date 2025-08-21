@@ -31,6 +31,7 @@
 			예산 계획 : <input type="text" id="plan" name="plan" value="${budgetInfo.plan}"/><br>
 			예산 집행일 : <input type="date" id="executionDate" name="executionDate" value="${budgetInfo.executionDate}"/><br>
 			<button type="submit" id="budget-update">수정</button>
+			<a href="/fm/budget" class="btnO">목록</a>
 		</form>
 	</div>
 	

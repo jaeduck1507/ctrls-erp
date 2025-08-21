@@ -48,6 +48,10 @@ public class SaleService {
 		return saleMapper.dailySale(dto);
 	}
 	
+	public void updateSaleRegistered(LocalDate saleDate) {
+		saleMapper.updateSaleRegistered(saleDate);
+	}
+	
 	public List<SaleReadyDTO> searchSaleDone(SaleReadyDTO dto) {
 	    return saleMapper.searchSaleDone(dto);
 	}

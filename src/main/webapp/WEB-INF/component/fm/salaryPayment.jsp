@@ -9,6 +9,21 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<style>
+	td {
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	.red {
+		border-color: red;
+		border-width: 2px;
+	}
+
+	table {
+	  border-collapse: separate;  
+	}
+</style>
 </head>
 <body>
 	<h5>[재무 관리] > [급여 등록]</h5>
@@ -23,7 +38,7 @@
 			<table border="1" id="result" class="data-table">
 					
 			</table>
-			<button id="submit">등록하기</button>
+			<button id="submit" disabled>등록하기</button>
 		</div>
 		
 		<nav>
@@ -34,6 +49,19 @@
 	</div>
 	
 	<script>
+		const deductionCheck = /^[1-9]\d*$/;
+		$(document).on("input", ".deduction", (e) => {
+			console.log(e.target.value);
+			console.log(deductionCheck.test(e.target.value));
+			
+			if (!deductionCheck.test(e.target.value)) {
+				e.target.parentElement.classList.add("red");
+				$("#submit").prop("disabled", true);
+			} else {
+				e.target.parentElement.classList.remove("red");
+				$("#submit").prop("disabled", false);
+			}
+		});
 	
 		var salayPagingDTO = {};
 		function inint_Paing() {
@@ -80,6 +108,9 @@
 						salayPagingDTO.result = result;
 						salayPagingDTO.setTotal(result.length);
 						
+						if (result.length !== 0) {
+							$("#submit").prop("disabled", false);
+						}
 						
 						$("#result").html("");
 						$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");

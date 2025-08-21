@@ -47,6 +47,8 @@
 				success: function(result) {
 					if (!result || result.length === 0) {
 						$("#sale-register").prop("disabled", true);
+						//alert("조회된 결과가 없습니다");
+						//location.reload();
 					} else {
 						$("#sale-register").prop("disabled", false);
 					}
