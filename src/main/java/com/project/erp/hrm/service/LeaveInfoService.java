@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.mapper.LeaveInfoMapper;
 import com.project.erp.hrm.model.dto.LeaveInfo;
+
 
 @Service
 public class LeaveInfoService {
@@ -18,14 +20,10 @@ public class LeaveInfoService {
 		return leaveInfoMapper.leaveInfo(li);
 	}
 	public void leaveAdd(List<LeaveInfo> liList) {
-		System.out.println("service!");
-		System.out.println(liList);
-		System.out.println("-------------");
+		//System.out.println("service!");
+		//System.out.println(liList);
+		//System.out.println("-------------");
 		leaveInfoMapper.leaveAdd(liList);
-	}
-	
-	public List<LeaveInfo> leaveStatus() {
-		return leaveInfoMapper.leaveStatus();
 	}
 	
 	public void leaveStatusUpdate(LeaveInfo leaveinfo) {
@@ -53,4 +51,14 @@ public class LeaveInfoService {
 	public void leaveDelete(int leaveId) {
 		leaveInfoMapper.leaveDelete(leaveId);
 	};
+	
+	public List<LeaveInfo> leaveStatus(Paging paging) {
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		paging.setTotal(leaveInfoMapper.totalLeaveInfo());
+		return leaveInfoMapper.leaveStatus(paging);
+	}
+	
+	public int totalLeaveInfo() {
+		return leaveInfoMapper.totalLeaveInfo();
+	}
 }

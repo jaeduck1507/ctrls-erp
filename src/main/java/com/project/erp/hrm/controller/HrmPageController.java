@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.common.model.vo.User;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.LeaveInfo;
@@ -93,9 +94,12 @@ public class HrmPageController {
 	}
 	
 	@GetMapping("/leaveStatus")
-	public String leaveStatus(Model model) {
-		System.out.println("test    " + leaveInfoService.leaveStatus());
-		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus() );
+	public String leaveStatus(Model model, Paging paging) {
+		//System.out.println("test    " + leaveInfoService.leaveStatus());
+		//System.out.println(paging);
+		model.addAttribute("paging", paging);
+		model.addAttribute("leaveInfoList",leaveInfoService.leaveStatus(paging));
+		//model.addAttribute("paging", new Paging(paging.getPage(), leaveInfoService.totalLeaveInfo()));
 		model.addAttribute("component","../component/hrm/leaveStatus.jsp");
 		return "common/layout";
 	}

@@ -56,9 +56,12 @@
 				   const empNoInput = document.querySelector('.empNo');
 				   $("#result tr").eq(-1).find(".empNo").val(empNoInput.value);
 				   // 휴가시작일, 종료일 신청날짜 다음날로 고정(다음날부터 신청가능하도록)
-				   const tomorrow = new Date();
-				   tomorrow.setDate(tomorrow.getDate() + 1);
-				   const tomorrowStr = tomorrow.toISOString().substring(0, 10);
+				   const tomorrowDay = String(today.getDate() + 1).padStart(2, "0");
+				   const tomorrowStr = year+"-"+month+"-"+tomorrowDay;
+				   console.log(tomorrowStr);
+				   //const tomorrow = new Date();
+				   //tomorrow.setDate(tomorrow.getDate() + 1);
+				   //const tomorrowStr = tomorrow.toISOString().substring(0, 10);
 				   $("#result tr").eq(-1).find(".leaveDate").val(tomorrowStr);
 				   
 				   // 과거시간, 주말, 공휴일 선택 제한
@@ -89,7 +92,7 @@
 				       if(weekend || holiday){
 				         alert("주말 및 공휴일 선택불가");
 				         this.value = tomorrowStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
-						 endDateInput.value = startDateInput.value
+						 endDateInput.value = startDateInput.value;
 				         return;
 				       }
 					   //console.log("휴가 시작일 : " + startDateInput.value);

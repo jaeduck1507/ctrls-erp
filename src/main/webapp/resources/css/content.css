@@ -96,7 +96,7 @@ section {
 }
 /* a 태그 상세 크기 조정*/
 .filter-bar a {
-  padding: 8.5px 12px;
+  padding: 8px 12px;
   font-size: 14px;
 }
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
@@ -191,7 +191,7 @@ input[list^="List"] {
   background-color: var(--table-td-color);
   border: none;
   color: var(--color);
-  padding: 6px 10px;
+  padding: 4px 9px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -200,7 +200,7 @@ input[list^="List"] {
   background-color: var(--table-td-color);
   border: none;
   color: indianred;
-  padding: 6px 10px;
+  padding: 4px 9px;
   cursor: pointer;
   font-weight: bold;
 }

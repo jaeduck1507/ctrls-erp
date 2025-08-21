@@ -51,7 +51,10 @@
 			</tr>
 			</table>
    </div>
+   <div>
+	<button onclick="location.href='/mypage'">취소</button>
     <button type="submit">수정</button>
+	</div>
 </form>
 <script>
 	// 이름 입력

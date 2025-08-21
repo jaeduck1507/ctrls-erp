@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.erp.common.model.vo.Paging;
+
 import com.project.erp.hrm.model.dto.LeaveInfo;
 
 @Mapper
@@ -14,7 +16,7 @@ public interface LeaveInfoMapper {
 	// 휴가 신청
 	void leaveAdd(List<LeaveInfo> liList);
 	// 휴가 상태
-	List<LeaveInfo> leaveStatus();
+	List<LeaveInfo> leaveStatus(Paging paging);
 	// 휴가 상태 변경(대기-> 승인 or 반려)
 	void leaveStatusUpdate(LeaveInfo leaveinfo);
 	// 누적 휴가 일수 중 사원 정보 조회
@@ -27,6 +29,8 @@ public interface LeaveInfoMapper {
 	void leaveUpdate(LeaveInfo li);
 	// 휴가 삭제
 	void leaveDelete(int leaveId);
+
+	int totalLeaveInfo();
 
 	
 }

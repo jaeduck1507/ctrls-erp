@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+	<h5>[근태 관리] > [휴가 조회]</h5>
 	<h3>휴가 조회</h3>
 
 	<div id="search" class="filter-bar">

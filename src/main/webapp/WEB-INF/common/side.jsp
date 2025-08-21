@@ -27,7 +27,7 @@
 			    <a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a>
 			  	<a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a>
 			  	<a href="/hrm/leaveDays">휴가 누적 사용일, 남은 휴가일 조회 /hrm/leaveDays</a>
-			  	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus 페이징 처리 필요</a>
+			  	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus 페이징 처리 완료</a>
 			  </div>
             </div>
 
