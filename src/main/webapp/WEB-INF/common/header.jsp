@@ -5,8 +5,8 @@
 <header class="top-header">
   <div class="breadcrumb"></div>
   <div class="right-area">
-    <span>id</span>
-    <span>이름</span>
+    <span></span>
+    <span></span>
 	<sec:authorize access="isAuthenticated()">
     <a href="/mypage" class="btn-mypage">마이페이지</a>
     <a href="/logout" class="btn-logout">로그아웃</a>

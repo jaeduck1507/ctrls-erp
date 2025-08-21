@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<div class="container">
+
 		<form action="/leaveUpdate" method="post">
 			
 			<h5>[근태 관리] > [휴가 조회] > [휴가 수정]</h5>
@@ -46,7 +46,7 @@
 		</table>
 		
 		<button type="submit" id="update">수정</button>
-		</div>
+
 		</form>
 
 		<script>

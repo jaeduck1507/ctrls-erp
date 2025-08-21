@@ -54,12 +54,14 @@ body {
   text-decoration: none;
   transition: background 0.2s;
   width: 100%;
+  box-shadow: #33333362 0 5px 5px -5px;
 }
 
 /* a 태그 상세 크기 조정*/
 .filter-bar a {
   padding: 5px 12px;
   font-size: 14px;
+  box-shadow: #33333362 0 5px 5px -5px;
 }
 .filter-bar .btn{
 	display: flex;
@@ -67,6 +69,7 @@ body {
 		gap: 10px;
 		justify-content: center;
 		width: 100%; 
+		
 }
 .filter-bar .btn button[type="button"] {
 	flex: 1;
@@ -78,6 +81,7 @@ body {
 	  border-radius: 10px;
 	  cursor: pointer;
 	  font-weight: bold;
+	  box-shadow: #33333362 0 5px 5px -5px;
 }
 
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
