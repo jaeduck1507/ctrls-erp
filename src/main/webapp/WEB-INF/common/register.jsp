@@ -23,7 +23,6 @@
 	<button type="button" id = "noCheck">번호확인</button>
 	</div>
 	<span id="noCkeckMessage"></span>
-	
 	<button type="submit">회원가입</button>
 	</div>
 	</form>

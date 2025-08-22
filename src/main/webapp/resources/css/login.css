@@ -50,7 +50,7 @@ body {
   color: white;
   background-color: #90c67c;
   padding: 4px 12px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-decoration: none;
   transition: background 0.2s;
   width: 100%;
@@ -66,7 +66,7 @@ body {
 .filter-bar .btn{
 	display: flex;
 		flex-direction: row;
-		gap: 10px;
+		gap: 7px;
 		justify-content: center;
 		width: 100%; 
 		
@@ -78,7 +78,7 @@ body {
 	  color: #516b38;
 	  border: #67ae6e solid 1px;
 	  padding: 4px 9px;
-	  border-radius: 10px;
+	  border-radius: 5px;
 	  cursor: pointer;
 	  font-weight: bold;
 	  box-shadow: #33333362 0 5px 5px -5px;

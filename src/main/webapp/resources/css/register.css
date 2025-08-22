@@ -46,17 +46,18 @@ body {
   border-radius: 4px;
 }
 /* submit, a, button 스타일 */
+button,
 .filter-bar button[type="submit"] {
   border-style: none;
-  text-decoration: none;
   color: white;
   background-color: #90c67c;
   padding: 4px 12px;
   border-radius: 4px;
-  text-decoration: none;
   transition: background 0.2s;
-  width: 180px;
+  width: fit-content;
+  box-shadow: #33333362 0 5px 5px -5px;
 }
+
 .filter-bar button[type="button"] {
   text-decoration: none;
   background-color: #ffffff;
@@ -68,16 +69,9 @@ body {
   font-weight: bold;
   width:95px;
 
-
-}
-/* a 태그 상세 크기 조정*/
-.filter-bar a {
-  padding: 5px 12px;
-  font-size: 14px;
 }
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
 
-.filter-bar a:hover,
 .filter-bar button[type="button"]:hover {
   background-color: #67ae6e;
   color: #ffffff;
