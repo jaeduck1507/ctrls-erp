@@ -22,7 +22,7 @@
 				<th>유형</th>
 				<th>시작일</th>
 				<th>종료일</th>
-				<th>이유</th>
+				<th>사유</th>
 				</tr>
 					
 				<c:forEach items="${leaveInfoList}" var="item">

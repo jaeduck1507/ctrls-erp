@@ -20,6 +20,7 @@
   margin-top: calc(var(--header-height) + 10px); /* 헤더높이 70px + 여백 10px */
   color: white;
   overflow-y: auto;
+  box-shadow: #33333362 0 5px 5px -5px;
 }
 
 /* 로고 */
@@ -30,8 +31,8 @@
   height: var(--header-height); /* 우측 헤더 높이와 동일 */
   width: var(--side-width); /* 사이드 메뉴 가로 길이와 동일 */
   border-radius: 10px;
-  border: #cec7c7 solid 1px;
-  box-shadow: #33333362 0 1px 1px; /* 그림자 효과 */
+  border: #F2F0F0 solid 1px;
+  box-shadow: #33333362 0 5px 5px -5px; /* 그림자 효과 */
 }
 
 /* 사이드 메뉴 중 주메뉴 */

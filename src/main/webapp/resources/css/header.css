@@ -1,6 +1,6 @@
 :root {
   --side-width: 250px; /* 사이드 메뉴 가로 길이*/
-  --header-height: 70px; /* 헤더 높이*/
+  --header-height: 100px; /* 헤더 높이*/
   --color: #67ae6e;
 }
 * {
@@ -16,13 +16,13 @@
   height: var(--header-height);
   padding: 0 20px;
   background-color: #f8f8f8;
-  border: #cec7c7 solid 1px;
+  border: #F2F0F0 solid 1px;
   border-radius: 10px;
   z-index: 999;
   /* 전체 가로 길이에서 사이드메뉴 가로 길이만큼 밀기, 97%를 한 이유는 상단 헤더 오른쪽 끝이 보이게 하기 위함 */
   width: calc(97% - var(--side-width));
   margin: 0 20px 20px 20px;
-  box-shadow: #33333362 0px 1px 1px;
+  box-shadow: #33333362 0 5px 5px -5px;
   box-sizing: border-box; /* 패딩 포함 너비 계산 */
 }
 .top-header .right-area {
@@ -40,7 +40,7 @@
   border-radius: 4px;
   text-decoration: none;
   transition: background 0.2s;
-  box-shadow: #33333362 0px 1px 1px;
+  box-shadow: #33333362 0 5px 5px -5px;
 }
 .top-header .btn-logout:hover,
 .top-header .btn-mypage:hover {

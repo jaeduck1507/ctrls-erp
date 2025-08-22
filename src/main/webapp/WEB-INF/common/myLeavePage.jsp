@@ -58,59 +58,7 @@
 		  		</div>
 		  		</div>
 
-				<!-- Button trigger modal -->
-				<div class="filter-bar">
-				<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				  모달 테스트
-				</button>
-				</div>
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog  modal-dialog-centered">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-						<form action="/myLeaveUpdate" method="post">
-									
-								<table border="1" class="data-table">
-										<tr>
-											
-										<th>신청번호</th>
-										<th>신청날짜</th>
-										<th>유형</th>
-										<th>시작일</th>
-										<th>종료일</th>
-										<th>이유</th>
-										</tr>
-											
-										<c:forEach items="${leaveInfoList}" var="item">
-										<tr>
-										    <td>${item.leaveId}<input type="hidden" name="leaveId" value="${item.leaveId}"></td>
-											<td>${item.requestDate}<input type="hidden" name="requestDate" value="${item.requestDate}"></td>
-											<!--휴가 신청 시 유형이 고정되도록, 하지만 다시 선택할 수 있도록 ${item.leaveType eq '연차' ? 'selected' : ''} 추가-->
-											<td><select name="leaveType"><option disabled selected>유형선택</option><option value="연차" ${item.leaveType eq '연차' ? 'selected' : ''}>연차</option><option value="병가" ${item.leaveType eq '병가' ? 'selected' : ''}>병가</option><option value="경조사" ${item.leaveType eq '경조사' ? 'selected' : ''}>경조사</option><option value="기타" ${item.leaveType eq '기타' ? 'selected' : ''}>기타</option></select></td>
-											<td><input type="date" name="startDate" value="${item.startDate}" class="leaveDate"></td>
-											<td><input type="date" name="endDate" value="${item.endDate}" class="leaveDate" id="endDate"></td>
-											<td><input type="text" name="reason" value="${item.reason}" placeholder="사유 입력"></td>
-											<input type="hidden" name="leaveId" value="${item.empNo}">
-											<input type="hidden" name="leaveId" value="${item.empName}">
-											<input type="hidden" name="leaveId" value="${item.status}">
-										</tr>
-										</c:forEach>
-								</table>
-						       
-								</form>
-				      </div>
-				      <div class="modal-footer">
-				        <button  type="submit" id="update" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.href='/myLeavePage'">취소</button>
-				        <button type="button" class="btn btn-primary">수정</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+				
 				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 	<script>
 
@@ -243,7 +191,6 @@
 	   const leaveDateInputs = document.querySelectorAll('.leaveDate');
  	   const startDateInput = document.getElementById('startDate');
  	   const endDateInput = document.getElementById('endDate');
-	   const endDateInput2 = document.querySelector('#endDate');
 	   
 	   leaveDateInputs.forEach(function(input){
 			 input.setAttribute('min', tomorrowStr); // 과거 날짜 선택 제한

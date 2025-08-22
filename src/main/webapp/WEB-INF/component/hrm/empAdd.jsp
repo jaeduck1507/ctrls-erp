@@ -55,7 +55,8 @@ table {
 </style>
 </head>
 <body>
-    <h1>테이블 열 추가/삭제 (사원 등록) 관리자</h1>
+	<h5>[인적 자원 관리] > [사원 정보 추가]</h5>
+	<h3>사원 정보 추가</h3>
     <div id = "test" class="filter-bar">
         <button id = "btn2">열 추가</button>
         <!-- <button id = "btn3">removeRowTest</button> -->
