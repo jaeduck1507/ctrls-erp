@@ -38,7 +38,7 @@ FROM leave_request
 	  </if>
 	</where>
 </if>
-
+ORDER BY leave_id DESC
 </select>
 
 <!-- 휴가 신청, 사번, 신청 날짜, 휴가 유형, 휴가 시작일,  종료일, 사유 작성-->
@@ -122,5 +122,12 @@ WHERE leave_id=#{leaveId}
 <delete id="leaveDelete" parameterType="int">
 DELETE FROM leave_request WHERE leave_id = #{leaveId}
 </delete>
+
+<insert id="attendanceAddLeaveDay" parameterType="ArrayList">
+INSERT INTO attendance_log(emp_no, work_date, check_in, check_out, status) VALUES
+<foreach collection="liList" item="leave" separator=",">
+   (#{empNo}, #{startDate}, '--:--:--',  '--:--:--', '휴가')
+</foreach>
+</insert>
 
 </mapper>

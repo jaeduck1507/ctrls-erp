@@ -18,7 +18,7 @@ body {
 #register-card {
   border: #90c67c solid 1px;
   border-radius: 5px;
-  width: 380px;
+  width: 400px;
   margin-bottom: 10px;
   color: #67ae6e;
   padding: 20px;
@@ -37,8 +37,15 @@ body {
   font-size: 14px;
   flex-direction: column;
 }
-.filter-bar input[type="text"],
-.filter-bar input[type="password"],
+.id-area,
+.pwd-area,
+.no-area{
+	width: 100%;
+	margin-bottom: 10px;
+	
+}
+.filter-bar .id-area input[type="text"],
+.filter-bar .pwd-area input[type="password"],
 .filter-bar input[type="number"] {
   width: 100%;
   padding: 6px 8px;

@@ -8,21 +8,30 @@
 <title>register</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" href="../resources/css/register.css" />
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
 	
 	<form action="/register" method="post" id="register">
 		<div class="filter-bar" id="register-card">
 			<h1>회원가입</h1>
-	<input type="text" name="username" id="id" placeholder="아이디">
+			<div class="id-area">
+	<i class="fi fi-rr-user"></i>&nbsp;&nbsp;아이디<input type="text" name="username" id="id" placeholder="아이디">
 	<p id="resultId">영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내</p>
-	<input type="password" name="password" id="pw" placeholder="비밀번호">
+	</div>
+	<div class="pwd-area">
+	<i class="fi fi-rr-lock"></i>&nbsp;&nbsp;비밀번호<input type="password" name="password" id="pw" placeholder="비밀번호">
 	 <p id="resultPw">영문자, 숫자, 특수문자 조합으로 8~15자 이내</p>
+	 </div>
+	 <div class="no-area">
+		<i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번
 	<div class="emp-check">
 	<input type="number" name="empNo" id ="empNo" placeholder="직원번호">
 	<button type="button" id = "noCheck">번호확인</button>
 	</div>
-	<span id="noCkeckMessage"></span>
+	<span id="noCkeckMessage">직원번호 입력 후 번호 확인을 눌러주세요.</span>
+	</div>
+	
 	<button type="submit">회원가입</button>
 	</div>
 	</form>

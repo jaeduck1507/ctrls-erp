@@ -36,19 +36,19 @@
 			<h4>사원 정보</h4>
 			<table>
 				<tr>
-		    <th>직원 번호</th><td><b> ${user.empNo}</b></td>
+		    <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;&nbsp;&nbsp;사번</th><td><b> ${user.empNo}</b></td>
 			</tr>
 			<tr>
-		    <th>성명</th><td><b>${user.empName}</b></td>
+		    <th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;&nbsp;&nbsp;성명</th><td><b>${user.empName}</b></td>
 			</tr>
 			<tr>
-		    <th>직급</th><td><b>${user.jobTitle}</b></td>
+		    <th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;&nbsp;&nbsp;직급</th><td><b>${user.jobTitle}</b></td>
 			</tr>
 			<tr>
-		    <th>부서</th><td><b>${user.deptName}</b></td>
+		    <th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><b>${user.deptName}</b></td>
 			</tr>
 			<tr>
-		    <th>입사일</th><td><b>${user.hireDate}</b></td>
+		    <th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;입사일</th><td><b>${user.hireDate}</b></td>
 			</tr>
 			</table>
 		</div>
@@ -57,16 +57,16 @@
 			<h4>개인 정보</h4>
 		<table>
 			<tr>
-			<th>주민등록번호</th><td><b>${user.empIn}</b></td>
+			<th><i class="fi fi-rr-hastag"></i>&nbsp;&nbsp;&nbsp;&nbsp;주민등록번호</th><td><b>${user.empIn}</b></td>
 			</tr>
-						<tr>
-		    <th>주소</th><td><b>${user.addr}</b></td>
+			<tr>
+		    <th><i class="fi fi-rr-home-location-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;주소</th><td><b>${user.addr}</b></td>
 			</tr>
-						<tr>
-		    <th>연락처</th><td><b>${user.phone}</b></td>
+			<tr>
+		    <th><i class="fi fi-rr-phone-call"></i>&nbsp;&nbsp;&nbsp;&nbsp;연락처</th><td><b>${user.phone}</b></td>
 			</tr>
-						<tr>
-		    <th>이메일</th><td><b>${user.email}</b></td>
+			<tr>
+		    <th><i class="fi fi-rr-envelope"></i>&nbsp;&nbsp;&nbsp;&nbsp;이메일</th><td><b>${user.email}</b></td>
 			</tr>
 		</table>
 		</div>

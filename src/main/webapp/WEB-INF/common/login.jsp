@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>login</title>
 <link rel="stylesheet" href="../resources/css/login.css" />
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
 	    <form action="login" method="post">
@@ -14,16 +15,15 @@
 	        <h1>로그인</h1>
 	        <input type="text" name="username" placeholder="아이디" />
 	        <input type="password" name="password" placeholder="비밀번호" />
-	        <button type="submit">로그인</button>
+	        <button type="submit"><i class="fi fi-rr-sign-in-alt"></i>&nbsp;&nbsp;로그인</button>
 			<div class="btn">
 	        <button type="button" onclick="location.href='/findId'">
-	          아이디 찾기
+	          <i class="fi fi-rr-search"></i>&nbsp;&nbsp;아이디 찾기
 	        </button>
 			<button type="button" onclick="location.href='/register'">
-				          회원가입
+				          <i class="fi fi-rr-user-add"></i>&nbsp;&nbsp;회원가입
 				        </button>
 						</div>
 	      </div>
 	    </form>
 	  </body>
-	</html>

@@ -55,14 +55,27 @@
 				   // 입력한 사번으로 고정
 				   const empNoInput = document.querySelector('.empNo');
 				   $("#result tr").eq(-1).find(".empNo").val(empNoInput.value);
+
 				   // 휴가시작일, 종료일 신청날짜 다음날로 고정(다음날부터 신청가능하도록)
-				   const tomorrowDay = String(today.getDate() + 1).padStart(2, "0");
-				   const tomorrowStr = year+"-"+month+"-"+tomorrowDay;
-				   console.log(tomorrowStr);
-				   //const tomorrow = new Date();
-				   //tomorrow.setDate(tomorrow.getDate() + 1);
-				   //const tomorrowStr = tomorrow.toISOString().substring(0, 10);
-				   $("#result tr").eq(-1).find(".leaveDate").val(tomorrowStr);
+				   		// 내일부터 신청 가능
+				   		let tomorrow = new Date();
+				   		tomorrow.setDate(today.getDate() + 1);
+
+				   		// 내일이 주말이면 다음 월요일로 이동
+				   		let dayOfWeek = tomorrow.getDay(); // 0=일, 6=토
+				   		if (dayOfWeek === 6) { 
+				   		  // 토요일이면 +2일 → 월요일
+				   		  tomorrow.setDate(tomorrow.getDate() + 2);
+				   		} else if (dayOfWeek === 0) { 
+				   		  // 일요일이면 +1일 → 월요일
+				   		  tomorrow.setDate(tomorrow.getDate() + 1);
+				   		}
+				   	     const nextYear = tomorrow.getFullYear();
+				   	     const nextMonth = String(tomorrow.getMonth() + 1).padStart(2, "0");
+				   	     const nextDay = String(tomorrow.getDate()).padStart(2, "0");
+				   		 const nextStr = nextYear+"-"+nextMonth+"-"+nextDay;
+
+				   $("#result tr").eq(-1).find(".leaveDate").val(nextStr);
 				   
 				   // 과거시간, 주말, 공휴일 선택 제한
 				   // Q. 더 간단한 방법, 그리고 앞으로의 공휴일을 계속 제한할 방법은?
@@ -81,7 +94,7 @@
 				   const startDateInput = document.querySelector('#startDate');
 				   const endDateInput = document.querySelector('#endDate');
 				   leaveDateInputs.forEach(function(input){
-				     input.setAttribute('min', tomorrowStr); // 과거 날짜 선택 제한
+				     input.setAttribute('min', nextStr); // 과거 날짜 선택 제한
 					 
 				     input.addEventListener('input', function(){
 				       const selectedDate = new Date(this.value); // 사용자가 선택한 날짜
@@ -91,7 +104,7 @@
 
 				       if(weekend || holiday){
 				         alert("주말 및 공휴일 선택불가");
-				         this.value = tomorrowStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
+				         this.value = nextStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
 						 endDateInput.value = startDateInput.value;
 				         return;
 				       }
@@ -134,10 +147,8 @@
 			                   	if(j === 4)  obj.endDate=$("#result tr").eq(i).find("td").eq(j).find("input").val();
 			                   	if(j === 5)  obj.reason=$("#result tr").eq(i).find("td").eq(j).find("input").val();
 			                   	if(j === 6)  obj.delete=$("#result tr").eq(i).find("td").eq(j).find("button").val();
-
 			                   }
-			                   liList.push(obj); // 정보 저장한 객체를 배열에 삽입
-							   
+			                   liList.push(obj); // 정보 저장한 객체를 배열에 삽입  
 			               }
 						   
 					
