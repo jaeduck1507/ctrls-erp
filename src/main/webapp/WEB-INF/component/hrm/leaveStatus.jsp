@@ -76,6 +76,9 @@
 					const formData = new FormData();
 					formData.append("status", "승인");
 					formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
+					const empNo = $row.find("td").eq(6).text(); // 사원ID 컬럼 위치 예시
+					const startDate = $row.find("td").eq(3).text(); // 시작일 컬럼 위치
+					
 					//location.reload(); // 승인 버튼 누르면 자동 새로고침
 					$.ajax({
 						// 요청
@@ -87,6 +90,27 @@
 						// 응답
 						success : function(result) {
 							location.reload();
+							$.ajax({
+								// 요청
+								type : "post",
+								url : "/attendanceAddLeaveDay",
+								data : JSON.stringify([{
+									"empNo" : empNo,
+									"startDate" : startDate,
+									"checkIn" : '--:--:--',
+									"checkOut" : '--:--:--',
+									"status" : '휴가'
+							   }]),
+							   contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
+								// 응답
+								success : function(result) {
+									location.reload();
+									
+								},
+								error:function(xhr, status, error){
+									
+								}
+							});
 							
 						},
 						error:function(xhr, status, error){

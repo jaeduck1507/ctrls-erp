@@ -19,6 +19,8 @@ public interface LeaveInfoMapper {
 	List<LeaveInfo> leaveStatus(Paging paging);
 	// 휴가 상태 변경(대기-> 승인 or 반려)
 	void leaveStatusUpdate(LeaveInfo leaveinfo);
+	// 휴가 승인 후 출근 현황에 추가 
+	void attendanceAddLeaveDay(List<LeaveInfo> liList);
 	// 누적 휴가 일수 중 사원 정보 조회
 	List<LeaveInfo> leaveDays(LeaveInfo leaveInfo);
 	// 누적 휴가 일수

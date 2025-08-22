@@ -28,6 +28,8 @@ public class LeaveInfoService {
 	
 	public void leaveStatusUpdate(LeaveInfo leaveinfo) {
 		leaveInfoMapper.leaveStatusUpdate(leaveinfo);
+		//leaveInfoMapper.attendanceAddLeaveDay(lilist);
+		//System.out.println(leaveinfo);
 	}
 	
 	public List<LeaveInfo> leaveDays(LeaveInfo leaveInfo) {

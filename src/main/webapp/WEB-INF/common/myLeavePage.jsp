@@ -41,7 +41,7 @@
 
 		  </div>
 		  <div class="box2">
-		  		<h4>휴가 처리 현황</h4>
+		  		<h4>휴가 신청 내역</h4>
 		     <div class="filter-bar">
 		  	
 		  	  휴가 처리 상태 <select name="status" id="status">
@@ -61,9 +61,6 @@
 				
 				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 	<script>
-
-	
-		
 		// 조회 버튼 클릭 시 정보 출력
    		$(document).ready(()=>{
    			const formData = new FormData();
@@ -139,7 +136,7 @@
 											   + "</td><td>" + leaveInfo.endDate 
 											   + "</td><td>" + leaveInfo.reason
 											   + "</td><td>" + leaveInfo.status 
-											   + "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
+											   + "</td><td><a id='btn1' href='/myLeaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/myLeaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
 								$("#result2").append(text);
 								
 								}
@@ -171,12 +168,26 @@
 		$("#currentDate").val(todayStr);
 		
 		// 휴가시작일, 종료일 신청날짜 다음날로 고정(다음날부터 신청가능하도록)
-		const tomorrowDay = String(today.getDate() + 1).padStart(2, "0");
-		const tomorrowStr = year+"-"+month+"-"+tomorrowDay;
-	   $(".leaveDate").val(tomorrowStr);
+		// 내일부터 신청 가능
+		let tomorrow = new Date();
+		tomorrow.setDate(today.getDate() + 1);
+
+		// 내일이 주말이면 다음 월요일로 이동
+		let dayOfWeek = tomorrow.getDay(); // 0=일, 6=토
+		if (dayOfWeek === 6) { 
+		  // 토요일이면 +2일 → 월요일
+		  tomorrow.setDate(tomorrow.getDate() + 2);
+		} else if (dayOfWeek === 0) { 
+		  // 일요일이면 +1일 → 월요일
+		  tomorrow.setDate(tomorrow.getDate() + 1);
+		}
+	     const nextYear = tomorrow.getFullYear();
+	     const nextMonth = String(tomorrow.getMonth() + 1).padStart(2, "0");
+	     const nextDay = String(tomorrow.getDate()).padStart(2, "0");
+		 const nextStr = nextYear+"-"+nextMonth+"-"+nextDay;
+		$(".leaveDate").val(nextStr);
 	   
 	   // 과거시간, 주말, 공휴일 선택 제한
-   	   // Q. 더 간단한 방법, 그리고 앞으로의 공휴일을 계속 제한할 방법은?
    	   const holidays = [// 제한할 공휴일 목록
    	     "2025-08-15", // 광복절
    	     "2025-10-03", // 개천절
@@ -193,7 +204,7 @@
  	   const endDateInput = document.getElementById('endDate');
 	   
 	   leaveDateInputs.forEach(function(input){
-			 input.setAttribute('min', tomorrowStr); // 과거 날짜 선택 제한
+			 input.setAttribute('min', nextStr); // 과거 날짜 선택 제한
 			 
 			 input.addEventListener('input', function(){
 				const selectedDate = new Date(this.value); // 사용자가 선택한 날짜
@@ -201,9 +212,11 @@
 		        const weekend = (day === 0 || day === 6); // 0: 일, 6: 토 주말
 		        const holiday = holidays.includes(this.value); // 공휴일
 				
+				
+				   
 				if(weekend || holiday){
 					alert("주말 및 공휴일 선택불가");
-					this.value = tomorrowStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
+					this.value = nextStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
 					endDateInput.value = startDateInput.value;
 					return;
 				 }
@@ -249,12 +262,13 @@
 		   contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	       // 응답
 		   success : function(response) {
-				alert("신청완료"); // 휴가 등록 버튼을 누르면
-				location.reload(); // 새로고침
+			alert("신청완료"); // 휴가 등록 버튼을 누르면
+											location.reload(); // 새로고침
 	      },
 	       error:function(xhr,status,error) {
 		   }
-       });
+		 
+	   });
 	});
 
 	

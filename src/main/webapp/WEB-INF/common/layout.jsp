@@ -13,6 +13,7 @@ uri="http://www.springframework.org/security/tags" %>
     <link rel="stylesheet" href="../resources/css/side.css" />
     <link rel="stylesheet" href="../resources/css/header.css" />
     <link rel="stylesheet" href="../resources/css/content.css" />
+	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
