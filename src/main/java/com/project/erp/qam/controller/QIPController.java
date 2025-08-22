@@ -73,8 +73,9 @@ public class QIPController {
         
         List<EmpInfo> empList = employeeInfoService.showEmployee();
         model.addAttribute("empList", empList);
-
-        return "component/qam/qcFormUpdate";
+        
+        model.addAttribute("component","../component/qam/qcFormUpdate.jsp");
+	    return "common/layout";
     }
 
     // QC 수정 처리

@@ -55,9 +55,11 @@ public class PIMController {
 	public String showUpdateForm(int productNo, Model model) {
 //	    ProductDetailDTO product = productService.findProductDetailById(productNo);
 //	    model.addAttribute("product", product); // Service로 비즈니스 로직 옮김
-	    return productService.findProductDetailById(productNo, model);
+	    //return productService.findProductDetailById(productNo, model);
 	    // productService.findProductDetailById(productNo, model);
 	    // return "/qam/product etc." 같이 해도 되는지 알아보기 
+	    model.addAttribute("component","../component/qam/productDetailFormUpdate.jsp");
+	    return "common/layout";
 	}
 
 	// 제품 수정 처리
