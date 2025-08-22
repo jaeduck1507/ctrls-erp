@@ -1,0 +1,153 @@
+const monthTrans = document.querySelector("#monthTrans");
+/*
+const transMonthLabels = [
+	<c:forEach var="trans" items="${monthTransList}" varStatus="loop">
+		"${trans.transMonth}"<c:if test="${!loop.last}">,</c:if>
+	</c:forEach>
+];
+
+const monthIncomeValues = [
+	<c:forEach var="trans" items="${monthTransList}" varStatus="loop">
+		"${trans.monthIncome}"<c:if test="${!loop.last}">,</c:if>
+	</c:forEach>
+];
+
+const monthExpensesValues = [
+	<c:forEach var="trans" items="${monthTransList}" varStatus="loop">
+		"${trans.monthExpenses}"<c:if test="${!loop.last}">,</c:if>
+	</c:forEach>
+];
+*/
+
+const transMonthLabels = monthTransList.map(item => item.transMonth);
+const monthIncomeValues = monthTransList.map(item => item.monthIncome);
+const monthExpensesValues = monthTransList.map(item => item.monthExpenses);
+
+new Chart(monthTransChart, {
+	type: 'bar',
+	data: {
+		labels: transMonthLabels,
+		datasets: [
+			{
+				label: '월별 수입',
+				data: monthIncomeValues,
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgb(255, 99, 132)',
+				borderWidth: 1
+			},
+			{
+				label: '월별 지출',
+				data: monthExpensesValues,
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgb(54, 162, 235)',
+				borderWidth: 1
+			}
+		]
+	},
+	options: {
+		scales: {
+			y: {
+				beginAtZero: true
+			}
+		}
+	}
+});
+
+$("#btn").click(() => {
+	const formData = new FormData();
+	formData.append("transType", $("#transType").val());
+	formData.append("deptName", $("#deptName").val());
+	
+	const startDate = $("#startDate").val();
+	const endDate = $("#endDate").val();
+	formData.append("startDate", startDate);
+	formData.append("endDate", endDate);
+	
+	if (startDate && !endDate) {
+		alert("조회 종료일을 선택해주세요!");
+		return;
+	} else if (!startDate && endDate) {
+		alert("조회 시작일을 선택해주세요!");
+		return;
+	} else if (startDate > endDate) {
+		alert("조회 기간을 다시 선택해주세요!");
+		return;
+	}
+	
+	$.ajax({
+		type: "post",
+		url: "/showtrans",
+		data: formData,
+		processData: false,
+		contentType : false,
+		success: function(result) {
+			//console.log($("#transType").val());
+			//console.log($("#deptName").val());
+			//console.log($("#startDate").val());
+			//console.log($("#endDate").val());
+			
+			if (!result.transList || result.transList.length === 0) {
+				alert("조회된 결과가 없습니다");
+				location.reload();
+			}
+			
+			$("#result").html("");
+			$("#result").append("<tr><th>거래 번호</th><th>부서</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
+				for (const trans of result.transList) {
+					var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount .toLocaleString()
+						+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"
+				$("#result").append(text);
+			}
+			
+			$(".pagination").html('');
+        	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+        	for (var i = result.startPage; i <= result.endPage; i++) {
+        		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+        	}
+        	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+			
+		},
+		error: function(xhr, status, error) {
+											
+		}
+	});
+});
+
+$(document).on('click', 'a.page-link', function(e) {
+	e.preventDefault();
+	
+	const formData = new FormData();
+	formData.append("transType", $("#transType").val());
+	formData.append("deptName", $("#deptName").val());
+	formData.append("startDate", $("#startDate").val());
+	formData.append("endDate", $("#endDate").val());
+	formData.append("page", $(this).attr('href'));
+	
+	$.ajax({
+		type: "post",
+		url: "/showtrans",
+		data: formData,
+		processData: false,
+		contentType : false,
+		success: function(result) {
+			$("#result").html("");
+			$("#result").append("<tr><th>거래 번호</th><th>부서</th><th>수입/지출</th><th>금액</th><th>분류</th><th>상세 내역</th><th>발생 일자</th></tr>");
+				for (const trans of result.transList) {
+					var text = "<tr><td>" + trans.transNo + "</td><td>" + trans.deptName + "</td><td>" + trans.transType + "</td><td>" + trans.transAmount.toLocaleString()
+						+ "</td><td>" + trans.category + "</td><td>" + trans.transDesc + "</td><td>" + trans.transDate + "</td></tr>"
+				$("#result").append(text);
+			}
+						
+			$(".pagination").html('');
+        	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+        	for (var i = result.startPage; i <= result.endPage; i++) {
+        		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+        	}
+        	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+			
+		},
+		error: function(xhr, status, error) {
+											
+		}
+	});
+});

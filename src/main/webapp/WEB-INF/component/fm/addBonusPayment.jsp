@@ -46,7 +46,7 @@
 		var payDateCheckValue = false;
 		
 		const bonusNoCheck = /^[1-9]$/;
-		$(document).on("click", "#bonusNo", (e) => {
+		$(document).on("click", ".bonusNo", (e) => {
 			console.log(e.target.value);
 			console.log(bonusNoCheck.test(e.target.value));
 			
@@ -61,7 +61,7 @@
 		});
 		
 		const paymentCheck = /^[1-9]\d*$/;
-		$(document).on("input", "#payment", (e) => {
+		$(document).on("input", ".payment", (e) => {
 			console.log(e.target.value);
 			console.log(paymentCheck.test(e.target.value));
 			
@@ -76,7 +76,7 @@
 		});
 		
 		const payDateCheck = /.+/;
-		$(document).on("input", "#payDate", (e) => {
+		$(document).on("input", ".payDate", (e) => {
 			console.log(e.target.value);
 			console.log(payDateCheck.test(e.target.value));
 			
@@ -131,9 +131,9 @@
 			}
 			
 			deptInfo.deptNo = opt.data('emp_no');
-			$(e.target).parent().parent().find("td").eq(1).html('<select id="bonusNo"><option value="" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
-			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" id="payment" name="payment">');
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" id="payDate" name="payDate">');
+			$(e.target).parent().parent().find("td").eq(1).html('<select class="bonusNo"><option value="" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
+			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" name="payment" class="payment" >');
+			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" name="payDate" class="payDate">');
 		});
 		
 		$("#bonus-register").click(() => {

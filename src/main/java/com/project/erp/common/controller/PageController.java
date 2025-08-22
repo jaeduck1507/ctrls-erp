@@ -151,7 +151,7 @@ public class PageController {
 		//System.out.println("income : " + transactionService.monthIncomeChart());
 		//System.out.println("expense : " + transactionService.monthExpensesChart());
 		model.addAttribute("monthTransList", transactionService.monthTransChart());
-		//System.out.println(transactionService.monthTransChart());
+		System.out.println(transactionService.monthTransChart());
 		model.addAttribute("component","../common/modalTest.jsp");
 		return "common/layout";
 	}

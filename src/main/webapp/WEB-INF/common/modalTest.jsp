@@ -254,21 +254,39 @@
 		];
 		*/
 		
+		const transMonthLabels = [
+			<c:forEach var="trans" items="${monthTransList}" varStatus="loop">
+				"${trans.transMonth}"<c:if test="${!loop.last}">,</c:if>
+			</c:forEach>
+		];
+		
+		const monthIncomeValues = [
+			<c:forEach var="trans" items="${monthTransList}" varStatus="loop">
+				"${trans.monthIncome}"<c:if test="${!loop.last}">,</c:if>
+			</c:forEach>
+		];
+		
+		const monthExpensesValues = [
+			<c:forEach var="trans" items="${monthTransList}" varStatus="loop">
+				"${trans.monthExpenses}"<c:if test="${!loop.last}">,</c:if>
+			</c:forEach>
+		];
+		
 		new Chart(twoBarChart, {
 			type: 'bar',
 			data: {
-				labels: monthLabels,
+				labels: transMonthLabels,
 				datasets: [
 					{
 						label: '월별 수입',
-						data: monthDataValues,
+						data: monthIncomeValues,
 						backgroundColor: 'rgba(255, 99, 132, 0.2)',
 						borderColor: 'rgb(255, 99, 132)',
 						borderWidth: 1
 					},
 					{
 						label: '월별 지출',
-						data: monthDataValues,
+						data: monthExpensesValues,
 						backgroundColor: 'rgba(54, 162, 235, 0.2)',
 						borderColor: 'rgb(54, 162, 235)',
 						borderWidth: 1

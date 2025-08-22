@@ -48,12 +48,11 @@
 		var transDateCheckValue = false;
 		
 		const transAmountCheck = /^[1-9]\d*$/;
-		$(document).on("input", "#transAmount", (e) => {
+		$(document).on("input", ".transAmount", (e) => {
 			console.log(e.target.value);
 			console.log(transAmountCheck.test(e.target.value));
 			
 			if (!transAmountCheck.test(e.target.value)) {
-				//alert("숫자만 입력!");
 				e.target.parentElement.classList.add("red");
 				transAmountCheckValue = false;
 			} else {
@@ -64,7 +63,7 @@
 		});
 		
 		const transDateCheck = /.+/;
-		$(document).on("input", "#transDate", (e) => {
+		$(document).on("input", ".transDate", (e) => {
 			console.log(e.target.value);
 			console.log(transDateCheck.test(e.target.value));
 			
@@ -123,9 +122,9 @@
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 			$(e.target).parent().parent().find("td").eq(2).text("지출");
 			$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
-			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" id="transAmount">');
+			$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" class="transAmount">');
 			$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc" value="기타 비용 지출">');
-			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date" id="transDate">');
+			$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date" class="transDate">');
 		});
 		
 		$("#trans-register").click(() => {

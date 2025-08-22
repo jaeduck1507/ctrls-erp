@@ -44,7 +44,7 @@
 	
 	<script>
 		const quantityCheck = /^[1-9]\d*$/;
-		$(document).on("input", "#quantity", (e) => {
+		$(document).on("input", ".quantity", (e) => {
 			console.log(e.target.value);
 			console.log(quantityCheck.test(e.target.value));
 			
@@ -162,13 +162,13 @@
 			$(e.target).parent().parent().find("td").eq(3).text(productInfo.productPrice);
 			$(e.target).parent().parent().find("td").eq(4).text(productInfo.productCost);
 			$(e.target).parent().parent().find("td").eq(5).text(productInfo.productCategory);
-			$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="0" id="quantity" name="quantity" class="price">');
+			$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="0" name="quantity" class="quantity">');
 			$(e.target).parent().parent().find("td").eq(7).text("");
 			$(e.target).parent().parent().find("td").eq(8).text("");
 			$(e.target).parent().parent().find("td").eq(9).html('<input type="date" name="purchase-date" value="${today}" readonly="readonly">');
 		});
 		
-		$(document).on('input', '.price', (e) => {
+		$(document).on('input', '.quantity', (e) => {
 			const price = $(e.target).val();
 			const amount = $(e.target).parent().parent().find("td").eq(4).text();
 			const totalPrice = price * amount;

@@ -55,19 +55,18 @@ public class TransactionService {
 	public List<TransDTO> monthTransChart() {
 		List<TransDTO> incomeList = monthIncomeChart();
 		List<TransDTO> expensesList = monthExpensesChart();
-		//System.out.println(incomeList);
-		//System.out.println(expensesList);
+		//System.out.println("incomeList : " + incomeList);
+		//System.out.println("expensesList : " + expensesList);
 		
-		List<TransDTO> monthTransList = new ArrayList<>();
-		for (TransDTO trans : incomeList) {
-			TransDTO transDTO = new TransDTO();
-			System.out.println(trans.getTransMonth());
-			System.out.println(trans.getMonthIncome());
-			transDTO.setTransMonth(trans.getTransMonth());
-			transDTO.setMonthIncome(trans.getMonthIncome());
-			monthTransList.add(transDTO);
+		List<TransDTO> monthTransList = incomeList;
+		
+		for (int i = 0; i < monthTransList.size(); i++) {
+			if (monthTransList.get(i).getTransMonth().equals(expensesList.get(i).getTransMonth())) {
+				monthTransList.get(i).setMonthExpenses(expensesList.get(i).getMonthExpenses());
+			}
 		}
-		//System.out.println(monthTransList);
+		
+		//System.out.println("monthTransList : " + monthTransList);
 		return monthTransList;
 	}
 	

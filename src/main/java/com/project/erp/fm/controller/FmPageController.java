@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
 import com.project.erp.fm.service.BudgetService;
 import com.project.erp.fm.service.SaleManageService;
+import com.project.erp.fm.service.TransactionService;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.BonusMapper;
 import com.project.erp.hrm.service.DepartmentService;
@@ -46,6 +47,9 @@ public class FmPageController {
 	
 	@Autowired
 	private SaleManageService saleManageService;
+	
+	@Autowired
+	private TransactionService transactionService;
 	
 	@GetMapping("/saleManage")
 	public String saleManage(Model model, Paging paging) {
@@ -86,6 +90,7 @@ public class FmPageController {
 	@GetMapping("/transaction")
 	public String transaction(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
+		model.addAttribute("monthTransList", transactionService.monthTransChart());
 		model.addAttribute("component","../component/fm/transaction.jsp");
 		return "common/layout";
 	}

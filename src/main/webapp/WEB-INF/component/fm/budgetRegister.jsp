@@ -43,29 +43,12 @@
 	</div>
 	
 	<script>
-		/*
-		const periodTypeCheckValue = {
-			reg : /^[A-Z]$/
-		};
-		const budgetAmountCheckValue = {
-			reg : /^[1-9]\d*$/
-		};
-		const executionDateCheckValue = {
-			reg : /.+/
-		};
-		
-		function checkReg(target, checkValue) {
-			console.log(target.value);
-    		console.log(checkValue.reg.test(target.value));
-		}
-		*/
-		
 		var periodTypeCheckValue = false;
 		var budgetAmountCheckValue = false;
 		var executionDateCheckValue = false;
 		
 		const periodTypeCheck = /^[A-Z]$/;
-		$(document).on("click", "#periodType", (e) => {
+		$(document).on("click", ".periodType", (e) => {
 			console.log(e.target.value);
 			console.log(periodTypeCheck.test(e.target.value));
 			
@@ -80,7 +63,7 @@
 		});
 		
 		const budgetAmountCheck = /^[1-9]\d*$/;
-		$(document).on("input", "#budgetAmount", (e) => {
+		$(document).on("input", ".budgetAmount", (e) => {
 			console.log(e.target.value);
 			console.log(budgetAmountCheck.test(e.target.value));
 			
@@ -96,7 +79,7 @@
 		});
 		
 		const executionDateCheck = /.+/;
-		$(document).on("input", "#executionDate", (e) => {
+		$(document).on("input", ".executionDate", (e) => {
 			console.log(e.target.value);
 			console.log(executionDateCheck.test(e.target.value));
 			
@@ -152,10 +135,10 @@
 			
 			deptInfo.deptNo = opt.data('dept_no');
 			$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
-			$(e.target).parent().parent().find("td").eq(2).html('<select id="periodType"><option value="" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" min="0" name="budget-amount" id="budgetAmount">');
+			$(e.target).parent().parent().find("td").eq(2).html('<select class="periodType"><option value="" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
+			$(e.target).parent().parent().find("td").eq(3).html('<input type="number" min="0" name="budget-amount" class="budgetAmount">');
 			$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan">');
-			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date" id="executionDate">');
+			$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date" class="executionDate">');
 		});
 		
 		
