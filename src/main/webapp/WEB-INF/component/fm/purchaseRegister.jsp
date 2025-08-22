@@ -48,13 +48,28 @@
 			console.log(e.target.value);
 			console.log(quantityCheck.test(e.target.value));
 			
+			let allValid = true;
+				
+			const table = document.querySelectorAll(".quantity");
+			    for (let i = 0; i < table.length; i++) {
+			        const check = table[i];
+
+			        if (!quantityCheck.test(check.value)) {
+			            check.parentElement.classList.add("red");
+			            allValid = false;
+			        } else {
+			            check.parentElement.classList.remove("red");
+			        }
+			    }
+				$("#purchase-register").prop("disabled", !allValid);
+			/*
 			if (!quantityCheck.test(e.target.value)) {
 				e.target.parentElement.classList.add("red");
 				$("#purchase-register").prop("disabled", true);
 			} else {
 				e.target.parentElement.classList.remove("red");
 				$("#purchase-register").prop("disabled", false);
-			}
+			}*/
 		});
 		
 		var count = 0;
