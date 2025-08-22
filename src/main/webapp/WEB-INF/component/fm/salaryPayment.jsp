@@ -38,7 +38,7 @@
 			<table border="1" id="result" class="data-table">
 					
 			</table>
-			<button id="submit" disabled>등록하기</button>
+			
 		</div>
 		
 		<nav>
@@ -128,6 +128,7 @@
 								+ '<input type="number" min="0" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
 							$("#result").append(text);
 						}
+						$("#result").append('<div class="filter-bar"><button id="submit">등록하기</button></div>');
 						
 						$(".pagination").html('');
 	                	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.startPage - 1) + '">Previous</a></li>');
@@ -141,7 +142,7 @@
 					}
 				});
 				
-			}else {
+			} else {
 				alert("월을 입력해주세요");
 				location.reload();
 			}
@@ -194,6 +195,7 @@
 					$("#result").append(text);
 					console.log(i + " : " + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1));
 				}
+				$("#result").append('<div class="filter-bar"><button id="submit">등록하기</button></div>');
 				
 				$(".pagination").html('');
             	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.startPage - 1) + '">Previous</a></li>');

@@ -18,6 +18,6 @@ public interface SaleManageMapper {
 	List<SaleProductDTO> totalSales(SaleProductDTO sp);
 	List<SaleProductDTO> weekSalesChart();
 	List<SaleProductDTO> monthSalesChart();
-	List<SaleProductDTO> monthQuantityChart();
+	List<SaleProductDTO> monthQuantityChart(SaleProductDTO sp);
 	
 }

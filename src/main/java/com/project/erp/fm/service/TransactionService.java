@@ -1,5 +1,6 @@
 package com.project.erp.fm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,33 @@ public class TransactionService {
 	
 	public void transRegister(List<Transaction> tList) {
 		transactionMapper.transRegister(tList);		
+	}
+	
+	public List<TransDTO> monthIncomeChart() {
+		return transactionMapper.monthIncomeChart();
+	}
+	
+	public List<TransDTO> monthExpensesChart() {
+		return transactionMapper.monthExpensesChart();
+	}
+	
+	public List<TransDTO> monthTransChart() {
+		List<TransDTO> incomeList = monthIncomeChart();
+		List<TransDTO> expensesList = monthExpensesChart();
+		//System.out.println(incomeList);
+		//System.out.println(expensesList);
+		
+		List<TransDTO> monthTransList = new ArrayList<>();
+		for (TransDTO trans : incomeList) {
+			TransDTO transDTO = new TransDTO();
+			System.out.println(trans.getTransMonth());
+			System.out.println(trans.getMonthIncome());
+			transDTO.setTransMonth(trans.getTransMonth());
+			transDTO.setMonthIncome(trans.getMonthIncome());
+			monthTransList.add(transDTO);
+		}
+		//System.out.println(monthTransList);
+		return monthTransList;
 	}
 	
 }

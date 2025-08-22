@@ -15,4 +15,7 @@ public interface TransactionMapper {
 	List<TransDTO> showtransPage(TransPagingDTO transPaging);
 	int totalTransPage(TransDTO trans);
 	void transRegister(List<Transaction> tList);
+	List<TransDTO> monthIncomeChart();
+	List<TransDTO> monthExpensesChart();
+	
 }

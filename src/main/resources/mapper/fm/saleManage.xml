@@ -103,12 +103,12 @@
 		ORDER BY sale_month
 	</select>
 	
-	<select id="monthQuantityChart" resultMap="SaleProductMap">
+	<select id="monthQuantityChart" parameterType="SaleProductDTO" resultMap="SaleProductMap">
 		SELECT product_name, SUM(quantity) AS month_quantity
 		FROM sale_manage
 		JOIN product_name USING(product_code)
 		WHERE DATE_FORMAT(sale_date, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
-		<if test="productCategory != null and productCategory != ''">
+		<if test="productCategory != null and productCategory != 'all'">
 	        AND product_category = #{productCategory}
 	    </if>
 		GROUP BY product_name
