@@ -40,23 +40,15 @@ public class QIPController {
     
     @ResponseBody
     @GetMapping("/showQc")
-    public List<QcResultDTO> showQc() {
-    	return qcService.showQc();
-    }
-    
-    @GetMapping("/qc")
-    public String QcPage(Model model) {
-        List<EmpInfo> empList = employeeInfoService.showEmployee();
-        model.addAttribute("empList", empList);
-        model.addAttribute("component","../component/qam/qc.jsp");
-		return "common/layout"; // qc.jsp 경로
+    public List<QcResultDTO> showQc(Paging paging) {
+    	return qcService.showQc(paging);
     }
     
     @ResponseBody
     @GetMapping("/searchQc")
-    public List<QcResultDTO> searchQc(QcResultDTO dto) {
-    	
-    	return qcService.searchQc(dto);
+    public QcResultDTO searchQc(QcResultDTO dto, Paging paging) {
+    	System.out.println(dto);
+    	return qcService.searchQc(dto, paging);
     }
     
     // QC 수정 폼 진입

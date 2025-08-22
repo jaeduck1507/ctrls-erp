@@ -30,10 +30,8 @@ public class ProductService {
 
     // 단일 제품 상세 조회
     // → 수정 페이지 진입 시 해당 제품 정보 불러오기
-    public String findProductDetailById(int productNo, Model model) {
-    	ProductDetailDTO product = productMapper.findProductDetailById(productNo);
-	    model.addAttribute("product", product);
-    	return "component/qam/productDetailFormUpdate"; // JSP 경로 반환
+    public ProductDetailDTO findProductDetailById(int productNo, Model model) {
+    	return productMapper.findProductDetailById(productNo); // JSP 경로 반환
     }
 
     // 제품 정보 수정

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.DefectiveMapper;
 import com.project.erp.qam.mapper.QcMapper;
 import com.project.erp.qam.mapper.SaleMapper;
@@ -12,6 +13,7 @@ import com.project.erp.qam.model.vo.Defective;
 import com.project.erp.qam.model.vo.Qc;
 import com.project.erp.qam.model.vo.Sale;
 import com.project.erp.qam.model.dto.QcResultDTO;
+import com.project.erp.qam.model.dto.SaleReadyDTO;
 
 import java.time.LocalDate;
 
@@ -28,16 +30,30 @@ public class QcService {
     private DefectiveMapper defectiveMapper;
 
     // 전체 제품 조회 (검사 되었든 안되었든)
-	public List<QcResultDTO> showQc() {
-		return qcMapper.showQc();
+	public List<QcResultDTO> showQc(Paging paging) {
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		paging.setTotal(qcMapper.showQcTotal());
+		return qcMapper.showQc(paging);
+	}
+	
+	public int showQcTotal(QcResultDTO dto) {
+		return qcMapper.searchQcTotal(dto);
 	}
 	
     // 제품명/카테고리 조회 
-	public List<QcResultDTO> searchQc(QcResultDTO dto) {
-		return qcMapper.searchQc(dto);
+	public QcResultDTO searchQc(QcResultDTO dto, Paging paging) {
+		dto.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		dto.setList(qcMapper.searchQc(dto));
+		dto.setPage(paging.getPage());
+//		dto.setLimit(paging.getLimit());
+		dto.setTotal(searchQcTotal(dto));
+		return dto;
 	}
 	
-    
+	public int searchQcTotal(QcResultDTO dto) {
+		return qcMapper.searchQcTotal(dto);
+	}
+	
     // 품질검사 수정
     public void updateQc(Qc qc) {
     	// 1. 기존 판정 삭제 (합격/불합격 상관없이 둘 다 삭제 시도)

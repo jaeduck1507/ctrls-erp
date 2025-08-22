@@ -6,33 +6,41 @@
     <meta charset="UTF-8">
     <title>브랜드 등록</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
 </head>
 
 <body>
-<h2>브랜드 등록</h2>
+	<h5>[품질 관리] > [브랜드 조회] > [브랜드 등록]</h5>
+	<h3>브랜드 등록</h3>
 
-	<form action="/registerBrand" method="post">
-	
-		<label>브랜드명: 
-		    <input type="text" name="brandName" required />
-		</label><br/>
+	<form action="/registerBrand" method="post" class="filter-bar">
+		<div class="box">
+			<table>
+				<tr>
+					<th>브랜드명</th>
+				   	<td><input type="text" name="brandName" required /></td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+				   	<td><input type="text" name="brandPhone" required /></td>
+				</tr>
+				<tr>
+					<th>계좌번호</th>
+				   	<td><input type="text" name="brandAccount" required /></td>
+				</tr>
+				<tr>
+					<th>사용 은행</th>
+				   	<td><input type="text" name="brandBank" required /></td>
+				</tr>
+			</table>
+		</div>
 		
-		<label>전화번호: 
-		    <input type="number" name="brandPhone" required />
-		</label><br/>
+		<div>
+			<button type="submit" class="btn">저장</button>
+			<a href="/qam/brand" class="btn">목록으로</a>
+		</div>
 		
-		<label>계좌번호: 
-		    <input type="number" name="brandAccount" required />
-		</label><br/>
-		
-		<label>사용 은행: 
-		    <input type="text" name="brandBank" required />
-		</label><br/>
-			
-		<button type="submit">저장</button>
 	</form>
-
-<button><a href="/qam/brand">목록으로</a></button>
 
 </body>
 </html>

@@ -5,80 +5,63 @@
 <head>
     <meta charset="UTF-8">
     <title>제품명 등록/수정</title> <!-- 페이지 제목 -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery 로드 -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
 </head>
 <body>
+	<h5>[품질 관리] > [브랜드 조회] > [제품 정보 수정/등록]</h5>
+	<h3>제품 정보 수정/등록</h3>
 
-<h2>제품 정보 등록 / 수정</h2> <!-- 제목 표시 -->
-
-<!-- 제품명 등록/수정 공용 폼 -->
-<!-- Controller에서 action URL과 productName 객체를 전달함 -->
-<form action="${action}" method="post">
-    <!-- 수정 시 필요한 고유 코드 (productCode) 숨김 전송 -->
+<form action="${action}" method="post" class="filter-bar">
     <input type="hidden" name="productCode" value="${productName.productCode}" />
 
-    <!-- 색상 입력 -->
-    <label>색상:
-        <input type="text" name="productColor" value="${productName.productColor}" required />
-    </label><br/>
-
-    <!-- 제품명 입력 -->
-    <label>제품명:
-        <input type="text" name="productName" value="${productName.productName}" required />
-    </label><br/>
-
-    <!-- 판매가 입력 -->
-    <label>판매가:
-        <input type="number" name="productPrice" value="${productName.productPrice}" required />
-    </label><br/>
-
-    <!-- 단가 입력 -->
-    <label>단가:
-        <input type="number" name="productCost" value="${productName.productCost}" required />
-    </label><br/>
+	<div class="box">
+		<table>
+			<tr>
+				<th>브랜드</th>
+				<td>				
+					<select name="brandCode">
+					        <c:forEach var="brand" items="${brandList}">
+					            <option value="${brand.brandCode}" ${productName.brandCode == brand.brandCode ? 'selected' : ''}>${brand.brandName}</option>
+					        </c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>카테고리</th>
+				<td>				
+					<select name="productCategory">
+					    <c:forEach var="category" items="${categoryList}">
+					        <option value="${category}" ${productName.productCategory == category ? 'selected' : ''}>${category}</option>
+					    </c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>제품명</th>
+				<td><input type="text" name="productName" value="${productName.productName}" required /></td>
+			</tr>
+			<tr>
+				<th>색상</th>
+				<td><input type="text" name="productColor" value="${productName.productColor}" required /></td>
+			</tr>
+			<tr>
+				<th>판매가</th>
+				<td><input type="number" name="productPrice" value="${productName.productPrice}" required /></td>
+			</tr>
+			<tr>
+				<th>단가</th>
+				<td><input type="number" name="productCost" value="${productName.productCost}" required /></td>
+			</tr>
+		</table>
+	</div>
 	
-	<!-- 카테고리 선택 -->
-	<label>카테고리:
-	    <select name="productCategory">
-	        <c:forEach var="category" items="${categoryList}">
-	            <option value="${category}" ${productName.productCategory == category ? 'selected' : ''}>${category}</option>
-	        </c:forEach>
-	    </select>
-	</label><br/>
+	<div>
+    <button type="submit" class="btn">저장</button>
+	<a href="/qam/productName" class="btn">목록으로</a>
+	</div>
 	
-	<!-- 브랜드 선택 -->
-	<label>브랜드:
-	    <select name="brandCode">
-	        <c:forEach var="brand" items="${brandList}">
-	            <option value="${brand.brandCode}" ${productName.brandCode == brand.brandCode ? 'selected' : ''}>${brand.brandName}</option>
-	        </c:forEach>
-	    </select>
-	</label><br/><br/>
-
-	    <!-- 카테고리 선택 -->
-	<!--    <label>카테고리:-->
-	<!--        <select name="productCategory">-->
-	<!--            <option value="상의" ${productName.productCategory == '상의' ? 'selected' : ''}>상의</option>-->
-	<!--            <option value="하의" ${productName.productCategory == '하의' ? 'selected' : ''}>하의</option>-->
-	<!--            <option value="악세사리" ${productName.productCategory == '악세사리' ? 'selected' : ''}>악세사리</option>-->
-	<!--            <option value="신발" ${productName.productCategory == '신발' ? 'selected' : ''}>신발</option>-->
-	<!--        </select>-->
-	<!--    </label><br/>-->
-		
-	<!--	<label>브랜드:-->
-	<!--	    <select name="brandCode">-->
-	<!--	        <option value="1" ${productName.brandCode == 1 ? 'selected' : ''}>샤넬</option>-->
-	<!--	        <option value="2" ${productName.brandCode == 2 ? 'selected' : ''}>유니클로</option>-->
-	<!--	        <option value="3" ${productName.brandCode == 3 ? 'selected' : ''}>자라</option>-->
-	<!--	    </select>-->
-	<!--	</label><br/><br/>-->
-	
-    <!-- 저장 버튼 -->
-    <button type="submit">저장</button>
 </form>
-
-<!-- 목록 페이지로 돌아가기 링크 -->
-<a href="/qam/productName">목록으로</a>
 
 </body>
 </html>

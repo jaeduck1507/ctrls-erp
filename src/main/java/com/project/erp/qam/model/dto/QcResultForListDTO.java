@@ -2,14 +2,11 @@ package com.project.erp.qam.model.dto;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
-
-import com.project.erp.common.model.vo.Paging;
 
 import lombok.Data;
 
 @Data
-public class QcResultDTO extends Paging {
+public class QcResultForListDTO {
     // product
     private int productNo;
     private Date productionDate;
@@ -45,7 +42,5 @@ public class QcResultDTO extends Paging {
     // brand
     private int brandCode;
     private String brandName;
-    
-    private List<QcResultForListDTO> list;
   
 }

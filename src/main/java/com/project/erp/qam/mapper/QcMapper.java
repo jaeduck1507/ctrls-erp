@@ -5,13 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.qam.model.vo.Qc;
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.model.dto.QcResultDTO;
+import com.project.erp.qam.model.dto.QcResultForListDTO;
 
 @Mapper
 public interface QcMapper {
 
 	// 전체 제품 조회 (검사 되었든 안되었든)
-	List<QcResultDTO> showQc();
+	List<QcResultDTO> showQc(Paging paging);
+	
+	int showQcTotal();
 	
     // 품질검사 수정
     void updateQc(Qc qc);
@@ -20,13 +24,18 @@ public interface QcMapper {
     QcResultDTO findByProductNo(int productNo);
     
     // 제품명으로 결과 조회
-    List<QcResultDTO> searchQc(QcResultDTO dto);
+//    List<QcResultDTO> searchQc(QcResultDTO dto, Paging paging);
+    List<QcResultForListDTO> searchQc(QcResultDTO dto);
 
+	int searchQcTotal(QcResultDTO dto);
+	
     // QC 안된 제품만 조회
     List<QcResultDTO> findQcTargetProducts(); 
     
     // 품질검사 등록
     void registerQc(Qc qc);
+
+
     
     
 

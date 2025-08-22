@@ -36,6 +36,40 @@
         <result column="brand_code" property="brandCode"/>
         <result column="brand_name" property="brandName"/>
     </resultMap>
+    
+    <resultMap id="QcResultForListMap" type="QcResultForListDTO">
+   		<!-- product -->
+        <result column="product_no" property="productNo"/>
+        <result column="production_date" property="productionDate"/>
+        <result column="product_code" property="productCode"/>
+	    <!-- product_name -->
+		<result column="product_color" property="productColor"/>
+		<result column="product_name" property="productName"/>
+		<result column="product_price" property="productPrice"/>
+		<result column="product_cost" property="productCost"/>
+		<result column="product_category" property="productCategory"/>
+		
+		<!-- qc -->
+		<result column="qc_code" property="qcCode"/>
+		<result column="check_material" property="checkMaterial"/>
+		<result column="check_color" property="checkColor"/>
+		<result column="check_damage" property="checkDamage"/>
+		<result column="qc_desc" property="qcDesc"/>
+		<result column="qc_date" property="qcDate"/>
+		<result column="emp_no" property="empNo"/>
+		
+		<!-- sale -->
+		<result column="sale_no" property="saleNo"/>
+		<result column="sale_date" property="saleDate"/>
+		
+		<!-- defective -->
+		<result column="defective_no" property="defectiveNo"/>
+		<result column="reason" property="reason"/>
+	       
+	    <!-- brand --> 
+        <result column="brand_code" property="brandCode"/>
+        <result column="brand_name" property="brandName"/>
+    </resultMap>
 
     <!-- 품질검사 등록 -->
     <insert id="registerQc" parameterType="Qc">
@@ -62,7 +96,7 @@
         WHERE product_no = #{productNo}
     </select>
 
-	<select id="searchQc" resultMap="QcResultMap">
+	<select id="searchQc" parameterType="QcResultDTO" resultMap="QcResultMap">
 	    SELECT
 	        product_no,
 	        production_date,
@@ -97,15 +131,48 @@
         	<if test="empNo != null and empNo != ''">
         		AND emp_no = #{empNo}
         	</if>
-        	<if test="startDate != null and endDate != null">
-				AND production_date BETWEEN #{startDate} AND #{endDate}
-			</if>
+        	<if test="startDate != null ">
+			AND qc_date <![CDATA[>=]]> #{startDate}
+		</if>
+		<if test="endDate != null ">
+			AND qc_date <![CDATA[<=]]> #{endDate}
+		</if>
+        </where>
+	    ORDER BY production_date DESC
+	    LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="searchQcTotal" parameterType="QcResultDTO" resultType="int">
+	    SELECT
+			COUNT(*)
+	    FROM product
+	    JOIN product_name USING(product_code)
+	    JOIN brand USING(brand_code)
+	    RIGHT JOIN qc USING(product_no)
+	    <where>
+        	<!-- 제품명 일치 검색 -->	
+        	<if test="productName != null and productName != ''">
+        		product_name = #{productName}
+        	</if>
+			<!-- 카테고리 일치 검색 -->
+        	<if test="productCategory != null and productCategory != ''">
+        		AND product_category = #{productCategory}
+        	</if>
+        	<if test="empNo != null and empNo != ''">
+        		AND emp_no = #{empNo}
+        	</if>
+        	<if test="startDate != null ">
+			AND qc_date <![CDATA[>=]]> #{startDate}
+		</if>
+		<if test="endDate != null ">
+			AND qc_date <![CDATA[<=]]> #{endDate}
+		</if>
         </where>
 	    ORDER BY production_date DESC
 	</select>
 
     <!-- 전체 QC + 판매 + 불량 조회 -->
-	<select id="showQc" resultMap="QcResultMap">
+	<select id="showQc" parameterType="paging" resultMap="QcResultMap">
 	    SELECT
 	        product_no,
 	        production_date,
@@ -124,6 +191,17 @@
 	        emp_no,
 	        brand_code,
 	        brand_name
+	    FROM product
+	    JOIN product_name USING(product_code)
+	    JOIN brand USING(brand_code)
+	    RIGHT JOIN qc USING(product_no)
+	    ORDER BY production_date DESC
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="showQcTotal" resultType="int">
+	    SELECT
+	        COUNT(*)
 	    FROM product
 	    JOIN product_name USING(product_code)
 	    JOIN brand USING(brand_code)

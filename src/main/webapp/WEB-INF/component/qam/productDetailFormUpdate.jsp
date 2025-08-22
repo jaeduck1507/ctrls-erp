@@ -4,61 +4,56 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>제품 정보 수정</title> <!-- 페이지 제목 -->
+    <title>상품 정보 수정</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
 </head>
 <body>
-<h2>제품 정보 수정</h2> <!-- 제목 표시 -->
+	<h5>[품질 관리] > [상품 조회] > [상품 정보 수정]</h5>
+	<h3>상품 정보 수정</h3>
 
-<!-- 제품 정보 수정 폼 -->
-<!-- action: /updateProduct (Controller로 POST 전송됨) -->
-<form action="/updateProduct" method="post">
-    <!-- 제품 번호 (product 테이블 PK) - 숨김 필드 -->
-    <input type="hidden" name="productNo" value="${product.productNo}" />
-
-    <!-- 제품 코드 (product_name 테이블 FK) - 숨김 필드 -->
-    <input type="hidden" name="productCode" value="${product.productCode}" />
-
-    <!-- 생산일 입력 -->
-    <label>생산일:
-        <input type="date" name="productionDate" value="${product.productionDate}" required />
-    </label><br/>
-
-    <!-- 색상 입력 -->
-    <label>색상:
-        <input type="text" name="productColor" value="${product.productColor}" required />
-    </label><br/>
-
-    <!-- 제품명 입력 -->
-    <label>제품명:
-        <input type="text" name="productName" value="${product.productName}" required />
-    </label><br/>
-
-    <!-- 판매가 입력 -->
-    <label>판매가:
-        <input type="number" name="productPrice" value="${product.productPrice}" required />
-    </label><br/>
-
-    <!-- 단가 입력 -->
-    <label>단가:
-        <input type="number" name="productCost" value="${product.productCost}" required />
-    </label><br/>
-
-    <!-- 카테고리 선택 -->
-    <label>카테고리:
-        <select name="productCategory">
-            <option value="상의" ${product.productCategory == '상의' ? 'selected' : ''}>상의</option>
-            <option value="하의" ${product.productCategory == '하의' ? 'selected' : ''}>하의</option>
-            <option value="악세사리" ${product.productCategory == '악세사리' ? 'selected' : ''}>악세사리</option>
-            <option value="신발" ${product.productCategory == '신발' ? 'selected' : ''}>신발</option>
-        </select>
-    </label><br/><br/>
-
-    <!-- 저장 버튼 -->
-    <button type="submit">저장</button>
-</form>
-
-<!-- 목록으로 이동 링크 -->
-<a href="/qam/product">목록으로</a>
+	<form action="/updateProduct" method="post" class="filter-bar">
+		<div class="box">
+	    <input type="hidden" name="productNo" value="${product.productNo}" />
+	    <input type="hidden" name="productCode" value="${product.productCode}" />
+		
+		<table>
+			<tr>
+			    <th>생산일</th>
+			    <td><input type="date" name="productionDate" value="${product.productionDate}" required /></td>
+		    </tr>
+			<tr>
+			    <th>색상</th>
+			    <td><input type="text" name="productColor" value="${product.productColor}" required /></td>
+			</tr>
+			<tr>
+			    <th>제품명</th>
+			    <td><input type="text" name="productName" value="${product.productName}" required /></td>
+			</tr>
+			<tr>
+			    <th>판매가</th>
+			    <td><input type="number" name="productPrice" value="${product.productPrice}" required /></td>
+			</tr>
+			<tr>
+			    <th>단가</th>
+			    <td><input type="number" name="productCost" value="${product.productCost}" required /></td>
+			</tr>
+			<tr>
+			    <th>카테고리</th>
+			    <td><select name="productCategory">
+				    <option value="상의" ${product.productCategory == '상의' ? 'selected' : ''}>상의</option>
+				    <option value="하의" ${product.productCategory == '하의' ? 'selected' : ''}>하의</option>
+				    <option value="악세사리" ${product.productCategory == '악세사리' ? 'selected' : ''}>악세사리</option>
+				    <option value="신발" ${product.productCategory == '신발' ? 'selected' : ''}>신발</option>
+				</select></td>
+			</tr>
+		</table>
+		</div>
+	    <div>
+		    <button type="submit" class="btn">저장</button>
+			<a href="/qam/product" class="btn">목록으로</a>
+		</div>
+	</form>
+	
 </body>
 </html>
