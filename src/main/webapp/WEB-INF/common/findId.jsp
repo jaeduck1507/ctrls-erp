@@ -18,6 +18,7 @@
 	</div>
 	<div class="data-table">
 	  <table id="result"></table>
+	  <button  onclick="location.href='/resetPwd'">비밀번호 재설정</button>
 	  <button id="btn" onclick="location.href='/login'">로그인으로 돌아가기</button>
 	</div>
 

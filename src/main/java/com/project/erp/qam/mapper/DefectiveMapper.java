@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.model.dto.DefectiveDTO;
+import com.project.erp.qam.model.dto.DefectiveForListDTO;
 import com.project.erp.qam.model.vo.Defective;
 
 @Mapper
@@ -17,10 +18,12 @@ public interface DefectiveMapper {
 
 	List<DefectiveDTO> showDefective(Paging paging);
 
-	List<DefectiveDTO> searchDefective(Paging paging, DefectiveDTO dto);
+	List<DefectiveForListDTO> searchDefective(DefectiveDTO dto);
 	
 	Integer totalDefective();
 	
 	Integer totalSearchDefective();
+	
+	int searchDefectiveTotal(DefectiveDTO dto);
 	
 }

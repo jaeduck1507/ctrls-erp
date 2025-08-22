@@ -67,10 +67,10 @@ public class HSDController {
 	
 	@ResponseBody
     @GetMapping("/searchDefective")
-    public List<DefectiveDTO> searchDefective(Model model, Paging paging, DefectiveDTO dto) {
+    public DefectiveDTO searchDefective(DefectiveDTO dto,Paging paging) {
 		System.out.println(dto);
-		model.addAttribute("searchDefectiveList", defectiveService.searchDefective(paging, dto));
-    	return defectiveService.searchDefective(paging, dto);
+//		model.addAttribute("searchDefectiveList", defectiveService.searchDefective(paging, dto));
+    	return defectiveService.searchDefective(dto, paging);
     }
 	
 	@GetMapping("/searchSaleDone")

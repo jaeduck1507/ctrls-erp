@@ -75,4 +75,17 @@ public class UserController {
 		leaveInfoService.leaveUpdate(li);
 		return "redirect:/myLeavePage";
 	}
+	
+	@PostMapping("/resetMyPwd")
+	public String resetMyPwd(User vo) {
+		userService.resetMyPwd(vo);
+		return "redirect:/mypage";
+	}
+	
+	@ResponseBody
+	@PostMapping("/idCheck")
+	public int idCheck(User vo) {
+		System.out.println(vo);
+		return 0;
+	}
 }

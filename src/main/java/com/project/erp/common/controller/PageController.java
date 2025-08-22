@@ -62,7 +62,7 @@ public class PageController {
 		User user = (User) auth.getPrincipal();
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
-		System.out.println(employeeInfoService.infoShowOne(empInfo));
+//		System.out.println(employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("component","../common/mypage.jsp");
 		return "common/layout";
@@ -142,6 +142,19 @@ public class PageController {
 		//System.out.println("quantity : " + saleManageService.monthQuantityChart());
 		model.addAttribute("component","../common/modalTest.jsp");
 		return "common/layout";
+	}
+	
+	@GetMapping("/resetMyPwd")
+	public String resetMyPwd(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		model.addAttribute("user",user);
+		model.addAttribute("component","../common/resetMyPwd.jsp");
+		return "common/layout";
+	}
+	@GetMapping("/resetPwd")
+	public String resetPwd(Model model) {
+		return "common/resetPwd";
 	}
 	
 }

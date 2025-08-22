@@ -33,8 +33,21 @@
 		WHERE emp_no = #{empNo}
 		
 	</select>
+	<select id="idCheck" parameterType="User" resultType="int">
+		SELECT COUNT(*) FROM user
+		WHERE username = #{username}
+		
+	</select>
 	
 	<select id="findId" parameterType="int" resultType="String">
 	    SELECT username FROM user WHERE emp_no = #{empNo};
 	</select>
+	
+	<update id="resetMyPwd" parameterType="User">
+		UPDATE user
+		<set>
+			password = #{password}
+		</set>
+		WHERE username = #{username}
+	</update>
 </mapper>

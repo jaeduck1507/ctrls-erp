@@ -1,6 +1,8 @@
 package com.project.erp.common.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,6 +27,7 @@ public class UserService implements UserDetailsService{
 	private EmployeeInfoService employeeInfoService; 
 	
 	public void register(User vo) {
+		System.out.println(vo);
 		vo.setPassword(bcpe.encode(vo.getPassword()));
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(vo.getEmpNo());
@@ -83,7 +86,21 @@ public class UserService implements UserDetailsService{
 	public String findId(int empNo) {
 		System.out.println("service");
 		return userMapper.findId(empNo);
-	};
+	}
+	
+	public void resetMyPwd(User vo) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) auth.getPrincipal();
+		
+		vo.setPassword(bcpe.encode(vo.getPassword()));
+		vo.setUsername(user.getUsername());
+		System.out.println("재설정된 비밀번호 : " + vo);
+		userMapper.resetMyPwd(vo);
+	}
+	
+	public int idCheck(User vo) {
+		return 0;
+	}
 	
 
 }
