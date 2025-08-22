@@ -35,14 +35,25 @@ body {
   font-size: 14px;
   flex-direction: column;
 }
-.filter-bar input[type="text"]{
+.filter-bar input[type="text"],
+.filter-bar input[type="password"] {
   padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
 }
 /* button 스타일 */
-/*조회버튼*/
+
+.filter-bar button {
+  border-style: none;
+  text-decoration: none;
+  color: white;
+  background-color: #90c67c;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+  width: 180px;
+}
 .filter-bar #btn{
   text-decoration: none;
   background-color: #67ae6e;
@@ -52,39 +63,20 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  width: 99%;
-  transition: background 0.2s;
-  box-shadow: #33333362 0 5px 5px -5px;
+  width: 200px;
 }
-/*비밀번호재설정 버튼*/
-.btn #btn1{
+
+.btn button{
 	text-decoration: none;
 	  background-color: #ffffff;
 	  color: #516b38;
-	  border: #F2F0F0 solid 1px;
+	  border: #67ae6e solid 1px;
 	  padding: 4px 12px;
 	  border-radius: 4px;
 	  cursor: pointer;
 	  font-weight: bold;
-	  width: 99%;
+	  width: 200px;
 	  margin-bottom: 5px;
-	  transition: background 0.2s;
-	  box-shadow: #33333362 0 5px 5px -5px;
-}
-/*로그인 버튼*/
-.btn #btn2 {
-	border-style: none;
-	  text-decoration: none;
-	  color: white;
-	  background-color: #90c67c;
-	  border: #90c67c solid 1px;
-	  padding: 4px 12px;
-	  border-radius: 5px;
-	  text-decoration: none;
-	  transition: background 0.2s;
-	  width: 99%;
-	  box-shadow: #33333362 0 5px 5px -5px;
-	  margin-bottom: 10px;
 }
 /* a 태그 상세 크기 조정*/
 .filter-bar a {
@@ -94,19 +86,24 @@ body {
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
 
 .filter-bar #btn:hover{
-	background-color: #328e6e;
-    border: #328e6e solid 1px;
-    color: #ffffff;
+  
+  background-color: #ffffff;
+  color: #516b38;
 }
 
-.btn #btn1:hover {
-	  background-color: #F2F0F0;
-	  border: #F2F0F0 solid 1px;
-	  color: #516b38;
+.data-table #btn:hover {
+  
+	text-decoration: none;
+	  background-color: #67ae6e;
+	  color: white;
+	  border: #67ae6e solid 1px;
+	  padding: 4px 12px;
+	  border-radius: 4px;
+	  cursor: pointer;
+	  font-weight: bold;
+	  width: 200px;
 }
-.btn #btn2:hover{
-	background-color: #67ae6e;
-	border: #67ae6e solid 1px;
-	  color: #ffffff;
+.data-table {
+  border-style: none;
+  color: #516b38;
 }
-

@@ -55,6 +55,22 @@
 		  		</div>
 		  		<div>
 		   		<table border="1" id="result2" class="data-table"></table>
+				<nav>
+				<ul class="pagination">
+						<li class="page-item ${paging.prev ? '' : 'disabled'}">
+							<a class="page-link" href="/hrm/leaveStatus?page=${paging.startPage - 1}">Previous</a>
+						</li>
+												
+					<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+						<li class="page-item">
+							<a class="page-link ${paging.page == page ? 'active' : ''}" href="/hrm/leaveStatus?page=${page}">${page}</a>
+						</li>
+					</c:forEach>
+						<li class="page-item ${paging.next ? '' : 'disabled'}">
+							<a class="page-link" href="/hrm/leaveStatus?page=${paging.endPage + 1}">Next</a>
+						</li>
+				</ul>
+				</nav>
 		  		</div>
 		  		</div>
 
@@ -110,6 +126,13 @@
 								   + "</td><td><a id='btn1' href='/myLeaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/myLeaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
 					$("#result2").append(text);
 					}
+					$(".pagination").html('');
+                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+                	for(var i =result.startPage; i<=result.endPage; i++) {
+                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+                	}
+                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+                
 				// 휴가 처리 상태로 조회
 				// 처리상태 조회			
 				$("#btn1").click(()=>{
@@ -140,6 +163,13 @@
 								$("#result2").append(text);
 								
 								}
+								$(".pagination").html('');
+			                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+			                	for(var i =result.startPage; i<=result.endPage; i++) {
+			                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+			                	}
+			                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+			                
 							},
 							error:function(xhr, status, error){
 								
@@ -230,8 +260,7 @@
 			 });
 			 
 	   });
-		
-	  
+			  
 	$("#btn2").click(() => { // 휴가 제출 버튼
   	   	  const empNo = $(".empNo").val();
 		  const currentDate = $("#currentDate").val();

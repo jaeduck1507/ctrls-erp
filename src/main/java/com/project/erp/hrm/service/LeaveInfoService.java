@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.MyLeaveInfoPaging;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.mapper.LeaveInfoMapper;
+import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
 import com.project.erp.hrm.model.dto.LeaveInfo;
+import com.project.erp.hrm.model.dto.LeaveInfoPagingDTO;
+import com.project.erp.hrm.model.vo.JobPosition;
 
 
 @Service
@@ -59,8 +64,9 @@ public class LeaveInfoService {
 		paging.setTotal(leaveInfoMapper.totalLeaveInfo());
 		return leaveInfoMapper.leaveStatus(paging);
 	}
-	
+
 	public int totalLeaveInfo() {
 		return leaveInfoMapper.totalLeaveInfo();
 	}
+	
 }
