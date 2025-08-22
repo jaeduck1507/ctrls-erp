@@ -67,6 +67,7 @@
 }
 #filter-bar input[type="radio"],
 #filter-bar input[type="checkbox"],
+.data-table td input[type="checkbox"],
 .filter-bar input[type="radio"],
 .filter-bar input[type="checkbox"] {
   accent-color: var(--color); /* 체크박스 색상 */

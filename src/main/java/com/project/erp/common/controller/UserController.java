@@ -83,9 +83,14 @@ public class UserController {
 	}
 	
 	@ResponseBody
+	@PostMapping("/resetPwd")
+	public void resetPwd(User vo) {
+		userService.resetPwd(vo);
+	}
+	
+	@ResponseBody
 	@PostMapping("/idCheck")
 	public int idCheck(User vo) {
-		System.out.println(vo);
-		return 0;
+		return userService.idCheck(vo);
 	}
 }
