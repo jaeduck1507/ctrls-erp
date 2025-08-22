@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>판매대기 제품 리스트</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
@@ -16,9 +17,11 @@
 	<div class="filter-bar">
 
 
-<button id = "sellRegister">판매 등록</button> <!-- 누를 시 입력된 날짜대로 판매날짜가 등록되는 버튼 -->
-<button id = "selectCurrentTable">현재 페이지 전체 선택</button> <!-- 누를 시 입력된 날짜대로 판매날짜가 등록되는 버튼 -->
-<button id = "selectAlldata">모든 페이지 전체 선택</button> <!-- 누를 시 입력된 날짜대로 판매날짜가 등록되는 버튼 -->
+<button id = "sellRegister">판매 등록</button> 
+<button id = "selectCurrentTable">현재 페이지 전체 선택</button> 
+<button id = "selectAlldata">모든 페이지 전체 선택</button> 
+<button id = "selectCancelCurrentTable">현재 페이지 전체 선택 취소</button> 
+<button id = "selectCancelAlldata">모든 페이지 전체 선택 취소</button> 
 </div>
 <table border="1" id="saleReady" class="data-table"> <!-- saleReady 테이블 -->
     
@@ -27,6 +30,7 @@
 			<ul class="pagination">
 			</ul>
 		</nav>
+
 
 	
 <script>
@@ -158,37 +162,36 @@
 				});
 	
 		$(document).on('click', '#selectCurrentTable', function(e) {
-           
-			
 			console.log("버튼누르기");
 			for(var i = saleReadyPagingDTO.offset;   i < ((saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) > saleReadyPagingDTO.result.length ? saleReadyPagingDTO.result.length: (saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) ); i++) {
 				saleReadyPagingDTO.result[i].checking = true;
 			}
-                
-        	// 링크 URL 읽기
 			
         	saleReadyPaingFuc();
-        		
-                
-                
-           
           });
 		
 		$(document).on('click', '#selectAlldata', function(e) {
-           
-			
 			console.log("버튼누르기");
 			for(var i = 0; i< saleReadyPagingDTO.result.length; i++) {
 				saleReadyPagingDTO.result[i].checking = true;
 			}
-                
-        	// 링크 URL 읽기
+        	saleReadyPaingFuc();
+          });
+		$(document).on('click', '#selectCancelCurrentTable', function(e) {
+			console.log("버튼누르기");
+			for(var i = saleReadyPagingDTO.offset;   i < ((saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) > saleReadyPagingDTO.result.length ? saleReadyPagingDTO.result.length: (saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) ); i++) {
+				saleReadyPagingDTO.result[i].checking = false;
+			}
 			
         	saleReadyPaingFuc();
-        		
-                
-                
-           
+          });
+		
+		$(document).on('click', '#selectCancelAlldata', function(e) {
+			console.log("버튼누르기");
+			for(var i = 0; i< saleReadyPagingDTO.result.length; i++) {
+				saleReadyPagingDTO.result[i].checking = false;
+			}
+        	saleReadyPaingFuc();
           });
 		
 		$(document).on('click', '#sellRegister', function(e) {
@@ -211,8 +214,79 @@
 					sellList.push(obj);
 				}
 			}
-			console.log(sellList);
+			console.log(sellList.length);
+			if(sellList.length == 0) {
+			//	alert("적어도 1개 이상의 제품을 선택해주세요");
+				Swal.fire({
+					title: "적어도 1개 이상의 제품을 선택해주세요",
+					confirmButtonText: '확인',
+					confirmButtonColor: "#90C67C",
+					icon: "warning",
+					iconColor: "green"
+					});
+			} else {
+				Swal.fire({
+					title: "등록하시겠습니까?",
+					text: "총 " + sellList.length + "개의 상품을 선택하셨습니다!" ,
+					confirmButtonText: '등록',
+					confirmButtonColor: "green",
+					icon: "question",
+					iconColor: "green",
+					showCancelButton: true,
+					cancelButtonText: '취소',
+					cancelButtonColor: "red"
+					}).then((result) => {
+						  if (result.isConfirmed) {
+							  
+							 
+							  $.ajax({
+									type: "post", // .jsp에서 받아진 값을 DB로 보내기에 POST
+									url: "/qam/registerSaleDate", // HSDController의 registerSaleDate(@RequestBody List<SaleReadyDTO> sellList)를 POST 호출, @PostMapping("/registerSaleDate")
+									contentType: "application/json", // Ajax 요청을 보낼 때, 요청 본문(RequestBody)에 담긴 데이터가 JSON 형식임을 서버에 알리는 역할
+									data: JSON.stringify(sellList), // sellList를 JSON'화'해두기 (HSDController의 registerSaleDate에서 @RequestBody로 JSON 데이터 Java 객체로 변환 예정)
+									success: function (result) {
+										
+										let timerInterval;
+										Swal.fire({
+											icon: "success",
+											iconColor: "green",
+										  title: "성공적으로 등록했습니다!",
+										  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
+										  timer: 3000,
+										  timerProgressBar: true,
+										  didOpen: () => {
+										    Swal.showLoading();
+										    const timer = Swal.getPopup().querySelector("#aa");
+										    timerInterval = setInterval(() => {
+												let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
+										      timer.textContent = remainSecond +1;
+										    }, 100);
+										  },
+										  willClose: () => {
+										    clearInterval(timerInterval);
+										  }
+										}).then((result) => {
+										  /* Read more about handling dismissals below */
+										  if(result.dismiss == "backdrop") {
+											  location.reload();
+										  }
+										  if (result.dismiss === Swal.DismissReason.timer) {
+											  location.reload();
+										  }
+										});
+										
+										
+										//location.reload(); // 성공적으로 요청이 처리되면 페이지를 새로고침, saleDate가 등록된 제품(=판매 완료된 제품)은 리스트에서 사라지고, saleDate가 여전히 null인 제품만 화면에 남음
+										
+									},
+									error: function (xhr, status, error) {
+									}
+								});
+							 
+							  }
+							});
 			
+				/*
 			$.ajax({
 				type: "post", // .jsp에서 받아진 값을 DB로 보내기에 POST
 				url: "/qam/registerSaleDate", // HSDController의 registerSaleDate(@RequestBody List<SaleReadyDTO> sellList)를 POST 호출, @PostMapping("/registerSaleDate")
@@ -220,18 +294,17 @@
 				data: JSON.stringify(sellList), // sellList를 JSON'화'해두기 (HSDController의 registerSaleDate에서 @RequestBody로 JSON 데이터 Java 객체로 변환 예정)
 				success: function (result) {
 					console.log(sellList)
+					alert("상품 판매 완료 등록 완료");
 					location.reload(); // 성공적으로 요청이 처리되면 페이지를 새로고침, saleDate가 등록된 제품(=판매 완료된 제품)은 리스트에서 사라지고, saleDate가 여전히 null인 제품만 화면에 남음
 					
 				},
 				error: function (xhr, status, error) {
 				}
 			});
-                
-        	// 링크 URL 읽기
+			*/
 			
-        	
-        		
-                
+				
+			}
                 
            
           });

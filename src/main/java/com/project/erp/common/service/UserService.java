@@ -98,8 +98,16 @@ public class UserService implements UserDetailsService{
 		userMapper.resetMyPwd(vo);
 	}
 	
+	public void resetPwd(User vo) {
+		
+		vo.setPassword(bcpe.encode(vo.getPassword()));
+		System.out.println("재설정된 비밀번호 : " + vo);
+		userMapper.resetMyPwd(vo);
+	}
+	
 	public int idCheck(User vo) {
-		return 0;
+		
+		return userMapper.idCheck(vo);
 	}
 	
 

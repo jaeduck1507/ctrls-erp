@@ -18,7 +18,7 @@
 	        <div>
 	        <input type="password" name="password" id="password" placeholder="비밀번호" />
 	        <input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호 확인" />
-	        <button type="submit">재설정</button>
+	        <button id="resetPwd">재설정</button>
 	        </div>
 			
 	      </div>
@@ -43,6 +43,27 @@
 			      }
 			    },
 			    error: function (xhr, status, error) {},
+			  });
+			});
+		 
+		 $("#resetPwd").click(() => {
+			  const formData = new FormData();
+			  formData.append("username", $("#username").val());
+			  formData.append("password", $("#password").val());
+			  $.ajax({
+			    type: "post",
+			    url: "/resetPwd",
+			    data: formData,
+			    processData: false,
+			    contentType: false,
+			    success: function (result) {
+			    	alert("비밀번호 재설정 완료!"); 
+			    	location.href='/login';
+			    },
+			    error: function (xhr, status, error) {
+			    	alert("비밀번호 재설정 실패!");
+			    	location.reload();
+			    },
 			  });
 			});
 	 </script>

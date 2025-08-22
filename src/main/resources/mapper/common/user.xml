@@ -33,6 +33,7 @@
 		WHERE emp_no = #{empNo}
 		
 	</select>
+	
 	<select id="idCheck" parameterType="User" resultType="int">
 		SELECT COUNT(*) FROM user
 		WHERE username = #{username}

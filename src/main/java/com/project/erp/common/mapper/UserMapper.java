@@ -11,4 +11,5 @@ public interface UserMapper {
 	int noCheck(int empNo);
 	String findId(int empNo); // 로그인에서 아이디 찾기
 	void resetMyPwd(User vo);
+	int idCheck(User vo);
 }
