@@ -97,4 +97,10 @@ public class SVSController {
 		return saleService.dailySale(dto);
 	}
 	
+	@ResponseBody
+	@PostMapping("/monthQuantityChart")
+	public List<SaleProductDTO> monthQuantityChart(SaleProductDTO sp) {
+		return saleManageService.monthQuantityChart(sp);
+	}
+	
 }

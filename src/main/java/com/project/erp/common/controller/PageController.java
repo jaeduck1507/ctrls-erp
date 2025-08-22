@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.project.erp.common.model.vo.User;
+import com.project.erp.fm.model.dto.SaleProductDTO;
 import com.project.erp.fm.service.SaleManageService;
+import com.project.erp.fm.service.TransactionService;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.model.vo.AttendanceLog;
@@ -30,6 +32,9 @@ public class PageController {
 	
 	@Autowired
 	private SaleManageService saleManageService;
+	
+	@Autowired
+	private TransactionService transactionService;
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
@@ -136,10 +141,17 @@ public class PageController {
 	public String modalTest(Model model) {
 		model.addAttribute("weekSalesChart", saleManageService.weekSalesChart());
 		model.addAttribute("monthSalesChart", saleManageService.monthSalesChart());
-		model.addAttribute("monthQuantityChart", saleManageService.monthQuantityChart());
+		//model.addAttribute("monthQuantityChart", saleManageService.monthQuantityChart());
 		//System.out.println("week : " + saleManageService.weekSalesChart());
 		//System.out.println("month : " + saleManageService.monthSalesChart());
 		//System.out.println("quantity : " + saleManageService.monthQuantityChart());
+		
+		//model.addAttribute("monthIncomeChart", transactionService.monthIncomeChart());
+		//model.addAttribute("monthExpensesChart", transactionService.monthExpensesChart());
+		//System.out.println("income : " + transactionService.monthIncomeChart());
+		//System.out.println("expense : " + transactionService.monthExpensesChart());
+		model.addAttribute("monthTransList", transactionService.monthTransChart());
+		//System.out.println(transactionService.monthTransChart());
 		model.addAttribute("component","../common/modalTest.jsp");
 		return "common/layout";
 	}

@@ -17,5 +17,8 @@ public class TransDTO {
 	private String deptName;
 	private LocalDate startDate;
 	private LocalDate endDate;
+	private String transMonth;
+	private long monthIncome;
+	private long monthExpenses;
 	
 }
