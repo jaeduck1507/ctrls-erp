@@ -63,9 +63,9 @@ public class SecurityConfig {
 						.requestMatchers("/hrm/empEval").authenticated()
 						.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
 						.requestMatchers("/hrm/empAdd").hasRole("ADMIN") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
-						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM") // ** 을 통해 모두 접근가능한가
-						.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM")
-						.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM")
+						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM","MANAGEMENT") // ** 을 통해 모두 접근가능한가
+						.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM","MANAGEMENT")
+						.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM","MANAGEMENT")
 						.anyRequest().permitAll()
 				)
 				.formLogin(form -> 

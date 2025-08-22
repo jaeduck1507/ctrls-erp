@@ -30,6 +30,27 @@
     <result column="brand_name" property="brandName"/>
 </resultMap>
 
+<resultMap id="defectiveListMap" type="DefectiveForListDTO">
+	<result column="defective_no" property="defectiveNo"/>
+	<result column="product_no" property="productNo"/>
+	<result column="reason" property="reason"/>
+	
+	<result column="product_code" property="productCode"/>
+	<result column="product_price" property="productPrice"/>
+	
+	<result column="product_category" property="productCategory"/>
+	<result column="product_name" property="productName"/>
+	<result column="quantity" property="quantity"/>
+	
+	<result column="check_material" property="checkMaterial"/>
+	<result column="check_color" property="checkColor"/>
+	<result column="check_damage" property="checkDamage"/>
+	<result column="qc_date" property="qcDate"/>
+	        
+    <result column="brand_code" property="brandCode"/>
+    <result column="brand_name" property="brandName"/>
+</resultMap>
+
     <insert id="insertDefective" parameterType="Defective">
         INSERT INTO defective (product_no, reason)
         VALUES (#{productNo}, #{reason})
@@ -74,7 +95,7 @@
 	ORDER BY qc_date DESC
 	</select> 
 	
-	<select id="searchDefective" parameterType="Paging" resultMap="defectiveMap">
+	<select id="searchDefective" parameterType="DefectiveDTO" resultMap="defectiveListMap">
 		SELECT 
 			defective_no,
 			product_no,
@@ -95,15 +116,31 @@
 		JOIN qc USING(product_no)
 		JOIN brand USING(brand_code)
 		<where>
+			(
+			<trim prefix="" prefixOverrides="OR">
+				<if test="checkMaterial == '불합격'">
+					check_material = #{checkMaterial}
+				</if>
+				<if test="checkColor == '불합격'">
+					OR check_color = #{checkColor}
+				</if>
+				<if test="checkDamage == '불합격'">
+					OR check_damage = #{checkDamage}
+				</if>
+			</trim>
+			)
 			<if test="productCategory != null and productCategory != ''">
 				AND product_category = #{productCategory}
 			</if>
-			<if test="startDate != null and endDate != null">
-				AND qc_date BETWEEN #{startDate} AND #{endDate}
+			<if test="startDate != null ">
+				AND qc_date <![CDATA[>=]]> #{startDate}
+			</if>
+			<if test="endDate != null ">
+				AND qc_date <![CDATA[<=]]> #{endDate}
 			</if>
 		</where>
 		ORDER BY qc_date DESC
-		LIMIT #{paging.offset}, #{paging.limit}
+		LIMIT #{offset}, #{limit}
 	</select> 
 <!--	문제있으면 paging.offset / limit-->
 	
@@ -121,6 +158,28 @@
 			</if>
 			<if test="startDate != null and endDate != null">
 				AND qc_date BETWEEN #{startDate} AND #{endDate}
+			</if>
+		</where>
+		ORDER BY qc_date DESC
+	</select> 
+	<select id="searchDefectiveTotal" parameterType="DefectiveDTO" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM defective
+		JOIN product USING(product_no)
+		JOIN product_name USING(product_code)
+		JOIN qc USING(product_no)
+		JOIN brand USING(brand_code)
+		<where>
+			<if test="productCategory != null and productCategory != ''">
+				AND product_category = #{productCategory}
+			</if>
+			
+			<if test="startDate != null ">
+				AND qc_date <![CDATA[>=]]> #{startDate}
+			</if>
+			<if test="endDate != null ">
+				AND qc_date <![CDATA[<=]]> #{endDate}
 			</if>
 		</where>
 		ORDER BY qc_date DESC

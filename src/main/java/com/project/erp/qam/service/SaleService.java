@@ -58,7 +58,6 @@ public class SaleService {
 	public SaleReadyDTO searchSaleDone(SaleReadyDTO dto, Paging paging) {
 		dto.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		dto.setList(saleMapper.searchSaleDone(dto));
-		dto.setPage(paging.getPage());
 		dto.setTotal(serachSaleDoneTotal(dto));
 	    return dto;
 	}

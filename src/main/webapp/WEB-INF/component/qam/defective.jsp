@@ -18,9 +18,9 @@
 <form id="defectiveSearchForm">
 	<!-- 불량 유형 필터 체크박스 -->
 	불량 유형:
-	<label><input type="checkbox" class="defectiveFilter" value="material"> 부자재 불량</label>
-	<label><input type="checkbox" class="defectiveFilter" value="color"> 색상 불량</label>
-	<label><input type="checkbox" class="defectiveFilter" value="damage"> 손상 불량</label>
+	<label><input type="checkbox" class="defectiveFilter" id="checkMaterial" value="material" checked> 부자재 불량</label>
+	<label><input type="checkbox" class="defectiveFilter" id="checkColor" value="color" checked> 색상 불량</label>
+	<label><input type="checkbox" class="defectiveFilter" id="checkDamage" value="damage" checked> 손상 불량</label>
 	
 	<br>
 	
@@ -58,35 +58,14 @@
     </thead>
     <tbody></tbody>
 	
-	<c:forEach items="${defectiveList}" var="d">
-		<tr>
-		    <td>${d.defectiveNo}</td>
-		    <td>${d.productNo}</td>
-		    <td>${d.productCode}</td>
-		    <td>${d.checkMaterial}</td>
-		    <td>${d.checkColor}</td>
-			<td>${d.checkDamage}</td>
-			<td>${d.brandName}</td>
-			<td>${d.productCategory}</td>
-			<td>${d.productName}</td>
-			<td>${d.productPrice}</td>
-			<td>${(d.reason == null || d.reason == '' ? "미작성" : d.reason)}</td>
-			<td>${d.qcDate}</td>
-		</tr>
-	</c:forEach>
+	
 
 	
 </table>
 
 <nav>
 	<ul class="pagination">
-		<li class="page-item ${paging.prev ? '' : 'disabled'}"><a class="page-link" href="/qam/defective?page=${paging.startPage - 1}">Previous</a></li>
-							
-		<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
-			<li class="page-item"><a class="page-link ${paging.page == page ? 'active' : ''}" href="/qam/defective?page=${page}">${page}</a></li>
-		</c:forEach>
 		
-		<li class="page-item ${paging.next ? '' : 'disabled'}"><a class="page-link" href="/qam/defective?page=${paging.endPage + 1}">Next</a></li>
 	</ul>
 </nav>
 
@@ -108,14 +87,7 @@ function displayDefective(data) {
     var total = 0;
 
 	for (let d of data) {
-	    let include = true;
-
-		for (let filter of selectedFilter) {
-		        if (filter === "material" && d.checkMaterial === "합격") include = false;
-		        if (filter === "color" && d.checkColor === "합격") include = false;
-		        if (filter === "damage" && d.checkDamage === "합격") include = false;
-		    }
-	    	if (!include) continue;
+	   
 		
 		total += d.productPrice;
 
@@ -142,6 +114,7 @@ function displayDefective(data) {
 
 $(document).ready(function() {
 	
+	/*
 	// 최초 전체 불량품 조회
 	$.ajax({
 	    type: "get",
@@ -150,6 +123,7 @@ $(document).ready(function() {
 	        displayDefective(result);
 	    }
 	});
+	*/
 
 	// 검색 버튼 클릭 시
 	$("#searchBtn").click(function () {
@@ -160,10 +134,13 @@ $(document).ready(function() {
 	        data: {
 	            productCategory: $("#productCategory").val(),
 	            startDate: $("#startDate").val(),
-	            endDate: $("#endDate").val()
+	            endDate: $("#endDate").val(),
+	            checkMaterial: ($("#checkMaterial").is(":checked")? "불합격" : "합격"),
+	            checkColor: ($("#checkColor").is(":checked")? "불합격" : "합격"),
+	            checkDamage: ($("#checkDamage").is(":checked")? "불합격" : "합격")
 	        },
 	        success: function (result) {
-	            displayDefective(result);
+	            displayDefective(result.list);
 				$(".pagination").html('');
 				$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
 				for(var i =result.startPage; i<=result.endPage; i++) {
@@ -173,7 +150,7 @@ $(document).ready(function() {
 	        }
 	    });
 	});
-	
+	/*
 	// 전체보기 버튼 클릭 시
 	$("#resetBtn").click(function () {
 	    // 필터 초기화
@@ -196,8 +173,46 @@ $(document).ready(function() {
 				$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
 	        }
 	    });
-	});
+	});*/
 });
+
+
+$(document).on('click', 'a.page-link', function(e) {
+    e.preventDefault();        
+    // a 태그 기본 동작(페이지 이동) 차단
+    /*
+    const formData = new FormData();
+	formData.append("empName", $('#empName').val());
+	formData.append("jobNo",$('#jobTitle').val());
+	formData.append("deptNo", $('#deptName').val());
+	formData.append("page",$(this).attr('href')); */
+        
+	// 링크 URL 읽기
+	
+	$.ajax({
+        // 요청
+        type: "get",
+	        url: "/qam/searchDefective",
+	        data: {
+	            productCategory: $("#productCategory").val(),
+	            startDate: $("#startDate").val(),
+	            endDate: $("#endDate").val(),
+	            page: $(this).attr('href'),
+	            checkMaterial: ($("#checkMaterial").is(":checked")? "불합격" : "합격"),
+	            checkColor: ($("#checkColor").is(":checked")? "불합격" : "합격"),
+	            checkDamage: ($("#checkDamage").is(":checked")? "불합격" : "합격")
+	        },
+	       	success: function (result) {
+		        displayDefective(result.list);
+				$(".pagination").html('');
+				$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+				for(var i =result.startPage; i<=result.endPage; i++) {
+					$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+				}
+				$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+	       }
+	    });
+	  });
 </script>
 
 </body>

@@ -1,18 +1,12 @@
 package com.project.erp.qam.model.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.project.erp.common.model.vo.Paging;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor @AllArgsConstructor @Data
-public class DefectiveDTO extends Paging { //불량품 테이블: 품질검사에서 불합격 처리된 제품을 기록
-
-	 private int defectiveNo; // 불량품 고유 번호 (PK, AUTO_INCREMENT)
+@Data
+public class DefectiveForListDTO {
+	private int defectiveNo; // 불량품 고유 번호 (PK, AUTO_INCREMENT)
 	 private int productNo; // 불량품 제품 번호 (FK, product.product_no)
 	 private int productCode;
 	 private String productCategory;
@@ -34,6 +28,4 @@ public class DefectiveDTO extends Paging { //불량품 테이블: 품질검사�
 	 
 	 private int brandCode;
 	 private String brandName;
-	 
-	 private List<DefectiveForListDTO> list;
 }

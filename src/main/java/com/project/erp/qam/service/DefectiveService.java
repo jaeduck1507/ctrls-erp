@@ -23,11 +23,16 @@ public class DefectiveService {
 		return defectiveMapper.showDefective(paging);
 	}
 
-	public List<DefectiveDTO> searchDefective(Paging paging, DefectiveDTO dto) {
-		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
-		paging.setTotal(defectiveMapper.totalSearchDefective());
+	public DefectiveDTO searchDefective(DefectiveDTO dto,Paging paging) {
+		dto.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		dto.setTotal(defectiveMapper.searchDefectiveTotal(dto));
 		System.out.println("searchDefective 넘어감");
-		return defectiveMapper.searchDefective(paging, dto);
+		dto.setList(defectiveMapper.searchDefective(dto));
+		return dto;
+	}
+	
+	public int searchDefectiveTotal(DefectiveDTO dto) {
+		return defectiveMapper.searchDefectiveTotal(dto);
 	}
 
 }
