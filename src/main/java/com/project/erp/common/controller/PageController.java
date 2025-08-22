@@ -8,12 +8,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.erp.common.model.vo.MyLeaveInfoPaging;
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.common.model.vo.User;
 import com.project.erp.fm.model.dto.SaleProductDTO;
 import com.project.erp.fm.service.SaleManageService;
 import com.project.erp.fm.service.TransactionService;
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
 import com.project.erp.hrm.model.dto.LeaveInfo;
 import com.project.erp.hrm.model.vo.AttendanceLog;
 import com.project.erp.hrm.service.EmployeeInfoService;
@@ -88,10 +93,11 @@ public class PageController {
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
 		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
+
 		model.addAttribute("component","../common/myLeavePage.jsp");
 		return "common/layout";
 	}
-	
+
 	@GetMapping("/myLeaveView")
 	public String myLeaveView(Model model, LeaveInfo li) {
 //		System.out.println(li);

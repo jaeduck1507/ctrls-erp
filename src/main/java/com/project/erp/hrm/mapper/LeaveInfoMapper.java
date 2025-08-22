@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.common.model.vo.Paging;
-
+import com.project.erp.fm.model.dto.BudgetDeptDTO;
+import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
 import com.project.erp.hrm.model.dto.LeaveInfo;
+import com.project.erp.hrm.model.dto.LeaveInfoPagingDTO;
 
 @Mapper
 public interface LeaveInfoMapper {

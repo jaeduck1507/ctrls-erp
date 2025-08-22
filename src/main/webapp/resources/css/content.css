@@ -59,10 +59,11 @@
 #filter-bar fieldset,
 #filter-bar select,
 .filter-bar fieldset,
-.filter-bar select {
-  padding: 6px 8px;
+.filter-bar select,
+.filter-bar textarea  {
+  padding: 4px 8px;
   border: 1px solid var(--input-color);
-  border-radius: 4px;
+  border-radius: 10px;
 }
 #filter-bar input[type="radio"],
 #filter-bar input[type="checkbox"],
@@ -76,7 +77,7 @@
 #filter-bar button,
 .filter-bar input[type="submit"],
 .filter-bar a,
-.filter-bar button {
+.filter-bar button{
   text-decoration: none;
   background-color: #ffffff;
   color: #516b38;
@@ -221,25 +222,29 @@ input[list^="List"] {
 .pagination li a {
   display: block;
   padding: 5px 14px;
-  border: 1px solid var(--input-color);
+  border: 1px solid #90c67c ;
   border-radius: 5px;
-  color: #333;
+  color: #90c67c ;
   text-decoration: none;
   transition: 0.2s;
+  background-color: white ;
 }
 
 .pagination li a:hover {
-  background-color: #eee;
+  background-color: #eee !important;
+  color: #90c67c !important;
 }
 
-.pagination .active a {
-  background-color: #328e6e;
-  color: white;
-  font-weight: bold;
-  border-color: #328e6e;
+.pagination .active li a {
+  background-color: green !important;
+  color: white !important;
+  font-weight: bold !important;
+  border-color: green !important;
 }
 
 .pagination .disabled a {
-  pointer-events: none;
-  opacity: 0.4;
+  pointer-events: none !important;
+  opacity: 0.6 !important;
+  background-color: white !important;
+  color: #90c67c !important;
 }
