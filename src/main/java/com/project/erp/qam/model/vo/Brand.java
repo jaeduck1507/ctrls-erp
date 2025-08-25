@@ -13,5 +13,4 @@ public class Brand {
 	private String brandAccount; // 계좌번호
 	private String brandBank; // 어떤은행인지
 	
-	
 }

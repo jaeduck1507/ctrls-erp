@@ -5,26 +5,18 @@ $(document).on("input", ".deduction", (e) => {
 	
 	let allValid = true;
 	
-	const table = document.querySelectorAll(".deduction");
-	    for (let i = 0; i < table.length; i++) {
-	        const check = table[i];
-
-	        if (!deductionCheck.test(check.value)) {
-	            check.parentElement.classList.add("red");
-	            allValid = false;
-	        } else {
-	            check.parentElement.classList.remove("red");
-	        }
-	    }
-		$("#submit").prop("disabled", !allValid);
-	/*
-	if (!deductionCheck.test(e.target.value)) {
-		e.target.parentElement.classList.add("red");
-		$("#submit").prop("disabled", true);
-	} else {
-		e.target.parentElement.classList.remove("red");
-		$("#submit").prop("disabled", false);
-	}*/
+	const deductionInput = document.querySelectorAll(".deduction");
+	for (let i = 0; i < deductionInput.length; i++) {
+		const input = deductionInput[i];
+		if (!deductionCheck.test(input.value)) {
+			input.parentElement.classList.add("red");
+			allValid = false;
+		} else {
+			input.parentElement.classList.remove("red");
+		}
+	}
+	
+	$("#submit").prop("disabled", !allValid);
 });
 
 var salayPagingDTO = {};
@@ -107,10 +99,20 @@ $("#btn").click(() => {
 		});
 		
 	} else {
-		alert("월을 입력해주세요");
-		location.reload();
+		//alert("월을 입력해주세요");
+		//location.reload();
+		Swal.fire({
+			position: "top",
+			icon: "error",
+			title: "조회할 월을 선택해주세요!",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000
+		});
+		return;
 	}
-});	
+});
+
 $(document).on('input', '.deduction', (e) => {
 		const indexNum = $(e.target).parent().parent().attr("id").split("_")[1];
 		console.log(indexNum);
@@ -172,7 +174,7 @@ $(document).on('click', 'a.page-link', function(e) {
    
   });
 
-$("#submit").click(() => { // 제출 버튼
+$(document).on("click", "#submit", function() { // 제출 버튼
 	const yearMonth = $("#yearMonth").val();
     const table = $("#result tr"); // 테이블 정보 획득
     const spList = []; // 객체를 담을 배열
@@ -206,25 +208,49 @@ $("#submit").click(() => { // 제출 버튼
         spList.push(obj); // 정보 저장한 객체를 배열에 삽입
     }
     console.log(spList);
-    
-    $.ajax({
-        // 요청
-        type : "post",
-        url : "/addSalaryPayment",
-        dataType : "json", // dataType 지정해줘야 자바에서 인식하는 듯?
-        data : JSON.stringify(spList), // json문자열로 변환해서 전송
-		processData: false,
-		contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
-        // 응답
-        success : function(result) {
-			if(result) {
-				alert("정상적으로 처리되었습니다!");
-				location.reload();
+	console.log(spList.length);
+	
+	Swal.fire({
+		title: "등록하시겠습니까?",
+		text: "총 " + spList.length + "개의 내역이 등록됩니다!",
+		icon: "question",
+		iconColor: "#8de664",
+		showCancelButton: true,
+		confirmButtonColor: "#48b85b",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "등록",
+		cancelButtonText: "취소"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					// 요청
+					type : "post",
+					url : "/addSalaryPayment",
+					dataType : "json", // dataType 지정해줘야 자바에서 인식하는 듯?
+					data : JSON.stringify(spList), // json문자열로 변환해서 전송
+					processData: false,
+					contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
+			        // 응답
+					success: function(result) {
+						if (result) {
+							Swal.fire({
+								title: "등록 완료!",
+								text: "성공적으로 등록되었습니다.",
+								icon: "success",
+								iconColor: "#48b85b",
+								confirmButtonColor: "#48b85b",
+								timer: 3000,
+								timerProgressBar: true,
+								didClose: () => {
+									location.reload();
+								}
+							});
+						}
+					},
+					error: function(xhr, status, error) {
+						
+					}
+				});
 			}
-        },
-		error:function(xhr,status,error) {
-			
-		} 
-    });
-
+		});
 });

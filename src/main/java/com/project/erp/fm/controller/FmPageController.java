@@ -81,8 +81,6 @@ public class FmPageController {
 		model.addAttribute("productNameList", productNameService.showProductName(paging));
 		model.addAttribute("brandList", brandService.findBrand(paging));
 		//System.out.println(brandService.findBrand());
-		model.addAttribute("today", LocalDate.now().toString());
-		//System.out.println(LocalDate.now().toString());
 		model.addAttribute("component","../component/fm/purchaseRegister.jsp");
 		return "common/layout";
 	}	

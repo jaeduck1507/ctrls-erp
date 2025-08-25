@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>saleRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<h5>[재무 관리] > [매출 등록]</h5>

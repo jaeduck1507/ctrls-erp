@@ -37,5 +37,26 @@ executionDate.addEventListener("input", (e) => {
 });
 
 $("#budget-update").click(() => {
-	alert("수정되었습니다!");
+	$.ajax({
+		type: "post",
+		url: "/budgetUpdate",
+		data: $("#budgetUpdateForm").serialize(),
+		success: function(response) {
+			if (response) {
+				Swal.fire({
+					position: "top",
+					icon: "success",
+					title: "수정되었습니다!",
+					showConfirmButton: false,
+					timer: 1500,
+					didClose: () => {
+						location.href = "/fm/budget"
+					}
+				});
+			}
+		},
+		error: function(xhr, status, error) {
+			
+		}
+	});
 });
