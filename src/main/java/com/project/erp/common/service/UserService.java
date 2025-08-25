@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.project.erp.common.mapper.UserMapper;
 import com.project.erp.common.model.vo.User;
 import com.project.erp.hrm.model.dto.EmpInfo;
+import com.project.erp.hrm.model.dto.Quitter;
 import com.project.erp.hrm.service.EmployeeInfoService;
 
 @Service
@@ -75,6 +76,9 @@ public class UserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userMapper.login(username);
+		if( user == null ) { 
+            throw new UsernameNotFoundException(username);
+       }
 		System.out.println("로그인" + user);
 		return user;
 	}
@@ -110,5 +114,9 @@ public class UserService implements UserDetailsService{
 		return userMapper.idCheck(vo);
 	}
 	
+	public void deleteId(Quitter q) {
+		System.out.println("deleteId : " + q);
+		userMapper.deleteId(q);
+	}
 
 }

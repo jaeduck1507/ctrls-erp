@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>마이 페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="../resources/css/mypage.css" />
 </head>
 <body>
@@ -139,6 +140,15 @@
 			contentType: 'application/json; charset=UTF-8',
 			
             success : function(result) {
+            	Swal.fire({
+        			title: "출근 완료 (출근시간 : "+ checkIn +")",
+        			confirmButtonText: '확인',
+        			width: 600,
+        			confirmButtonColor: "#90C67C",
+        			icon: "warning",
+        			iconColor: "green"
+        			});
+            	
             	checkAtt(); // 출퇴근 현황 비동기 처리로 업데이트
             	
             	
@@ -163,6 +173,15 @@
 			contentType: 'application/json; charset=UTF-8',
 			
             success : function(result) {
+
+            	Swal.fire({
+        			title: "퇴근 완료 (퇴근시간 : "+ checkOut +")",
+        			confirmButtonText: '확인',
+        			width: 600,
+        			confirmButtonColor: "#90C67C",
+        			icon: "warning",
+        			iconColor: "green"
+        			});
             	checkAtt(); // 출퇴근 현황 비동기 처리로 업데이트
             	
             },

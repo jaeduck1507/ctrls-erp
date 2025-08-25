@@ -48,7 +48,7 @@ public class PageController {
 	public String index(Model model, HttpSession session) {
 		Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println(auth.toString().equals("anonymousUser"));
-		if(auth.toString().equals("anonymousUser")) return "redirect:/login";
+		if(auth.toString().equals("anonymousUser")) return "common/login";
 		//User user = (User) auth.getPrincipal();
 		User user = (User) auth;
 		EmpInfo empInfo = new EmpInfo();
@@ -61,6 +61,7 @@ public class PageController {
 	
 	@GetMapping("/login")
 	public String login() {
+//		if(error !=  null) return "common/login?error=" + error;
 		return "common/login";
 	}
 	

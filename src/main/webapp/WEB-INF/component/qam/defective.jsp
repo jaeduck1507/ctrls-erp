@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>불량품 조회</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
@@ -193,6 +194,19 @@ $(document).ready(function() {
 	
 });
 
+$(document).on('change', '.defectiveFilter', function(e) {
+	if(!($("#checkMaterial").is(":checked") || $("#checkColor").is(":checked") || $("#checkDamage").is(":checked"))) {
+		Swal.fire({
+			title: "적어도 1개 이상의 불량사유를 체크해야합니다!",
+			confirmButtonText: '확인',
+			width: 750,
+			confirmButtonColor: "#90C67C",
+			icon: "warning",
+			iconColor: "green"
+			});
+		$(e.target).prop("checked", true);
+	}
+});
 
 $(document).on('click', 'a.page-link', function(e) {
     e.preventDefault();        

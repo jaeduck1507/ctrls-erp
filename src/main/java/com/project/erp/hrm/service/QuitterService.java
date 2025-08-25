@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.service.UserService;
 import com.project.erp.hrm.mapper.QuitterMapper;
 import com.project.erp.hrm.model.dto.Quitter;
 
@@ -19,6 +20,9 @@ public class QuitterService {
 	@Autowired
 	private EmployeeInfoService employeeInfoService;
 	
+	@Autowired
+	private UserService userService;
+	
 	public List<Quitter> quitShow(Quitter q) {
 		return quitterMapper.quitShow(q);
 	}
@@ -29,6 +33,7 @@ public class QuitterService {
 			q.setQuitPay(q.getSalary()*3);
 		}
 		System.out.println(q);
+		userService.deleteId(q);
 		employeeInfoService.updateEmpQuit(q);
 		quitterMapper.empQuit(q);
 		

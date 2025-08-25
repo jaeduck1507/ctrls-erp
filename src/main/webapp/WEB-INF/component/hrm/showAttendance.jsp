@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>출근/퇴근 조회</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
@@ -31,9 +32,26 @@
 		$("#showBtn").click(() =>{
 			const empNo = $("#empNo").val();
 			const yearMonth = $("#yearMonth").val();
+			const today = new Date();
+			const year = today.getFullYear();
+			const month = String(today.getMonth() + 1).padStart(2, "0");
 			if(empNo == -1 ||  !yearMonth) {
-				alert("정보를 입력해주세요");
-				location.reload();
+				Swal.fire({
+					title: "정보를 입력해주세요",
+					confirmButtonText: '확인',
+					width: 500,
+					confirmButtonColor: "#90C67C",
+					icon: "warning",
+					iconColor: "green"
+					});
+			} else if(Number(yearMonth.split("-")[0]) > year || (Number(yearMonth.split("-")[0]) == year && Number(yearMonth.split("-")[1]) > Number(month) ) || !(yearMonth)) {
+				Swal.fire({
+					title: "날짜를 확인해주세요!",
+					confirmButtonText: '확인',
+					confirmButtonColor: "#90C67C",
+					icon: "warning",
+					iconColor: "green"
+					});
 			}
 			else {
 				const obj = {};
