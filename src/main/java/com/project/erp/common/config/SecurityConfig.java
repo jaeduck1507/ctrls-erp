@@ -12,7 +12,12 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-
+	
+	@Bean
+	public LoginFailureHandler loginFailureHandler(){
+	    return  new LoginFailureHandler();
+	}
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		int a = 1;
@@ -32,12 +37,17 @@ public class SecurityConfig {
 							.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM") // ** 을 통해 모두 접근가능한가
 							.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM")
 							.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM")
+							
 							.anyRequest().permitAll()
 					)
 					.formLogin(form -> 
-					form.loginPage("/login")
+					form
+						.loginPage("/login")
+						.loginProcessingUrl("/login")
+						.failureHandler(loginFailureHandler())
+						.failureUrl("/login?error=aa")
+						.failureForwardUrl("/login?error=a")
 						.defaultSuccessUrl("/")
-						.failureUrl("/login")
 						
 						
 						
@@ -45,11 +55,11 @@ public class SecurityConfig {
 					)
 					.logout(logout -> 
 						logout.logoutUrl("/logout")
-							.logoutSuccessUrl("/")
+							.logoutSuccessUrl("/login")
 					)
 					.build();
 		}
-		
+		// 위에거 작동 안하는거 실험용임
 		
 		return http
 				.csrf(csrf -> csrf.disable()) // 웹 보안 토큰 설정 (비활성화)
@@ -69,9 +79,11 @@ public class SecurityConfig {
 						.anyRequest().permitAll()
 				)
 				.formLogin(form -> 
-				form.loginPage("/login")
+				form
+					.loginPage("/login")
 					.defaultSuccessUrl("/")
-					.failureUrl("/login")
+					.loginProcessingUrl("/login")
+					.failureHandler(loginFailureHandler())
 					
 					
 					

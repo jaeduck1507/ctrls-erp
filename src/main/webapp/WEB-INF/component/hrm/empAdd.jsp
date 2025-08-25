@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
   
 .arrow_box {
@@ -71,6 +72,7 @@ table {
                 <th>주소</th>
                 <th>연락처</th>
                 <th>이메일</th>
+                <th>사진</th>
                 <th>삭제</th>
 
             </tr>
@@ -80,8 +82,6 @@ table {
         <button id = "btn">사원 등록</button>
         
     </div>
-
-	
 	
     <script>
     	
@@ -261,6 +261,7 @@ table {
             		'<td><input type="text" class="addr"></td>' + 
             		'<td><input type="text" class="phone"></td>' + 
             		'<td><input type="text" class="email"></td>' + 
+            		'<td><input type="file" class="file"></td>' + 
             		'<td><button class="btn4">삭제</button></td>'		
             );
         }
@@ -301,33 +302,63 @@ table {
             
             // finalCheck가 true일때 제약조건 위배되는 데이터 없으므로 전송할 객체배열 생성
             if(finalCheck) {
+				const formData = new FormData();
 	            for(var i = 1; i < table.length; i++){ // i가 1부터 시작하는 이유는 첫번째 열은 th(열의 설명)부분이라 데이터가 아님
-	                const obj ={}; // 직원 하나당 하나의 객체로 생성
-	                for(var j = 0; j <9; j++) { // 객체에 데이터 삽입
-	                	if(j === 0)  obj.empName=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-	                	if(j === 1)  obj.empIn=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-	                	if(j === 2)  obj.jobNo=$("#result tr").eq(i).find("td").eq(j).find("select").val();
-	                	if(j === 3)  obj.deptNo=$("#result tr").eq(i).find("td").eq(j).find("select").val();
-	                	if(j === 4)  obj.hireDate=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-	                	if(j === 5)  obj.salary=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-	                	if(j === 6)  obj.addr=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-	                	if(j === 7)  obj.phone=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-	                	if(j === 8)  obj.email=$("#result tr").eq(i).find("td").eq(j).find("input").val();
+	                //const obj ={}; // 직원 하나당 하나의 객체로 생성
+	                for(var j = 0; j <10; j++) { // 객체에 데이터 삽입
+	                	if(j === 0)  formData.append('eiList[' + (i-1) +'].empName',$("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 1)  formData.append('eiList[' + (i-1) +'].empIn',$("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 2)  formData.append('eiList[' + (i-1) +'].jobNo',$("#result tr").eq(i).find("td").eq(j).find("select").val());
+	                	if(j === 3)  formData.append('eiList[' + (i-1) +'].deptNo',$("#result tr").eq(i).find("td").eq(j).find("select").val());
+	                	if(j === 4)  formData.append('eiList[' + (i-1) +'].hireDate', $("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 5)  formData.append('eiList[' + (i-1) +'].salary',$("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 6)  formData.append('eiList[' + (i-1) +'].addr',$("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 7)  formData.append('eiList[' + (i-1) +'].phone',$("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 8)  formData.append('eiList[' + (i-1) +'].email',$("#result tr").eq(i).find("td").eq(j).find("input").val());
+	                	if(j === 9)  {
+							if($("#result tr").eq(i).find("td").eq(j).find("input")[0].files[0]) formData.append('eiList[' + (i-1) +'].file',$("#result tr").eq(i).find("td").eq(j).find("input")[0].files[0]);
+	                	}
 	                }
-	                eiList.push(obj); // 정보 저장한 객체를 배열에 삽입
+	                //eiList.push(obj); // 정보 저장한 객체를 배열에 삽입
 	            }
-	            console.log(JSON.stringify(eiList));
+	            //console.log(JSON.stringify(eiList));
 	            $.ajax({
 	                // 요청
 	                type : "post",
 	                url : "/empAdd",
-	                dataType : "json", // dataType 지정해줘야 자바에서 인식하는 듯?
-	                data : JSON.stringify(eiList), // json문자열로 변환해서 전송
+	                data : formData,
 					processData: false,
-					contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
+					enctype: "multipart/form-data",
+					contentType : false, // json문자열로 변환해서 전송
 	                // 응답
 	                success : function(result) {
-						
+	                	Swal.fire({
+							icon: "success",
+							iconColor: "green",
+						  title: "성공적으로 등록했습니다!",
+						  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
+						  timer: 3000,
+						  timerProgressBar: true,
+						  didOpen: () => {
+						    Swal.showLoading();
+						    const timer = Swal.getPopup().querySelector("#aa");
+						    timerInterval = setInterval(() => {
+								let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
+						      timer.textContent = remainSecond +1;
+						    }, 100);
+						  },
+						  willClose: () => {
+						    clearInterval(timerInterval);
+						  }
+						}).then((result) => {
+						  /* Read more about handling dismissals below */
+						  if(result.dismiss == "backdrop") {
+							  location.reload();
+						  }
+						  if (result.dismiss === Swal.DismissReason.timer) {
+							  location.reload();
+						  }
+						});
 	                },
 	                
 					error:function(xhr,status,error) {

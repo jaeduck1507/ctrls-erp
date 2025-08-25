@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="../resources/css/findid.css" />
 </head>
 <body>
@@ -58,8 +59,21 @@
 			    processData: false,
 			    contentType: false,
 			    success: function (result) {
-			    	alert("비밀번호 재설정 완료!"); 
-			    	location.href='/login';
+			    	Swal.fire({
+						title: "비밀번호 재설정이 완료되었습니다!",
+						confirmButtonText: '확인',
+						width: 600,
+						confirmButtonColor: "#90C67C",
+						icon: "success",
+						iconColor: "green"
+						}).then((result) => {
+							  if (result.isConfirmed) {
+								  location.href='/login';	
+								  }
+							  if(result.dismiss == "backdrop") {
+								  location.href='/login';	
+							  }
+								});
 			    },
 			    error: function (xhr, status, error) {
 			    	alert("비밀번호 재설정 실패!");

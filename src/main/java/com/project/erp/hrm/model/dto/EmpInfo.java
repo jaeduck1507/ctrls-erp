@@ -2,6 +2,8 @@ package com.project.erp.hrm.model.dto;
 
 import java.time.LocalDate;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,4 +25,6 @@ public class EmpInfo {
 	private String phone; // 연락처
 	private String email; // 이메일
 	private String date; // 다른 날짜 정보(월,분기,일 등 임시 저장소)
+	private MultipartFile file;
+	private String url;
 }

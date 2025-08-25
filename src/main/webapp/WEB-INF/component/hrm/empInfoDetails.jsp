@@ -25,6 +25,7 @@
 			
 			<div class="box3">
 				<h4>개인 정보</h4>
+				<img src="D:/assets/${empInfo.url}" width="200" height="120" />
 				<p><b>주민등록번호 : </b>${empInfo.empIn}</p>
 			    <p><b>주소 : </b>${empInfo.addr}</p>
 			    <p><b>연락처 : </b>${empInfo.phone}</p>

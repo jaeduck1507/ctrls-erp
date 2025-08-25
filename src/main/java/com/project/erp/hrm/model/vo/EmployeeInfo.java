@@ -21,4 +21,5 @@ public class EmployeeInfo {
 	private String addr; // 주소
 	private String phone; // 연락처
 	private String email; // 이메일
+	private String url;
 }

@@ -51,4 +51,8 @@
 		</set>
 		WHERE username = #{username}
 	</update>
+	
+	<delete id="deleteId" parameterType="Quitter">
+		DELETE FROM user WHERE emp_no = #{empNo};
+	</delete>
 </mapper>

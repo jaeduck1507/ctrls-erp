@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.common.model.vo.Paging;
+import com.project.erp.hrm.model.dto.EmpAddDTO;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
 import com.project.erp.hrm.model.vo.Department;
@@ -55,8 +56,9 @@ public class EIMController {
 	
 	@ResponseBody
 	@PostMapping("/empAdd")
-	public void empAdd(@RequestBody List<EmployeeInfo> eiList) {
+	public void empAdd(EmpAddDTO eiList) {
 //		System.out.println(eiList);
+		
 		employeeInfoservice.empAdd(eiList);
 	}
 	

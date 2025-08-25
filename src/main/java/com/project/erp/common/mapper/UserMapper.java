@@ -3,6 +3,7 @@ package com.project.erp.common.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.erp.common.model.vo.User;
+import com.project.erp.hrm.model.dto.Quitter;
 
 @Mapper
 public interface UserMapper {
@@ -12,4 +13,5 @@ public interface UserMapper {
 	String findId(int empNo); // 로그인에서 아이디 찾기
 	void resetMyPwd(User vo);
 	int idCheck(User vo);
+	void deleteId(Quitter q);
 }

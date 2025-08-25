@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.common.model.vo.MyLeaveInfoPaging;
@@ -45,7 +46,7 @@ public class PageController {
 	public String index(Model model, HttpSession session) {
 		Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println(auth.toString().equals("anonymousUser"));
-		if(auth.toString().equals("anonymousUser")) return "redirect:/login";
+		if(auth.toString().equals("anonymousUser")) return "common/login";
 		//User user = (User) auth.getPrincipal();
 		User user = (User) auth;
 		EmpInfo empInfo = new EmpInfo();
@@ -58,6 +59,7 @@ public class PageController {
 	
 	@GetMapping("/login")
 	public String login() {
+//		if(error !=  null) return "common/login?error=" + error;
 		return "common/login";
 	}
 	

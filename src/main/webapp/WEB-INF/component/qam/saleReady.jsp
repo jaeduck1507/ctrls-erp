@@ -220,6 +220,7 @@
 				Swal.fire({
 					title: "적어도 1개 이상의 제품을 선택해주세요",
 					confirmButtonText: '확인',
+					width: 600,
 					confirmButtonColor: "#90C67C",
 					icon: "warning",
 					iconColor: "green"
