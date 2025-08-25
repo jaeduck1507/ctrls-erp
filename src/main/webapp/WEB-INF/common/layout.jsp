@@ -34,6 +34,6 @@ uri="http://www.springframework.org/security/tags" %>
 		<jsp:include page="${component}" />
       </div>
     </div>
-    <script src="../resources/js/side.js"></script>
+    <script src="../resources/js/common/side.js"></script>
   </body>
 </html>

@@ -27,6 +27,6 @@
 	  </div>
 	</form>
 	</div>
-	<script src="../resources/js/findid.js"></script>
+	<script src="../resources/js/common/findid.js"></script>
 </body>
 </html>
