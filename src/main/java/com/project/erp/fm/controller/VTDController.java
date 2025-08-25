@@ -28,8 +28,9 @@ public class VTDController {
 	
 	@ResponseBody
 	@PostMapping("/transRegister")
-	public void transRegister(@RequestBody List<Transaction> tList) {
+	public boolean transRegister(@RequestBody List<Transaction> tList) {
 		transactionService.transRegister(tList);
+		return true;
 	}
 	
 }

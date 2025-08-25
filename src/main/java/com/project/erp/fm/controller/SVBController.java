@@ -34,10 +34,11 @@ public class SVBController {
 		return true;
 	}
 	
+	@ResponseBody
 	@PostMapping("/budgetUpdate")
-	public String budgetUpdate(Budget budget) {
+	public boolean budgetUpdate(Budget budget) {
 		budgetService.budgetUpdate(budget);
-		return "redirect:/fm/budget";
+		return true;
 	}
 	
 }

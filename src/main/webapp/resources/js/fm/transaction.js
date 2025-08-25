@@ -60,18 +60,28 @@ $("#btn").click(() => {
 	
 	const startDate = $("#startDate").val();
 	const endDate = $("#endDate").val();
-	formData.append("startDate", startDate);
-	formData.append("endDate", endDate);
 	
-	if (startDate && !endDate) {
-		alert("조회 종료일을 선택해주세요!");
-		return;
+	if (startDate && endDate) {
+		if (startDate > endDate) {
+			Swal.fire({
+				position: "top",
+				icon: "error",
+				title: "조회 기간을 다시 선택해주세요!",
+				showConfirmButton: false,
+				timer: 1500,
+				didClose: () => {
+					location.reload();
+				}
+			});
+		}
+		formData.append("startDate", startDate);
+		formData.append("endDate", endDate);
+	} else if (startDate && !endDate) {
+		formData.append("startDate", startDate);
+		formData.append("endDate", new Date().toISOString().slice(0, 10));
 	} else if (!startDate && endDate) {
-		alert("조회 시작일을 선택해주세요!");
-		return;
-	} else if (startDate > endDate) {
-		alert("조회 기간을 다시 선택해주세요!");
-		return;
+		formData.append("startDate", '1900-01-01');
+		formData.append("endDate", endDate);
 	}
 	
 	$.ajax({
@@ -83,12 +93,23 @@ $("#btn").click(() => {
 		success: function(result) {
 			//console.log($("#transType").val());
 			//console.log($("#deptName").val());
-			//console.log($("#startDate").val());
-			//console.log($("#endDate").val());
+			console.log($("#startDate").val());
+			console.log($("#endDate").val());
 			
 			if (!result.transList || result.transList.length === 0) {
-				alert("조회된 결과가 없습니다");
-				location.reload();
+				//alert("조회된 결과가 없습니다");
+				//location.reload();
+				Swal.fire({
+					position: "top",
+					icon: "error",
+					title: "조회된 결과가 없습니다!",
+					showConfirmButton: false,
+					timer: 1500,
+					didClose: () => {
+						location.reload();
+					}
+				});
+				return;
 			}
 			
 			$("#result").html("");
@@ -119,9 +140,31 @@ $(document).on('click', 'a.page-link', function(e) {
 	const formData = new FormData();
 	formData.append("transType", $("#transType").val());
 	formData.append("deptName", $("#deptName").val());
-	formData.append("startDate", $("#startDate").val());
-	formData.append("endDate", $("#endDate").val());
 	formData.append("page", $(this).attr('href'));
+	
+	const startDate = $("#startDate").val();
+	const endDate = $("#endDate").val();
+	
+	if (startDate && endDate) {
+		if (startDate > endDate) {
+			Swal.fire({
+				position: "top",
+				icon: "error",
+				title: "조회 기간을 다시 선택해주세요!",
+				showConfirmButton: false,
+				timer: 1500
+			});
+			return;
+		}
+		formData.append("startDate", startDate);
+		formData.append("endDate", endDate);
+	} else if (startDate && !endDate) {
+		formData.append("startDate", startDate);
+		formData.append("endDate", new Date().toISOString().slice(0, 10));
+	} else if (!startDate && endDate) {
+		formData.append("startDate", '1900-01-01');
+		formData.append("endDate", endDate);
+	}
 	
 	$.ajax({
 		type: "post",

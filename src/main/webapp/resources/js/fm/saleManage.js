@@ -112,7 +112,7 @@ function loadChart(category) {
 		processData: false,
 		contentType: false,
 		success: function(result) {
-			console.log(result);
+			//console.log(result);
 			
 			let productLabels = [];
 			let quantityValues = [];
@@ -198,8 +198,19 @@ $("#btn").click(() => {
 			//console.log($("#endDate").val());
 			
 			if (!result.salesList || result.salesList.length === 0) {
-				alert("조회된 결과가 없습니다");
-				location.reload();
+				//alert("조회된 결과가 없습니다");
+				//location.reload();
+				Swal.fire({
+					position: "top",
+					icon: "error",
+					title: "조회된 결과가 없습니다!",
+					showConfirmButton: false,
+					timer: 1500,
+					didClose: () => {
+						location.reload();
+					}
+				});
+				return;
 			}
 			
 			$("#result").html("");

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>bonusRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 	td {
 		position: relative;
@@ -41,138 +42,18 @@
 	</div>
 	
 	<script>
-		var bonusNoCheckValue = false;
-		var paymentCheckValue = false;
-		var payDateCheckValue = false;
+		const empInfo = [
+		<c:forEach items="${empInfo}" var="emp" varStatus="status">
+			{ empNo: "${emp.empNo}", empName: "${emp.empName}", deptName: "${emp.deptName}", jobTitle: "${emp.jobTitle}" }<c:if test="${!status.last}">,</c:if>
+		</c:forEach>
+		];
 		
-		const bonusNoCheck = /^[1-9]$/;
-		$(document).on("click", ".bonusNo", (e) => {
-			console.log(e.target.value);
-			console.log(bonusNoCheck.test(e.target.value));
-			
-			if (!bonusNoCheck.test(e.target.value)) {
-				e.target.parentElement.classList.add("red");
-				bonusNoCheckValue = false;
-			} else {
-				e.target.parentElement.classList.remove("red");
-				bonusNoCheckValue = true;
-			}
-			checkAll();
-		});
-		
-		const paymentCheck = /^[1-9]\d*$/;
-		$(document).on("input", ".payment", (e) => {
-			console.log(e.target.value);
-			console.log(paymentCheck.test(e.target.value));
-			
-			if (!paymentCheck.test(e.target.value)) {
-				e.target.parentElement.classList.add("red");
-				paymentCheckValue = false;
-			} else {
-				e.target.parentElement.classList.remove("red");
-				paymentCheckValue = true;
-			}
-			checkAll();
-		});
-		
-		const payDateCheck = /.+/;
-		$(document).on("input", ".payDate", (e) => {
-			console.log(e.target.value);
-			console.log(payDateCheck.test(e.target.value));
-			
-			if (!payDateCheck.test(e.target.value)) {
-				e.target.parentElement.classList.add("red");
-				payDateCheckValue = false;
-			} else {
-				e.target.parentElement.classList.remove("red");
-				payDateCheckValue = true;
-			}
-			checkAll();
-		});
-		
-		function checkAll() {
-		    if (bonusNoCheckValue && paymentCheckValue && payDateCheckValue) {
-		        $("#bonus-register").prop("disabled", false);
-		    } else {
-		        $("#bonus-register").prop("disabled", true);
-		    }
-		}
-		
-		var count = 0;
-		
-		function addRow() { // 열 추가 함수
-			$("#result").append('<tr></tr>'); // 기본 열 추가
-			for(var i = 0; i < 4; i++) { // 열에 데이터 추가
-				if(i == 0) $("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="empName" placeholder="사원 선택" /><datalist id="List'+ count + '"><c:forEach items="${empInfo}" var="emp"><option value="${emp.empName}/${emp.deptName}/${emp.jobTitle}" data-emp_no ="${emp.empNo}" ></option></c:forEach></datalist></td>');
-				else $("#result tr").eq(-1).append('<td></td>');
-			}
-			$("#result tr").eq(-1).append('<td><button class="remove-row">열 삭제</button></td>'); // 열 삭제 버튼 추가
-		}
-		
-		addRow();
-		
-		$("#add-row").click(() => { // 열 추가 버튼 클릭시 열 추가 함수 addRow 함수 실행
-			addRow();
-		});
-		
-		$(document).on("click", ".remove-row", function() { // 열 삭제 함수
-			if($("#result tr").length > 2) $(this).parent().parent().remove();
-		});
-		
-		$(document).on("change", ".empName", (e) => {
-			const deptInfo = {};
-			const val = $(e.target).val();
-			console.log(val);
-			const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
-			
-			if (!opt.length) {
-				alert("없는 부서입니다");
-				return;
-			}
-			
-			deptInfo.deptNo = opt.data('emp_no');
-			$(e.target).parent().parent().find("td").eq(1).html('<select class="bonusNo"><option value="" disabled selected>선택</option><c:forEach items="${bonus}" var="bn"><option value="${bn.bonusNo}">${bn.bonusName}</option></c:forEach></select>');
-			$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" name="payment" class="payment" >');
-			$(e.target).parent().parent().find("td").eq(3).html('<input type="date" name="payDate" class="payDate">');
-		});
-		
-		$("#bonus-register").click(() => {
-			const table = $("#result tr");
-			const bList = [];
-			for (var i = 1; i < table.length; i++) {
-				const val = $('#result tr').eq(i).find('td').eq(0).find('input').val();
-				const opt = $('#result tr').eq(i).find('td').eq(0).find('datalist').find('option').filter(function () {
-				  return this.value === val;
-				});
-				const obj ={};
-				obj.empNo=opt.data('emp_no');
-				obj.bonusNo=$("#result tr").eq(i).find("td").eq(1).find("select").val();
-				obj.payment=$("#result tr").eq(i).find("td").eq(2).find("input").val();
-				obj.payDate=$("#result tr").eq(i).find("td").eq(3).find("input").val();
-				
-				bList.push(obj);
-			}
-			console.log(JSON.stringify(bList));
-			
-			
-			$.ajax({
-				type : "post",
-				url: "/addBonusPayment",
-				dataType : "json",
-				data : JSON.stringify(bList),
-				processData: false,
-				contentType: 'application/json; charset=UTF-8',
-				success: function(response) {
-					if (response) {
-						alert("등록되었습니다!");
-						location.reload();
-					}
-				},
-				error: function(xhr, status, error) {
-					
-				}
-			});
-		});
+		const bonus = [
+		<c:forEach items="${bonus}" var="bn" varStatus="status">
+			{ bonusNo: "${bn.bonusNo}", bonusName: "${bn.bonusName}" }<c:if test="${!status.last}">,</c:if>
+		</c:forEach>
+		];
 	</script>
+	<script src="../resources/js/fm/addBonusPayment.js"></script>
 </body>
 </html>

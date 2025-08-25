@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>budgetUpdate</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="../resources/css/modifyMyInfo.css"/>
 <style>
 	#budgetNo,
@@ -23,7 +24,7 @@
 <body>
 	<h5>[재무 관리] > [예산 수정]</h5>
 	<h3>예산 수정</h3>
-	<form action="/budgetUpdate" method="post" class="filter-bar">
+	<form action="/budgetUpdate" method="post" id="budgetUpdateForm" class="filter-bar">
 		<div class="box">
 			<table>
 				<tr>
@@ -56,8 +57,8 @@
 		</div>
 		
 		<div>
-			<button type="submit" id="budget-update">수정</button>
-			<button onclick="location.href='/fm/budget'">취소</button>
+			<button type="button" id="budget-update">수정</button>
+			<button type="button" onclick="location.href='/fm/budget'">취소</button>
 		</div>
 	</form>
 	

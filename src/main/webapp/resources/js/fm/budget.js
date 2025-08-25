@@ -14,8 +14,19 @@ $("#btn").click(() => {
 			//console.log($("#yearMonth").val());
 			
 			if (!result.budgetList || result.budgetList.length === 0) {
-				alert("조회된 결과가 없습니다");
-				location.reload();
+				//alert("조회된 결과가 없습니다");
+				//location.reload();
+				Swal.fire({
+					position: "top",
+					icon: "error",
+					title: "조회된 결과가 없습니다!",
+					showConfirmButton: false,
+					timer: 1500,
+					didClose: () => {
+						location.reload();
+					}
+				});
+				return;
 			}
 			
 			$("#result").html("");
@@ -43,9 +54,34 @@ $("#btn").click(() => {
 
 $(document).on('click', 'a.btnX', function(e) {
 	e.preventDefault();
-	if (confirm("정말 삭제하시겠습니까?")) {
+	/*if (confirm("정말 삭제하시겠습니까?")) {
 		location.href = $(this).attr("href");
-	}
+	}*/
+	
+	Swal.fire({
+		title: "정말 삭제하시겠습니까?",
+		text: "삭제를 누르면 해당 항목이 영구적으로 삭제됩니다.",
+		icon: "warning",
+		iconColor: "#f1a025",
+		showCancelButton: true,
+		confirmButtonColor: "#48b85b",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "삭제",
+		cancelButtonText: "취소"
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: "삭제 완료!",
+				text: "성공적으로 삭제되었습니다.",
+				icon: "success",
+				timer: 3000,
+				timerProgressBar: true,
+				didClose: () => {
+					location.href = $(this).attr("href");
+				}
+			});
+		}
+	});
 });
 
 $(document).on('click', 'a.page-link', function(e) {
@@ -63,13 +99,13 @@ $(document).on('click', 'a.page-link', function(e) {
 		contentType : false,
 		success: function(result) {
 			$("#result").html("");
-			$("#result").append("<tr><th>예산 코드</th><th>부서</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th></tr>");
+			$("#result").append("<tr><th>예산 코드</th><th>부서</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th><th>삭제</th></tr>");
 			for (const budget of result.budgetList) {
 				var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
 					+ budget.annualBudget.toLocaleString() + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
 				$("#result").append(text);
-				$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '">수정</a></td>');
-				$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '">삭제</a></td>');
+				$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '" class="btnO">수정</a></td>');
+				$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '" class="btnX">삭제</a></td>');
 			}
 			
 			$(".pagination").html('');

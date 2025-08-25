@@ -55,22 +55,47 @@ $("#sale-register").click(() => {
 		smList.push(obj);
 	}
 	console.log(JSON.stringify(smList));
+	console.log(smList.length);
 	
-	$.ajax({
-		type : "post",
-		url: "/saleRegister",
-		dataType : "json",
-		data : JSON.stringify(smList),
-		processData: false,
-		contentType: 'application/json; charset=UTF-8',
-		success: function(response) {
-			if (response) {
-				alert("등록되었습니다!");
-				location.reload();
+	Swal.fire({
+		title: "등록하시겠습니까?",
+		text: "총 " + smList.length + "개의 내역이 등록됩니다!",
+		icon: "question",
+		iconColor: "#8de664",
+		showCancelButton: true,
+		confirmButtonColor: "#48b85b",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "등록",
+		cancelButtonText: "취소"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type : "post",
+					url: "/saleRegister",
+					dataType : "json",
+					data : JSON.stringify(smList),
+					processData: false,
+					contentType: 'application/json; charset=UTF-8',
+					success: function(response) {
+						if (response) {
+							Swal.fire({
+								title: "등록 완료!",
+								text: "성공적으로 등록되었습니다.",
+								icon: "success",
+								iconColor: "#48b85b",
+								confirmButtonColor: "#48b85b",
+								timer: 3000,
+								timerProgressBar: true,
+								didClose: () => {
+									location.reload();
+								}
+							});
+						}
+					},
+					error: function(xhr, status, error) {
+						
+					}
+				});
 			}
-		},
-		error: function(xhr, status, error) {
-			
-		}
-	});
+		});
 });
