@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>사원정보조회</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<h5>[근태 관리] > [휴가 신청]</h5>
@@ -133,6 +134,7 @@
 		       });
 			   
 			   $("#btn").click((e) => { // 제출 버튼
+				
 			               const table = $("#result tr"); // 테이블 정보 획득
 			               const liList = []; // 객체를 담을 배열
 			               const formData = new FormData();
@@ -152,7 +154,7 @@
 			               }
 						   
 					
-			               console.log(JSON.stringify(liList));
+			               //console.log(JSON.stringify(liList));
 			               $.ajax({
 			                   // 요청
 			                   type : "post",
@@ -168,10 +170,12 @@
 			                   },
 			                   
 			   				error:function(xhr,status,error) {
-									alert("사번을 입력하세요");
+									
 			   				}
 			               });
+						   
 			           });
+					  
 
 	</script>
 	</body>

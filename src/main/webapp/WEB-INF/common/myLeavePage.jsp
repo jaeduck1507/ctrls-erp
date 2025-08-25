@@ -43,7 +43,6 @@
 		  <div class="box2">
 		  		<h4>휴가 신청 내역</h4>
 		     <div class="filter-bar">
-		  	
 		  	  휴가 처리 상태 <select name="status" id="status">
 		  	   			<option value="all">전체</option>
 		  	   			<option value="wait">대기</option>
@@ -51,144 +50,172 @@
 		  	   			<option value="back">반려</option>
 		  	   		</select>
 		  	 	<input type="hidden" id="empNoSearch" value="${user.empNo}">
-		  		<button id="btn1">조회</button></br>
 		  		</div>
-		  		<div>
+		  		
 		   		<table border="1" id="result2" class="data-table"></table>
 				<nav>
-				<ul class="pagination">
-						<li class="page-item ${paging.prev ? '' : 'disabled'}">
-							<a class="page-link" href="/hrm/leaveStatus?page=${paging.startPage - 1}">Previous</a>
-						</li>
-												
-					<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
-						<li class="page-item">
-							<a class="page-link ${paging.page == page ? 'active' : ''}" href="/hrm/leaveStatus?page=${page}">${page}</a>
-						</li>
-					</c:forEach>
-						<li class="page-item ${paging.next ? '' : 'disabled'}">
-							<a class="page-link" href="/hrm/leaveStatus?page=${paging.endPage + 1}">Next</a>
-						</li>
-				</ul>
-				</nav>
-		  		</div>
+						<ul class="pagination">
+						</ul>
+					</nav>
+		  		
 		  		</div>
 
 				
 				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 	<script>
-		// 조회 버튼 클릭 시 정보 출력
-   		$(document).ready(()=>{
-   			const formData = new FormData();
-   			formData.append("empNo", $('#empNoSearch').val());
-   		  // 휴가 누적 사용일수, 남은 휴가일수
-	      $.ajax({
-				// 요청
-				type : "post",
-				url : "/leaveTotalDays",
-				data : formData, 
-				processData : false,
-			    contentType : false,
-				// 응답
-				success : function(result) {
-					
-					  for(const leaveTotalDays of result) {
-						if(leaveTotalDays && leaveTotalDays.empNo !== null) {
-						  var text = "휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
-					             + "남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
-				       } else {
-							var text = "휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
-						             + "남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
-						   
-					} 
-					$("#result1").append(text);
-				}
-				// 휴가 전체 조회
-			$.ajax({
-				// 요청
-				type : "post",
-				url : "/leaveInfo",
-				data : formData, 
-				processData : false,
-			    contentType : false,
-				// 응답
-				success : function(result) {
-					$("#result2").empty();
-					$("#result2").append("<tr><th>신청번호</th><th>신청날짜</th><th>유형</th><th>시작일</th><th>종료일</th><th>이유</th><th>상태</th><th>수정</th><th>삭제</th></tr>");
-					for(const leaveInfo of result) {
-						var text = "<tr><td>" + leaveInfo.leaveId
-							       + "</td><td>" + leaveInfo.requestDate 
-							       + "</td><td>" + leaveInfo.leaveType 
-								   + "</td><td>" + leaveInfo.startDate 
-								   + "</td><td>" + leaveInfo.endDate 
-								   + "</td><td>" + leaveInfo.reason
-								   + "</td><td>" + leaveInfo.status 
-								   + "</td><td><a id='btn1' href='/myLeaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/myLeaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
-					$("#result2").append(text);
+			// 조회 버튼 클릭 시 정보 출력
+			$(document).ready(()=>{
+				const formData = new FormData();
+				formData.append("empNo", $('#empNoSearch').val());
+			  // 휴가 누적 사용일수, 남은 휴가일수
+		      $.ajax({
+					// 요청
+					type : "post",
+					url : "/leaveTotalDays",
+					data : formData, 
+					processData : false,
+				    contentType : false,
+					// 응답
+					success : function(result) {
+						
+						  for(const leaveTotalDays of result) {
+							if(leaveTotalDays && leaveTotalDays.empNo !== null) {
+							  var text = "휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+						             + "남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
+					       } else {
+								var text = "휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+							             + "남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
+							   
+						} 
+						$("#result1").append(text);
 					}
-					$(".pagination").html('');
-                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-                	for(var i =result.startPage; i<=result.endPage; i++) {
-                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-                	}
-                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
-                
-				// 휴가 처리 상태로 조회
-				// 처리상태 조회			
-				$("#btn1").click(()=>{
-					const formData = new FormData();
-					    formData.append("empNo", $('#empNoSearch').val());
-						formData.append("status", $('#status').val());
-
-						$.ajax({
-							// 요청
-							type : "post",
-							url : "/leaveInfo",
-							data : formData, 
-							processData : false,
-						    contentType : false,
-							// 응답
-							success : function(result) {
-								$("#result2").empty();
-								$("#result2").append("<tr><th>신청번호</th><th>신청날짜</th><th>유형</th><th>시작일</th><th>종료일</th><th>이유</th><th>상태</th><th>수정</th><th>삭제</th></tr>");
-								for(const leaveInfo of result) {
-									var text = "<tr><td>" + leaveInfo.leaveId
-										       + "</td><td>" + leaveInfo.requestDate 
-										       + "</td><td>" + leaveInfo.leaveType 
-											   + "</td><td>" + leaveInfo.startDate 
-											   + "</td><td>" + leaveInfo.endDate 
-											   + "</td><td>" + leaveInfo.reason
-											   + "</td><td>" + leaveInfo.status 
-											   + "</td><td><a id='btn1' href='/myLeaveView?leaveId=" + leaveInfo.leaveId + "' class='btnO'>수정</a></td><td><a id='btn2' href='/myLeaveDelete?leaveId="+ leaveInfo.leaveId +"' class='btnX'>삭제</a></td></tr>";
-								$("#result2").append(text);
-								
-								}
-								$(".pagination").html('');
-			                	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-			                	for(var i =result.startPage; i<=result.endPage; i++) {
-			                		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-			                	}
-			                	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
-			                
-							},
-							error:function(xhr, status, error){
-								
-							}
-						});
-						});
-						},
-						error:function(xhr, status, error){
-							
-						}
-					});
-			},
-			error:function(xhr, status, error){
-					
-				}
+				},
+				error:function(xhr, status, error){
+						
+					}
+			});
 		});
-	});
+		const $status = $("#status");
+		const $table = $("#result2");
+		const $pagination = $(".pagination");
+		
+		let currentPage = 1;
+		let currentLimit = 5;
+		let currentStatus = "all"; // 처리 상태 기본 "전체" 
+		
+
+		  function Pagination(result) {
+		    $table.html("");
+		    $table.append(
+		      "<tr>" +
+		        "<th>신청번호</th>" +
+		        "<th>신청날짜</th>" +
+		        "<th>유형</th>" +
+		        "<th>시작일</th>" +
+		        "<th>종료일</th>" +
+		        "<th>이유</th>" +
+		        "<th>상태</th>" +
+		        "<th>수정</th>" +
+		        "<th>삭제</th>" +
+		      "</tr>"
+		    );
+
+		    // 2) 목록 행 추가
+		    if (result.list && result.list.length > 0) {
+		      for (const row of result.list) {
+		        const tr =
+		          "<tr>" +
+		            "<td>" + row.leaveId    + "</td>" +
+		            "<td>" + row.requestDate+ "</td>" +
+		            "<td>" + row.leaveType  + "</td>" +
+		            "<td>" + row.startDate  + "</td>" +
+		            "<td>" + row.endDate    + "</td>" +
+		            "<td>" + row.reason     + "</td>" +
+		            "<td>" + row.status     + "</td>" +
+		            "<td><a href='/myLeaveView?leaveId=" + row.leaveId + "' class='btnO'>수정</a></td>" +
+		            "<td><a href='/myLeaveDelete?leaveId="+ row.leaveId +"' class='btnX'>삭제</a></td>" +
+		          "</tr>";
+		        $table.append(tr);
+		      }
+		    } else {
+		      // 데이터 없을 때 안내
+		      $table.append("<tr><td colspan='9' style='text-align:center'>데이터가 없습니다.</td></tr>");
+		    }
+
+		    $pagination.html("");
+
+		    // 이전 버튼
+		    const prevDisabled = result.prev ? "" : " disabled";
+		    $pagination.append(
+		      "<li class='page-item" + prevDisabled + "'>" +
+		        "<a class='page-link' href='#' data-page='" + (result.startPage - 1) + "'>Previous</a>" +
+		      "</li>"
+		    );
+
+		    // 페이지 번호 버튼
+		    for (let i = result.startPage; i <= result.endPage; i++) {
+		      const active = (i === result.page) ? " active" : "";
+		      $pagination.append(
+		        "<li class='page-item" + active + "'>" +
+		          "<a class='page-link' href='#' data-page='" + i + "'>" + i + "</a>" +
+		        "</li>"
+		      );
+		    }
+
+		    // 다음 버튼
+		    const nextDisabled = result.next ? "" : " disabled";
+		    $pagination.append(
+		      "<li class='page-item" + nextDisabled + "'>" +
+		        "<a class='page-link' href='#' data-page='" + (result.endPage + 1) + "'>Next</a>" +
+		      "</li>"
+		    );
+		  }
+
+		  function leaveInfoPage(page = 1, status = "all") {
+		    // 현재 상태 저장
+		    currentPage = page;
+		    currentStatus = status;
+
+		    $.ajax({
+		      type: "get",               
+		      url: "/leaveInfo",
+		      data: {
+		        page: page,              // 현재 페이지
+		        limit: currentLimit,     // 한 페이지 개수
+		        status: status           
+		      },
+		      success: function(result) {
+		        Pagination(result);
+		      },
+		      error: function(xhr) {
+		        
+		      }
+		    });
+		  }
+
+		  //상태 셀렉트 변경 시 1페이지부터 다시 조회
+		  $status.on("change", function() {
+		    leaveInfoPage(1, $(this).val()); // 항상 1페이지로
+		  });
+
+		  // 페이지 버튼 클릭
+		  $pagination.on("click", "a.page-link", function(e) {
+		    e.preventDefault();
+		    const page = parseInt($(this).data("page"), 10);
+		      leaveInfoPage(page, currentStatus);
+		  });
+
+		  $(document).ready(function() {
+		    // 페이지 진입 시 "전체" 상태로 1페이지 조회
+		    leaveInfoPage(1, "all");
+			
+		  });
+		  
+		
 	            
-	
+	// 휴가 신청
+	    // 승인된 휴가 가져오기
+		
 		// 신청날짜 현재 날짜로 고정 
 		 const today = new Date();
 	     const year = today.getFullYear();
@@ -279,7 +306,7 @@
 	   $.ajax({
 			// 요청
 			type : "post",
-			url : "/leaveAdd",
+			url : "/myLeaveAdd",
 			data : JSON.stringify([{
 				"empNo" : empNo,
 				"requestDate" : currentDate, 
@@ -291,8 +318,15 @@
 		   contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	       // 응답
 		   success : function(response) {
-			alert("신청완료"); // 휴가 등록 버튼을 누르면
-											location.reload(); // 새로고침
+			if(response === "success"){
+				alert("신청 완료"); // 휴가 등록 버튼을 누르면
+			   location.reload(); // 새로고침}
+			} else if (response === "overlap") {
+				alert("이미 등록 및 승인된 휴가입니다. 다른 날짜를 선택해주세요.");
+				return;
+			} else if(response === "exceed"){
+				alert("남은 휴가일수를 초과했습니다. 휴가일수를 확인해주세요.");
+			}
 	      },
 	       error:function(xhr,status,error) {
 		   }
