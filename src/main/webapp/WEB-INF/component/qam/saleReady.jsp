@@ -216,9 +216,9 @@
 			}
 			console.log(sellList.length);
 			if(sellList.length == 0) {
-			//	alert("적어도 1개 이상의 제품을 선택해주세요");
+			//	alert("1개 이상의 제품을 선택해주세요");
 				Swal.fire({
-					title: "적어도 1개 이상의 제품을 선택해주세요",
+					title: "1개 이상의 제품을 선택해주세요!",
 					confirmButtonText: '확인',
 					confirmButtonColor: "#90C67C",
 					icon: "warning",
@@ -252,7 +252,7 @@
 											iconColor: "green",
 										  title: "성공적으로 등록했습니다!",
 										  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
-										  timer: 3000,
+										  timer: 2000,
 										  timerProgressBar: true,
 										  didOpen: () => {
 										    Swal.showLoading();

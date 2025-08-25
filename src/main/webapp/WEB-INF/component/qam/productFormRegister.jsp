@@ -8,8 +8,15 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <!-- jQuery CDN -->
 </head>
 <body>
-    <h2>제품 등록</h2> <!-- 제목 표시 -->
+    <h2>제품 등록</h2> 
 
+	
+<!--	이 페이지도 사용 X, 현재 매입으로만 상품은 추가 가능하도록 기능 구현, 상품 페이지 자체에서 상품 등록 불가능! -->
+	
+	
+	
+	
+	
     <!-- 제품 등록 폼 시작 -->
     <!-- action은 Controller에서 동적으로 결정 (등록/수정 겸용 설계) -->
     <form action="${action}" method="post">

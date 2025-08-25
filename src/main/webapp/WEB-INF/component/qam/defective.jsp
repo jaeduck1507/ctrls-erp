@@ -150,30 +150,47 @@ $(document).ready(function() {
 	        }
 	    });
 	});
-	/*
+
 	// 전체보기 버튼 클릭 시
 	$("#resetBtn").click(function () {
-	    // 필터 초기화
-	    $("#productCategory").val("");
-	    $("#startDate").val("");
-	    $("#endDate").val("");
-	    $(".defectiveFilter").prop("checked", false);
+	  // 1) reset the UI
+	  $("#productCategory").val("");
+	  $("#startDate").val("");
+	  $("#endDate").val("");
+	  $("#checkMaterial").prop("checked", true);
+	  $("#checkColor").prop("checked", true);
+	  $("#checkDamage").prop("checked", true);
 
-	    // 전체 조회 재요청
-	    $.ajax({
-	        type: "get",
-	        url: "/qam/showDefective",
-	        success: function (result) {
-	            displayDefective(result);
-				$(".pagination").html('');
-				$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-				for(var i =result.startPage; i<=result.endPage; i++) {
-					$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-				}
-				$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
-	        }
-	    });
-	});*/
+	  $.ajax({
+	    type: "get",
+	    url: "/qam/searchDefective",
+	    data: {
+	      productCategory: "",
+	      startDate: "",
+	      endDate: "",
+	      checkMaterial: "불합격",
+	      checkColor: "불합격",
+	      checkDamage: "불합격"
+	    },
+	    success: function (result) {
+	      displayDefective(result.list);
+	      $(".pagination").html("");
+	      $(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
+	      for (var i = result.startPage; i <= result.endPage; i++) {
+	        $(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i + '">' + i + '</a></li>');
+	      }
+	      $(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
+	    },
+	    error: function (xhr) {
+	      console.error("reset error", xhr.responseText);
+	    }
+	  });
+	});
+
+
+	
+	
+	
 });
 
 

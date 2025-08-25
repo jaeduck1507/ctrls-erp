@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>품질검사 등록</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
 </head>
 <body>
@@ -13,14 +14,14 @@
 	<h3>신규 검사 등록</h3>
 
 <!-- QC 등록 폼 -->
-<form action="/qam/registerQc" method="post" class="filter-bar">
+<form id="qcForm" class="filter-bar">
 	<div class="box">
 		<table>
 			<tr>
-		    <th>제품 선택</th>
+		    <th>상품 선택</th>
 		        <td>
-					<select name="productNo" required>
-			            <option value="">검사할 제품 선택</option>
+					<select name="productNo" id="productNo">
+			            <option value="">검사할 상품 선택</option>
 			            <c:forEach var="p" items="${list}">
 			                <option value="${p.productNo}">
 			                    [${p.productNo}] ${p.productName} - ${p.productColor}
@@ -33,7 +34,7 @@
 			<tr>
 			<th>검사자 사번</th>
 				<td>
-				    <select name="empNo" required>
+				    <select name="empNo" id="empNo">
 				        <option value="">사번 선택</option>
 				        <c:forEach var="e" items="${empList}">
 				            <option value="${e.empNo}">[${e.empNo}] ${e.empName}</option>
@@ -45,7 +46,7 @@
 			<tr>
 		    <th>부자재 검사</th>
 				<td>
-			        <select name="checkMaterial" required>
+			        <select name="checkMaterial" id="checkMaterial">
 			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
@@ -55,7 +56,7 @@
 			<tr>
 		    <th>색상 검사</th>
 				<td>
-			        <select name="checkColor" required>
+			        <select name="checkColor" id="checkColor">
 			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
@@ -65,7 +66,7 @@
 			<tr>
 		    <th>손상 검사</th>
 				<td>
-			        <select name="checkDamage" required>
+			        <select name="checkDamage" id="checkDamage">
 			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
@@ -75,7 +76,7 @@
 			<tr>
 		    <th>검사 설명</th>
 				<td>
-		        	<textarea name="qcDesc" rows="3" cols="40" placeholder="불량 관련 메모 입력"></textarea>
+		        	<textarea name="qcDesc" id="qcDesc" rows="3" cols="40" placeholder="불량 관련 메모 입력"></textarea>
 		    	</td>
 			</tr>
 		</table>
@@ -85,8 +86,88 @@
 		<button type="submit" class="btn">검사 등록</button>
 		<a href="/qam/qc" class="btn">검사 목록으로</a>
 	</div>
-	
 </form>
+
+<script>
+	function collectMissingFields() {
+	  const labels = {
+	    productNo: "상품",
+	    empNo: "검사자 사번",
+	    checkMaterial: "부자재 검사",
+	    checkColor: "색상 검사",
+	    checkDamage: "손상 검사",
+	  };
+	  const missing = [];
+	  Object.keys(labels).forEach(k => {
+	  	const v = $("#" + k).val()?.trim();
+		if (!v) missing.push(labels[k]);
+	  });
+	  return missing;
+	  }
+	
+	$("#qcForm").on("submit", function (e) {
+		e.preventDefault();
+		
+	const missing = collectMissingFields();
+	if (missing.length > 0) {
+	  Swal.fire({
+	    icon: "warning",
+	    iconColor: "green",
+	    title: "입력 누락",
+	    html: "다음 항목을 모두 입력해주세요:<br>" + missing.join(", "),
+	    confirmButtonText: "확인",
+	    confirmButtonColor: "#90C67C"
+	  });
+	  return;
+	}
+
+	Swal.fire({
+	  icon: "question",
+	  iconColor: "green",
+	  title: "등록하시겠습니까?",
+	  text: "신규 검사를 저장합니다.",
+	  showCancelButton: true,
+	  confirmButtonText: "등록",
+	  cancelButtonText: "취소",
+	  confirmButtonColor: "green",
+	  cancelButtonColor: "red"
+	}).then((res) => {
+	  if (!res.isConfirmed) return;
+
+    const payload = $("#qcForm").serialize(); 
+	// form-urlencoded, serialize시 이런식으로 뜸 "productName=청바지&productPrice=10000&productCost=7000"
+	
+	$.ajax({
+          type: "post",
+          url: "/qam/registerQc",
+          data: payload,
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function () {
+            let timerInterval;
+            Swal.fire({
+              icon: "success",
+              iconColor: "green",
+              title: "저장 완료",
+              html: '<span id="remainSec"></span>초 후 목록으로 이동합니다.',
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                const span = Swal.getPopup().querySelector("#remainSec");
+                timerInterval = setInterval(() => {
+                  span.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+                }, 100);
+              },
+              willClose: () => clearInterval(timerInterval)
+            }).then(() => {
+              window.location.href = "/qam/qc";
+            });
+	       }
+        });
+      });
+    });
+</script>
+
 
 </body>
 </html>

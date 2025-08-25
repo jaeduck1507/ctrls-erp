@@ -35,7 +35,7 @@
     <tr>
         <th>제품 번호</th><th>생산일</th><th>제품 코드</th>
         <th>카테고리</th><th>색상</th><th>제품명</th><th>판매가</th>
-        <th>단가</th><th>수정</th><th>삭제</th>
+        <th>단가</th><th>삭제</th>
     </tr>
 	
 	<c:forEach items="${productList}" var="p">
@@ -48,7 +48,7 @@
 	        <td>${p.productName}</td>
 	        <td>${p.productPrice}</td>
 	        <td>${p.productCost}</td>
-	        <td><a href='/productDetailFormUpdate?productNo=${p.productNo}' class="btnO">수정</a></td>
+<!--	        <td><a href='/productDetailFormUpdate?productNo=${p.productNo}' class="btnO">수정</a></td>-->
 	        <td><a href='/deleteProduct?productNo=${p.productNo}' class="btnX">삭제</a></td>
 	    </tr>
 	</c:forEach>
