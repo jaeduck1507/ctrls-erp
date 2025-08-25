@@ -19,6 +19,8 @@ import com.project.erp.hrm.model.vo.AttendanceLog;
 import com.project.erp.hrm.service.AttendanceLogService;
 import com.project.erp.hrm.service.LeaveInfoService;
 
+import ch.qos.logback.core.model.Model;
+
 @Controller
 public class UserController {
 	
@@ -63,11 +65,27 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/myLeavePage")
+	@PostMapping("/myLeaveAdd")
 	public String myLeavePage(@RequestBody List<LeaveInfo> liList) {
-//		System.out.println(liList.get(0).getEmpNo());
-		leaveInfoService.leaveAdd(liList);
-		return "redirect:/myLeavePage";
+//		// 첫 번째 휴가 정보 가져오기 (여러 개 신청 가능하면 반복 처리 필요)
+	    LeaveInfo leave = liList.get(0);
+	    int empNo =leave.getEmpNo();
+	    // 남은 휴가일수 체크
+	    if(!leaveInfoService.canApplyLeave(empNo, leave)) {
+	    	return "exceed";
+	    }
+	    // 겹치는 휴가 있는지 체크
+	    boolean check = leaveInfoService.checkApprove(leave);
+	    
+	    if(check) {
+	        // 겹치면 신청 불가 알림
+	        return "overlap"; // JS에서 이 문자열로 처리
+	    }
+	    
+	    // 겹치지 않으면 신청 진행
+	    leaveInfoService.leaveAdd(liList);
+	    
+	    return "success"; // JS에서 이 문자열로 처리
 	}
 	
 	@PostMapping("/myLeaveUpdate")
@@ -93,4 +111,5 @@ public class UserController {
 	public int idCheck(User vo) {
 		return userService.idCheck(vo);
 	}
+
 }

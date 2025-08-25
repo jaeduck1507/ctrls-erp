@@ -1,6 +1,7 @@
 package com.project.erp.common.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.common.model.vo.MyLeaveInfoPaging;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.common.model.vo.User;
 import com.project.erp.fm.model.dto.SaleProductDTO;
@@ -20,6 +22,7 @@ import com.project.erp.fm.service.TransactionService;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
 import com.project.erp.hrm.model.dto.LeaveInfo;
+import com.project.erp.hrm.model.dto.LeaveInfoPagingDTO;
 import com.project.erp.hrm.model.vo.AttendanceLog;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.hrm.service.LeaveInfoService;
@@ -93,7 +96,6 @@ public class PageController {
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("leaveInfo", leaveInfoService.leaveInfo(li));
 		model.addAttribute("leaveDays", leaveInfoService.leaveDays(li));
-
 		model.addAttribute("component","../common/myLeavePage.jsp");
 		return "common/layout";
 	}
@@ -175,5 +177,26 @@ public class PageController {
 	public String resetPwd(Model model) {
 		return "common/resetPwd";
 	}
+
+    @ResponseBody
+    @GetMapping("/leaveInfo")
+    public LeaveInfoPagingDTO myLeaveInfo(LeaveInfoPagingDTO paging, String status) {
+        // status가 파라미터로 왔다면 DTO에 넣기 (DTO 하나로만 사용하기 위해)
+            paging.setStatus(status);
+        // 로그인 사용자의 empNo를 서버에서 강제 주입하고 싶다면 아래처럼 세팅 가능
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = (User) auth.getPrincipal();
+            paging.setEmpNo(user.getEmpNo());
+        // 전체 개수 계산 → DTO에 total 세팅 (offset/페이지버튼도 자동계산)
+        int total = leaveInfoService.totalMyLeaveInfo(paging);
+        paging.setTotal(total);
+        // 실제 목록 조회 → DTO에 list 세팅
+        List<LeaveInfo> list = leaveInfoService.myLeaveInfo(paging);
+        paging.setList(list);
+        // DTO 그대로 반환 → JSON으로 내려감
+        return paging;
+    }
+
+
 	
 }

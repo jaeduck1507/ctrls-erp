@@ -132,15 +132,19 @@ table.data-table {
   border-collapse: separate;
   border-spacing: 3px 5px;
   margin-bottom: 10px;
+  display: table;
+  width: 100%;
+  table-layout: fixed; /*각 셀의 너비를 자동 고정, 내용에 상관없이 동일한 너비로 유지*/
 }
 
 .data-table th,
-.data-table tr,
 .data-table td {
   padding: 3px 10px;
   border-radius: 25px ;
-  text-align: center; 
+  text-align: center;
+
 }
+
 
 /* 테이블 컬럼명 */
 .data-table th {
@@ -164,6 +168,7 @@ table.data-table {
   background-color: var(--table-td-color);
 }
 
+
 /* 데이터 리스트 */
 input[list^="List"] {
   padding: 5px 10px;
@@ -183,6 +188,7 @@ input[list^="List"] {
   cursor: pointer;
   font-weight: bold;
 }*/
+
 .btnO {
   text-decoration: none;
   background-color: var(--table-td-color);
@@ -192,6 +198,7 @@ input[list^="List"] {
   cursor: pointer;
   font-weight: bold;
 }
+
 .btnX {
   text-decoration: none;
   background-color: var(--table-td-color);
@@ -236,12 +243,20 @@ input[list^="List"] {
   color: #90c67c !important;
 }
 
-.pagination .active li a {
+.pagination li.active a {
   background-color: green !important;
   color: white !important;
   font-weight: bold !important;
   border-color: green !important;
 }
+
+.pagination .page-link.active  {
+  background-color: green !important;
+  color: white !important;
+  font-weight: bold !important;
+  border-color: green !important;
+}
+
 
 .pagination .disabled a {
   pointer-events: none !important;

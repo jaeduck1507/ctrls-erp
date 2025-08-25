@@ -23,8 +23,8 @@
 	월별 조회 : <input type="month" id="yearMonth">
 	<button id="showBtn">조회</button>
 	</div>
-	<div class="data-table">
-	<table border="1" id = "result" ></table>
+	<div >
+	<table border="1" id = "result" class="data-table"></table>
 	</div>
 	
 	<script>

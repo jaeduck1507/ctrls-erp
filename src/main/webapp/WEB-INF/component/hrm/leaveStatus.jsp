@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<h5>[근태 관리] > [휴가 상태 처리]</h5>
@@ -73,12 +74,21 @@
 	
 	<script>
 		$(".btnO").click((e)=>{
-					const formData = new FormData();
-					formData.append("status", "승인");
-					formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
-					const empNo = $row.find("td").eq(6).text(); // 사원ID 컬럼 위치 예시
-					const startDate = $row.find("td").eq(3).text(); // 시작일 컬럼 위치
-					
+			const formData = new FormData();
+								formData.append("status", "승인");
+								formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
+								//console.log($("#result tr").eq(i).find("td").eq(0).find("input").val());
+			Swal.fire({
+					title: "승인하시겠습니까?",
+					confirmButtonText: '등록',
+					confirmButtonColor: "green",
+					icon: "question",
+					iconColor: "green",
+					showCancelButton: true,
+					cancelButtonText: '취소',
+					cancelButtonColor: "red"
+					}).then((result) => {
+						  if (result.isConfirmed) {
 					//location.reload(); // 승인 버튼 누르면 자동 새로고침
 					$.ajax({
 						// 요청
@@ -89,41 +99,62 @@
 					    contentType : false,
 						// 응답
 						success : function(result) {
-							location.reload();
-							$.ajax({
-								// 요청
-								type : "post",
-								url : "/attendanceAddLeaveDay",
-								data : JSON.stringify([{
-									"empNo" : empNo,
-									"startDate" : startDate,
-									"checkIn" : '--:--:--',
-									"checkOut" : '--:--:--',
-									"status" : '휴가'
-							   }]),
-							   contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
-								// 응답
-								success : function(result) {
-									location.reload();
-									
-								},
-								error:function(xhr, status, error){
-									
-								}
+							//location.reload();
+							let timerInterval;
+							Swal.fire({
+								icon: "success",
+								iconColor: "green",
+							  title: "승인되었습니다!",
+							  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
+							  timer: 3000,
+							  timerProgressBar: true,
+							  didOpen: () => {
+							    Swal.showLoading();
+							    const timer = Swal.getPopup().querySelector("#aa");
+							    timerInterval = setInterval(() => {
+									let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
+							      timer.textContent = remainSecond +1;
+							    }, 100);
+							  },
+							  willClose: () => {
+							    clearInterval(timerInterval);
+							  }
+							}).then((result) => {
+							  /* Read more about handling dismissals below */
+							  if(result.dismiss == "backdrop") {
+								  location.reload();
+							  }
+							  if (result.dismiss === Swal.DismissReason.timer) {
+								  location.reload();
+							  }
 							});
+							
 							
 						},
 						error:function(xhr, status, error){
 							
 						}
 					});
-					
+					}
+					})
 				});
+				
 				$(".btnX").click((e)=>{
 									const formData = new FormData();
 									formData.append("status", "반려");
 									formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
 									//location.reload(); // 반려 버튼 누르면 자동 새로고침
+									Swal.fire({
+														title: "반려하시겠습니까?",
+														confirmButtonText: '등록',
+														confirmButtonColor: "green",
+														icon: "question",
+														iconColor: "green",
+														showCancelButton: true,
+														cancelButtonText: '취소',
+														cancelButtonColor: "red"
+														}).then((result) => {
+															  if (result.isConfirmed) {
 									$.ajax({
 										// 요청
 										type : "post",
@@ -133,15 +164,44 @@
 									    contentType : false,
 										// 응답
 										success : function(result) {
-											location.reload();
-											
-										},
-										error:function(xhr, status, error){
-											
-										}
-									});
-									
+											let timerInterval;
+										Swal.fire({
+											icon: "success",
+											iconColor: "green",
+										  title: "반려되었습니다!",
+										  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
+										  timer: 3000,
+										  timerProgressBar: true,
+										  didOpen: () => {
+										    Swal.showLoading();
+										    const timer = Swal.getPopup().querySelector("#aa");
+										    timerInterval = setInterval(() => {
+												let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
+										      timer.textContent = remainSecond +1;
+										    }, 100);
+										  },
+										  willClose: () => {
+										    clearInterval(timerInterval);
+										  }
+										}).then((result) => {
+										  /* Read more about handling dismissals below */
+										  if(result.dismiss == "backdrop") {
+											  location.reload();
+										  }
+										  if (result.dismiss === Swal.DismissReason.timer) {
+											  location.reload();
+										  }
+										});
+										
+										
+									},
+									error:function(xhr, status, error){
+										
+									}
 								});
+								}
+								})
+							});
 		
 	</script>
 </body>
