@@ -116,7 +116,15 @@ $(document).on('change', '.productName', (e) => {
 	
 	if (!opt.length) {
 		console.warn('없는 값:', val);
-		alert("존재하지 않는 상품입니다!");
+		//alert("존재하지 않는 상품입니다!");
+		Swal.fire({
+			position: "top",
+			icon: "error",
+			title: "존재하지 않는 상품입니다!",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000
+		});
 		return;
 	}
 	

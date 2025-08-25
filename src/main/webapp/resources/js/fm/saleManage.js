@@ -2,6 +2,11 @@ const now = new Date();
 const month = now.getMonth() + 1;
 document.querySelector("#currentMonth").innerHTML = month + "월";
 
+const today = now.getFullYear() + '-' 
+	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
+	                    + String(now.getDate()).padStart(2, '0');
+console.log(today);
+
 const monthChart = document.querySelector("#monthChart");
 const weekChart = document.querySelector("#weekChart");
 /*
@@ -171,18 +176,28 @@ $("#btn").click(() => {
 	
 	const startDate = $("#startDate").val();
 	const endDate = $("#endDate").val();
-	formData.append("startDate", startDate);
-	formData.append("endDate", endDate);
 	
-	if (startDate && !endDate) {
-		alert("조회 종료일을 선택해주세요!");
-		return;
+	if (startDate && endDate) {
+		if (startDate > endDate) {
+			Swal.fire({
+				position: "top",
+				icon: "error",
+				title: "조회 기간을 다시 선택해주세요!",
+				showConfirmButton: false,
+				timer: 1500,
+				didClose: () => {
+					location.reload();
+				}
+			});
+		}
+		formData.append("startDate", startDate);
+		formData.append("endDate", endDate);
+	} else if (startDate && !endDate) {
+		formData.append("startDate", startDate);
+		formData.append("endDate", today);
 	} else if (!startDate && endDate) {
-		alert("조회 시작일을 선택해주세요!");
-		return;
-	} else if (startDate > endDate) {
-		alert("조회 기간을 다시 선택해주세요!");
-		return;
+		formData.append("startDate", '1900-01-01');
+		formData.append("endDate", endDate);
 	}
 	
 	$.ajax({
@@ -240,9 +255,33 @@ $(document).on('click', 'a.page-link', function(e) {
 	const formData = new FormData();
 	formData.append("productCategory", $("#productCategory").val());
 	formData.append("productName", $("#productName").val());
-	formData.append("startDate", $("#startDate").val());
-	formData.append("endDate", $("#endDate").val());
 	formData.append("page", $(this).attr('href'));
+	
+	const startDate = $("#startDate").val();
+	const endDate = $("#endDate").val();
+	
+	if (startDate && endDate) {
+		if (startDate > endDate) {
+			Swal.fire({
+				position: "top",
+				icon: "error",
+				title: "조회 기간을 다시 선택해주세요!",
+				showConfirmButton: false,
+				timer: 1500,
+				didClose: () => {
+					location.reload();
+				}
+			});
+		}
+		formData.append("startDate", startDate);
+		formData.append("endDate", endDate);
+	} else if (startDate && !endDate) {
+		formData.append("startDate", startDate);
+		formData.append("endDate", today);
+	} else if (!startDate && endDate) {
+		formData.append("startDate", '1900-01-01');
+		formData.append("endDate", endDate);
+	}
 	
 	$.ajax({
 		type: "post",

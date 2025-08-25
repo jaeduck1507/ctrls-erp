@@ -77,7 +77,18 @@ $(document).on("change", ".empName", (e) => {
 	const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
 	
 	if (!opt.length) {
-		alert("존재하지 않는 사원입니다");
+		//alert("존재하지 않는 사원입니다");
+		Swal.fire({
+			position: "top",
+			icon: "error",
+			title: "존재하지 않는 사원입니다",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000,
+			didClose: () => {
+				location.reload();
+			}
+		});
 		return;
 	}
 	

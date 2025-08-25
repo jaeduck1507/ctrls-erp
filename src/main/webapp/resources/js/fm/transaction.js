@@ -1,3 +1,9 @@
+const now = new Date();
+const today = now.getFullYear() + '-' 
+	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
+	                    + String(now.getDate()).padStart(2, '0');
+console.log(today);
+
 const monthTrans = document.querySelector("#monthTrans");
 /*
 const transMonthLabels = [
@@ -78,7 +84,7 @@ $("#btn").click(() => {
 		formData.append("endDate", endDate);
 	} else if (startDate && !endDate) {
 		formData.append("startDate", startDate);
-		formData.append("endDate", new Date().toISOString().slice(0, 10));
+		formData.append("endDate", today);
 	} else if (!startDate && endDate) {
 		formData.append("startDate", '1900-01-01');
 		formData.append("endDate", endDate);
@@ -160,7 +166,7 @@ $(document).on('click', 'a.page-link', function(e) {
 		formData.append("endDate", endDate);
 	} else if (startDate && !endDate) {
 		formData.append("startDate", startDate);
-		formData.append("endDate", new Date().toISOString().slice(0, 10));
+		formData.append("endDate", today);
 	} else if (!startDate && endDate) {
 		formData.append("startDate", '1900-01-01');
 		formData.append("endDate", endDate);

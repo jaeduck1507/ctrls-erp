@@ -35,7 +35,9 @@
 			</c:forEach>
 		</select>
 		<button id="selectBrand">거래처 선택</button>
-		
+	</div>
+	
+	<div class="filter-bar">
 		<div id="test" class="data-table">
 					
 		</div>

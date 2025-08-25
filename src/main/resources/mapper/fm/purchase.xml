@@ -21,9 +21,6 @@
 		JOIN brand USING(brand_code)
 		JOIN product_name USING(product_code)
 		<where>
-			<if test="startDate != null and endDate != null">
-				purchase_date BETWEEN #{startDate} AND #{endDate}
-			</if>
 			<if test="brandName != 'all'">
 				AND brand_name = #{brandName}
 			</if>
@@ -32,6 +29,12 @@
 			</if>
 			<if test="productName != null">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
+			</if>
+			<if test="startDate != null">
+				trans_date &gt;=  #{startDate}
+			</if>
+			<if test="endDate != null">
+				trans_date &lt;= #{endDate}
 			</if>
 		</where>
 		ORDER BY purchase_date

@@ -26,10 +26,10 @@
 			<if test="deptName != 'dept'">
 				AND dept_name = #{deptName}
 			</if>
-			<if test="startDate != null and startDate != ''">
+			<if test="startDate != null">
 				trans_date &gt;=  #{startDate}
 			</if>
-			<if test="endDate != null and endDate != ''">
+			<if test="endDate != null">
 				trans_date &lt;= #{endDate}
 			</if>
 		</where>
