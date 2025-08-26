@@ -27,4 +27,5 @@ public class EmpInfo {
 	private String date; // 다른 날짜 정보(월,분기,일 등 임시 저장소)
 	private MultipartFile file;
 	private String url;
+	private int year;
 }

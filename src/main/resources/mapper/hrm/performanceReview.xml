@@ -18,6 +18,19 @@
 	    <result property="email" column="email" />
 	</resultMap>
 	
+	<resultMap id="PerformanceReviewDTOMap" type="PerformanceReviewDTO">
+	    <id property="reviewId" column="review_id" />
+	    <result property="empNo" column="emp_no" />
+	    <result property="evaluatorEmpNo" column="evaluator_emp_no" />
+	    <result property="reviewDate" column="review_date" />
+	    <result property="attitudeScore" column="attitude_score" />
+	    <result property="achieveScore" column="achieve_score" />
+	    <result property="avgAttitudeScore" column="avg_attitude_score" />
+	    <result property="avgAchieveScore" column="avg_achieve_score" />
+	    <result property="comments" column="comments" />
+	    <result property="deptNo" column="dept_no" />
+	</resultMap>
+	
 	<insert id="empEval" parameterType="PerformanceReview">
 		INSERT INTO performance_review(emp_no,evaluator_emp_no,attitude_score,achieve_score,comments)
 		VALUES(#{empNo},#{evaluatorEmpNo},#{attitudeScore},#{achieveScore},#{comments})
@@ -27,5 +40,24 @@
 		select evaluator_emp_no as 'emp_no'
 		from performance_review 
 		WHERE emp_no = #{empNo}
+		AND review_date LIKE CONCAT('%', #{year}, '%')
+		
+	</select>
+	
+	<select id="showEval" parameterType="PerformanceReviewDTO" resultMap="PerformanceReviewDTOMap">
+		select evaluator_emp_no ,avg(attitude_score) as avg_attitude_score, avg(achieve_score) as avg_achieve_score
+		from performance_review
+		where evaluator_emp_no = #{empNo}
+		AND review_date LIKE CONCAT('%', #{year}, '%')
+		group by evaluator_emp_no
+	</select>
+	
+	<select id="showCommnetsList" parameterType="PerformanceReviewDTO" resultMap="PerformanceReviewDTOMap">
+		select comments
+		from performance_review
+		where evaluator_emp_no = #{empNo}
+		AND review_date LIKE CONCAT('%', #{year}, '%')
+		AND trim(comments) != ''
+		AND comments IS NOT NULL
 	</select>
 </mapper>

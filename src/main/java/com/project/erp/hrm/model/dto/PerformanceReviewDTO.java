@@ -16,4 +16,9 @@ public class PerformanceReviewDTO {
 	private String comments;
 	private int deptNo;
 	private List<EmpInfo> empList;
+	private int year;
+	private List<String> commentsList;
+	
+	private double avgAttitudeScore;
+	private double avgAchieveScore;
 }

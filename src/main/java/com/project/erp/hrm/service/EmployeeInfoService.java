@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.erp.common.model.vo.Paging;
@@ -91,6 +92,10 @@ public class EmployeeInfoService {
 	
 	public void updateEmpQuit(Quitter q) {
 		employeeInfoMapper.updateEmpQuit(q);
+	}
+	
+	public void modifyJobDept(EmpInfo ei) {
+		employeeInfoMapper.modifyJobDept(ei);
 	}
 	
 	public String fileUpload(MultipartFile file) {

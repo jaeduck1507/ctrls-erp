@@ -1,5 +1,6 @@
 package com.project.erp.hrm.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +90,7 @@ public class HrmPageController {
 		performanceReviewService.showEvalEmp(empinfo);
 		model.addAttribute("empInfo", performanceReviewService.showEvalEmp(empinfo));
 		model.addAttribute("user", user);
+		model.addAttribute("year", LocalDate.now().getYear());
 		model.addAttribute("component","../component/hrm/empEval.jsp");
 		return "common/layout";
 	}
@@ -151,6 +153,8 @@ public class HrmPageController {
 	public String empModify(Model model,EmpInfo ei) {
 		model.addAttribute("empInfo", employeeInfoservice.infoShowOne(ei));
 		model.addAttribute("component","../component/hrm/empModify.jsp");
+		model.addAttribute("department", departmentService.showDept());
+		model.addAttribute("jobPosition", jobPositionService.showJob());
 		return "common/layout";
 	}
 	@GetMapping("/empInfoDetails")
@@ -178,6 +182,12 @@ public class HrmPageController {
 	public String leaveUpdate(LeaveInfo li,Model model) {
 		leaveInfoService.leaveUpdate(li);
 		model.addAttribute("component","../component/hrm/leaveView.jsp");
+		return "common/layout";
+	}
+	
+	@GetMapping("/evalShow")
+	public String evalShow(Model model) {
+		model.addAttribute("component","../component/hrm/evalShow.jsp");
 		return "common/layout";
 	}
 
