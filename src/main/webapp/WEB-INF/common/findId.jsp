@@ -8,6 +8,7 @@
 <title>아이디 찾기</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" href="../resources/css/findid.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
@@ -27,6 +28,6 @@
 	  </div>
 	</form>
 	</div>
-	<script src="../resources/js/findid.js"></script>
+	<script src="../resources/js/common/findid.js"></script>
 </body>
 </html>

@@ -9,9 +9,11 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+	<h5>[마이페이지] > [비밀번호 재설정]</h5>
+			<h3>비밀번호 재설정</h3>
 	<form action="resetMyPwd" method="post">
 	      <div class="filter-bar">
-	        <h1>비밀번호 재설정</h1>
+	        
 	        <input type="password" name="password" id="password" placeholder="비밀번호" />
 	        <input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호 확인" />
 	        <button class="btn" id="btn">재설정</button>

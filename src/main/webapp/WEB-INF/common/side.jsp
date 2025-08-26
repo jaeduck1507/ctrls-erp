@@ -64,25 +64,7 @@
           </div>
 		  
 		  <!-- 로그인 및 로그아웃 버튼 위에다가 기능 작성해주세요 -->
-		  <sec:authorize access="isAnonymous()">
-		  <div class="menu-group">
-              <div class="menu-title">로그인/회원가입</div>
-              <div class="submenu">
-				<a href="/login">로그인</a><br>
-				<a href="/register">회원가입</a><br>
-			</div>
-		</div>
-		</sec:authorize>
-		
-		<sec:authorize access="isAuthenticated()">
-		<div class="menu-group">
-            <div class="menu-title">로그아웃/마이페이지</div>
-              <div class="submenu">
-				<a href="/logout">로그아웃</a><br>
-				<a href="/mypage">마이페이지</a><br>
-		     </div>
-		</div>
-		</sec:authorize>
+		  
         </nav>
       </div>
     </div>

@@ -53,7 +53,7 @@
    </div>
    <div>
 	<button onclick="location.href='/mypage'">취소</button>
-    <button type="submit">수정</button>
+    <button type="submit" id="submit">수정</button>
 	</div>
 </form>
 <script>
@@ -64,9 +64,11 @@
 	  const nameExp = /^[가-힣]{2,}$/;
 	  const nEt = nameExp.test(e.target.value);
 	  if (nEt) {
+		$("#submit").prop("disabled", false);
 	    resultName.innerHTML = "OK!";
 	    resultName.style.color = "blue";
 	  } else {
+		$("#submit").prop("disabled", true);
 		resultName.innerHTML = "한글 2자 이상";
 	    resultName.style.color = "red";
 	  }
@@ -78,11 +80,15 @@
 	  const telExp = /^\d{3}-\d{3,4}-\d{4}$/;
 	  const tEt = telExp.test(e.target.value);
 	  if (tEt) {
+		$("#submit").prop("disabled", false);
 	    resultTel.innerHTML = "OK!";
 	    resultTel.style.color = "blue";
+
 	  } else {
+		$("#submit").prop("disabled", true);
 		resultTel.innerHTML = "010-0000-0000 형식";
 	    resultTel.style.color = "red";
+
 	  }
 	});
 	// 이메일 입력
@@ -93,11 +99,15 @@
 	  const eEt = emailExp.test(e.target.value);
 
 	  if (eEt) {
+		$("#submit").prop("disabled", false);
 	    resultEmail.innerHTML = "OK!";
 	    resultEmail.style.color = "blue";
+
 	  } else {
+		$("#submit").prop("disabled", true);
 		resultEmail.innerHTML = "이메일 형식(@포함)";
 	    resultEmail.style.color = "red";
+
 	  }
 	});
 </script>

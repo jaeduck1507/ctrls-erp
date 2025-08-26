@@ -7,17 +7,17 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="../resources/css/findid.css" />
+<link rel="stylesheet" href="../resources/css/resetPwd.css" />
 </head>
 <body>
-	      <div class="filter-bar">
+	      <div class="filter-bar" id="resetpwd-card">
 	        <h1>비밀번호 재설정</h1>
-	        <div>
+	        <div id="id-area">
 	        <input type="text" id="username" placeholder="아이디를 입력하세요." />
 	  		<button class="btn" id="idCheck">조회</button>
-	  		<p id="result"></p>
 	        </div>
-	        <div>
+			<p id="result"></p>
+	        <div class="filter-bar" id="pwd-area">
 	        <input type="password" name="password" id="password" placeholder="비밀번호" />
 	        <input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호 확인" />
 	        <button id="resetPwd">재설정</button>

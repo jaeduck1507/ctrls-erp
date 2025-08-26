@@ -16,6 +16,15 @@ $("#btn").click(() => {
 		
       }
     },
-    error: function (xhr, status, error) {},
+    error: function (xhr, status, error) {	
+		Swal.fire({
+			title: "사번을 입력해주세요!",
+			confirmButtonText: '확인',
+			width: 600,
+			confirmButtonColor: "#90C67C",
+			icon: "warning",
+			iconColor: "green"
+			});
+		},
   });
 });
