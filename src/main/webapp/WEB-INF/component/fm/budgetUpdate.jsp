@@ -8,18 +8,7 @@
 <title>budgetUpdate</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="../resources/css/modifyMyInfo.css"/>
-<style>
-	#budgetNo,
-	#deptName,
-	#periodType,
-	#annualBudget,
-	#plan,
-	#executionDate {
-	    border: 1px #ccc;
-		outline: none;
-	}
-</style>
+<link rel="stylesheet" href="../resources/css/fm/budgetUpdate.css"/>
 </head>
 <body>
 	<h5>[재무 관리] > [예산 수정]</h5>

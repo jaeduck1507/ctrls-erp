@@ -21,7 +21,7 @@
 		    <th>상품 선택</th>
 		        <td>
 					<select name="productNo" id="productNo">
-			            <option value="">검사할 상품 선택</option>
+			            <option value="" disabled selected>검사할 상품 선택</option>
 			            <c:forEach var="p" items="${list}">
 			                <option value="${p.productNo}">
 			                    [${p.productNo}] ${p.productName} - ${p.productColor}
@@ -35,7 +35,7 @@
 			<th>검사자 사번</th>
 				<td>
 				    <select name="empNo" id="empNo">
-				        <option value="">사번 선택</option>
+				        <option value="" disabled selected>사번 선택</option>
 				        <c:forEach var="e" items="${empList}">
 				            <option value="${e.empNo}">[${e.empNo}] ${e.empName}</option>
 				        </c:forEach>
@@ -47,6 +47,7 @@
 		    <th>부자재 검사</th>
 				<td>
 			        <select name="checkMaterial" id="checkMaterial">
+						<option value="" disabled selected>선택</option>
 			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
@@ -57,6 +58,7 @@
 		    <th>색상 검사</th>
 				<td>
 			        <select name="checkColor" id="checkColor">
+						<option value="" disabled selected>선택</option>
 			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
@@ -67,6 +69,7 @@
 		    <th>손상 검사</th>
 				<td>
 			        <select name="checkDamage" id="checkDamage">
+						<option value="" disabled selected>선택</option>
 			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>

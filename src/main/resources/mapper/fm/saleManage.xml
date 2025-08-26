@@ -22,17 +22,14 @@
 		FROM sale_manage
 		JOIN product_name USING(product_code)
 		<where>
+			<if test="startDate != null and endDate != null">
+				sale_date BETWEEN #{startDate} AND #{endDate}
+			</if>
 			<if test="productCategory != 'all'">
 				AND product_category = #{productCategory}
 			</if>
 			<if test="productName != null">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
-			</if>
-			<if test="startDate != null">
-				trans_date &gt;=  #{startDate}
-			</if>
-			<if test="endDate != null">
-				trans_date &lt;= #{endDate}
 			</if>
 		</where>
 		ORDER BY sale_date
@@ -110,10 +107,14 @@
 		SELECT product_name, SUM(quantity) AS month_quantity
 		FROM sale_manage
 		JOIN product_name USING(product_code)
-		WHERE DATE_FORMAT(sale_date, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
-		<if test="productCategory != null and productCategory != 'all'">
-	        AND product_category = #{productCategory}
-	    </if>
+		<where>
+			<if test="yearMonth != null">
+				AND sale_date LIKE CONCAT ('%', #{yearMonth}, '%')
+			</if>
+			<if test="saleCategory != null and saleCategory != 'all'">
+		        AND product_category = #{saleCategory}
+		    </if>
+	    </where>
 		GROUP BY product_name
 	</select>
 </mapper>

@@ -22,5 +22,7 @@ public class SaleProductDTO {
 	private String saleMonth;
 	private int monthAmount;
 	private int monthQuantity;
+	private String yearMonth;
+	private String saleCategory;
 	
 }

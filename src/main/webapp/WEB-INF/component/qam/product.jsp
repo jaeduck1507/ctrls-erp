@@ -28,7 +28,7 @@
     <button type="button" id="resetBtn">전체보기</button>
 </form>
 </div>
-<br/>
+
 
 <!-- 제품 목록 테이블 -->
 <table border="1" id="result" class="data-table">

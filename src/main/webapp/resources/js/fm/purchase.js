@@ -18,13 +18,12 @@ $("#btn").click(() => {
 			Swal.fire({
 				position: "top",
 				icon: "error",
-				title: "조회 기간을 다시 선택해주세요!",
+				title: "조회 실패",
+				text: "조회 기간을 다시 선택해주세요!",
 				showConfirmButton: false,
-				timer: 1500,
-				didClose: () => {
-					location.reload();
-				}
+				timer: 1500
 			});
+			return;
 		}
 		formData.append("startDate", startDate);
 		formData.append("endDate", endDate);
@@ -104,13 +103,12 @@ $(document).on('click', 'a.page-link', function(e) {
 			Swal.fire({
 				position: "top",
 				icon: "error",
-				title: "조회 기간을 다시 선택해주세요!",
+				title: "조회 실패",
+				text: "조회 기간을 다시 선택해주세요!",
 				showConfirmButton: false,
-				timer: 1500,
-				didClose: () => {
-					location.reload();
-				}
+				timer: 1500
 			});
+			return;
 		}
 		formData.append("startDate", startDate);
 		formData.append("endDate", endDate);

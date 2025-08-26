@@ -8,7 +8,9 @@ $(document).on("input", ".deduction", (e) => {
 	const deductionInput = document.querySelectorAll(".deduction");
 	for (let i = 0; i < deductionInput.length; i++) {
 		const input = deductionInput[i];
-		if (!deductionCheck.test(input.value)) {
+		const deduction = Number(input.value);
+		const baseSalary = Number($(input).parent().parent().find("td").eq(5).text());
+		if (!deductionCheck.test(input.value) || deduction >= baseSalary) {
 			input.parentElement.classList.add("red");
 			allValid = false;
 		} else {

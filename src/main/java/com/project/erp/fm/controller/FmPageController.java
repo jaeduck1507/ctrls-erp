@@ -56,6 +56,7 @@ public class FmPageController {
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("weekSalesChart", saleManageService.weekSalesChart());
 		model.addAttribute("monthSalesChart", saleManageService.monthSalesChart());
+		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("component","../component/fm/saleManage.jsp");
 		return "common/layout";
 	}

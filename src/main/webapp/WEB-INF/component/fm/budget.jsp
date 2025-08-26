@@ -27,7 +27,7 @@
 	
 	<div>	
 		<table border="1" id="result" class="data-table">
-				
+			
 		</table>
 	</div>
 	

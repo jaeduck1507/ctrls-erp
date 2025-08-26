@@ -8,21 +8,7 @@
 <title>budgetRegister</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<style>
-	td {
-		position: relative;
-		box-sizing: border-box;
-	}
-
-	.red {
-		border-color: red;
-		border-width: 2px;
-	}
-
-	table {
-	  border-collapse: separate;  
-	}
-</style>
+<link rel="stylesheet" href="../resources/css/fm/fmRegister.css"/>
 </head>
 <body>
 	<h5>[재무 관리] > [예산 등록]</h5>

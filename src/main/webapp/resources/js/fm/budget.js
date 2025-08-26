@@ -74,6 +74,8 @@ $(document).on('click', 'a.btnX', function(e) {
 				title: "삭제 완료!",
 				text: "성공적으로 삭제되었습니다.",
 				icon: "success",
+				iconColor: "#48b85b",
+				confirmButtonColor: "#48b85b",
 				timer: 3000,
 				timerProgressBar: true,
 				didClose: () => {

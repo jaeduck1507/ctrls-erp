@@ -22,6 +22,7 @@
           <th>브랜드</th>
           <td>
             <select name="brandCode" id="brandCode">
+			<option value="" disabled selected>선택</option>
               <c:forEach var="brand" items="${brandList}">
                 <option value="${brand.brandCode}" ${productName.brandCode == brand.brandCode ? 'selected' : ''}>${brand.brandName}</option>
               </c:forEach>
@@ -32,6 +33,7 @@
           <th>카테고리</th>
           <td>
             <select name="productCategory" id="productCategory">
+			<option value="" disabled selected>선택</option>
               <c:forEach var="category" items="${categoryList}">
                 <option value="${category}" ${productName.productCategory == category ? 'selected' : ''}>${category}</option>
               </c:forEach>

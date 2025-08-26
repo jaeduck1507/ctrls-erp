@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>브랜드 조회</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
@@ -58,8 +59,36 @@
 </nav>
 
 <script>
-
+	$(document).on('click', 'a.btnX', function(e) {
+		e.preventDefault();
+		
+		Swal.fire({
+			title: "정말 삭제하시겠습니까?",
+			text: "삭제를 누르면 해당 항목이 영구적으로 삭제됩니다.",
+			icon: "warning",
+			iconColor: "#f1a025",
+			showCancelButton: true,
+			confirmButtonColor: "#48b85b",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "삭제",
+			cancelButtonText: "취소"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					title: "삭제 완료!",
+					text: "성공적으로 삭제되었습니다.",
+					icon: "success",
+					iconColor: "#48b85b",
+					confirmButtonColor: "#48b85b",
+					timer: 3000,
+					timerProgressBar: true,
+					didClose: () => {
+						location.href = $(this).attr("href");
+					}
+				});
+			}
+		});
+	});
 </script>
-
 </body>
 </html>

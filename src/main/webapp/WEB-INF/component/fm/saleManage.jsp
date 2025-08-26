@@ -23,13 +23,13 @@
 	<h5>[재무 관리] > [매출 조회]</h5>
 	<h3>매출 조회</h3>	
 	<div id="search" class="filter-bar">
-		제품명 검색: <input type="text" id="productName">
 		<select id="productCategory">
 			<option value="all">카테고리</option>
 			<c:forEach items="${categoryList}" var="category">
 				<option value="${category}">${category}</option>
 			</c:forEach>
 		</select>
+		제품명 검색: <input type="text" id="productName">
 		조회 시작일: <input type="date" id="startDate">
 		조회 종료일: <input type="date" id="endDate">
 		<button id="btn">조회</button>
@@ -65,7 +65,7 @@
 		      </div>
 		      	<div class="modal-body">
 					<div>
-					  <canvas id="monthChart"></canvas>
+						<canvas id="monthChart"></canvas>
 					</div>
 				</div>
 		      	<div class="modal-footer">
@@ -84,7 +84,7 @@
 		      </div>
 		      	<div class="modal-body">
 					<div>
-					  <canvas id="weekChart"></canvas>
+						<canvas id="weekChart"></canvas>
 					</div>
 				</div>
 		      	<div class="modal-footer">
@@ -98,17 +98,20 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="chartModal"><span id="currentMonth"></span> 제품별 판매 현황</h1>
+		        <h1 class="modal-title fs-5" id="chartModal">월별 제품 판매 현황</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      	<div class="modal-body">
-					<button type="button" onclick="loadChart('all')">전체</button>
-					<button type="button" onclick="loadChart('상의')">상의</button>
-					<button type="button" onclick="loadChart('하의')">하의</button>
-					<button type="button" onclick="loadChart('악세사리')">악세사리</button>
-					<button type="button" onclick="loadChart('신발')">신발</button>
+					<select id="saleCategory">
+						<option value="all">전체</option>
+						<c:forEach items="${categoryList}" var="category">
+							<option value="${category}">${category}</option>
+						</c:forEach>
+					</select>
+					<input type="month" id="yearMonth">
+					<button id="search">조회</button>
 					<div>
-					  <canvas id="doughnutChart" style="width: 100%; height: 400px;"></canvas>
+						<canvas id="doughnutChart" style="width: 100%; height: 380px;"></canvas>
 					</div>
 				</div>
 		      	<div class="modal-footer">

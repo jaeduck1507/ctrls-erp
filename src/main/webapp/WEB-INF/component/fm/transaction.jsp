@@ -15,7 +15,7 @@
 		max-width: 800px;
 	}
 	.modal-body {
-		min-height: 450px;
+		height: 450px;
 	}
 </style>
 </head>

@@ -149,7 +149,7 @@
 		    console.log(category);
 			
 			const formData = new FormData();
-			formData.append("productCategory", category);
+			formData.append("saleCategory", category);
 			
 			$.ajax({
 				type: "post",
@@ -294,6 +294,8 @@
 				]
 			},
 			options: {
+				responsive: true,
+				maintainAspectRatio: false,
 				scales: {
 					y: {
 						beginAtZero: true
@@ -331,6 +333,8 @@
 				}]
 			},
 			options: {
+				responsive: true,
+				maintainAspectRatio: false,
 				scales: {
 					y: {
 						beginAtZero: true
@@ -377,6 +381,8 @@
 				}]
 			},
 			options: {
+				responsive: true,
+				maintainAspectRatio: false,
 				scales: {
 					y: {
 						beginAtZero: true
@@ -405,6 +411,8 @@
 				}]
 			},
 			options: {
+				responsive: true,
+				maintainAspectRatio: false,
 				scales: {
 					y: {
 						beginAtZero: true

@@ -20,17 +20,14 @@
 		FROM transaction
 		JOIN department USING(dept_no)
 		<where>
+			<if test="startDate != null and endDate != null">
+				trans_date BETWEEN #{startDate} AND #{endDate}
+			</if>
 			<if test="transType != 'all'">
 				AND trans_type = #{transType}
 			</if>
 			<if test="deptName != 'dept'">
 				AND dept_name = #{deptName}
-			</if>
-			<if test="startDate != null">
-				trans_date &gt;=  #{startDate}
-			</if>
-			<if test="endDate != null">
-				trans_date &lt;= #{endDate}
 			</if>
 		</where>
 		ORDER BY trans_date

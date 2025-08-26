@@ -1,39 +1,12 @@
 const now = new Date();
-const month = now.getMonth() + 1;
-document.querySelector("#currentMonth").innerHTML = month + "월";
-
 const today = now.getFullYear() + '-' 
 	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
 	                    + String(now.getDate()).padStart(2, '0');
-console.log(today);
+						
+const month = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
 
 const monthChart = document.querySelector("#monthChart");
 const weekChart = document.querySelector("#weekChart");
-/*
-const monthLabels = [
-	<c:forEach var="month" items="${monthSalesChart}" varStatus="loop">
-    	"${month.saleMonth}"<c:if test="${!loop.last}">,</c:if>
-    </c:forEach>
-];
-
-const monthDataValues = [
-	<c:forEach var="month" items="${monthSalesChart}" varStatus="loop">
-    	"${month.monthAmount}"<c:if test="${!loop.last}">,</c:if>
-    </c:forEach>
-];
-
-const weekLabels = [
-    <c:forEach var="week" items="${weekSalesChart}" varStatus="loop">
-    	"${week.saleDate}"<c:if test="${!loop.last}">,</c:if>
-    </c:forEach>
-];
-
-const weekDataValues = [
-	<c:forEach var="week" items="${weekSalesChart}" varStatus="loop">
-		${week.saleAmount}<c:if test="${!loop.last}">,</c:if>
-	</c:forEach>
-];
-*/
 
 const monthLabels = monthSalesChart.map(item => item.saleMonth);
 const monthDataValues = monthSalesChart.map(item => item.monthAmount);
@@ -70,6 +43,8 @@ new Chart(monthChart, {
 		}]
 	},
 	options: {
+		responsive: true,
+		maintainAspectRatio: false,
 		scales: {
 			y: {
 				beginAtZero: true
@@ -90,6 +65,8 @@ new Chart(weekChart, {
 		}]
 	},
 	options: {
+		responsive: true,
+		maintainAspectRatio: false,
 		scales: {
 			y: {
 				beginAtZero: true
@@ -99,16 +76,18 @@ new Chart(weekChart, {
 });
 
 let doughnutChart;
-		
-$("#salesQuantity").on("shown.bs.modal", function () {
-	loadChart('all');
+
+$("#salesQuantity").on("show.bs.modal", function () {
+	$("#saleCategory").val("all");
+	$("#yearMonth").val(month);
 });
 
-function loadChart(category) {
-    console.log(category);
-	
+$(document).on("click", "#search", () => {
 	const formData = new FormData();
-	formData.append("productCategory", category);
+	formData.append("saleCategory", $("#saleCategory").val());
+	formData.append("yearMonth", $("#yearMonth").val());
+	//console.log($("#saleCategory").val());
+	//console.log($("#yearMonth").val());
 	
 	$.ajax({
 		type: "post",
@@ -118,6 +97,20 @@ function loadChart(category) {
 		contentType: false,
 		success: function(result) {
 			//console.log(result);
+			if (result.length === 0) {
+				Swal.fire({
+					position: "top",
+					icon: "error",
+					title: "조회 실패",
+					text: "해당 월의 판매 내역이 존재하지 않습니다!",
+					showConfirmButton: false,
+					timer: 2000,
+					didClose: () => {
+						$("#salesQuantity").modal("show");
+					}
+				});
+				return;
+			}
 			
 			let productLabels = [];
 			let quantityValues = [];
@@ -166,8 +159,7 @@ function loadChart(category) {
 			
 		}
 	});
-}
-
+});
 
 $("#btn").click(() => {
 	const formData = new FormData();
@@ -182,13 +174,12 @@ $("#btn").click(() => {
 			Swal.fire({
 				position: "top",
 				icon: "error",
-				title: "조회 기간을 다시 선택해주세요!",
+				title: "조회 실패",
+				text: "조회 기간을 다시 선택해주세요!",
 				showConfirmButton: false,
-				timer: 1500,
-				didClose: () => {
-					location.reload();
-				}
+				timer: 1500
 			});
+			return;
 		}
 		formData.append("startDate", startDate);
 		formData.append("endDate", endDate);
@@ -265,13 +256,12 @@ $(document).on('click', 'a.page-link', function(e) {
 			Swal.fire({
 				position: "top",
 				icon: "error",
-				title: "조회 기간을 다시 선택해주세요!",
+				title: "조회 실패",
+				text: "조회 기간을 다시 선택해주세요!",
 				showConfirmButton: false,
-				timer: 1500,
-				didClose: () => {
-					location.reload();
-				}
+				timer: 1500
 			});
+			return;
 		}
 		formData.append("startDate", startDate);
 		formData.append("endDate", endDate);

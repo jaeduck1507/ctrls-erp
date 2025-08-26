@@ -1,0 +1,57 @@
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* 세로 방향 정렬 */
+  overflow-x: hidden; /* 가로 스크롤 제거 */
+}
+
+form .box {
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 10px;
+  width: calc(95vw - var(--side-width));
+  font-size: large;
+  justify-content: flex-start;
+}
+
+form button {
+  justify-content: flex-start;
+}
+
+.box table {
+  border-radius: 10px;
+}
+
+.box td {
+  color: #938e8e;
+  border-radius: 10px;
+  width: 300px;
+  height: 60px;
+}
+
+.box th {
+  color: #938e8e;
+  border-radius: 10px;
+  width: 250px;
+}
+
+.box input[type="text"],
+.box input[type="date"],
+.box input[type="number"],
+.box select {
+  border-style: none;
+  border: 1px #ccc;
+  outline: none;
+}
+
+.box input[readonly="readonly"] {
+  border-style: none;
+  background-color: #f5f5f5;
+  border: 1px #ccc;
+  outline: none;
+}
