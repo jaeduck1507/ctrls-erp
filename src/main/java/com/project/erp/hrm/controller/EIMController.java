@@ -75,4 +75,11 @@ public class EIMController {
 		
 		return "redirect:/mypage";
 	}
+	
+	@ResponseBody
+	@PostMapping("/modifyJobDept")
+	public boolean modifyJobDept(@RequestBody EmpInfo ei) {
+		employeeInfoservice.modifyJobDept(ei);
+		return true;
+	}
 }

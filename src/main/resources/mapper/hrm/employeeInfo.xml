@@ -55,8 +55,9 @@
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
 		<where>
+			quit_date IS NULL
 		<if test="empName != null" >
-			emp_name LIKE CONCAT('%', #{empName}, '%')
+			AND emp_name LIKE CONCAT('%', #{empName}, '%')
 		</if>
 		<if test='jobNo != -1 and jobNo != null'>
 			AND job_no = #{jobNo}
@@ -74,8 +75,9 @@
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
 		<where>
+			quit_date IS NULL
 		<if test="empInfo.empName != null" >
-			emp_name LIKE CONCAT('%', #{empInfo.empName}, '%')
+			AND emp_name LIKE CONCAT('%', #{empInfo.empName}, '%')
 		</if>
 		<if test='empInfo.jobNo != -1'>
 			AND job_no = #{empInfo.jobNo}
@@ -117,6 +119,7 @@
 		JOIN job_position USING(job_no)
 			<where>
 				dept_no = #{deptNo}
+				AND quit_date IS NULL
 				<if test="empList.size() != 0">
 					<foreach collection="empList" item="emp">
 						AND emp_no != #{emp.empNo}
@@ -129,6 +132,19 @@
 	<update id="updateEmpQuit" parameterType="Quitter">
 		UPDATE employee_info
 		SET quit_date = #{quitDate}
+		WHERE emp_no = #{empNo}
+	</update>
+	
+	<update id="modifyJobDept" parameterType="EmpInfo">
+		UPDATE employee_info
+		<set>
+			<if test='jobNo != 0'>
+			job_no = #{jobNo},
+		</if>
+		<if test='deptNo != 0'>
+			dept_no = #{deptNo}
+		</if>
+		</set>
 		WHERE emp_no = #{empNo}
 	</update>
 	

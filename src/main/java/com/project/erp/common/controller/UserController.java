@@ -43,7 +43,7 @@ public class UserController {
 	@PostMapping("/register")
 	public String register(User vo) {
 		userService.register(vo);
-		return"redirect:/register";
+		return"redirect:/login";
 	}
 	
 	@ResponseBody
@@ -94,10 +94,11 @@ public class UserController {
 		return "redirect:/myLeavePage";
 	}
 	
+	@ResponseBody
 	@PostMapping("/resetMyPwd")
-	public String resetMyPwd(User vo) {
+	public boolean resetMyPwd(@RequestBody User vo) {
 		userService.resetMyPwd(vo);
-		return "redirect:/mypage";
+		return true;
 	}
 	
 	@ResponseBody

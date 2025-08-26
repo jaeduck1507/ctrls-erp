@@ -21,4 +21,5 @@ public interface EmployeeInfoMapper {
 	void empModify(EmpInfo ei);
 	List<EmpInfo> showNotEvalEmp(PerformanceReviewDTO prDto);
 	void updateEmpQuit(Quitter q);
+	void modifyJobDept(EmpInfo ei);
 }

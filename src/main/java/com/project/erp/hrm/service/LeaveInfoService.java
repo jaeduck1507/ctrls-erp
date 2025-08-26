@@ -95,6 +95,7 @@ public class LeaveInfoService {
 	public List<LeaveInfo> leaveStatus(Paging paging) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		paging.setTotal(leaveInfoMapper.totalLeaveInfo());
+		System.out.println(leaveInfoMapper.totalLeaveInfo());
 		return leaveInfoMapper.leaveStatus(paging);
 	}
 
