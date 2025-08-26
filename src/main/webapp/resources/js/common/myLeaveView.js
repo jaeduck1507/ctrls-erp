@@ -29,7 +29,14 @@
 	       const isHoliday = holidays.includes(this.value); // 공휴일
 
 	       if(isWeekend || isHoliday){
-	         alert("주말 및 공휴일 선택불가");
+			Swal.fire({
+				title: "주말 및 공휴일은 선택이 불가합니다. 다른 날짜를 선택해주세요.",
+				confirmButtonText: '확인',
+				width: 600,
+				confirmButtonColor: "#90C67C",
+				icon: "check",
+				iconColor: "green"
+				});
 	         this.value = tomorrowStr; // 날짜 초기화
 	         return;
 	       }

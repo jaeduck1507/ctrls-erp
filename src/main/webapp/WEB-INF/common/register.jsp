@@ -32,7 +32,7 @@
 	<span id="noCkeckMessage">직원번호 입력 후 번호 확인을 눌러주세요.</span>
 	</div>
 	
-	<button type="submit">회원가입</button>
+	<button type="submit" id="submit">회원가입</button>
 	</div>
 	</form>
 	
@@ -44,9 +44,11 @@
 		  const idExp = /^[a-zA-Z][a-zA-Z0-9]{3,11}$/;
 		  const iEt = idExp.test(e.target.value);
 		  if (iEt) {
+			$("#submit").prop("disabled", false);
 		    resultId.innerHTML = "OK!";
 		    resultId.style.color = "blue";
 		  } else {
+			$("#submit").prop("disabled", true);
 			resultId.innerHTML = "영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내";
 		    resultId.style.color = "red";
 		  }
@@ -60,14 +62,17 @@
 		    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
 		  const pEt = pwExp.test(e.target.value);
 		  if (pEt) {
+			$("#submit").prop("disabled", false);
 		    resultPw.innerHTML = "OK!";
 		    resultPw.style.color = "blue";
 		  } else {
+			$("#submit").prop("disabled", true);
 			resultPw.innerHTML = "영문자, 숫자, 특수문자 조합으로 8~15자 이내";
 		    resultPw.style.color = "red";
 		  }
 		});
 		console.log(pw.addEventListener);
+
 
 		// 로그인 할때 수정할 부분입니당
 		$("#noCheck").click(() =>{

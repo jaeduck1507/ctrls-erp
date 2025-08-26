@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>휴가 정보 수정</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 

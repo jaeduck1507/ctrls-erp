@@ -207,7 +207,14 @@
 				
 				   
 				if(weekend || holiday){
-					alert("주말 및 공휴일 선택불가");
+					Swal.fire({
+						title: "다른 날짜를 선택해주세요.",
+						text: "주말 및 공휴일은 선택이 불가합니다.",
+						confirmButtonText: '확인',
+						width: 600,
+						confirmButtonColor: "#90C67C",
+						icon: "warning"
+						});
 					this.value = nextStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
 					endDateInput.value = startDateInput.value;
 					return;
@@ -254,13 +261,40 @@
 	       // 응답
 		   success : function(response) {
 			if(response === "success"){
-				alert("신청 완료"); // 휴가 등록 버튼을 누르면
+				//alert("신청 완료"); // 휴가 등록 버튼을 누르면
+				Swal.fire({
+					title: "다른 날짜를 선택해주세요.",
+					text: "주말 및 공휴일은 선택이 불가합니다. ",
+					confirmButtonText: '확인',
+					width: 600,
+					confirmButtonColor: "#90C67C",
+					icon: "warning"
+					
+					});
 			   location.reload(); // 새로고침}
 			} else if (response === "overlap") {
-				alert("이미 등록 및 승인된 휴가입니다. 다른 날짜를 선택해주세요.");
+				//alert("이미 등록 및 승인된 휴가입니다. 다른 날짜를 선택해주세요.");
+				Swal.fire({
+					title: "다른 날짜를 선택해주세요.",
+					text: "이미 등록 및 승인된 휴가일 입니다.",
+					confirmButtonText: '확인',
+					width: 600,
+					confirmButtonColor: "#90C67C",
+					icon: "warning",
+					
+					});
 				return;
 			} else if(response === "exceed"){
-				alert("남은 휴가일수를 초과했습니다. 휴가일수를 확인해주세요.");
+				//alert("남은 휴가일수를 초과했습니다. 휴가일수를 확인해주세요.");
+				Swal.fire({
+					title: "휴가일수를 확인해주세요.",
+					text: "남은 휴가일수를 초과했습니다. ",
+					confirmButtonText: '확인',
+					width: 600,
+					confirmButtonColor: "#90C67C",
+					icon: "warning"
+					
+					});
 			}
 	      },
 	       error:function(xhr,status,error) {

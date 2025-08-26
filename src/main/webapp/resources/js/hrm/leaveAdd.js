@@ -21,8 +21,8 @@ function addRow() { // 열 추가 함수
 
 				   //$("#result tr").eq(-1).find(".currentDate").val(new Date().toISOString().substring(0, 10));
 				   // 입력한 사번으로 고정
-				   const empNoInput = document.querySelector('.empNo');
-				   $("#result tr").eq(-1).find(".empNo").val(empNoInput.value);
+				   //const empNoInput = document.querySelector('.empNo');
+				   //$("#result tr").eq(-1).find(".empNo").val(empNoInput.value);
 
 				   // 휴가시작일, 종료일 신청날짜 다음날로 고정(다음날부터 신청가능하도록)
 				   		// 내일부터 신청 가능
@@ -46,7 +46,6 @@ function addRow() { // 열 추가 함수
 				   $("#result tr").eq(-1).find(".leaveDate").val(nextStr);
 				   
 				   // 과거시간, 주말, 공휴일 선택 제한
-				   // Q. 더 간단한 방법, 그리고 앞으로의 공휴일을 계속 제한할 방법은?
 				   const holidays = [// 제한할 공휴일 목록
 				     "2025-08-15", // 광복절
 				     "2025-10-03", // 개천절
@@ -71,7 +70,16 @@ function addRow() { // 열 추가 함수
 				       const holiday = holidays.includes(this.value); // 공휴일
 
 				       if(weekend || holiday){
-				         alert("주말 및 공휴일 선택불가");
+				         //alert("주말 및 공휴일 선택불가");
+						 Swal.fire({
+	 						title: "다른 날짜를 선택해주세요.",
+							text: "주말 및 공휴일은 선택이 불가합니다. ",
+	 						confirmButtonText: '확인',
+	 						width: 600,
+	 						confirmButtonColor: "#90C67C",
+	 						icon: "warning",
+	 						
+	 						});
 				         this.value = nextStr; // 날짜 기본값(신청날짜 다음날)으로 초기화
 						 endDateInput.value = startDateInput.value;
 				         return;
@@ -105,11 +113,27 @@ function addRow() { // 열 추가 함수
 			               const table = $("#result tr"); // 테이블 정보 획득
 			               const liList = []; // 객체를 담을 배열
 			               const formData = new FormData();
+						   let valid = true;
+						   
 			           	
 			               for(var i = 1; i < table.length; i++){ // i가 1부터 시작하는 이유는 첫번째 열은 th(열의 설명)부분이라 데이터가 아님
 			                   const obj ={}; // 직원 하나당 하나의 객체로 생성
+							   const empNoVal = $("#result tr").eq(i).find("td").eq(0).find("input").val().trim();
+
+							           if (!empNoVal) { // 사번이 비어있으면
+										Swal.fire({
+											title: "사번을 입력해주세요!",
+											confirmButtonText: '확인',
+											width: 600,
+											confirmButtonColor: "#90C67C",
+											icon: "warning",
+											iconColor: "green"
+											});
+							               valid = false;
+							               break; // 더 이상 진행 안 하고 반복문 종료
+							           }
 			                   for(var j = 0; j <6; j++) { // 객체에 데이터 삽입
-			                   	if(j === 0)  obj.empNo=$("#result tr").eq(i).find("td").eq(j).find("input").val(); // result의 i번째 tr의 j번째 td 데이터(사원이름,직무이름 등)을 객체에 저장 
+			                   	if(j === 0)  obj.empNo = empNoVal; // result의 i번째 tr의 j번째 td 데이터(사원이름,직무이름 등)을 객체에 저장 
 			                   	if(j === 1)  obj.requestDate=$("#result tr").eq(i).find("td").eq(j).find("input").val();
 			                   	if(j === 2)  obj.leaveType=$("#result tr").eq(i).find("td").eq(j).find("select").val();
 			                   	if(j === 3)  obj.startDate=$("#result tr").eq(i).find("td").eq(j).find("input").val();
@@ -120,7 +144,7 @@ function addRow() { // 열 추가 함수
 			                   liList.push(obj); // 정보 저장한 객체를 배열에 삽입  
 			               }
 						   
-					
+						   
 			               //console.log(JSON.stringify(liList));
 			               $.ajax({
 			                   // 요청
@@ -132,14 +156,51 @@ function addRow() { // 열 추가 함수
 			   				contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 			                   // 응답
 			                   success : function(result) {
-								alert("신청완료"); // 휴가 등록 버튼을 누르면
-								location.reload(); // 새로고침
-			                   },
-			                   
-			   				error:function(xhr,status,error) {
-									
-			   				}
-			               });
-						   
-			           });
-					  
+								Swal.fire({
+					   					title: "휴가를 등록 하시겠습니까?",
+					   					confirmButtonText: '등록',
+					   					confirmButtonColor: "green",
+					   					icon: "question",
+					   					iconColor: "green",
+					   					showCancelButton: true,
+					   					cancelButtonText: '취소',
+					   					cancelButtonColor: "red"
+					   					}).then((result) => {
+					   						  if (result.isConfirmed) {
+								Swal.fire({
+											icon: "success",
+											iconColor: "green",
+										  title: "등록 되었습니다!",
+										  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
+										  timer: 3000,
+										  timerProgressBar: true,
+										  didOpen: () => {
+										    Swal.showLoading();
+										    const timer = Swal.getPopup().querySelector("#aa");
+										    timerInterval = setInterval(() => {
+												let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
+										      timer.textContent = remainSecond +1;
+										    }, 100);
+										  },
+										  willClose: () => {
+										    clearInterval(timerInterval);
+										  }
+										}).then((result) => {
+										  /* Read more about handling dismissals below */
+										  if(result.dismiss == "backdrop") {
+											  location.reload();
+										  }
+										  if (result.dismiss === Swal.DismissReason.timer) {
+											  location.reload();
+										  }
+										});
+										}
+									});
+										
+									},
+									error:function(xhr, status, error){
+										
+									}
+								});
+								
+							});

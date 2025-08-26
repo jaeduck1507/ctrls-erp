@@ -79,6 +79,7 @@ public class HrmPageController {
 		model.addAttribute("component","../component/hrm/leaveInfo.jsp");
 		return "common/layout";
 	}
+	
 	@GetMapping("/empEval")
 	public String empEval(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

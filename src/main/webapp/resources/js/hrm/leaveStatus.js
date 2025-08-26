@@ -2,6 +2,9 @@ $(".btnO").click((e)=>{
 			const formData = new FormData();
 								formData.append("status", "승인");
 								formData.append("leaveId", $(e.target).parent().parent().find("td").eq(0).text());
+								formData.append("startDate", $(e.target).parent().parent().find("td").eq(3).text());
+								formData.append("endDate", $(e.target).parent().parent().find("td").eq(4).text());
+								formData.append("empNo", $(e.target).parent().parent().find("td").eq(6).text());
 								//console.log($("#result tr").eq(i).find("td").eq(0).find("input").val());
 			Swal.fire({
 					title: "승인하시겠습니까?",

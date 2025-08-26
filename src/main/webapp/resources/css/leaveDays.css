@@ -1,0 +1,35 @@
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+}  
+
+ .box {
+	background-color: none;
+	padding: 30px;
+	border-radius: 10px;
+	width: 100%;
+	font-size: large;
+	justify-content: flex-start;
+} 
+
+
+
+
+.box table {
+	border-radius: 10px;
+	
+}
+.box th {
+	color: #938E8E;
+	border-radius: 10px;
+	width: 250px;
+}
+
+.box td{
+	color: #424242;
+	border-radius: 10px;
+	width: 300px;
+	height: 60px;
+	
+}
