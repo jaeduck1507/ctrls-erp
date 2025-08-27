@@ -77,15 +77,56 @@ new Chart(weekChart, {
 
 let doughnutChart;
 
-$("#salesQuantity").on("show.bs.modal", function () {
-	$("#saleCategory").val("all");
-	$("#yearMonth").val(month);
-});
+// 차트 생성하기
+function createChart(result) {
+	let productLabels = [];
+	let quantityValues = [];
+	
+	result.forEach(item => {
+		productLabels.push(item.productName);
+		quantityValues.push(item.monthQuantity);
+	});
+	
+	console.log(productLabels);
+	console.log(quantityValues);
+	
+	if (doughnutChart) {
+		doughnutChart.destroy();
+	}
+	
+	const ctx = document.querySelector("#doughnutChart");
+	doughnutChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: productLabels,
+			datasets: [{
+				label: '제품별 판매 수량',
+				data: quantityValues,
+				backgroundColor: [
+				'rgba(255, 99, 132, 0.5)',
+				'rgba(255, 159, 64, 0.5)',
+				'rgba(255, 205, 86, 0.5)',
+				'rgba(75, 192, 192, 0.5)',
+				'rgba(54, 162, 235, 0.5)',
+				'rgba(153, 102, 255, 0.5)',
+				'rgba(255, 182, 193, 0.5)'
+				],
+				hoverOffset: 4
+			}]
+		},
+		options: {
+			responsive: true, // 창 크기에 맞게 자동 조절
+			maintainAspectRatio: false, // 비율 고정 여부
+			cutout: "50%", // 도넛 가운데 구멍 크기 (퍼센트나 픽셀 가능)
+		}
+	});
+}
 
-$(document).on("click", "#search", () => {
+// formData 받아서 차트 조회하기 -> result 값을 createChart 로 전달
+function searchChart(saleCategory, yearMonth) {
 	const formData = new FormData();
-	formData.append("saleCategory", $("#saleCategory").val());
-	formData.append("yearMonth", $("#yearMonth").val());
+	formData.append("saleCategory", saleCategory);
+	formData.append("yearMonth", yearMonth);
 	//console.log($("#saleCategory").val());
 	//console.log($("#yearMonth").val());
 	
@@ -106,62 +147,41 @@ $(document).on("click", "#search", () => {
 					showConfirmButton: false,
 					timer: 2000,
 					didClose: () => {
-						$("#salesQuantity").modal("show");
+						reloadChart();
 					}
 				});
 				return;
 			}
-			
-			let productLabels = [];
-			let quantityValues = [];
-			
-			result.forEach(item => {
-				productLabels.push(item.productName);
-				quantityValues.push(item.monthQuantity);
-			});
-			
-			console.log(productLabels);
-			console.log(quantityValues);
-			
-			if (doughnutChart) {
-				doughnutChart.destroy();
-			}
-			
-			const ctx = document.querySelector("#doughnutChart");
-			doughnutChart = new Chart(ctx, {
-				type: 'doughnut',
-				data: {
-					labels: productLabels,
-					datasets: [{
-						label: '제품별 판매 수량',
-						data: quantityValues,
-						backgroundColor: [
-						'rgba(255, 99, 132, 0.5)',
-						'rgba(255, 159, 64, 0.5)',
-						'rgba(255, 205, 86, 0.5)',
-						'rgba(75, 192, 192, 0.5)',
-						'rgba(54, 162, 235, 0.5)',
-						'rgba(153, 102, 255, 0.5)',
-						'rgba(255, 182, 193, 0.5)'
-						],
-						hoverOffset: 4
-					}]
-				},
-				options: {
-					responsive: true, // 창 크기에 맞게 자동 조절
-					maintainAspectRatio: false, // 비율 고정 여부
-					cutout: "50%", // 도넛 가운데 구멍 크기 (퍼센트나 픽셀 가능)
-				}
-			});
-			
+			createChart(result);
 		},
 		error: function(xhr, status, error) {
 			
 		}
 	});
+}
+
+// 처음 모달 창을 열었을 때 조회 초기값 세팅
+$("#salesQuantity").on("show.bs.modal", function () {
+	//$("#saleCategory").val("all");
+	//$("#yearMonth").val(month);
+	reloadChart();
 });
 
-$("#btn").click(() => {
+// 조회 버튼 클릭 시 -> 카테고리와 월 데이터를 전달해서 차트 조회
+$(document).on("click", "#search", function() {
+	const saleCategory = $("#saleCategory").val();
+	const yearMonth = $("#yearMonth").val();
+	searchChart(saleCategory, yearMonth);
+});
+
+// 조회 실패 에러 시 차트 재로딩
+function reloadChart() {
+	$("#saleCategory").val("all");
+	$("#yearMonth").val(month);
+	searchChart("all", month);
+}
+
+function showSaleManage() {
 	const formData = new FormData();
 	formData.append("productCategory", $("#productCategory").val());
 	formData.append("productName", $("#productName").val());
@@ -238,6 +258,12 @@ $("#btn").click(() => {
 			
 		}
 	});
+}
+
+$("#btn").click(showSaleManage);
+
+$(document).ready(function() {
+	showSaleManage();
 });
 
 $(document).on('click', 'a.page-link', function(e) {

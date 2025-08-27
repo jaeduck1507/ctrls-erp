@@ -80,6 +80,10 @@ $(document).on("change", ".deptName", (e) => {
 			timer: 2000
 		});
 		$(e.target).val("");
+		for (var i = 1; i < 6; i++) {
+			$(e.target).parent().parent().find("td").eq(i).text("");
+			$(e.target).parent().parent().find("td").eq(i).removeClass("red");
+		}
 		return;
 	}
 	

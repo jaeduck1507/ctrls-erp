@@ -46,6 +46,7 @@ $("#budget-update").click(() => {
 				Swal.fire({
 					position: "top",
 					icon: "success",
+					iconColor: "#48b85b",
 					title: "수정되었습니다!",
 					showConfirmButton: false,
 					timer: 1500,

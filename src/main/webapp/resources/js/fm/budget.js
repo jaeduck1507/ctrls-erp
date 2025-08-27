@@ -1,4 +1,4 @@
-$("#btn").click(() => {
+function showBudget() {
 	const formData = new FormData();
 	formData.append("deptName", $("#deptName").val());
 	formData.append("yearMonth", $("#yearMonth").val());
@@ -50,13 +50,16 @@ $("#btn").click(() => {
 			
 		}
 	});
+}
+
+$("#btn").click(showBudget);
+
+$(document).ready(function() {
+	showBudget();
 });
 
 $(document).on('click', 'a.btnX', function(e) {
 	e.preventDefault();
-	/*if (confirm("정말 삭제하시겠습니까?")) {
-		location.href = $(this).attr("href");
-	}*/
 	
 	Swal.fire({
 		title: "정말 삭제하시겠습니까?",
@@ -91,6 +94,7 @@ $(document).on('click', 'a.page-link', function(e) {
 	
 	const formData = new FormData();
 	formData.append("deptName", $("#deptName").val());
+	formData.append("yearMonth", $("#yearMonth").val());
 	formData.append("page", $(this).attr('href'));
 	
 	$.ajax({

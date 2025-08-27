@@ -22,6 +22,7 @@
 				AND dept_name = #{deptName}
 			</if>
 		</where>
+		ORDER BY budget_no
 	</select>
 	
 	<select id="showBudgetPage" parameterType="BudgetPagingDTO" resultMap="BudgetDeptMap">
@@ -35,6 +36,7 @@
 				AND dept_name = #{budgetDeptDTO.deptName}
 			</if>
 		</where>
+		ORDER BY budget_no
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -49,6 +51,7 @@
 				AND dept_name = #{deptName}
 			</if>
 		</where>
+		ORDER BY budget_no
 	</select>
 	
 	<insert id="budgetRegister" parameterType="ArrayList">

@@ -1,4 +1,4 @@
-$("#btn").click(() =>{
+function showBonusPayment() {
 	const formData = new FormData();
 	formData.append("empName", $("#empName").val());
 	formData.append("deptNo", $("#deptName").val());
@@ -49,6 +49,12 @@ $("#btn").click(() =>{
 			
 		}
     });
+}
+
+$("#btn").click(showBonusPayment);
+
+$(document).ready(function() {
+	showBonusPayment();
 });
 
 $(document).on('click', 'a.page-link', function(e) {
