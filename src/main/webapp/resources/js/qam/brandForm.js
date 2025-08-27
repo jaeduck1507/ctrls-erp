@@ -1,0 +1,106 @@
+function collectMissingFields() {
+  const labels = {
+    brandName: "브랜드명",
+    brandPhone: "전화번호",
+    brandAccount: "계좌번호",
+    brandBank: "사용 은행"
+  };
+  const missing = [];
+  Object.keys(labels).forEach(k => {
+    const v = $("#" + k).val()?.trim();
+    if (!v) missing.push(labels[k]);
+  });
+  return missing;
+}
+
+$("#brandForm").on("submit", function (e) {
+  e.preventDefault();
+  
+  const missing = collectMissingFields();
+  if (missing.length > 0) {
+    Swal.fire({
+      icon: "warning",
+      iconColor: "green",
+      title: "입력 누락",
+      html: "다음 항목을 모두 입력해주세요:<br>" + missing.join(", "),
+      confirmButtonText: "확인",
+      confirmButtonColor: "#90C67C"
+    });
+    return;
+  }
+  
+  const phone = $("#brandPhone").val().trim();
+  const account = $("#brandAccount").val().trim();
+
+  if (!/^\d{9,15}$/.test(phone)) {
+    Swal.fire({
+      icon: "error",
+      title: "형식 오류",
+      text: "전화번호는 숫자 9~15자리로 입력해주세요.",
+    confirmButtonText: "확인",
+    confirmButtonColor: "#90C67C"
+    });
+    return;
+  }
+
+  if (!/^\d{8,14}$/.test(account)) {
+    Swal.fire({
+      icon: "error",
+      title: "형식 오류",
+      text: "계좌번호는 숫자 8~14자리로 입력해주세요.",
+    confirmButtonText: "확인",
+    confirmButtonColor: "#90C67C"
+    });
+    return;
+  }
+
+  Swal.fire({
+    icon: "question",
+    iconColor: "green",
+    title: "등록하시겠습니까?",
+    text: "브랜드 정보를 저장합니다.",
+    showCancelButton: true,
+    confirmButtonText: "등록",
+    cancelButtonText: "취소",
+    confirmButtonColor: "green",
+    cancelButtonColor: "red"
+  }).then((res) => {
+    if (!res.isConfirmed) return;
+
+    const payload = {
+      brandName: $("#brandName").val().trim(),
+      brandPhone: $("#brandPhone").val().trim(),
+      brandAccount: $("#brandAccount").val().trim(),
+      brandBank: $("#brandBank").val().trim()
+    };
+
+    $.ajax({
+      type: "post",
+      url: "/registerBrand",
+      data: $.param(payload), // form-urlencoded (컨트롤러 그대로 두기 위함 -> urlencoded 쓰기)
+      contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	  // submit시 url링크 이런식으로 뜸! => http://localhost:8080/brandForm?brandName=%EC%9D%98%EC%A7%84%EB%9E%9C%EB%93%9C&brandPhone=1231231&brandAccount=123123&brandBank=%EC%9D%98%EC%A7%84%EC%9D%80%ED%96%89 
+      success: function () {
+        let timerInterval;
+        Swal.fire({
+          icon: "success",
+          iconColor: "green",
+          title: "등록 완료",
+          html: '<span id="aa"></span>초 후 목록으로 이동합니다.',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const span = Swal.getPopup().querySelector("#aa");
+            timerInterval = setInterval(() => {
+              span.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+            }, 100);
+          },
+          willClose: () => clearInterval(timerInterval)
+        }).then(() => {
+          window.location.href = "/qam/brand";
+        });
+      }
+    });
+  });
+});
