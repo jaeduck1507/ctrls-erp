@@ -15,11 +15,11 @@
 						
 						  for(const leaveTotalDays of result) {
 							if(leaveTotalDays && leaveTotalDays.empNo !== null) {
-							  var text = "휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
-						             + "남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
+							  var text = "<i class='fi fi-rr-calendar-check'></i>&nbsp;&nbsp;휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+						             + "<i class='fi fi-rr-calendar'></i>&nbsp;&nbsp;남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
 					       } else {
-								var text = "휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
-							             + "남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
+								var text = "<i class='fi fi-rr-calendar-check'></i>&nbsp;&nbsp;휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+							             + "<i class='fi fi-rr-calendar'></i>&nbsp;&nbsp;남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
 							   
 						} 
 						$("#result1").append(text);

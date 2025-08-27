@@ -17,7 +17,7 @@
 	<h3>휴가 조회 및 신청</h3>
 	<div class="box">
 		<!-- &nbsp; : span에서 띄어쓰기 적용-->
-		<span>올해 받은 휴가일수&nbsp;&nbsp;<b>12일</b>&nbsp;&nbsp;</span>
+		<span><i class='fi fi-rr-umbrella-beach'></i>&nbsp;&nbsp;올해 받은 휴가일수&nbsp;&nbsp;<b>12일</b>&nbsp;&nbsp;</span>
 		<span id="result1"></span>
 	</div>
 	

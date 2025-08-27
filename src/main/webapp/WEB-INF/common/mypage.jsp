@@ -83,7 +83,7 @@
 	</div>
 	
 	<div class="logout">
-	<a href="/logout" class="btn-logout">로그아웃</a>
+	<a href="/logout" class="btn-logout"><i class="fi fi-rr-exit"></i>&nbsp;&nbsp;로그아웃</a>
 	</div>
 	</div>
 	<script>

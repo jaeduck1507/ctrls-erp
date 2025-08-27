@@ -190,14 +190,13 @@
 		  pwValid = false;
 		  pwMatch = false;
 		  empNoChecked = false;
-		
+		  $("#submit").prop("disabled", true);
+		});
+		$("#submit").prop("disabled", true);
 		// 로그인 페이지로 이동
 		$("#login").click((e) => {
 		  e.preventDefault(); // 기본 submit 막기
 		  window.location.href = "/login"; // 로그인 페이지 경로에 맞게 수정
-		});
-
-		$("#submit").prop("disabled", true);
 		});
 	</script>
 </body>
