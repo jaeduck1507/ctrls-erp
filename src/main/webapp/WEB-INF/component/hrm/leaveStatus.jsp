@@ -16,7 +16,7 @@
 	<h5>[근태 관리] > [휴가 상태 처리]</h5>
 	<h3>휴가 상태 처리</h3>
 	<div class="box">
-		<h5><i class="fi fi-rr-comment-smile"></i>&nbsp;&nbsp;승인 또는 반려를 선택해주세요.</h5>
+		<h5><i class="fi fi-rr-info"></i>&nbsp;&nbsp;승인 또는 반려를 선택해주세요.</h5>
 	</div>
 	<div>
 		<table border="1" id="result" class="data-table">

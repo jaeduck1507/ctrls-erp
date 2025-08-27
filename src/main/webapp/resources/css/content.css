@@ -293,4 +293,11 @@ input[list^="List"] {
   --color: #67ae6e;
 }  
 
+.total{
+	background-color: #E1EEBC;
+	color: #2F5249;
+	border-radius: 10px;
+	padding: 10px 20px 5px 20px;
+	width: fit-content;
+}
    

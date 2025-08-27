@@ -19,7 +19,7 @@
     <div class="box">
       <table>
         <tr>
-          <th>브랜드</th>
+          <th><i class="fi fi-rr-brand-badge"></i>&nbsp;&nbsp;브랜드</th>
           <td>
             <select name="brandCode" id="brandCode">
 			<option value="" disabled selected>선택</option>
@@ -30,7 +30,7 @@
           </td>
         </tr>
         <tr>
-          <th>카테고리</th>
+          <th><i class="fi fi-rr-category-alt"></i>&nbsp;&nbsp;카테고리</th>
           <td>
             <select name="productCategory" id="productCategory">
 			<option value="" disabled selected>선택</option>
@@ -48,19 +48,19 @@
 <!--        </tr>-->
 		
         <tr>
-          <th>제품명</th>
+          <th><i class="fi fi-rr-gift-card"></i>&nbsp;&nbsp;제품명</th>
           <td><input type="text" name="productName" id="productName" value="${productName.productName}"/></td>
         </tr>
         <tr>
-          <th>색상</th>
+          <th><i class="fi fi-rr-fill"></i>&nbsp;&nbsp;색상</th>
           <td><input type="text" name="productColor" id="productColor" value="${productName.productColor}"/></td>
         </tr>
         <tr>
-          <th>판매가</th>
+          <th><i class="fi fi-rr-tags">&nbsp;&nbsp;</i>판매가</th>
           <td><input type="text" name="productPrice" id="productPrice" value="${productName.productPrice}"/></td>
         </tr>
         <tr>
-          <th>단가</th>
+          <th><i class="fi fi-rr-dollar"></i>&nbsp;&nbsp;단가</th>
           <td><input type="text" name="productCost" id="productCost" value="${productName.productCost}"/></td>
         </tr>
       </table>

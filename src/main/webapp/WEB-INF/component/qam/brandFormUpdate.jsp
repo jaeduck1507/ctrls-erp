@@ -19,19 +19,19 @@
 			<table>
 				<input type="hidden" name="brandCode" id="brandCode" value="${brand.brandCode}" />
 				<tr>
-					<th>브랜드명</th>
+					<th><i class="fi fi-rr-brand-badge"></i>&nbsp;&nbsp;브랜드명</th>
 				   	<td><input type="text" name="brandName" id="brandName" value="${brand.brandName}"  /></td>
 				</tr>
 				<tr>
-					<th>전화번호</th>
+					<th><i class="fi fi-rr-phone-call"></i>&nbsp;&nbsp;전화번호</th>
 				   	<td><input type="text" name="brandPhone" id="brandPhone" value="${brand.brandPhone}"  /></td>
 				</tr>
 				<tr>
-					<th>계좌번호</th>
+					<th><i class="fi fi-rr-money-check-edit"></i>&nbsp;&nbsp;계좌번호</th>
 				   	<td><input type="text" name="brandAccount" id="brandAccount" value="${brand.brandAccount}"  /></td>
 				</tr>
 				<tr>
-					<th>사용 은행</th>
+					<th><i class="fi fi-rr-bank"></i>&nbsp;&nbsp;사용 은행</th>
 				   	<td><input type="text" name="brandBank" id="brandBank" value="${brand.brandBank}"  /></td>
 				</tr>
 			</table>

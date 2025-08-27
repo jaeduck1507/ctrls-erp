@@ -20,7 +20,7 @@
 			    <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번</th><td><b>${empInfo.empNo}</b></td></tr>
 			    <tr><th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;성명</th><td><b>${empInfo.empName}</b></td></tr>
 			    <tr><th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;직급</th><td><b>${empInfo.jobTitle}</b></td></tr>
-			    <tr><th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;부서</th><td><b>${empInfo.deptName}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-briefcase"></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><b>${empInfo.deptName}</b></td></tr>
 			    <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;입사일</th><td><b>${empInfo.hireDate}</b></td></tr>
 			    <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;퇴사일</th><td><b id="quitDate">${empInfo.quitDate}</b></td></tr>
 				</table>
