@@ -7,38 +7,42 @@
     <title>사원 정보 수정</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/empInfoDetail.css" />
 </head>
 <body>
-	<h5>[인적자원관리] > [사원정보조회] > [상세정보]</h5>
+	<h5>[인적자원관리] > [사원정보조회] > [사원상세정보]</h5>
 	<h3>사원 상세 정보</h3>
 
-	<div class="container">
 		<div class="box">
 			<div class="box2">
 				<h4>사원 정보</h4>
-			    <p>직원 번호 : <b> ${empInfo.empNo}</b></p>
-			    <p>성명 : <b>${empInfo.empName}</b></p>
-			    <p>직급 : <b>${empInfo.jobTitle}</b></p>
-			    <p>부서 : <b>${empInfo.deptName}</b></p>
-			    <p>입사일 : <b>${empInfo.hireDate}</b></p>
-			    <p>퇴사일 : <b id="quitDate">${empInfo.quitDate}</b></p>
+				<table>
+			    <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번</th><td><b>${empInfo.empNo}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;성명</th><td><b>${empInfo.empName}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;직급</th><td><b>${empInfo.jobTitle}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;부서</th><td><b>${empInfo.deptName}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;입사일</th><td><b>${empInfo.hireDate}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;퇴사일</th><td><b id="quitDate">${empInfo.quitDate}</b></td></tr>
+				</table>
 			</div>
 			
-			<div class="box3">
+			<div class="box2">
 				<h4>개인 정보</h4>
+				<table>
 				<img src="D:/assets/${empInfo.url}" width="200" height="120" />
-				<p><b>주민등록번호 : </b>${empInfo.empIn}</p>
-			    <p><b>주소 : </b>${empInfo.addr}</p>
-			    <p><b>연락처 : </b>${empInfo.phone}</p>
-			    <p><b>이메일 : </b>${empInfo.email}</p>
+				<tr><th><i class="fi fi-rr-hastag"></i>&nbsp;&nbsp;주민등록번호</th><td><b>${empInfo.empIn}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-home-location-alt"></i>&nbsp;&nbsp;주소</th><td><b>${empInfo.addr}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-phone-call"></i>&nbsp;&nbsp;연락처</th><td><b>${empInfo.phone}</b></td></tr>
+			    <tr><th><i class="fi fi-rr-envelope"></i>&nbsp;&nbsp;이메일</th><td><b>${empInfo.email}</b></td></tr>
+				</table>
 			</div>
-			
+			</div>
 			<div class="filter-bar">
-				<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#updateModal" id="quitBtn">퇴직 처리</button>
-				<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#evalShowModal" id="quitBtn">평가 조회</button>
+				<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal" id="quitBtn">퇴직 처리</button>
+				<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#evalShowModal" id="quitBtn">평가 조회</button>
 			</div>
 			
-		</div>
+		
 	
 		<div class="modal fade filter-bar" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -61,8 +65,8 @@
 			  </div>
 		      <div class="modal-footer">
 		      	<p>퇴사 처리시 변경 불가능 합니다</p>
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		        <button type="submit" class="btn btn-warning">등록</button>
+		        <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
+		        <button type="submit" class="btn">등록</button>
 		      </div>
 			  </form>
 		    </div>
@@ -98,7 +102,7 @@
 		    </div>
 		  </div>
 		  
-		</div>
+		
 	
 
 <script>

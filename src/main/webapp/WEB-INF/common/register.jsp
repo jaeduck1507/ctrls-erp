@@ -16,20 +16,29 @@
 		<div class="filter-bar" id="register-card">
 			<h1>회원가입</h1>
 			<div class="id-area">
-	<i class="fi fi-rr-user"></i>&nbsp;&nbsp;아이디<input type="text" name="username" id="id" placeholder="아이디">
+	<i class="fi fi-rr-user"></i>&nbsp;&nbsp;아이디
+	<div class="emp-check">
+		<input type="text" name="username" id="id" placeholder="아이디">
+		<button type="button" id = "idCheck">중복확인</button>
+	</div>
+	
 	<p id="resultId">영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내</p>
 	</div>
 	<div class="pwd-area">
-	<i class="fi fi-rr-lock"></i>&nbsp;&nbsp;비밀번호<input type="password" name="password" id="pw" placeholder="비밀번호">
+	 <i class="fi fi-rr-lock"></i>&nbsp;&nbsp;비밀번호<input type="password" name="password" id="pw" placeholder="비밀번호">
 	 <p id="resultPw">영문자, 숫자, 특수문자 조합으로 8~15자 이내</p>
+	 </div>
+	 <div class="pwd-area">
+	 <i class="fi fi-rr-padlock-check"></i>&nbsp;&nbsp;비밀번호 확인<input type="password" id="pw2" placeholder=" 비밀번호 확인"/>
+	 <p id="resultPw2">위 비밀번호와 동일하게</p>
 	 </div>
 	 <div class="no-area">
 		<i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번
 	<div class="emp-check">
-	<input type="number" name="empNo" id ="empNo" placeholder="직원번호">
+	<input type="number" name="empNo" id ="empNo" placeholder="사번 입력">
 	<button type="button" id = "noCheck">번호확인</button>
 	</div>
-	<span id="noCkeckMessage">직원번호 입력 후 번호 확인을 눌러주세요.</span>
+	<span id="noCkeckMessage">사번 입력 후 번호 확인을 눌러주세요.</span>
 	</div>
 	
 	<button type="submit" id="submit">회원가입</button>
@@ -37,6 +46,12 @@
 	</form>
 	
 	<script>
+		let idValid = false;
+		let idChecked = false;
+		let pwValid = false;
+		let pwMatch = false;
+		let empNoChecked = false;
+		
 		// 아이디입력
 		const id = document.querySelector("#id");
 		const resultId = document.querySelector("#resultId");
@@ -71,8 +86,24 @@
 		    resultPw.style.color = "red";
 		  }
 		});
-		console.log(pw.addEventListener);
-
+		//console.log(pw.addEventListener);
+		// 비밀번호 확인
+		const pw2 = document.querySelector("#pw2");
+		const resultPw2 = document.querySelector("#resultPw2");
+		pw2.addEventListener("input", (e) => {
+		  const pwExp =
+		    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+		  // 앞에서 입력한 비밀번호와 현재 입력한 비밀번호가 일치할 때만 OK!=>value이용!
+		  const pwOk = pw.value === pw2.value;
+		  if (pwOk) {
+		    resultPw2.innerHTML = "OK!";
+		    resultPw2.style.color = "blue";
+		  } else {
+			resultPw.innerHTML = "위 비밀번호와 동일하게";
+		    resultPw2.style.color = "red";
+		  }
+		});
+	
 
 		// 로그인 할때 수정할 부분입니당
 		$("#noCheck").click(() =>{

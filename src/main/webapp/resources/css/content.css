@@ -74,6 +74,7 @@
   accent-color: var(--color); /* 체크박스 색상 */
 }
 /* submit, a, button 스타일 */
+
 #filter-bar input[type="submit"],
 #filter-bar a,
 #filter-bar button,
@@ -89,13 +90,29 @@
   cursor: pointer;
   font-weight: bold;
 }
+input[type=file]::file-selector-button{
+	border-style: none;
+	text-decoration: none;
+	background-color: #90c67c;
+	color: #ffffff;
+	padding: 3px 6px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+input[type=file]{
+	width: 100%;
+	font-size: 9.6px;
+	font-weight: bold;
+}
 
 /* a 태그 상세 크기 조정*/
 .filter-bar a {
   padding: 8px 12px;
   font-size: 14px;
 }
+
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
+input[type=file]::file-selector-button:hover,
 .filter-bar input[type="submit"]:hover,
 .filter-bar a:hover,
 .filter-bar button:hover {
@@ -135,7 +152,6 @@ table.data-table {
   border-spacing: 3px 5px;
   margin-bottom: 10px;
   display: table;
-  width: 100%;
   table-layout: fixed; /*각 셀의 너비를 자동 고정, 내용에 상관없이 동일한 너비로 유지*/
 }
 
@@ -211,6 +227,15 @@ input[list^="List"] {
   cursor: pointer;
   font-weight: bold;
 }
+.disable {
+  text-decoration: none;
+  background-color: var(--table-td-color);
+  border: none;
+  color: var(--table-th-color);
+  padding: 1px 1px;
+  font-weight: bold;
+  pointer-events: none; /* 클릭 못하게 함 */
+}
 
 /* 테이블 내 버튼 커서 올렸을 경우 */
 .innerbtn:hover,
@@ -233,9 +258,9 @@ input[list^="List"] {
 .pagination li a {
   display: block;
   padding: 5px 14px;
-  border: 1px solid #90c67c ;
+  border: 1px solid green ;
   border-radius: 5px;
-  color: #90c67c ;
+  color: green ;
   text-decoration: none;
   transition: 0.2s;
   background-color: white ;
@@ -245,7 +270,7 @@ input[list^="List"] {
   background-color: #eee !important;
   color: #90c67c !important;
 }
-
+.pagination .page-link.active,
 .pagination li.active a {
   background-color: green !important;
   color: white !important;
@@ -253,17 +278,19 @@ input[list^="List"] {
   border-color: green !important;
 }
 
-.pagination .page-link.active  {
-  background-color: green !important;
-  color: white !important;
-  font-weight: bold !important;
-  border-color: green !important;
-}
-
-
 .pagination .disabled a {
   pointer-events: none !important;
   opacity: 0.6 !important;
   background-color: white !important;
   color: #90c67c !important;
+  border: 1px solid #90c67c ;
 }
+
+/*box*/
+:root {
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
+  --color: #67ae6e;
+}  
+
+   

@@ -17,9 +17,31 @@
 		</if>
   </where>  
 </select>
+<select id="quitShowPage" parameterType="QuitterPagingDTO" resultMap="QuitterMap">
+   SELECT emp_name, quit_date ,quit_pay, quit_pay_date 
+   FROM quitter
+        JOIN employee_info USING(emp_no)
+  <where>
+		<if test="quitter.empName != null" >
+			emp_name LIKE CONCAT('%', #{quitter.empName}, '%')
+		</if>
+  </where> 
+  LIMIT #{offset}, #{limit} 
+</select>
 
 <insert id="empQuit" parameterType="Quitter">
 	INSERT INTO quitter(quit_pay, quit_pay_date, emp_no)
 	VALUES(#{quitPay},#{quitPayDate},#{empNo})
 </insert>
+
+<select id="totalQuit" parameterType="Quitter" resultType="int">
+   SELECT count(*) 
+   FROM quitter
+        JOIN employee_info USING(emp_no)
+     <where>
+		<if test="empName != null" >
+			emp_name LIKE CONCAT('%', #{empName}, '%')
+		</if>
+  </where>
+</select>
 </mapper>

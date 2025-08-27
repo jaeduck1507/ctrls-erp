@@ -1,0 +1,56 @@
+
+.box {
+	display: flex;
+	flex-direction: row;
+	font-size: medium;
+	gap: 10px;
+	
+	
+}
+
+.box2{
+	background-color: #F5F5F5;
+	padding: 30px 30px 10px 30px;
+	width: calc(100% - var(--side-width));
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+button {
+	justify-content: flex-start;
+}
+
+.btn {
+  justify-content: flex-start;
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 14px;       /* 두 버튼 폰트 크기 통일 */
+  line-height: 1.2;
+  border-radius: 6px;
+  text-decoration: none; /* a 기본 밑줄 제거 */
+}
+
+.box table {
+	border-radius: 10px;
+	
+}
+.box td{
+	color: #424242;
+	border-radius: 10px;
+	width: 300px;
+	height: 60px;
+	
+}
+.box th {
+	color: #938E8E;
+	border-radius: 10px;
+	width: 250px;
+}
+.box input[type="text"],
+.box input[type="date"] {
+	border-style: none;
+}
+.box input[readonly="readonly"] {
+	border-style: none;
+	background-color:#F5F5F5;
+}

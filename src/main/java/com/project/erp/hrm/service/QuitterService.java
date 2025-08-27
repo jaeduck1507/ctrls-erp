@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.erp.common.model.vo.Paging;
 import com.project.erp.common.service.UserService;
 import com.project.erp.hrm.mapper.QuitterMapper;
 import com.project.erp.hrm.model.dto.Quitter;
+import com.project.erp.hrm.model.dto.QuitterPagingDTO;
 
 @Service
 public class QuitterService {
@@ -25,6 +27,23 @@ public class QuitterService {
 	
 	public List<Quitter> quitShow(Quitter q) {
 		return quitterMapper.quitShow(q);
+	}
+	List<Quitter> quitShowPage(QuitterPagingDTO quitterPagingDTO) {
+		return quitterMapper.quitShowPage(quitterPagingDTO);
+	}
+	
+	public int totalQuit(Quitter q) {
+		return quitterMapper.totalQuit(q);
+	}
+	
+	public QuitterPagingDTO pagingQuitShow(Quitter q, Paging paging) {
+		QuitterPagingDTO quitterPagingDTO = new QuitterPagingDTO(); 
+		quitterPagingDTO.setQuitter(q);
+		quitterPagingDTO.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		quitterPagingDTO.setQuitterList(quitShowPage(quitterPagingDTO));
+		quitterPagingDTO.setPage(paging.getPage());
+		quitterPagingDTO.setTotal(totalQuit(q));
+		return quitterPagingDTO;
 	}
 	
 	public void empQuit(Quitter q) {

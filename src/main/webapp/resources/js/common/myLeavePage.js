@@ -58,6 +58,7 @@
 		    // 2) 목록 행 추가
 		    if (result.list && result.list.length > 0) {
 		      for (const row of result.list) {
+				
 		        const tr =
 		          "<tr>" +
 		            "<td>" + row.leaveId    + "</td>" +
@@ -67,8 +68,8 @@
 		            "<td>" + row.endDate    + "</td>" +
 		            "<td>" + row.reason     + "</td>" +
 		            "<td>" + row.status     + "</td>" +
-		            "<td><a href='/myLeaveView?leaveId=" + row.leaveId + "' class='btnO'>수정</a></td>" +
-		            "<td><a href='/myLeaveDelete?leaveId="+ row.leaveId +"' class='btnX'>삭제</a></td>" +
+		            "<td><a href='/myLeaveView?leaveId=" + row.leaveId + "' class='" + (row.status === "승인" || row.status === "반려"? "disable" : "btnO") + "'>수정</a></td>" +
+		            "<td><a href='/myLeaveDelete?leaveId="+ row.leaveId +"' class='" + (row.status === "승인" || row.status === "반려" ? "disable" : "btnO") + "'>삭제</a></td>" +
 		          "</tr>";
 		        $table.append(tr);
 		      }
@@ -263,15 +264,46 @@
 			if(response === "success"){
 				//alert("신청 완료"); // 휴가 등록 버튼을 누르면
 				Swal.fire({
-					title: "다른 날짜를 선택해주세요.",
-					text: "주말 및 공휴일은 선택이 불가합니다. ",
-					confirmButtonText: '확인',
-					width: 600,
-					confirmButtonColor: "#90C67C",
-					icon: "warning"
-					
+   					title: "휴가를 등록 하시겠습니까?",
+   					confirmButtonText: '등록',
+   					confirmButtonColor: "green",
+   					icon: "question",
+   					iconColor: "green",
+   					showCancelButton: true,
+   					cancelButtonText: '취소',
+   					cancelButtonColor: "red"
+   					}).then((result) => {
+   						  if (result.isConfirmed) {
+			Swal.fire({
+						icon: "success",
+						iconColor: "green",
+					  title: "등록 되었습니다!",
+					  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
+					  timer: 3000,
+					  timerProgressBar: true,
+					  didOpen: () => {
+					    Swal.showLoading();
+					    const timer = Swal.getPopup().querySelector("#aa");
+					    timerInterval = setInterval(() => {
+							let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
+					      timer.textContent = remainSecond +1;
+					    }, 100);
+					  },
+					  willClose: () => {
+					    clearInterval(timerInterval);
+					  }
+					}).then((result) => {
+					  /* Read more about handling dismissals below */
+					  if(result.dismiss == "backdrop") {
+						  location.reload();
+					  }
+					  if (result.dismiss === Swal.DismissReason.timer) {
+						  location.reload();
+					  }
 					});
-			   location.reload(); // 새로고침}
+					}
+				});
+   
 			} else if (response === "overlap") {
 				//alert("이미 등록 및 승인된 휴가입니다. 다른 날짜를 선택해주세요.");
 				Swal.fire({

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>휴가 상태 처리</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="../resources/css/leaveStatus.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -14,6 +15,10 @@
 <body>
 	<h5>[근태 관리] > [휴가 상태 처리]</h5>
 	<h3>휴가 상태 처리</h3>
+	<div class="box">
+		<h5><i class="fi fi-rr-comment-smile"></i>&nbsp;&nbsp;승인 또는 반려를 선택해주세요.</h5>
+	</div>
+	<div>
 		<table border="1" id="result" class="data-table">
 				<tr>
 				<th>신청번호</th>
@@ -54,7 +59,7 @@
 				</tr>
 				</c:forEach>
 		</table>
-
+		
 		<nav>
 		<ul class="pagination">
 				<li class="page-item ${paging.prev ? '' : 'disabled'}">
@@ -71,6 +76,7 @@
 				</li>
 		</ul>
 		</nav>
+		</div>
 		<script src="../resources/js/hrm/leaveStatus.js"></script>
 </body>
 </html>

@@ -11,14 +11,14 @@
 body {
   background-color: #67ae6e21;
   height: 100%;
-  padding: 250px;
+  padding: 200px;
   display: flex;
   justify-content: center;
 }
 #register-card {
   border: #90c67c solid 1px;
   border-radius: 5px;
-  width: 400px;
+  width: 450px;
   margin-bottom: 10px;
   color: #67ae6e;
   padding: 20px;
@@ -51,6 +51,7 @@ body {
   padding: 6px 8px;
   border: 1px solid #90c67c;
   border-radius: 4px;
+  
 }
 /* submit, a, button 스타일 */
 button,

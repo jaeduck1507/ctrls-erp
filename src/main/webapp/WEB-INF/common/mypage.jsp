@@ -10,6 +10,7 @@
 <title>마이 페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 <link rel="stylesheet" href="../resources/css/mypage.css" />
 </head>
 <body>
@@ -17,13 +18,14 @@
 	<!-- get, /mypage: 인증된 사람만 즉! 로그인된 사람만 -->
 	<h1>마이페이지</h1>
 	<div class="mypage">
+		
 		<div class="box1">
-			<h4>출퇴근 등록</h4>
+			<h4><i class="fi fi-br-smiley-comment-alt"  style="color:#67ae6e;"></i>&nbsp;&nbsp;${user.empName}님, 반갑습니다!</h4>
 			<div id="date-timer" class="filter-bar">
 				<p class="date" id="ymd"></p>
 			    <p id="timer"></p>
 
-				출퇴근 등록 시간: <input type="time" id = "checkTime">
+				출퇴근 등록 시간<input type="time" id = "checkTime">
 				<button id="start_work">출근</button>
 				<button id="finish_work">퇴근</button>
 
