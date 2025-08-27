@@ -1,6 +1,6 @@
 function displayQc(result) {
 	// 테이블 헤더 초기화
-	let tableHead = "<tr><th>제품번호</th><th>qc코드</th><th>생산일</th><th>제품코드</th><th>브랜드명</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>카테고리</th><th>부자재검사 여부</th><th>색상검사 여부</th><th>손상검사 여부</th><th>검사 설명</th><th>검사일</th><th>검사자</th><th>수정</th></tr>"
+	let tableHead = "<tr><th>제품번호</th><th>qc코드</th><th>생산일</th><th>제품코드</th><th>브랜드명</th><th>색상</th><th>제품명</th><th>판매가</th><th>단가</th><th>카테고리</th><th>부자재검사</th><th>색상검사</th><th>손상검사</th><th>검사 설명</th><th>검사일</th><th>검사자</th><th>수정</th></tr>"
 	$("#qcResult").html(tableHead);
 	
 	// QC읭 각 행 기입 (전부 보여주는 페이지기에 product와 qc leftJoin으로 합침)

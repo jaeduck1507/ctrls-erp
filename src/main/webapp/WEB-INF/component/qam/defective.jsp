@@ -7,7 +7,7 @@
     <title>불량품 조회</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+	<link rel="stylesheet" href="../resources/css/basic.css"/>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 
@@ -44,9 +44,9 @@
             <th>불량코드</th>
             <th>제품번호</th>
             <th>제품코드</th>
-            <th>부자재검사 여부</th>
-            <th>색상검사 여부</th>
-            <th>손상검사 여부</th>
+            <th>부자재검사</th>
+            <th>색상검사</th>
+            <th>손상검사</th>
 			<th>브랜드명</th>
 			<th>카테고리</th>
             <th>제품명</th>

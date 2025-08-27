@@ -34,6 +34,12 @@ button {
 	border-radius: 10px;
 	
 }
+
+.box select,
+.box input {
+  min-width: 120px;
+  max-width: 200px;  /* 필요시 조절 */
+}
 .box td{
 	color: #424242;
 	border-radius: 10px;
@@ -48,7 +54,8 @@ button {
 }
 .box input[type="text"],
 .box input[type="date"] {
-	border-style: none;
+	min-width: 120px;
+	max-width: 200px;  /* 필요시 조절 */
 }
 .box input[readonly="readonly"] {
 	border-style: none;

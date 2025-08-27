@@ -6,7 +6,7 @@ function displayDefective(data) {
 	    selectedFilter.push($(this).val());
 	});
 	
-	let tableHead = "<tr><th>불량코드</th><th>제품번호</th><th>제품코드</th><th>부자재검사 여부</th><th>색상검사 여부</th><th>손상검사 여부</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>불량사유</th><th>검사일</th></tr>";
+	let tableHead = "<tr><th>불량코드</th><th>제품번호</th><th>제품코드</th><th>부자재검사</th><th>색상검사</th><th>손상검사</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>불량사유</th><th>검사일</th></tr>";
 	$("#defectiveResult thead").html(tableHead);
 	$("#defectiveResult tbody").html("");
 	
@@ -147,7 +147,6 @@ $(document).on('click', 'a.page-link', function(e) {
 	    });
 	  });
 	  
-
 	  $(function () {
-	    $("#resetBtn").trigger("click"); // 페이지 클릭 시 전체보기 가능하도록 
+	    $("#resetBtn").trigger("click"); // 페이지 접속 시 바로 전체보기 가능하도록 
 	  });

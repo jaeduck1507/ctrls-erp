@@ -1,0 +1,92 @@
+:root {
+  --side-width: 250px;
+  --header-height: 70px;
+  --color: #67ae6e;
+  --pill-gray: #f5f5f5;
+  --text-dark: #424242;
+  --text-muted: #938E8E;
+}
+
+/* Search/filter form */
+form {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+form .box {
+  background-color: var(--pill-gray);
+  padding: 30px;
+  border-radius: 10px;
+  width: calc(95vw - var(--side-width));
+  font-size: large;
+  justify-content: flex-start;
+}
+
+form button {
+  justify-content: flex-start;
+}
+
+form .btn {
+  justify-content: flex-start;
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 14px;
+  line-height: 1.2;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* ===============================
+   QC Result Table (pill style)
+================================= */
+#qcResult {
+  width: 100%;
+  border-collapse: separate;   /* important for pill look */
+  border-spacing: 10px 10px;   /* gap between cells */
+  table-layout: fixed;         /* respect column widths */
+}
+
+/* Header cells */
+#qcResult th {
+  background-color: var(--pill-gray);
+  color: var(--text-muted);
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px;
+  height: 50px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Data cells */
+#qcResult td {
+  background-color: var(--pill-gray);
+  color: var(--text-dark);
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px;
+  height: 50px;
+
+  white-space: nowrap;       /* prevent wrapping */
+  overflow: hidden;          /* cut overflow */
+  text-overflow: ellipsis;   /* show ... */
+}
+
+/* Special wider columns */
+#qcResult td.qc_desc,
+#qcResult th.qc_desc {
+  width: 400px;
+}
+
+#qcResult td.qc_date,
+#qcResult th.qc_date {
+  width: 180px;
+}
+
+#qcResult td.production_date,
+#qcResult th.production_date {
+  width: 180px;
+}

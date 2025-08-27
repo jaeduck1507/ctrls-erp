@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <title>품질검사 결과 목록</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../resources/css/basic.css"/>
+<!--	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">-->
 </head>
 <body>
 	<h5>[품질 관리] > [품질검사 결과 목록]</h5>
@@ -16,7 +16,7 @@
 <!--<h3>(QC 1차 완료된 제품들만 조회, 미완료 제품들은 신규 검사 등록에서 select후 QC)</h3>-->
 
 <!-- QC 등록 버튼 -->
-<a href="/qam/qcForm">신규 검사 등록</a>
+<a href="/qam/qcForm">신규 검사 등록</a> <br>
 <div></div>
 <form id = "searchForm">
 		제품 조회: <select id ="productName">
@@ -29,6 +29,7 @@
 					    <option value="악세사리">악세사리</option>
 					    <option value="신발">신발</option>
 					</select>
+					<br>
 		검사자 사번: <select id="empNo">
 			        <option value="">사번 선택</option>
 			        <c:forEach var="e" items="${empList}">
@@ -37,7 +38,6 @@
 			            </option>
 			        </c:forEach>
 		    	</select>
-		<br>
 		생산일 조회 (시작일): <input type="date" id="startDate">
 		(종료일): <input type="date" id="endDate">
 		<button type="submit" class="btnO">조회</button> <!-- button type 지정 안할 시 default => submit -->
@@ -57,9 +57,9 @@
         <th>판매가</th>
 		<th>단가</th>
 		<th>카테고리</th>
-		<th>부자재검사 여부</th>
-		<th>색상검사 여부</th>
-		<th>손상검사 여부</th>
+		<th>부자재검사</th>
+		<th>색상검사</th>
+		<th>손상검사</th>
 		<th>검사 설명</th>
         <th>검사일</th>
 		<th>검사자</th>

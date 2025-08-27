@@ -95,5 +95,5 @@ function displaySale(result) {
       });
 	  
 	  $(function () {
-	    $("#resetBtn").trigger("click"); // 페이지 클릭 시 전체보기 가능하도록 
+	    $("#resetBtn").trigger("click"); // 페이지 접속 시 바로 전체보기 가능하도록 
 	  });

@@ -13856,3 +13856,15 @@ fieldset:disabled .btn {
 		display: none !important
 	}
 }
+
+#qcResult td {
+  white-space: nowrap;       /* 줄바꿈 방지 */
+  overflow: hidden;          /* 넘치면 숨김 */
+  text-overflow: ellipsis;   /* ... 표시 */
+}
+
+#defectiveResult td {
+  white-space: nowrap;       /* 줄바꿈 방지 */
+  overflow: hidden;          /* 넘치면 숨김 */
+  text-overflow: ellipsis;   /* ... 표시 */
+}
