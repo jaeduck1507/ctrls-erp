@@ -29,6 +29,11 @@ public class VTDController {
 	@ResponseBody
 	@PostMapping("/transRegister")
 	public boolean transRegister(@RequestBody List<Transaction> tList) {
+		for (int i = 0; i < tList.size(); i++) {
+			if (tList.get(i).getTransDesc().isEmpty()) {
+				tList.get(i).setTransDesc("기타 비용 지출");
+			}
+		}
 		transactionService.transRegister(tList);
 		return true;
 	}

@@ -69,7 +69,7 @@ $("#sale-register").click(() => {
 		title: "등록하시겠습니까?",
 		text: "총 " + smList.length + "개의 내역이 등록됩니다!",
 		icon: "question",
-		iconColor: "#8de664",
+		iconColor: "#48b85b",
 		showCancelButton: true,
 		confirmButtonColor: "#48b85b",
 		cancelButtonColor: "#d33",

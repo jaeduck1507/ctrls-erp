@@ -2,21 +2,16 @@ const quantityCheck = /^[1-9]\d*$/;
 $(document).on("input", ".quantity", (e) => {
 	console.log(e.target.value);
 	console.log(quantityCheck.test(e.target.value));
-	
-	let allValid = true;
 		
 	const quantityInput = document.querySelectorAll(".quantity");
 	for (let i = 0; i < quantityInput.length; i++) {
 		const input = quantityInput[i];
 		if (!quantityCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
 	}
-	
-	$("#purchase-register").prop("disabled", !allValid);
 });
 
 var count = 0;
@@ -54,10 +49,10 @@ $("#selectBrand").click((e) => {
         	$("#test").html('');
     		$("#test").append(
     		'<button id = "add-row" class="filter-bar">열 추가</button>' +
-    		'<table border="1" id = "result" class="filter-bar">' +
+    		'<table border="1" id ="result" class="data-table">' +
     		'<tr><th>상품 이름</th><th>상품 코드</th><th>상품 색깔</th><th>상품 가격</th><th>상품 단가</th><th>상품 카테고리</th><th>수량</th><th>부가세</th><th>총액</th><th>매입일</th><th>삭제</th></tr>' +
     		'</table>' +
-    		'<button id="purchase-register" class="filter-bar" disabled>매입 등록</button>'
+    		'<button id="purchase-register" class="filter-bar">매입 등록</button>'
     		);
     		totalOptionText ='';
 			for(r of result) {
@@ -125,6 +120,7 @@ $(document).on('change', '.productName', (e) => {
 			confirmButtonColor: "#85c468",
 			timer: 2000
 		});
+		$(e.target).val("");
 		return;
 	}
 	
@@ -139,7 +135,7 @@ $(document).on('change', '.productName', (e) => {
 	$(e.target).parent().parent().find("td").eq(3).text(productInfo.productPrice);
 	$(e.target).parent().parent().find("td").eq(4).text(productInfo.productCost);
 	$(e.target).parent().parent().find("td").eq(5).text(productInfo.productCategory);
-	$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="0" name="quantity" class="quantity">');
+	$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="1" name="quantity" class="quantity" placeholder="수량 입력">');
 	$(e.target).parent().parent().find("td").eq(7).text("");
 	$(e.target).parent().parent().find("td").eq(8).text("");
 	
@@ -160,6 +156,38 @@ $(document).on('input', '.quantity', (e) => {
 });
 
 $(document).on("click", "#purchase-register", function() { // 제출 버튼 동적으로 바꿔야함!
+	let allFilled = true;
+	
+	$("#result tr").each(function () {
+		$(this).find("input").each(function () {
+			const val = String($(this).val() || "").trim()
+			console.log(val)
+			if (!val) {
+				allFilled = false;
+			}
+			
+			if ($(this).is(".quantity")) {
+				if (!quantityCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+		});
+	});
+	
+	if (!allFilled) {
+		Swal.fire({
+			position: "center",
+			icon: "warning",
+			iconColor: "#E74C3C",
+			title: "등록 실패!",
+			text: "모든 정보를 정확히 입력해주세요.",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000
+        });
+		return;
+	}
+	
     const table = $("#result tr"); // 테이블 정보 획득
     const prList = []; // 객체를 담을 배열
 	
@@ -181,7 +209,7 @@ $(document).on("click", "#purchase-register", function() { // 제출 버튼 동�
 		title: "등록하시겠습니까?",
 		text: "총 " + prList.length + "개의 내역이 등록됩니다!",
 		icon: "question",
-		iconColor: "#8de664",
+		iconColor: "#48b85b",
 		showCancelButton: true,
 		confirmButtonColor: "#48b85b",
 		cancelButtonColor: "#d33",

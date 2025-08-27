@@ -1,4 +1,4 @@
-const periodTypeCheck = /^[A-Z]$/;
+const periodTypeCheck = /^[YQM]$/;
 const budgetAmountCheck = /^[1-9]\d*$/;
 const executionDateCheck = /.+/;
 $(document).on("input", ".periodType, .budgetAmount, .executionDate", (e) => {
@@ -7,14 +7,11 @@ $(document).on("input", ".periodType, .budgetAmount, .executionDate", (e) => {
 	//console.log(budgetAmountCheck.test(e.target.value));
 	//console.log(executionDateCheck.test(e.target.value));
 	
-	let allValid = true;
-	
 	const periodInput = document.querySelectorAll(".periodType");
 	for (let i = 0; i < periodInput.length; i++) {
 		const input = periodInput[i];
 		if (!periodTypeCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
@@ -25,7 +22,6 @@ $(document).on("input", ".periodType, .budgetAmount, .executionDate", (e) => {
 		const input = amountInput[i];
 		if (!budgetAmountCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
@@ -36,13 +32,10 @@ $(document).on("input", ".periodType, .budgetAmount, .executionDate", (e) => {
 		const input = dateInput[i];
 		if (!executionDateCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
-	}	
-			
-	$("#budget-register").prop("disabled", !allValid);
+	}
 });
 
 var count = 0;
@@ -84,24 +77,66 @@ $(document).on("change", ".deptName", (e) => {
 			title: "없는 부서입니다",
 			showConfirmButton: true,
 			confirmButtonColor: "#85c468",
-			timer: 2000,
-			didClose: () => {
-				location.reload();
-			}
+			timer: 2000
 		});
+		$(e.target).val("");
 		return;
 	}
 	
 	deptInfo.deptNo = opt.data('dept_no');
 	$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 	$(e.target).parent().parent().find("td").eq(2).html('<select class="periodType"><option value="" disabled selected>연/분기/월</option><option value="Y">연(Y)</option><option value="Q">분기(Q)</option><option value="M">월(M)</option></select>');
-	$(e.target).parent().parent().find("td").eq(3).html('<input type="number" min="0" name="budget-amount" class="budgetAmount">');
-	$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan">');
+	$(e.target).parent().parent().find("td").eq(3).html('<input type="number" min="0" name="budget-amount" class="budgetAmount" placeholder="예산 입력">');
+	$(e.target).parent().parent().find("td").eq(4).html('<input type="text" name="plan" class="plan" placeholder="계획 입력">');
 	$(e.target).parent().parent().find("td").eq(5).html('<input type="date" name="execution-date" class="executionDate">');
 });
 
 
 $("#budget-register").click(() => {
+	let allFilled = true;
+	
+	$("#result tr").each(function () {
+		$(this).find("input, select").not(".plan").each(function () {
+			const val = String($(this).val() || "").trim()
+			console.log(val)
+			if (!val) {
+				allFilled = false;
+			}
+			
+			if ($(this).is(".periodType")) {
+				if (!periodTypeCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+			
+			if ($(this).is(".budgetAmount")) {
+				if (!budgetAmountCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+			
+			if ($(this).is(".executionDate")) {
+				if (!executionDateCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+		});
+	});
+	
+	if (!allFilled) {
+		Swal.fire({
+			position: "center",
+			icon: "warning",
+			iconColor: "#E74C3C",
+			title: "등록 실패!",
+			text: "모든 정보를 정확히 입력해주세요.",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000
+        });
+		return;
+	}
+	
 	const table = $("#result tr");
 	const bList = [];
 	
@@ -122,7 +157,7 @@ $("#budget-register").click(() => {
 		title: "등록하시겠습니까?",
 		text: "총 " + bList.length + "개의 내역이 등록됩니다!",
 		icon: "question",
-		iconColor: "#8de664",
+		iconColor: "#48b85b",
 		showCancelButton: true,
 		confirmButtonColor: "#48b85b",
 		cancelButtonColor: "#d33",

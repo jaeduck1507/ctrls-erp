@@ -1,12 +1,12 @@
 table {
 	table-layout: fixed; /* 고정 레이아웃 */
 	width: 100%; /* 전체 넓이 맞춤 */
-	border-collapse: collapse;
+	border-collapse: separate;
 }
 
 table th, 
 table td {
-	width: 150px; /* 원하는 고정 크기 */
+	width: 130px; /* 원하는 고정 크기 */
 	white-space: nowrap; /* 줄바꿈 방지 */
 	text-align: center;
 	vertical-align: middle;
@@ -29,10 +29,3 @@ td {
 	border-width: 2px;
 }
 
-/* 매입 일괄 등록 */
-.productName {
-	width: 150px;
-}
-.quantity {
-	width: 80px;
-}

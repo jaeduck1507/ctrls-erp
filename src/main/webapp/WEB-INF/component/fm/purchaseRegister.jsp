@@ -23,10 +23,8 @@
 		<button id="selectBrand">거래처 선택</button>
 	</div>
 	
-	<div class="filter-bar">
-		<div id="test" class="data-table">
-					
-		</div>
+	<div id="test" class="filter-bar">
+		
 	</div>
 	
 	<script src="../resources/js/fm/purchaseRegister.js"></script>

@@ -26,7 +26,7 @@
 				<th>삭제</th>
 			</tr>
 		</table>
-		<button id="budget-register" disabled>예산 등록</button>
+		<button id="budget-register">예산 등록</button>
 	</div>
 	
 	<script>

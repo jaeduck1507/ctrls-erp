@@ -5,14 +5,11 @@ $(document).on("input", ".transAmount, .transDate", (e) => {
 	//console.log(transAmountCheck.test(e.target.value));
 	//console.log(transDateCheck.test(e.target.value));
 	
-	let allValid = true;
-	
 	const amountInput = document.querySelectorAll(".transAmount");
 	for (let i = 0; i < amountInput.length; i++) {
 		const input = amountInput[i];
 		if (!transAmountCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
@@ -22,13 +19,10 @@ $(document).on("input", ".transAmount, .transDate", (e) => {
 		const input = dateInput[i];
 		if (!transDateCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
 	}
-	
-	$("#trans-register").prop("disabled", !allValid);
 });
 
 var count = 0;
@@ -71,11 +65,9 @@ $(document).on("change", ".deptName", (e) => {
 			title: "없는 부서입니다",
 			showConfirmButton: true,
 			confirmButtonColor: "#85c468",
-			timer: 2000,
-			didClose: () => {
-				location.reload();
-			}
+			timer: 2000
 		});
+		$(e.target).val("");
 		return;
 	}
 	
@@ -83,12 +75,50 @@ $(document).on("change", ".deptName", (e) => {
 	$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 	$(e.target).parent().parent().find("td").eq(2).text("지출");
 	$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
-	$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" class="transAmount">');
-	$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc" value="기타 비용 지출">');
+	$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" class="transAmount" placeholder="금액 입력">');
+	$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc" class="transDesc" placeholder="상세내역 입력">');
 	$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date" class="transDate">');
 });
 
 $("#trans-register").click(() => {
+	let allFilled = true;
+		
+	$("#result tr").each(function () {
+		$(this).find("input").not(".transDesc").each(function () {
+			const val = String($(this).val() || "").trim()
+			console.log(val)
+			if (!val) {
+				allFilled = false;
+			}
+			
+			if ($(this).is(".transAmount")) {
+				if (!transAmountCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+						
+			if ($(this).is(".transDate")) {
+				if (!transDateCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+		});
+	});
+	
+	if (!allFilled) {
+		Swal.fire({
+			position: "center",
+			icon: "warning",
+			iconColor: "#E74C3C",
+			title: "등록 실패!",
+			text: "모든 정보를 정확히 입력해주세요.",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000
+        });
+		return;
+	}
+	
 	const table = $("#result tr");
 	const tList = [];
 	
@@ -110,7 +140,7 @@ $("#trans-register").click(() => {
 		title: "등록하시겠습니까?",
 		text: "총 " + tList.length + "개의 내역이 등록됩니다!",
 		icon: "question",
-		iconColor: "#8de664",
+		iconColor: "#48b85b",
 		showCancelButton: true,
 		confirmButtonColor: "#48b85b",
 		cancelButtonColor: "#d33",
