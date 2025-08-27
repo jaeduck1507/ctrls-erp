@@ -7,14 +7,11 @@ $(document).on("input", ".bonusNo, .payment, .payDate", (e) => {
 	//console.log(paymentCheck.test(e.target.value));
 	//console.log(payDateCheck.test(e.target.value));
 	
-	let allValid = true;
-	
 	const bonusNoInput = document.querySelectorAll(".bonusNo");
 	for (let i = 0; i < bonusNoInput.length; i++) {
 		const input = bonusNoInput[i];
 		if (!bonusNoCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
@@ -25,7 +22,6 @@ $(document).on("input", ".bonusNo, .payment, .payDate", (e) => {
 		const input = paymentInput[i];
 		if (!paymentCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
@@ -36,13 +32,10 @@ $(document).on("input", ".bonusNo, .payment, .payDate", (e) => {
 		const input = payDateInput[i];
 		if (!payDateCheck.test(input.value)) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
 	}
-	
-	$("#bonus-register").prop("disabled", !allValid);
 });
 
 var count = 0;
@@ -84,21 +77,63 @@ $(document).on("change", ".empName", (e) => {
 			title: "존재하지 않는 사원입니다",
 			showConfirmButton: true,
 			confirmButtonColor: "#85c468",
-			timer: 2000,
-			didClose: () => {
-				location.reload();
-			}
+			timer: 2000
 		});
+		$(e.target).val("");
 		return;
 	}
 	
 	deptInfo.deptNo = opt.data('emp_no');
 	$(e.target).parent().parent().find("td").eq(1).html(`<select class="bonusNo"><option value="" disabled selected>선택</option>${bonus.map(bn => `<option value="${bn.bonusNo}">${bn.bonusName}</option>`).join("")}</select>`);
-	$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" name="payment" class="payment" >');
+	$(e.target).parent().parent().find("td").eq(2).html('<input type="number" min="0" name="payment" class="payment" placeholder="금액 입력">');
 	$(e.target).parent().parent().find("td").eq(3).html('<input type="date" name="payDate" class="payDate">');
 });
 
 $("#bonus-register").click(() => {
+	let allFilled = true;
+	
+	$("#result tr").each(function () {
+		$(this).find("input, select").each(function () {
+			const val = String($(this).val() || "").trim()
+			console.log(val)
+			if (!val) {
+				allFilled = false;
+			}
+			
+			if ($(this).is(".bonusNo")) {
+				if (!bonusNoCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+			
+			if ($(this).is(".payment")) {
+				if (!paymentCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+			
+			if ($(this).is(".payDate")) {
+				if (!payDateCheck.test(val)) {
+					allFilled = false;
+                }
+            }
+		});
+	});
+	
+	if (!allFilled) {
+		Swal.fire({
+			position: "center",
+			icon: "warning",
+			iconColor: "#E74C3C",
+			title: "등록 실패!",
+			text: "모든 정보를 정확히 입력해주세요.",
+			showConfirmButton: true,
+			confirmButtonColor: "#85c468",
+			timer: 2000
+        });
+		return;
+	}
+		
 	const table = $("#result tr");
 	const bList = [];
 	for (var i = 1; i < table.length; i++) {
@@ -121,7 +156,7 @@ $("#bonus-register").click(() => {
 		title: "등록하시겠습니까?",
 		text: "총 " + bList.length + "개의 내역이 등록됩니다!",
 		icon: "question",
-		iconColor: "#8de664",
+		iconColor: "#48b85b",
 		showCancelButton: true,
 		confirmButtonColor: "#48b85b",
 		cancelButtonColor: "#d33",

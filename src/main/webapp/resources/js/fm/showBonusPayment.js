@@ -34,7 +34,7 @@ $("#btn").click(() =>{
 			$("#result").html("");
         	$("#result").append("<tr><th>이름</th><th>부서</th><th>직급</th><th>수당 금액</th><th>수당 종류</th><th>지급 날짜</th></tr>");
         	for(const bonus of result.bonusPaymentList) {
-			var text = "<tr><td>"+ bonus.empName +"</td><td>"+bonus.deptName+"</td><td>"+bonus.jobTitle+"</td><td>"+bonus.payment+"</td><td>"+bonus.bonusName+"</td><td>"+bonus.payDate+"</td></tr>"
+			var text = "<tr><td>"+ bonus.empName +"</td><td>"+bonus.deptName+"</td><td>"+bonus.jobTitle+"</td><td>"+bonus.payment.toLocaleString()+"</td><td>"+bonus.bonusName+"</td><td>"+bonus.payDate+"</td></tr>"
 				$("#result").append(text);
         	}
 			
@@ -74,7 +74,7 @@ $(document).on('click', 'a.page-link', function(e) {
 			$("#result").html("");
         	$("#result").append("<tr><th>이름</th><th>부서</th><th>직급</th><th>수당 금액</th><th>수당 종류</th><th>지급 날짜</th></tr>");
         	for(const bonus of result.bonusPaymentList) {
-			var text = "<tr><td>"+ bonus.empName +"</td><td>"+bonus.deptName+"</td><td>"+bonus.jobTitle+"</td><td>"+bonus.payment+"</td><td>"+bonus.bonusName+"</td><td>"+bonus.payDate+"</td></tr>"
+			var text = "<tr><td>"+ bonus.empName +"</td><td>"+bonus.deptName+"</td><td>"+bonus.jobTitle+"</td><td>"+bonus.payment.toLocaleString()+"</td><td>"+bonus.bonusName+"</td><td>"+bonus.payDate+"</td></tr>"
 				$("#result").append(text);
         	}
 			

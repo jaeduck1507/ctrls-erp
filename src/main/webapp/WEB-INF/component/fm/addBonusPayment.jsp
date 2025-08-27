@@ -24,7 +24,7 @@
 				<th>삭제</th>
 			</tr>
 		</table>
-		<button id="bonus-register" disabled>보너스 등록</button>
+		<button id="bonus-register">보너스 등록</button>
 	</div>
 	
 	<script>

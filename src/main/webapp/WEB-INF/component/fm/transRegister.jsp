@@ -27,7 +27,7 @@
 				<th>삭제</th>
 			</tr>
 		</table>
-		<button id="trans-register" disabled>등록</button>
+		<button id="trans-register">등록</button>
 	</div>
 	
 	<script>
