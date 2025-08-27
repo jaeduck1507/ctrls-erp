@@ -1,4 +1,4 @@
-$("#btn").click(() => {
+function showSalary() {
 	const formData = new FormData();
 	formData.append("deptName", $("#deptName").val());
 	formData.append("empName", $("#empName").val());
@@ -52,7 +52,13 @@ $("#btn").click(() => {
 					
 		}
 	});
-});	
+}
+
+$("#btn").click(showSalary);
+
+$(document).ready(function() {
+	showSalary();
+});
 
 $(document).on('click', 'a.page-link', function(e) {
     e.preventDefault(); // a 태그 기본 동작(페이지 이동) 차단

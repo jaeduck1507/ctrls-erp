@@ -61,7 +61,7 @@ new Chart(monthTransChart, {
 	}
 });
 
-$("#btn").click(() => {
+function showTrans() {
 	const formData = new FormData();
 	formData.append("transType", $("#transType").val());
 	formData.append("deptName", $("#deptName").val());
@@ -139,6 +139,12 @@ $("#btn").click(() => {
 											
 		}
 	});
+}
+
+$("#btn").click(showTrans);
+
+$(document).ready(function() {
+	showTrans();
 });
 
 $(document).on('click', 'a.page-link', function(e) {

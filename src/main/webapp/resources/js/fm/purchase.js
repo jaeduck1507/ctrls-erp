@@ -4,7 +4,7 @@ const today = now.getFullYear() + '-'
 	                    + String(now.getDate()).padStart(2, '0');
 console.log(today);
 
-$("#btn").click(() => {
+function showPurchase() {
 	const formData = new FormData();
 	formData.append("brandName", $("#brandName").val());
 	formData.append("productCategory", $("#productCategory").val());
@@ -84,6 +84,12 @@ $("#btn").click(() => {
 			
 		}
 	});
+}
+
+$("#btn").click(showPurchase);
+
+$(document).ready(function() {
+	showPurchase();
 });
 
 $(document).on('click', 'a.page-link', function(e) {

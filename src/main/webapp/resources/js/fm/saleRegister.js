@@ -30,7 +30,10 @@ $("#search").click(() => {
 					icon: "error",
 					title: "조회된 결과가 없습니다!",
 					showConfirmButton: false,
-					timer: 1500
+					timer: 1500,
+					didClose: () => {
+						location.reload();
+					}
 				});
 				return;
 			} else {

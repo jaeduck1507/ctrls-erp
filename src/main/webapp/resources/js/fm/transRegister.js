@@ -14,6 +14,7 @@ $(document).on("input", ".transAmount, .transDate", (e) => {
 			input.parentElement.classList.remove("red");
 		}
 	}
+	
 	const dateInput = document.querySelectorAll(".transDate");
 	for (let i = 0; i < dateInput.length; i++) {
 		const input = dateInput[i];
@@ -68,6 +69,10 @@ $(document).on("change", ".deptName", (e) => {
 			timer: 2000
 		});
 		$(e.target).val("");
+		for (var i = 1; i < 7; i++) {
+			$(e.target).parent().parent().find("td").eq(i).text("");
+			$(e.target).parent().parent().find("td").eq(i).removeClass("red");
+		}
 		return;
 	}
 	
