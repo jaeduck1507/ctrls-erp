@@ -63,7 +63,7 @@ table {
         <!-- <button id = "btn3">removeRowTest</button> -->
         <table border="1" id = "result" class="data-table">
             <tr>
-                <th>이름</th>
+                <th>사원명</th>
                 <th>주민등록번호</th>
                 <th>직급</th>
                 <th>부서</th>
@@ -252,7 +252,7 @@ table {
                 else $("#result tr").eq(-1).append('<td><input type="text" class="name"></td>');
             } */
             $("#result tr").eq(-1).append(
-            		'<td><input type="text" class="name"></td>' +
+            		'<td><input type="text" class="name" placeholder="사원명 입력"></td>' +
             		'<td><input type="text" class="in"></td>' + 
             		'<td class="aa"><select class="job"><option value="-1" disabled selected>직무 선택</option><c:forEach items="${jobPosition}" var="job"><option value="${job.jobNo}">${job.jobTitle}</option></c:forEach></select></td>' +
             		'<td><select class="dept"><option value="-1" disabled selected>부서 선택</option><c:forEach items="${department}" var="dept"><option value="${dept.deptNo}">${dept.deptName}</option></c:forEach></select></td>' +

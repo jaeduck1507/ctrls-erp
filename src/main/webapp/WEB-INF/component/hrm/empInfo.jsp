@@ -13,7 +13,7 @@
 	<h5>[인적자원관리] > [사원정보조회]</h5>
 	<h3>사원정보조회</h3>
 	<div id = "search" class="filter-bar">
-	이름 : <input type="text" id="empName">
+	<input type="text" id="empName" placeholder="사원명 입력">
 		<select id = "deptName">
 				<option value="-1">부서 선택</option>
 				
