@@ -12,11 +12,7 @@
 
 <body>
 <h5>[품질 관리] > [판매완료 제품 조회]</h5>
-	<h3>판매완료 제품 조회</h3>
-	
-<h4 id="salePriceSum">
-	<!-- 총 가격 출력 영역 -->
-</h4>
+<h3>판매완료 제품 조회</h3>
 <div class="filter-bar">
 <form id="saleSearchForm">
 	카테고리 조회:
@@ -34,6 +30,13 @@
 	<button type="button" id="resetBtn">전체보기</button>
 </form>
 </div>
+
+<div class="total">
+	<h4 id="salePriceSum">
+			<!-- 총 가격 출력 영역 -->
+	</h4>
+</div>
+	
 <table border="1" id="saleResult" class="data-table">
     <tr>
 		<th>판매코드</th>

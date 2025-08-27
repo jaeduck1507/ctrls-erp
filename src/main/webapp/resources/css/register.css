@@ -37,6 +37,7 @@ body {
   font-size: 14px;
   flex-direction: column;
 }
+
 .id-area,
 .pwd-area,
 .no-area{
@@ -44,6 +45,7 @@ body {
 	margin-bottom: 10px;
 	
 }
+/* 사번, 아이디, 비밀번호, 비밀번호 확인 입력창*/
 .filter-bar .id-area input[type="text"],
 .filter-bar .pwd-area input[type="password"],
 .filter-bar input[type="number"] {
@@ -51,22 +53,9 @@ body {
   padding: 6px 8px;
   border: 1px solid #90c67c;
   border-radius: 4px;
-  
-}
-/* submit, a, button 스타일 */
-button,
-.filter-bar button[type="submit"] {
-  border-style: none;
-  color: white;
-  background-color: #90c67c;
-  padding: 4px 12px;
-  border-radius: 4px;
-  transition: background 0.2s;
-  width: fit-content;
-  box-shadow: #33333362 0 5px 5px -5px;
 }
 
-
+/*사번확인, 중복확인 버튼*/
 .filter-bar button[type="button"] {
   text-decoration: none;
   background-color: #ffffff;
@@ -77,18 +66,67 @@ button,
   cursor: pointer;
   font-weight: bold;
   width:95px;
-
 }
-/* 각종 버튼들 커서 올렸을 경우 색상 변경 */
+/* 초기화 버튼 */
+#reset{
+	border: #333333 solid 1px;
+  border-style: none;
+  color: #67ae6e;
+  background-color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  width: fit-content;
+  cursor: pointer;
+}
 
-.filter-bar button[type="button"]:hover {
+/*로그인으로 돌아가기*/
+#login{
+  border-style: none;
+  color: white;
+  background-color: #90C67C;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  width: fit-content;
+  cursor: pointer;
+  box-shadow: #33333362 0 5px 5px -5px;
+}
+
+/* 회원가입 버튼 기본 */
+#submit {
+	border-style: none;
+	 color: white;
+	 background-color: #67AE6E;
+	 padding: 6px 12px;
+	 border-radius: 4px;
+	 transition: background 0.2s;
+	 width: fit-content;
+	 box-shadow: #33333362 0 5px 5px -5px;
+	 cursor: pointer;
+}
+
+/* 회원가입 버튼 커서 올렸을 경우 */
+#submit:hover:not(:disabled) {
+  background-color: #328e6e;
+}
+
+/* 회원가입 버튼 비활성화 */
+#submit:disabled {
+  color: white;
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 초기화, 로그인으로 돌아가기 버튼들 커서 올렸을 경우 색상 변경 */
+#reset:hover,
+#login:hover {
   background-color: #67ae6e;
   color: #ffffff;
 }
-.filter-bar button[type="submit"]:hover {
-  background-color: #328e6e;
-}
-.emp-check{
+
+/*좌측 가로 정렬*/
+.row{
 	display: flex;
 	flex-direction: row;
 	gap: 5px;

@@ -18,7 +18,7 @@
 	<div class="box">
 		<table>
 			<tr>
-		    <th>상품 선택</th>
+		    <th><i class="fi fi-rr-gift-card"></i>&nbsp;&nbsp;상품 선택</th>
 		        <td>
 					<select name="productNo" id="productNo">
 			            <option value="" disabled selected>검사할 상품 선택</option>
@@ -32,7 +32,7 @@
 			</tr>
 		
 			<tr>
-			<th>검사자 사번</th>
+			<th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;검사자 사번</th>
 				<td>
 				    <select name="empNo" id="empNo">
 				        <option value="" disabled selected>사번 선택</option>
@@ -44,7 +44,7 @@
 			</tr>
 		
 			<tr>
-		    <th>부자재 검사</th>
+		    <th><i class="fi fi-rr-mockup"></i> &nbsp;&nbsp;부자재 검사</th>
 				<td>
 			        <select name="checkMaterial" id="checkMaterial">
 						<option value="" disabled selected>선택</option>
@@ -55,7 +55,7 @@
 			</tr>
 		
 			<tr>
-		    <th>색상 검사</th>
+		    <th><i class="fi fi-rr-fill"></i> &nbsp;&nbsp;색상 검사</th>
 				<td>
 			        <select name="checkColor" id="checkColor">
 						<option value="" disabled selected>선택</option>
@@ -66,7 +66,7 @@
 			</tr>
 			
 			<tr>
-		    <th>손상 검사</th>
+		    <th><i class="fi fi-rr-damage"></i> &nbsp;&nbsp;손상 검사</th>
 				<td>
 			        <select name="checkDamage" id="checkDamage">
 						<option value="" disabled selected>선택</option>
@@ -77,7 +77,7 @@
 			</tr>
 
 			<tr>
-		    <th>검사 설명</th>
+		    <th><i class="fi fi-rr-description-alt"></i>&nbsp;&nbsp;검사 설명</th>
 				<td>
 		        	<textarea name="qcDesc" id="qcDesc" rows="3" cols="40" placeholder="불량 관련 메모 입력"></textarea>
 		    	</td>
