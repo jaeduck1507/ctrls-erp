@@ -98,12 +98,40 @@ public class EmployeeInfoService {
 		employeeInfoMapper.modifyJobDept(ei);
 	}
 	
+	public void modifySalary(EmpInfo ei) {
+		employeeInfoMapper.modifySalary(ei);
+	}
+	
+	public void modifyImg(EmpInfo ei) {
+		
+		if(ei.getUrl() ==null || ei.getUrl().isBlank()) {
+			if(!ei.getFile().getOriginalFilename().isBlank()) {
+				ei.setUrl(fileUpload(ei.getFile()));
+			}
+		} else if(!ei.getFile().getOriginalFilename().isBlank()) {
+			File delFile = new File("D:\\ctrls-erp\\src\\main\\resources\\static\\images\\" + ei.getUrl());
+			delFile.delete();
+			ei.setUrl(fileUpload(ei.getFile()));
+		}
+		employeeInfoMapper.modifyImg(ei);
+	}
+	
+	public void deleteImg(EmpInfo ei) {
+		if(ei.getUrl() ==null || ei.getUrl().isBlank()) {
+			return;
+		}
+		File delFile = new File("D:\\ctrls-erp\\src\\main\\resources\\static\\images\\" + ei.getUrl());
+		delFile.delete();
+		
+		employeeInfoMapper.deleteImg(ei);
+	}
+	
 	public String fileUpload(MultipartFile file) {
 		// 중복 방지를 위한 UUID 적용
 		UUID uuid = UUID.randomUUID();
 		String fileName = uuid.toString() + "_" + file.getOriginalFilename();
 		System.out.println(fileName);
-		File copyFile = new File("D:\\assets\\" + fileName);
+		File copyFile = new File("D:\\ctrls-erp\\src\\main\\resources\\static\\images\\" + fileName);
 
 		try {
 			file.transferTo(copyFile);

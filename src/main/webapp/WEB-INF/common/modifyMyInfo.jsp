@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>사원 정보 수정</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link rel="stylesheet" href="../resources/css/modifypage.css"/>
 </head>
 <body>
@@ -17,7 +18,10 @@
 	<div class="box">
 		<table>
 			<tr>
-		    <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;&nbsp;&nbsp;사번</th><td><input type="text" name="empNo" value="${user.empNo}" readonly="readonly"></td>
+			 <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${user.url}" width="75" height="100" onerror="this.onerror=null; this.src='/images/default.jpg';"/><input type="hidden" value="${user.url}" id="url"></td>
+			<tr>
+			<tr>
+		    <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;&nbsp;&nbsp;사번</th><td><input type="text" name="empNo" value="${user.empNo}" readonly="readonly" id="empNo"></td>
 			</tr>
 			<tr>
 		    <th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;&nbsp;&nbsp;성명</th><td><input type="text" name="empName" id="empName" value="${user.empName}"></td>
@@ -53,63 +57,34 @@
    </div>
    <div>
 	<button onclick="location.href='/mypage'">취소</button>
+    <button type="button"  data-bs-toggle="modal" data-bs-target="#updateImg">사진 변경/삭제</button>
     <button type="submit" id="submit">수정</button>
 	</div>
+	
+	<div class="modal fade filter-bar" id="updateImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">사진 수정/삭제</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+			  
+			  <div class="modal-body">
+					<img src="/images/${user.url}" width="200" height="120" onerror="this.onerror=null; this.src='/images/default.jpg';" />
+					<input type="file" class="file" id="file">
+					<button type="button" class="btn" id ="deleteImg">삭제</button>
+			  </div>
+		      <div class="modal-footer">
+		      	<p>사진 변경시 이전 사진은 확인 불가능합니다</p>
+		        <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
+		        
+		        <button type="button" class="btn" id ="modifyImg">수정</button>
+		      </div>
+			  
+		    </div>
+		  </div>
+		</div>
 </form>
-<script>
-	// 이름 입력
-	const name = document.querySelector("#empName");
-	const resultIName = document.querySelector("#resultName");
-	name.addEventListener("input", (e) => {
-	  const nameExp = /^[가-힣]{2,}$/;
-	  const nEt = nameExp.test(e.target.value);
-	  if (nEt) {
-		$("#submit").prop("disabled", false);
-	    resultName.innerHTML = "OK!";
-	    resultName.style.color = "blue";
-	  } else {
-		$("#submit").prop("disabled", true);
-		resultName.innerHTML = "한글 2자 이상";
-	    resultName.style.color = "red";
-	  }
-	});
-	// 전화번호 입력
-	const tel = document.querySelector("#phone");
-	const resultTel = document.querySelector("#resultTel");
-	tel.addEventListener("input", (e) => {
-	  const telExp = /^\d{3}-\d{3,4}-\d{4}$/;
-	  const tEt = telExp.test(e.target.value);
-	  if (tEt) {
-		$("#submit").prop("disabled", false);
-	    resultTel.innerHTML = "OK!";
-	    resultTel.style.color = "blue";
-
-	  } else {
-		$("#submit").prop("disabled", true);
-		resultTel.innerHTML = "010-0000-0000 형식";
-	    resultTel.style.color = "red";
-
-	  }
-	});
-	// 이메일 입력
-	const email = document.querySelector("#email");
-	const resultIEmail = document.querySelector("#resultEmail");
-	email.addEventListener("input", (e) => {
-	  const emailExp = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
-	  const eEt = emailExp.test(e.target.value);
-
-	  if (eEt) {
-		$("#submit").prop("disabled", false);
-	    resultEmail.innerHTML = "OK!";
-	    resultEmail.style.color = "blue";
-
-	  } else {
-		$("#submit").prop("disabled", true);
-		resultEmail.innerHTML = "이메일 형식(@포함)";
-	    resultEmail.style.color = "red";
-
-	  }
-	});
-</script>
+<script src="../resources/js/common/modifyMyInfo.js"></script>
 </body>
 </html>

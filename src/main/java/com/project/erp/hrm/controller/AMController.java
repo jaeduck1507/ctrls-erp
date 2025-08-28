@@ -85,4 +85,11 @@ public class AMController {
 		return attendanceLogService.showAttendance(am);
 	}
 	
+	@ResponseBody
+	@PostMapping("/setAttendance")
+	public boolean setAttendance(@RequestBody AttendanceLog al) {
+		System.out.println(al);
+		attendanceLogService.setAttendance(al);
+		return true;
+	}
 }

@@ -13,4 +13,6 @@ public interface AttendanceLogMapper {
 	void finishWork(AttendanceLog al);
 	List<AttendanceLog> showAttendance(attendanceMonth am);
 	AttendanceLog showAttendanceOneAtToday(AttendanceLog al);
+	void setAttendanceNotExist(AttendanceLog al);
+	void setAttendanceExist(AttendanceLog al);
 }

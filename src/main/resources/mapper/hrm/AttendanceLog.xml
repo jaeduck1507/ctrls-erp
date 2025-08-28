@@ -34,4 +34,19 @@
  		AND emp_no = #{empNo}
 	</select>
 	
+	<insert id="setAttendanceNotExist" parameterType="AttendanceLog">
+		INSERT INTO attendance_log(emp_no,work_date,check_in,check_out)
+		VALUES(#{empNo},#{workDate},#{checkIn},#{checkOut})
+	</insert>
+	
+	<update id="setAttendanceExist" parameterType="AttendanceLog">
+		UPDATE attendance_log
+		SET 
+		check_in = #{checkIn},
+		check_out = #{checkOut}
+		
+		WHERE emp_no = #{empNo}
+		AND work_date = #{workDate}
+	</update>
+	
 </mapper>
