@@ -52,6 +52,7 @@ $(document).on("click", ".remove-row", function() {
 });
 
 $(document).on("change", ".deptName", (e) => {
+	$(e.target).parent().removeClass("red");
 	$(e.target).parent().parent().find("td").eq(3).html("");
 	const deptInfo = {};
 	const val = $(e.target).val();
@@ -94,17 +95,20 @@ $("#trans-register").click(() => {
 			console.log(val)
 			if (!val) {
 				allFilled = false;
+				$(this).parent().addClass("red");
 			}
 			
 			if ($(this).is(".transAmount")) {
 				if (!transAmountCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 						
 			if ($(this).is(".transDate")) {
 				if (!transDateCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 		});
@@ -116,7 +120,7 @@ $("#trans-register").click(() => {
 			icon: "warning",
 			iconColor: "#E74C3C",
 			title: "등록 실패!",
-			text: "모든 정보를 정확히 입력해주세요.",
+			text: "필수 정보를 정확히 입력해주세요.",
 			showConfirmButton: true,
 			confirmButtonColor: "#85c468",
 			timer: 2000

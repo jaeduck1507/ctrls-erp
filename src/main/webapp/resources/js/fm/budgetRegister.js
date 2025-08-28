@@ -64,6 +64,7 @@ $(document).on("click", ".remove-row", function() { // 열 삭제 함수
 });
 
 $(document).on("change", ".deptName", (e) => {
+	$(e.target).parent().removeClass("red");
 	const deptInfo = {};
 	const val = $(e.target).val();
 	console.log(val);
@@ -105,23 +106,27 @@ $("#budget-register").click(() => {
 			console.log(val)
 			if (!val) {
 				allFilled = false;
+				$(this).parent().addClass("red");
 			}
 			
 			if ($(this).is(".periodType")) {
 				if (!periodTypeCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 			
 			if ($(this).is(".budgetAmount")) {
 				if (!budgetAmountCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 			
 			if ($(this).is(".executionDate")) {
 				if (!executionDateCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 		});
@@ -133,7 +138,7 @@ $("#budget-register").click(() => {
 			icon: "warning",
 			iconColor: "#E74C3C",
 			title: "등록 실패!",
-			text: "모든 정보를 정확히 입력해주세요.",
+			text: "필수 정보를 정확히 입력해주세요.",
 			showConfirmButton: true,
 			confirmButtonColor: "#85c468",
 			timer: 2000

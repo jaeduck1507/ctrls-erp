@@ -64,6 +64,7 @@ $(document).on("click", ".remove-row", function() { // 열 삭제 함수
 });
 
 $(document).on("change", ".empName", (e) => {
+	$(e.target).parent().removeClass("red");
 	const deptInfo = {};
 	const val = $(e.target).val();
 	console.log(val);
@@ -102,23 +103,27 @@ $("#bonus-register").click(() => {
 			console.log(val)
 			if (!val) {
 				allFilled = false;
+				$(this).parent().addClass("red");
 			}
 			
 			if ($(this).is(".bonusNo")) {
 				if (!bonusNoCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 			
 			if ($(this).is(".payment")) {
 				if (!paymentCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 			
 			if ($(this).is(".payDate")) {
 				if (!payDateCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 		});

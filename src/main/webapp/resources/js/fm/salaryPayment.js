@@ -1,25 +1,47 @@
 const deductionCheck = /^[1-9]\d*(\.\d+)?$/;
-$(document).on("input", ".deduction", (e) => {
-	console.log(e.target.value);
-	console.log(deductionCheck.test(e.target.value));
-	
-	let allValid = true;
-	
+// 유효성 검사 함수
+function validateDeductions() {	
 	const deductionInput = document.querySelectorAll(".deduction");
 	for (let i = 0; i < deductionInput.length; i++) {
 		const input = deductionInput[i];
-		const deduction = Number(input.value);
-		const baseSalary = Number($(input).parent().parent().find("td").eq(5).text());
-		if (!deductionCheck.test(input.value) || deduction >= baseSalary) {
+		const deduction = Number(input.value || 0);
+		const baseSalary = Number($(input).parent().parent().find("td").eq(5).text() || 0);
+		
+		const checkValid = deductionCheck.test(input.value) && baseSalary > deduction;
+		if (!checkValid) {
 			input.parentElement.classList.add("red");
-			allValid = false;
 		} else {
 			input.parentElement.classList.remove("red");
 		}
+		
+		localStorage.setItem(input.name, input.value);
+		localStorage.setItem(input.name + "_valid", checkValid);
 	}
 	
-	$("#submit").prop("disabled", !allValid);
+	// 전체 localStorage 기준으로 버튼 disabled 결정
+	const allKeys = Object.keys(localStorage).filter(k => k.endsWith("_valid"));
+	const anyInvalid = allKeys.some(k => localStorage.getItem(k) === "false");
+	$("#submit").prop("disabled", anyInvalid);
+}
+
+// 버튼 상태 복원 함수
+function restoreSubmitState() {
+    // localStorage에서 모든 deduction_*_YYYYMM key 확인
+	const allKeys = Object.keys(localStorage).filter(k => k.endsWith("_valid"));
+	const anyInvalid = allKeys.some(k => localStorage.getItem(k) === "false");
+	$("#submit").prop("disabled", anyInvalid);
+}
+
+// 페이지 로딩 시 localStorage 초기화
+$(document).ready(function() {
+	Object.keys(localStorage).filter(k => k.startsWith("deduction_")).forEach(k => localStorage.removeItem(k));
 });
+
+// 아래 쪽에 있는 input deduction function 에 넣어도 OK
+$(document).on('input', '.deduction', function() {
+	validateDeductions();
+});
+
 
 var salayPagingDTO = {};
 function inint_Paing() {
@@ -81,9 +103,13 @@ $("#btn").click(() => {
 						deduction = salayPagingDTO.result[i].deduction;
 					}
 					
+					//console.log(salayPagingDTO.result[i].empName);
+					const inputName = 'deduction_' + salayPagingDTO.result[i].empNo + '_' + yearMonth;
+					//console.log(inputName);
+					
 					var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
 						+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
-						+ '<input type="number" min="0" class="deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
+						+ '<input type="number" min="0" class="deduction" name="' + inputName + '" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
 					$("#result").append(text);
 				}
 				$("#result").append('<div class="filter-bar"><button id="submit">등록하기</button></div>');
@@ -94,6 +120,23 @@ $("#btn").click(() => {
             		$(".pagination").append('<li class="page-item"><a class="page-link ' + (salayPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
             	}
             	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.endPage + 1) + '">Next</a></li>');
+				
+				// 유효성 복원
+				$(".deduction").each(function() {
+			        const saved = localStorage.getItem(this.name);
+			        if (saved !== null) $(this).val(saved);
+
+			        const isValid = localStorage.getItem(this.name + "_valid");
+			        if (isValid === "false") $(this).parent().addClass("red");
+			        else $(this).parent().removeClass("red");
+			    });
+				
+				// 유효성 검사 함수
+				validateDeductions();
+				
+				// 버튼 복원 함수
+				restoreSubmitState();
+				
 			},
 			error: function(xhr, status, error) {
 						
@@ -116,24 +159,24 @@ $("#btn").click(() => {
 });
 
 $(document).on('input', '.deduction', (e) => {
-		const indexNum = $(e.target).parent().parent().attr("id").split("_")[1];
-		console.log(indexNum);
-		const deduction = $(e.target).val();
-		const salaryDate = $(e.target).parent().parent().find("td").eq(4).text();
-		const baseSalary = $(e.target).parent().parent().find("td").eq(5).text();
-		const bonus = $(e.target).parent().parent().find("td").eq(6).text();
-		const total = Number(baseSalary) + Number(bonus) - deduction;
-		salayPagingDTO.result[Number(indexNum)].deduction = deduction;
-		salayPagingDTO.result[Number(indexNum)].baseSalary = baseSalary;
-		salayPagingDTO.result[Number(indexNum)].bonus = bonus;
-		salayPagingDTO.result[Number(indexNum)].salaryDate = salaryDate;
-		console.log(salayPagingDTO.result[Number(indexNum)].bonus);
-		$(e.target).parent().parent().find("td").eq(8).html("");
-		$(e.target).parent().parent().find("td").eq(8).text(total);
-	});
+	const indexNum = $(e.target).parent().parent().attr("id").split("_")[1];
+	console.log(indexNum);
+	const deduction = $(e.target).val();
+	const salaryDate = $(e.target).parent().parent().find("td").eq(4).text();
+	const baseSalary = $(e.target).parent().parent().find("td").eq(5).text();
+	const bonus = $(e.target).parent().parent().find("td").eq(6).text();
+	const total = Number(baseSalary) + Number(bonus) - deduction;
+	salayPagingDTO.result[Number(indexNum)].deduction = deduction;
+	salayPagingDTO.result[Number(indexNum)].baseSalary = baseSalary;
+	salayPagingDTO.result[Number(indexNum)].bonus = bonus;
+	salayPagingDTO.result[Number(indexNum)].salaryDate = salaryDate;
+	console.log(salayPagingDTO.result[Number(indexNum)].bonus);
+	$(e.target).parent().parent().find("td").eq(8).html("");
+	$(e.target).parent().parent().find("td").eq(8).text(total);
+});
 
 $(document).on('click', 'a.page-link', function(e) {
-    e.preventDefault();        
+    e.preventDefault();    
    
     // a 태그 기본 동작(페이지 이동) 차단
     
@@ -144,37 +187,52 @@ $(document).on('click', 'a.page-link', function(e) {
 	salayPagingDTO.setTotal(salayPagingDTO.result.length);
         
 	// 링크 URL 읽기
-	
-	
-		$("#result").html("");
-		$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
-		for (var i = salayPagingDTO.offset;   i < ((salayPagingDTO.offset + salayPagingDTO.limit) > salayPagingDTO.result.length ? salayPagingDTO.result.length: (salayPagingDTO.offset + salayPagingDTO.limit) ); i++) {
-			var deduction =0;
-			if(salayPagingDTO.result[i].deduction ==0) {
-				deduction = (Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1;
-				salayPagingDTO.result[i].deduction = deduction;
-			} else {
-				deduction = salayPagingDTO.result[i].deduction;
-			}
-			
-			var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
-				+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
-				+ '<input type="number" min="0" class= "deduction" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
-			$("#result").append(text);
-			console.log(i + " : " + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1));
+
+	$("#result").html("");
+	$("#result").append("<tr><th>직원 번호</th><th>직원 이름</th><th>부서명</th><th>직급명</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
+	for (var i = salayPagingDTO.offset;   i < ((salayPagingDTO.offset + salayPagingDTO.limit) > salayPagingDTO.result.length ? salayPagingDTO.result.length: (salayPagingDTO.offset + salayPagingDTO.limit) ); i++) {
+		var deduction =0;
+		if(salayPagingDTO.result[i].deduction ==0) {
+			deduction = (Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1;
+			salayPagingDTO.result[i].deduction = deduction;
+		} else {
+			deduction = salayPagingDTO.result[i].deduction;
 		}
-		$("#result").append('<div class="filter-bar"><button id="submit">등록하기</button></div>');
 		
-		$(".pagination").html('');
-    	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.startPage - 1) + '">Previous</a></li>');
-    	for(var i =salayPagingDTO.startPage; i<=salayPagingDTO.endPage; i++) {
-    		$(".pagination").append('<li class="page-item"><a class="page-link ' + (salayPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-    	}
-    	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.endPage + 1) + '">Next</a></li>');
-        
-        
-   
-  });
+		const inputName = 'deduction_' + salayPagingDTO.result[i].empNo + '_' + yearMonth;
+		
+		var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
+			+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
+			+ '<input type="number" min="0" class="deduction" name="' + inputName + '" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
+		$("#result").append(text);
+		console.log(i + " : " + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1));
+	}
+	$("#result").append('<div class="filter-bar"><button id="submit">등록하기</button></div>');
+	
+	$(".pagination").html('');
+	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.startPage - 1) + '">Previous</a></li>');
+	for(var i =salayPagingDTO.startPage; i<=salayPagingDTO.endPage; i++) {
+		$(".pagination").append('<li class="page-item"><a class="page-link ' + (salayPagingDTO.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
+	}
+	$(".pagination").append('<li class="page-item ' + (salayPagingDTO.next ? '' : 'disabled') + '"><a class="page-link" href="' + (salayPagingDTO.endPage + 1) + '">Next</a></li>');
+    
+    
+	// 유효성 복원
+	$(".deduction").each(function() {
+        const saved = localStorage.getItem(this.name);
+        if (saved !== null) $(this).val(saved);
+
+        const isValid = localStorage.getItem(this.name + "_valid");
+        if (isValid === "false") $(this).parent().addClass("red");
+        else $(this).parent().removeClass("red");
+    });
+	
+	// 유효성 검사 함수
+	validateDeductions();
+	
+	// 버튼 복원 함수
+	restoreSubmitState();
+});
 
 $(document).on("click", "#submit", function() { // 제출 버튼
 	const yearMonth = $("#yearMonth").val();
@@ -216,7 +274,7 @@ $(document).on("click", "#submit", function() { // 제출 버튼
 		title: "등록하시겠습니까?",
 		text: "총 " + spList.length + "개의 내역이 등록됩니다!",
 		icon: "question",
-		iconColor: "#8de664",
+		iconColor: "#48b85b",
 		showCancelButton: true,
 		confirmButtonColor: "#48b85b",
 		cancelButtonColor: "#d33",

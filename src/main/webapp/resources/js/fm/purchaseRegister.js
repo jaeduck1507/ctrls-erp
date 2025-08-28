@@ -1,4 +1,4 @@
-const quantityCheck = /^[1-9]\d*$/;
+const quantityCheck = /^[0-9]\d*$/;
 $(document).on("input", ".quantity", (e) => {
 	console.log(e.target.value);
 	console.log(quantityCheck.test(e.target.value));
@@ -105,6 +105,7 @@ $(document).on("click", ".remove-row", function() { // 나중에 생성된 태�
 
 
 $(document).on('change', '.productName', (e) => {
+	$(e.target).parent().removeClass("red");
 	const productInfo = {};
 	const val = $(e.target).val();
 	const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
@@ -168,11 +169,13 @@ $(document).on("click", "#purchase-register", function() { // 제출 버튼 동�
 			console.log(val)
 			if (!val) {
 				allFilled = false;
+				$(this).parent().addClass("red");
 			}
 			
 			if ($(this).is(".quantity")) {
 				if (!quantityCheck.test(val)) {
 					allFilled = false;
+					$(this).parent().addClass("red");
                 }
             }
 		});
