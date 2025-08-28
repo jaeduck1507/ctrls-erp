@@ -14,32 +14,35 @@
 
 
 
-<form action="/empModify" method="post">
+
 	<div class="box filter-bar">
 	<table>
+    <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사진<th><td><img src="/images/${empInfo.url}" width="100" height="150" onerror="this.onerror=null; this.src='/images/default.jpg';" /><input type="hidden" value="${empInfo.url}" id="url"></td><tr>
     <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번<th><td><input type="text" name="empNo" value="${empInfo.empNo}" readonly="readonly" id="empNo"></td><tr>
-    <tr><th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;성명<th><td><input type="text" name="empName" value="${empInfo.empName}"></label><br>
+    <tr><th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;성명<th><td><input type="text" name="empName" value="${empInfo.empName}" id ="empName"></label><br>
     <tr><th><i class="fi fi-rr-hastag"></i>&nbsp;&nbsp;주민등록번호<th><td><input type="text" name="empIn" value="${empInfo.empIn}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;직급<th><td><input type="text" name="jobTitle" value="${empInfo.jobTitle}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;부서<th><td><input type="text" name="deptName" value="${empInfo.deptName}" readonly="readonly"></td><tr>
+    <tr><th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;급여<th><td><input type="text" name="salary" value="${empInfo.salary}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;입사일<th><td><input type="date" name="hireDate" value="${empInfo.hireDate}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;퇴사일<th><td><input type="date" name="quitDate" value="${empInfo.quitDate}" readonly="readonly"></td><tr>
-    <tr><th><i class="fi fi-rr-home-location-alt"></i>&nbsp;&nbsp;주소<th><td><input type="text" name="addr" value="${empInfo.addr}"></td><tr>
-    <tr><th><i class="fi fi-rr-phone-call"></i>&nbsp;&nbsp;연락처<th><td><input type="text" name="phone" value="${empInfo.phone}"></td><tr>
-    <tr><th><i class="fi fi-rr-envelope"></i>&nbsp;&nbsp;이메일<th><td><input type="text" name="email" value="${empInfo.email}"></td><tr>
+    <tr><th><i class="fi fi-rr-home-location-alt"></i>&nbsp;&nbsp;주소<th><td><input type="text" name="addr" value="${empInfo.addr}" id="addr"></td><tr>
+    <tr><th><i class="fi fi-rr-phone-call"></i>&nbsp;&nbsp;연락처<th><td><input type="text" name="phone" value="${empInfo.phone}" id="phone"></td><tr>
+    <tr><th><i class="fi fi-rr-envelope"></i>&nbsp;&nbsp;이메일<th><td><input type="text" name="email" value="${empInfo.email}" id="email"></td><tr>
 	</table>
 	</div>
 	<div class="filter-bar">
-    <button type="submit">수정</button>
+    <button type="button" id="empModifyBtn">수정</button>
 	<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateModal" id="quitBtn">직급/부서 변경</button>
+	<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateSalary">급여 변경</button>
+	<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateImg">사진 변경/삭제</button>
 	</div>
-</form>
 
 		<div class="modal fade filter-bar" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">퇴직 처리</h1>
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">직급/부서 변경</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 			  
@@ -58,7 +61,6 @@
 					</select>
 			  </div>
 		      <div class="modal-footer">
-		      	<p>퇴사 처리시 변경 불가능 합니다</p>
 		        <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
 		        <button type="button" class="btn" id ="modifyJobDept">등록</button>
 		      </div>
@@ -66,84 +68,54 @@
 		    </div>
 		  </div>
 		</div>
+		
+		<div class="modal fade filter-bar" id="updateSalary" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">급여 변경</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+			  
+			  <div class="modal-body">
+					<i class="fi fi-rr-department"></i>&nbsp;&nbsp;급여<th><td><input type="text" name="salary" value="${empInfo.salary}" id="salary">
+			  </div>
+		      <div class="modal-footer">
+		      	<p>급여 변경시 이전 급여는 확인 불가능 합니다</p>
+		        <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn" id ="modifySalary">등록</button>
+		      </div>
+			  
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="modal fade filter-bar" id="updateImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">사진 수정/삭제</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+			  
+			  <div class="modal-body">
+					<img src="/images/${empInfo.url}" width="200" height="120" onerror="this.onerror=null; this.src='/images/default.jpg';" />
+					<input type="file" class="file" id="file">
+					<button type="button" class="btn" id ="deleteImg">삭제</button>
+			  </div>
+		      <div class="modal-footer">
+		      	<p>사진 변경시 이전 사진은 확인 불가능합니다</p>
+		        <button type="button" class="btn" data-bs-dismiss="modal">닫기</button>
+		        
+		        <button type="button" class="btn" id ="modifyImg">수정</button>
+		      </div>
+			  
+		    </div>
+		  </div>
+		</div>
 
 
-<script>
-$("#modifyJobDept").click(() => { // 열 추가 버튼 클릭시 열 추가 함수 addRow 함수 실행
-
-	Swal.fire({
-		title: "변경하시겠습니까?",
-		confirmButtonText: '등록',
-		confirmButtonColor: "green",
-		icon: "question",
-		iconColor: "green",
-		showCancelButton: true,
-		cancelButtonText: '취소',
-		cancelButtonColor: "red"
-		}).then((result) => {
-			  if (result.isConfirmed) {
-				  	console.log($("#job").val());
-				    console.log($("#dept").val());
-				    console.log($("#empNo").val());
-				    const obj = {};
-				    obj.deptNo = $("#dept").val();
-				    obj.jobNo = $("#job").val();
-				    obj.empNo = $("#empNo").val();
-				    $.ajax({
-				        // 요청
-				        type : "post",
-				        url : "/modifyJobDept",
-				        dataType : "json", 
-				        data : JSON.stringify(obj),
-						processData: false,
-						contentType: 'application/json; charset=UTF-8',
-						
-				        // 응답
-				        success : function(result) {
-				        	let timerInterval;
-							Swal.fire({
-								icon: "success",
-								iconColor: "green",
-							  title: "성공적으로 등록했습니다!",
-							  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
-							  timer: 2000,
-							  timerProgressBar: true,
-							  didOpen: () => {
-							    Swal.showLoading();
-							    const timer = Swal.getPopup().querySelector("#aa");
-							    timerInterval = setInterval(() => {
-									let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
-							      timer.textContent = remainSecond +1;
-							    }, 100);
-							  },
-							  willClose: () => {
-							    clearInterval(timerInterval);
-							  }
-							}).then((result) => {
-							  /* Read more about handling dismissals below */
-							  if(result.dismiss == "backdrop") {
-								  location.reload();
-							  }
-							  if (result.dismiss === Swal.DismissReason.timer) {
-								  location.reload();
-							  }
-							});
-				        },
-				        
-						error:function(xhr,status,error) {
-							
-						}
-				    });
-				 
-				  }
-				});
-    
-    
-    
-    
-});
-
-</script>
+<script src="../resources/js/hrm/empModify.js"></script>
 </body>
 
 </html>

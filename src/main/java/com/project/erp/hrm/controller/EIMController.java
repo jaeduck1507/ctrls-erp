@@ -62,10 +62,11 @@ public class EIMController {
 		employeeInfoservice.empAdd(eiList);
 	}
 	
+	@ResponseBody
 	@PostMapping("/empModify")
-	public String empModify(EmpInfo ei) {
+	public boolean empModify(@RequestBody EmpInfo ei) {
 		employeeInfoservice.empModify(ei);
-		return "redirect:/hrm/empInfo";
+		return true;
 	}
 	
 	@PostMapping("/modifyMyInfo")
@@ -80,6 +81,27 @@ public class EIMController {
 	@PostMapping("/modifyJobDept")
 	public boolean modifyJobDept(@RequestBody EmpInfo ei) {
 		employeeInfoservice.modifyJobDept(ei);
+		return true;
+	}
+	
+	@ResponseBody
+	@PostMapping("/modifySalary")
+	public boolean modifySalary(@RequestBody EmpInfo ei) {
+		employeeInfoservice.modifySalary(ei);
+		return true;
+	}
+	
+	@ResponseBody
+	@PostMapping("/modifyImg")
+	public boolean modifyImg(EmpInfo ei) {
+		employeeInfoservice.modifyImg(ei);
+		return true;
+	}
+	
+	@ResponseBody
+	@PostMapping("/deleteImg")
+	public boolean deleteImg(EmpInfo ei) {
+		employeeInfoservice.deleteImg(ei);
 		return true;
 	}
 }

@@ -23,14 +23,15 @@
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
 		<where>
+		emp_no != 1
 		<if test="empName != null" >
-			emp_name LIKE CONCAT('%', #{empName}, '%')
+			AND emp_name LIKE CONCAT('%', #{empName}, '%')
 		</if>
 		<if test='jobNo != -1'>
 			AND job_no = #{jobNo}
 		</if>
 		</where>
-		
+		ORDER BY emp_no
 	</select>
 	
 <!-- 윤의진 추가 qc 위함 -->
@@ -56,6 +57,7 @@
 		JOIN job_position USING(job_no)
 		<where>
 			quit_date IS NULL
+			AND emp_no != 1
 		<if test="empName != null" >
 			AND emp_name LIKE CONCAT('%', #{empName}, '%')
 		</if>
@@ -76,6 +78,7 @@
 		JOIN job_position USING(job_no)
 		<where>
 			quit_date IS NULL
+			AND emp_no != 1
 		<if test="empInfo.empName != null" >
 			AND emp_name LIKE CONCAT('%', #{empInfo.empName}, '%')
 		</if>
@@ -146,6 +149,36 @@
 		</if>
 		</set>
 		WHERE emp_no = #{empNo}
+	</update>
+	
+	<update id="modifySalary" parameterType="EmpInfo">
+		UPDATE employee_info
+		<set>
+			salary = #{salary}
+		</set>
+		<where>
+			emp_no = #{empNo}
+		</where>
+	</update>
+	
+	<update id="modifyImg" parameterType="EmpInfo">
+		UPDATE employee_info
+		<set>
+			url = #{url}
+		</set>
+		<where>
+			emp_no = #{empNo}
+		</where>
+	</update>
+	
+	<update id="deleteImg" parameterType="EmpInfo">
+		UPDATE employee_info
+		<set>
+			url = NULL
+		</set>
+		<where>
+			emp_no = #{empNo}
+		</where>
 	</update>
 	
 </mapper>

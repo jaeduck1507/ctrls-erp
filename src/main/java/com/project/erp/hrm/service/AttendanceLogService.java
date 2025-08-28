@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project.erp.hrm.mapper.AttendanceLogMapper;
 import com.project.erp.hrm.model.dto.AttendanceStatsDTO;
@@ -138,4 +139,17 @@ public class AttendanceLogService {
 		return attendanceLogMapper.showAttendanceOneAtToday(al);
 		
 	}
+	
+	public void setAttendance(AttendanceLog al) {
+		System.out.println(showAttendanceOneAtToday(al));
+		al.setCheckIn(LocalTime.parse("09:00"));
+		al.setCheckOut(LocalTime.parse("18:00"));
+		if(showAttendanceOneAtToday(al) == null) {
+			attendanceLogMapper.setAttendanceNotExist(al);
+		} else {
+			attendanceLogMapper.setAttendanceExist(al);
+		}
+	}
+	
+	
 }

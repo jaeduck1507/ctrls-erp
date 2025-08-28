@@ -22,4 +22,7 @@ public interface EmployeeInfoMapper {
 	List<EmpInfo> showNotEvalEmp(PerformanceReviewDTO prDto);
 	void updateEmpQuit(Quitter q);
 	void modifyJobDept(EmpInfo ei);
+	void modifySalary(EmpInfo ei);
+	void modifyImg(EmpInfo ei);
+	void deleteImg(EmpInfo ei);
 }
