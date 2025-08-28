@@ -1,7 +1,8 @@
-function showBudget() {
+function showBudget(page = 1) {
 	const formData = new FormData();
-	formData.append("deptName", $("#deptName").val());
-	formData.append("yearMonth", $("#yearMonth").val());
+	formData.append("deptName", $("#deptName").val() || '');
+	formData.append("yearMonth", $("#yearMonth").val() || '');
+	formData.append("page", page);
 	
 	$.ajax({
 		type: "post",
@@ -52,10 +53,13 @@ function showBudget() {
 	});
 }
 
-$("#btn").click(showBudget);
-
 $(document).ready(function() {
-	showBudget();
+	showBudget(1);
+});
+
+$("#btn").click(function(e) {
+	e.preventDefault();
+	showBudget(1);
 });
 
 $(document).on('click', 'a.btnX', function(e) {
@@ -91,7 +95,9 @@ $(document).on('click', 'a.btnX', function(e) {
 
 $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
-	
+	const page = $(this).attr('href');
+	showBudget(page);
+	/*
 	const formData = new FormData();
 	formData.append("deptName", $("#deptName").val());
 	formData.append("yearMonth", $("#yearMonth").val());
@@ -124,5 +130,5 @@ $(document).on('click', 'a.page-link', function(e) {
 		error: function(xhr, status, error) {
 			
 		}
-	});
+	});*/
 });

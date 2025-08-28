@@ -181,10 +181,11 @@ function reloadChart() {
 	searchChart("all", month);
 }
 
-function showSaleManage() {
+function showSaleManage(page = 1) {
 	const formData = new FormData();
-	formData.append("productCategory", $("#productCategory").val());
-	formData.append("productName", $("#productName").val());
+	formData.append("productCategory", $("#productCategory").val() || '');
+	formData.append("productName", $("#productName").val() || '');
+	formData.append("page", page);
 	
 	const startDate = $("#startDate").val();
 	const endDate = $("#endDate").val();
@@ -260,15 +261,20 @@ function showSaleManage() {
 	});
 }
 
-$("#btn").click(showSaleManage);
-
 $(document).ready(function() {
-	showSaleManage();
+	showSaleManage(1);
+});
+
+$("#btn").click(function(e) {
+	e.preventDefault();
+	showSaleManage(1);
 });
 
 $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
-	
+	const page = $(this).attr('href');
+	showSaleManage(page);
+	/*
 	const formData = new FormData();
 	formData.append("productCategory", $("#productCategory").val());
 	formData.append("productName", $("#productName").val());
@@ -324,5 +330,5 @@ $(document).on('click', 'a.page-link', function(e) {
 		error: function(xhr, status, error) {
 			
 		}
-	});
+	});*/
 });

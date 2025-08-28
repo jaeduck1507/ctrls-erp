@@ -4,11 +4,12 @@ const today = now.getFullYear() + '-'
 	                    + String(now.getDate()).padStart(2, '0');
 console.log(today);
 
-function showPurchase() {
+function showPurchase(page = 1) {
 	const formData = new FormData();
-	formData.append("brandName", $("#brandName").val());
-	formData.append("productCategory", $("#productCategory").val());
-	formData.append("productName", $("#productName").val());
+	formData.append("brandName", $("#brandName").val() || '');
+	formData.append("productCategory", $("#productCategory").val() || '');
+	formData.append("productName", $("#productName").val() || '');
+	formData.append("page", page);
 	
 	const startDate = $("#startDate").val();
 	const endDate = $("#endDate").val();
@@ -86,15 +87,20 @@ function showPurchase() {
 	});
 }
 
-$("#btn").click(showPurchase);
-
 $(document).ready(function() {
-	showPurchase();
+	showPurchase(1);
+});
+
+$("#btn").click(function(e) {
+	e.preventDefault();
+	showPurchase(1);
 });
 
 $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
-	
+	const page = $(this).attr('href');
+	showPurchase(page);
+	/*
 	const formData = new FormData();
 	formData.append("brandName", $("#brandName").val());
 	formData.append("productCategory", $("#productCategory").val());
@@ -152,5 +158,5 @@ $(document).on('click', 'a.page-link', function(e) {
 		error: function(xhr, status, error) {
 			
 		}
-	});
+	});*/
 });

@@ -1,8 +1,9 @@
-function showSalary() {
+function showSalary(page = 1) {
 	const formData = new FormData();
-	formData.append("deptName", $("#deptName").val());
-	formData.append("empName", $("#empName").val());
-	formData.append("yearMonth", $("#yearMonth").val());
+	formData.append("deptName", $("#deptName").val() || '');
+	formData.append("empName", $("#empName").val() || '');
+	formData.append("yearMonth", $("#yearMonth").val() || '');
+	formData.append("page", page);
 	
 	$.ajax({
 		type: "post",
@@ -54,15 +55,20 @@ function showSalary() {
 	});
 }
 
-$("#btn").click(showSalary);
-
 $(document).ready(function() {
-	showSalary();
+	showSalary(1);
+});
+
+$("#btn").click(function(e) {
+	e.preventDefault();
+	showSalary(1);
 });
 
 $(document).on('click', 'a.page-link', function(e) {
     e.preventDefault(); // a 태그 기본 동작(페이지 이동) 차단
-	
+	const page = $(this).attr('href');
+	showSalary(page);
+	/*
 	const formData = new FormData();
     formData.append("deptName", $("#deptName").val());
 	formData.append("empName", $("#empName").val());
@@ -102,5 +108,5 @@ $(document).on('click', 'a.page-link', function(e) {
 		error:function(xhr,status,error) {
 			
 		}
-    });
+    });*/
 }); 

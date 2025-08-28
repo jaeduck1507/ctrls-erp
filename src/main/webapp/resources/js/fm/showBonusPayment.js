@@ -1,9 +1,10 @@
-function showBonusPayment() {
+function showBonusPayment(page = 1) {
 	const formData = new FormData();
-	formData.append("empName", $("#empName").val());
-	formData.append("deptNo", $("#deptName").val());
-	formData.append("jobNo", $("#jobTitle").val());
-	formData.append("date", $("#date").val());
+	formData.append("empName", $("#empName").val() || '');
+	formData.append("deptNo", $("#deptName").val() || '');
+	formData.append("jobNo", $("#jobTitle").val() || '');
+	formData.append("date", $("#date").val() || '');
+	formData.append("page", page);
 	
 	$.ajax({
         // 요청
@@ -51,15 +52,20 @@ function showBonusPayment() {
     });
 }
 
-$("#btn").click(showBonusPayment);
-
 $(document).ready(function() {
-	showBonusPayment();
+	showBonusPayment(1);
+});
+
+$("#btn").click(function(e) {
+	e.preventDefault();
+	showBonusPayment(1);
 });
 
 $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
-	
+	const page = $(this).attr('href');
+	showBonusPayment(page);
+	/*
 	const formData = new FormData();
 	formData.append("empName", $("#empName").val());
 	formData.append("deptNo", $("#deptName").val());
@@ -94,5 +100,5 @@ $(document).on('click', 'a.page-link', function(e) {
 		error:function(xhr,status,error) {
 			
 		}
-    });
+    });*/
 });

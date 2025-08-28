@@ -61,10 +61,11 @@ new Chart(monthTransChart, {
 	}
 });
 
-function showTrans() {
+function showTrans(page = 1) {
 	const formData = new FormData();
-	formData.append("transType", $("#transType").val());
-	formData.append("deptName", $("#deptName").val());
+	formData.append("transType", $("#transType").val() || '');
+	formData.append("deptName", $("#deptName").val() || '');
+	formData.append("page", page);
 	
 	const startDate = $("#startDate").val();
 	const endDate = $("#endDate").val();
@@ -100,8 +101,8 @@ function showTrans() {
 		success: function(result) {
 			//console.log($("#transType").val());
 			//console.log($("#deptName").val());
-			console.log($("#startDate").val());
-			console.log($("#endDate").val());
+			//console.log($("#startDate").val());
+			//console.log($("#endDate").val());
 			
 			if (!result.transList || result.transList.length === 0) {
 				//alert("조회된 결과가 없습니다");
@@ -141,15 +142,21 @@ function showTrans() {
 	});
 }
 
-$("#btn").click(showTrans);
-
 $(document).ready(function() {
-	showTrans();
+	showTrans(1);
+});
+
+$("#btn").click(function(e) {
+	e.preventDefault();
+	showTrans(1);
 });
 
 $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
-	
+	const page = $(this).attr('href');
+	console.log(page);
+	showTrans(page);
+	/*
 	const formData = new FormData();
 	formData.append("transType", $("#transType").val());
 	formData.append("deptName", $("#deptName").val());
@@ -206,5 +213,5 @@ $(document).on('click', 'a.page-link', function(e) {
 		error: function(xhr, status, error) {
 											
 		}
-	});
+	});*/
 });
