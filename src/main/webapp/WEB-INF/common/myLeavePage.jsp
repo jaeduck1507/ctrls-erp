@@ -37,7 +37,7 @@
 		  휴가 시작일 <input type="date" id="startDate" class="leaveDate">
 		  휴가 종료일 <input type="date" id="endDate" class="leaveDate">
 		  사유 <input type="text" id="reason" value="휴가" placeholder="사유 입력"/>
-		  <button id="btn2">휴가 등록</button>
+		  <button id="btn2">휴가 신청</button>
 		  </div>
 
 		  </div>

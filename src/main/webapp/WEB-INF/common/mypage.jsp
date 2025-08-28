@@ -16,7 +16,7 @@
 <body>
 	
 	<!-- get, /mypage: 인증된 사람만 즉! 로그인된 사람만 -->
-	<h1>마이페이지</h1>
+	<h3>마이페이지</h3>
 	<div class="mypage">
 		
 		<div class="box1">
@@ -48,7 +48,7 @@
 		    <th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;&nbsp;&nbsp;직급</th><td><b>${user.jobTitle}</b></td>
 			</tr>
 			<tr>
-		    <th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><b>${user.deptName}</b></td>
+		    <th><i class="fi fi-rr-briefcase"></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><b>${user.deptName}</b></td>
 			</tr>
 			<tr>
 		    <th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;입사일</th><td><b>${user.hireDate}</b></td>

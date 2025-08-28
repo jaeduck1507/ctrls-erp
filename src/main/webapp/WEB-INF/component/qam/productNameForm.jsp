@@ -7,7 +7,7 @@
   <title>제품명 등록/수정</title>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="stylesheet" href="../resources/css/qamForm.css"/>
+  <link rel="stylesheet" href="../resources/css/qam/qamForm.css"/>
 </head>
 <body>
   <h5>[품질 관리] > [브랜드 조회] > [제품 정보 수정/등록]</h5>

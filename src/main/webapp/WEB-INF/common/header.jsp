@@ -13,7 +13,7 @@
 	</b>
   </div>
 	<sec:authorize access="isAuthenticated()">	
-    <a href="/mypage" class="btn-mypage"><i class="fi fi-rr-user"></i>&nbsp;&nbsp;마이페이지</a>
+    <a href="/mypage" class="btn-mypage"><i class="fi fi-rr-review"></i>&nbsp;&nbsp;마이페이지</a>
     <a href="/logout" class="btn-logout"><i class="fi fi-rr-exit"></i>&nbsp;&nbsp;로그아웃</a>
 	</sec:authorize>
 	</div>

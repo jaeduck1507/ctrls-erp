@@ -7,7 +7,7 @@
     <title>품질검사 등록</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
+	<link rel="stylesheet" href="../resources/css/qam/qamForm.css"/>
 </head>
 <body>
 	<h5>[품질 관리] > [품질검사 결과 목록] > [신규 검사 등록]</h5>

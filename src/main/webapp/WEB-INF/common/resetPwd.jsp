@@ -7,25 +7,75 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <link rel="stylesheet" href="../resources/css/resetPwd.css" />
 </head>
 <body>
-	      <div class="filter-bar" id="resetpwd-card">
+	      <div class="filter-bar" id="register-card">
+			
 	        <h1>비밀번호 재설정</h1>
-	        <div id="id-area">
-	        <input type="text" id="username" placeholder="아이디를 입력하세요." />
-	  		<button class="btn" id="idCheck">조회</button>
-	        </div>
-			<p id="result"></p>
-	        <div class="filter-bar" id="pwd-area">
+			
+			<div class="id-area">
+			 <i class="fi fi-rr-user"></i>&nbsp;&nbsp;아이디
+		        <div class="row">
+		         <input type="text" id="username" placeholder="아이디를 입력하세요." />
+		  		 <button type="button" class="btn" id="idCheck">조회</button>
+				   
+			 </div>
+			 <p id="result"></p>
+			</div>
+			
+	        <div class="pwd-area" id="pwd-area">
+				<i class="fi fi-rr-lock"></i>&nbsp;&nbsp;비밀번호	
 	        <input type="password" name="password" id="password" placeholder="비밀번호" />
-	        <input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호 확인" />
-	        <button id="resetPwd">재설정</button>
+			<p id="resultPw">영문자, 숫자, 특수문자 조합으로 8~15자 이내</p>	
+		</div>
+			
+			<div class="pwd-area" id="pwd-area">
+				<i class="fi fi-rr-padlock-check"></i>&nbsp;&nbsp;비밀번호 확인
+			<input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호 확인" />
+			<p id="resultPw2">위 비밀번호와 동일하게</p>	
+		   </div>
+			
+			<button id="resetPwd">재설정</button>
 	        </div>
 			
 	      </div>
 	    
 	 <script>
+		let idValid = false;
+		let idChecked = false;
+		let pwValid = false;
+		let pwMatch = false;
+							
+		// 모든 input 채웠는지 확인
+		function checkAllValid() {
+		   if (idValid && idChecked && pwValid && pwMatch) {
+		     $("#resetPwd").prop("disabled", false);
+		   } else {
+		     $("#resetPwd").prop("disabled", true);
+		   }
+		 };
+		 
+		 // 아이디입력
+		 		const id = document.querySelector("#username");
+		 		const resultId = document.querySelector("#result");
+		 		id.addEventListener("input", (e) => {
+					const value = e.target.value; // 앞뒤 공백 제거
+					idChecked = false; // 아이디 다시 입력하면 중복확인 다시 해야 함
+		 		  if (value === "") {			
+		 		    resultId.innerHTML = "필수 입력값입니다.";
+		 		    resultId.style.color = "red";
+					idValid = false;
+		 		  } else {			
+		 			resultId.innerHTML = "조회 버튼을 눌러주세요.";
+		 		    resultId.style.color = "blue";
+					idValid = true;
+		 		  }
+				  
+		 		  checkAllValid();
+		 		});
+		 
 		 $("#idCheck").click(() => {
 			  const formData = new FormData();
 			  formData.append("username", $("#username").val());
@@ -38,16 +88,58 @@
 			    contentType: false,
 			    success: function (result) {
 			      if (!result) {
-			        $("#result").append("아이디가 존재하지 않습니다.");
+			        $("#result").append("아이디가 존재하지 않습니다.").css("color", "red");
+					idChecked = false;
 			      } else {
-			        $("#result").append("아이디 체크 완료");
+			        $("#result").append("아이디 체크 완료").css("color", "blue");
+					idChecked = true;
 					
 			      }
+				  checkAllValid();
 			    },
 			    error: function (xhr, status, error) {},
 			  });
 			});
-		 
+			// 비밀번호 입력
+			const pw = document.querySelector("#password");
+			const resultPw = document.querySelector("#resultPw");
+			pw.addEventListener("input", (e) => {
+			  const pwExp =
+			    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+			 pwValid = pwExp.test(e.target.value);	  
+			  if (pwValid) {	
+			    resultPw.innerHTML = "사용가능한 비밀번호입니다.";
+			    resultPw.style.color = "blue";
+			  } else {
+				resultPw.innerHTML = "영문자, 숫자, 특수문자 조합으로 8~15자 이내";
+			    resultPw.style.color = "red";
+			  }
+			  checkPwMatch();
+			  checkAllValid();
+			});
+			//console.log(pw.addEventListener);
+
+			// 비밀번호 확인
+			const pw2 = document.querySelector("#passwordCheck");
+			const resultPw2 = document.querySelector("#resultPw2");
+			pw2.addEventListener("input", () => {
+				checkPwMatch();
+				checkAllValid();
+			});
+			
+			function checkPwMatch() {
+				pwMatch = pw.value === pw2.value && pw.value.length > 0;
+				if (pwMatch) {
+					    resultPw2.innerHTML = "비밀번호가 일치합니다.";
+					    resultPw2.style.color = "blue";
+					  } else {
+					    resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
+					    resultPw2.style.color = "red";
+					  }			
+				}
+			
+			$("#resetPwd").prop("disabled", true);
+			
 		 $("#resetPwd").click(() => {
 			  const formData = new FormData();
 			  formData.append("username", $("#username").val());
@@ -81,6 +173,9 @@
 			    },
 			  });
 			});
+			
+			
+			
 	 </script>
 </body>
 </html>
