@@ -27,7 +27,7 @@
 	            </tr>
 			</table>
 
-			<button id="btn">휴가 등록</button>
+			<button id="btn">휴가 신청</button>
 	 </div>
 	<script src="../resources/js/hrm/leaveAdd.js"></script>
 	</body>

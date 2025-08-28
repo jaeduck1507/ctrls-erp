@@ -27,7 +27,7 @@
 							   + "</td><td>" + leaveInfo.empName 
 							   + "</td><td>" + leaveInfo.deptName
 							   + "</td><td>" + leaveInfo.jobTitle 
-							   + "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "' class='" + (leaveInfo.status === "승인"|| leaveInfo.status === "반려" ? "disable" : "btnO") + "'>수정</a></td><td><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"' class='" + (leaveInfo.status === "승인" || leaveInfo.status === "반려"? "disable" : "btnO") + "'>삭제</a></td></tr>"
+							   + "</td><td><a id='btn1' href='/hrm/leaveView?leaveId=" + leaveInfo.leaveId + "' class='" + (leaveInfo.status === "승인"|| leaveInfo.status === "반려" ? "disable" : "btnO") + "'>수정</a></td><td><a id='btn2' href='/hrm/leaveDelete?leaveId="+ leaveInfo.leaveId +"' class='" + (leaveInfo.status === "승인" || leaveInfo.status === "반려"? "disable" : "btnX") + "'>삭제</a></td></tr>"
 				$("#result").append(text);
 				}
 			},

@@ -15,11 +15,11 @@
 						
 						  for(const leaveTotalDays of result) {
 							if(leaveTotalDays && leaveTotalDays.empNo !== null) {
-							  var text = "휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
-						             + "남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
+							  var text = "<i class='fi fi-rr-calendar-check'></i>&nbsp;&nbsp;휴가 누적 사용일수&nbsp;&nbsp;<b>" + leaveTotalDays.totalDays + "일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+						             + "<i class='fi fi-rr-calendar'></i>&nbsp;&nbsp;남은 휴가일수&nbsp;&nbsp;<b>" + (12-leaveTotalDays.totalDays)  + "일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
 					       } else {
-								var text = "휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
-							             + "남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
+								var text = "<i class='fi fi-rr-calendar-check'></i>&nbsp;&nbsp;휴가 누적 사용일수 : <b>0일</b>&nbsp;&nbsp;&nbsp;&nbsp; "
+							             + "<i class='fi fi-rr-calendar'></i>&nbsp;&nbsp;남은 휴가일수 : <b>12일</b>&nbsp;&nbsp;&nbsp;&nbsp;";
 							   
 						} 
 						$("#result1").append(text);
@@ -69,7 +69,7 @@
 		            "<td>" + row.reason     + "</td>" +
 		            "<td>" + row.status     + "</td>" +
 		            "<td><a href='/myLeaveView?leaveId=" + row.leaveId + "' class='" + (row.status === "승인" || row.status === "반려"? "disable" : "btnO") + "'>수정</a></td>" +
-		            "<td><a href='/myLeaveDelete?leaveId="+ row.leaveId +"' class='" + (row.status === "승인" || row.status === "반려" ? "disable" : "btnO") + "'>삭제</a></td>" +
+		            "<td><a href='/myLeaveDelete?leaveId="+ row.leaveId +"' class='" + (row.status === "승인" || row.status === "반려" ? "disable" : "btnX") + "'>삭제</a></td>" +
 		          "</tr>";
 		        $table.append(tr);
 		      }
@@ -246,7 +246,19 @@
 		  //console.log(endDate);
 		  //console.log(reason);
 
-	   $.ajax({
+		  Swal.fire({
+				title: "휴가를 신청 하시겠습니까?",
+				confirmButtonText: '신청',
+				confirmButtonColor: "green",
+				icon: "question",
+				iconColor: "green",
+				showCancelButton: true,
+				cancelButtonText: '취소',
+				cancelButtonColor: "red"
+		}).then((result) => {
+			  if (result.isConfirmed) {
+				// 사용자가 등록을 눌렀을 경우에만 서버요청
+	        $.ajax({
 			// 요청
 			type : "post",
 			url : "/myLeaveAdd",
@@ -260,77 +272,74 @@
 		   }]),
 		   contentType: 'application/json; charset=UTF-8', // formData에서는 false였으나 여기서는 contentType을 지정해줘야함
 	       // 응답
-		   success : function(response) {
-			if(response === "success"){
-				//alert("신청 완료"); // 휴가 등록 버튼을 누르면
-				Swal.fire({
-   					title: "휴가를 등록 하시겠습니까?",
-   					confirmButtonText: '등록',
-   					confirmButtonColor: "green",
-   					icon: "question",
-   					iconColor: "green",
-   					showCancelButton: true,
-   					cancelButtonText: '취소',
-   					cancelButtonColor: "red"
-   					}).then((result) => {
-   						  if (result.isConfirmed) {
-			Swal.fire({
-						icon: "success",
-						iconColor: "green",
-					  title: "등록 되었습니다!",
-					  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
-					  timer: 3000,
-					  timerProgressBar: true,
-					  didOpen: () => {
-					    Swal.showLoading();
-					    const timer = Swal.getPopup().querySelector("#aa");
-					    timerInterval = setInterval(() => {
-							let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
-					      timer.textContent = remainSecond +1;
-					    }, 100);
-					  },
-					  willClose: () => {
-					    clearInterval(timerInterval);
-					  }
-					}).then((result) => {
-					  /* Read more about handling dismissals below */
-					  if(result.dismiss == "backdrop") {
-						  location.reload();
-					  }
-					  if (result.dismiss === Swal.DismissReason.timer) {
-						  location.reload();
-					  }
-					});
-					}
-				});
-   
-			} else if (response === "overlap") {
-				//alert("이미 등록 및 승인된 휴가입니다. 다른 날짜를 선택해주세요.");
-				Swal.fire({
-					title: "다른 날짜를 선택해주세요.",
-					text: "이미 등록 및 승인된 휴가일 입니다.",
-					confirmButtonText: '확인',
-					width: 600,
-					confirmButtonColor: "#90C67C",
-					icon: "warning",
-					
-					});
-				return;
-			} else if(response === "exceed"){
-				//alert("남은 휴가일수를 초과했습니다. 휴가일수를 확인해주세요.");
-				Swal.fire({
-					title: "휴가일수를 확인해주세요.",
-					text: "남은 휴가일수를 초과했습니다. ",
-					confirmButtonText: '확인',
-					width: 600,
-					confirmButtonColor: "#90C67C",
-					icon: "warning"
-					
-					});
-			}
-	      },
-	       error:function(xhr,status,error) {
-		   }
-		 
-	   });
-	});
+		    success: function(response) {
+		                       if (response === "success") {
+								Swal.fire({
+					   					title: "휴가 신청 완료!",
+					   					text: "성공적으로 신청되었습니다.",
+					   					icon: "success",
+					   					timer: 3000,
+					   					timerProgressBar: true,
+					   					didClose: () => {
+					   						location.href = $(this).attr("href");
+					   					}
+					   				}).then(() => location.reload());
+		                       } else if (response === "overlap") {
+		                           Swal.fire({
+		                               title: "다른 날짜를 선택해주세요.",
+		                               text: "이미 신청 또는 승인된 휴가일 입니다.",
+		                               confirmButtonText: '확인',
+		                               width: 600,
+		                               confirmButtonColor: "#90C67C",
+		                               icon: "warning"
+		                           });
+		                       } else if (response === "exceed") {
+		                           Swal.fire({
+		                               title: "휴가일수를 확인해주세요.",
+		                               text: "남은 휴가일수를 초과했습니다.",
+		                               confirmButtonText: '확인',
+		                               width: 600,
+		                               confirmButtonColor: "#90C67C",
+		                               icon: "warning"
+		                           });
+		                       }
+		                   },
+		                   error: function(xhr, status, error) {
+		                       console.error(error);
+		                   }
+		               });
+		           }
+		           // 취소를 누르면 서버 호출 없음 → 저장 안 됨
+		       });
+		   });
+		   $(document).on('click', 'a.btnX', function(e) {
+		   		e.preventDefault();
+		   		/*if (confirm("정말 삭제하시겠습니까?")) {
+		   			location.href = $(this).attr("href");
+		   		}*/
+		   		
+		   		Swal.fire({
+		   			title: "정말 삭제하시겠습니까?",
+		   			text: "삭제를 누르면 해당 항목이 영구적으로 삭제됩니다.",
+		   			icon: "warning",
+		   			iconColor: "#f1a025",
+		   			showCancelButton: true,
+		   			confirmButtonColor: "#48b85b",
+		   			cancelButtonColor: "#d33",
+		   			confirmButtonText: "삭제",
+		   			cancelButtonText: "취소"
+		   		}).then((result) => {
+		   			if (result.isConfirmed) {
+		   				Swal.fire({
+		   					title: "삭제 완료!",
+		   					text: "성공적으로 삭제되었습니다.",
+		   					icon: "success",
+		   					timer: 3000,
+		   					timerProgressBar: true,
+		   					didClose: () => {
+		   						location.href = $(this).attr("href");
+		   					}
+		   				});
+		   			}
+		   		});
+		   	});

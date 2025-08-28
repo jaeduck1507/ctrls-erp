@@ -33,11 +33,13 @@
 	<p id="resultId">영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내</p>
 	</div>
 	<div class="pwd-area">
-	 <i class="fi fi-rr-lock"></i>&nbsp;&nbsp;비밀번호<input type="password" name="password" id="pw" placeholder="비밀번호">
+	 <i class="fi fi-rr-lock"></i>&nbsp;&nbsp;비밀번호
+	 <input type="password" name="password" id="pw" placeholder="비밀번호">
 	 <p id="resultPw">영문자, 숫자, 특수문자 조합으로 8~15자 이내</p>
 	 </div>
 	 <div class="pwd-area">
-	 <i class="fi fi-rr-padlock-check"></i>&nbsp;&nbsp;비밀번호 확인<input type="password" id="pw2" placeholder="비밀번호 확인"/>
+	 <i class="fi fi-rr-padlock-check"></i>&nbsp;&nbsp;비밀번호 확인
+	 <input type="password" id="pw2" placeholder="비밀번호 확인"/>
 	 <p id="resultPw2">위 비밀번호와 동일하게</p>
 	 </div>
 	 <button type="submit" id="submit"><i class="fi fi-rr-user-add"></i>&nbsp;&nbsp;회원가입</button>
@@ -151,6 +153,7 @@
 			resultPw.innerHTML = "영문자, 숫자, 특수문자 조합으로 8~15자 이내";
 		    resultPw.style.color = "red";
 		  }
+		  checkPwMatch();
 		  checkAllValid();
 		});
 		//console.log(pw.addEventListener);
@@ -159,16 +162,20 @@
 		const pw2 = document.querySelector("#pw2");
 		const resultPw2 = document.querySelector("#resultPw2");
 		pw2.addEventListener("input", () => {
-		  pwMatch = pw.value === pw2.value && pw.value.length > 0;
-		  if (pwMatch) {
-		    resultPw2.innerHTML = "비밀번호가 일치합니다.";
-		    resultPw2.style.color = "blue";
-		  } else {
-		    resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
-		    resultPw2.style.color = "red";
-		  }
+			checkPwMatch();
+
 		  checkAllValid();
 		});
+		function checkPwMatch() {
+			pwMatch = pw.value === pw2.value && pw.value.length > 0;
+			if (pwMatch) {
+			  resultPw2.innerHTML = "비밀번호가 일치합니다.";
+			  resultPw2.style.color = "blue";
+			} else {
+			  resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
+			  resultPw2.style.color = "red";
+			}
+		}
 		
 		// reset 버튼 클릭 시 메시지 초기화
 		$("#register").on("reset", function () {
@@ -190,14 +197,13 @@
 		  pwValid = false;
 		  pwMatch = false;
 		  empNoChecked = false;
-		
+		  $("#submit").prop("disabled", true);
+		});
+		$("#submit").prop("disabled", true);
 		// 로그인 페이지로 이동
 		$("#login").click((e) => {
 		  e.preventDefault(); // 기본 submit 막기
 		  window.location.href = "/login"; // 로그인 페이지 경로에 맞게 수정
-		});
-
-		$("#submit").prop("disabled", true);
 		});
 	</script>
 </body>

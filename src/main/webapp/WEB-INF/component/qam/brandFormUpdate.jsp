@@ -7,7 +7,7 @@
     <title>브랜드 수정</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
+	<link rel="stylesheet" href="../resources/css/qam/qamForm.css"/>
 </head>
 
 <body>

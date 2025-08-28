@@ -8,8 +8,7 @@
 }
 
 /* 본문 스타일 */
-/* 메인 섹션 */
-
+/* 메인 content */
 .content {
   margin: 15px;
   overflow-y: auto; /* 스크롤 가능 */
@@ -32,6 +31,7 @@
   font-size: 14px;
   padding: 10px;
 }
+
 /*empEval용*/
 #filter-bar {
   display: flex;
@@ -42,6 +42,7 @@
   font-size: 14px;
   flex-direction: column;
 }
+
 #filter-bar #test button,
 #filter-bar #test table .filter-bar #test button,
 .filter-bar #test table {
@@ -66,6 +67,7 @@
   border: 1px solid var(--input-color);
   border-radius: 10px;
 }
+
 #filter-bar input[type="radio"],
 #filter-bar input[type="checkbox"],
 .data-table td input[type="checkbox"],
@@ -90,6 +92,8 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+/*input file style*/
 input[type=file]::file-selector-button{
 	border-style: none;
 	text-decoration: none;
@@ -99,16 +103,11 @@ input[type=file]::file-selector-button{
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 input[type=file]{
 	width: 100%;
 	font-size: 9.6px;
 	font-weight: bold;
-}
-
-/* a 태그 상세 크기 조정*/
-.filter-bar a {
-  padding: 8px 12px;
-  font-size: 14px;
 }
 
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
@@ -119,6 +118,13 @@ input[type=file]::file-selector-button:hover,
   background-color: var(--color);
   color: #ffffff;
 }
+
+/* a 태그 상세 크기 조정*/
+.filter-bar a {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
 .btn-logout a {
   text-decoration: none;
   color: white;
@@ -160,9 +166,7 @@ table.data-table {
   padding: 3px 10px;
   border-radius: 25px ;
   text-align: center;
-
 }
-
 
 /* 테이블 컬럼명 */
 .data-table th {
@@ -176,6 +180,8 @@ table.data-table {
   background-color: var(--table-td-color);
   box-shadow: #33333362 0 5px 5px -5px;
 }
+
+/* 테이블 내 input */
 .data-table td input[type="text"],
 .data-table td input[type="date"],
 .data-table td input[type="number"],
@@ -186,7 +192,6 @@ table.data-table {
   background-color: var(--table-td-color);
   width: 100%;
 }
-
 
 /* 데이터 리스트 */
 input[list^="List"] {
@@ -208,6 +213,8 @@ input[list^="List"] {
   font-weight: bold;
 }*/
 
+/* 테이블 내 a태그 style*/
+/* 조회, 승인 */
 .btnO {
   text-decoration: none;
   background-color: var(--table-td-color);
@@ -218,6 +225,7 @@ input[list^="List"] {
   font-weight: bold;
 }
 
+/* 삭제, 반려 */
 .btnX {
   text-decoration: none;
   background-color: var(--table-td-color);
@@ -227,6 +235,8 @@ input[list^="List"] {
   cursor: pointer;
   font-weight: bold;
 }
+
+/* a태그 비활성화 */
 .disable {
   text-decoration: none;
   background-color: var(--table-td-color);
@@ -237,11 +247,11 @@ input[list^="List"] {
   pointer-events: none; /* 클릭 못하게 함 */
 }
 
-/* 테이블 내 버튼 커서 올렸을 경우 */
-.innerbtn:hover,
+/* 테이블 내 a태그에 커서 올렸을 경우 */
 .btnO:hover {
   color: green;
 }
+
 .btnX:hover {
   color: orangered;
 }
@@ -255,6 +265,7 @@ input[list^="List"] {
   padding: 10px;
 }
 
+/* 페이징 기본 style */
 .pagination li a {
   display: block;
   padding: 5px 14px;
@@ -266,10 +277,13 @@ input[list^="List"] {
   background-color: white ;
 }
 
+/* 페이징 내 a태그에 커서 올렸을 경우 */
 .pagination li a:hover {
   background-color: #eee !important;
   color: #90c67c !important;
 }
+
+/* 페이징 클릭했을 때 고정되는 색 */
 .pagination .page-link.active,
 .pagination li.active a {
   background-color: green !important;
@@ -278,6 +292,7 @@ input[list^="List"] {
   border-color: green !important;
 }
 
+/* previous, next 비활성화 시 style */
 .pagination .disabled a {
   pointer-events: none !important;
   opacity: 0.6 !important;

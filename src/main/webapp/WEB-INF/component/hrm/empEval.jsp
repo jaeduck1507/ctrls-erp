@@ -8,7 +8,7 @@
 <title>직원정보조회</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="../resources/css/empEval.css"/>
+<link rel="stylesheet" href="../resources/css/hrm/empEval.css"/>
 </head>
 <body>
 	<h5>[인적자원관리] > [인사 성과/평가]</h5>

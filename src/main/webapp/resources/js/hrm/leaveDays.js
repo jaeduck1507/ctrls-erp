@@ -22,7 +22,7 @@
 							       + "</td><tr><th><i class='fi fi-rr-letter-case'></i>&nbsp;&nbsp;사원명</th><td><b>" + leaveDays.empName
 							       + "<b></td><tr><th><i class='fi fi-rr-briefcase'></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><b>" + leaveDays.deptName 
 								   + "<b></td><tr><th><i class='fi fi-rr-sitemap'></i>&nbsp;&nbsp;직급</th><td><b>" + leaveDays.jobTitle 
-					               + "<b></td><tr><th><i class='fi fi-rr-umbrella-beach'>&nbsp;&nbsp;</i>올해 받은 휴가일수</th><td><b>12일<b></td>";
+					               + "<b></td><tr><th><i class='fi fi-rr-umbrella-beach'></i>&nbsp;&nbsp;올해 받은 휴가일수</th><td><b>12일<b></td>";
 					$("#result").append(text);
 					}
 					// 휴가 누적 사용일 수,  첫번째 ajax요청 다음에 실행되도록
@@ -42,7 +42,7 @@
 						             + "<tr><th><i class='fi fi-rr-calendar'>&nbsp;&nbsp;</i>남은 휴가일수</th><td><b>" + (12-leaveTotalDays.totalDays)  + "일<b></td></tr>";
 					       } else {
 								var text = "<tr><th><i class='fi fi-rr-calendar-check'></i>&nbsp;&nbsp;</i>휴가 누적 사용일수</th><td><b>0일<b></td></tr>"
-							             + "<tr><th><i class='fi fi-rr-calendar'>&nbsp;&nbsp;</i>남은 휴가일수</th><td><b>12일<b></td></tr>";
+							             + "<tr><th><i class='fi fi-rr-calendar'></i>&nbsp;&nbsp;남은 휴가일수</th><td><b>12일<b></td></tr>";
 							   
 						} 
 						$("#result").append(text);

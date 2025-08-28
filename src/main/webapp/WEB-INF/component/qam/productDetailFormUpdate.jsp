@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>상품 정보 수정</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="../resources/css/qamForm.css"/>
+	<link rel="stylesheet" href="../resources/css/qam/qamForm.css"/>
 </head>
 <body>
 	

@@ -7,7 +7,7 @@
     <title>사원 정보 수정</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="../resources/css/empInfoDetail.css" />
+	<link rel="stylesheet" href="../resources/css/hrm/empInfoDetails.css" />
 </head>
 <body>
 	<h5>[인적자원관리] > [사원정보조회] > [사원상세정보]</h5>

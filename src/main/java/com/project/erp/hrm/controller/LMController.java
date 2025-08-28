@@ -31,13 +31,26 @@ public class LMController {
 	
 	@ResponseBody
 	@PostMapping("/leaveAdd")
-	public boolean leaveAdd(@RequestBody List<LeaveInfo> liList) {
-//		System.out.println("Controller");
-//		System.out.println(liList);
-//		System.out.println("-----------");
-//		System.out.println(liList.get(0).getEmpNo());
-		leaveInfoService.leaveAdd(liList);
-		return true;
+	public String leaveAdd(@RequestBody List<LeaveInfo> liList) {
+		// 첫 번째 휴가 정보 가져오기 (여러 개 신청 가능하면 반복 처리 필요)
+	    LeaveInfo leave = liList.get(0);
+	    int empNo =leave.getEmpNo();
+	    // 남은 휴가일수 체크
+	    if(!leaveInfoService.canApplyLeave(empNo, leave)) {
+	    	return "exceed";
+	    }
+	    // 겹치는 휴가 있는지 체크
+	    boolean check = leaveInfoService.checkApprove(leave);
+	    
+	    if(check) {
+	        // 겹치면 신청 불가 알림
+	        return "overlap"; // JS에서 이 문자열로 처리
+	    }
+	    
+	    // 겹치지 않으면 신청 진행
+	    leaveInfoService.leaveAdd(liList);
+	    
+	    return "success"; // JS에서 이 문자열로 처리
 	}
 //	common UserController로 이동
 //	@ResponseBody

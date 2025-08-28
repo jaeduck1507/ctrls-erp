@@ -22,24 +22,30 @@ form button{
 	justify-content: flex-start;
 }
 .box table{
+
 	border-radius: 10px;
 	
 }
 .box td{
 	color: #938E8E;
 	border-radius: 10px;
-	width: 300px;
+	width: fit-content;
 	height: 60px;
+	padding-right: 100px;
+
 	
 }
 .box th {
 	color: #938E8E;
 	border-radius: 10px;
-	width: 250px;
+	width: 240px;
+
 }
+.box select,
 .box input[type="text"],
 .box input[type="date"] {
 	border-style: none;
+
 }
 .box input[readonly="readonly"]{
 	border-style: none;

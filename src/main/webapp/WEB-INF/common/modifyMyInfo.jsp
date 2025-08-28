@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>사원 정보 수정</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="../resources/css/modifyMyInfo.css"/>
+	<link rel="stylesheet" href="../resources/css/modifypage.css"/>
 </head>
 <body>
 
@@ -30,7 +30,7 @@
 		    <th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;&nbsp;&nbsp;직급</th><td><input type="text" name="jobTitle" value="${user.jobTitle}" readonly="readonly"></td>
 			</tr>
 			<tr>
-		    <th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><input type="text" name="deptName" value="${user.deptName}" readonly="readonly"></td>
+		    <th><i class="fi fi-rr-briefcase"></i>&nbsp;&nbsp;&nbsp;&nbsp;부서</th><td><input type="text" name="deptName" value="${user.deptName}" readonly="readonly"></td>
 			</tr>
 			<tr>
 		    <th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;입사일</th><td><input type="date" name="hireDate" value="${user.hireDate}" readonly="readonly"></td>

@@ -30,32 +30,14 @@ $(".btnO").click((e)=>{
 							//location.reload();
 							let timerInterval;
 							Swal.fire({
-								icon: "success",
-								iconColor: "green",
-							  title: "승인되었습니다!",
-							  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
-							  timer: 3000,
-							  timerProgressBar: true,
-							  didOpen: () => {
-							    Swal.showLoading();
-							    const timer = Swal.getPopup().querySelector("#aa");
-							    timerInterval = setInterval(() => {
-									let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
-							      timer.textContent = remainSecond +1;
-							    }, 100);
-							  },
-							  willClose: () => {
-							    clearInterval(timerInterval);
-							  }
-							}).then((result) => {
-							  /* Read more about handling dismissals below */
-							  if(result.dismiss == "backdrop") {
-								  location.reload();
-							  }
-							  if (result.dismiss === Swal.DismissReason.timer) {
-								  location.reload();
-							  }
-							});
+				   					title: "휴가 승인 완료",
+				   					icon: "success",
+				   					timer: 3000,
+				   					timerProgressBar: true,
+				   					didClose: () => {
+				   						location.href = $(this).attr("href");
+				   					}
+				   				}).then(() => location.reload());
 							
 							
 						},
@@ -93,33 +75,15 @@ $(".btnO").click((e)=>{
 										// 응답
 										success : function(result) {
 											let timerInterval;
-										Swal.fire({
-											icon: "success",
-											iconColor: "green",
-										  title: "반려되었습니다!",
-										  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
-										  timer: 3000,
-										  timerProgressBar: true,
-										  didOpen: () => {
-										    Swal.showLoading();
-										    const timer = Swal.getPopup().querySelector("#aa");
-										    timerInterval = setInterval(() => {
-												let remainSecond = parseInt(Swal.getTimerLeft() / 1000) ;
-										      timer.textContent = remainSecond +1;
-										    }, 100);
-										  },
-										  willClose: () => {
-										    clearInterval(timerInterval);
-										  }
-										}).then((result) => {
-										  /* Read more about handling dismissals below */
-										  if(result.dismiss == "backdrop") {
-											  location.reload();
-										  }
-										  if (result.dismiss === Swal.DismissReason.timer) {
-											  location.reload();
-										  }
-										});
+											Swal.fire({
+							   					title: "휴가 반려 완료",
+							   					icon: "success",
+							   					timer: 3000,
+							   					timerProgressBar: true,
+							   					didClose: () => {
+							   						location.href = $(this).attr("href");
+							   					}
+							   				}).then(() => location.reload());
 										
 										
 									},

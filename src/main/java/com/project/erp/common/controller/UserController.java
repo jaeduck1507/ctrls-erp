@@ -67,7 +67,7 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/myLeaveAdd")
 	public String myLeavePage(@RequestBody List<LeaveInfo> liList) {
-//		// 첫 번째 휴가 정보 가져오기 (여러 개 신청 가능하면 반복 처리 필요)
+  		// 첫 번째 휴가 정보 가져오기 (여러 개 신청 가능하면 반복 처리 필요)
 	    LeaveInfo leave = liList.get(0);
 	    int empNo =leave.getEmpNo();
 	    // 남은 휴가일수 체크
