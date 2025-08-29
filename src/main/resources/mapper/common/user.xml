@@ -55,4 +55,12 @@
 	<delete id="deleteId" parameterType="Quitter">
 		DELETE FROM user WHERE emp_no = #{empNo};
 	</delete>
+	
+	<update id="updatePermissions" parameterType="User">
+		UPDATE user
+		<set>
+			role = #{role}
+		</set>
+		WHERE emp_no = #{empNo}
+	</update>
 </mapper>

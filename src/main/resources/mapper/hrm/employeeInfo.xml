@@ -89,6 +89,7 @@
 			AND dept_no = #{empInfo.deptNo}
 		</if>
 		</where>
+		ORDER BY emp_no
 		LIMIT #{offset}, #{limit}
 	</select>
 	

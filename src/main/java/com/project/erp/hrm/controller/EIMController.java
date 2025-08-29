@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.common.model.vo.Paging;
+import com.project.erp.common.service.UserService;
 import com.project.erp.hrm.model.dto.EmpAddDTO;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.model.dto.EmpInfoPagingDTO;
@@ -33,6 +34,9 @@ public class EIMController {
 	
 	@Autowired
 	private JobPositionService jobPositionService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@ResponseBody
 	@PostMapping("/infoShow")
@@ -81,6 +85,7 @@ public class EIMController {
 	@PostMapping("/modifyJobDept")
 	public boolean modifyJobDept(@RequestBody EmpInfo ei) {
 		employeeInfoservice.modifyJobDept(ei);
+		userService.updatePermissions(ei);
 		return true;
 	}
 	
