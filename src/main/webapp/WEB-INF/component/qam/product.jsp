@@ -33,7 +33,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <table border="1" id="result" class="data-table">
       <tr>
         <th>제품 번호</th>
-        <th>생산일</th>
+        <th>입고일</th>
         <th>제품 코드</th>
         <th>카테고리</th>
         <th>색상</th>
