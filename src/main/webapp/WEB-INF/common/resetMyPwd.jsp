@@ -12,7 +12,7 @@
 <body>
 	<h5>[마이페이지] > [비밀번호 재설정]</h5>
 			<h3>비밀번호 재설정</h3>
-<form>
+
 	      <div class="filter-bar box">
 	        <table>
 	        <tr>
@@ -30,7 +30,7 @@
 			<div class="filter-bar">
 	        <button class="btn" id="btn">재설정</button>
 			</div>
-</form>	      
+      
 <script>
 	let pwValid = false;
 	let pwMatch = false;
