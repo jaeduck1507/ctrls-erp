@@ -63,6 +63,7 @@
 .filter-bar fieldset,
 .filter-bar select,
 .filter-bar textarea  {
+  outline: none;
   padding: 4px 8px;
   border: 1px solid var(--input-color);
   border-radius: 10px;
@@ -187,6 +188,7 @@ table.data-table {
 .data-table td input[type="number"],
 .data-table td select,
 .data-table td input[list="List1"] {
+	outline: none;
   text-align: center;
   border-style: none;
   background-color: var(--table-td-color);

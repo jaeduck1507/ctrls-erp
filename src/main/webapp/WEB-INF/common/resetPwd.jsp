@@ -66,10 +66,12 @@
 		 		  if (value === "") {			
 		 		    resultId.innerHTML = "필수 입력값입니다.";
 		 		    resultId.style.color = "red";
+					id.style.border = "solid red 1px"
 					idValid = false;
 		 		  } else {			
 		 			resultId.innerHTML = "조회 버튼을 눌러주세요.";
-		 		    resultId.style.color = "blue";
+		 		    resultId.style.color = "green";
+					id.style.border = ""
 					idValid = true;
 		 		  }
 				  
@@ -89,9 +91,11 @@
 			    success: function (result) {
 			      if (!result) {
 			        $("#result").append("아이디가 존재하지 않습니다.").css("color", "red");
+					$("#username").css("border", "red 1px solid");
 					idChecked = false;
 			      } else {
 			        $("#result").append("아이디 체크 완료").css("color", "blue");
+					$("#username").css("border", "");
 					idChecked = true;
 					
 			      }
@@ -110,9 +114,11 @@
 			  if (pwValid) {	
 			    resultPw.innerHTML = "사용가능한 비밀번호입니다.";
 			    resultPw.style.color = "blue";
+				pw.style.border = ""
 			  } else {
 				resultPw.innerHTML = "영문자, 숫자, 특수문자 조합으로 8~15자 이내";
 			    resultPw.style.color = "red";
+				pw.style.border = "red solid 1px"
 			  }
 			  checkPwMatch();
 			  checkAllValid();
@@ -132,9 +138,11 @@
 				if (pwMatch) {
 					    resultPw2.innerHTML = "비밀번호가 일치합니다.";
 					    resultPw2.style.color = "blue";
+						pw2.style.border = ""
 					  } else {
 					    resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
 					    resultPw2.style.color = "red";
+						pw2.style.border = "red solid 1px"
 					  }			
 				}
 			

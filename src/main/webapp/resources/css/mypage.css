@@ -93,6 +93,7 @@ h4 {
 }
 .box input[type="text"],
 .box input[type="date"] {
+	outline: none;
 	border-style: none;
 }
 .box input[readonly="readonly"]{

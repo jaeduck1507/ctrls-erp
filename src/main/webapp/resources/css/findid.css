@@ -36,6 +36,7 @@ body {
   flex-direction: column;
 }
 .filter-bar input[type="text"]{
+	outline: none;
   padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

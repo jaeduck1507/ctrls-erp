@@ -9,7 +9,7 @@ form{
 	  overflow-x: hidden; /* 가로 스크롤 제거 */
   }
    
-
+.box,
 form .box {
 	background-color: #F5F5F5;
 	padding: 30px;
@@ -30,7 +30,7 @@ form button{
 	color: #938E8E;
 	border-radius: 10px;
 	width: fit-content;
-	height: 60px;
+	height: 50px;
 	padding-right: 100px;
 
 	
@@ -44,6 +44,7 @@ form button{
 .box select,
 .box input[type="text"],
 .box input[type="date"] {
+	outline: none;
 	border-style: none;
 
 }

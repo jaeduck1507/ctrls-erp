@@ -18,13 +18,13 @@
 
 	<div class="box filter-bar">
 	<table>
-    <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사진<th><td><img src="/images/${empInfo.url}" width="100" height="150" onerror="this.onerror=null; this.src='/images/default.jpg';" /><input type="hidden" value="${empInfo.url}" id="url"></td><tr>
+    <tr><th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진<th><td><img src="/images/${empInfo.url}" width="100" height="150" onerror="this.onerror=null; this.src='/images/default.jpg';" /><input type="hidden" value="${empInfo.url}" id="url"></td><tr>
     <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번<th><td><input type="text" name="empNo" value="${empInfo.empNo}" readonly="readonly" id="empNo"></td><tr>
     <tr><th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;성명<th><td><input type="text" name="empName" value="${empInfo.empName}" id ="empName"></label><br>
     <tr><th><i class="fi fi-rr-hastag"></i>&nbsp;&nbsp;주민등록번호<th><td><input type="text" name="empIn" value="${empInfo.empIn}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-sitemap"></i>&nbsp;&nbsp;직급<th><td><input type="text" name="jobTitle" value="${empInfo.jobTitle}" readonly="readonly"></td><tr>
-    <tr><th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;부서<th><td><input type="text" name="deptName" value="${empInfo.deptName}" readonly="readonly"></td><tr>
-    <tr><th><i class="fi fi-rr-department"></i>&nbsp;&nbsp;급여<th><td><input type="text" name="salary" value="${empInfo.salary}" readonly="readonly"></td><tr>
+    <tr><th><i class="fi fi-rr-briefcase"></i>&nbsp;&nbsp;부서<th><td><input type="text" name="deptName" value="${empInfo.deptName}" readonly="readonly"></td><tr>
+    <tr><th><i class="fi fi-rr-usd-circle"></i>&nbsp;&nbsp;급여<th><td><input type="text" name="salary" value="${empInfo.salary}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;입사일<th><td><input type="date" name="hireDate" value="${empInfo.hireDate}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-calendar"></i>&nbsp;&nbsp;퇴사일<th><td><input type="date" name="quitDate" value="${empInfo.quitDate}" readonly="readonly"></td><tr>
     <tr><th><i class="fi fi-rr-home-location-alt"></i>&nbsp;&nbsp;주소<th><td><input type="text" name="addr" value="${empInfo.addr}" id="addr"></td><tr>

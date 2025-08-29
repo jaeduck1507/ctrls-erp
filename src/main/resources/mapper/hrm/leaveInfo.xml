@@ -97,10 +97,10 @@ WHERE emp_no= #{empNo}
 승인된 휴가만 휴가 누적 사용일수에 포함
 휴가 누적 사용일수 = 12개 - {(종료일-시작일)+1} -->
 <select id="leaveTotalDays" parameterType="LeaveInfo" resultMap="LeaveInfoMap">
-SELECT 
-SUM(DATEDIFF(end_date, start_date) + 1) AS 'total_days'
+SELECT end_date, start_date
 FROM leave_request
-WHERE emp_no = #{empNo} AND (status = '승인' or status = '대기')
+WHERE emp_no = #{empNo} 
+      AND (status = '승인' OR status = '대기')
 </select>
 
 <select id="leaveInfoView" parameterType="LeaveInfo" resultMap="LeaveInfoMap">

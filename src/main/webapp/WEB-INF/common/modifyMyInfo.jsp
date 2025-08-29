@@ -18,7 +18,7 @@
 	<div class="box">
 		<table>
 			<tr>
-			 <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${user.url}" width="75" height="100" onerror="this.onerror=null; this.src='/images/default.jpg';"/><input type="hidden" value="${user.url}" id="url"></td>
+			 <th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${user.url}" width="75" height="100" onerror="this.onerror=null; this.src='/images/default.jpg';"/><input type="hidden" value="${user.url}" id="url"></td>
 			<tr>
 			<tr>
 		    <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;&nbsp;&nbsp;사번</th><td><input type="text" name="empNo" value="${user.empNo}" readonly="readonly" id="empNo"></td>
