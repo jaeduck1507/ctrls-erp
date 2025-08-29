@@ -195,6 +195,7 @@ public class PIMController {
     
     @PostMapping("/registerBrand")
     public String registerBrand(Brand brand) {
+    	System.out.println(brand);
     	brandService.registerBrand(brand);
     	return "redirect:/qam/brand";
     }

@@ -90,16 +90,13 @@ public class AttendanceLogService {
 
 			// 고용일보다 전이면 카운트 올리고 스킵
 			if (ym.getYear() < ei.getHireDate().getYear()) {
-				count++;
 				continue;
 			}
 			if (ym.getYear() == ei.getHireDate().getYear() && ym.getMonthValue() < ei.getHireDate().getMonthValue()) {
-				count++;
 				continue;
 			}
 			if (ym.getYear() == ei.getHireDate().getYear() && ym.getMonthValue() == ei.getHireDate().getMonthValue()
 					&& ei.getHireDate().getDayOfMonth() > i) {
-				count++;
 				continue;
 			}
 
