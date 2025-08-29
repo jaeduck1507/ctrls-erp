@@ -14,7 +14,7 @@ function validateDeductions() {
 			input.parentElement.classList.remove("red");
 		}
 		
-		localStorage.setItem(input.name, input.value);
+		localStorage.setItem(input.name, input.value || 0);
 		localStorage.setItem(input.name + "_valid", checkValid);
 	}
 	
@@ -41,7 +41,6 @@ $(document).ready(function() {
 $(document).on('input', '.deduction', function() {
 	validateDeductions();
 });
-
 
 var salayPagingDTO = {};
 function inint_Paing() {

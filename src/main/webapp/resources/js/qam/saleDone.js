@@ -44,8 +44,19 @@ function displaySale(result) {
 			},
 			success: function (result) {
 				if (!result.list || result.list.length === 0) {
-					alert("조회된 결과가 없습니다");
-					location.reload();
+					//alert("조회된 결과가 없습니다");
+					//location.reload();
+					Swal.fire({
+						position: "top",
+						icon: "error",
+						title: "조회된 결과가 없습니다!",
+						showConfirmButton: false,
+						timer: 1500,
+						didClose: () => {
+							location.reload();
+						}
+					});
+					return;
 				} else {
 					console.log(result);
 					displaySale(result);

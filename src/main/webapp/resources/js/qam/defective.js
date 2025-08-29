@@ -57,7 +57,24 @@ $(document).ready(function() {
 	            checkDamage: ($("#checkDamage").is(":checked")? "불합격" : "합격")
 	        },
 	        success: function (result) {
-	            displayDefective(result.list);
+				if (!result.list || result.list.length === 0) {
+					//alert("조회된 결과가 없습니다");
+					//location.reload();
+					Swal.fire({
+						position: "top",
+						icon: "error",
+						title: "조회된 결과가 없습니다!",
+						showConfirmButton: false,
+						timer: 1500,
+						didClose: () => {
+							location.reload();
+						}
+					});
+					return;
+				} else {
+					displayDefective(result.list);
+				}
+				
 				$(".pagination").html('');
 				$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
 				for(var i =result.startPage; i<=result.endPage; i++) {

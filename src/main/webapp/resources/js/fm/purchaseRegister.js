@@ -187,7 +187,7 @@ $(document).on("click", "#purchase-register", function() { // 제출 버튼 동�
 			icon: "warning",
 			iconColor: "#E74C3C",
 			title: "등록 실패!",
-			text: "모든 정보를 정확히 입력해주세요.",
+			text: "필수 항목을 정확히 입력해주세요.",
 			showConfirmButton: true,
 			confirmButtonColor: "#85c468",
 			timer: 2000

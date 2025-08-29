@@ -7,7 +7,6 @@
     <title>품질검사 결과 목록</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="../resources/css/basic.css"/>
-<!--	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">-->
 </head>
 <body>
 	<h5>[품질 관리] > [품질검사 결과 목록]</h5>
@@ -17,7 +16,7 @@
 
 <!-- QC 등록 버튼 -->
 <a href="/qam/qcForm">신규 검사 등록</a> <br>
-<div></div>
+
 <form id = "searchForm">
 		제품 조회: <select id ="productName">
 					<option value="">제품 선택</option>

@@ -8,39 +8,46 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link rel="stylesheet" href="../resources/css/basic.css"/>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 
 <body>
 	<h5>[품질 관리] > [불량품 조회]</h5>
-		<h3>불량품 조회</h3>
+	<h3>불량품 조회</h3>
 
 <div class="filter-bar">
 <form id="defectiveSearchForm">
-	<!-- 불량 유형 필터 체크박스 -->
-	불량 유형:
-	<label><input type="checkbox" class="defectiveFilter" id="checkMaterial" value="material" checked> 부자재 불량</label>
-	<label><input type="checkbox" class="defectiveFilter" id="checkColor" value="color" checked> 색상 불량</label>
-	<label><input type="checkbox" class="defectiveFilter" id="checkDamage" value="damage" checked> 손상 불량</label>
-</br>	
-	카테고리 조회: <select id="productCategory">
-	    <option value="">카테고리 선택</option>
-	    <option value="상의">상의</option>
-	    <option value="하의">하의</option>
-	    <option value="악세사리">악세사리</option>
-	    <option value="신발">신발</option>
-	</select>
-	
-	검사일 조회 (시작일): <input type="date" id="startDate">
-	(종료일): <input type="date" id="endDate"> 
-	
-	<button type="button" id="searchBtn">검색</button>
-	<button type="button" id="resetBtn">전체보기</button>
+	<div>
+		<!-- 불량 유형 필터 체크박스 -->
+		불량 유형:
+		<label><input type="checkbox" class="defectiveFilter" id="checkMaterial" value="material" checked> 부자재 불량</label>
+		<label><input type="checkbox" class="defectiveFilter" id="checkColor" value="color" checked> 색상 불량</label>
+		<label><input type="checkbox" class="defectiveFilter" id="checkDamage" value="damage" checked> 손상 불량</label>
+	</div>
+	</br>	
+	<div>
+		카테고리 조회: 
+		<select id="productCategory">
+		    <option value="">카테고리 선택</option>
+		    <option value="상의">상의</option>
+		    <option value="하의">하의</option>
+		    <option value="악세사리">악세사리</option>
+		    <option value="신발">신발</option>
+		</select>
+	</div>
+	<div>
+		검사일 조회 (시작일): <input type="date" id="startDate">
+		(종료일): <input type="date" id="endDate"> 
+		
+		<button type="button" id="searchBtn">검색</button>
+		<button type="button" id="resetBtn">전체보기</button>
+	</div>
 </form>
 </div>
+
 <div class="total">
-<h4 id="defectivePriceSum"></h4>
+	<h4 id="defectivePriceSum"></h4>
 </div>
+
 <table border="1" id="defectiveResult" class="data-table">
     <thead>
         <tr>
