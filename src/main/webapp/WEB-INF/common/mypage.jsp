@@ -84,10 +84,7 @@
 	<button onclick="location.href='/myAttendance'">출근 현황 보기(완)</button>
 	<button onclick="location.href='/resetMyPwd'">비밀번호재설정(미완)</button>
 	</div>
-	
-	<div class="logout">
-	<a href="/logout" class="btn-logout"><i class="fi fi-rr-exit"></i>&nbsp;&nbsp;로그아웃</a>
-	</div>
+
 	</div>
 	<script src="../resources/js/common/mypage.js"></script>
 </body>

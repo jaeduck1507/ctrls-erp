@@ -79,7 +79,7 @@
 		      </div>
 			  
 			  <div class="modal-body">
-					<i class="fi fi-rr-department"></i>&nbsp;&nbsp;급여<th><td><input type="text" name="salary" value="${empInfo.salary}" id="salary">
+					<i class="fi fi-rr-usd-circle"></i>&nbsp;&nbsp;급여&nbsp;&nbsp;<input type="text" name="salary" value="${empInfo.salary}" id="salary">
 			  </div>
 		      <div class="modal-footer">
 		      	<p>급여 변경시 이전 급여는 확인 불가능 합니다</p>
