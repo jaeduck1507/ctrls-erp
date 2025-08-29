@@ -13,17 +13,25 @@ function addRow() {
     $newRow.append('<td><button class="btn4">열 삭제</button></td>');
 
     // 현재 날짜 고정
-    const today = new Date();
-    const todayStr = today.toISOString().substring(0, 10);
+	 const today = new Date();
+	 const year = today.getFullYear();
+	 const month = String(today.getMonth() + 1).padStart(2, "0");
+	 const day = String(today.getDate()).padStart(2, "0");
+	 const todayStr = year+"-"+month+"-"+day;
     $newRow.find(".currentDate").val(todayStr);
 
     // 내일부터 시작 (주말 보정)
     let tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
+	// 토요일이면 +2일 → 월요일
     if (tomorrow.getDay() === 6) tomorrow.setDate(tomorrow.getDate() + 2); // 토요일 → 월요일
-    if (tomorrow.getDay() === 0) tomorrow.setDate(tomorrow.getDate() + 1); // 일요일 → 월요일
+	// 일요일이면 +1일 → 월요일
+	if (tomorrow.getDay() === 0) tomorrow.setDate(tomorrow.getDate() + 1); // 일요일 → 월요일
 
-    const nextStr = tomorrow.toISOString().substring(0, 10);
+	 const nextYear = tomorrow.getFullYear();
+	 const nextMonth = String(tomorrow.getMonth() + 1).padStart(2, "0");
+	 const nextDay = String(tomorrow.getDate()).padStart(2, "0");
+	 const nextStr = nextYear+"-"+nextMonth+"-"+nextDay;
     $newRow.find(".leaveDate").val(nextStr).attr("min", nextStr);
 
     // 공휴일

@@ -13,7 +13,7 @@
             <div class="submenu">
               <a href="/hrm/empInfo">사원정보조회 /hrm/empInfo 페이징 처리 완료</a>
               <a href="/hrm/empAdd">사원정보추가 /hrm/empAdd</a>
-              <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow 페이징 처리 필요</a>
+              <a href="/hrm/quitShow">퇴사자정보조회 /hrm/quitShow 페이징 처리 완료</a>
               <a href="/hrm/empEval">인사/성과평가 /hrm/empEval</a>
             </div>
           </div>

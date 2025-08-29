@@ -7,10 +7,12 @@ const name = document.querySelector("#empName");
 		$("#submit").prop("disabled", false);
 	    resultName.innerHTML = "OK!";
 	    resultName.style.color = "blue";
+		name.style.border = "";
 	  } else {
 		$("#submit").prop("disabled", true);
 		resultName.innerHTML = "한글 2자 이상";
 	    resultName.style.color = "red";
+		name.style.border = "red solid 1px";
 	  }
 	});
 	// 전화번호 입력
@@ -23,11 +25,13 @@ const name = document.querySelector("#empName");
 		$("#submit").prop("disabled", false);
 	    resultTel.innerHTML = "OK!";
 	    resultTel.style.color = "blue";
+		tel.style.border = "";
 
 	  } else {
 		$("#submit").prop("disabled", true);
 		resultTel.innerHTML = "010-0000-0000 형식";
 	    resultTel.style.color = "red";
+		tel.style.border = "red solid 1px";
 
 	  }
 	});
@@ -42,11 +46,13 @@ const name = document.querySelector("#empName");
 		$("#submit").prop("disabled", false);
 	    resultEmail.innerHTML = "OK!";
 	    resultEmail.style.color = "blue";
+		email.style.border = "";
 
 	  } else {
 		$("#submit").prop("disabled", true);
 		resultEmail.innerHTML = "이메일 형식(@포함)";
 	    resultEmail.style.color = "red";
+		email.style.border = "red solid 1px";
 
 	  }
 	});

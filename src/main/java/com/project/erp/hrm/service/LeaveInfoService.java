@@ -1,6 +1,8 @@
 package com.project.erp.hrm.service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +78,18 @@ public class LeaveInfoService {
 	}
 
 	public List<LeaveInfo> leaveTotalDays(LeaveInfo leaveInfo) {
-		return leaveInfoMapper.leaveTotalDays(leaveInfo);
+		List<LeaveInfo> liList = leaveInfoMapper.leaveTotalDays(leaveInfo);
+		
+		int totalDays = 0;
+		for(LeaveInfo li : liList) {
+			totalDays += calculateLeaveDays(li.getStartDate(), li.getEndDate());
+		}
+		
+		LeaveInfo result = new LeaveInfo();
+		result.setEmpNo(leaveInfo.getEmpNo());
+		result.setTotalDays(totalDays);
+		
+		return Collections.singletonList(result);
 
 	}
 
@@ -127,8 +140,7 @@ public class LeaveInfoService {
 	// 직원이 신청하려는 휴가일수가 남은 휴가일수를 초과하는지 체크
 	public boolean canApplyLeave(int empNo, LeaveInfo leave) {
 		// 이번 신청 휴가 일수 계산 (종료일 - 시작일 + 1)
-		int requestedDays = (int) java.time.temporal.ChronoUnit.DAYS.between(leave.getStartDate(), leave.getEndDate())
-				+ 1;
+		int requestedDays = calculateLeaveDays(leave.getStartDate(), leave.getEndDate());
 
 		// 이미 사용한 누적 휴가일수 조회
 		LeaveInfo li = new LeaveInfo();
@@ -143,6 +155,20 @@ public class LeaveInfoService {
 		int remaining = 12 - usedDays;
 
 		return requestedDays <= remaining; // true: 신청 가능, false: 초과
+	}
+	
+	// 주말 제외 휴가일수 계산
+	private int calculateLeaveDays(LocalDate startDate, LocalDate endDate) {
+		int days = 0;
+		LocalDate date = startDate;
+		while(!date.isAfter(endDate)){
+			DayOfWeek dow = date.getDayOfWeek();
+			if(dow != DayOfWeek.SATURDAY && dow != DayOfWeek.SUNDAY) {
+				days++;
+			} 
+			date = date.plusDays(1);
+		}
+		return days;
 	}
 
 }

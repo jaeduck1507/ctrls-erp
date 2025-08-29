@@ -21,7 +21,7 @@
 				<input type="number" name="empNo" id ="empNo" placeholder="사번 입력">
 				<button type="button" id = "noCheck">사번확인</button>
 				</div>
-				<span id="noCkeckMessage">사번 입력 후 번호 확인을 눌러주세요.</span>
+				<span id="noCkeckMessage">사번 입력 후 사번확인을 눌러주세요.</span>
 				</div>
 			<div class="id-area">
 	<i class="fi fi-rr-user"></i>&nbsp;&nbsp;아이디
@@ -40,7 +40,7 @@
 	 <div class="pwd-area">
 	 <i class="fi fi-rr-padlock-check"></i>&nbsp;&nbsp;비밀번호 확인
 	 <input type="password" id="pw2" placeholder="비밀번호 확인"/>
-	 <p id="resultPw2">위 비밀번호와 동일하게</p>
+	 <p id="resultPw2">위 비밀번호와 동일하게 입력</p>
 	 </div>
 	 <button type="submit" id="submit"><i class="fi fi-rr-user-add"></i>&nbsp;&nbsp;회원가입</button>
 	 <div>
@@ -65,6 +65,26 @@
 		     $("#submit").prop("disabled", true);
 		   }
 		 }
+		 
+		 // 사번 입력
+ 		const empNo = document.querySelector("#empNo");
+ 		const resultNo = document.querySelector("#noCkeckMessage");
+ 		empNo.addEventListener("input", (e) => {
+			const value = e.target.value; // 앞뒤 공백 제거
+			idChecked = false; // 아이디 다시 입력하면 중복확인 다시 해야 함
+ 		  if (value === "") {			
+ 		    resultNo.innerHTML = "필수 입력값입니다.";
+ 		    resultNo.style.color = "red";
+			empNo.style.border = "red solid 1px";
+			
+ 		  } else {			
+ 			resultNo.innerHTML = "사번확인 버튼을 눌러주세요.";
+ 		    resultNo.style.color = "green";
+			empNo.style.border = "";
+ 		  }
+		  
+ 		  checkAllValid();
+ 		});
 		 // 아이디 생성 가능한 사번인지 확인
  		$("#noCheck").click(() =>{
          	const empNo = $("#empNo").val();
@@ -78,10 +98,12 @@
  					if(result == 0) {
  						$("#noCkeckMessage").text("아이디 생성이 가능합니다.");
  						$("#noCkeckMessage").css("color","blue");
+						$("#empNo").css("border","");
 						empNoChecked = true;
  					} else {
  						$("#noCkeckMessage").text("아이디 생성이 불가능합니다.");
  						$("#noCkeckMessage").css("color","red");
+						$("#empNo").css("border","red solid 1px");
 						empNoChecked = false;
  					}
  					checkAllValid();
@@ -103,11 +125,13 @@
 		  idValid = idExp.test(e.target.value);
 		  idChecked = false; // 아이디 다시 입력하면 중복확인 다시 해야 함
 		  if (idValid) {			
-		    resultId.innerHTML = "OK! 중복확인을 해주세요.";
-		    resultId.style.color = "blue";
+		    resultId.innerHTML = "중복확인을 눌러주세요.";
+		    resultId.style.color = "green";
+			id.style.border = "";
 		  } else {			
 			resultId.innerHTML = "영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내";
 		    resultId.style.color = "red";
+			id.style.border = "red solid 1px";
 		  }
 		  checkAllValid();
 		});
@@ -118,6 +142,7 @@
 		    if (!idValid) {
 		      resultId.innerHTML = "아이디 형식이 올바르지 않습니다.";
 		      resultId.style.color = "red";
+			  id.style.border = "red solid 1px";
 		      return;
 		    }
 		    $.ajax({
@@ -128,10 +153,13 @@
 		        if (result == 0) {
 		          resultId.innerHTML = "사용 가능한 아이디입니다!";
 		          resultId.style.color = "blue";
+				  id.style.border = "";
+				  
 		          idChecked = true;
 		        } else {
 		          resultId.innerHTML = "이미 사용 중인 아이디입니다.";
 		          resultId.style.color = "red";
+				  id.style.border = "red solid 1px";
 		          idChecked = false;
 		        }
 		        checkAllValid();
@@ -149,9 +177,11 @@
 		  if (pwValid) {	
 		    resultPw.innerHTML = "사용가능한 비밀번호입니다.";
 		    resultPw.style.color = "blue";
+			pw.style.border = "";
 		  } else {
 			resultPw.innerHTML = "영문자, 숫자, 특수문자 조합으로 8~15자 이내";
 		    resultPw.style.color = "red";
+			pw.style.border = "red solid 1px";
 		  }
 		  checkPwMatch();
 		  checkAllValid();
@@ -171,16 +201,18 @@
 			if (pwMatch) {
 			  resultPw2.innerHTML = "비밀번호가 일치합니다.";
 			  resultPw2.style.color = "blue";
+			  pw2.style.border = "";
 			} else {
 			  resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
 			  resultPw2.style.color = "red";
+			  pw2.style.border = "red solid 1px";
 			}
 		}
 		
 		// reset 버튼 클릭 시 메시지 초기화
 		$("#register").on("reset", function () {
 		  // 사번 안내
-		  $("#noCkeckMessage").text("사번 입력 후 번호 확인을 눌러주세요.").css("color", "");
+		  $("#noCkeckMessage").text("사번 입력 후 사번확인을 눌러주세요.").css("color", "");
 
 		  // 아이디 안내
 		  $("#resultId").text("영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내").css("color", "");
@@ -189,7 +221,7 @@
 		  $("#resultPw").text("영문자, 숫자, 특수문자 조합으로 8~15자 이내").css("color", "");
 
 		  // 비밀번호 확인 안내
-		  $("#resultPw2").text("위 비밀번호와 동일하게").css("color", "");
+		  $("#resultPw2").text("위 비밀번호와 동일하게 입력").css("color", "");
 
 		  // 상태값 전부 false로 초기화
 		  idValid = false;
@@ -199,7 +231,9 @@
 		  empNoChecked = false;
 		  $("#submit").prop("disabled", true);
 		});
+		
 		$("#submit").prop("disabled", true);
+		
 		// 로그인 페이지로 이동
 		$("#login").click((e) => {
 		  e.preventDefault(); // 기본 submit 막기

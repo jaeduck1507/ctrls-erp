@@ -1,4 +1,3 @@
-// 조회 버튼 클릭 시 정보 출력
 			$(document).ready(()=>{
 				const formData = new FormData();
 				formData.append("empNo", $('#empNoSearch').val());
@@ -67,7 +66,7 @@
 		            "<td>" + row.startDate  + "</td>" +
 		            "<td>" + row.endDate    + "</td>" +
 		            "<td>" + row.reason     + "</td>" +
-		            "<td>" + row.status     + "</td>" +
+		            "<td style='" + (row.status == "승인"? "color:#0065F8": row.status === "대기"? "color:#FFA62F" : "color:#7A7A73")+"'>" + row.status + "</td>" +
 		            "<td><a href='/myLeaveView?leaveId=" + row.leaveId + "' class='" + (row.status === "승인" || row.status === "반려"? "disable" : "btnO") + "'>수정</a></td>" +
 		            "<td><a href='/myLeaveDelete?leaveId="+ row.leaveId +"' class='" + (row.status === "승인" || row.status === "반려" ? "disable" : "btnX") + "'>삭제</a></td>" +
 		          "</tr>";
@@ -227,6 +226,7 @@
 	 		     endDateInput.setAttribute('min', startDateInput.value);
 	 		     // 사용자가 휴가 시작일 변경하면 휴가 종료일 가능일로 자동변경
 	 		     $("#endDate").val(this.value);
+			
 			 });
 			 
 	   });
@@ -306,6 +306,13 @@
 		                   },
 		                   error: function(xhr, status, error) {
 		                       console.error(error);
+							   Swal.fire({
+	                               title: "휴가 날짜를 선택해주세요!",
+	                               confirmButtonText: '확인',
+	                               width: 600,
+	                               confirmButtonColor: "#90C67C",
+	                               icon: "warning"
+	                           });
 		                   }
 		               });
 		           }
@@ -343,3 +350,5 @@
 		   			}
 		   		});
 		   	});
+			
+			

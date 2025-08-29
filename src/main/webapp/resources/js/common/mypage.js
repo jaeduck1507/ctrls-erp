@@ -133,3 +133,4 @@ function checkAtt() { // 출퇴근 현황 ajax로 보기
 	
 	nowtime(); // 처음에 바로 실시간 시간 받아오기
 	checkAtt(); // 처음에 바로 출퇴근 현황 보여주기
+	

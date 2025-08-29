@@ -49,10 +49,12 @@ body {
 .filter-bar .id-area input[type="text"],
 .filter-bar .pwd-area input[type="password"],
 .filter-bar input[type="number"] {
+	outline: none;
   width: 100%;
   padding: 6px 8px;
   border: 1px solid #90c67c;
   border-radius: 4px;
+  
 }
 
 /*사번확인, 중복확인 버튼*/

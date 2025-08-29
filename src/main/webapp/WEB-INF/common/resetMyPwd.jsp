@@ -51,9 +51,11 @@
 		  if (pwValid) {	
 		    resultPw.innerHTML = "사용가능한 비밀번호입니다.";
 		    resultPw.style.color = "blue";
+			pw.style.border = "";
 		  } else {
 			resultPw.innerHTML = "영문자, 숫자, 특수문자 조합 8~15자 이내";
 		    resultPw.style.color = "red";
+			pw.style.border = "red solid 1px";
 		  }
 		  checkPwMatch();
 		  checkAllValid();
@@ -73,9 +75,11 @@
 						  if (pwMatch) {
 						    resultPw2.innerHTML = "비밀번호가 일치합니다.";
 						    resultPw2.style.color = "blue";
+							pw2.style.border = "";
 						  } else {
 						    resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
 						    resultPw2.style.color = "red";
+							pw2.style.border = "red solid 1px";
 						  }
 		}
 			
@@ -109,7 +113,7 @@ $("#btn").click(() => {
 								Swal.fire({
 									icon: "success",
 									iconColor: "green",
-								  title: "성공적으로 변경했습니다!",
+								  title: "비밀번호 재설정이 완료되었습니다!",
 								  html: '<span id="aa"></span>초 후 자동으로 닫힙니다.',
 								  timer: 2000,
 								  timerProgressBar: true,
