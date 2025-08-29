@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,27 +12,26 @@
 <body>
 	<h5>[인적자원관리] > [사원정보조회]</h5>
 	<h3>사원정보조회</h3>
-	<div id = "search" class="filter-bar">
-	<input type="text" id="empName" placeholder="사원명 입력">
-		<select id = "deptName">
+	<div id="search" class="filter-bar">
+		<input type="text" id="empName" placeholder="사원명 입력"> 
+		<select id="deptName">
 			<option value="-1">부서 선택</option>
-		</select>
-		
-		<select id = "jobTitle">
+		</select> 
+		<select id="jobTitle">
 			<option value="-1">직급 선택</option>
 		</select>
-		<button id = "btn">검색</button>
+		<button id="btn">검색</button>
 	</div>
 	<div>
-	<table border="1" id = "result" class="data-table">
-	</table>
+		<table border="1" id="result" class="data-table">
+		</table>
 	</div>
 
 	<nav>
 		<ul class="pagination">
 		</ul>
 	</nav>
-		
+
 	<script src="../resources/js/hrm/empInfo.js"></script>
-	</body>
-	</html>
+</body>
+</html>

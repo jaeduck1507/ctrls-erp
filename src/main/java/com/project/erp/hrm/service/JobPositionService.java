@@ -13,10 +13,9 @@ public class JobPositionService {
 
 	@Autowired
 	private JobPositionMapper jobpositionMapper;
-	
-	
+
 	public List<JobPosition> showJob() {
 		return jobpositionMapper.showJob();
-		
+
 	}
 }
