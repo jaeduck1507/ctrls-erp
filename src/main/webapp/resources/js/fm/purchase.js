@@ -50,8 +50,6 @@ function showPurchase(page = 1) {
 			//console.log($("#endDate").val());
 			
 			if (!result.purchaseList || result.purchaseList.length === 0) {
-				//alert("조회된 결과가 없습니다");
-				//location.reload();
 				Swal.fire({
 					position: "top",
 					icon: "error",
@@ -59,7 +57,13 @@ function showPurchase(page = 1) {
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {
-						location.reload();
+						$("#brandName").val("all");
+						$("#productCategory").val("all");
+						$("#productName").val("");
+						$("#startDate").val("");
+						$("#endDate").val("");
+						$("#result").html("");
+						$(".pagination").html("");
 					}
 				});
 				return;

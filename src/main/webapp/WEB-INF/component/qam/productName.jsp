@@ -19,13 +19,12 @@
 <!-- 검색창: 제품명 + 카테고리 -->
 <form action="productName">
     제품명 : <input type="text" name="productName" id="productName" />
-    <select name="productCategory" id="productCategory">
-        <option value="">카테고리</option>
-        <option value="상의">상의</option>
-        <option value="하의">하의</option>
-        <option value="악세사리">악세사리</option>
-        <option value="신발">신발</option>
-    </select>
+	<select name="productCategory" id="productCategory">
+		<option value="">카테고리 선택</option>
+		<c:forEach items="${categoryList}" var="category">
+			<option value="${category}">${category}</option>
+		</c:forEach>
+	</select>
     <button type="submit">검색</button> <!-- 검색 버튼 -->
 </form>
 </div>

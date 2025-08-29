@@ -174,7 +174,7 @@ $(document).on("click", "#search", function() {
 	searchChart(saleCategory, yearMonth);
 });
 
-// 조회 실패 에러 시 차트 재로딩
+// 조회 실패 에러 시 차트 초기화면 재로딩
 function reloadChart() {
 	$("#saleCategory").val("all");
 	$("#yearMonth").val(month);
@@ -225,8 +225,6 @@ function showSaleManage(page = 1) {
 			//console.log($("#endDate").val());
 			
 			if (!result.salesList || result.salesList.length === 0) {
-				//alert("조회된 결과가 없습니다");
-				//location.reload();
 				Swal.fire({
 					position: "top",
 					icon: "error",
@@ -234,7 +232,12 @@ function showSaleManage(page = 1) {
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {
-						location.reload();
+						$("#productCategory").val("all");
+						$("#productName").val("");
+						$("#startDate").val("");
+						$("#endDate").val("");
+						$("#result").html("");
+						$(".pagination").html("");
 					}
 				});
 				return;

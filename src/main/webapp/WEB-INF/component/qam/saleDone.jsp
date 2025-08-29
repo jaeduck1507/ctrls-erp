@@ -17,11 +17,10 @@
 	<div>
 		카테고리 조회:
 		<select id="productCategory">
-		    <option value="">카테고리 선택</option>
-		    <option value="상의">상의</option>
-		    <option value="하의">하의</option>
-		    <option value="악세사리">악세사리</option>
-		    <option value="신발">신발</option>
+			<option value="">카테고리 선택</option>
+			<c:forEach items="${categoryList}" var="category">
+				<option value="${category}">${category}</option>
+			</c:forEach>
 		</select>
 	</div>
 	<div>

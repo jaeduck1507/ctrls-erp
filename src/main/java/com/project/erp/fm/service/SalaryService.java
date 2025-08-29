@@ -46,7 +46,7 @@ public class SalaryService {
 	public List<SalaryDTO> salaryPayment(SalaryAlreadyAddDTO saaDto) {
 		List<SalaryDTO> allList = new ArrayList<SalaryDTO>();
 		YearMonth ym = YearMonth.parse(saaDto.getYearMonth());        // 문자열 → YearMonth
-//        System.out.println(ym.minusMonths(1).toString());
+        System.out.println(ym.minusMonths(1).toString());
 		saaDto.setLastMonth(ym.minusMonths(1).toString());
 		saaDto.setList(showSalaryAlreadyAdd(saaDto)); // 이미 급여 등록이된 사람 조회한 리스트
 		

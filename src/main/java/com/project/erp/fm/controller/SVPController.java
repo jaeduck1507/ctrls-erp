@@ -52,7 +52,7 @@ public class SVPController {
 		List<Department> deptList = departmentService.showDept();
 		int purchaseDept = 0;
 		for (Department dept : deptList) {
-			if (dept.getDeptName().contains("지점")) {
+			if (dept.getDeptName().contains("본부")) {
 				purchaseDept = dept.getDeptNo();
 			}
 		}

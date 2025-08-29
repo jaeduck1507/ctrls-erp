@@ -17,8 +17,6 @@ function showBonusPayment(page = 1) {
         // 응답
         success : function(result) {
 			if (!result.bonusPaymentList || result.bonusPaymentList.length === 0) {
-				//alert("조회된 결과가 없습니다");
-				//location.reload();
 				Swal.fire({
 					position: "top",
 					icon: "error",
@@ -26,7 +24,12 @@ function showBonusPayment(page = 1) {
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {
-						location.reload();
+						$("#empName").val("");
+						$("#deptName").val("-1");
+						$("#jobTitle").val("-1");
+						$("#date").val("");
+						$("#result").html("");
+						$(".pagination").html("");
 					}
 				});
 				return;

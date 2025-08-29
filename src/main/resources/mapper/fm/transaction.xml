@@ -26,7 +26,7 @@
 			<if test="transType != 'all'">
 				AND trans_type = #{transType}
 			</if>
-			<if test="deptName != 'dept'">
+			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
 		</where>
@@ -44,7 +44,7 @@
 			<if test="transDTO.transType != 'all'">
 				AND trans_type = #{transDTO.transType}
 			</if>
-			<if test="transDTO.deptName != 'dept'">
+			<if test="transDTO.deptName != 'all'">
 				AND dept_name = #{transDTO.deptName}
 			</if>
 		</where>
@@ -63,7 +63,7 @@
 			<if test="transType != 'all'">
 				AND trans_type = #{transType}
 			</if>
-			<if test="deptName != 'dept'">
+			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
 		</where>

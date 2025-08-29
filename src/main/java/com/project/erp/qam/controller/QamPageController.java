@@ -68,6 +68,7 @@ public class QamPageController {
 		) {
 		System.out.println(productname);
 		model.addAttribute("productList", productService.searchProductDetail(paging, productname.getProductName(), productname.getProductCategory()));
+		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("paging", paging);
 		System.out.println(paging);
 		model.addAttribute("productName", productname.getProductName());
@@ -80,6 +81,7 @@ public class QamPageController {
 	public String productName(Model model, Paging paging, ProductName productName) {
 		System.out.println(productName);
 		model.addAttribute("productNameList", productNameService.searchProductName(paging, productName.getProductName(), productName.getProductCategory()));
+		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("paging",paging);
 		model.addAttribute("productName", productName.getProductName());
 		model.addAttribute("productCategory", productName.getProductCategory());
@@ -92,6 +94,7 @@ public class QamPageController {
         List<EmpInfo> empList = employeeInfoService.showEmployee();
         model.addAttribute("paging",paging);
         model.addAttribute("empList", empList);
+        model.addAttribute("categoryList", productNameService.selectCategory());
         model.addAttribute("component","../component/qam/qc.jsp");
 		return "common/layout"; // qc.jsp 경로
     }
@@ -107,6 +110,7 @@ public class QamPageController {
 	@GetMapping("/saleDone")
 	public String saleDone(Model model, Paging paging) {
 		model.addAttribute("saleList", saleService.showSaleDone(paging));
+		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("paging", paging);
 		model.addAttribute("component","../component/qam/saleDone.jsp");
 		return "common/layout";
@@ -114,6 +118,7 @@ public class QamPageController {
 	
 	@GetMapping("/defective")
 	public String defective(Model model, Paging paging) {
+		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("defectiveList", defectiveService.showDefective(paging));
 		model.addAttribute("paging", paging);
 		model.addAttribute("component","../component/qam/defective.jsp");

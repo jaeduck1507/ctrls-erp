@@ -14,7 +14,7 @@
 	<h3>예산 조회</h3>
 	<div id="search" class="filter-bar">
 		<select id="deptName">
-			<option value="dept">부서 선택</option>
+			<option value="all">부서 선택</option>
 			<c:forEach items="${department}" var="dept">
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>

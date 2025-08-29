@@ -18,7 +18,7 @@
 			<if test="yearMonth != null">
 				execution_date LIKE CONCAT('%', #{yearMonth}, '%')
 			</if>
-			<if test="deptName != 'dept'">
+			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
 		</where>
@@ -32,7 +32,7 @@
 			<if test="budgetDeptDTO.yearMonth != null">
 				execution_date LIKE CONCAT('%', #{budgetDeptDTO.yearMonth}, '%')
 			</if>
-			<if test="budgetDeptDTO.deptName != 'dept'">
+			<if test="budgetDeptDTO.deptName != 'all'">
 				AND dept_name = #{budgetDeptDTO.deptName}
 			</if>
 		</where>
@@ -47,7 +47,7 @@
 			<if test="yearMonth != null">
 				execution_date LIKE CONCAT('%', #{yearMonth}, '%')
 			</if>
-			<if test="deptName != 'dept'">
+			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
 		</where>

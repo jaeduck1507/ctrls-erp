@@ -114,7 +114,12 @@ function showTrans(page = 1) {
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {
-						location.reload();
+						$("#transType").val("all");
+						$("#deptName").val("all");
+						$("#startDate").val("");
+						$("#endDate").val("");
+						$("#result").html("");
+						$(".pagination").html("");
 					}
 				});
 				return;

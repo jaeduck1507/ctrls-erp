@@ -1,4 +1,4 @@
-const deductionCheck = /^[1-9]\d*(\.\d+)?$/;
+const deductionCheck = /^[0-9]\d*(\.\d+)?$/;
 // 유효성 검사 함수
 function validateDeductions() {	
 	const deductionInput = document.querySelectorAll(".deduction");
@@ -86,9 +86,21 @@ $("#btn").click(() => {
 				inint_Paing();
 				salayPagingDTO.result = result;
 				salayPagingDTO.setTotal(result.length);
-				
-				if (result.length !== 0) {
-					$("#submit").prop("disabled", false);
+				console.log(result.length);
+				if (result.length === 0) {
+					Swal.fire({
+						position: "top",
+						icon: "error",
+						title: "급여 등록이 완료된 월입니다!",
+						showConfirmButton: false,
+						timer: 1500,
+						didClose: () => {
+							$("#yearMonth").val("");
+							$("#result").html("");
+							$(".pagination").html("");
+						}
+					});
+					return;
 				}
 				
 				$("#result").html("");

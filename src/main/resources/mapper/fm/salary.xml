@@ -39,7 +39,7 @@
 			<if test="yearMonth != null">
 				salary_date LIKE CONCAT ('%', #{yearMonth}, '%')
 			</if>
-			<if test="deptName != 'dept'">
+			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
 			<if test="empName != null">
@@ -58,7 +58,7 @@
 			<if test="salEmpDTO.yearMonth != null">
 				salary_date LIKE CONCAT ('%', #{salEmpDTO.yearMonth}, '%')
 			</if>
-			<if test="salEmpDTO.deptName != 'dept'">
+			<if test="salEmpDTO.deptName != 'all'">
 				AND dept_name = #{salEmpDTO.deptName}
 			</if>
 			<if test="salEmpDTO.empName != null">
@@ -78,7 +78,7 @@
 			<if test="yearMonth != null">
 				salary_date LIKE CONCAT ('%', #{yearMonth}, '%')
 			</if>
-			<if test="deptName != 'dept'">
+			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
 			<if test="empName != null">
@@ -102,8 +102,9 @@
 	) as q USING(emp_no)
 	
 	<where>
-	pay_date like CONCAT('%', #{yearMonth}, '%')
+	pay_date like CONCAT('%', #{lastMonth}, '%')
 	and IFNULL(quit_date,'2050-01-01') <![CDATA[>=]]> CONCAT(#{lastMonth},'-1')
+	AND emp_no != 1
 	<if test="list.size != 0">
 				<foreach collection="list" item = "emp">
 					AND emp_no != #{emp.empNo}
@@ -126,7 +127,7 @@
 	) AS q USING(emp_no)
 		<where>
 			IFNULL(quit_date,'2050-01-01') <![CDATA[>=]]> CONCAT(#{lastMonth},'-1')
-			
+			AND emp_no != 1
 			<if test="list.size != 0">
 				<foreach collection="list" item = "emp">
 					AND emp_no != #{emp.empNo}

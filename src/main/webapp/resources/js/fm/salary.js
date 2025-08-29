@@ -17,8 +17,6 @@ function showSalary(page = 1) {
 			//console.log($("#yearMonth").val());
 			
 			if (!result.salaryList || result.salaryList.length === 0) {
-				//alert("조회된 결과가 없습니다");
-				//location.reload();
 				Swal.fire({
 					position: "top",
 					icon: "error",
@@ -26,7 +24,11 @@ function showSalary(page = 1) {
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {
-						location.reload();
+						$("#deptName").val("all");
+						$("#empName").val("");
+						$("#yearMonth").val("");
+						$("#result").html("");
+						$(".pagination").html("");
 					}
 				});
 				return;

@@ -15,7 +15,7 @@
 	<div id="search" class="filter-bar">
 		사원 검색 : <input type="text" id="empName">
 		<select id="deptName">
-			<option value="dept">부서 선택</option>
+			<option value="all">부서 선택</option>
 			<c:forEach items="${department}" var="dept">
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>
