@@ -83,6 +83,9 @@ public class UserService implements UserDetailsService {
 	}
 
 	public int noCheck(int empNo) {
+		EmpInfo ei = new EmpInfo();
+		ei.setEmpNo(empNo);
+		if(employeeInfoService.infoShowOne(ei) == null) return 1;
 		return userMapper.noCheck(empNo);
 	}
 
