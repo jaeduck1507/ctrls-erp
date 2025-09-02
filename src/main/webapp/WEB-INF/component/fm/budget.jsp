@@ -23,6 +23,10 @@
 		<button id="btn">조회</button>
 	</div>
 	
+	<div>
+		<h5 id="totalBudget"></h5>
+	</div>
+	
 	<div>	
 		<table border="1" id="result" class="data-table">
 			

@@ -1,8 +1,11 @@
 function showBudget(page = 1) {
 	const formData = new FormData();
-	formData.append("deptName", $("#deptName").val() || '');
+	const deptName = $("#deptName").val();
+	formData.append("deptName", deptName || '');
 	formData.append("yearMonth", $("#yearMonth").val() || '');
 	formData.append("page", page);
+	console.log(deptName);
+	var totalBudget = 0
 	
 	$.ajax({
 		type: "post",
@@ -26,6 +29,7 @@ function showBudget(page = 1) {
 						$("#yearMonth").val("");
 						$("#result").html("");
 						$(".pagination").html("");
+						document.querySelector("#totalBudget").innerHTML = "";
 					}
 				});
 				return;
@@ -39,6 +43,15 @@ function showBudget(page = 1) {
 				$("#result").append(text);
 				$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '" class="btnO">수정</a></td>');
 				$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '" class="btnX">삭제</a></td>');
+				
+				if (deptName != 'all') {
+					//console.log(deptName);
+					totalBudget += budget.annualBudget;
+				}
+			}
+			//console.log(totalBudget);
+			if (deptName != 'all') {
+				document.querySelector("#totalBudget").innerHTML = deptName + " 총 예산 : " + totalBudget.toLocaleString() + "원";
 			}
 			
 			$(".pagination").html('');

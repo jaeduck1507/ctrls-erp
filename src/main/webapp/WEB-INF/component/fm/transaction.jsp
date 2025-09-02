@@ -33,6 +33,8 @@
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>
 		</select>
+		
+		<input type="text" id="transDesc" placeholder="상세 내역 검색">
 		조회 시작일: <input type="date" id="startDate">
 		조회 종료일: <input type="date" id="endDate">
 		<button id="btn">조회</button>

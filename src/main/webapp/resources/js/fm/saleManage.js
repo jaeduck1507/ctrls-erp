@@ -1,10 +1,25 @@
 const now = new Date();
 const today = now.getFullYear() + '-' 
 	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
-	                    + String(now.getDate()).padStart(2, '0');
-						
-const month = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+	                    + String(now.getDate()).padStart(2, '0'); // 매출 기간 조회에 사용
 
+let month = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+/*
+// 월별 차트 조회 시 사용				
+let year = now.getFullYear();
+let month = now.getMonth() + 1;
+
+// 오늘이 1일이면 전월 차트가 조회되게
+if (now.getDate() === 1) {
+		month -= 1;
+		if (month === 0) {
+			month = 12;
+			year -= 1;
+		}
+	}
+
+let currentMonth = year + '-' + String(month).padStart(2, '0');
+*/						
 const monthChart = document.querySelector("#monthChart");
 const weekChart = document.querySelector("#weekChart");
 
@@ -137,6 +152,10 @@ function searchChart(saleCategory, yearMonth) {
 		processData: false,
 		contentType: false,
 		success: function(result) {
+			let currentMonth = $("#yearMonth").val();
+			console.log(currentMonth);
+			console.log(currentMonth.substring(5));
+			console.log(String(now.getMonth() + 1).padStart(2, '0'));
 			//console.log(result);
 			if (result.length === 0) {
 				Swal.fire({
@@ -147,6 +166,12 @@ function searchChart(saleCategory, yearMonth) {
 					showConfirmButton: false,
 					timer: 2000,
 					didClose: () => {
+						if (currentMonth.substring(5) === String(now.getMonth() + 1).padStart(2, '0')) {
+							month = now.getFullYear() + '-' + String(now.getMonth()).padStart(2, '0');
+							if (now.getMonth() === 0) {
+								month = now.getFullYear() - 1 + '-12';
+							}
+						} 
 						reloadChart();
 					}
 				});
@@ -163,7 +188,7 @@ function searchChart(saleCategory, yearMonth) {
 // 처음 모달 창을 열었을 때 조회 초기값 세팅
 $("#salesQuantity").on("show.bs.modal", function () {
 	//$("#saleCategory").val("all");
-	//$("#yearMonth").val(month);
+	//$("#yearMonth").val(currentMonth);
 	reloadChart();
 });
 

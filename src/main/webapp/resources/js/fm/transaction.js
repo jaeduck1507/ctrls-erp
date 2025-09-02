@@ -65,6 +65,7 @@ function showTrans(page = 1) {
 	const formData = new FormData();
 	formData.append("transType", $("#transType").val() || '');
 	formData.append("deptName", $("#deptName").val() || '');
+	formData.append("transDesc", $("#transDesc").val() || '');
 	formData.append("page", page);
 	
 	const startDate = $("#startDate").val();
@@ -101,6 +102,7 @@ function showTrans(page = 1) {
 		success: function(result) {
 			//console.log($("#transType").val());
 			//console.log($("#deptName").val());
+			//console.log($("#transDesc").val());
 			//console.log($("#startDate").val());
 			//console.log($("#endDate").val());
 			
@@ -116,6 +118,7 @@ function showTrans(page = 1) {
 					didClose: () => {
 						$("#transType").val("all");
 						$("#deptName").val("all");
+						$("#transDesc").val("");
 						$("#startDate").val("");
 						$("#endDate").val("");
 						$("#result").html("");

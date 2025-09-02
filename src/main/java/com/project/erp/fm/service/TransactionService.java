@@ -59,11 +59,20 @@ public class TransactionService {
 		//System.out.println("expensesList : " + expensesList);
 		
 		List<TransDTO> monthTransList = incomeList;
-		
+		/*
 		for (int i = 0; i < monthTransList.size(); i++) {
 			if (monthTransList.get(i).getTransMonth().equals(expensesList.get(i).getTransMonth())) {
 				monthTransList.get(i).setMonthExpenses(expensesList.get(i).getMonthExpenses());
 			}
+		}*/
+		
+		for (TransDTO income : monthTransList) {
+		    for (TransDTO expense : expensesList) {
+		        if (income.getTransMonth().equals(expense.getTransMonth())) {
+		            income.setMonthExpenses(expense.getMonthExpenses());
+		            break;
+		        }
+		    }
 		}
 		
 		//System.out.println("monthTransList : " + monthTransList);
