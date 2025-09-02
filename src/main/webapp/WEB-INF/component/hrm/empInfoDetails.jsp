@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../resources/css/hrm/empInfoDetails.css" />
 </head>
 <body>
-	<h5>[인적자원관리] > [사원정보조회] > [사원상세정보]</h5>
+	<h5>[인적 자원 관리] > [사원 정보 조회] > [사원 상세 정보]</h5>
 	<h3>사원 상세 정보</h3>
 
 		<div class="box">
@@ -29,7 +29,7 @@
 			<div class="box2">
 				<h4>개인 정보</h4>
 				<table>
-				<img src="/images/${empInfo.url}" width="200" height="120" onerror="this.onerror=null; this.src='/images/default.jpg';" />
+				<tr><th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${empInfo.url}" width="60" height="90" onerror="this.onerror=null; this.src='/images/default.jpg';" /></td></tr>
 				<tr><th><i class="fi fi-rr-hastag"></i>&nbsp;&nbsp;주민등록번호</th><td><b>${empInfo.empIn}</b></td></tr>
 			    <tr><th><i class="fi fi-rr-home-location-alt"></i>&nbsp;&nbsp;주소</th><td><b>${empInfo.addr}</b></td></tr>
 			    <tr><th><i class="fi fi-rr-phone-call"></i>&nbsp;&nbsp;연락처</th><td><b>${empInfo.phone}</b></td></tr>

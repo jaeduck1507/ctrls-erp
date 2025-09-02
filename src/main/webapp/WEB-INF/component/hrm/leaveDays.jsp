@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>휴가 누적 사용일 조회</title>
+    <title>휴가일수 조회</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link rel="stylesheet" href="../resources/css/hrm/leaveDays.css" />
   </head>
   <body>
-	<h5>[근태 관리] > [휴가 누적 사용일, 남은 휴가일 조회]</h5>
-	<h3>휴가 누적 사용일, 남은 휴가일 조회</h3>
+	<h5>[근태 관리] > [휴가일수 조회]</h5>
+	<h3>휴가일수 조회</h3>
 	<div class="filter-bar">
 		<input type="text" id="empNo" placeholder="사번 입력">
 		<button id="btn">조회</button>

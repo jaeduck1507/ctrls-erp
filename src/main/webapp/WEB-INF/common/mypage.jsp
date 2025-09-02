@@ -79,10 +79,10 @@
 		
 	</div>
 	<div class="filter-bar">
-	<button onclick="location.href='/modifyMyInfo'">개인정보 수정(완)</button>
-	<button onclick="location.href='/myLeavePage'">휴가신청(완)</button>
-	<button onclick="location.href='/myAttendance'">출근 현황 보기(완)</button>
-	<button onclick="location.href='/resetMyPwd'">비밀번호재설정(미완)</button>
+	<button onclick="location.href='/modifyMyInfo'">개인정보 수정</button>
+	<button onclick="location.href='/myLeavePage'">휴가신청</button>
+	<button onclick="location.href='/myAttendance'">출근 현황 보기</button>
+	<button onclick="location.href='/resetMyPwd'">비밀번호 재설정</button>
 	</div>
 
 	</div>

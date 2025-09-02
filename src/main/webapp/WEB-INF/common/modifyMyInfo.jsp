@@ -4,21 +4,21 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>사원 정보 수정</title>
+    <title>개인정보 수정</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<link rel="stylesheet" href="../resources/css/modifypage.css"/>
 </head>
 <body>
 
-	<h5>[마이페이지] > [개인정보수정]</h5>
-		<h3>개인정보수정</h3>
+	<h5>[마이페이지] > [개인정보 수정]</h5>
+		<h3>개인정보 수정</h3>
 
 <form action="modifyMyInfo" method="post" class="filter-bar">
 	<div class="box">
 		<table>
 			<tr>
-			 <th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${user.url}" width="75" height="100" onerror="this.onerror=null; this.src='/images/default.jpg';"/><input type="hidden" value="${user.url}" id="url"></td>
+			 <th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${user.url}" width="80" height="120" onerror="this.onerror=null; this.src='/images/default.jpg';"/><input type="hidden" value="${user.url}" id="url"></td>
 			<tr>
 			<tr>
 		    <th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;&nbsp;&nbsp;사번</th><td><input type="text" name="empNo" value="${user.empNo}" readonly="readonly" id="empNo"></td>
@@ -70,9 +70,11 @@
 		      </div>
 			  
 			  <div class="modal-body">
-					<img src="/images/${user.url}" width="200" height="120" onerror="this.onerror=null; this.src='/images/default.jpg';" />
+					<img src="/images/${user.url}" width="80" height="120" style="border: #ccc solid 1px" onerror="this.onerror=null; this.src='/images/default.jpg';" />
+					<div>
 					<input type="file" class="file" id="file">
-					<button type="button" class="btn" id ="deleteImg">삭제</button>
+					<button type="button" class="btn" id ="deleteImg">사진 삭제</button>
+					</div>
 			  </div>
 		      <div class="modal-footer">
 		      	<p>사진 변경시 이전 사진은 확인 불가능합니다</p>

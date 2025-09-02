@@ -10,8 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-	<h5>[인적자원관리] > [사원정보조회]</h5>
-	<h3>사원정보조회</h3>
+	<h5>[인적 자원 관리] > [사원 정보 조회]</h5>
+	<h3>사원 정보 조회</h3>
 	<div id="search" class="filter-bar">
 		<input type="text" id="empName" placeholder="사원명 입력"> 
 		<select id="deptName">

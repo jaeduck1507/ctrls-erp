@@ -34,7 +34,7 @@
 			<div class="pwd-area" id="pwd-area">
 				<i class="fi fi-rr-padlock-check"></i>&nbsp;&nbsp;비밀번호 확인
 			<input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호 확인" />
-			<p id="resultPw2">위 비밀번호와 동일하게</p>	
+			<p id="resultPw2">위 비밀번호와 동일하게 입력해주세요.</p>	
 		   </div>
 			
 			<button id="resetPwd">재설정</button>
@@ -94,7 +94,7 @@
 					$("#username").css("border", "red 1px solid");
 					idChecked = false;
 			      } else {
-			        $("#result").append("아이디 체크 완료").css("color", "blue");
+			        $("#result").append("아이디가 확인되었습니다. 새 비밀번호를 설정해주세요.").css("color", "blue");
 					$("#username").css("border", "");
 					idChecked = true;
 					
@@ -140,7 +140,7 @@
 					    resultPw2.style.color = "blue";
 						pw2.style.border = ""
 					  } else {
-					    resultPw2.innerHTML = "위 비밀번호와 동일하게 입력";
+					    resultPw2.innerHTML = "위 비밀번호와 동일하게 입력해주세요.";
 					    resultPw2.style.color = "red";
 						pw2.style.border = "red solid 1px"
 					  }			

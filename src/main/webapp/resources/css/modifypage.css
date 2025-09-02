@@ -12,20 +12,21 @@ form{
 .box,
 form .box {
 	background-color: #F5F5F5;
-	padding: 30px;
+	padding: 25px 30px 5px 30px;
 	border-radius: 10px;
 	width: calc(95vw - var(--side-width));
 	font-size: large;
 	justify-content: flex-start;
 } 
+
 form button{
 	justify-content: flex-start;
 }
-.box table{
 
+.box table{
 	border-radius: 10px;
-	
 }
+
 .box td{
 	color: #938E8E;
 	border-radius: 10px;

@@ -10,15 +10,15 @@
 	<link rel="stylesheet" href="../resources/css/modifypage.css"/>
 </head>
 <body>
-	<h5>[인적자원관리] > [사원정보조회] > [사원정보수정]</h5>
-		<h3>사원정보수정</h3>
+	<h5>[인적 자원 관리] > [사원 정보 조회] > [사원 정보 수정]</h5>
+		<h3>사원 정보 수정</h3>
 
 
 
 
 	<div class="box filter-bar">
 	<table>
-    <tr><th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${empInfo.url}" width="100" height="150" onerror="this.onerror=null; this.src='/images/default.jpg';" /><input type="hidden" value="${empInfo.url}" id="url"></td></tr>
+    <tr><th><i class="fi fi-rr-picture"></i>&nbsp;&nbsp;사진</th><td><img src="/images/${empInfo.url}" width="60" height="90" onerror="this.onerror=null; this.src='/images/default.jpg';" /><input type="hidden" value="${empInfo.url}" id="url"></td></tr>
     <tr><th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;사번</th><td><input type="text" name="empNo" value="${empInfo.empNo}" readonly="readonly" id="empNo"></td></tr>
     <tr><th><i class="fi fi-rr-letter-case"></i>&nbsp;&nbsp;성명</th><td><input type="text" name="empName" value="${empInfo.empName}" id ="empName"></label></tr>
     <tr><th><i class="fi fi-rr-hastag"></i>&nbsp;&nbsp;주민등록번호</th><td><input type="text" name="empIn" value="${empInfo.empIn}" readonly="readonly"></td></tr>
@@ -100,9 +100,11 @@
 		      </div>
 			  
 			  <div class="modal-body">
-					<img src="/images/${empInfo.url}" width="200" height="120" onerror="this.onerror=null; this.src='/images/default.jpg';" />
-					<input type="file" class="file" id="file">
-					<button type="button" class="btn" id ="deleteImg">삭제</button>
+					<img src="/images/${empInfo.url}" width="80" height="120" style="border:1px solid #ccc" onerror="this.onerror=null; this.src='/images/default.jpg';" />
+					<div>
+					<input type="file" class="file modal-btn" id="file">
+					<button type="button" class="btn modal-btn" id ="deleteImg">사진 삭제</button>
+					</div>
 			  </div>
 		      <div class="modal-footer">
 		      	<p>사진 변경시 이전 사진은 확인 불가능합니다</p>
