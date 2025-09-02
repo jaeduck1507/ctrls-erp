@@ -47,7 +47,7 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 			  
-			  <div class="modal-body">
+			  <div class="modal-body ">
 					<select id="job">
 					<option value="-1" disabled selected>직무 선택</option>
 					<c:forEach items="${jobPosition}" var="job">
@@ -99,7 +99,7 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 			  
-			  <div class="modal-body">
+			  <div class="modal-body img-div">
 					<img src="/images/${empInfo.url}" width="80" height="120" style="border:1px solid #ccc" onerror="this.onerror=null; this.src='/images/default.jpg';" />
 					<div>
 					<input type="file" class="file modal-btn" id="file">

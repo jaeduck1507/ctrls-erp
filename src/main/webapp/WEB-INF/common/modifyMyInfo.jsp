@@ -69,7 +69,7 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 			  
-			  <div class="modal-body">
+			  <div class="modal-body img-div">
 					<img src="/images/${user.url}" width="80" height="120" style="border: #ccc solid 1px" onerror="this.onerror=null; this.src='/images/default.jpg';" />
 					<div>
 					<input type="file" class="file" id="file">
