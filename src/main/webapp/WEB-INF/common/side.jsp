@@ -31,37 +31,45 @@
 			  </div>
             </div>
 
-          <div class="menu-group">
-            <div class="menu-title">재무 관리</div>
-            <div class="submenu">
-				<a href="/modalTest">**모달 테스트 /modalTest</a> <!-- 테스트용 -->
-				<a href="/fm/budget">예산 조회 /fm/budget 페이징 처리 완료</a>
-			    <a href="/fm/saleManage">매출 조회 /fm/saleManage 페이징 처리 완료</a>
-			    <a href="/fm/purchase">매입 내역 조회 /fm/purchase 페이징 처리 완료</a>
-			    <a href="/fm/purchaseRegister">매입 일괄 등록 /fm/purchaseRegister</a>
-			    <a href="/fm/transaction">거래내역 조회 /fm/transaction 페이징 처리 완료</a>
-				<a href="/fm/salary">급여 조회 /fm/salary 페이징 처리 완료</a>
-				<a href="/fm/salaryPayment">급여 등록 /fm/salaryPayment</a>
-				<a href="/fm/budgetRegister">예산 등록 /fm/budgetRegister</a>
-				<a href="/fm/saleRegister">매출 등록 /fm/saleRegister</a>
-				<a href="/fm/transRegister">거래내역 입력 /fm/transRegister</a>
-				<a href="/fm/addBonusPayment">사원 보너스 입력 /fm/addBonusPayment</a>
-				<a href="/fm/showBonusPayment">사원 보너스 조회 /fm/showBonusPayment 페이징 처리 완료</a>
-            </div>
-          </div>
+			<sec:authorize access="hasAnyRole('HRM','ADMIN','MANAGEMENT','FM')">
+				<div class="menu-group">
+		            <div class="menu-title">재무 관리</div>
+		            <div class="submenu">
+						<a href="/modalTest">**모달 테스트 /modalTest</a> <!-- 테스트용 -->
+		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM')">
+							<a href="/fm/budget">예산 조회</a>
+						    <a href="/fm/saleManage">매출 조회</a>
+						    <a href="/fm/purchase">매입 내역 조회</a>
+						    <a href="/fm/purchaseRegister">매입 일괄 등록</a>
+						    <a href="/fm/transaction">거래내역 조회</a>
+							<a href="/fm/salary">급여 조회</a>
+							<a href="/fm/salaryPayment">급여 등록</a>
+							<a href="/fm/budgetRegister">예산 등록</a>
+							<a href="/fm/saleRegister">매출 등록</a>
+							<a href="/fm/transRegister">거래내역 입력</a>
+		            	</sec:authorize>
+		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM','HRM')">
+							<a href="/fm/addBonusPayment">사원 보너스 입력</a>
+							<a href="/fm/showBonusPayment">사원 보너스 조회</a>
+		            	</sec:authorize>
+		            </div>
+				</div>
+			</sec:authorize>
 		  
-          <div class="menu-group">
-            <div class="menu-title">품질 관리</div>
-            <div class="submenu">
-				<a href="/qam/brand">브랜드 조회 /qam/brand 페이징 처리 완료</a>
-			    <a href="/qam/product">상품(Product) 조회 /qam/product 페이징 처리 완료</a>
-			    <a href="/qam/productName">제품(ProductName) 조회/등록/수정/삭제 /qam/productName</a>
-			    <a href="/qam/qc">제품 품질 검수 전체조회 /qam/qc 페이징 처리 필요</a>
-				<a href="/qam/saleReady">판매 전 제품 조회 /qam/saleReady 페이징 처리 필요</a>
-				<a href="/qam/saleDone">판매 완료 제품 조회 /qam/saleDone 페이징 처리 완료</a>
-				<a href="/qam/defective">불량 제품 조회 /qam/defective 페이징 처리 필요</a>
-            </div>
-          </div>
+			<sec:authorize access="hasAnyRole('HRM','ADMIN','MANAGEMENT','HEADQUARTER','SALE')">
+	          <div class="menu-group">
+	            <div class="menu-title">품질 관리</div>
+	            <div class="submenu">
+					<a href="/qam/brand">브랜드 조회</a>
+				    <a href="/qam/product">상품 조회</a>
+				    <a href="/qam/productName">제품 조회/등록/수정/삭제</a>
+				    <a href="/qam/qc">제품 품질 검수 전체조회</a>
+					<a href="/qam/saleReady">판매 전 제품 조회</a>
+					<a href="/qam/saleDone">판매 완료 제품 조회</a>
+					<a href="/qam/defective">불량 제품 조회</a>
+	            </div>
+	          </div>
+			</sec:authorize>
 		  
 		  <!-- 로그인 및 로그아웃 버튼 위에다가 기능 작성해주세요 -->
 		  
