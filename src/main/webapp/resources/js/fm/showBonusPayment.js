@@ -1,8 +1,8 @@
 function showBonusPayment(page = 1) {
 	const formData = new FormData();
 	formData.append("empName", $("#empName").val() || '');
-	formData.append("deptNo", $("#deptName").val() || '');
-	formData.append("jobNo", $("#jobTitle").val() || '');
+	formData.append("deptNo", $("#deptName").val());
+	formData.append("jobNo", $("#jobTitle").val());
 	formData.append("date", $("#date").val() || '');
 	formData.append("page", page);
 	

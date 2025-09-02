@@ -30,6 +30,22 @@
 			  	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus 페이징 처리 완료</a>
 			  </div>
             </div>
+			
+			<sec:authorize access="hasAnyRole('HRM','ADMIN','MANAGEMENT','FM')">
+				<div class="menu-group">
+		            <div class="menu-title">급여 관리</div>
+		            <div class="submenu">
+		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM')">
+							<a href="/fm/salary">급여 조회</a>
+							<a href="/fm/salaryPayment">급여 등록</a>
+		            	</sec:authorize>
+		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM','HRM')">
+							<a href="/fm/showBonusPayment">사원 보너스 조회</a>
+							<a href="/fm/addBonusPayment">사원 보너스 입력</a>
+		            	</sec:authorize>
+		            </div>
+				</div>
+			</sec:authorize>
 
 			<sec:authorize access="hasAnyRole('HRM','ADMIN','MANAGEMENT','FM')">
 				<div class="menu-group">
@@ -38,19 +54,13 @@
 						<a href="/modalTest">**모달 테스트 /modalTest</a> <!-- 테스트용 -->
 		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM')">
 							<a href="/fm/budget">예산 조회</a>
+							<a href="/fm/budgetRegister">예산 등록</a>
 						    <a href="/fm/saleManage">매출 조회</a>
+							<a href="/fm/saleRegister">매출 등록</a>
 						    <a href="/fm/purchase">매입 내역 조회</a>
 						    <a href="/fm/purchaseRegister">매입 일괄 등록</a>
 						    <a href="/fm/transaction">거래내역 조회</a>
-							<a href="/fm/salary">급여 조회</a>
-							<a href="/fm/salaryPayment">급여 등록</a>
-							<a href="/fm/budgetRegister">예산 등록</a>
-							<a href="/fm/saleRegister">매출 등록</a>
 							<a href="/fm/transRegister">거래내역 입력</a>
-		            	</sec:authorize>
-		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM','HRM')">
-							<a href="/fm/addBonusPayment">사원 보너스 입력</a>
-							<a href="/fm/showBonusPayment">사원 보너스 조회</a>
 		            	</sec:authorize>
 		            </div>
 				</div>

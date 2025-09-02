@@ -11,6 +11,12 @@
 		<result property="deptName" column="dept_name"/>
 	</resultMap>
 	
+	<resultMap id="BalanceMap" type="BalanceDTO">
+		<result property="deptNo" column="dept_no" />
+		<result property="deptName" column="dept_name" />
+		<result property="totalBudget" column="total_budget" />
+	</resultMap>
+	
 	<select id="showBudget" parameterType="BudgetDeptDTO" resultMap="BudgetDeptMap">
 		SELECT * FROM budget
 		JOIN department USING(dept_no)
@@ -86,4 +92,11 @@
 		DELETE FROM budget 
 		WHERE budget_no = #{budgetNo}
 	</delete>
+	
+	<select id="totalBudget" resultMap="BalanceMap">
+		SELECT dept_no, dept_name, SUM(annual_budget) AS total_budget 
+		FROM budget
+		JOIN department USING(dept_no)
+		GROUP BY dept_no, dept_name
+	</select>
 </mapper>

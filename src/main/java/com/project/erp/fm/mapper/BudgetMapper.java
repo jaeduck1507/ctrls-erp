@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.erp.fm.model.dto.BalanceDTO;
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
 import com.project.erp.fm.model.dto.BudgetPagingDTO;
 import com.project.erp.fm.model.vo.Budget;
@@ -19,5 +20,6 @@ public interface BudgetMapper {
 	BudgetDeptDTO searchBudget(BudgetDeptDTO bd);
 	void budgetUpdate(Budget budget);
 	void budgetDelete(int budgetNo);
+	List<BalanceDTO> totalBudget();
 	
 }

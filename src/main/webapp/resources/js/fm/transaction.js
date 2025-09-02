@@ -2,7 +2,6 @@ const now = new Date();
 const today = now.getFullYear() + '-' 
 	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
 	                    + String(now.getDate()).padStart(2, '0');
-console.log(today);
 
 const monthTrans = document.querySelector("#monthTrans");
 /*
@@ -63,8 +62,8 @@ new Chart(monthTransChart, {
 
 function showTrans(page = 1) {
 	const formData = new FormData();
-	formData.append("transType", $("#transType").val() || '');
-	formData.append("deptName", $("#deptName").val() || '');
+	formData.append("transType", $("#transType").val());
+	formData.append("deptName", $("#deptName").val());
 	formData.append("transDesc", $("#transDesc").val() || '');
 	formData.append("page", page);
 	

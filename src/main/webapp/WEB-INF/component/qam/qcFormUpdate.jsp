@@ -17,7 +17,7 @@
 	<div class="box">
 		<table>
 			<tr>
-				<th><i class="fi fi-rr-gift-card"></i>&nbsp;&nbsp;제품 번호</th>
+				<th><i class="fi fi-rr-gift-card"></i>&nbsp;&nbsp;상품 번호</th>
 				<td><input type="number" name="productNo"  id="productNo" value="${qc.productNo}" readonly /></td>
 			</tr>
 			<tr>

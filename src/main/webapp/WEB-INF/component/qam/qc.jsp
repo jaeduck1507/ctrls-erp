@@ -36,7 +36,7 @@
 			            </option>
 			        </c:forEach>
 		    	</select>
-		생산일 조회 (시작일): <input type="date" id="startDate">
+		입고일 조회 (시작일): <input type="date" id="startDate">
 		(종료일): <input type="date" id="endDate">
 		<button type="submit" class="btnO">조회</button> <!-- button type 지정 안할 시 default => submit -->
 		<button type="button" id="resetBtn">전체보기</button>
@@ -45,9 +45,9 @@
 <!-- 테이블 -->
 <table border="1" id="qcResult" class="data-table">
     <tr>
-        <th>제품번호</th>
+        <th>상품번호</th>
 		<th>qc코드</th>
-        <th>생산일</th>
+        <th>입고일</th>
         <th>제품코드</th>
 		<th>브랜드명</th>
         <th>색상</th>

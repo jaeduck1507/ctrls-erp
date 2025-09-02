@@ -6,7 +6,7 @@ function displayDefective(data) {
 	    selectedFilter.push($(this).val());
 	});
 	
-	let tableHead = "<tr><th>불량코드</th><th>제품번호</th><th>제품코드</th><th>부자재검사</th><th>색상검사</th><th>손상검사</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>불량사유</th><th>검사일</th></tr>";
+	let tableHead = "<tr><th>불량코드</th><th>상품번호</th><th>제품코드</th><th>부자재검사</th><th>색상검사</th><th>손상검사</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>불량사유</th><th>검사일</th></tr>";
 	$("#defectiveResult thead").html(tableHead);
 	$("#defectiveResult tbody").html("");
 	

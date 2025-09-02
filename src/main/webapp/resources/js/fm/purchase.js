@@ -2,12 +2,11 @@ const now = new Date();
 const today = now.getFullYear() + '-' 
 	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
 	                    + String(now.getDate()).padStart(2, '0');
-console.log(today);
 
 function showPurchase(page = 1) {
 	const formData = new FormData();
-	formData.append("brandName", $("#brandName").val() || '');
-	formData.append("productCategory", $("#productCategory").val() || '');
+	formData.append("brandName", $("#brandName").val());
+	formData.append("productCategory", $("#productCategory").val());
 	formData.append("productName", $("#productName").val() || '');
 	formData.append("page", page);
 	

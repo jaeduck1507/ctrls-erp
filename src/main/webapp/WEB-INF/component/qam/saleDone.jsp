@@ -42,7 +42,7 @@
 <table border="1" id="saleResult" class="data-table">
     <tr>
 		<th>판매코드</th>
-        <th>제품번호</th>
+        <th>상품번호</th>
         <th>제품코드</th>
 		<th>브랜드명</th>
 		<th>카테고리</th>

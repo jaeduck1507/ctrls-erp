@@ -95,9 +95,7 @@ $("#btn").click(() => {
 						showConfirmButton: false,
 						timer: 1500,
 						didClose: () => {
-							$("#yearMonth").val("");
-							$("#result").html("");
-							$(".pagination").html("");
+							location.reload();
 						}
 					});
 					return;
@@ -114,7 +112,6 @@ $("#btn").click(() => {
 						deduction = salayPagingDTO.result[i].deduction;
 					}
 					
-					//console.log(salayPagingDTO.result[i].empName);
 					const inputName = 'deduction_' + salayPagingDTO.result[i].empNo + '_' + yearMonth;
 					//console.log(inputName);
 					

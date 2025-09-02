@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.BudgetMapper;
+import com.project.erp.fm.mapper.TransactionMapper;
+import com.project.erp.fm.model.dto.BalanceDTO;
 import com.project.erp.fm.model.dto.BudgetDeptDTO;
 import com.project.erp.fm.model.dto.BudgetPagingDTO;
+import com.project.erp.fm.model.dto.TransDTO;
 import com.project.erp.fm.model.vo.Budget;
 
 @Service
@@ -16,6 +19,9 @@ public class BudgetService {
 
 	@Autowired
 	private BudgetMapper budgetMapper;
+	
+	@Autowired
+	private TransactionMapper transactionMapper;
 
 	public List<BudgetDeptDTO> showBudget(BudgetDeptDTO bd) {
 		return budgetMapper.showBudget(bd);
@@ -57,6 +63,28 @@ public class BudgetService {
 	
 	public void budgetDelete(int budgetNo) {
 		budgetMapper.budgetDelete(budgetNo);
+	}
+	
+	public List<BalanceDTO> totalBudget() {
+		return budgetMapper.totalBudget();
+	}
+	
+	public List<BalanceDTO> balanceBudget() {
+		List<BalanceDTO> budgetList = budgetMapper.totalBudget();
+		List<BalanceDTO> expensesList = transactionMapper.transExpenses();
+		
+		List<BalanceDTO> balanceList = budgetList;
+		
+		for (BalanceDTO budget : balanceList) {
+		    for (BalanceDTO expenses : expensesList) {
+		        if (budget.getDeptNo() == (expenses.getDeptNo())) {
+		        	budget.setExpenses(expenses.getExpenses());
+		            break;
+		        }
+		    }
+		}
+		
+		return balanceList;
 	}
 	
 }

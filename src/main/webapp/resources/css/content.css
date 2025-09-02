@@ -138,11 +138,6 @@ input[type=file]::file-selector-button:hover,
 	font-weight: bold;
 	margin: 10px 0px;
 }
-.modal-body{
-	display: flex;
-	flex-direction: row;
-	gap: 20px;
-}
 
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
 .modal input[type=file]::file-selector-button:hover{
@@ -349,4 +344,3 @@ input[list^="List"] {
 	margin: 10px;
 	width: fit-content;
 }
-   

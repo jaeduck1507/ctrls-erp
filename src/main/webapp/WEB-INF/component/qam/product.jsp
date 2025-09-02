@@ -32,7 +32,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <!-- 제품 목록 테이블 -->
     <table border="1" id="result" class="data-table">
       <tr>
-        <th>제품 번호</th>
+        <th>상품 번호</th>
         <th>입고일</th>
         <th>제품 코드</th>
         <th>카테고리</th>

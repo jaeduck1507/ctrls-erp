@@ -1,6 +1,5 @@
 package com.project.erp.fm.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.TransactionMapper;
+import com.project.erp.fm.model.dto.BalanceDTO;
 import com.project.erp.fm.model.dto.TransDTO;
 import com.project.erp.fm.model.dto.TransPagingDTO;
 import com.project.erp.fm.model.vo.Transaction;
@@ -77,6 +77,10 @@ public class TransactionService {
 		
 		//System.out.println("monthTransList : " + monthTransList);
 		return monthTransList;
+	}
+	
+	public List<BalanceDTO> transExpenses() {
+		return transactionMapper.transExpenses();
 	}
 	
 }

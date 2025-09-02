@@ -23,10 +23,6 @@
 		<button id="btn">조회</button>
 	</div>
 	
-	<div>
-		<h5 id="totalBudget"></h5>
-	</div>
-	
 	<div>	
 		<table border="1" id="result" class="data-table">
 			
@@ -41,6 +37,18 @@
 		</nav>
 	</div>
 	
+	<script>
+		const balanceList = [
+		<c:forEach items="${balanceList}" var="balance" varStatus="loop">
+			{
+				deptName: "${balance.deptName}",
+				totalBudget: ${balance.totalBudget},
+				expenses: ${balance.expenses}
+			}<c:if test="${!loop.last}">,</c:if>
+		</c:forEach>
+		];
+		console.log(balanceList);
+	</script>
 	<script src="../resources/js/fm/budget.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.erp.fm.model.dto.BalanceDTO;
 import com.project.erp.fm.model.dto.TransDTO;
 import com.project.erp.fm.model.dto.TransPagingDTO;
 import com.project.erp.fm.model.vo.Transaction;
@@ -17,5 +18,6 @@ public interface TransactionMapper {
 	void transRegister(List<Transaction> tList);
 	List<TransDTO> monthIncomeChart();
 	List<TransDTO> monthExpensesChart();
+	List<BalanceDTO> transExpenses();
 	
 }

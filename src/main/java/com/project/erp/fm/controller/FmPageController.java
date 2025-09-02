@@ -51,12 +51,17 @@ public class FmPageController {
 	@Autowired
 	private TransactionService transactionService;
 	
+	@Autowired
+	private BudgetService budgetService;
+	
 	@GetMapping("/saleManage")
 	public String saleManage(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("weekSalesChart", saleManageService.weekSalesChart());
 		model.addAttribute("monthSalesChart", saleManageService.monthSalesChart());
 		model.addAttribute("categoryList", productNameService.selectCategory());
+		System.out.println(saleManageService.weekSalesChart());
+		System.out.println(saleManageService.monthSalesChart());
 		model.addAttribute("component","../component/fm/saleManage.jsp");
 		return "common/layout";
 	}
@@ -73,6 +78,8 @@ public class FmPageController {
 	@GetMapping("/budget")
 	public String budget(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
+		model.addAttribute("balanceList", budgetService.balanceBudget());
+		System.out.println(budgetService.balanceBudget());
 		model.addAttribute("component","../component/fm/budget.jsp");
 		return "common/layout";
 	}
