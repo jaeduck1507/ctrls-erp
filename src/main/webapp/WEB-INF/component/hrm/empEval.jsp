@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>직원정보조회</title>
+<title>인사 성과/평가</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="../resources/css/hrm/empEval.css" />
 </head>
 <body>
-	<h5>[인적자원관리] > [인사 성과/평가]</h5>
-	<h3>${year}년인사 성과/평가</h3>
+	<h5>[인적 자원 관리] > [인사 성과/평가]</h5>
+	<h3>${year}년 인사 성과/평가</h3>
 	<div id="filter-bar">
 		<input type="hidden" value="${user.empNo}" id="empNo"> 
 		<select id="emp">

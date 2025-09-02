@@ -51,7 +51,7 @@ $(document).on('change', '#year', function(e) {
 
 			error: function(xhr, status, error) {
 				$("#showEval").html('');
-				$("#showEval").append('<h1>조회된 정보가 없습니다</h1>');
+				$("#showEval").append('<h3>조회된 정보가 없습니다.</h3>');
 			}
 		});
 

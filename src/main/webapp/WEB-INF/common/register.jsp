@@ -9,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" href="../resources/css/register.css" />
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	
@@ -88,6 +89,7 @@
 		 // 아이디 생성 가능한 사번인지 확인
  		$("#noCheck").click(() =>{
          	const empNo = $("#empNo").val();
+		
              $.ajax({
                  // 요청
                  type : "post",
@@ -110,8 +112,13 @@
                  },
                  
  				error:function(xhr,status,error) {
- 					
- 				}
+					//alert("사번을 입력해주세요");
+					const empNo = document.querySelector("#empNo");
+					const resultNo = document.querySelector("#noCkeckMessage");
+					resultNo.innerHTML = "필수 입력값입니다.";
+		 		    resultNo.style.color = "red";
+					empNo.style.border = "red solid 1px";
+}
              });
          });
 		 
@@ -209,18 +216,22 @@
 			}
 		}
 		
-		// reset 버튼 클릭 시 메시지 초기화
+		// reset 버튼 클릭 시 border, 메시지 초기화
 		$("#register").on("reset", function () {
-		  // 사번 안내
+		  // 사번
+		  $("#empNo").css("border","");
 		  $("#noCkeckMessage").text("사번 입력 후 사번확인을 눌러주세요.").css("color", "");
 
-		  // 아이디 안내
+		  // 아이디
+		  $("#id").css("border","");
 		  $("#resultId").text("영문자로 시작하고 영문자와 숫자 조합으로 4~12자 이내").css("color", "");
 
-		  // 비밀번호 안내
+		  // 비밀번호
+		  $("#pw").css("border","");
 		  $("#resultPw").text("영문자, 숫자, 특수문자 조합으로 8~15자 이내").css("color", "");
 
-		  // 비밀번호 확인 안내
+		  // 비밀번호 확인
+		  $("#pw2").css("border","");
 		  $("#resultPw2").text("위 비밀번호와 동일하게 입력").css("color", "");
 
 		  // 상태값 전부 false로 초기화

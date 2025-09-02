@@ -38,7 +38,7 @@ body {
 .filter-bar input[type="text"]{
 	outline: none;
   padding: 6px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #67ae6e;
   border-radius: 4px;
   width: 100%;
 }
