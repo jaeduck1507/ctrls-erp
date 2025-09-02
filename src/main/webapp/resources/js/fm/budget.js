@@ -1,12 +1,13 @@
-const balance = balanceList.map(item => ({
+const deptBalance = balanceList.map(item => ({
 	deptName: item.deptName,
-	remain: item.totalBudget - item.expenses
+	balance: item.totalBudget - item.expenses
 }));
-console.log(balance);
+console.log(deptBalance);
 
 function showBudget(page = 1) {
 	const formData = new FormData();
-	formData.append("deptName", $("#deptName").val());
+	const deptName = $("#deptName").val();
+	formData.append("deptName", deptName);
 	formData.append("yearMonth", $("#yearMonth").val() || '');
 	formData.append("page", page);
 	
@@ -19,6 +20,12 @@ function showBudget(page = 1) {
 		success: function(result) {
 			//console.log($("#deptName").val());
 			//console.log($("#yearMonth").val());
+			if (deptName) {
+				const balanceInfo = deptBalance.find(item => item.deptName === deptName);
+				if (balanceInfo) {
+					document.querySelector("#balance").innerHTML = `${balanceInfo.deptName} 남은 예산: ${balanceInfo.balance.toLocaleString()}원`;
+				}
+			}
 			
 			if (!result.budgetList || result.budgetList.length === 0) {
 				Swal.fire({
