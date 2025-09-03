@@ -57,12 +57,6 @@ public class HrmPageController {
 	
 	@GetMapping("/empAdd")
 	public String empAdd(Model model) {
-//		List<Department> saleDept = new ArrayList<>();
-//		List<Department> deptList = departmentService.showDept();
-//		for(Department d : deptList) {
-//			if(d.getDeptName().contains("지점")) saleDept.add(d);
-//		}
-//		System.out.println(saleDept);
 		model.addAttribute("department", departmentService.showDept());
 		model.addAttribute("jobPosition", jobPositionService.showJob());
 		model.addAttribute("component","../component/hrm/empAdd.jsp");

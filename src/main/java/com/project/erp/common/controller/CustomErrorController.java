@@ -14,7 +14,6 @@ public class CustomErrorController implements ErrorController {
 	public String handlerError(HttpServletRequest request, Model model) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		int statusCode = Integer.parseInt(status.toString());
-		System.out.println("에러페이지작동하냐?");
 		String errorMessage = "알수없는 오류가 발생하였습니다";
 		if(statusCode == 403) errorMessage = "접근권한이 없습니다";
 		else if(statusCode == 400) errorMessage = "잘못된 요청입니다";

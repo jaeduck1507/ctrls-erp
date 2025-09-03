@@ -47,13 +47,11 @@ public class PageController {
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
 		Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println(auth.toString().equals("anonymousUser"));
 		if(auth.toString().equals("anonymousUser")) return "common/login";
 		//User user = (User) auth.getPrincipal();
 		User user = (User) auth;
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
-		System.out.println(employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("component","../common/mypage.jsp");
 		return "common/layout";
@@ -61,7 +59,6 @@ public class PageController {
 	
 	@GetMapping("/login")
 	public String login() {
-//		if(error !=  null) return "common/login?error=" + error;
 		return "common/login";
 	}
 	
@@ -76,7 +73,6 @@ public class PageController {
 		User user = (User) auth.getPrincipal();
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
-//		System.out.println(employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("user",employeeInfoService.infoShowOne(empInfo));
 		model.addAttribute("component","../common/mypage.jsp");
 		return "common/layout";
@@ -103,7 +99,6 @@ public class PageController {
 
 	@GetMapping("/myLeaveView")
 	public String myLeaveView(Model model, LeaveInfo li) {
-//		System.out.println(li);
 		model.addAttribute("leaveInfoList", leaveInfoService.leaveInfoView(li));	
 		model.addAttribute("component","../common/myLeaveView.jsp");
 		return "common/layout";

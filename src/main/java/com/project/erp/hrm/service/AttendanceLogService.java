@@ -38,7 +38,6 @@ public class AttendanceLogService {
 		EmpInfo ei = new EmpInfo();
 		ei.setEmpNo(am.getEmpNo());
 		ei = employeeInfoService.infoShowOne(ei);
-		System.out.println(ei);
 
 		List<AttendanceLog> alList = attendanceLogMapper.showAttendance(am);
 		List<AttendanceLog> list = new ArrayList<AttendanceLog>();
@@ -46,13 +45,15 @@ public class AttendanceLogService {
 		LocalTime checkInStd = LocalTime.parse("09:00");
 		LocalTime checkOutStd = LocalTime.parse("18:00");
 		int lastDate = ym.lengthOfMonth();
-		int count = 0; // 리스트 번호대로
+		int count = 0; 
 		LocalDate today = LocalDate.now();
+		
 		if (alList.size() == 0) {
 			AttendanceLog dummyLog = new AttendanceLog();
 			dummyLog.setEmpNo(am.getEmpNo());
 			alList.add(dummyLog);
 		}
+		
 		for (int i = 1; i <= lastDate; i++) {
 			if (ym.getYear() > today.getYear())
 				break;
@@ -62,7 +63,7 @@ public class AttendanceLogService {
 					&& today.getDayOfMonth() < i)
 				break;
 
-			// 퇴사일 이후는 안찍히게 break 걸기
+			
 			if (ei.getQuitDate() != null) {
 				if (ym.getYear() > ei.getQuitDate().getYear())
 					break;
@@ -76,7 +77,7 @@ public class AttendanceLogService {
 			LocalDate date = ym.atDay(i);
 			AttendanceLog al = new AttendanceLog();
 
-			try { // 카운트가 리스트 크기 넘을때 더미데이터 생성으로 오류 차단
+			try { 
 				al = alList.get(count);
 			} catch (IndexOutOfBoundsException e) {
 				AttendanceLog dummyLog = new AttendanceLog();
@@ -86,9 +87,9 @@ public class AttendanceLogService {
 			}
 
 			if (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY)
-				continue; // 휴일일때 스킵
+				continue; 
 
-			// 고용일보다 전이면 카운트 올리고 스킵
+			
 			if (ym.getYear() < ei.getHireDate().getYear()) {
 				continue;
 			}
@@ -109,35 +110,33 @@ public class AttendanceLogService {
 				continue;
 			}
 
-			if (al.getStatus() != null && al.getStatus().equals("휴가")) { // 휴가 일때
+			if (al.getStatus() != null && al.getStatus().equals("휴가")) { 
 				list.add(al);
-				System.out.println("휴휴휴휴흏휴휴휴휴가가가각가가가가");
 				count++;
 				continue;
 			}
 
-			al.setStatus("출근"); // 일단 출근으로 변경
+			al.setStatus("출근"); 
 
-			// 만약 출근시간이나 퇴근시간이 null이 나오면 isAfter,isBefore에서 에러발생하므로 null 먼저 처리하기
-			if (al.getCheckIn() == null) { // 출근 누락 -> 결근
+			if (al.getCheckIn() == null) { 
 				al.setStatus("결근");
 				list.add(al);
 				count++;
 				continue;
 			}
-			if (al.getCheckOut() == null) { // 퇴근 누락 -> 결근
+			if (al.getCheckOut() == null) { 
 				al.setStatus("결근");
 				list.add(al);
 				count++;
 				continue;
 			}
-			if (al.getCheckIn().isAfter(checkInStd)) { // 출근시간이 출근기준시각보다 후인 경우 지각
+			if (al.getCheckIn().isAfter(checkInStd)) { 
 				al.setStatus("지각");
 			}
-			if (al.getCheckOut().isBefore(checkOutStd)) { // 퇴근 시간이 퇴근기준시각보다 전인 경우 조퇴 (우선 순위 조퇴 > 지각)
+			if (al.getCheckOut().isBefore(checkOutStd)) { 
 				al.setStatus("조퇴");
 			}
-			list.add(al); // 출근이나 지각,조퇴시에 추가
+			list.add(al); 
 			count++;
 
 		}
@@ -182,7 +181,6 @@ public class AttendanceLogService {
 	}
 
 	public void setAttendance(AttendanceLog al) {
-		System.out.println(showAttendanceOneAtToday(al));
 		al.setCheckIn(LocalTime.parse("09:00"));
 		al.setCheckOut(LocalTime.parse("18:00"));
 		if (showAttendanceOneAtToday(al) == null) {

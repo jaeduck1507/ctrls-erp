@@ -29,7 +29,6 @@ public class AMController {
 	@ResponseBody
 	@PostMapping("/startWork")
 	public void startWork(@RequestBody AttendanceLog al) {
-		System.out.println(al);
 		attendanceLogService.startWork(al);
 		
 	}
@@ -88,7 +87,6 @@ public class AMController {
 	@ResponseBody
 	@PostMapping("/setAttendance")
 	public boolean setAttendance(@RequestBody AttendanceLog al) {
-		System.out.println(al);
 		attendanceLogService.setAttendance(al);
 		return true;
 	}

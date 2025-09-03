@@ -41,8 +41,6 @@ public class HSDController {
     @PostMapping("/registerSaleDate")
     public String registerSaleDate(@RequestBody List<SaleReadyDTO> sellList) { // @RequestBody는 HTTP 요청(/qam/saleReady)의 Body에 담겨 있는 JSON 데이터를 Java 객체로 자동 변환해주는 역할
     	saleService.registerSaleDate(sellList);
-    	System.out.println("registerSaleDate 넘어감");
-    	System.out.println(sellList);
 		return "redirect:/qam/saleReady";
     }
     
@@ -50,12 +48,6 @@ public class HSDController {
 	@ResponseBody
     @GetMapping("/showSaleDone")
     public List<SaleReadyDTO> showSaleDone(Paging paging) {
-//	    Paging pagingAjax = new Paging(); // ajax showSaleDone용
-//	    paging.setPage(paging.getPage());
-//	    paging.setPageSize(20); // or whatever your page size is
-//	    paging.setOffset((paging.getPage() - 1) * pagingAjax.getPageSize());
-
-//	    paging.setTotal(saleService.totalSaleDone()); // total count setter
     	return saleService.showSaleDone(paging);
     }
 	
@@ -68,8 +60,6 @@ public class HSDController {
 	@ResponseBody
     @GetMapping("/searchDefective")
     public DefectiveDTO searchDefective(DefectiveDTO dto,Paging paging) {
-		System.out.println(dto);
-//		model.addAttribute("searchDefectiveList", defectiveService.searchDefective(paging, dto));
     	return defectiveService.searchDefective(dto, paging);
     }
 	

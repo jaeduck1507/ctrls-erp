@@ -29,17 +29,14 @@ public class EmployeeInfoService {
 	public List<EmpInfo> infoShow(EmpInfo ei) {
 		ei.setDeptNo(-1);
 		ei.setJobNo(-1);
-//		if(ei.getEmpName().isBlank()) ei.setEmpName(null);
 		return employeeInfoMapper.infoShow(ei);
 	};
 	
 	List<EmpInfo> infoShowPage(EmpInfoPagingDTO empInfoPagingDTO) {
-		
 		return employeeInfoMapper.infoShowPage(empInfoPagingDTO);
 	};
 	
 	public void empAdd(EmpAddDTO eiList) {
-		System.out.println(eiList);
 		List<EmployeeInfo> empList = new ArrayList<EmployeeInfo>();
 		for(EmpInfo emp : eiList.getEiList()) {
 			EmployeeInfo e = new EmployeeInfo();
@@ -130,7 +127,6 @@ public class EmployeeInfoService {
 		// 중복 방지를 위한 UUID 적용
 		UUID uuid = UUID.randomUUID();
 		String fileName = uuid.toString() + "_" + file.getOriginalFilename();
-		System.out.println(fileName);
 		File copyFile = new File("D:\\ctrls-erp\\src\\main\\resources\\static\\images\\" + fileName);
 
 		try {

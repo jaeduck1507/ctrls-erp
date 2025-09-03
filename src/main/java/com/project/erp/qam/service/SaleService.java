@@ -25,7 +25,6 @@ public class SaleService {
 	public List<SaleReadyDTO> showSaleNull() {
 //		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 //		paging.setTotal(saleMapper.totalSaleReady());
-		System.out.println("showSaleNull 넘어감");
 		return saleMapper.showSaleNull();
 	}
 	

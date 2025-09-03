@@ -97,11 +97,11 @@ function checkReg(target, checkValue) {
 		}
 		else {
 			if (target.parentElement.querySelector("p") != null) target.parentElement.removeChild(target.parentElement.querySelector("p"));
-			const message = document.createElement("p");
-			message.classList.add("arrow_box");
-			message.innerHTML = checkValue.message;
+			//const message = document.createElement("p");
+			//message.classList.add("arrow_box");
+			//message.innerHTML = checkValue.message;
 			target.parentElement.classList.add("red");
-			target.parentElement.appendChild(message);
+			//target.parentElement.appendChild(message);
 
 		}
 	} else {
@@ -111,11 +111,11 @@ function checkReg(target, checkValue) {
 		*/
 
 		if (target.parentElement.querySelector("p") != null) target.parentElement.removeChild(target.parentElement.querySelector("p"));
-		const message = document.createElement("p");
-		message.classList.add("arrow_box");
-		message.innerHTML = checkValue.message;
+		//const message = document.createElement("p");
+		//message.classList.add("arrow_box");
+		//message.innerHTML = checkValue.message;
 		target.parentElement.classList.add("red");
-		target.parentElement.appendChild(message);
+		//target.parentElement.appendChild(message);
 
 		checking = false;
 	}
@@ -201,13 +201,6 @@ $(document).on("click", ".arrow_box", function(e) {
 
 function addRow() { // 열 추가 함수
 	$("#result").append('<tr></tr>'); // 기본 열 추가
-	/*
-	for(var i = 0; i < 9; i++) { // 열에 데이터 추가  4 : 직무, 5: 부서, 6 : 고용일 나머지 : 텍스트 데이터 
-		if(i == 2) $("#result tr").eq(-1).append('<td class="aa"><select><option value="-1">직무 선택</option><c:forEach items="${jobPosition}" var="job"><option value="${job.jobNo}">${job.jobTitle}</option></c:forEach></select><p class="arrow_box">gd</p></td>');
-		else if(i == 3) $("#result tr").eq(-1).append('<td><select><option value="-1">부서 선택</option><c:forEach items="${department}" var="dept"><option value="${dept.deptNo}">${dept.deptName}</option></c:forEach></select></td>');
-		else if(i == 4) $("#result tr").eq(-1).append('<td><input type="date"></td>');
-		else $("#result tr").eq(-1).append('<td><input type="text" class="name"></td>');
-	} */
 	console.log(jobList);
 	$("#result tr").eq(-1).append(
 		'<td><input type="text" class="name" placeholder="사원명 입력"></td>' +
@@ -228,7 +221,6 @@ $(document).on("click", ".btn4", function() { // 나중에 생성된 태그 경�
 	if ($("#result tr").length > 2) $(this).parent().parent().remove(); // this : 현재 태크(button) 부모의 부모는 button -> td -> tr 즉 tr을 삭제(조건은 하나의 열은 남겨둬야되서 걸어둠)
 });
 
-// addRow(); // 처음 열은 자동으로 추가
 
 $("#btn2").click(() => { // 열 추가 버튼 클릭시 열 추가 함수 addRow 함수 실행
 
@@ -256,7 +248,6 @@ $("#btn").click(() => { // 제출 버튼
 			if (j === 8) finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"), emailCheckValue) && finalCheck;
 		}
 	}
-	console.log("마지막" + finalCheck);
 
 	// finalCheck가 true일때 제약조건 위배되는 데이터 없으므로 전송할 객체배열 생성
 	if (finalCheck) {
@@ -326,26 +317,3 @@ $("#btn").click(() => { // 제출 버튼
 	}
 });
 
-/*
-$("#test1").click(() => { // 제출 버튼
-	const table = $("#result tr"); // 테이블 정보 획득
-	var finalCheck = true;
-	for(var i = 1; i < table.length; i++){ // i가 1부터 시작하는 이유는 첫번째 열은 th(열의 설명)부분이라 데이터가 아님
-		for(var j = 0; j <9; j++) { // 객체에 데이터 삽입
-			if(j === 0)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"),nameCheckValue) && finalCheck;
-			if(j === 1)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"),inCheckValue) && finalCheck;
-			if(j === 2)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("select"),jobCheckValue) && finalCheck;
-			if(j === 3)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("select"),deptCheckValue) && finalCheck;
-			if(j === 4)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"),hireDateCheckValue) && finalCheck;
-			if(j === 5)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"),salaryCheckValue) && finalCheck;
-			
-			//if(j === 6)  obj.addr=$("#result tr").eq(i).find("td").eq(j).find("input").val();
-			if(j === 7)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"),phoneCheckValue) && finalCheck;
-			if(j === 8)  finalCheck = checkReg(document.querySelectorAll("#result tr")[i].querySelectorAll("td")[j].querySelector("input"),emailCheckValue) && finalCheck;
-		}
-	}
-    
-    
-	console.log("마지막" + finalCheck);
-});
-*/

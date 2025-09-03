@@ -36,7 +36,6 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/noCheck")
 	public int noCheck(int empNo) {
-		System.out.println(userService.noCheck(empNo));
 		return userService.noCheck(empNo);
 	}
 	
@@ -60,7 +59,6 @@ public class UserController {
 		AttendanceLog al = new AttendanceLog();
 		al.setEmpNo(user.getEmpNo());
 		al.setWorkDate(LocalDate.now());
-		System.out.println(attendanceLogService.showAttendanceOneAtToday(al));
 		return attendanceLogService.showAttendanceOneAtToday(al);
 	}
 	

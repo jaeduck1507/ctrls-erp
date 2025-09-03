@@ -15,7 +15,6 @@ public class DepartmentService {
 	private DepartmentMapper departmentmapper;
 	
 	public List<Department> showDept() {
-		
 		return departmentmapper.showDept();
 	}
 }

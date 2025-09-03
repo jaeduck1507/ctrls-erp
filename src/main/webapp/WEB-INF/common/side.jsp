@@ -8,28 +8,30 @@
 	  <!-- 여기다가 각자 링크 작성하시면 됩니다! -->
       <div class="menu">
         <nav>
-          <div class="menu-group">
-            <div class="menu-title">인적 자원 관리</div>
-            <div class="submenu">
-              <a href="/hrm/empInfo">사원 정보 조회 /hrm/empInfo 페이징 처리 완료</a>
-              <a href="/hrm/empAdd">사원 정보 추가 /hrm/empAdd</a>
-              <a href="/hrm/quitShow">퇴사자 정보 조회 /hrm/quitShow 페이징 처리 완료</a>
-              <a href="/hrm/empEval">인사/성과 평가 /hrm/empEval</a>
-            </div>
-          </div>
-		  
-		  <div class="menu-group">
-              <div class="menu-title">근태 관리</div>
-              <div class="submenu">
-  			    <a href="/hrm/attendanceRecord">출근/퇴근 기록 /hrm/attendanceRecord</a>
-  			    <a href="/hrm/showAttendance">출근/퇴근 조회 /hrm/attendanceRecord</a>
-  			    <a href="/hrm/attendanceStats">출근/퇴근 통계 /hrm/attendanceStats</a>
-			    <a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a>
-			  	<a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a>
-			  	<a href="/hrm/leaveDays">휴가일수 조회 /hrm/leaveDays</a>
-			  	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus 페이징 처리 완료</a>
-			  </div>
-            </div>
+	        <sec:authorize access="hasAnyRole('HRM','ADMIN','MANAGEMENT')">
+	          <div class="menu-group">
+	            <div class="menu-title">인적 자원 관리</div>
+	            <div class="submenu">
+	              <a href="/hrm/empInfo">사원 정보 조회 /hrm/empInfo 페이징 처리 완료</a>
+	              <a href="/hrm/empAdd">사원 정보 추가 /hrm/empAdd</a>
+	              <a href="/hrm/quitShow">퇴사자 정보 조회 /hrm/quitShow 페이징 처리 완료</a>
+	              <a href="/hrm/empEval">인사/성과 평가 /hrm/empEval</a>
+	            </div>
+	          </div>
+			  
+			  <div class="menu-group">
+	              <div class="menu-title">근태 관리</div>
+	              <div class="submenu">
+	  			    <a href="/hrm/attendanceRecord">출근/퇴근 기록 /hrm/attendanceRecord</a>
+	  			    <a href="/hrm/showAttendance">출근/퇴근 조회 /hrm/attendanceRecord</a>
+	  			    <a href="/hrm/attendanceStats">출근/퇴근 통계 /hrm/attendanceStats</a>
+				    <a href="/hrm/leaveAdd">휴가 신청 /hrm/leaveAdd</a>
+				  	<a href="/hrm/leaveInfo">휴가 조회 /hrm/leaveInfo</a>
+				  	<a href="/hrm/leaveDays">휴가일수 조회 /hrm/leaveDays</a>
+				  	<a href="/hrm/leaveStatus">휴가 상태 처리 /hrm/leaveStatus 페이징 처리 완료</a>
+				  </div>
+	            </div>
+	        </sec:authorize>
 
 			<sec:authorize access="hasAnyRole('HRM','ADMIN','MANAGEMENT','FM')">
 				<div class="menu-group">
