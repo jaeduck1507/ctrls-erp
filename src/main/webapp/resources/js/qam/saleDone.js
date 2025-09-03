@@ -1,5 +1,5 @@
 function displaySale(result) {
-	let tableHead = "<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>";
+	let tableHead = "<tr><th>판매코드</th><th>상품번호</th><th>제품코드</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>";
 	$("#saleResult").html(tableHead); // 테이블 헤더 설정
 
 	let total = 0;
@@ -44,8 +44,6 @@ function displaySale(result) {
 			},
 			success: function (result) {
 				if (!result.list || result.list.length === 0) {
-					//alert("조회된 결과가 없습니다");
-					//location.reload();
 					Swal.fire({
 						position: "top",
 						icon: "error",
@@ -87,10 +85,8 @@ function displaySale(result) {
 	
 	$(document).on('click', 'a.page-link', function(e) {
         e.preventDefault();        
-        // a 태그 기본 동작(페이지 이동) 차단
             
     	$.ajax({
-            // 요청
             type: "get",
 			url: "/qam/searchSaleDone", 
 			data: {

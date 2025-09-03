@@ -15,6 +15,12 @@
 		<result property="monthExpenses" column="month_expenses"/>
 	</resultMap>
 	
+	<resultMap id="BalanceMap" type="BalanceDTO">
+		<result property="deptNo" column="dept_no" />
+		<result property="deptName" column="dept_name" />
+		<result property="expenses" column="expenses" />
+	</resultMap>
+	
 	<select id="showtrans" parameterType="TransDTO" resultMap="TransMap">
 		SELECT trans_no, trans_type, trans_amount, category, trans_desc, trans_date, dept_name
 		FROM transaction
@@ -108,5 +114,13 @@
 				AND DATE_FORMAT(CURDATE(), '%Y-%m')
 		GROUP BY DATE_FORMAT(trans_date, '%Y-%m')
 		ORDER BY trans_month
+	</select>
+	
+	<select id="transExpenses" resultMap="BalanceMap">
+		SELECT dept_no, dept_name, SUM(trans_amount) AS expenses
+		FROM transaction
+		JOIN department USING(dept_no)
+		WHERE trans_type = '지출'
+		GROUP BY dept_no, dept_name
 	</select>
 </mapper>

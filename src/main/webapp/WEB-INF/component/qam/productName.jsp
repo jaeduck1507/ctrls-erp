@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>제품 정보 조회</title> <!-- 페이지 제목 -->
+<title>제품 정보 조회</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -13,10 +13,8 @@
 <h5>[품질 관리] > [제품 정보 조회]</h5>
 <h3>제품 정보 조회</h3>
 <div class="filter-bar">
-<!-- 제품명 신규 등록 버튼 -->
 <a href="/productNameForm">제품 신규 등록</a>
 
-<!-- 검색창: 제품명 + 카테고리 -->
 <form action="productName">
     제품명 : <input type="text" name="productName" id="productName" />
 	<select name="productCategory" id="productCategory">
@@ -25,10 +23,10 @@
 			<option value="${category}">${category}</option>
 		</c:forEach>
 	</select>
-    <button type="submit">검색</button> <!-- 검색 버튼 -->
+    <button type="submit">검색</button>
 </form>
 </div>
-<!-- 검색 및 전체 조회 결과 출력 테이블 -->
+
 <table border="1" id="result" class="data-table">
 	<tr>
 		<th>제품 코드</th>

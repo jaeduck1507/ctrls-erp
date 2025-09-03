@@ -57,12 +57,11 @@
 .filter-bar input[type="time"],
 .filter-bar input[type="number"],
 .filter-bar input[type="checkbox"],
-.filter-bar input[type="file"]
-#filter-bar fieldset,
+.filter-bar input[type="file"] #filter-bar fieldset,
 .filter-bar fieldset,
 #filter-bar select,
 .filter-bar select,
-.filter-bar textarea  {
+.filter-bar textarea {
   outline: none;
   padding: 6px 8px;
   border: 1px solid var(--input-color);
@@ -83,7 +82,7 @@
 #filter-bar button,
 .filter-bar input[type="submit"],
 .filter-bar a,
-.filter-bar button{
+.filter-bar button {
   text-decoration: none;
   background-color: #ffffff;
   color: #516b38;
@@ -96,24 +95,24 @@
 }
 
 /*data-table input file style*/
-input[type=file]::file-selector-button{
-	border-style: none;
-	text-decoration: none;
-	background-color: #90c67c;
-	color: #ffffff;
-	padding: 3px 6px;
-	border-radius: 5px;
-	cursor: pointer;
+input[type="file"]::file-selector-button {
+  border-style: none;
+  text-decoration: none;
+  background-color: #90c67c;
+  color: #ffffff;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-input[type=file]{
-	width: 100%;
-	font-size: 9.6px;
-	font-weight: bold;
+input[type="file"] {
+  width: 100%;
+  font-size: 9.6px;
+  font-weight: bold;
 }
 
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
-input[type=file]::file-selector-button:hover,
+input[type="file"]::file-selector-button:hover,
 .filter-bar input[type="submit"]:hover,
 .filter-bar a:hover,
 .filter-bar button:hover {
@@ -122,34 +121,34 @@ input[type=file]::file-selector-button:hover,
 }
 
 /*modify page input file style*/
-.modal input[type=file]::file-selector-button{
-	border-style: none;
-	text-decoration: none;
-	background-color: #90c67c;
-	color: #ffffff;
-	padding: 8px 12px;
-	border-radius: 10px;
-	cursor: pointer;
+.modal input[type="file"]::file-selector-button {
+  border-style: none;
+  text-decoration: none;
+  background-color: #90c67c;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.modal input[type=file]{
-	width: 100%;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 10px 0px;
+.modal input[type="file"] {
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0px;
 }
-.img-div{
-	display: flex;
-	flex-direction: row;
-	gap: 20px;
+
+.img-div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 /* 각종 버튼들 커서 올렸을 경우 색상 변경 */
-.modal input[type=file]::file-selector-button:hover{
+.modal input[type="file"]::file-selector-button:hover {
   background-color: var(--color);
   color: #ffffff;
 }
-
 
 /* a 태그 상세 크기 조정*/
 .filter-bar a {
@@ -196,7 +195,7 @@ table.data-table {
 .data-table th,
 .data-table td {
   padding: 3px 10px;
-  border-radius: 25px ;
+  border-radius: 25px;
   text-align: center;
 }
 
@@ -219,7 +218,7 @@ table.data-table {
 .data-table td input[type="number"],
 .data-table td select,
 .data-table td input[list="List1"] {
-	outline: none;
+  outline: none;
   text-align: center;
   border-style: none;
   background-color: var(--table-td-color);
@@ -302,12 +301,12 @@ input[list^="List"] {
 .pagination li a {
   display: block;
   padding: 5px 14px;
-  border: 1px solid green ;
+  border: 1px solid green;
   border-radius: 5px;
-  color: green ;
+  color: green;
   text-decoration: none;
   transition: 0.2s;
-  background-color: white ;
+  background-color: white;
 }
 
 /* 페이징 내 a태그에 커서 올렸을 경우 */
@@ -331,7 +330,7 @@ input[list^="List"] {
   opacity: 0.6 !important;
   background-color: white !important;
   color: #90c67c !important;
-  border: 1px solid #90c67c ;
+  border: 1px solid #90c67c;
 }
 
 /*box*/
@@ -339,14 +338,21 @@ input[list^="List"] {
   --side-width: 250px; /* 사이드 메뉴 가로 길이*/
   --header-height: 70px; /* 헤더 높이*/
   --color: #67ae6e;
-}  
-
-.total{
-	background-color: #E1EEBC;
-	color: #2F5249;
-	border-radius: 10px;
-	padding: 10px 20px 5px 20px;
-	margin: 10px;
-	width: fit-content;
 }
-   
+
+.total {
+  background-color: #e1eebc;
+  color: #2f5249;
+  border-radius: 10px;
+  padding: 10px 20px 5px 20px;
+  margin: 10px;
+  width: fit-content;
+}
+
+.balance {
+  background-color: #e1eebc;
+  color: #2f5249;
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: fit-content;
+}

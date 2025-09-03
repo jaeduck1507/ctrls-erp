@@ -13,7 +13,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <h5>[품질 관리] > [상품 조회]</h5>
     <h3>상품 조회</h3>
-      <!-- 검색창 -->
       <form action="product" method="get">
 		<div class="filter-bar">
 	        제품명: <input type="text" name="productName" value="${productName}" />
@@ -28,11 +27,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 		</div>
       </form>
    
-
-    <!-- 제품 목록 테이블 -->
     <table border="1" id="result" class="data-table">
       <tr>
-        <th>제품 번호</th>
+        <th>상품 번호</th>
         <th>입고일</th>
         <th>제품 코드</th>
         <th>카테고리</th>

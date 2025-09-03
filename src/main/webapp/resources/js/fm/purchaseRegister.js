@@ -1,8 +1,5 @@
 const quantityCheck = /^[0-9]\d*$/;
 $(document).on("input", ".quantity", (e) => {
-	console.log(e.target.value);
-	console.log(quantityCheck.test(e.target.value));
-		
 	const quantityInput = document.querySelectorAll(".quantity");
 	for (let i = 0; i < quantityInput.length; i++) {
 		const input = quantityInput[i];
@@ -81,8 +78,6 @@ function addRow(totalOptionText) { // 열 추가 함수()
     $("#result").append('<tr></tr>'); // 기본 열 추가
     for(var i = 0; i < 10; i++) { // 열에 데이터 추가  4 : 직무, 5: 부서, 6 : 고용일 나머지 : 텍스트 데이터 
 		if(i == 0) {
-			
-			//console.log(totalOptionText);
     		$("#result tr").eq(-1).append('<td><input list="List'+ (++count) +'" class="productName" placeholder="검색 또는 선택" />'+
 				'<datalist id="List'+ count +'">'+
 				totalOptionText+
@@ -111,8 +106,6 @@ $(document).on('change', '.productName', (e) => {
 	const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
 	
 	if (!opt.length) {
-		console.warn('없는 값:', val);
-		//alert("존재하지 않는 상품입니다!");
 		Swal.fire({
 			position: "top",
 			icon: "error",
@@ -145,7 +138,6 @@ $(document).on('change', '.productName', (e) => {
 	$(e.target).parent().parent().find("td").eq(8).text("");
 	
 	const today = new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0') + '-' + String(new Date().getDate()).padStart(2, '0');
-	//console.log(today);
 	$(e.target).parent().parent().find("td").eq(9).html(`<input type="date" name="purchase-date" value="${today}" readonly>`);
 });
 
@@ -165,8 +157,7 @@ $(document).on("click", "#purchase-register", function() { // 제출 버튼 동�
 	
 	$("#result tr").each(function () {
 		$(this).find("input").each(function () {
-			const val = String($(this).val() || "").trim()
-			console.log(val)
+			const val = String($(this).val() || "").trim();
 			if (!val) {
 				allFilled = false;
 				$(this).parent().addClass("red");
@@ -209,8 +200,6 @@ $(document).on("click", "#purchase-register", function() { // 제출 버튼 동�
         obj.brandCode=$("#brand").val();
         prList.push(obj); // 정보 저장한 객체를 배열에 삽입
     }
-    console.log(JSON.stringify(prList));
-	console.log(prList.length);
 	
 	Swal.fire({
 		title: "등록하시겠습니까?",

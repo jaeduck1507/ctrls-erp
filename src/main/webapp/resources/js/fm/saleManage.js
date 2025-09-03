@@ -1,25 +1,10 @@
 const now = new Date();
 const today = now.getFullYear() + '-' 
 	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
-	                    + String(now.getDate()).padStart(2, '0'); // 매출 기간 조회에 사용
+	                    + String(now.getDate()).padStart(2, '0');
 
 let month = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
-/*
-// 월별 차트 조회 시 사용				
-let year = now.getFullYear();
-let month = now.getMonth() + 1;
-
-// 오늘이 1일이면 전월 차트가 조회되게
-if (now.getDate() === 1) {
-		month -= 1;
-		if (month === 0) {
-			month = 12;
-			year -= 1;
-		}
-	}
-
-let currentMonth = year + '-' + String(month).padStart(2, '0');
-*/						
+					
 const monthChart = document.querySelector("#monthChart");
 const weekChart = document.querySelector("#weekChart");
 
@@ -102,9 +87,6 @@ function createChart(result) {
 		quantityValues.push(item.monthQuantity);
 	});
 	
-	console.log(productLabels);
-	console.log(quantityValues);
-	
 	if (doughnutChart) {
 		doughnutChart.destroy();
 	}
@@ -142,9 +124,7 @@ function searchChart(saleCategory, yearMonth) {
 	const formData = new FormData();
 	formData.append("saleCategory", saleCategory);
 	formData.append("yearMonth", yearMonth);
-	//console.log($("#saleCategory").val());
-	//console.log($("#yearMonth").val());
-	
+		
 	$.ajax({
 		type: "post",
 		url: "/monthQuantityChart",
@@ -153,10 +133,6 @@ function searchChart(saleCategory, yearMonth) {
 		contentType: false,
 		success: function(result) {
 			let currentMonth = $("#yearMonth").val();
-			console.log(currentMonth);
-			console.log(currentMonth.substring(5));
-			console.log(String(now.getMonth() + 1).padStart(2, '0'));
-			//console.log(result);
 			if (result.length === 0) {
 				Swal.fire({
 					position: "top",
@@ -187,8 +163,6 @@ function searchChart(saleCategory, yearMonth) {
 
 // 처음 모달 창을 열었을 때 조회 초기값 세팅
 $("#salesQuantity").on("show.bs.modal", function () {
-	//$("#saleCategory").val("all");
-	//$("#yearMonth").val(currentMonth);
 	reloadChart();
 });
 
@@ -208,7 +182,7 @@ function reloadChart() {
 
 function showSaleManage(page = 1) {
 	const formData = new FormData();
-	formData.append("productCategory", $("#productCategory").val() || '');
+	formData.append("productCategory", $("#productCategory").val());
 	formData.append("productName", $("#productName").val() || '');
 	formData.append("page", page);
 	
@@ -244,11 +218,6 @@ function showSaleManage(page = 1) {
 		processData: false,
 		contentType: false,
 		success: function(result) {
-			//console.log($("#productCategory").val());
-			//console.log($("#productName").val());
-			//console.log($("#startDate").val());
-			//console.log($("#endDate").val());
-			
 			if (!result.salesList || result.salesList.length === 0) {
 				Swal.fire({
 					position: "top",
@@ -302,61 +271,4 @@ $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
 	const page = $(this).attr('href');
 	showSaleManage(page);
-	/*
-	const formData = new FormData();
-	formData.append("productCategory", $("#productCategory").val());
-	formData.append("productName", $("#productName").val());
-	formData.append("page", $(this).attr('href'));
-	
-	const startDate = $("#startDate").val();
-	const endDate = $("#endDate").val();
-	
-	if (startDate && endDate) {
-		if (startDate > endDate) {
-			Swal.fire({
-				position: "top",
-				icon: "error",
-				title: "조회 실패",
-				text: "조회 기간을 다시 선택해주세요!",
-				showConfirmButton: false,
-				timer: 1500
-			});
-			return;
-		}
-		formData.append("startDate", startDate);
-		formData.append("endDate", endDate);
-	} else if (startDate && !endDate) {
-		formData.append("startDate", startDate);
-		formData.append("endDate", today);
-	} else if (!startDate && endDate) {
-		formData.append("startDate", '1900-01-01');
-		formData.append("endDate", endDate);
-	}
-	
-	$.ajax({
-		type: "post",
-		url: "/showSaleManage",
-		data: formData,
-		processData: false,
-		contentType: false,
-		success: function(result) {
-			$("#result").html("");
-			$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
-			for (const sales of result.salesList) {
-				var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice.toLocaleString() + "</td><td>" 
-					+ sales.quantity + "</td><td>" + sales.varAmount.toLocaleString() + "</td><td>" + sales.totalAmount.toLocaleString() + "</td><td>" + sales.saleDate + "</td></tr>"
-				$("#result").append(text);
-			}
-			
-			$(".pagination").html('');
-        	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-        	for (var i = result.startPage; i <= result.endPage; i++) {
-        		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-        	}
-        	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
-		},
-		error: function(xhr, status, error) {
-			
-		}
-	});*/
 });

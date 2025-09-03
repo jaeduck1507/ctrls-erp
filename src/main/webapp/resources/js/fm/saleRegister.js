@@ -3,16 +3,13 @@ $(document).ready(() => {
 	const today = now.getFullYear() + '-' 
 	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
 	                    + String(now.getDate()).padStart(2, '0');
-	//console.log(today);
 	
 	$("#saleDate").val(today);
-	console.log($("#saleDate").val());
 });
 
 $("#search").click(() => {
 	const formData = new FormData();
 	formData.append("saleDate", $("#saleDate").val());
-	console.log($("#saleDate").val());
 	
 	$.ajax({
 		type: "post",
@@ -23,8 +20,6 @@ $("#search").click(() => {
 		success: function(result) {
 			if (!result || result.length === 0) {
 				$("#sale-register").prop("disabled", true);
-				//alert("조회된 결과가 없습니다");
-				//location.reload();
 				Swal.fire({
 					position: "top",
 					icon: "error",
@@ -65,9 +60,7 @@ $("#sale-register").click(() => {
 		
 		smList.push(obj);
 	}
-	console.log(JSON.stringify(smList));
-	console.log(smList.length);
-	
+		
 	Swal.fire({
 		title: "등록하시겠습니까?",
 		text: "총 " + smList.length + "개의 내역이 등록됩니다!",

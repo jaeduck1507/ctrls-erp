@@ -17,7 +17,6 @@
 <div class="filter-bar">
 <form id="defectiveSearchForm">
 	<div>
-		<!-- 불량 유형 필터 체크박스 -->
 		불량 유형:
 		<label><input type="checkbox" class="defectiveFilter" id="checkMaterial" value="material" checked> 부자재 불량</label>
 		<label><input type="checkbox" class="defectiveFilter" id="checkColor" value="color" checked> 색상 불량</label>
@@ -51,7 +50,7 @@
     <thead>
         <tr>
             <th>불량코드</th>
-            <th>제품번호</th>
+            <th>상품번호</th>
             <th>제품코드</th>
             <th>부자재검사</th>
             <th>색상검사</th>

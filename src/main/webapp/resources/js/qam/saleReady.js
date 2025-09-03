@@ -35,13 +35,13 @@ function saleReadyPaingFuc() {
 	let today = new Date();
 
 	let year = today.getFullYear();
-	let month = String(today.getMonth() + 1).padStart(2, "0"); // 0부터 시작하므로 +1
+	let month = String(today.getMonth() + 1).padStart(2, "0");
 	let day = String(today.getDate()).padStart(2, "0");
 
 	let ymd = year + "-" + month + "-" + day;
 	
 	$("#saleReady").html("");
-	$("#saleReady").append("<tr><th>판매코드</th><th>제품번호</th><th>제품코드</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>날짜입력</th><th>선택</th></tr>");
+	$("#saleReady").append("<tr><th>판매코드</th><th>상품번호</th><th>제품코드</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매일 입력</th><th>선택</th></tr>");
 	for (var i = saleReadyPagingDTO.offset;   i < ((saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) > saleReadyPagingDTO.result.length ? saleReadyPagingDTO.result.length: (saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) ); i++) {
 		var text =
 			'<tr id="index_'+ i +'">' +
@@ -80,16 +80,12 @@ function saleReadyPaingFuc() {
 	
 	$(document).on('click', 'a.page-link', function(e) {
         e.preventDefault();        
-       
-        // a 태그 기본 동작(페이지 이동) 차단
         
     	const page = $(this).attr('href');
     	saleReadyPagingDTO.offset = (page - 1) * saleReadyPagingDTO.limit;
     	saleReadyPagingDTO.page = page;
     	saleReadyPagingDTO.setTotal(saleReadyPagingDTO.result.length);
-            
-    	// 링크 URL 읽기
-		
+        
     	saleReadyPaingFuc();
       });
 	
@@ -169,7 +165,6 @@ function saleReadyPaingFuc() {
 		}
 		console.log(sellList.length);
 		if(sellList.length == 0) {
-		//	alert("1개 이상의 제품을 선택해주세요");
 			Swal.fire({
 				title: "1개 이상의 제품을 선택해주세요!",
 				confirmButtonText: '확인',

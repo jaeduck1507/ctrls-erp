@@ -24,7 +24,7 @@
 	</div>
 	
 	<div>
-		<h5 id="totalBudget"></h5>
+		<h5 id="balance"></h5>
 	</div>
 	
 	<div>	
@@ -41,6 +41,17 @@
 		</nav>
 	</div>
 	
+	<script>
+		const balanceList = [
+		<c:forEach items="${balanceList}" var="balance" varStatus="loop">
+			{
+				deptName: "${balance.deptName}",
+				totalBudget: ${balance.totalBudget},
+				expenses: ${balance.expenses}
+			}<c:if test="${!loop.last}">,</c:if>
+		</c:forEach>
+		];
+	</script>
 	<script src="../resources/js/fm/budget.js"></script>
 </body>
 </html>

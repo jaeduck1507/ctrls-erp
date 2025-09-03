@@ -1,7 +1,5 @@
 package com.project.erp.fm.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +49,9 @@ public class FmPageController {
 	@Autowired
 	private TransactionService transactionService;
 	
+	@Autowired
+	private BudgetService budgetService;
+	
 	@GetMapping("/saleManage")
 	public String saleManage(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
@@ -65,7 +66,6 @@ public class FmPageController {
 	public String purchase(Model model, Paging paging) {
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("brandList", brandService.findBrand(paging));
-		//System.out.println(productNameService.selectCategory());
 		model.addAttribute("component","../component/fm/purchase.jsp");
 		return "common/layout";
 	}
@@ -73,6 +73,7 @@ public class FmPageController {
 	@GetMapping("/budget")
 	public String budget(Model model, Paging paging) {
 		model.addAttribute("department", departmentService.showDept());
+		model.addAttribute("balanceList", budgetService.balanceBudget());
 		model.addAttribute("component","../component/fm/budget.jsp");
 		return "common/layout";
 	}
@@ -81,7 +82,6 @@ public class FmPageController {
 	public String purchaseRegister(Model model, Paging paging) {
 		model.addAttribute("productNameList", productNameService.showProductName(paging));
 		model.addAttribute("brandList", brandService.findBrand(paging));
-		//System.out.println(brandService.findBrand());
 		model.addAttribute("component","../component/fm/purchaseRegister.jsp");
 		return "common/layout";
 	}	

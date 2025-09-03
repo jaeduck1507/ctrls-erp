@@ -36,7 +36,6 @@ public class SaleManageService {
 		saleManagePagingDTO.setSalesList(showSaleManagePage(saleManagePagingDTO));
 		saleManagePagingDTO.setPage(paging.getPage());
 		saleManagePagingDTO.setTotal(totalSaleManagePage(sp));
-		//System.out.println(saleManagePaging);
 		return saleManagePagingDTO;
 	}
 	

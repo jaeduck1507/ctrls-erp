@@ -1,6 +1,5 @@
 package com.project.erp.fm.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.fm.mapper.TransactionMapper;
+import com.project.erp.fm.model.dto.BalanceDTO;
 import com.project.erp.fm.model.dto.TransDTO;
 import com.project.erp.fm.model.dto.TransPagingDTO;
 import com.project.erp.fm.model.vo.Transaction;
@@ -55,17 +55,9 @@ public class TransactionService {
 	public List<TransDTO> monthTransChart() {
 		List<TransDTO> incomeList = monthIncomeChart();
 		List<TransDTO> expensesList = monthExpensesChart();
-		//System.out.println("incomeList : " + incomeList);
-		//System.out.println("expensesList : " + expensesList);
-		
+				
 		List<TransDTO> monthTransList = incomeList;
-		/*
-		for (int i = 0; i < monthTransList.size(); i++) {
-			if (monthTransList.get(i).getTransMonth().equals(expensesList.get(i).getTransMonth())) {
-				monthTransList.get(i).setMonthExpenses(expensesList.get(i).getMonthExpenses());
-			}
-		}*/
-		
+				
 		for (TransDTO income : monthTransList) {
 		    for (TransDTO expense : expensesList) {
 		        if (income.getTransMonth().equals(expense.getTransMonth())) {
@@ -75,8 +67,11 @@ public class TransactionService {
 		    }
 		}
 		
-		//System.out.println("monthTransList : " + monthTransList);
 		return monthTransList;
+	}
+	
+	public List<BalanceDTO> transExpenses() {
+		return transactionMapper.transExpenses();
 	}
 	
 }
