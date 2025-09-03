@@ -1,10 +1,6 @@
 const transAmountCheck = /^[1-9]\d*$/;
 const transDateCheck = /.+/;
 $(document).on("input", ".transAmount, .transDate", (e) => {
-	//console.log(e.target.value);
-	//console.log(transAmountCheck.test(e.target.value));
-	//console.log(transDateCheck.test(e.target.value));
-	
 	const amountInput = document.querySelectorAll(".transAmount");
 	for (let i = 0; i < amountInput.length; i++) {
 		const input = amountInput[i];
@@ -60,7 +56,6 @@ $(document).on("change", ".deptName", (e) => {
 	const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
 	
 	if (!opt.length) {
-		//alert("없는 부서입니다");
 		Swal.fire({
 			position: "top",
 			icon: "error",
@@ -91,8 +86,7 @@ $("#trans-register").click(() => {
 		
 	$("#result tr").each(function () {
 		$(this).find("input").not(".transDesc").each(function () {
-			const val = String($(this).val() || "").trim()
-			console.log(val)
+			const val = String($(this).val() || "").trim();
 			if (!val) {
 				allFilled = false;
 				$(this).parent().addClass("red");
@@ -142,8 +136,6 @@ $("#trans-register").click(() => {
 		
 		tList.push(obj);
 	}
-	console.log(JSON.stringify(tList));
-	console.log(tList.length);
 	
 	Swal.fire({
 		title: "등록하시겠습니까?",

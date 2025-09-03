@@ -2,11 +2,6 @@ const periodTypeCheck = /^[YQM]$/;
 const budgetAmountCheck = /^[1-9]\d*$/;
 const executionDateCheck = /.+/;
 $(document).on("input", ".periodType, .budgetAmount, .executionDate", (e) => {
-	//console.log(e.target.value);
-	//console.log(periodTypeCheck.test(e.target.value));
-	//console.log(budgetAmountCheck.test(e.target.value));
-	//console.log(executionDateCheck.test(e.target.value));
-	
 	const periodInput = document.querySelectorAll(".periodType");
 	for (let i = 0; i < periodInput.length; i++) {
 		const input = periodInput[i];
@@ -40,9 +35,9 @@ $(document).on("input", ".periodType, .budgetAmount, .executionDate", (e) => {
 
 var count = 0;
 
-function addRow() { // 열 추가 함수
-	$("#result").append('<tr></tr>'); // 기본 열 추가
-	for(var i = 0; i < 6; i++) { // 열에 데이터 추가
+function addRow() {
+	$("#result").append('<tr></tr>');
+	for(var i = 0; i < 6; i++) {
 		if(i == 0) {
 			count++;
 			var text = `<td><input list="List${count}" class="deptName" placeholder="부서 선택"/><datalist id="List${count}">${department.map(dept => `<option value="${dept.deptName}" data-dept_no="${dept.deptNo}"></option>`).join("")}</datalist></td>`;
@@ -55,11 +50,11 @@ function addRow() { // 열 추가 함수
 
 addRow();
 
-$("#add-row").click(() => { // 열 추가 버튼 클릭시 열 추가 함수 addRow 함수 실행
+$("#add-row").click(() => {
 	addRow();
 });
 
-$(document).on("click", ".remove-row", function() { // 열 삭제 함수
+$(document).on("click", ".remove-row", function() {
 	if($("#result tr").length > 2) $(this).parent().parent().remove();
 });
 
@@ -67,11 +62,9 @@ $(document).on("change", ".deptName", (e) => {
 	$(e.target).parent().removeClass("red");
 	const deptInfo = {};
 	const val = $(e.target).val();
-	console.log(val);
 	const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
 	
 	if (!opt.length) {
-		//alert("없는 부서입니다");
 		Swal.fire({
 			position: "top",
 			icon: "error",
@@ -102,8 +95,7 @@ $("#budget-register").click(() => {
 	
 	$("#result tr").each(function () {
 		$(this).find("input, select").not(".plan").each(function () {
-			const val = String($(this).val() || "").trim()
-			console.log(val)
+			const val = String($(this).val() || "").trim();
 			if (!val) {
 				allFilled = false;
 				$(this).parent().addClass("red");
@@ -159,8 +151,6 @@ $("#budget-register").click(() => {
 		
 		bList.push(obj);
 	}
-	console.log(JSON.stringify(bList));
-	console.log(bList.length);
 	
 	Swal.fire({
 		title: "등록하시겠습니까?",

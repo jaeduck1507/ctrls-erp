@@ -2,7 +2,6 @@ const deptBalance = balanceList.map(item => ({
 	deptName: item.deptName,
 	balance: item.totalBudget - item.expenses
 }));
-console.log(deptBalance);
 
 function showBudget(page = 1) {
 	const formData = new FormData();
@@ -11,6 +10,11 @@ function showBudget(page = 1) {
 	formData.append("yearMonth", $("#yearMonth").val() || '');
 	formData.append("page", page);
 	
+	if (deptName === 'all') {
+		document.querySelector("#balance").innerHTML = "";
+		$("#balance").removeClass("balance");
+	}
+	
 	$.ajax({
 		type: "post",
 		url: "/showBudget",
@@ -18,15 +22,6 @@ function showBudget(page = 1) {
 		processData: false,
 		contentType : false,
 		success: function(result) {
-			//console.log($("#deptName").val());
-			//console.log($("#yearMonth").val());
-			if (deptName) {
-				const balanceInfo = deptBalance.find(item => item.deptName === deptName);
-				if (balanceInfo) {
-					document.querySelector("#balance").innerHTML = `${balanceInfo.deptName} 남은 예산: ${balanceInfo.balance.toLocaleString()}원`;
-				}
-			}
-			
 			if (!result.budgetList || result.budgetList.length === 0) {
 				Swal.fire({
 					position: "top",
@@ -40,9 +35,18 @@ function showBudget(page = 1) {
 						$("#result").html("");
 						$(".pagination").html("");
 						document.querySelector("#balance").innerHTML = "";
+						$("#balance").removeClass("balance");
 					}
 				});
 				return;
+			}
+			
+			if (deptName) {
+				const balanceInfo = deptBalance.find(item => item.deptName === deptName);
+				if (balanceInfo) {
+					document.querySelector("#balance").innerHTML = `${balanceInfo.deptName} 남은 예산: ${balanceInfo.balance.toLocaleString()}원`;
+					$("#balance").addClass("balance");
+				}
 			}
 						
 			$("#result").html("");
@@ -81,40 +85,6 @@ $(document).on('click', 'a.page-link', function(e) {
 	e.preventDefault();
 	const page = $(this).attr('href');
 	showBudget(page);
-	/*
-	const formData = new FormData();
-	formData.append("deptName", $("#deptName").val());
-	formData.append("yearMonth", $("#yearMonth").val());
-	formData.append("page", $(this).attr('href'));
-	
-	$.ajax({
-		type: "post",
-		url: "/showBudget",
-		data: formData,
-		processData: false,
-		contentType : false,
-		success: function(result) {
-			$("#result").html("");
-			$("#result").append("<tr><th>예산 코드</th><th>부서</th><th>예산 금액</th><th>계획</th><th>예산 집행일</th><th>수정</th><th>삭제</th></tr>");
-			for (const budget of result.budgetList) {
-				var text = "<tr><td>" + budget.periodValue + "</td><td>" + budget.deptName + "</td><td>" 
-					+ budget.annualBudget.toLocaleString() + "</td><td>" + budget.plan + "</td><td>" + budget.executionDate + "</td></tr>"
-				$("#result").append(text);
-				$("#result tr").eq(-1).append('<td><a href="/fm/budgetUpdate?budgetNo=' + budget.budgetNo + '" class="btnO">수정</a></td>');
-				$("#result tr").eq(-1).append('<td><a href="/fm/budgetDelete?budgetNo=' + budget.budgetNo + '" class="btnX">삭제</a></td>');
-			}
-			
-			$(".pagination").html('');
-        	$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
-        	for (var i = result.startPage; i <= result.endPage; i++) {
-        		$(".pagination").append('<li class="page-item"><a class="page-link ' + (result.page == i ? 'active' : '') + '" href="' + i +'">' + i + '</a></li>');
-        	}
-        	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
-		},
-		error: function(xhr, status, error) {
-			
-		}
-	});*/
 });
 
 $(document).on('click', 'a.btnX', function(e) {

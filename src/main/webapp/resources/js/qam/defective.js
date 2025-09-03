@@ -41,8 +41,6 @@ function displayDefective(data) {
 }
 
 $(document).ready(function() {
-
-	// 검색 버튼 클릭 시
 	$("#searchBtn").click(function () {
 
 	    $.ajax({
@@ -58,8 +56,6 @@ $(document).ready(function() {
 	        },
 	        success: function (result) {
 				if (!result.list || result.list.length === 0) {
-					//alert("조회된 결과가 없습니다");
-					//location.reload();
 					Swal.fire({
 						position: "top",
 						icon: "error",
@@ -84,8 +80,7 @@ $(document).ready(function() {
 	        }
 	    });
 	});
-
-	// 전체보기 버튼 클릭 시
+	
 	$("#resetBtn").click(function () {
 
 	  $("#productCategory").val("");

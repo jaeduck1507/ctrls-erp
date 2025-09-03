@@ -51,7 +51,6 @@
 				<div class="menu-group">
 		            <div class="menu-title">재무 관리</div>
 		            <div class="submenu">
-						<a href="/modalTest">**모달 테스트 /modalTest</a> <!-- 테스트용 -->
 		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM')">
 							<a href="/fm/budget">예산 조회</a>
 							<a href="/fm/budgetRegister">예산 등록</a>

@@ -2,11 +2,6 @@ const bonusNoCheck = /^[1-9]$/;
 const paymentCheck = /^[1-9]\d*$/;
 const payDateCheck = /.+/;
 $(document).on("input", ".bonusNo, .payment, .payDate", (e) => {
-	//console.log(e.target.value);
-	//console.log(bonusNoCheck.test(e.target.value));
-	//console.log(paymentCheck.test(e.target.value));
-	//console.log(payDateCheck.test(e.target.value));
-	
 	const bonusNoInput = document.querySelectorAll(".bonusNo");
 	for (let i = 0; i < bonusNoInput.length; i++) {
 		const input = bonusNoInput[i];
@@ -40,9 +35,9 @@ $(document).on("input", ".bonusNo, .payment, .payDate", (e) => {
 
 var count = 0;
 
-function addRow() { // 열 추가 함수
-	$("#result").append('<tr></tr>'); // 기본 열 추가
-	for(var i = 0; i < 4; i++) { // 열에 데이터 추가
+function addRow() {
+	$("#result").append('<tr></tr>');
+	for(var i = 0; i < 4; i++) {
 		if(i == 0) {
 			count++;
 			var text = `<td><input list="List${count}" class="empName" placeholder="사원 선택" /><datalist id="List${count}">${empInfo.map(emp => `<option value="${emp.empName}/${emp.deptName}/${emp.jobTitle}" data-emp_no="${emp.empNo}"></option>`).join("")}</datalist></td>`;
@@ -55,11 +50,11 @@ function addRow() { // 열 추가 함수
 
 addRow();
 
-$("#add-row").click(() => { // 열 추가 버튼 클릭시 열 추가 함수 addRow 함수 실행
+$("#add-row").click(() => {
 	addRow();
 });
 
-$(document).on("click", ".remove-row", function() { // 열 삭제 함수
+$(document).on("click", ".remove-row", function() {
 	if($("#result tr").length > 2) $(this).parent().parent().remove();
 });
 
@@ -67,11 +62,9 @@ $(document).on("change", ".empName", (e) => {
 	$(e.target).parent().removeClass("red");
 	const deptInfo = {};
 	const val = $(e.target).val();
-	console.log(val);
 	const opt = $('#result tr').eq(1).find('td').eq(0).find('datalist').find('option').filter((a, o) => o.value === val);
 	
 	if (!opt.length) {
-		//alert("존재하지 않는 사원입니다");
 		Swal.fire({
 			position: "top",
 			icon: "error",
@@ -99,8 +92,7 @@ $("#bonus-register").click(() => {
 	
 	$("#result tr").each(function () {
 		$(this).find("input, select").each(function () {
-			const val = String($(this).val() || "").trim()
-			console.log(val)
+			const val = String($(this).val() || "").trim();
 			if (!val) {
 				allFilled = false;
 				$(this).parent().addClass("red");
@@ -148,7 +140,7 @@ $("#bonus-register").click(() => {
 	for (var i = 1; i < table.length; i++) {
 		const val = $('#result tr').eq(i).find('td').eq(0).find('input').val();
 		const opt = $('#result tr').eq(i).find('td').eq(0).find('datalist').find('option').filter(function () {
-		  return this.value === val;
+			return this.value === val;
 		});
 		const obj ={};
 		obj.empNo=opt.data('emp_no');
@@ -158,9 +150,7 @@ $("#bonus-register").click(() => {
 		
 		bList.push(obj);
 	}
-	console.log(JSON.stringify(bList));
-	console.log(bList.length);
-	
+		
 	Swal.fire({
 		title: "등록하시겠습니까?",
 		text: "총 " + bList.length + "개의 내역이 등록됩니다!",

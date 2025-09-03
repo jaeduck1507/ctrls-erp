@@ -12,12 +12,9 @@
 	<h5>[품질 관리] > [품질검사 결과 목록]</h5>
 	<h3>품질검사 결과 목록</h3>
 	<div class="filter-bar">
-<!--<h3>(QC 1차 완료된 제품들만 조회, 미완료 제품들은 신규 검사 등록에서 select후 QC)</h3>-->
+	<a href="/qam/qcForm">신규 검사 등록</a> <br>
 
-<!-- QC 등록 버튼 -->
-<a href="/qam/qcForm">신규 검사 등록</a> <br>
-
-<form id = "searchForm">
+	<form id = "searchForm">
 		제품 조회: <select id ="productName">
 					<option value="">제품 선택</option>
 				</select>
@@ -42,7 +39,7 @@
 		<button type="button" id="resetBtn">전체보기</button>
 </form>
 </div>
-<!-- 테이블 -->
+
 <table border="1" id="qcResult" class="data-table">
     <tr>
         <th>상품번호</th>

@@ -40,13 +40,6 @@
             </select>
           </td>
         </tr>
-		
-<!--		<tr>-->
-<!--          <th>제품 사진</th>-->
-<!--		  <td><input type="file" name="productFile" id="productFile" accept="image/*"/></td>-->
-<!--		  <td><img id="preview" style="display:none; max-width:160px; margin-top:8px;"/></td>-->
-<!--        </tr>-->
-		
         <tr>
           <th><i class="fi fi-rr-gift-card"></i>&nbsp;&nbsp;제품명</th>
           <td><input type="text" name="productName" id="productName" value="${productName.productName}"/></td>

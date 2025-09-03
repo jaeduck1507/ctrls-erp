@@ -51,7 +51,6 @@
 			}<c:if test="${!loop.last}">,</c:if>
 		</c:forEach>
 		];
-		console.log(balanceList);
 	</script>
 	<script src="../resources/js/fm/budget.js"></script>
 </body>

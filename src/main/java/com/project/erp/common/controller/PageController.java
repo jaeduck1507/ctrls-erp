@@ -144,7 +144,7 @@ public class PageController {
 		model.addAttribute("component","../common/myAttendance.jsp");
 		return "common/layout";
 	}
-	
+	/*
 	// 모달창 테스트용
 	@GetMapping("/modalTest")
 	public String modalTest(Model model) {
@@ -164,7 +164,7 @@ public class PageController {
 		model.addAttribute("component","../common/modalTest.jsp");
 		return "common/layout";
 	}
-	
+	*/
 
 	@GetMapping("/resetMyPwd")
 	public String resetMyPwd(Model model) {

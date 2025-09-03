@@ -13,7 +13,6 @@
 	<h5>[품질 관리] > [품질검사 결과 목록] > [신규 검사 등록]</h5>
 	<h3>신규 검사 등록</h3>
 
-<!-- QC 등록 폼 -->
 <form id="qcForm" class="filter-bar">
 	<div class="box">
 		<table>

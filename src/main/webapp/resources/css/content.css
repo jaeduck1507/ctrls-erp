@@ -344,3 +344,11 @@ input[list^="List"] {
 	margin: 10px;
 	width: fit-content;
 }
+
+.balance{
+	background-color: #E1EEBC;
+	color: #2F5249;
+	border-radius: 10px;
+	padding: 10px 20px;
+	width: fit-content;
+}

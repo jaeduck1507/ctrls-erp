@@ -113,7 +113,6 @@ $("#btn").click(() => {
 					}
 					
 					const inputName = 'deduction_' + salayPagingDTO.result[i].empNo + '_' + yearMonth;
-					//console.log(inputName);
 					
 					var text = '<tr id="index_'+ i +'"><td>' + salayPagingDTO.result[i].empNo + "</td><td>" + salayPagingDTO.result[i].empName + "</td><td>" + salayPagingDTO.result[i].deptName + "</td><td>" 
 						+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
@@ -152,8 +151,6 @@ $("#btn").click(() => {
 		});
 		
 	} else {
-		//alert("월을 입력해주세요");
-		//location.reload();
 		Swal.fire({
 			position: "top",
 			icon: "error",
@@ -168,7 +165,6 @@ $("#btn").click(() => {
 
 $(document).on('input', '.deduction', (e) => {
 	const indexNum = $(e.target).parent().parent().attr("id").split("_")[1];
-	console.log(indexNum);
 	const deduction = $(e.target).val();
 	const salaryDate = $(e.target).parent().parent().find("td").eq(4).text();
 	const baseSalary = $(e.target).parent().parent().find("td").eq(5).text();
@@ -178,7 +174,6 @@ $(document).on('input', '.deduction', (e) => {
 	salayPagingDTO.result[Number(indexNum)].baseSalary = baseSalary;
 	salayPagingDTO.result[Number(indexNum)].bonus = bonus;
 	salayPagingDTO.result[Number(indexNum)].salaryDate = salaryDate;
-	console.log(salayPagingDTO.result[Number(indexNum)].bonus);
 	$(e.target).parent().parent().find("td").eq(8).html("");
 	$(e.target).parent().parent().find("td").eq(8).text(total);
 });
@@ -213,7 +208,6 @@ $(document).on('click', 'a.page-link', function(e) {
 			+ salayPagingDTO.result[i].jobTitle + "</td><td>" + (yearMonth +'-15') + "</td><td>" + salayPagingDTO.result[i].baseSalary + "</td><td>" + salayPagingDTO.result[i].bonus + "</td><td>" 
 			+ '<input type="number" min="0" class="deduction" name="' + inputName + '" value="'+ deduction +'">' +"</td><td>" + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus)-deduction)) + "</td></tr>";
 		$("#result").append(text);
-		console.log(i + " : " + ((Number(salayPagingDTO.result[i].baseSalary)+Number(salayPagingDTO.result[i].bonus))*0.1));
 	}
 	$("#result").append('<div class="filter-bar"><button id="submit">등록하기</button></div>');
 	
@@ -275,8 +269,6 @@ $(document).on("click", "#submit", function() { // 제출 버튼
         
         spList.push(obj); // 정보 저장한 객체를 배열에 삽입
     }
-    console.log(spList);
-	console.log(spList.length);
 	
 	Swal.fire({
 		title: "등록하시겠습니까?",

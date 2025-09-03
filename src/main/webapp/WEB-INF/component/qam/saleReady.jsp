@@ -20,7 +20,7 @@
 		<button id = "selectCancelAlldata">모든 페이지 전체 선택 취소</button> 
 	</div>
 	
-	<table border="1" id="saleReady" class="data-table"> <!-- saleReady 테이블 -->
+	<table border="1" id="saleReady" class="data-table">
 	    
 	</table>
 	

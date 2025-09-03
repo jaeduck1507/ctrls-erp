@@ -34,9 +34,7 @@
 </div>
 
 <div class="total">
-	<h4 id="salePriceSum">
-		<!-- 총 가격 출력 영역 -->
-	</h4>
+	<h4 id="salePriceSum"></h4>
 </div>
 
 <table border="1" id="saleResult" class="data-table">

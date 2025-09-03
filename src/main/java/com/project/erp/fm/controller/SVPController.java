@@ -47,8 +47,7 @@ public class SVPController {
 	public boolean purchaseRegister(@RequestBody List<Purchase> prList) {
 		productService.productBatchSetter(prList);
 		purchaseService.purchaseRegister(prList);
-		System.out.println(prList);
-		
+				
 		List<Department> deptList = departmentService.showDept();
 		int purchaseDept = 0;
 		for (Department dept : deptList) {
