@@ -49,7 +49,7 @@ $("#budget-update").click(() => {
 					iconColor: "#48b85b",
 					title: "수정되었습니다!",
 					showConfirmButton: false,
-					timer: 1500,
+					timer: 2000,
 					didClose: () => {
 						location.href = "/fm/budget"
 					}

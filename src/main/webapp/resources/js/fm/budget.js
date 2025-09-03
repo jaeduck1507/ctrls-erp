@@ -39,7 +39,8 @@ function showBudget(page = 1) {
 						$("#yearMonth").val("");
 						$("#result").html("");
 						$(".pagination").html("");
-						}
+						document.querySelector("#balance").innerHTML = "";
+					}
 				});
 				return;
 			}
