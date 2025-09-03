@@ -23,7 +23,6 @@ public class ProductNameService {
 	public List<ProductNameDTO> showProductName(Paging paging) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		paging.setTotal(productNameMapper.totalProductName());
-		System.out.println("showProductName 넘어감");
 		return productNameMapper.showProductName(paging);
 	}
 
@@ -56,7 +55,6 @@ public class ProductNameService {
 	public List<ProductNameDTO> searchProductName(Paging paging, String productName, String productCategory) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		paging.setTotal(productNameMapper.totalSearchProductName(productName,productCategory));
-		System.out.println("searchProductName 넘어감");
 		return productNameMapper.searchProductName(paging, productName, productCategory);
 	}
 	

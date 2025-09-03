@@ -41,28 +41,23 @@ public class EIMController {
 	@ResponseBody
 	@PostMapping("/infoShow")
 	public EmpInfoPagingDTO infoShow(EmpInfo ei, Paging hrmPagingDTO) {
-		System.out.println(hrmPagingDTO);
 		return employeeInfoservice.pagingInfoShow(ei,hrmPagingDTO);
 	}
 	
 	@ResponseBody
 	@GetMapping("/showDept")
 	public List<Department> showDept() {
-//		System.out.println(departmentService.showDept().get(0).getDeptName());
 		return departmentService.showDept();
 	}
 	@ResponseBody
 	@GetMapping("/showJob")
 	public List<JobPosition> showJob() {
-//		System.out.println(jobPositionService.showJob().get(0).getJobTitle());
 		return jobPositionService.showJob();
 	}
 	
 	@ResponseBody
 	@PostMapping("/empAdd")
 	public void empAdd(EmpAddDTO eiList) {
-//		System.out.println(eiList);
-		
 		employeeInfoservice.empAdd(eiList);
 	}
 	

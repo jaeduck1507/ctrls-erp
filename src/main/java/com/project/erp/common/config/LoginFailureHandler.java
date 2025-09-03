@@ -36,7 +36,6 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 				
 				errorMessage = URLEncoder.encode(errorMessage, "UTF-8");
 				setDefaultFailureUrl("/login?error=" + errorMessage);
-				System.out.println("커스텀 로그인 핸들러!!");
 				super.onAuthenticationFailure(request, response, exception);
 			}
 	

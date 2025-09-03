@@ -19,7 +19,6 @@ public class PEMController {
 	@ResponseBody
 	@PostMapping("/empEval")
 	public boolean empEval(@RequestBody PerformanceReview pr) {
-		System.out.println(pr);
 		performanceReviewService.empEval(pr);
 		return true;
 	}
@@ -27,7 +26,6 @@ public class PEMController {
 	@ResponseBody
 	@PostMapping("/showEval")
 	public PerformanceReviewDTO showEval(@RequestBody PerformanceReviewDTO prDto) {
-		System.out.println(prDto);
 		return performanceReviewService.showEval(prDto);
 	}
 }

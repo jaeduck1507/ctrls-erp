@@ -20,46 +20,7 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		int a = 1;
-		if(a != 1) { // 평가할때 기간 정해서
-			return http
-					.csrf(csrf -> csrf.disable()) // 웹 보안 토큰 설정 (비활성화)
-					
-					.authorizeHttpRequests(authorize -> 
-							
-							authorize
-							.requestMatchers("/resources/**","/css/**","/js/**","/images/**").permitAll()
-							.requestMatchers("/mypage").authenticated()
-							.requestMatchers("/hrm/my*").authenticated()
-							.requestMatchers("/hrm/empEval").denyAll()
-							.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
-							.requestMatchers("/hrm/empAdd").hasRole("ADMIN") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
-							.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM") // ** 을 통해 모두 접근가능한가
-							.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM")
-							.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM")
-							
-							.anyRequest().permitAll()
-					)
-					.formLogin(form -> 
-					form
-						.loginPage("/login")
-						.loginProcessingUrl("/login")
-						.failureHandler(loginFailureHandler())
-						.failureUrl("/login?error=aa")
-						.failureForwardUrl("/login?error=a")
-						.defaultSuccessUrl("/")
-						
-						
-						
-						
-					)
-					.logout(logout -> 
-						logout.logoutUrl("/logout")
-							.logoutSuccessUrl("/login")
-					)
-					.build();
-		}
-		// 위에거 작동 안하는거 실험용임
+		
 		
 		return http
 				.csrf(csrf -> csrf.disable()) // 웹 보안 토큰 설정 (비활성화)
@@ -72,9 +33,9 @@ public class SecurityConfig {
 						.requestMatchers("/hrm/my*").authenticated()
 						.requestMatchers("/hrm/empEval").authenticated()
 						.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
-						.requestMatchers("/hrm/empAdd").hasRole("ADMIN") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
+						.requestMatchers("/hrm/empAdd").hasAnyRole("ADMIN","HRM") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
 						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM","MANAGEMENT") // ** 을 통해 모두 접근가능한가
-						.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM","MANAGEMENT")
+						.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM","MANAGEMENT","HEADQUARTER","SALE")
 						.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM","MANAGEMENT")
 						.anyRequest().permitAll()
 				)
@@ -84,10 +45,6 @@ public class SecurityConfig {
 					.defaultSuccessUrl("/")
 					.loginProcessingUrl("/login")
 					.failureHandler(loginFailureHandler())
-					
-					
-					
-					
 				)
 				.logout(logout -> 
 					logout.logoutUrl("/logout")

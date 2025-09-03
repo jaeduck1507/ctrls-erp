@@ -16,6 +16,5 @@ public class JobPositionService {
 
 	public List<JobPosition> showJob() {
 		return jobpositionMapper.showJob();
-
 	}
 }

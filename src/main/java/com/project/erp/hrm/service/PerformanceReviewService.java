@@ -28,22 +28,18 @@ public class PerformanceReviewService {
 	}
 	
 	public List<EmpInfo> showEvalEmp(EmpInfo empinfo) {
-//		System.out.println(performanceReviewMapper.showEvalEmp(empinfo));
 		PerformanceReviewDTO prDto = new PerformanceReviewDTO();
 		empinfo.setYear(LocalDate.now().getYear());
 		prDto.setEmpList(performanceReviewMapper.showEvalEmp(empinfo));
 		prDto.getEmpList().add(empinfo);
 		prDto.setDeptNo(empinfo.getDeptNo());
-//		System.out.println(employeeInfoService.showNotEvalEmp(prDto));
 		return employeeInfoService.showNotEvalEmp(prDto);
 	}
 	
 	public PerformanceReviewDTO showEval(PerformanceReviewDTO prDto) {
-//		System.out.println(performanceReviewMapper.showEval(prDto));
 		PerformanceReviewDTO pr = performanceReviewMapper.showEval(prDto);
 		if(pr == null) return pr;
 		pr.setCommentsList(showCommnetsList(prDto));
-		System.out.println("최종 : " + pr);
 		return pr;
 	}
 	

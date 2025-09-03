@@ -24,7 +24,6 @@ public class ProductService {
     public List<ProductDetailDTO> showProductDetail(Paging paging) {
     	paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
     	paging.setTotal(productMapper.totalProduct());
-    	System.out.println("showProductDetail 서비스 넘어감");
         return productMapper.showProductDetail(paging);
     }
 

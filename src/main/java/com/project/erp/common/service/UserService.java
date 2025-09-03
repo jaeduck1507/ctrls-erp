@@ -28,7 +28,6 @@ public class UserService implements UserDetailsService {
 	private EmployeeInfoService employeeInfoService;
 
 	public void register(User vo) {
-		System.out.println(vo);
 		vo.setPassword(bcpe.encode(vo.getPassword()));
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(vo.getEmpNo());
@@ -36,7 +35,6 @@ public class UserService implements UserDetailsService {
 
 		if (vo.getUsername().equals("admin")) {
 			vo.setRole("ROLE_ADMIN");
-			System.out.println(vo);
 			userMapper.register(vo);
 			return;
 		}
@@ -67,7 +65,6 @@ public class UserService implements UserDetailsService {
 			vo.setRole("ROLE_SALE");
 			break;
 		}
-		System.out.println(vo);
 		userMapper.register(vo);
 
 	}
@@ -78,7 +75,6 @@ public class UserService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		System.out.println("로그인" + user);
 		return user;
 	}
 
@@ -90,7 +86,6 @@ public class UserService implements UserDetailsService {
 	}
 
 	public String findId(int empNo) {
-		System.out.println("service");
 		return userMapper.findId(empNo);
 	}
 
@@ -100,14 +95,12 @@ public class UserService implements UserDetailsService {
 
 		vo.setPassword(bcpe.encode(vo.getPassword()));
 		vo.setUsername(user.getUsername());
-		System.out.println("재설정된 비밀번호 : " + vo);
 		userMapper.resetMyPwd(vo);
 	}
 
 	public void resetPwd(User vo) {
 
 		vo.setPassword(bcpe.encode(vo.getPassword()));
-		System.out.println("재설정된 비밀번호 : " + vo);
 		userMapper.resetMyPwd(vo);
 	}
 
@@ -117,7 +110,6 @@ public class UserService implements UserDetailsService {
 	}
 
 	public void deleteId(Quitter q) {
-		System.out.println("deleteId : " + q);
 		userMapper.deleteId(q);
 	}
 

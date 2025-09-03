@@ -66,11 +66,9 @@ public class QamPageController {
 		Model model,
 		Paging paging,ProductName productname
 		) {
-		System.out.println(productname);
 		model.addAttribute("productList", productService.searchProductDetail(paging, productname.getProductName(), productname.getProductCategory()));
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("paging", paging);
-		System.out.println(paging);
 		model.addAttribute("productName", productname.getProductName());
 		model.addAttribute("productCategory", productname.getProductCategory());
 		model.addAttribute("component","../component/qam/product.jsp");
@@ -79,7 +77,6 @@ public class QamPageController {
 	
 	@GetMapping("/productName")
 	public String productName(Model model, Paging paging, ProductName productName) {
-		System.out.println(productName);
 		model.addAttribute("productNameList", productNameService.searchProductName(paging, productName.getProductName(), productName.getProductCategory()));
 		model.addAttribute("categoryList", productNameService.selectCategory());
 		model.addAttribute("paging",paging);

@@ -30,8 +30,7 @@ public class BrandService {
 	public List<Brand> findBrand(Paging paging) {
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		paging.setTotal(brandMapper.totalBrand());
-		System.out.println("findBrand 넘어감");
-	    return brandMapper.findBrand(paging); // assumes brandMapper exists and works
+	    return brandMapper.findBrand(paging); 
 	}
 
 	public void updateBrand(Brand brand) {
