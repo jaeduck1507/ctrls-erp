@@ -72,7 +72,7 @@ public class SVPController {
 			transaction.setTransType("지출");
 			transaction.setTransAmount(purDept.getTotalPurchase());
 			transaction.setCategory("매입 비용");
-			transaction.setTransDesc(purDept.getBrandName() + " 제품 매입");
+			transaction.setTransDesc(purDept.getBrandName() + " 제품 매입 대금");
 			transaction.setTransDate(purDept.getPurchaseDate());
 			transaction.setDeptNo(purchaseDept);
 			transactionList.add(transaction);

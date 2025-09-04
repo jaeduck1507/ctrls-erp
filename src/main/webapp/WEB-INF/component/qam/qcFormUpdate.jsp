@@ -24,7 +24,7 @@
 				<th><i class="fi fi-rr-id-badge"></i>&nbsp;&nbsp;검사자 사번</th>
 				<td>
 					<select name="empNo" id="empNo">
-						<option value="">사번 선택</option> 
+						<option value="" disabled selected>사번 선택</option> 
 						  <c:forEach var="e" items="${empList}">
 						    <option value="${e.empNo}" <c:if test="${qc.empNo == e.empNo}">selected</c:if>>
 						      [${e.empNo}] ${e.empName}

@@ -349,7 +349,7 @@ input[list^="List"] {
   width: fit-content;
 }
 
-.balance {
+.greenBox {
   background-color: #e1eebc;
   color: #2f5249;
   border-radius: 10px;

@@ -13,8 +13,6 @@ import com.project.erp.qam.model.vo.Defective;
 import com.project.erp.qam.model.vo.Qc;
 import com.project.erp.qam.model.vo.Sale;
 import com.project.erp.qam.model.dto.QcResultDTO;
-import com.project.erp.qam.model.dto.SaleReadyDTO;
-
 import java.time.LocalDate;
 
 @Service
@@ -122,6 +120,5 @@ public class QcService {
             defectiveMapper.insertDefective(defective);
         }
         
-       // System.out.println("QC 등록 성공");
     }
 }

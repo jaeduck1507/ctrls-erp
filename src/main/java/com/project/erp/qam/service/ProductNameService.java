@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.ProductNameMapper;
 import com.project.erp.qam.model.dto.ProductNameDTO;
@@ -59,7 +57,6 @@ public class ProductNameService {
 	}
 	
 	public List<ProductNameDTO> showProductNameByBrandFilter(Brand brand) {
-		
 		return productNameMapper.showProductNameByBrandFilter(brand);
 	}
 	

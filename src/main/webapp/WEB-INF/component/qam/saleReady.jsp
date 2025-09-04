@@ -4,14 +4,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>판매대기 제품 리스트</title>
+    <title>판매 대기 제품 리스트</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-	<h5>[품질 관리] > [판매대기 제품 리스트]</h5>
-	<h3>판매대기 제품 리스트</h3>
+	<h5>[품질 관리] > [판매 대기 제품 리스트]</h5>
+	<h3>판매 대기 제품 리스트</h3>
 	<div class="filter-bar">
 		<button id = "sellRegister">판매 등록</button> 
 		<button id = "selectCurrentTable">현재 페이지 전체 선택</button> 

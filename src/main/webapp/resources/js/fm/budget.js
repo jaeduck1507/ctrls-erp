@@ -12,7 +12,7 @@ function showBudget(page = 1) {
 	
 	if (deptName === 'all') {
 		document.querySelector("#balance").innerHTML = "";
-		$("#balance").removeClass("balance");
+		$("#balance").removeClass("greenBox");
 	}
 	
 	$.ajax({
@@ -35,7 +35,7 @@ function showBudget(page = 1) {
 						$("#result").html("");
 						$(".pagination").html("");
 						document.querySelector("#balance").innerHTML = "";
-						$("#balance").removeClass("balance");
+						$("#balance").removeClass("greenBox");
 					}
 				});
 				return;
@@ -44,8 +44,8 @@ function showBudget(page = 1) {
 			if (deptName) {
 				const balanceInfo = deptBalance.find(item => item.deptName === deptName);
 				if (balanceInfo) {
-					document.querySelector("#balance").innerHTML = `${balanceInfo.deptName} 남은 예산: ${balanceInfo.balance.toLocaleString()}원`;
-					$("#balance").addClass("balance");
+					document.querySelector("#balance").innerHTML = `${balanceInfo.deptName} 남은 예산 : ${balanceInfo.balance.toLocaleString()}원`;
+					$("#balance").addClass("greenBox");
 				}
 			}
 						

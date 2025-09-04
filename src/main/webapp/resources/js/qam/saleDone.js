@@ -29,7 +29,7 @@ function displaySale(result) {
 	}
 	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
 
-	document.getElementById("salePriceSum").innerText = "매출 총합: " + total.toLocaleString() + "원";
+	document.getElementById("salePriceSum").innerText = "매출 총합 : " + total.toLocaleString() + "원";
 	}
 
 	$("#searchBtn").click(function () {

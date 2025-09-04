@@ -41,25 +41,6 @@
 		<button type="button" data-bs-toggle="modal" data-bs-target="#monthTrans">월별 수입/지출</button>
 	</div>
 	
-	<div class="modal fade" id="monthTrans" tabindex="-1" aria-labelledby="chartModal" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="chartModal">월별 수입/지출</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      	<div class="modal-body">
-				<div>
-				  <canvas id="monthTransChart"></canvas>
-				</div>
-			</div>
-	      	<div class="modal-footer">
-	       	 	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	    	</div>
-	    </div>
-	  </div>
-	</div>
-	
 	<div>	
 		<table border="1" id="result" class="data-table">
 			
@@ -72,6 +53,27 @@
 				
 			</ul>
 		</nav>
+	</div>
+	
+	<div class="filter-bar">
+		<div class="modal fade" id="monthTrans" tabindex="-1" aria-labelledby="chartModal" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="chartModal">월별 수입/지출</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      	<div class="modal-body">
+					<div>
+					  <canvas id="monthTransChart"></canvas>
+					</div>
+				</div>
+		      	<div class="modal-footer">
+		       	 	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		    	</div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

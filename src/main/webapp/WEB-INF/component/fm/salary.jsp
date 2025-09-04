@@ -13,13 +13,13 @@
 	<h5>[재무 관리] > [급여 조회]</h5>
 	<h3>급여 조회</h3>
 	<div id="search" class="filter-bar">
-		사원 검색 : <input type="text" id="empName">
 		<select id="deptName">
 			<option value="all">부서 선택</option>
 			<c:forEach items="${department}" var="dept">
 				<option value="${dept.deptName}">${dept.deptName}</option>
 			</c:forEach>
 		</select>
+		<input type="text" id="empName" placeholder="사원 검색">
 		<input type="month" id="yearMonth">
 		<button id="btn">조회</button>
 	</div>

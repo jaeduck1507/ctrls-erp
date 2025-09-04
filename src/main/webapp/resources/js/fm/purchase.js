@@ -63,7 +63,7 @@ function showPurchase(page = 1) {
 			}
 			
 			$("#result").html("");
-			$("#result").append("<tr><th>매입 번호</th><th>브랜드</th><th>제품명</th><th>카테고리</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th></tr>");
+			$("#result").append("<tr><th>매입 번호</th><th>브랜드</th><th>상품명</th><th>카테고리</th><th>단가</th><th>수량</th><th>부가세</th><th>총액</th><th>매입 날짜</th></tr>");
 			for (const purchase of result.purchaseList) {
 				var text = "<tr><td>"  + purchase.purchaseNo + "</td><td>"  + purchase.brandName + "</td><td>"  + purchase.productName + "</td><td>" + purchase.productCategory 
 					+ "</td><td>" + purchase.unitPrice.toLocaleString() + "</td><td>" + purchase.quantity + "</td><td>" + purchase.varAmount.toLocaleString() 

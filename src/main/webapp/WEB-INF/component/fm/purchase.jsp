@@ -25,7 +25,7 @@
 				<option value="${category}">${category}</option>
 			</c:forEach>
 		</select>
-		제품명 검색: <input type="text" id="productName">
+		<input type="text" id="productName" placeholder="상품 검색">
 		
 		조회 시작일: <input type="date" id="startDate">
 		조회 종료일: <input type="date" id="endDate">

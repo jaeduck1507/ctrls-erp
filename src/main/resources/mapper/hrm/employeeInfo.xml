@@ -36,10 +36,11 @@
 	
 <!-- 윤의진 추가 qc 위함 -->
 	<select id="showEmployee" resultMap="EmpInfoMap"> 
-		SELECT emp_no,emp_name, dept_name, job_title 
+		SELECT emp_no, emp_name, dept_name, job_title 
 		FROM employee_info
 		JOIN department USING(dept_no)
 		JOIN job_position USING(job_no)
+		WHERE dept_no = 5 OR dept_no = 6
 	</select>
 	
 	<insert id="empAdd" parameterType="ArrayList">

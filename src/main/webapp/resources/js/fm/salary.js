@@ -31,7 +31,7 @@ function showSalary(page = 1) {
 			}
 			
 			$("#result").html("");
-			$("#result").append("<tr><th>직원 번호</th><th>부서</th><th>직원 이름</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
+			$("#result").append("<tr><th>직원 번호</th><th>부서</th><th>사원</th><th>지급일</th><th>기본급</th><th>보너스</th><th>공제금</th><th>급여 총액</th></tr>");
 			for (const salary of result.salaryList) {
 				const total = salary.baseSalary + salary.bonus - salary.deduction;
 				var text = "<tr><td>" + salary.empNo + "</td><td>" + salary.deptName + "</td><td>" + salary.empName + "</td><td>" + salary.salaryDate 

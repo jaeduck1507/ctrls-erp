@@ -1,4 +1,4 @@
-const deductionCheck = /^[0-9]\d*(\.\d+)?$/;
+const deductionCheck = /^[1-9]\d*(\.\d+)?$/;
 // 유효성 검사 함수
 function validateDeductions() {	
 	const deductionInput = document.querySelectorAll(".deduction");
@@ -86,7 +86,7 @@ $("#btn").click(() => {
 				inint_Paing();
 				salayPagingDTO.result = result;
 				salayPagingDTO.setTotal(result.length);
-				console.log(result.length);
+				
 				if (result.length === 0) {
 					Swal.fire({
 						position: "top",

@@ -91,8 +91,8 @@ function createChart(result) {
 		doughnutChart.destroy();
 	}
 	
-	const ctx = document.querySelector("#doughnutChart");
-	doughnutChart = new Chart(ctx, {
+	const saleChart = document.querySelector("#doughnutChart");
+	doughnutChart = new Chart(saleChart, {
 		type: 'doughnut',
 		data: {
 			labels: productLabels,
@@ -133,16 +133,18 @@ function searchChart(saleCategory, yearMonth) {
 		contentType: false,
 		success: function(result) {
 			let currentMonth = $("#yearMonth").val();
+			let category = $("#saleCategory").val();
+			
 			if (result.length === 0) {
 				Swal.fire({
 					position: "top",
 					icon: "error",
 					title: "조회 실패",
-					text: "해당 월의 판매 내역이 존재하지 않습니다!",
+					text: "판매 내역이 존재하지 않습니다!",
 					showConfirmButton: false,
 					timer: 2000,
 					didClose: () => {
-						if (currentMonth.substring(5) === String(now.getMonth() + 1).padStart(2, '0')) {
+						if (category === 'all' && currentMonth.substring(5) === String(now.getMonth() + 1).padStart(2, '0')) {
 							month = now.getFullYear() + '-' + String(now.getMonth()).padStart(2, '0');
 							if (now.getMonth() === 0) {
 								month = now.getFullYear() - 1 + '-12';
@@ -238,7 +240,7 @@ function showSaleManage(page = 1) {
 			}
 			
 			$("#result").html("");
-			$("#result").append("<tr><th>매출 번호</th><th>제품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
+			$("#result").append("<tr><th>매출 번호</th><th>상품명</th><th>카테고리</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
 			for (const sales of result.salesList) {
 				var text = "<tr><td>" + sales.smNo + "</td><td>" + sales.productName + "</td><td>" + sales.productCategory + "</td><td>" + sales.productPrice.toLocaleString() + "</td><td>" 
 					+ sales.quantity + "</td><td>" + sales.varAmount.toLocaleString() + "</td><td>" + sales.totalAmount.toLocaleString() + "</td><td>" + sales.saleDate + "</td></tr>"

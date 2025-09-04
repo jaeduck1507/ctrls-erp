@@ -16,7 +16,11 @@
 		날짜 : <input type="date" id="saleDate"/>
 		<button id="search">조회</button>
 		<button id="sale-register" disabled>매출 등록</button>
-		
+	</div>	
+	
+	<h5 id="total"></h5>
+	
+	<div>	
 		<table border="1" id="result" class="data-table">
 			
 		</table>

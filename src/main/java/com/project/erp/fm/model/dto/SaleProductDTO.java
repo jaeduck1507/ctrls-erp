@@ -9,7 +9,7 @@ public class SaleProductDTO {
 
 	private int smNo;
 	private LocalDate saleDate;
-	private String quantity;
+	private int quantity;
 	private int varAmount;
 	private int totalAmount;
 	private String productName;

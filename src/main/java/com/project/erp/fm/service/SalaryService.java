@@ -46,14 +46,11 @@ public class SalaryService {
 	public List<SalaryDTO> salaryPayment(SalaryAlreadyAddDTO saaDto) {
 		List<SalaryDTO> allList = new ArrayList<SalaryDTO>();
 		YearMonth ym = YearMonth.parse(saaDto.getYearMonth()); // 문자열 → YearMonth
-        System.out.println(ym.minusMonths(1).toString());
 		saaDto.setLastMonth(ym.minusMonths(1).toString());
 		saaDto.setList(showSalaryAlreadyAdd(saaDto)); // 이미 급여 등록이된 사람 조회한 리스트
 		
 		List<SalaryDTO> existList = salaryMapper.salaryPayment(saaDto); // 이미 급여 등록이 된 사람을 제외하고 보너스가 존재하는 사람 보너스 종합
-		System.out.println(existList);
 		saaDto.getList().addAll(existList); // 급여등록 및 보너스 존재하는 사람 리스트
-		System.out.println(saaDto.getList());
 		List<SalaryDTO> noList = salaryPaymentNoBonus(saaDto); // 위의 리스트에 담긴 사람을 제외한 정보 들고오기
 		
 		// 합치기

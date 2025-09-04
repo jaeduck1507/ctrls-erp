@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.DefectiveMapper;
 import com.project.erp.qam.model.dto.DefectiveDTO;
-import com.project.erp.qam.model.vo.Defective;
 
 @Service
 public class DefectiveService {

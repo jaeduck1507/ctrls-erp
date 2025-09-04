@@ -121,7 +121,6 @@ public class PIMController {
 	    // 브랜드 목록 추가 (DB에서 모든 브랜드 가져오기)
 	    List<Brand> brandList = brandService.findBrand(paging); // 이 메서드 필요
 	    model.addAttribute("brandList", brandList);
-	    System.out.println("findBrand() working");
 
 	    if (productCode != null) {
 	        ProductNameDTO productName = productNameService.findById(productCode);
@@ -131,7 +130,7 @@ public class PIMController {
 	        model.addAttribute("productName", new ProductNameDTO()); // 빈 객체 전달
 	        model.addAttribute("action", "/registerProductName"); // 등록용 액션
 	    }
-	    System.out.println("/productNameForm working");
+	    
 	    model.addAttribute("component","../component/qam/productNameForm.jsp");
 	    return "common/layout";
 	}
@@ -171,13 +170,12 @@ public class PIMController {
     @GetMapping("/checkProductNo")
     @ResponseBody
     public boolean checkProductNo(int productNo) {
-    return productService.existsByProductNo(productNo);
-        }
+    	return productService.existsByProductNo(productNo);
+    }
     
     @ResponseBody
     @PostMapping("/showProductNameByBrandFilter")
     public List<ProductNameDTO> showProductNameByBrandFilter(@RequestBody Brand brand) {
-    	System.out.println(productNameService.showProductNameByBrandFilter(brand));
     	return productNameService.showProductNameByBrandFilter(brand);
     }
     
@@ -195,7 +193,6 @@ public class PIMController {
     
     @PostMapping("/registerBrand")
     public String registerBrand(Brand brand) {
-    	System.out.println(brand);
     	brandService.registerBrand(brand);
     	return "redirect:/qam/brand";
     }

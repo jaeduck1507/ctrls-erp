@@ -1,9 +1,9 @@
+const now = new Date();
+const today = now.getFullYear() + '-' 
+                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
+                    + String(now.getDate()).padStart(2, '0');
+
 $(document).ready(() => {
-	const now = new Date();
-	const today = now.getFullYear() + '-' 
-	                    + String(now.getMonth() + 1).padStart(2, '0') + '-' 
-	                    + String(now.getDate()).padStart(2, '0');
-	
 	$("#saleDate").val(today);
 });
 
@@ -23,7 +23,7 @@ $("#search").click(() => {
 				Swal.fire({
 					position: "top",
 					icon: "error",
-					title: "조회된 결과가 없습니다!",
+					title: "조회된 매출 내역이 없습니다!",
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {
@@ -35,13 +35,17 @@ $("#search").click(() => {
 				$("#sale-register").prop("disabled", false);
 			}
 			
+			var total = 0;
 			$("#result").html("");
 			$("#result").append("<tr><th>상품명</th><th>상품 코드</th><th>가격</th><th>수량</th><th>부가세</th><th>총액</th><th>매출 발생일자</th></tr>");
 			for (const sale of result) {
 				const totalAmount = sale.productPrice * sale.quantity;
 				const varAmount = Math.floor(totalAmount - (totalAmount / 1.1));
-				$("#result").append("<tr><td>" + sale.productName + "</td><td>" +sale.productCode + "</td><td>" + sale.productPrice + "</td><td>" + sale.quantity + "</td><td>" + varAmount + "</td><td>" + totalAmount + "</td><td>" + $("#saleDate").val() + "</td></tr>");
+				$("#result").append("<tr><td>" + sale.productName + "</td><td>" + sale.productCode + "</td><td>" + sale.productPrice.toLocaleString() + "</td><td>" + sale.quantity + "</td><td>" + varAmount.toLocaleString() + "</td><td>" + totalAmount.toLocaleString() + "</td><td>" + $("#saleDate").val() + "</td></tr>");
+				total += totalAmount;
 			}
+			document.querySelector("#total").innerHTML = "매출 총액 : " + total.toLocaleString() + "원";
+			$("#total").addClass("greenBox");
 		}
 	});
 });
@@ -54,13 +58,13 @@ $("#sale-register").click(() => {
 		const obj ={};
 		obj.productCode=$("#result tr").eq(i).find("td").eq(1).text();
 		obj.quantity=$("#result tr").eq(i).find("td").eq(3).text();
-		obj.varAmount=$("#result tr").eq(i).find("td").eq(4).text();
-		obj.totalAmount=$("#result tr").eq(i).find("td").eq(5).text();
+		obj.varAmount=$("#result tr").eq(i).find("td").eq(4).text().replaceAll(',', '');
+		obj.totalAmount=$("#result tr").eq(i).find("td").eq(5).text().replaceAll(',', '');
 		obj.saleDate=$("#result tr").eq(i).find("td").eq(6).text();
 		
 		smList.push(obj);
 	}
-		
+	
 	Swal.fire({
 		title: "등록하시겠습니까?",
 		text: "총 " + smList.length + "개의 내역이 등록됩니다!",

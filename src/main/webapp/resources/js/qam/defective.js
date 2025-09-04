@@ -10,8 +10,6 @@ function displayDefective(data) {
 	$("#defectiveResult thead").html(tableHead);
 	$("#defectiveResult tbody").html("");
 	
-	console.log(selectedFilter);
-
     var total = 0;
 
 	for (let d of data) {
@@ -36,7 +34,7 @@ function displayDefective(data) {
 
         $("#defectiveResult tbody").append(row);
     }
-    $("#defectivePriceSum").text("손실액 총합: " + total.toLocaleString() + "원");
+    $("#defectivePriceSum").text("손실액 총합 : " + total.toLocaleString() + "원");
 	
 }
 
@@ -135,7 +133,6 @@ $(document).on('click', 'a.page-link', function(e) {
     e.preventDefault();        
 	
 	$.ajax({
-        // 요청
         type: "get",
 	        url: "/qam/searchDefective",
 	        data: {

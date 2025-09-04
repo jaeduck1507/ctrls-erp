@@ -1,6 +1,5 @@
 package com.project.erp.qam.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.project.erp.qam.model.vo.ProductName;
 import com.project.erp.qam.model.vo.Qc;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.model.dto.EmpInfo;
-import com.project.erp.hrm.model.vo.Department;
 import com.project.erp.hrm.service.EmployeeInfoService;
 import com.project.erp.qam.model.dto.ProductNameDTO;
 import com.project.erp.qam.model.dto.QcResultDTO;
@@ -20,7 +17,7 @@ import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.QcService;
 
 @Controller
-@RequestMapping("/qam") // 모든 매핑 이제 /qam로 시작
+@RequestMapping("/qam")
 public class QIPController {
 
     @Autowired
@@ -90,14 +87,3 @@ public class QIPController {
     }
     
 }
-
-//List<Department> saleDept = new ArrayList<>();
-//List<Department> deptList = departmentService.showDept();
-//for(Department d : deptList) {
-//	if(d.getDeptName().contains("지점")) saleDept.add(d);
-//}
-//System.out.println(saleDept);
-
-
-
-

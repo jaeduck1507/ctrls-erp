@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.hrm.model.dto.EmpInfo;
 import com.project.erp.hrm.service.EmployeeInfoService;
@@ -17,7 +15,6 @@ import com.project.erp.qam.service.BrandService;
 import com.project.erp.qam.service.DefectiveService;
 import com.project.erp.qam.service.ProductNameService;
 import com.project.erp.qam.service.ProductService;
-import com.project.erp.qam.service.QcService;
 import com.project.erp.qam.service.SaleService;
 
 
@@ -40,9 +37,6 @@ public class QamPageController {
 	@Autowired
 	private DefectiveService defectiveService;
 	
-    @Autowired
-    private QcService qcService;
-    
     @Autowired
     private EmployeeInfoService employeeInfoService;
 	
@@ -89,11 +83,11 @@ public class QamPageController {
     @GetMapping("/qc")
     public String QcPage(Model model, Paging paging) {
         List<EmpInfo> empList = employeeInfoService.showEmployee();
-        model.addAttribute("paging",paging);
+        model.addAttribute("paging", paging);
         model.addAttribute("empList", empList);
         model.addAttribute("categoryList", productNameService.selectCategory());
         model.addAttribute("component","../component/qam/qc.jsp");
-		return "common/layout"; // qc.jsp 경로
+		return "common/layout";
     }
 
 	@GetMapping("/saleReady")

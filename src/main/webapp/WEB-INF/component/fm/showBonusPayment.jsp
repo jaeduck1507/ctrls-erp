@@ -13,7 +13,7 @@
 	<h5>[재무 관리] > [수당 조회]</h5>
 	<h3>수당 조회</h3>
 	<div id = "search" class="filter-bar">
-		이름 : <input type="text" id="empName">
+		<input type="text" id="empName" placeholder="사원 검색">
 		<select id="deptName">
 			<option value="-1">부서 선택</option>
 			<c:forEach items="${department}" var="emp">
@@ -21,7 +21,7 @@
 			</c:forEach>
 		</select>
 		<select id="jobTitle">
-			<option value="-1">직무 선택</option>
+			<option value="-1">직급 선택</option>
 			<c:forEach items="${jobPosition}" var="emp">
 				<option value="${emp.jobNo}">${emp.jobTitle}</option>
 			</c:forEach>

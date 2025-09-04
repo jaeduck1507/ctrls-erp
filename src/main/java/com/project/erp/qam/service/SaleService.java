@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.project.erp.common.model.vo.Paging;
 import com.project.erp.qam.mapper.SaleMapper;
 import com.project.erp.qam.model.dto.SaleReadyDTO;
-import com.project.erp.qam.model.dto.SaleReadyForListDTO;
 import com.project.erp.qam.model.vo.Sale;
 
 @Service

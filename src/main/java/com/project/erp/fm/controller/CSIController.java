@@ -46,7 +46,6 @@ public class CSIController {
 	@ResponseBody
 	@PostMapping("/addBonusPayment")
 	public boolean addBonusPayment(@RequestBody List<BonusPayment> bList) {
-		System.out.println(bList);
 		bonusPaymentService.addBonusPayment(bList);
 		return true;
 	}
@@ -66,10 +65,8 @@ public class CSIController {
 	@ResponseBody
 	@PostMapping("/addSalaryPayment")
 	public boolean addSalaryPayment(@RequestBody List<Salary> spList) {
-		System.out.println(spList);
 		salaryService.addSalaryPayment(spList);
 		
-		// 날짜
 		LocalDate salaryDate = spList.get(0).getSalaryDate();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
 	    String yearMonth = salaryDate.format(formatter);
