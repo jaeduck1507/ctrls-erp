@@ -181,6 +181,9 @@ WHERE (status = '승인' OR status = '대기')
 AND emp_no = #{empNo}
 AND (end_date >= #{startDate} AND start_date <= #{endDate})
 ]]> 
+<if test="leaveId != null and leaveId != ''">
+    AND leave_id != #{leaveId}  <!-- 수정할 때만 자기 자신 제외 -->
+</if>
 </select>
 
 <!-- 출퇴근 기록 존재 여부 -->

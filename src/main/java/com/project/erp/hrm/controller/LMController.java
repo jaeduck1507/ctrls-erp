@@ -92,5 +92,10 @@ public class LMController {
 		return "common/layout";
 	}
 	
+	@ResponseBody
+	@PostMapping("/checkApprove")
+	public int checkApprove(LeaveInfo li) {
+	    return leaveInfoService.checkApprove(li) ? 1 : 0;
+	}
 
 }

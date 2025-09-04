@@ -80,8 +80,8 @@
 	</div>
 	<div class="filter-bar">
 	<button onclick="location.href='/modifyMyInfo'">개인정보 수정</button>
-	<button onclick="location.href='/myLeavePage'">휴가신청</button>
-	<button onclick="location.href='/myAttendance'">출근 현황 보기</button>
+	<button onclick="location.href='/myLeavePage'">나의 휴가 정보</button>
+	<button onclick="location.href='/myAttendance'">나의 출근 현황</button>
 	<button onclick="location.href='/resetMyPwd'">비밀번호 재설정</button>
 	</div>
 
