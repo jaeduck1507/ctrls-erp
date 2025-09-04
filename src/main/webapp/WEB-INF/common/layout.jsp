@@ -25,6 +25,7 @@ uri="http://www.springframework.org/security/tags" %>
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
+	
   </head>
   <body>
     <jsp:include page="side.jsp" />

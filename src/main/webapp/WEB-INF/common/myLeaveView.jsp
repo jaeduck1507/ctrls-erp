@@ -25,18 +25,18 @@
 				<tr><tr><th>시작일</th><td><input type="date" name="startDate" value="${item.startDate}" class="leaveDate"></td></tr>
 				<tr><th>종료일</th><td><input type="date" name="endDate" value="${item.endDate}" class="leaveDate" id="endDate"></td></tr>
 				<tr><th>사유</th><td><input type="text" name="reason" value="${item.reason}" placeholder="사유 입력"></td></tr>
-					<input type="hidden" name="leaveId" value="${item.empNo}">
-					<input type="hidden" name="leaveId" value="${item.empName}">
-					<input type="hidden" name="leaveId" value="${item.status}">
+					<input type="hidden" name="empNo" value="${item.empNo}">
+					<input type="hidden" name="empName" value="${item.empName}">
+					<input type="hidden" name="status" value="${item.status}">
 				</c:forEach>
 		      </table>
 		</div>
        <div id="btn" class="filter-bar">
 		<button type="submit" id="update">수정</button>
-		<button onclick="location.href='/myLeavePage'">취소</button>
+		<button type="button" id="cancel">취소</button>
 		</div>
 		</form>
-
+		
 		<script src="../resources/js/common/myLeaveView.js"></script>
 
 </body>
