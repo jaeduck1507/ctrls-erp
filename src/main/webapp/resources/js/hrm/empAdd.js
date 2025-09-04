@@ -204,14 +204,14 @@ function addRow() { // 열 추가 함수
 	console.log(jobList);
 	$("#result tr").eq(-1).append(
 		'<td><input type="text" class="name" placeholder="사원명 입력"></td>' +
-		'<td><input type="text" class="in"></td>' +
+		'<td><input type="text" class="in" placeholder="주민등록번호 입력"></td>' +
 		'<td class="aa"><select class="job"><option value="-1" disabled selected>직무 선택</option>' + jobList + '</select></td>' +
 		'<td><select class="dept"><option value="-1" disabled selected>부서 선택</option>' + deptList + '</select></td>' +
 		'<td><input type="date" class="hireDate"></td>' +
-		'<td><input type="text" class="salary"></td>' +
-		'<td><input type="text" class="addr"></td>' +
-		'<td><input type="text" class="phone"></td>' +
-		'<td><input type="text" class="email"></td>' +
+		'<td><input type="text" class="salary" placeholder="급여 입력"></td>' +
+		'<td><input type="text" class="addr" placeholder="주소 입력"></td>' +
+		'<td><input type="text" class="phone" placeholder="연락처 입력"></td>' +
+		'<td><input type="text" class="email" placeholder="이메일 입력"></td>' +
 		'<td><input type="file" class="file"></td>' +
 		'<td><button class="btn4">삭제</button></td>'
 	);
@@ -313,6 +313,15 @@ $("#btn").click(() => { // 제출 버튼
 			error: function(xhr, status, error) {
 
 			}
+		});
+	} else {
+		Swal.fire({
+			title: "정보를 정확하게 입력해주세요!!",
+			confirmButtonText: '확인',
+			width: 600,
+			confirmButtonColor: "#90C67C",
+			icon: "warning",
+			iconColor: "green"
 		});
 	}
 });
