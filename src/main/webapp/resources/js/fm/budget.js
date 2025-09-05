@@ -44,7 +44,7 @@ function showBudget(page = 1) {
 			if (deptName) {
 				const balanceInfo = deptBalance.find(item => item.deptName === deptName);
 				if (balanceInfo) {
-					document.querySelector("#balance").innerHTML = `${balanceInfo.deptName} 남은 예산 : ${balanceInfo.balance.toLocaleString()}원`;
+					document.querySelector("#balance").innerHTML = `[${balanceInfo.deptName}] 예산 잔액 : ${balanceInfo.balance.toLocaleString()}원`;
 					$("#balance").addClass("greenBox");
 				}
 			}
