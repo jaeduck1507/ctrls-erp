@@ -1,3 +1,7 @@
+const today = new Date().getFullYear() + '-' 
+		+ String(new Date().getMonth() + 1).padStart(2, '0') + '-' 
+		+ String(new Date().getDate()).padStart(2, '0');
+
 const quantityCheck = /^[0-9]\d*$/;
 $(document).on("input", ".quantity", (e) => {
 	const quantityInput = document.querySelectorAll(".quantity");
@@ -13,13 +17,8 @@ $(document).on("input", ".quantity", (e) => {
 
 var count = 0;
 var totalOptionText ='';
-$("#brand").change((e) =>{
-	console.log($("#brand").val());
-});
-
 $("#selectBrand").click((e) => {
 	const brand = $("#brand").val();
-	console.log(brand);
 	
 	if (brand == null) {
 		Swal.fire({
@@ -136,8 +135,6 @@ $(document).on('change', '.productName', (e) => {
 	$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="1" name="quantity" class="quantity" placeholder="수량 입력">');
 	$(e.target).parent().parent().find("td").eq(7).text("");
 	$(e.target).parent().parent().find("td").eq(8).text("");
-	
-	const today = new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0') + '-' + String(new Date().getDate()).padStart(2, '0');
 	$(e.target).parent().parent().find("td").eq(9).html(`<input type="date" name="purchase-date" value="${today}" readonly>`);
 });
 

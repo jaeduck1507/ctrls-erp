@@ -52,7 +52,7 @@ public class SVSController {
 		// sale_registered 컬럼 값 'Y'로 업데이트
 		LocalDate saleDate = smList.get(0).getSaleDate();
 		saleService.updateSaleRegistered(saleDate);
-				
+		
 		List<Department> deptList = departmentService.showDept();
 		int salesDept = 0;
 		for (Department dept : deptList) {
