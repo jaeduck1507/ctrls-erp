@@ -98,13 +98,6 @@ $("#trans-register").click(() => {
 					$(this).parent().addClass("red");
                 }
             }
-						
-			if ($(this).is(".transDate")) {
-				if (!transDateCheck.test(val)) {
-					allFilled = false;
-					$(this).parent().addClass("red");
-                }
-            }
 		});
 	});
 	

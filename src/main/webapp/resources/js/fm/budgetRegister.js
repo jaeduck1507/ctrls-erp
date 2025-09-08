@@ -101,22 +101,8 @@ $("#budget-register").click(() => {
 				$(this).parent().addClass("red");
 			}
 			
-			if ($(this).is(".periodType")) {
-				if (!periodTypeCheck.test(val)) {
-					allFilled = false;
-					$(this).parent().addClass("red");
-                }
-            }
-			
 			if ($(this).is(".budgetAmount")) {
 				if (!budgetAmountCheck.test(val)) {
-					allFilled = false;
-					$(this).parent().addClass("red");
-                }
-            }
-			
-			if ($(this).is(".executionDate")) {
-				if (!executionDateCheck.test(val)) {
 					allFilled = false;
 					$(this).parent().addClass("red");
                 }
