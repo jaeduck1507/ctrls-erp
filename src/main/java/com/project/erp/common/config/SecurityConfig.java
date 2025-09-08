@@ -20,31 +20,27 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-		
 		return http
-				.csrf(csrf -> csrf.disable()) // 웹 보안 토큰 설정 (비활성화)
-				
+				.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(authorize -> 
-						
-						authorize
+					authorize
 						.requestMatchers("/resources/**","/css/**","/js/**","/images/**").permitAll()
 						.requestMatchers("/mypage").authenticated()
 						.requestMatchers("/hrm/my*").authenticated()
 						.requestMatchers("/hrm/empEval").authenticated()
 						.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
-						.requestMatchers("/hrm/empAdd").hasAnyRole("ADMIN","HRM") // 그전에 먼저 지정하면 특정 경로 차단 가능!!
-						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM","MANAGEMENT") // ** 을 통해 모두 접근가능한가
+						.requestMatchers("/hrm/empAdd").hasAnyRole("ADMIN","HRM")
+						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM","MANAGEMENT")
 						.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM","MANAGEMENT","HEADQUARTER","SALE")
 						.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM","MANAGEMENT")
 						.anyRequest().permitAll()
 				)
 				.formLogin(form -> 
-				form
-					.loginPage("/login")
-					.defaultSuccessUrl("/")
-					.loginProcessingUrl("/login")
-					.failureHandler(loginFailureHandler())
+					form
+						.loginPage("/login")
+						.defaultSuccessUrl("/")
+						.loginProcessingUrl("/login")
+						.failureHandler(loginFailureHandler())
 				)
 				.logout(logout -> 
 					logout.logoutUrl("/logout")

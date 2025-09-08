@@ -52,7 +52,6 @@ public class EmployeeInfoService {
 			if(emp.getFile() != null) e.setUrl(fileUpload(emp.getFile()));
 			empList.add(e);
 		}
-		System.out.println(empList);
 		employeeInfoMapper.empAdd(empList);
 	};
 	

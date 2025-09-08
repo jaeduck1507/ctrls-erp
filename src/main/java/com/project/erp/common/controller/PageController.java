@@ -48,7 +48,6 @@ public class PageController {
 	public String index(Model model, HttpSession session) {
 		Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(auth.toString().equals("anonymousUser")) return "common/login";
-		//User user = (User) auth.getPrincipal();
 		User user = (User) auth;
 		EmpInfo empInfo = new EmpInfo();
 		empInfo.setEmpNo(user.getEmpNo());
