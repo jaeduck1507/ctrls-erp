@@ -40,7 +40,8 @@ function checkAtt() { // 출퇴근 현황 ajax로 보기
 	
 	
 	$("#start_work").click(() =>{
-		const checkIn = $("#checkTime").val();
+		const now = new Date();
+		const checkIn = isOver10(now.getHours()) + ":" + isOver10(now.getMinutes()) + ":" + isOver10(now.getSeconds());
 		const obj = {};
 		obj.checkIn = checkIn;
 		$.ajax({
@@ -73,7 +74,8 @@ function checkAtt() { // 출퇴근 현황 ajax로 보기
     });
 	
 	$("#finish_work").click(() =>{
-		const checkOut = $("#checkTime").val();
+		const now = new Date();
+		const checkOut = isOver10(now.getHours()) + ":" + isOver10(now.getMinutes()) + ":" + isOver10(now.getSeconds());
 		const obj = {};
 		obj.checkOut = checkOut;
 		$.ajax({

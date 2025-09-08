@@ -25,7 +25,7 @@
 				<p class="date" id="ymd"></p>
 			    <p id="timer"></p>
 
-				출퇴근 등록 시간<input type="time" id = "checkTime">
+				
 				<button id="start_work">출근</button>
 				<button id="finish_work">퇴근</button>
 

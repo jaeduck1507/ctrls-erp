@@ -45,15 +45,15 @@ public class AttendanceLogService {
 		LocalTime checkInStd = LocalTime.parse("09:00");
 		LocalTime checkOutStd = LocalTime.parse("18:00");
 		int lastDate = ym.lengthOfMonth();
-		int count = 0; 
+		int count = 0;
 		LocalDate today = LocalDate.now();
-		
+
 		if (alList.size() == 0) {
 			AttendanceLog dummyLog = new AttendanceLog();
 			dummyLog.setEmpNo(am.getEmpNo());
 			alList.add(dummyLog);
 		}
-		
+
 		for (int i = 1; i <= lastDate; i++) {
 			if (ym.getYear() > today.getYear())
 				break;
@@ -63,7 +63,6 @@ public class AttendanceLogService {
 					&& today.getDayOfMonth() < i)
 				break;
 
-			
 			if (ei.getQuitDate() != null) {
 				if (ym.getYear() > ei.getQuitDate().getYear())
 					break;
@@ -77,7 +76,7 @@ public class AttendanceLogService {
 			LocalDate date = ym.atDay(i);
 			AttendanceLog al = new AttendanceLog();
 
-			try { 
+			try {
 				al = alList.get(count);
 			} catch (IndexOutOfBoundsException e) {
 				AttendanceLog dummyLog = new AttendanceLog();
@@ -87,9 +86,8 @@ public class AttendanceLogService {
 			}
 
 			if (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY)
-				continue; 
+				continue;
 
-			
 			if (ym.getYear() < ei.getHireDate().getYear()) {
 				continue;
 			}
@@ -110,33 +108,33 @@ public class AttendanceLogService {
 				continue;
 			}
 
-			if (al.getStatus() != null && al.getStatus().equals("휴가")) { 
+			if (al.getStatus() != null && al.getStatus().equals("휴가")) {
 				list.add(al);
 				count++;
 				continue;
 			}
 
-			al.setStatus("출근"); 
+			al.setStatus("출근");
 
-			if (al.getCheckIn() == null) { 
+			if (al.getCheckIn() == null) {
 				al.setStatus("결근");
 				list.add(al);
 				count++;
 				continue;
 			}
-			if (al.getCheckOut() == null) { 
+			if (al.getCheckOut() == null) {
 				al.setStatus("결근");
 				list.add(al);
 				count++;
 				continue;
 			}
-			if (al.getCheckIn().isAfter(checkInStd)) { 
+			if (al.getCheckIn().isAfter(checkInStd)) {
 				al.setStatus("지각");
 			}
-			if (al.getCheckOut().isBefore(checkOutStd)) { 
+			if (al.getCheckOut().isBefore(checkOutStd)) {
 				al.setStatus("조퇴");
 			}
-			list.add(al); 
+			list.add(al);
 			count++;
 
 		}
