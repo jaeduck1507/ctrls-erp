@@ -8,6 +8,7 @@
 <title>login</title>
 <link rel="stylesheet" href="../resources/css/login.css" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
@@ -28,6 +29,7 @@
 						</div>
 	      </div>
 	    </form>
-<script src="../resources/js/common/login.js"></script>
+	<div id="container"></div>
+	<script src="../resources/js/common/login.js"></script>
 </body>
 </html>
