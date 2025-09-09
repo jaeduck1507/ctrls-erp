@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../resources/css/hrm/empEval.css" />
 </head>
 <body>
-	<h5>[인적 자원 관리] > [인사 성과/평가]</h5>
+	<h5>[인사 관리] > [인사 성과/평가]</h5>
 	<h3>${year}년 인사 성과/평가</h3>
 	<div id="filter-bar">
 		<input type="hidden" value="${user.empNo}" id="empNo"> 

@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h5>[인적 자원 관리] > [퇴사자 정보 조회]</h5>
+	<h5>[인사 관리] > [퇴사자 정보 조회]</h5>
 					<h3>퇴사자 정보 조회</h3>
 	<div id="search" class="filter-bar">
 		<input type="text" id="quitName" placeholder="사원명 입력">

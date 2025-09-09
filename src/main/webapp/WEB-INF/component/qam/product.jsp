@@ -11,7 +11,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </head>
 
   <body>
-    <h5>[품질 관리] > [상품 조회]</h5>
+    <h5>[제품 관리] > [상품 조회]</h5>
     <h3>상품 조회</h3>
       <form action="product" method="get">
 		<div class="filter-bar">

@@ -31,7 +31,7 @@ public class VTDController {
 	public boolean transRegister(@RequestBody List<Transaction> tList) {
 		for (int i = 0; i < tList.size(); i++) {
 			if (tList.get(i).getTransDesc().isEmpty()) {
-				tList.get(i).setTransDesc("기타 비용 지출" + "(" + (i + 1) + ")");
+				tList.get(i).setTransDesc("기타 비용 지출");
 			}
 		}
 		transactionService.transRegister(tList);

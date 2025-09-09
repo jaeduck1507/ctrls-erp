@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<h5>[품질 관리] > [제품 정보 조회]</h5>
+<h5>[제품 관리] > [제품 정보 조회]</h5>
 <h3>제품 정보 조회</h3>
 <div class="filter-bar">
 <a href="/productNameForm">제품 신규 등록</a>

@@ -90,9 +90,9 @@
 	</insert>
 	
 	<select id="totalPurchase" parameterType="PurDeptDTO" resultMap="PurDeptMap">
-		SELECT purchase_date, SUM(total_amount) AS total_purchase FROM purchase
+		SELECT brand_code, brand_name, purchase_date, SUM(total_amount) AS total_purchase FROM purchase
 		JOIN brand USING(brand_code)
 		WHERE purchase_date = #{purchaseDate}
-		GROUP BY purchase_date
+		GROUP BY brand_code, brand_name, purchase_date
 	</select>
 </mapper>

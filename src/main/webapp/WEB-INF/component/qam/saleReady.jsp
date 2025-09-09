@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<h5>[품질 관리] > [판매 대기 제품 리스트]</h5>
+	<h5>[제품 관리] > [판매 대기 제품 리스트]</h5>
 	<h3>판매 대기 제품 리스트</h3>
 	<div class="filter-bar">
 		<button id = "sellRegister">판매 등록</button> 

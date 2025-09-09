@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../resources/css/modifypage.css"/>
 </head>
 <body>
-	<h5>[인적 자원 관리] > [사원 정보 조회] > [사원 정보 수정]</h5>
+	<h5>[인사 관리] > [사원 정보 조회] > [사원 정보 수정]</h5>
 		<h3>사원 정보 수정</h3>
 
 

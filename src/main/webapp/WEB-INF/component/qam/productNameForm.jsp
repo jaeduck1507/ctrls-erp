@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../resources/css/qam/qamForm.css"/>
 </head>
 <body>
-  <h5>[품질 관리] > [브랜드 조회] > [제품 정보 수정/등록]</h5>
+  <h5>[제품 관리] > [브랜드 조회] > [제품 정보 수정/등록]</h5>
   <h3>제품 정보 수정/등록</h3>
 
   <form id="productForm" class="filter-bar" action="${action}" method="post" novalidate>

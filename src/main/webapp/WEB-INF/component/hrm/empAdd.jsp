@@ -56,7 +56,7 @@ table {
 </style>
 </head>
 <body>
-	<h5>[인적 자원 관리] > [사원 정보 추가]</h5>
+	<h5>[인사 관리] > [사원 정보 추가]</h5>
 	<h3>사원 정보 추가</h3>
     <div id = "test" class="filter-bar">
         <button id = "btn2">열 추가</button>

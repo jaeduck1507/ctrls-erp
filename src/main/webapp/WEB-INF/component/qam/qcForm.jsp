@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../resources/css/qam/qamForm.css"/>
 </head>
 <body>
-	<h5>[품질 관리] > [품질검사 결과 목록] > [신규 검사 등록]</h5>
+	<h5>[품질 관리] > [품질 검사 결과 목록] > [신규 검사 등록]</h5>
 	<h3>신규 검사 등록</h3>
 
 <form id="qcForm" class="filter-bar">

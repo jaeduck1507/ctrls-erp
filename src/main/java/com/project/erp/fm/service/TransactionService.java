@@ -1,5 +1,6 @@
 package com.project.erp.fm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,25 @@ public class TransactionService {
 	}
 	
 	public void transRegister(List<Transaction> tList) {
-		transactionMapper.transRegister(tList);		
+		List<Transaction> insertList = new ArrayList<>();
+		
+		for (Transaction trans : tList) {
+			if ("기타 비용".equals(trans.getCategory())) {
+				insertList.add(trans);
+			} else {
+				int count = transactionMapper.existTrans(trans);
+				if (count > 0) {
+					transactionMapper.updateTrans(trans);
+				} else {
+					insertList.add(trans);
+				}
+			}
+		}
+		
+		if (!insertList.isEmpty()) {
+			transactionMapper.transRegister(insertList);
+		}
+		
 	}
 	
 	public List<TransDTO> monthIncomeChart() {

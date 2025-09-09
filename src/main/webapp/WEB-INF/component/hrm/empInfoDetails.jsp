@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../resources/css/hrm/empInfoDetails.css" />
 </head>
 <body>
-	<h5>[인적 자원 관리] > [사원 정보 조회] > [사원 상세 정보]</h5>
+	<h5>[인사 관리] > [사원 정보 조회] > [사원 상세 정보]</h5>
 	<h3>사원 상세 정보</h3>
 
 		<div class="box">

@@ -12,7 +12,7 @@
 	
 <!-- 현재 기용 X, jsp에 상품 수정을 없애고 삭제만 남겨둠 -->
 	
-	<h5>[품질 관리] > [상품 조회] > [상품 정보 수정]</h5>
+	<h5>[제품 관리] > [상품 조회] > [상품 정보 수정]</h5>
 	<h3>상품 정보 수정</h3>
 
 	<form action="/updateProduct" method="post" class="filter-bar">

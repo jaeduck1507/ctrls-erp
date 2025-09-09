@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-	<h5>[재무 관리] > [급여 조회]</h5>
+	<h5>[급여 관리] > [급여 조회]</h5>
 	<h3>급여 조회</h3>
 	<div id="search" class="filter-bar">
 		<select id="deptName">

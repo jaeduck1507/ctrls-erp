@@ -84,16 +84,31 @@
 		</where>
 		ORDER BY trans_date
 	</select>
+		
+	<select id="existTrans" parameterType="Transaction" resultType="int">
+		SELECT COUNT(*) FROM transaction
+		WHERE dept_no = #{deptNo}
+			AND trans_type = #{transType}
+			AND category = #{category}
+			AND trans_date = #{transDate}
+			AND trans_desc = #{transDesc}
+	</select>
+	
+	<update id="updateTrans" parameterType="Transaction">
+		UPDATE transaction
+		SET trans_amount = #{transAmount}
+		WHERE dept_no = #{deptNo}
+			AND trans_type = #{transType}
+			AND category = #{category}
+			AND trans_date = #{transDate}
+			AND trans_desc = #{transDesc}
+	</update>
 	
 	<insert id="transRegister" parameterType="ArrayList">
 		INSERT INTO transaction(trans_type, trans_amount, category, trans_desc, trans_date, dept_no) VALUES
 		<foreach collection="tList" item="trans" separator=",">
 		(#{trans.transType},#{trans.transAmount},#{trans.category},#{trans.transDesc},#{trans.transDate},#{trans.deptNo})
 		</foreach>
-		ON DUPLICATE KEY UPDATE
-			trans_amount = VALUES(trans_amount),
-			trans_desc = VALUES(trans_desc),
-			trans_type = VALUES(trans_type)
 	</insert>
 	
 	<select id="monthIncomeChart" resultMap="TransMap">

@@ -10,8 +10,8 @@
 </head>
 
 <body>
-<h5>[품질 관리] > [판매완료 제품 조회]</h5>
-<h3>판매완료 제품 조회</h3>
+<h5>[제품 관리] > [판매 완료 제품 조회]</h5>
+<h3>판매 완료 제품 조회</h3>
 <div class="filter-bar">
 <form id="saleSearchForm">
 	<div>

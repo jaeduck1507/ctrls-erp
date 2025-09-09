@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<h5>[품질 관리] > [브랜드 조회]</h5>
+<h5>[제품 관리] > [브랜드 조회]</h5>
 	<h3>브랜드 조회</h3>
 <div class="filter-bar">
 	<a href="/brandForm">브랜드 신규 등록</a>

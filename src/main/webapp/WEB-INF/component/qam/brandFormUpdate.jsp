@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<h5>[품질 관리] > [브랜드 조회] > [브랜드 수정]</h5>
+	<h5>[제품 관리] > [브랜드 조회] > [브랜드 수정]</h5>
 	<h3>브랜드 수정</h3>
 
 	<form id="brandFormUpdate" class="filter-bar">

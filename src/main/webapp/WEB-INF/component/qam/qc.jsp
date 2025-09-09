@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="../resources/css/basic.css"/>
 </head>
 <body>
-	<h5>[품질 관리] > [품질검사 결과 목록]</h5>
-	<h3>품질검사 결과 목록</h3>
+	<h5>[품질 관리] > [품질 검사 결과 목록]</h5>
+	<h3>품질 검사 결과 목록</h3>
 	<div class="filter-bar">
 	<a href="/qam/qcForm">신규 검사 등록</a> <br>
 
