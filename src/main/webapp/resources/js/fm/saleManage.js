@@ -185,7 +185,7 @@ function reloadChart() {
 function showSaleManage(page = 1) {
 	const formData = new FormData();
 	formData.append("productCategory", $("#productCategory").val());
-	formData.append("productName", $("#productName").val() || '');
+	formData.append("productName", $("#productName").val());
 	formData.append("page", page);
 	
 	const startDate = $("#startDate").val();

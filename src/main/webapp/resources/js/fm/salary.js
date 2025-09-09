@@ -1,8 +1,8 @@
 function showSalary(page = 1) {
 	const formData = new FormData();
 	formData.append("deptName", $("#deptName").val());
-	formData.append("empName", $("#empName").val() || '');
-	formData.append("yearMonth", $("#yearMonth").val() || '');
+	formData.append("empName", $("#empName").val());
+	formData.append("yearMonth", $("#yearMonth").val());
 	formData.append("page", page);
 	
 	$.ajax({

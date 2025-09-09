@@ -45,7 +45,7 @@ function showTrans(page = 1) {
 	const formData = new FormData();
 	formData.append("transType", $("#transType").val());
 	formData.append("deptName", $("#deptName").val());
-	formData.append("transDesc", $("#transDesc").val() || '');
+	formData.append("transDesc", $("#transDesc").val());
 	formData.append("page", page);
 	
 	const startDate = $("#startDate").val();

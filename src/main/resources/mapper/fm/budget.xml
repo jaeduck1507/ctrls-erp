@@ -21,7 +21,7 @@
 		SELECT * FROM budget
 		JOIN department USING(dept_no)
 		<where>
-			<if test="yearMonth != null">
+			<if test="yearMonth != null and yearMonth != ''">
 				execution_date LIKE CONCAT('%', #{yearMonth}, '%')
 			</if>
 			<if test="deptName != 'all'">
@@ -35,7 +35,7 @@
 		SELECT * FROM budget
 		JOIN department USING(dept_no)
 		<where>
-			<if test="budgetDeptDTO.yearMonth != null">
+			<if test="budgetDeptDTO.yearMonth != null and budgetDeptDTO.yearMonth != ''">
 				execution_date LIKE CONCAT('%', #{budgetDeptDTO.yearMonth}, '%')
 			</if>
 			<if test="budgetDeptDTO.deptName != 'all'">
@@ -50,7 +50,7 @@
 		SELECT count(*) FROM budget
 		JOIN department USING(dept_no)
 		<where>
-			<if test="yearMonth != null">
+			<if test="yearMonth != null and yearMonth != ''">
 				execution_date LIKE CONCAT('%', #{yearMonth}, '%')
 			</if>
 			<if test="deptName != 'all'">

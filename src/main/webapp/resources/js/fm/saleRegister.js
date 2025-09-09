@@ -5,6 +5,8 @@ const today = now.getFullYear() + '-'
 
 $(document).ready(() => {
 	$("#saleDate").val(today);
+	$("#saleDate").attr("min", today);
+	$("#saleDate").attr("max", today);
 });
 
 $("#search").click(() => {
@@ -23,7 +25,7 @@ $("#search").click(() => {
 				Swal.fire({
 					position: "top",
 					icon: "error",
-					title: "조회된 매출 내역이 없습니다!",
+					title: "등록할 매출 내역이 없습니다!",
 					showConfirmButton: false,
 					timer: 1500,
 					didClose: () => {

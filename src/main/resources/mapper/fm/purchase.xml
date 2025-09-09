@@ -30,7 +30,7 @@
 			<if test="productCategory != 'all'">
 				AND product_category = #{productCategory}
 			</if>
-			<if test="productName != null">
+			<if test="productName != null and productName != ''">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
@@ -52,7 +52,7 @@
 			<if test="purDeptDTO.productCategory != 'all'">
 				AND product_category = #{purDeptDTO.productCategory}
 			</if>
-			<if test="purDeptDTO.productName != null">
+			<if test="purDeptDTO.productName != null and purDeptDTO.productName != ''">
 				AND product_name LIKE CONCAT ('%', #{purDeptDTO.productName}, '%')
 			</if>
 		</where>
@@ -75,7 +75,7 @@
 			<if test="productCategory != 'all'">
 				AND product_category = #{productCategory}
 			</if>
-			<if test="productName != null">
+			<if test="productName != null and productName != ''">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
@@ -86,15 +86,13 @@
 		INSERT INTO purchase (unit_price, quantity, var_amount, total_amount, purchase_date, product_code, brand_code) VALUES
 		<foreach collection="prList" item="purchase" separator=",">
 		(#{purchase.unitPrice},#{purchase.quantity},#{purchase.varAmount},#{purchase.totalAmount},#{purchase.purchaseDate},#{purchase.productCode},#{purchase.brandCode})
-		
 		</foreach>
 	</insert>
 	
 	<select id="totalPurchase" parameterType="PurDeptDTO" resultMap="PurDeptMap">
-		SELECT brand_code, brand_name, purchase_date, SUM(total_amount) AS total_purchase FROM purchase
+		SELECT purchase_date, SUM(total_amount) AS total_purchase FROM purchase
 		JOIN brand USING(brand_code)
-		WHERE brand_code = #{brandCode}
-		AND purchase_date = #{purchaseDate}
-		GROUP BY brand_code, brand_name, purchase_date
+		WHERE purchase_date = #{purchaseDate}
+		GROUP BY purchase_date
 	</select>
 </mapper>

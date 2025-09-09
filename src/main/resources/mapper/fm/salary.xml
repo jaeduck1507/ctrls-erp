@@ -36,13 +36,13 @@
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
 		<where>
-			<if test="yearMonth != null">
+			<if test="yearMonth != null and yearMonth != ''">
 				salary_date LIKE CONCAT ('%', #{yearMonth}, '%')
 			</if>
 			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
-			<if test="empName != null">
+			<if test="empName != null and empName != ''">
 				AND emp_name LIKE CONCAT ('%', #{empName}, '%')
 			</if>
 		</where>
@@ -55,13 +55,13 @@
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
 		<where>
-			<if test="salEmpDTO.yearMonth != null">
+			<if test="salEmpDTO.yearMonth != null and salEmpDTO.yearMonth != ''">
 				salary_date LIKE CONCAT ('%', #{salEmpDTO.yearMonth}, '%')
 			</if>
 			<if test="salEmpDTO.deptName != 'all'">
 				AND dept_name = #{salEmpDTO.deptName}
 			</if>
-			<if test="salEmpDTO.empName != null">
+			<if test="salEmpDTO.empName != null and salEmpDTO.empName != ''">
 				AND emp_name LIKE CONCAT ('%', #{salEmpDTO.empName}, '%')
 			</if>
 		</where>
@@ -75,13 +75,13 @@
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
 		<where>
-			<if test="yearMonth != null">
+			<if test="yearMonth != null and yearMonth != ''">
 				salary_date LIKE CONCAT ('%', #{yearMonth}, '%')
 			</if>
 			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
-			<if test="empName != null">
+			<if test="empName != null and empName != ''">
 				AND emp_name LIKE CONCAT ('%', #{empName}, '%')
 			</if>
 		</where>

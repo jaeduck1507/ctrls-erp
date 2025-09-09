@@ -7,7 +7,7 @@ function showBudget(page = 1) {
 	const formData = new FormData();
 	const deptName = $("#deptName").val();
 	formData.append("deptName", deptName);
-	formData.append("yearMonth", $("#yearMonth").val() || '');
+	formData.append("yearMonth", $("#yearMonth").val());
 	formData.append("page", page);
 	
 	if (deptName === 'all') {

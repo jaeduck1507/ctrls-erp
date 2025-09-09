@@ -35,7 +35,7 @@
 			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
-			<if test="transDesc != null">
+			<if test="transDesc != null and transDesc != ''">
 				AND trans_desc LIKE CONCAT ('%', #{transDesc}, '%')
 			</if>
 		</where>
@@ -56,7 +56,7 @@
 			<if test="transDTO.deptName != 'all'">
 				AND dept_name = #{transDTO.deptName}
 			</if>
-			<if test="transDTO.transDesc != null">
+			<if test="transDTO.transDesc != null and transDTO.transDesc != ''">
 				AND trans_desc LIKE CONCAT ('%', #{transDTO.transDesc}, '%')
 			</if>
 		</where>
@@ -78,7 +78,7 @@
 			<if test="deptName != 'all'">
 				AND dept_name = #{deptName}
 			</if>
-			<if test="transDesc != null">
+			<if test="transDesc != null and transDesc != ''">
 				AND trans_desc LIKE CONCAT ('%', #{transDesc}, '%')
 			</if>
 		</where>
@@ -90,6 +90,10 @@
 		<foreach collection="tList" item="trans" separator=",">
 		(#{trans.transType},#{trans.transAmount},#{trans.category},#{trans.transDesc},#{trans.transDate},#{trans.deptNo})
 		</foreach>
+		ON DUPLICATE KEY UPDATE
+			trans_amount = VALUES(trans_amount),
+			trans_desc = VALUES(trans_desc),
+			trans_type = VALUES(trans_type)
 	</insert>
 	
 	<select id="monthIncomeChart" resultMap="TransMap">

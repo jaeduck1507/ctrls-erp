@@ -1,6 +1,7 @@
 package com.project.erp.fm.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +57,9 @@ public class SVPController {
 			}
 		}
 		
-		int brand = prList.get(0).getBrandCode();
 		LocalDate checkDate = prList.get(0).getPurchaseDate();
 		
 		PurDeptDTO dto = new PurDeptDTO();
-		dto.setBrandCode(brand);
 		dto.setPurchaseDate(checkDate);
 		
 		List<PurDeptDTO> totalList = purchaseService.totalPurchase(dto);
@@ -72,7 +71,7 @@ public class SVPController {
 			transaction.setTransType("지출");
 			transaction.setTransAmount(purDept.getTotalPurchase());
 			transaction.setCategory("매입 비용");
-			transaction.setTransDesc(purDept.getBrandName() + " 제품 매입 대금");
+			transaction.setTransDesc("제품 매입 대금");
 			transaction.setTransDate(purDept.getPurchaseDate());
 			transaction.setDeptNo(purchaseDept);
 			transactionList.add(transaction);
@@ -85,6 +84,5 @@ public class SVPController {
 	public List<PurDeptDTO> totalPurchase(PurDeptDTO pd) {
 		return purchaseService.totalPurchase(pd);
 	}
-	
 	
 }

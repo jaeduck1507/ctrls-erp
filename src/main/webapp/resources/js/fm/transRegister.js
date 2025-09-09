@@ -1,3 +1,7 @@
+const today = new Date().getFullYear() + '-' 
+		+ String(new Date().getMonth() + 1).padStart(2, '0') + '-' 
+		+ String(new Date().getDate()).padStart(2, '0');
+
 const transAmountCheck = /^[1-9]\d*$/;
 const transDateCheck = /.+/;
 $(document).on("input", ".transAmount, .transDate", (e) => {
@@ -76,9 +80,9 @@ $(document).on("change", ".deptName", (e) => {
 	$(e.target).parent().parent().find("td").eq(1).text(deptInfo.deptNo);
 	$(e.target).parent().parent().find("td").eq(2).text("지출");
 	$(e.target).parent().parent().find("td").eq(3).text("기타 비용");
-	$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" class="transAmount" placeholder="금액 입력">');
+	$(e.target).parent().parent().find("td").eq(4).html('<input type="number" min="0" name="trans-amount" class="transAmount" value="${today}" placeholder="금액 입력">');
 	$(e.target).parent().parent().find("td").eq(5).html('<input type="text" name="trans-desc" class="transDesc" placeholder="상세내역 입력">');
-	$(e.target).parent().parent().find("td").eq(6).html('<input type="date" name="trans-date" class="transDate">');
+	$(e.target).parent().parent().find("td").eq(6).html(`<input type="date" name="trans-date" class="transDate" value="${today}">`);
 });
 
 $("#trans-register").click(() => {

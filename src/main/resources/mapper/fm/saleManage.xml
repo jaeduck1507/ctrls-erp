@@ -25,10 +25,10 @@
 			<if test="startDate != null and endDate != null">
 				sale_date BETWEEN #{startDate} AND #{endDate}
 			</if>
-			<if test="productCategory != 'all'">
+			<if test="productCategory != null and productCategory != 'all'">
 				AND product_category = #{productCategory}
 			</if>
-			<if test="productName != null">
+			<if test="productName != null and productName != ''">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
@@ -46,7 +46,7 @@
 			<if test="saleProductDTO.productCategory != 'all'">
 				AND product_category = #{saleProductDTO.productCategory}
 			</if>
-			<if test="saleProductDTO.productName != null">
+			<if test="saleProductDTO.productName != null and saleProductDTO.productName != ''">
 				AND product_name LIKE CONCAT ('%', #{saleProductDTO.productName}, '%')
 			</if>
 		</where>
@@ -65,7 +65,7 @@
 			<if test="productCategory != 'all'">
 				AND product_category = #{productCategory}
 			</if>
-			<if test="productName != null">
+			<if test="productName != null and productName != ''">
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
