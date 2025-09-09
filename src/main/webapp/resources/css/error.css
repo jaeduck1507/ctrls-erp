@@ -1,0 +1,380 @@
+body {
+	height: 100vh;
+	background: linear-gradient(to bottom, #202020, #111119);
+	overflow: hidden;
+}
+
+* {
+	font-family: "Pretendard", sans-serif;
+}
+
+h1 {
+	font-size: 200px;
+	font-weight: 900;
+	color: white;
+	text-shadow: 0px 0px 20px #90C67C;
+	margin-bottom: 20px;
+}
+
+.twinkling {
+	color: gray;
+	text-shadow: none;
+}
+
+h2 {
+	font-size: 50px;
+	color: #90C67C;
+	margin-bottom: 20px;
+}
+
+.errorBox {
+	z-index: 9999;
+		width: 100%;
+  		height: 90vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+}
+
+.ground {
+	bottom: 0px;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+}
+
+.rain.back-row {
+	display: block;
+	z-index: 1;
+	bottom: 60px;
+	opacity: 0.5;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 15px;
+  height: 120px;
+  pointer-events: none;
+  animation: drop 0.5s linear infinite;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(0vh);
+  }
+  75% {
+    transform: translateY(90vh);
+  }
+  100% {
+    transform: translateY(90vh);
+  }
+}
+
+.stem {
+  width: 3px;
+  height: 60%;
+  margin-left: 7px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+  animation: stem 0.5s linear infinite;
+}
+
+@keyframes stem {
+  0% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.splat {
+  width: 25px;
+  height: 10px;
+  border-top: 2px dotted rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(0);
+  animation: splat 0.5s linear infinite;
+  display: block;
+}
+
+@keyframes splat {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  90% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+button {
+	color: white;
+	z-index: 9999;
+	background-color: #90c67c;
+	padding: 6px 10px;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.2s;
+	box-shadow: #33333362 0 5px 5px -5px;
+	border: none;
+}
+
+button:hover {
+	background-color: #328e6e;
+}
+
+.man {
+  width: 100px;
+  margin-top: 20px;
+  height: 180px;
+  position: absolute;
+  bottom: 200px;
+  animation: moveRight 25s linear infinite;
+}
+
+.head {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation-name: body;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.body {
+  height: 77px;
+  width: 36px;
+  background-color: #fff;
+  border-radius: 100% 20% 0 0;
+  transform: skewX(-2deg);
+  position: relative;
+  left: -20px;  
+  animation-name: body;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.foot {
+  width: 25px;
+  height: 12px;
+  border-radius: 5px 80% 2px 2px;
+  transform: skewX(5deg);
+  background-color: #fff;
+  display: inline-block;
+  animation-name: foot;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  &:last-child {
+    margin-left: -20px;
+    animation-delay: .9s;
+  }
+}
+
+.feet {
+  text-align: left;
+  position: relative;
+  top: 46px;
+  left: -28px;
+  
+  &:before {
+    width: 60px;
+    height: 4px;
+    border-radius: 50%;
+    content: "";
+    background: rgba(#000,.1);
+    position: absolute;
+    bottom: -1px;
+    left: -8px; 
+    animation-name: shadow;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+
+@keyframes foot {
+  20% {
+    transform: translate3d(17px, -8px, 0) rotate(4deg);
+  } 
+  26% {
+      transform: translate3d(17px, -5px, 2) rotate(0deg);
+  }
+  40% {
+      transform: translate3d(28px, -3px, 0) rotate(-6deg);
+  }
+  44% {
+      transform: translate3d(28px, 0, 0) rotate(0deg);
+  }
+   
+}
+
+@keyframes body {
+  25% {
+    transform: translateY(2.5px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(2.5px);
+  }
+}
+
+
+@keyframes shadow {
+  25% {
+    transform: scale(1.1);
+  }
+ 
+  75% {
+    transform: scale(.96);
+  }
+}
+
+@keyframes moveRight {
+  0%   { left: -5%; }
+  100% { left: 110%; } /* 화면 오른쪽 끝까지 */
+}
+
+
+.hand {
+	width: 17px;
+	height: 17px;
+	background-color: white;
+	border-radius: 50%;
+	position: relative;
+	left: 58px;
+	top: 144px;
+	
+}
+
+:root {
+    --font-size: 6px;
+}
+
+.toggle {
+    position: absolute;
+    filter: opacity(0);
+    width: 25em;
+    height: 26em;
+    font-size: var(--font-size);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.umbrella *::before,
+.umbrella *::after {
+    content: '';
+    position: absolute;
+}
+
+
+
+.umbrella,
+.umbrella .canopy,
+.umbrella .canopy::after {
+    transition: 0.3s cubic-bezier(0.5, -0.25, 0.5, 1.25);
+}
+
+.umbrella {
+    position: relative;
+    width: 25em;
+    height: 26em;
+    font-size: var(--font-size);
+    transform: rotate(-30deg);
+    bottom: 93px;
+    right: 43px;
+}
+
+.toggle:checked ~ .umbrella {
+    transform: rotate(0deg);
+}
+
+.umbrella .canopy {
+    position: absolute;
+    width: inherit;
+    height: 5.5em;
+    top: 2.5em;
+    transform-origin: top;
+    transform: scale(0.08, 4);
+}
+
+.toggle:checked ~ .umbrella .canopy {
+    transform: scale(1, 1);
+}
+
+.umbrella .canopy::before {
+	
+    width: inherit;
+    height: 12.5em;
+    background: white;
+    border-radius: 12.5em 12.5em 0 0;
+    transform: scaleY(0.4);
+    top: -4em;
+}
+
+.umbrella .canopy::after {
+    width: inherit;
+    height: 1.5em;
+    background-color: white;
+    top: 4em;
+    border-radius: 50%;
+    transform: scaleY(0);
+}
+
+.toggle:checked ~ .umbrella .canopy::after {
+    transform: scaleY(1);
+}
+
+.umbrella .shaft {
+    position: absolute;
+    width: 0.8em;
+    height: 18em;
+    background-color: white;
+    top: 5.5em;
+    left: calc((100% - 0.8em) / 2);
+}
+
+.umbrella .shaft::before {
+    width: 6em;
+    height: 3em;
+    background-color: white;
+    left: calc((100% - 6em) / 2);
+    top: -5.5em;
+    border-radius: 6em 6em 0 0;
+    transform: scaleX(0.1);
+}
+
+.umbrella .shaft::after {
+    box-sizing: border-box;
+    width: 4em;
+    height: 2.5em;
+    border: 1em solid white;
+    top: 100%;
+    left: calc(50% - 4em + 1em / 2);
+    border-radius: 0 0 2.5em 2.5em;
+    border-top: none;
+}
