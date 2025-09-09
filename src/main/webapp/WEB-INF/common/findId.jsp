@@ -12,6 +12,8 @@
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
+	<div>
+	<div class="logo-verde"><img src="/images/verde32big.png" alt=" " style="height: 80px;"/></div>
 	<div id="find-card">
 	<div id="find" class="filter-bar" >
 	  <h2>아이디 찾기</h2>
@@ -27,6 +29,7 @@
 
 	  </div>
 	</form>
+	</div>
 	</div>
 	<script src="../resources/js/common/findid.js"></script>
 </body>
