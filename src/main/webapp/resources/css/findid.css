@@ -11,9 +11,13 @@
 body {
   background-color: #67ae6e21;
   height: 100%;
-  padding: 250px;
+  padding: 50px 150px 150px 150px;;
   display: flex;
   justify-content: center;
+}
+.logo-verde{
+	text-align: center;
+	margin-bottom: 150px;
 }
 #find-card {
   border: #90c67c solid 1px;
@@ -24,6 +28,7 @@ body {
   color: #67ae6e;
   padding: 20px;
   margin: auto;
+  background-color: #67ae6e13;
 }
 
 .filter-bar {

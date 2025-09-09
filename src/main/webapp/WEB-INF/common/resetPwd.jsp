@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="../resources/css/resetPwd.css" />
 </head>
 <body>
+	<div>
+		<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
 	      <div class="filter-bar" id="register-card">
 			
 	        <h1>비밀번호 재설정</h1>
@@ -41,7 +43,7 @@
 	        </div>
 			
 	      </div>
-	    
+		  </div>
 	 <script>
 		let idValid = false;
 		let idChecked = false;
