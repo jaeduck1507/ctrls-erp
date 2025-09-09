@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div>
-	<div class="logo-verde"><img src="/images/verde32big.png" alt=" " style="height: 80px;"/></div>
+	<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
 	<div id="find-card">
 	<div id="find" class="filter-bar" >
 	  <h2>아이디 찾기</h2>

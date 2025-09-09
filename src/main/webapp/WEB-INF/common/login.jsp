@@ -12,7 +12,7 @@
 </head>
 <body>
 	    <form action="login" method="post">
-			<div class="logo-verde"><img src="/images/verde32big.png" alt=" " style="height: 80px;"/></div>
+			<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
 	      <div class="filter-bar" id="login-card">
 	        <h1>로그인</h1>
 	        <input type="text" name="username" placeholder="아이디" />

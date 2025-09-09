@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div>
-		<div class="logo-verde"><img src="/images/verde32big.png" alt=" " style="height: 80px;"/></div>
+		<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
 	      <div class="filter-bar" id="register-card">
 			
 	        <h1>비밀번호 재설정</h1>

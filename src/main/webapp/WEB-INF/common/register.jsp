@@ -14,7 +14,7 @@
 <body>
 	
 	<form action="/register" method="post" id="register">
-		<div class="logo-verde"><img src="/images/verde32big.png" alt=" " style="height: 80px;"/></div>
+		<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
 		<div class="filter-bar" id="register-card">
 			<h1>회원가입</h1>
 			<div class="no-area">
