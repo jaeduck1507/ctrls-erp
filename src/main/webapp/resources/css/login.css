@@ -20,7 +20,7 @@ body {
 	margin-bottom: 150px;
 }
 #login-card {
-  border: #90c67c solid 1px;
+  border:none;
   border-radius: 5px;
   width: 300px;
   text-align: center;
@@ -28,7 +28,7 @@ body {
   color: #67ae6e;
   padding: 20px;
   margin: auto;
-  background-color: #67ae6e13;
+  background-color: #67ae6e33;
 
 }
 
@@ -46,9 +46,10 @@ body {
 .filter-bar input[type="number"] {
 	outline: none;
   padding: 6px 8px;
-  border: 1px solid #67ae6e;
+  border: none;
   border-radius: 4px;
   width: 100%;
+
   
 }
 /* submit, a, button 스타일 */
