@@ -75,7 +75,7 @@
 	            <div class="submenu">
 					<a href="/qam/brand">브랜드 조회</a>
 				    <a href="/qam/product">상품 조회</a>
-				    <a href="/qam/productName">제품 조회/등록/수정/삭제</a>
+				    <a href="/qam/productName">제품 조회</a>
 					<a href="/qam/saleReady">판매 대기 제품 조회</a>
 					<a href="/qam/saleDone">판매 완료 제품 조회</a>
 	            </div>
