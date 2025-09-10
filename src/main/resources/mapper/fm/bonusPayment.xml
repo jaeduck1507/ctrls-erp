@@ -26,7 +26,7 @@
 	</update>
 	
 	<select id="showBonusPayment" parameterType="EmpInfo" resultMap="BonusPaymentDTOMap">
-		SELECT bonus_payment_no, payment, pay_date, bonus_no, emp_no, dept_name, job_title, bonus_name,emp_name
+		SELECT bonus_payment_no, payment, pay_date, bonus_no, emp_no, dept_name, job_title, bonus_name, emp_name
 		FROM bonus_payment
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
@@ -47,10 +47,11 @@
 			AND pay_date LIKE CONCAT('%', #{date}, '%')
 		</if>
 		</where>
+		ORDER BY pay_date desc
 	</select>
 	
 	<select id="showBonusPaymentPage" parameterType="BonusPaymentPagingDTO" resultMap="BonusPaymentDTOMap">
-		SELECT bonus_payment_no, payment, pay_date, bonus_no, emp_no, dept_name, job_title, bonus_name,emp_name
+		SELECT bonus_payment_no, payment, pay_date, bonus_no, emp_no, dept_name, job_title, bonus_name, emp_name
 		FROM bonus_payment
 		JOIN employee_info USING(emp_no)
 		JOIN department USING(dept_no)
@@ -71,6 +72,7 @@
 			AND pay_date LIKE CONCAT('%', #{empInfo.date}, '%')
 		</if>
 		</where>
+		ORDER BY pay_date desc
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -96,6 +98,7 @@
 			AND pay_date LIKE CONCAT('%', #{date}, '%')
 		</if>
 		</where>
+		ORDER BY pay_date desc
 	</select>
 	
 </mapper>
