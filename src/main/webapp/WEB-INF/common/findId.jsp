@@ -19,7 +19,7 @@
 	  <h1>아이디 찾기</h1>
 	  <input type="text" id="empNo" placeholder="사번을 입력하세요." />
 	  <button id="btn"><i class="fi fi-rr-search"></i>&nbsp;&nbsp;조회</button>
-	  <h3 id="result"></h3>
+	  <h3 id="result">사번 입력 후 조회 버튼을 눌러주세요.</h3>
 	</div>
 	<hr></hr>
 	<div class="btn">
