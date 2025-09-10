@@ -14,8 +14,8 @@ function displayQc(result) {
 		row += "<td>" + q.brandName + "</td>";
 		row += "<td>" + q.productColor + "</td>";
 		row += "<td>" + q.productName + "</td>";
-		row += "<td>" + q.productPrice + "</td>";
-		row += "<td>" + q.productCost + "</td>";
+		row += "<td>" + q.productPrice.toLocaleString() + "</td>";
+		row += "<td>" + q.productCost.toLocaleString() + "</td>";
 		row += "<td>" + q.productCategory + "</td>";
 		row += "<td>" + q.checkMaterial + "</td>";
 		row += "<td>" + q.checkColor + "</td>";

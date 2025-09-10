@@ -32,7 +32,7 @@
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
-		ORDER BY sale_date
+		ORDER BY sale_date desc
 	</select>
 	
 	<select id="showSaleManagePage" parameterType="SaleManagePagingDTO" resultMap="SaleProductMap">
@@ -50,7 +50,7 @@
 				AND product_name LIKE CONCAT ('%', #{saleProductDTO.productName}, '%')
 			</if>
 		</where>
-		ORDER BY sale_date
+		ORDER BY sale_date desc
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -69,7 +69,7 @@
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
-		ORDER BY sale_date
+		ORDER BY sale_date desc
 	</select>
 	
 	<insert id="saleRegister" parameterType="ArrayList">

@@ -34,7 +34,7 @@
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
-		ORDER BY purchase_date
+		ORDER BY purchase_date desc
 	</select>
 	
 	<select id="showPurchasePage" parameterType="PurchasePagingDTO" resultMap="PurDeptMap">
@@ -56,7 +56,7 @@
 				AND product_name LIKE CONCAT ('%', #{purDeptDTO.productName}, '%')
 			</if>
 		</where>
-		ORDER BY purchase_date
+		ORDER BY purchase_date desc
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -79,7 +79,7 @@
 				AND product_name LIKE CONCAT ('%', #{productName}, '%')
 			</if>
 		</where>
-		ORDER BY purchase_date
+		ORDER BY purchase_date desc
 	</select>
 	
 	<insert id="purchaseRegister" parameterType="ArrayList">

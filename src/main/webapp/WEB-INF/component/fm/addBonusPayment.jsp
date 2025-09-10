@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="../resources/css/fm/fmRegister.css"/>
 </head>
 <body>
-	<h5>[급여 관리] > [보너스 수당 등록]</h5>
-	<h3>보너스 수당 등록</h3>
+	<h5>[급여 관리] > [수당 등록]</h5>
+	<h3>수당 등록</h3>
 	<div id="register" class="filter-bar">
 		<button id="add-row">열 추가</button>
 		<table border="1" id="result" class="data-table">

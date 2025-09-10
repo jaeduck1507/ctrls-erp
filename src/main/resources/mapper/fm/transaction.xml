@@ -39,7 +39,7 @@
 				AND trans_desc LIKE CONCAT ('%', #{transDesc}, '%')
 			</if>
 		</where>
-		ORDER BY trans_date
+		ORDER BY trans_date desc
 	</select>
 	
 	<select id="showtransPage" parameterType="TransPagingDTO" resultMap="TransMap">
@@ -60,7 +60,7 @@
 				AND trans_desc LIKE CONCAT ('%', #{transDTO.transDesc}, '%')
 			</if>
 		</where>
-		ORDER BY trans_date
+		ORDER BY trans_date desc
 		LIMIT #{offset}, #{limit}
 	</select>
 	
@@ -82,7 +82,7 @@
 				AND trans_desc LIKE CONCAT ('%', #{transDesc}, '%')
 			</if>
 		</where>
-		ORDER BY trans_date
+		ORDER BY trans_date desc
 	</select>
 		
 	<select id="existTrans" parameterType="Transaction" resultType="int">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- JSTL 사용 선언 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,8 +50,8 @@
 	        <td>${pn.productCategory}</td>
 	        <td>${pn.productColor}</td>
 	        <td>${pn.productName}</td>
-	        <td>${pn.productPrice}</td>
-	        <td>${pn.productCost}</td>
+	        <td><fmt:formatNumber value="${pn.productPrice}" pattern="#,###" /></td>
+	        <td><fmt:formatNumber value="${pn.productCost}" pattern="#,###" /></td>
 	        <td><a href='/productNameForm?productCode=${pn.productCode}' class="btnO">수정</a></td>
 	        <td>
 	            <a href='/deleteProductName?productCode=${pn.productCode}' class="btnX">삭제</a>

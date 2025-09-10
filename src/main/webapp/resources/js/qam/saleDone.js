@@ -15,7 +15,7 @@ function displaySale(result) {
 		row += "<td>" + s.brandName + "</td>";
 		row += "<td>" + s.productCategory + "</td>";
 		row += "<td>" + s.productName + "</td>";
-		row += "<td>" + s.productPrice + "</td>";
+		row += "<td>" + s.productPrice.toLocaleString() + "</td>";
 		row += "<td>" + s.saleDate + "</td>";
 		row += "</tr>";
 

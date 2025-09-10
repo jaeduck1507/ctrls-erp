@@ -77,8 +77,9 @@ new Chart(weekChart, {
 
 let doughnutChart;
 
-// 차트 생성하기
+// 차트 생성
 function createChart(result) {
+	// 상품명, 판매량 리스트
 	let productLabels = [];
 	let quantityValues = [];
 	
@@ -87,11 +88,13 @@ function createChart(result) {
 		quantityValues.push(item.monthQuantity);
 	});
 	
+	// 이미 차트가 존재하는 경우 삭제
 	if (doughnutChart) {
 		doughnutChart.destroy();
 	}
 	
 	const saleChart = document.querySelector("#doughnutChart");
+	// 새로운 차트 생성
 	doughnutChart = new Chart(saleChart, {
 		type: 'doughnut',
 		data: {
@@ -119,7 +122,7 @@ function createChart(result) {
 	});
 }
 
-// formData 받아서 차트 조회하기 -> result 값을 createChart 로 전달
+// formData 받아서 차트 조회 -> result 값을 createChart 로 전달
 function searchChart(saleCategory, yearMonth) {
 	const formData = new FormData();
 	formData.append("saleCategory", saleCategory);
@@ -132,8 +135,8 @@ function searchChart(saleCategory, yearMonth) {
 		processData: false,
 		contentType: false,
 		success: function(result) {
-			let currentMonth = $("#yearMonth").val();
-			let category = $("#saleCategory").val();
+			const currentMonth = $("#yearMonth").val();
+			const category = $("#saleCategory").val();
 			
 			if (result.length === 0) {
 				Swal.fire({
@@ -142,7 +145,7 @@ function searchChart(saleCategory, yearMonth) {
 					title: "조회 실패",
 					text: "판매 내역이 존재하지 않습니다!",
 					showConfirmButton: false,
-					timer: 2000,
+					timer: 1500,
 					didClose: () => {
 						if (category === 'all' && currentMonth.substring(5) === String(now.getMonth() + 1).padStart(2, '0')) {
 							month = now.getFullYear() + '-' + String(now.getMonth()).padStart(2, '0');
@@ -163,7 +166,7 @@ function searchChart(saleCategory, yearMonth) {
 	});
 }
 
-// 처음 모달 창을 열었을 때 조회 초기값 세팅
+// 처음 모달 창을 열었을 때 -> 조회 초기 화면
 $("#salesQuantity").on("show.bs.modal", function () {
 	reloadChart();
 });
@@ -175,7 +178,7 @@ $(document).on("click", "#search", function() {
 	searchChart(saleCategory, yearMonth);
 });
 
-// 조회 실패 에러 시 차트 초기화면 재로딩
+// 조회 실패 시 -> 차트 초기화면 재로딩
 function reloadChart() {
 	$("#saleCategory").val("all");
 	$("#yearMonth").val(month);

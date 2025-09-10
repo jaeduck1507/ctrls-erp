@@ -27,7 +27,7 @@ function displayDefective(data) {
 		row += "<td>" + d.brandName + "</td>";
 		row += "<td>" + d.productCategory + "</td>";
         row += "<td>" + d.productName + "</td>";
-        row += "<td>" + d.productPrice + "</td>";
+        row += "<td>" + d.productPrice.toLocaleString() + "</td>";
         row += "<td>" + (d.reason == null || d.reason == '' ? "미작성" : d.reason) + "</td>";
 		row += "<td>" + d.qcDate + "</td>";
 		row += "</tr>";

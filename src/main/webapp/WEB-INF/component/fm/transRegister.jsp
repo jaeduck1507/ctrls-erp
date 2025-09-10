@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="../resources/css/fm/fmRegister.css"/>
 </head>
 <body>
-	<h5>[재무 관리] > [기타 지출 내역 입력]</h5>
-	<h3>기타 지출 내역 입력</h3>
+	<h5>[재무 관리] > [거래내역 등록]</h5>
+	<h3>거래내역 등록(기타 지출)</h3>
 	<div id="register" class="filter-bar">
 		<button id="add-row">열 추가</button>
 		<table border="1" id="result" class="data-table">

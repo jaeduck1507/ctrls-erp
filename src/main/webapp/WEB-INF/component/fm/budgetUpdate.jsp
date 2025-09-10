@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../resources/css/fm/budgetUpdate.css"/>
 </head>
 <body>
-	<h5>[재무 관리] > [예산 수정]</h5>
+	<h5>[재무 관리] > [예산 조회] > [예산 수정]</h5>
 	<h3>예산 수정</h3>
 	<form action="/budgetUpdate" method="post" id="budgetUpdateForm" class="filter-bar">
 		<div class="box">

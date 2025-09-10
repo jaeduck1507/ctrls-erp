@@ -51,7 +51,7 @@ function saleReadyPaingFuc() {
 			'<td>' + saleReadyPagingDTO.result[i].brandName + '</td>' +
 			'<td>' + saleReadyPagingDTO.result[i].productCategory + '</td>' +
 			'<td>' + saleReadyPagingDTO.result[i].productName + '</td>' +
-			'<td>' + saleReadyPagingDTO.result[i].productPrice + '</td>' +
+			'<td>' + saleReadyPagingDTO.result[i].productPrice.toLocaleString() + '</td>' +
 			'<td>' + '<input type="date" class="sellDate" value="' + (saleReadyPagingDTO.result[i].saleDate == null || saleReadyPagingDTO.result[i].saleDate == '' ? ymd : saleReadyPagingDTO.result[i].saleDate) + '">' + '</td>' +
 			'<td>' + '<input type="checkbox" class="checking " ' + (saleReadyPagingDTO.result[i].checking ? 'checked' : '') + '>' + '</td>' +
 			'</tr>';
@@ -90,28 +90,23 @@ $(document).on('click', 'a.page-link', function(e) {
 });
 
 $(document).on('change', '.checking', (e) => {
-
 	const idx = $(e.target).parent().parent().attr("id").split("_")[1];
 	if ($(e.target).is(":checked")) {
 		saleReadyPagingDTO.result[idx].checking = true;
 	} else {
 		saleReadyPagingDTO.result[idx].checking = false;
 	}
-
-	console.log(saleReadyPagingDTO.result[idx]);
+	
 });
 
 $(document).on('input', '.sellDate', (e) => {
 
 	const idx = $(e.target).parent().parent().attr("id").split("_")[1];
 	saleReadyPagingDTO.result[idx].saleDate = e.target.value;
-
-
-	console.log(saleReadyPagingDTO.result[idx]);
+	
 });
 
 $(document).on('click', '#selectCurrentTable', function(e) {
-	console.log("버튼누르기");
 	for (var i = saleReadyPagingDTO.offset; i < ((saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) > saleReadyPagingDTO.result.length ? saleReadyPagingDTO.result.length : (saleReadyPagingDTO.offset + saleReadyPagingDTO.limit)); i++) {
 		saleReadyPagingDTO.result[i].checking = true;
 	}
@@ -120,14 +115,12 @@ $(document).on('click', '#selectCurrentTable', function(e) {
 });
 
 $(document).on('click', '#selectAlldata', function(e) {
-	console.log("버튼누르기");
 	for (var i = 0; i < saleReadyPagingDTO.result.length; i++) {
 		saleReadyPagingDTO.result[i].checking = true;
 	}
 	saleReadyPaingFuc();
 });
 $(document).on('click', '#selectCancelCurrentTable', function(e) {
-	console.log("버튼누르기");
 	for (var i = saleReadyPagingDTO.offset; i < ((saleReadyPagingDTO.offset + saleReadyPagingDTO.limit) > saleReadyPagingDTO.result.length ? saleReadyPagingDTO.result.length : (saleReadyPagingDTO.offset + saleReadyPagingDTO.limit)); i++) {
 		saleReadyPagingDTO.result[i].checking = false;
 	}
@@ -136,7 +129,6 @@ $(document).on('click', '#selectCancelCurrentTable', function(e) {
 });
 
 $(document).on('click', '#selectCancelAlldata', function(e) {
-	console.log("버튼누르기");
 	for (var i = 0; i < saleReadyPagingDTO.result.length; i++) {
 		saleReadyPagingDTO.result[i].checking = false;
 	}
@@ -163,7 +155,7 @@ $(document).on('click', '#sellRegister', function(e) {
 			sellList.push(obj);
 		}
 	}
-	console.log(sellList.length);
+	
 	if (sellList.length == 0) {
 		Swal.fire({
 			title: "1개 이상의 제품을 선택해주세요!",

@@ -35,7 +35,7 @@
 		<div>
 			<button type="button" data-bs-toggle="modal" data-bs-target="#monthSales">월별 매출</button>
 			<button type="button" data-bs-toggle="modal" data-bs-target="#weekSales">주간 매출</button>
-			<button type="button" data-bs-toggle="modal" data-bs-target="#salesQuantity">제품별 판매 현황</button>
+			<button type="button" data-bs-toggle="modal" data-bs-target="#salesQuantity">상품별 판매 현황</button>
 		</div>
 	</div>
 	
@@ -96,7 +96,7 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="chartModal">월별 제품 판매 현황</h1>
+		        <h1 class="modal-title fs-5" id="chartModal">월별 상품 판매 현황</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      	<div class="modal-body">

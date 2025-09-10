@@ -44,8 +44,8 @@
 							<a href="/fm/salaryPayment">급여 등록</a>
 		            	</sec:authorize>
 		            	<sec:authorize access="hasAnyRole('ADMIN','MANAGEMENT','FM','HRM')">
-							<a href="/fm/showBonusPayment">사원 보너스 조회</a>
-							<a href="/fm/addBonusPayment">사원 보너스 입력</a>
+							<a href="/fm/showBonusPayment">수당 조회</a>
+							<a href="/fm/addBonusPayment">수당 등록</a>
 		            	</sec:authorize>
 		            </div>
 				</div>
@@ -63,7 +63,7 @@
 						    <a href="/fm/purchase">매입 내역 조회</a>
 						    <a href="/fm/purchaseRegister">매입 일괄 등록</a>
 						    <a href="/fm/transaction">거래내역 조회</a>
-							<a href="/fm/transRegister">거래내역 입력</a>
+							<a href="/fm/transRegister">거래내역 등록</a>
 		            	</sec:authorize>
 		            </div>
 				</div>
