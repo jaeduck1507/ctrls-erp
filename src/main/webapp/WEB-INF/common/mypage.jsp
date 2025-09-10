@@ -24,12 +24,11 @@
 			<div id="date-timer" class="filter-bar">
 				<p class="date" id="ymd"></p>
 			    <p id="timer"></p>
-
-				
-				<button id="start_work">출근</button>
-				<button id="finish_work">퇴근</button>
-
-				<p id="status"><span id = "checkIn">00:00:00</span> ~ <span id="checkOut">00:00:00</span></p>
+			    <sec:authorize access="hasAnyRole('HRM','FM', 'QAM','MANAGEMENT','HEADQUARTER','SALE')">
+					<button id="start_work">출근</button>
+					<button id="finish_work">퇴근</button>
+					<p id="status"><span id = "checkIn">00:00:00</span> ~ <span id="checkOut">00:00:00</span></p>
+			    </sec:authorize>
 
 			</div>
 			
@@ -78,10 +77,13 @@
 		</div>
 		
 	</div>
+	
 	<div class="filter-bar">
-	<button onclick="location.href='/modifyMyInfo'">개인정보 수정</button>
-	<button onclick="location.href='/myLeavePage'">나의 휴가페이지</button>
-	<button onclick="location.href='/myAttendance'">나의 출근 현황</button>
+		<sec:authorize access="hasAnyRole('HRM','FM', 'QAM','MANAGEMENT','HEADQUARTER','SALE')">
+			<button onclick="location.href='/modifyMyInfo'">개인정보 수정</button>
+			<button onclick="location.href='/myLeavePage'">나의 휴가페이지</button>
+			<button onclick="location.href='/myAttendance'">나의 출근 현황</button>
+		</sec:authorize>
 	<button onclick="location.href='/resetMyPwd'">비밀번호 재설정</button>
 	</div>
 
