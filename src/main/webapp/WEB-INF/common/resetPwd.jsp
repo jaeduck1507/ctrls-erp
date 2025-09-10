@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div>
-		<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
+		<a href="/"><div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div></a>
 	      <div class="filter-bar" id="register-card">
 			
 	        <h1>비밀번호 재설정</h1>
@@ -40,6 +40,7 @@
 		   </div>
 			
 			<button id="resetPwd">재설정</button>
+			<button id="btn2" onclick="location.href='/login'"><i class="fi fi-rr-sign-in-alt"></i>&nbsp;&nbsp;로그인으로 돌아가기</button>
 	        </div>
 			
 	      </div>

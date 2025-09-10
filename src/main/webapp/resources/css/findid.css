@@ -17,24 +17,26 @@ body {
 }
 .logo-verde{
 	text-align: center;
-	margin-bottom: 150px;
+	margin-bottom: 100px;
 }
 #find-card {
   border: none;
   border-radius: 5px;
-  width: 300px;
+  width: 450px;
   text-align: center;
   /* margin-bottom: 10px; */
   color: #67ae6e;
-  padding: 20px;
+  padding: 45px;
   margin: auto;
-  background-color: #67ae6e13;
+  background-color: #67ae6e33;
 }
-
+h1{
+	margin-bottom: 20px;
+}
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 16px;
   flex-wrap: wrap;
   font-size: 14px;
@@ -42,7 +44,7 @@ body {
 }
 .filter-bar input[type="text"]{
 	outline: none;
-  padding: 6px 8px;
+  padding: 8px;
   border: none;
   border-radius: 4px;
   width: 100%;
@@ -51,6 +53,8 @@ body {
 /*조회버튼*/
 .filter-bar #btn{
   text-decoration: none;
+  font-weight: bold;
+    font-size: 17px;
   background-color: #67ae6e;
   color: white;
   border: #67ae6e solid 1px;
@@ -58,9 +62,15 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  width: 99%;
+  width: 100%;
   transition: background 0.2s;
   box-shadow: #33333362 0 5px 5px -5px;
+}
+hr{
+	width: 100%;
+	border: #67ae6e88 dashed 1px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 /*비밀번호재설정 버튼*/
 .btn #btn1{
@@ -72,7 +82,7 @@ body {
 	  border-radius: 4px;
 	  cursor: pointer;
 	  font-weight: bold;
-	  width: 99%;
+	  width: 48%;
 	  margin-bottom: 5px;
 	  transition: background 0.2s;
 	  box-shadow: #33333362 0 5px 5px -5px;
@@ -81,14 +91,16 @@ body {
 .btn #btn2 {
 	border-style: none;
 	  text-decoration: none;
+	  font-weight: bold;
 	  color: white;
 	  background-color: #90c67c;
 	  border: #90c67c solid 1px;
 	  padding: 4px 12px;
+	  width: 48%;
 	  border-radius: 5px;
 	  text-decoration: none;
 	  transition: background 0.2s;
-	  width: 99%;
+	  
 	  box-shadow: #33333362 0 5px 5px -5px;
 	  margin-bottom: 10px;
 }

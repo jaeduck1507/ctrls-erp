@@ -13,12 +13,13 @@
 </head>
 <body>
 	    <form action="login" method="post">
-			<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
+			<a href="/"><div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div></a>
 	      <div class="filter-bar" id="login-card">
 	        <h1>로그인</h1>
 	        <input type="text" name="username" placeholder="아이디" />
 	        <input type="password" name="password" placeholder="비밀번호" />
 	        <button type="submit"><i class="fi fi-rr-sign-in-alt"></i>&nbsp;&nbsp;로그인</button>
+			<hr></hr>
 			<div class="btn">
 	        <button type="button" onclick="location.href='/findId'">
 	          <i class="fi fi-rr-search"></i>&nbsp;&nbsp;아이디 찾기

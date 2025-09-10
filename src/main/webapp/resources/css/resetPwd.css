@@ -25,12 +25,12 @@ body {
   width: 450px;
   margin-bottom: 10px;
   color: #67ae6e;
-  padding: 20px;
+  padding: 45px;
   margin: auto;
   gap: 15px;
   display: flex;
   text-align: left;
-  background-color: #67ae6e13;
+  background-color: #67ae6e33;
 }
 
 .filter-bar {
@@ -86,6 +86,8 @@ body {
 	 width: fit-content;
 	 box-shadow: #33333362 0 5px 5px -5px;
 	 cursor: pointer;
+	 font-weight: bold;
+	   font-size: 17px;
 }
 
 /* 재설정 버튼 커서 올렸을 경우 */
@@ -106,4 +108,24 @@ body {
 	flex-direction: row;
 	gap: 5px;
 	width: 100%;
+}
+#btn2 {
+	border-style: none;
+	  text-decoration: none;
+	  color: white;
+	  background-color: #90c67c;
+	  border: #90c67c solid 1px;
+	  padding: 4px 12px;
+	  width: 48%;
+	  border-radius: 5px;
+	  text-decoration: none;
+	  transition: background 0.2s;
+	  
+	  box-shadow: #33333362 0 5px 5px -5px;
+	  margin-bottom: 10px;
+}
+#btn2:hover{
+	background-color: #67ae6e;
+	border: #67ae6e solid 1px;
+	  color: #ffffff;
 }

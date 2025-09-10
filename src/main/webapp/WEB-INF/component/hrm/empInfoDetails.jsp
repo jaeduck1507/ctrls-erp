@@ -95,7 +95,7 @@
 			  </div>
 			  </div>
 		      <div class="modal-footer">
-		      <p>퇴사 처리시 변경 불가능 합니다</p>
+		      <p></p>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 		      </div>
 		      </div>

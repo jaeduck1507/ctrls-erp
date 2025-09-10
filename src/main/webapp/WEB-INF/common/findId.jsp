@@ -13,14 +13,15 @@
 </head>
 <body>
 	<div>
-	<div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div>
+	<a href="/"><div class="logo-verde"><img src="/images/verde33.png" alt=" " style="height: 80px;"/></div></a>
 	<div id="find-card">
 	<div id="find" class="filter-bar" >
-	  <h2>아이디 찾기</h2>
+	  <h1>아이디 찾기</h1>
 	  <input type="text" id="empNo" placeholder="사번을 입력하세요." />
 	  <button id="btn"><i class="fi fi-rr-search"></i>&nbsp;&nbsp;조회</button>
 	  <h3 id="result"></h3>
 	</div>
+	<hr></hr>
 	<div class="btn">
 	  
 	  <button id="btn1" onclick="location.href='/resetPwd'"><i class="fi fi-rr-pen-field"></i>&nbsp;&nbsp;비밀번호 재설정</button>
