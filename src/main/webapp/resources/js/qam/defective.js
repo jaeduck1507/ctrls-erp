@@ -1,4 +1,4 @@
-function displayDefective(data) {
+function displayDefective(result) {
 	
 	let selectedFilter = [];
 	
@@ -9,14 +9,9 @@ function displayDefective(data) {
 	let tableHead = "<tr><th>불량코드</th><th>상품번호</th><th>제품코드</th><th>부자재검사</th><th>색상검사</th><th>손상검사</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>불량사유</th><th>검사일</th></tr>";
 	$("#defectiveResult thead").html(tableHead);
 	$("#defectiveResult tbody").html("");
-	
-    var total = 0;
 
-	for (let d of data) {
+	for (let d of result.list) {
 	   
-		
-		total += d.productPrice;
-
         let row = "<tr>";
         row += "<td>" + d.defectiveNo + "</td>";
         row += "<td>" + d.productNo + "</td>";
@@ -34,13 +29,28 @@ function displayDefective(data) {
 
         $("#defectiveResult tbody").append(row);
     }
-    $("#defectivePriceSum").text("손실액 총합 : " + total.toLocaleString() + "원");
+    $("#defectivePriceSum").text("손실액 총합 : " + result.totalPrice.toLocaleString() + "원");
 	
 }
 
 $(document).ready(function() {
 	$("#searchBtn").click(function () {
-
+		if(!($("#checkMaterial").is(":checked") || $("#checkColor").is(":checked") || $("#checkDamage").is(":checked"))) {
+			Swal.fire({
+				title: "적어도 1개 이상의 불량사유를 체크해야합니다!",
+				confirmButtonText: '확인',
+				width: 750,
+				confirmButtonColor: "#90C67C",
+				icon: "warning",
+				iconColor: "green",
+				timer: 1500,
+				didClose: () => {
+					location.reload();
+				}
+			});
+			return;
+		}
+		
 	    $.ajax({
 	        type: "get",
 	        url: "/qam/searchDefective",
@@ -66,7 +76,7 @@ $(document).ready(function() {
 					});
 					return;
 				} else {
-					displayDefective(result.list);
+					displayDefective(result);
 				}
 				
 				$(".pagination").html('');
@@ -100,7 +110,7 @@ $(document).ready(function() {
 	      checkDamage: "불합격"
 	    },
 	    success: function (result) {
-	      displayDefective(result.list);
+	      displayDefective(result);
 	      $(".pagination").html("");
 	      $(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
 	      for (var i = result.startPage; i <= result.endPage; i++) {
@@ -114,7 +124,7 @@ $(document).ready(function() {
 	  });
 	});
 });
-
+/*
 $(document).on('change', '.defectiveFilter', function(e) {
 	if(!($("#checkMaterial").is(":checked") || $("#checkColor").is(":checked") || $("#checkDamage").is(":checked"))) {
 		Swal.fire({
@@ -128,7 +138,7 @@ $(document).on('change', '.defectiveFilter', function(e) {
 		$(e.target).prop("checked", true);
 	}
 });
-
+*/
 $(document).on('click', 'a.page-link', function(e) {
     e.preventDefault();        
 	
@@ -145,7 +155,7 @@ $(document).on('click', 'a.page-link', function(e) {
 	            checkDamage: ($("#checkDamage").is(":checked")? "불합격" : "합격")
 	        },
 	       	success: function (result) {
-		        displayDefective(result.list);
+		        displayDefective(result);
 				$(".pagination").html('');
 				$(".pagination").append('<li class="page-item ' + (result.prev ? '' : 'disabled') + '"><a class="page-link" href="' + (result.startPage - 1) + '">Previous</a></li>');
 				for(var i =result.startPage; i<=result.endPage; i++) {

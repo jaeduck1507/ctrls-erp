@@ -73,7 +73,7 @@ public class QamPageController {
 	public String productName(Model model, Paging paging, ProductName productName) {
 		model.addAttribute("productNameList", productNameService.searchProductName(paging, productName.getProductName(), productName.getProductCategory()));
 		model.addAttribute("categoryList", productNameService.selectCategory());
-		model.addAttribute("paging",paging);
+		model.addAttribute("paging", paging);
 		model.addAttribute("productName", productName.getProductName());
 		model.addAttribute("productCategory", productName.getProductCategory());
 		model.addAttribute("component","../component/qam/productName.jsp");

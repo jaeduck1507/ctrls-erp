@@ -2,7 +2,7 @@ var saleReadyPagingDTO = {};
 function inint_Paing() {
 	saleReadyPagingDTO = {
 		offset: 0,
-		limit: 10,
+		limit: 15,
 		page: 1,
 		pageSize: 10,
 		endPage: this.pageSize,
@@ -52,7 +52,7 @@ function saleReadyPaingFuc() {
 			'<td>' + saleReadyPagingDTO.result[i].productCategory + '</td>' +
 			'<td>' + saleReadyPagingDTO.result[i].productName + '</td>' +
 			'<td>' + saleReadyPagingDTO.result[i].productPrice.toLocaleString() + '</td>' +
-			'<td>' + '<input type="date" class="sellDate" value="' + (saleReadyPagingDTO.result[i].saleDate == null || saleReadyPagingDTO.result[i].saleDate == '' ? ymd : saleReadyPagingDTO.result[i].saleDate) + '">' + '</td>' +
+			'<td>' + '<input type="date" class="sellDate" max="'+ ymd + '" value="' + (saleReadyPagingDTO.result[i].saleDate == null || saleReadyPagingDTO.result[i].saleDate == '' ? ymd : saleReadyPagingDTO.result[i].saleDate) + '" >' + '</td>' +
 			'<td>' + '<input type="checkbox" class="checking " ' + (saleReadyPagingDTO.result[i].checking ? 'checked' : '') + '>' + '</td>' +
 			'</tr>';
 		$("#saleReady").append(text);

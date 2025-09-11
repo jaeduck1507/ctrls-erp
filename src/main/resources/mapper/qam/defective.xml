@@ -28,6 +28,8 @@
 	        
     <result column="brand_code" property="brandCode"/>
     <result column="brand_name" property="brandName"/>
+    
+    <result column="total_price" property="totalPrice"/>
 </resultMap>
 
 <resultMap id="defectiveListMap" type="DefectiveForListDTO">
@@ -184,5 +186,38 @@
 		</where>
 		ORDER BY qc_date DESC
 	</select> 
+
+	<select id="defectiveTotalPrice" parameterType="DefectiveDTO" resultType="int">
+	    SELECT COALESCE(SUM(product_price), 0) AS total_price
+	    FROM defective
+	    JOIN product USING(product_no)
+	    JOIN product_name USING(product_code)
+	    JOIN qc USING(product_no)
+	    JOIN brand USING(brand_code)
+	    <where>
+	        (
+	            <trim prefix="" prefixOverrides="OR">
+	                <if test="checkMaterial == '불합격'">
+	                    check_material = #{checkMaterial}
+	                </if>
+	                <if test="checkColor == '불합격'">
+	                    OR check_color = #{checkColor}
+	                </if>
+	                <if test="checkDamage == '불합격'">
+	                    OR check_damage = #{checkDamage}
+	                </if>
+	            </trim>
+	        )
+	        <if test="productCategory != null and productCategory != ''">
+	            AND product_category = #{productCategory}
+	        </if>
+	        <if test="startDate != null">
+	            AND qc_date <![CDATA[>=]]> #{startDate}
+	        </if>
+	        <if test="endDate != null">
+	            AND qc_date <![CDATA[<=]]> #{endDate}
+	        </if>
+	    </where>
+	</select>
 
 </mapper>

@@ -31,8 +31,8 @@ public class SaleReadyDTO extends Paging {
     private String brandName;
     
     private String saleRegisterd;
+    private int totalPrice;
     private boolean checking;
-    
     
     private List<SaleReadyForListDTO> list;
 }

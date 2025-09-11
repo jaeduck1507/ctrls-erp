@@ -2,11 +2,7 @@ function displaySale(result) {
 	let tableHead = "<tr><th>판매코드</th><th>상품번호</th><th>제품코드</th><th>브랜드명</th><th>카테고리</th><th>제품명</th><th>가격</th><th>판매날짜</th></tr>";
 	$("#saleResult").html(tableHead); // 테이블 헤더 설정
 
-	let total = 0;
-
 	for (let s of result.list) {
-		
-		total += s.productPrice;
 
 		let row = "<tr>";
 		row += "<td>" + s.saleNo + "</td>";
@@ -29,7 +25,7 @@ function displaySale(result) {
 	}
 	$(".pagination").append('<li class="page-item ' + (result.next ? '' : 'disabled') + '"><a class="page-link" href="' + (result.endPage + 1) + '">Next</a></li>');
 
-	document.getElementById("salePriceSum").innerText = "매출 총합 : " + total.toLocaleString() + "원";
+	document.getElementById("salePriceSum").innerText = "매출 총합 : " + result.totalPrice.toLocaleString() + "원";
 	}
 
 	$("#searchBtn").click(function () {
@@ -56,7 +52,6 @@ function displaySale(result) {
 					});
 					return;
 				} else {
-					console.log(result);
 					displaySale(result);
 				}
 			}

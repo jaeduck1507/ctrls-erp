@@ -57,6 +57,7 @@ public class SaleService {
 		dto.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		dto.setList(saleMapper.searchSaleDone(dto));
 		dto.setTotal(serachSaleDoneTotal(dto));
+		dto.setTotalPrice(saleMapper.totalPriceSum(dto));
 	    return dto;
 	}
 	

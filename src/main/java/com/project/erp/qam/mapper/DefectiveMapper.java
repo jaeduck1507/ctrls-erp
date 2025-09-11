@@ -26,4 +26,6 @@ public interface DefectiveMapper {
 	
 	int searchDefectiveTotal(DefectiveDTO dto);
 	
+	int defectiveTotalPrice(DefectiveDTO dto);
+	
 }

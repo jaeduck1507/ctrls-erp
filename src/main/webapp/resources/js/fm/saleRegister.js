@@ -5,7 +5,7 @@ const today = now.getFullYear() + '-'
 
 $(document).ready(() => {
 	$("#saleDate").val(today);
-	$("#saleDate").attr("min", today);
+	//$("#saleDate").attr("min", today);
 	$("#saleDate").attr("max", today);
 });
 

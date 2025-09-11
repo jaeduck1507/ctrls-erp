@@ -25,6 +25,7 @@ public class DefectiveService {
 		dto.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		dto.setTotal(defectiveMapper.searchDefectiveTotal(dto));
 		dto.setList(defectiveMapper.searchDefective(dto));
+		dto.setTotalPrice(defectiveMapper.defectiveTotalPrice(dto));
 		return dto;
 	}
 	

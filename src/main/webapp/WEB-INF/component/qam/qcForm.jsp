@@ -47,7 +47,7 @@
 				<td>
 			        <select name="checkMaterial" id="checkMaterial">
 						<option value="" disabled selected>선택</option>
-			            <option value="합격" selected>합격</option>
+			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
 		    	</td>
@@ -57,8 +57,8 @@
 		    <th><i class="fi fi-rr-fill"></i> &nbsp;&nbsp;색상 검사</th>
 				<td>
 			        <select name="checkColor" id="checkColor">
-						<option value="" disabled>선택</option>
-			            <option value="합격" selected>합격</option>
+						<option value="" disabled selected>선택</option>
+			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
 		    	</td>
@@ -68,8 +68,8 @@
 		    <th><i class="fi fi-rr-damage"></i> &nbsp;&nbsp;손상 검사</th>
 				<td>
 			        <select name="checkDamage" id="checkDamage">
-						<option value="" disabled >선택</option>
-			            <option value="합격" selected>합격</option>
+						<option value="" disabled selected>선택</option>
+			            <option value="합격">합격</option>
 			            <option value="불합격">불합격</option>
 			        </select>
 		    	</td>

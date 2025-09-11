@@ -135,7 +135,7 @@ $(document).on('change', '.productName', (e) => {
 	$(e.target).parent().parent().find("td").eq(6).html('<input type="number" min="1" name="quantity" class="quantity" placeholder="수량 입력">');
 	$(e.target).parent().parent().find("td").eq(7).text("");
 	$(e.target).parent().parent().find("td").eq(8).text("");
-	$(e.target).parent().parent().find("td").eq(9).html(`<input type="date" name="purchase-date" value="${today}" readonly>`);
+	$(e.target).parent().parent().find("td").eq(9).html(`<input type="date" name="purchase-date" value="${today}" min="${today}" max="${today}">`);
 });
 
 $(document).on('input', '.quantity', (e) => {

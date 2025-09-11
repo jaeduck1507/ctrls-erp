@@ -35,5 +35,7 @@ public class DefectiveDTO extends Paging { //불량품 테이블: 품질검사�
 	 private int brandCode;
 	 private String brandName;
 	 
+	 private int totalPrice;
+	 
 	 private List<DefectiveForListDTO> list;
 }

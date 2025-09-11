@@ -17,13 +17,13 @@
 <a href="/productNameForm">제품 신규 등록</a>
 
 <form action="productName">
-    제품명 : <input type="text" name="productName" id="productName" />
 	<select name="productCategory" id="productCategory">
 		<option value="">카테고리 선택</option>
 		<c:forEach items="${categoryList}" var="category">
 			<option value="${category}">${category}</option>
 		</c:forEach>
 	</select>
+	<input type="text" name="productName" id="productName" placeholder="제품명 검색"/>
     <button type="submit">검색</button>
 </form>
 </div>

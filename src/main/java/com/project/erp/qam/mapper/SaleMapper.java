@@ -42,4 +42,6 @@ public interface SaleMapper {
 	
 	int serachSaleDoneTotal(SaleReadyDTO dto);
 	
+	int totalPriceSum(SaleReadyDTO dto);
+	
 }

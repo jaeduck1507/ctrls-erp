@@ -15,13 +15,13 @@
     <h3>상품 조회</h3>
       <form action="product" method="get">
 		<div class="filter-bar">
-	        제품명: <input type="text" name="productName" value="${productName}" />
 			<select name="productCategory">
 				<option value="">카테고리 선택</option>
 				<c:forEach items="${categoryList}" var="category">
 					<option value="${category}">${category}</option>
 				</c:forEach>
 			</select>
+			<input type="text" name="productName" value="${productName}" placeholder="제품명 검색"/>
 	        <button type="submit">검색</button>
 	        <button type="button" id="resetBtn">전체보기</button>
 		</div>

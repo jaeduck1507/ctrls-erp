@@ -18,6 +18,7 @@
         <result column="brand_name" property="brandName"/>
         
         <result column="sale_registerd" property="saleRegisterd"/>
+        <result column="total_price" property="totalPrice"/>
 	</resultMap>
 	
 	<resultMap id="SaleReadyForListDTOMap" type="SaleReadyForListDTO">
@@ -204,5 +205,24 @@
 <!--		LIMIT #{offset}, #{limit}-->
 	</select>
 
+	<select id="totalPriceSum" parameterType="SaleReadyDTO" resultType="int">
+	    SELECT COALESCE(SUM(product_price), 0) AS total_price
+	    FROM sale
+	    JOIN product USING(product_no)
+	    JOIN product_name USING(product_code)
+	    JOIN brand USING(brand_code)
+	    <where>
+	        sale_date IS NOT NULL
+	        <if test="productCategory != null and productCategory != ''">
+	            AND product_category = #{productCategory}
+	        </if>
+	        <if test="startDate != null">
+	            AND sale_date <![CDATA[>=]]> #{startDate}
+	        </if>
+	        <if test="endDate != null">
+	            AND sale_date <![CDATA[<=]]> #{endDate}
+	        </if>
+	    </where>
+	</select>
 
 </mapper>
