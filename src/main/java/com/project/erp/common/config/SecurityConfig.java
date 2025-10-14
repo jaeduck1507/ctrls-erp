@@ -29,7 +29,7 @@ public class SecurityConfig {
 						.requestMatchers("/hrm/my*").authenticated()
 						.requestMatchers("/hrm/empEval").authenticated()
 						.requestMatchers(new RegexRequestMatcher("^/hrm/my[^/]+/.*$",null)).authenticated()
-						.requestMatchers("/hrm/empAdd").hasAnyRole("ADMIN","HRM")
+						.requestMatchers("/hrm/empAdd").hasAnyRole("ADMIN","HRM","MANAGEMENT")
 						.requestMatchers("/hrm/**").hasAnyRole("ADMIN","HRM","MANAGEMENT")
 						.requestMatchers("/qam/**").hasAnyRole("ADMIN","QAM","MANAGEMENT","HEADQUARTER","SALE")
 						.requestMatchers("/fm/**").hasAnyRole("ADMIN","FM","MANAGEMENT")
