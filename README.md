@@ -23,10 +23,10 @@
 - **팀 이름(팀 멤버)**: Ctrl S (오재덕, 이환희, 윤의진, 박지연)
 - **프로젝트 기간**: 2025-08-07 ~ 2025-09-12
 - **개발 기술**
-  - Frontend: HTML, CSS, JavaScript, Bootstrap, Chart.js, SweetAlert2
-  - Backend: Spring Boot, Spring Security, MyBatis
-  - DB: MySQL
-  - Tools: GitHub, Slack, Figma, Notion, Flaticon, Google Drive, Eclipse
+  - **Frontend**: HTML, CSS, JavaScript, Bootstrap, Chart.js, SweetAlert2
+  - **Backend**: Spring Boot, Spring Security, MyBatis
+  - **DB**: MySQL
+  - **Tools**: GitHub, Slack, Figma, Notion, Flaticon, Google Drive, Eclipse
 
 ## 🔗 Links
 <!--
